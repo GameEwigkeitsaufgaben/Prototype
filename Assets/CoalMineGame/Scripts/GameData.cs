@@ -11,4 +11,5 @@ public static class GameData
     public const string sceneMainChapterOne = "Dummy";
     public const string sceneMainChapterTwo = "Dummy";
     public const string sceneMainChapterThree = "Dummy";
+    public const string sceneInstaMainChapterOne = "Scene11InstaMain";
 }
