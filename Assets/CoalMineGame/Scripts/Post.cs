@@ -1,69 +1,52 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Post : MonoBehaviour
 {
-    public PostData postData;
-    public GameIcons icons;
+    private PostData postData;
     public GameObject prefabImgLocked;
 
-    private OverlayType overlayType; // Enum
     private GameObject childIcon = null;
-    private SpriteRenderer spriteRenderer = null;
+    private SpriteRenderer iconSpriteRenderer = null;
 
     void Start()
     {
-        SetPostImage(postData.postSprite);
-        
-        if (postData.postLocked)
-        {
-            SetUpPostLocked();
-        }
-        else
-        {
-            SetUpPostUnlocked();
-        }
+        Debug.Log("Post created" + gameObject.name);
     }
 
-    private void SetPostImage(Sprite sprite)
+    private void SetUpPost()
     {
-        gameObject.GetComponent<Image>().sprite = sprite;
-    }
+        gameObject.GetComponent<Image>().sprite = postData.postSprite;
 
-    public void SetButtonFunctionInteractable(bool interactable)
-    {
-        gameObject.GetComponent<Button>().interactable = interactable;
-    }
-
-    public void SetUpPostLocked()
-    {
-        gameObject.GetComponent<Button>().interactable = false;
+        //generate child obj as image container locked, ineract, video.
+        //if locked a corresponding symbol is shown and the post is not interactable
         childIcon = Instantiate(prefabImgLocked);
         childIcon.transform.SetParent(gameObject.transform.parent, false);
         childIcon.GetComponent<RectTransform>().localPosition = Vector3.zero;
         childIcon.GetComponent<RectTransform>().localScale = new Vector3(0.5f, 0.5f, 0.5f);
         childIcon.GetComponent<Image>().raycastTarget = false;
+
+        gameObject.GetComponent<Button>().interactable = false;
+
+        if (postData.postLocked) return;
+
+        //if the post is unlocked the post is interactable, the sprite is set and icon is set 
+        //if it is an image without an icon, the lockicon will be deactivated. 
+        gameObject.GetComponent<Button>().interactable = true;
+        childIcon.GetComponent<Image>().sprite = postData.GetIcon();
+        if (childIcon.GetComponent<Image>().sprite == null)
+            childIcon.GetComponent<Image>().gameObject.SetActive(false);
+        Debug.Log("Post created" + gameObject.name);
     }
 
-    public void SetUpPostUnlocked()
+    public void SetOverlayData(PostData data)
     {
-        gameObject.GetComponent<Button>().interactable = true;
-        spriteRenderer = transform.GetChild(0).GetComponent<Image>().GetComponent<SpriteRenderer>();
+        postData = data;
+        SetUpPost();
+    }
 
-        switch (overlayType)
-        {
-            case OverlayType.IMAGE:
-                break;
-            case OverlayType.VIDEO:
-                spriteRenderer.sprite = icons.videoIcon;
-                break;
-            case OverlayType.QUIZ:
-                spriteRenderer.sprite = icons.interactIcon;
-                break;
-            case OverlayType.INTERACTION:
-                spriteRenderer.sprite = icons.interactIcon;
-                break;
-        }
+    public void SetButtonFunctionInteractable(bool interactable)
+    {
+        gameObject.GetComponent<Button>().interactable = interactable;
     }
 }
