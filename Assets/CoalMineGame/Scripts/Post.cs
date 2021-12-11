@@ -4,7 +4,10 @@ using UnityEngine.UI;
 public class Post : MonoBehaviour
 {
     private PostData postData;
+    private GameIcons icons;
     public GameObject prefabImgLocked;
+
+    private WebGlVideoPlayer webglVideoPlayer;
 
     private GameObject childIcon = null;
     private SpriteRenderer iconSpriteRenderer = null;
@@ -12,14 +15,25 @@ public class Post : MonoBehaviour
     void Start()
     {
         Debug.Log("Post created" + gameObject.name);
+        webglVideoPlayer = GameObject.FindObjectOfType<WebGlVideoPlayer>();
+        icons = Resources.Load<GameIcons>("Icons");
     }
 
+    public void UpdateIcon()
+    {
+        Debug.Log("Update Icon in Post " + gameObject.name);
+        childIcon.GetComponent<Image>().sprite = icons.replayIcon;
+    }
+
+    //will be called form Class Entry!
     private void SetUpPost()
     {
         gameObject.GetComponent<Image>().sprite = postData.postSprite;
 
         //generate child obj as image container locked, ineract, video.
         //if locked a corresponding symbol is shown and the post is not interactable
+
+        //Maybe better to create it not at runtime, only set it active.
         childIcon = Instantiate(prefabImgLocked);
         childIcon.transform.SetParent(gameObject.transform.parent, false);
         childIcon.GetComponent<RectTransform>().localPosition = Vector3.zero;
@@ -33,10 +47,16 @@ public class Post : MonoBehaviour
         //if the post is unlocked the post is interactable, the sprite is set and icon is set 
         //if it is an image without an icon, the lockicon will be deactivated. 
         gameObject.GetComponent<Button>().interactable = true;
-        childIcon.GetComponent<Image>().sprite = postData.GetIcon();
-        if (childIcon.GetComponent<Image>().sprite == null)
+
+        if (OverlayType.IMAGE == postData.overlayType)
+        {
             childIcon.GetComponent<Image>().gameObject.SetActive(false);
-        Debug.Log("Post created" + gameObject.name);
+            return;
+        }
+
+        childIcon.GetComponent<Image>().sprite = postData.GetIcon();
+
+        Debug.Log("Post created: " + gameObject.name);
     }
 
     public void SetOverlayData(PostData data)
@@ -48,5 +68,14 @@ public class Post : MonoBehaviour
     public void SetButtonFunctionInteractable(bool interactable)
     {
         gameObject.GetComponent<Button>().interactable = interactable;
+
+    }
+
+    public void UnlockPost()
+    {
+        SetButtonFunctionInteractable(true);
+        childIcon.GetComponent<Image>().sprite = postData.GetIcon();
+
+
     }
 }

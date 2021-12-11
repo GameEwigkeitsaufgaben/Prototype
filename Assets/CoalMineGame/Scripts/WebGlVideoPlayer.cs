@@ -4,33 +4,51 @@ using UnityEngine.UI;
 
 public class WebGlVideoPlayer : MonoBehaviour
 {
-    [SerializeField] private VideoPlayer videoPlayer;
+    public VideoPlayer videoPlayer;
     
-    public string videoFileName;
-    public GameObject rawImage;
-
+    private string videoPostName;
+    
+    private GameObject rawImage;
+    private bool videoIsPlaying = false;
+    private bool videoSetUpDone = false; 
 
     private void Start()
     {
-        videoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, videoFileName);
-        videoPlayer.isLooping = false;
-        //rawImage.SetActive(false);
         Debug.Log("Set Video Url and configurations: " + videoPlayer.url);
-
     }
 
-    public void StartTheVideo()
+    public void StartTheVideo(string videoPostName, string videoName, RawImage imgRaw)
     {
-        if (!videoPlayer.isPlaying)
+        if (!videoSetUpDone)
         {
-            // rawImage.SetActive(true);
-            rawImage.GetComponent<RawImage>().color = new Color(255,255,255,255);
-            videoPlayer.Play();
-            Debug.Log("video is playing: " + videoPlayer.isPlaying);
-            //gameData.introVideoIsPlaying = true;
-            videoPlayer.loopPointReached += RestoreIntroVideo;
-
+            SetVideo(videoName, imgRaw);
+            videoSetUpDone = true;
+            Debug.Log("Setup Videooutput" + videoPostName);
         }
+
+        this.videoPostName = videoPostName;
+        
+        if (!videoIsPlaying)
+        {       
+            videoPlayer.Play();
+            videoPlayer.loopPointReached += SetVideopostToRead;
+            videoIsPlaying = true;
+        }else
+        {
+            videoPlayer.Stop();
+            videoIsPlaying = false;
+        }
+
+        rawImage.transform.parent.transform.parent.GetComponent<Overlay>().SetIconActive(!videoIsPlaying);
+    }
+
+    public void SetVideo(string videoName, RawImage imgRaw)
+    {
+        Debug.Log("SetVideoData in Player");
+        rawImage = imgRaw.gameObject;
+        rawImage.GetComponent<RawImage>().texture = videoPlayer.targetTexture;
+        videoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, videoName);
+        videoPlayer.isLooping = false;
     }
 
     public void StopTheVideo()
@@ -38,19 +56,15 @@ public class WebGlVideoPlayer : MonoBehaviour
         if (videoPlayer.isPlaying)
         {
             videoPlayer.Stop();
-            GameData.restorIntroVideo = true;
         }
+
+        videoIsPlaying = false;
     }
 
-    public void RestoreIntroVideo(VideoPlayer vp)
+    //Method called (from local method StartTheVideo) if event player finished is fired
+    public void SetVideopostToRead(VideoPlayer vp)
     {
-        if (!GameData.introPlayedOnce)
-        {
-            GameData.introPlayedOnce = true;
-        }
-        
-        GameData.restorIntroVideo = true;
-        rawImage.GetComponent<RawImage>().color = new Color(255, 255, 255, 0);
+        videoIsPlaying = false;
     }
 
 }

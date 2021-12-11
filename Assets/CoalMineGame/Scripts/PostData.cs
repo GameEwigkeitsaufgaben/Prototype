@@ -19,6 +19,11 @@ public class PostData : ScriptableObject
     public string interactionScene;
     public string videoName;
 
+    public Sprite GetReplayIcon()
+    {
+        return icons.replayIcon;
+    }
+
     public Sprite GetIcon()
     {
         Sprite xy;

@@ -7,4 +7,5 @@ public class GameIcons : ScriptableObject
     public Sprite lockedIcon;
     public Sprite interactIcon;
     public Sprite videoIcon;
+    public Sprite replayIcon;
 }
