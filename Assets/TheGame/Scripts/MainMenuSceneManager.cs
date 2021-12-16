@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class MainMenuSceneManager : MonoBehaviour
 {
     private const string pwdChapterOne = "111";
+    private const string pwdAdminChapterOne = "1212";
     private const string pwdChapterTwo = "222";
     private const string pwdChapterThree = "333";
 
@@ -114,6 +115,23 @@ public class MainMenuSceneManager : MonoBehaviour
 
     private bool CheckPwdCorrect(int chapterCode, bool pwdCorrect)
     {
+        //Check admin and set unlock all for chapter
+        switch (chapterCode)
+        {
+            case 1:
+                if (inputFieldChapterOne.text == pwdAdminChapterOne)
+                {
+                    GameData.chapterOneUnlocked = 1;
+                    GameData.progressWithAdmin = true;
+                }
+                break;
+            case 2:
+                //ToDO
+                break;
+            case 3:
+                //Todo
+                break;
+        }
         
         switch (chapterCode)
         {

@@ -117,7 +117,7 @@ public class Overlay : MonoBehaviour
 
     public void CloseOverlay()
     {
-        SetIconActive(true);
+        //SetIconActive(true);
         gameObject.SetActive(false);
         webglVideoPlayer.StopTheVideo();
     }

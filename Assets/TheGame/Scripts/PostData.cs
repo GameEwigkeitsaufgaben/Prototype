@@ -14,7 +14,7 @@ public class PostData : ScriptableObject
     [TextArea(3, 100)]
     public string postTags;
 
-    public bool postLocked;
+    public bool postUnLocked;
 
     public string interactionScene;
     public string videoName;

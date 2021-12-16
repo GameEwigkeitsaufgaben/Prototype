@@ -14,14 +14,13 @@ public class Post : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Post created" + gameObject.name);
         webglVideoPlayer = GameObject.FindObjectOfType<WebGlVideoPlayer>();
         icons = Resources.Load<GameIcons>("Icons");
     }
 
     public void UpdateIcon()
     {
-        Debug.Log("Update Icon in Post " + gameObject.name);
+        //Debug.Log("Update Icon in Post " + gameObject.name);
         childIcon.GetComponent<Image>().sprite = icons.replayIcon;
     }
 
@@ -41,11 +40,13 @@ public class Post : MonoBehaviour
         childIcon.GetComponent<Image>().raycastTarget = false;
 
         gameObject.GetComponent<Button>().interactable = false;
-
-        if (postData.postLocked) return;
+        
+        //&& to unlock all || to lock all
+        if (!GameData.progressWithAdmin && !postData.postUnLocked) return;
 
         //if the post is unlocked the post is interactable, the sprite is set and icon is set 
-        //if it is an image without an icon, the lockicon will be deactivated. 
+        //if it is an image without an icon, the lockicon will be deactivated.
+        postData.postUnLocked = true;
         gameObject.GetComponent<Button>().interactable = true;
 
         if (OverlayType.IMAGE == postData.overlayType)
@@ -56,7 +57,7 @@ public class Post : MonoBehaviour
 
         childIcon.GetComponent<Image>().sprite = postData.GetIcon();
 
-        Debug.Log("Post created: " + gameObject.name);
+        
     }
 
     public void SetOverlayData(PostData data)
@@ -75,7 +76,5 @@ public class Post : MonoBehaviour
     {
         SetButtonFunctionInteractable(true);
         childIcon.GetComponent<Image>().sprite = postData.GetIcon();
-
-
     }
 }
