@@ -2,6 +2,10 @@
 
 First prototype of a learning game to seniblilize children older than 15 for the tasks based on coal mining. 
 
+different branches: 
++ main Hauptbranch
+
+
 Prototype is based on https://miro.com/app/board/o9J_kmQ5v0g=/
 
 ### Targetplatform: WebGL Desktop
