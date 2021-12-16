@@ -15,3 +15,9 @@ Das Menü ist so aufgebaut, dass es einzelne Posts gibt und diese als Kacheln (m
 
 Video: Das Video wird Gestartet durch das Betätigen des Spielberiechs. Ein Icon zeigt an, dass es sich um ein Video handelt. Wurde das Video das Video abgespielt, wird ein Wiederholen Incon anstatt des Play Icons angezeigt. Das Video kann nicht pausiert aber gestoppt werden und fängt immer von vorne an.
 
+MainMenü:
+3 Kapitel mit pwd Prüfung, Adminpwd für ch1, ein startpwd zum Spielen. Wird ins input field eingegeben. Falls richtig wir in GameData.progressWithAdmin auf true gesetzt und in Post.cs wird dies geprüft. Wenn mit Admin eingestiegen wird alles im Kapitel freigeschalten. Wird gemacht 1) zum zusammenwarten, zur Sicherstellung was angesehen wurde. So kann auch jederzeit jeder mit dem Adminpwd rein (Schüler haben gefehlt, etc. ), Das Pwd soll von den Schülern gemerkt werden und beim nächsten Mal eingegeben werden. 
+
+InstaMenü ch1:
+vom Instamenü kommt man ins Main retour, wenn man wieder einsteigt muss kein pwd mehr eingegeben werden. Hat man das AdminPwd ist alles freigeschalten.  
+
