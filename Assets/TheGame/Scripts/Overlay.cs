@@ -85,6 +85,11 @@ public class Overlay : MonoBehaviour
             allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().interactable = true;
             allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().onClick.AddListener(delegate { SwitchTheScene(postData.interactionScene); });
         }
+        else if(postData.overlayType == OverlayType.INTERACTION)
+        {
+            allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().interactable = true;
+            allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().onClick.AddListener(delegate { SwitchTheScene(postData.interactionScene); });
+        }
         
 
         allOverlayChildren[OVERLAYTYPEICON].gameObject.GetComponent<Image>().sprite = postData.GetIcon();
