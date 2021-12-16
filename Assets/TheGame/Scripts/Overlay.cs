@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,13 +19,15 @@ public class Overlay : MonoBehaviour
 
     private PostData postData;
     private GameIcons icons;
-    private bool videoFinished = false; 
+    private bool videoFinished = false;
+    private MenuManager menuManager;
 
 
     private void Start()
     {
         icons = Resources.Load<GameIcons>("Icons");
         webglVideoPlayer = GameObject.FindObjectOfType<WebGlVideoPlayer>();
+        menuManager = FindObjectOfType<MenuManager>();
     }
 
     public void SetReplayIcon()
@@ -77,6 +80,11 @@ public class Overlay : MonoBehaviour
             allOverlayChildren[OVERLAYTYPEICON].gameObject.SetActive(false);
             return;
         }
+        else if(postData.overlayType == OverlayType.QUIZ)
+        {
+            allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().interactable = true;
+            allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().onClick.AddListener(delegate { SwitchTheScene(postData.interactionScene); });
+        }
         
 
         allOverlayChildren[OVERLAYTYPEICON].gameObject.GetComponent<Image>().sprite = postData.GetIcon();
@@ -84,6 +92,11 @@ public class Overlay : MonoBehaviour
         allOverlayChildren[OVERLAYTYPEICON].gameObject.GetComponent<Image>().raycastTarget = false;
         
         Debug.Log("**************" + gameObject.name + " " + postData.overlayType);
+    }
+
+    private void SwitchTheScene(string interactionScene)
+    {
+        menuManager.GetComponent<CoalMineSceneManager>().SwitchScene(interactionScene);
     }
 
     public void SetOverlayData(PostData data)
