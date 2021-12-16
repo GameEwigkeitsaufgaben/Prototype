@@ -11,6 +11,8 @@ Prototype is based on https://miro.com/app/board/o9J_kmQ5v0g=/
 ### Targetplatform: WebGL Desktop
 ### Developmentplatform: Window 10, Unity 2020.3.18f1, Visual Studio Community 2019
 
+Packages: Shapes 4.1.1
+
 Das Spiel teilt sich auf in 3 Hauptbereiche: 
 Einführung, Grubenwasser, Ewigkeitsaufgabe. Das Spiel sollte auf 3 Einheiten aufgeteilt werden. Jedes Kapitel kann durch eine Code freigeschalten werden. Der Code wird am Ende es Kapitels bzw. durch die Betreuungsperson mitgeteilt. Es können zusätzliche Unterlagen zum Notieren von Infos runtergeladen werden, sowie wird es einen Guide für die Betreuungsperson gegen.  Spielstände werden nicht gespeichert. 
 
