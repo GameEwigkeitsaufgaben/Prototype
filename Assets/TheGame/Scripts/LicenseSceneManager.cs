@@ -28,12 +28,12 @@ public class LicenseSceneManager : MonoBehaviour
 
     public void SwitchToDecline()
     {
-        gameObject.GetComponent<CoalMineSceneManager>().SwitchScene(GameData.sceneLicenseDeclined);
+        gameObject.GetComponent<SwitchSceneManager>().SwitchScene(GameData.sceneLicenseDeclined);
     }
 
     public void SwitchToGame()
     {
-        gameObject.GetComponent<CoalMineSceneManager>().SwitchScene(GameData.sceneMainMenu);
+        gameObject.GetComponent<SwitchSceneManager>().SwitchScene(GameData.sceneMainMenu);
     }
 
 }

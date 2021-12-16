@@ -18,6 +18,7 @@ public static class GameData
     //Unlock Posts data; is Introvideo played as a whole, than next post is to unlock
     public static bool introPlayedOnce = false;
     public static bool restorIntroVideo = false;
+    public static string overlayToLoad = "";
 
     public static void PrintState()
     {
