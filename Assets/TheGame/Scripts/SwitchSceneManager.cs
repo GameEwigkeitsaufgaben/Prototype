@@ -8,6 +8,10 @@ public class SwitchSceneManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    public string GetSceneName()
+    {
+        return SceneManager.GetActiveScene().name;
+    }
     public void SwitchToChapter1withOverlay(string overlayName)
     {
         GameData.overlayToLoad = overlayName;

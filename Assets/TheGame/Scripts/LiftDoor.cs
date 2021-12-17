@@ -6,6 +6,7 @@ public class LiftDoor : MonoBehaviour
     public float speed = 1f;
     public bool move = false;
 
+    public bool doorOpened = false;
     private Vector3 targetPosition;
     private Vector3 closedPosition;
     
@@ -16,12 +17,13 @@ public class LiftDoor : MonoBehaviour
         targetPosition = closedPosition;
         
         gameObject.transform.position = opendPosition.transform.position;
+        doorOpened = true;
         
         //Debug.Log(gameObject.name + " closed pos " + closedPosition);
         //Debug.Log(gameObject.name + " opened pos " + opendPosition.position);
         //Debug.Log(gameObject.name + " go pos " + transform.position);
         
-        Invoke("CloseDoor", 2f);
+        //Invoke("CloseDoor", 2f);
     }
 
     // Update is called once per frame
@@ -36,18 +38,19 @@ public class LiftDoor : MonoBehaviour
                 move = false;
             }
         }
-        
     }
 
     public void CloseDoor()
     {
         move = true;
+        doorOpened = false;
         targetPosition = closedPosition;
     }
 
     public void OpenDoor()
     {
         move = true;
+        doorOpened = true;
         targetPosition = opendPosition.position;
     }
 }

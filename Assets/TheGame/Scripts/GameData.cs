@@ -19,6 +19,7 @@ public static class GameData
     public static bool introPlayedOnce = false;
     public static bool restorIntroVideo = false;
     public static string overlayToLoad = "";
+    public static bool liftIntroDadDone = false;
 
     public static void PrintState()
     {
