@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public static class GameData
@@ -15,11 +16,14 @@ public static class GameData
 
     public static bool progressWithAdmin = false; //if start chapter with admin pwd true, else false;
 
+
     //Unlock Posts data; is Introvideo played as a whole, than next post is to unlock
     public static bool introPlayedOnce = false;
     public static bool restorIntroVideo = false;
     public static string overlayToLoad = "";
     public static bool liftIntroDadDone = false;
+    public static bool moveCave = false;
+    public static int nbrSchacht = 1;
 
     public static void PrintState()
     {

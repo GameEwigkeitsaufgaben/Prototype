@@ -39,7 +39,6 @@ public class LiftDoor : MonoBehaviour
             }
         }
     }
-
     public void CloseDoor()
     {
         move = true;

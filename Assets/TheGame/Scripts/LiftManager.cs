@@ -63,6 +63,8 @@ public class LiftManager : MonoBehaviour
     public void SohleOne()
     {
         Debug.Log("SO1 ---------------");
+        
+        StartMoving("sohle1");
         cave.GetComponent<LiftCaveShake>().StartShake();
     }
 
@@ -77,8 +79,9 @@ public class LiftManager : MonoBehaviour
         Debug.Log("SO3 ---------------");
     }
 
-    public void StartDriving(int meters)
+    public void StartMoving(string destination) //"einstieg, sohle1, sohle2, sohle3"
     {
+        GameData.moveCave = true;
         //GameObject go = Instantiate(prefabStollenVertical);
         //go.transform.position = new Vector3(4.6f, -10.7f, -6.8f);
         //go.GetComponent<Stollen>().StartMove();
