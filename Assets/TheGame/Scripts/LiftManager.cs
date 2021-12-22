@@ -12,8 +12,10 @@ public class LiftManager : MonoBehaviour
 
     public AudioSource src11621Dad;
     public Button[] liftBtns;
+    public Button exitScene;
 
     bool introPlayedOneTime = false;
+    bool caveDoorsClosed = false;
 
     private void Start()
     {
@@ -27,16 +29,23 @@ public class LiftManager : MonoBehaviour
     {
         if (gameObject.GetComponent<SwitchSceneManager>().GetSceneName() == "Scene1162")
         {
-            if (doorLeft.GetComponent<LiftDoor>().doorOpened)
-            {
-                doorLeft.GetComponent<LiftDoor>().CloseDoor();
-                doorRight.GetComponent<LiftDoor>().CloseDoor();
-            }
-            else
-            {
-                doorLeft.GetComponent<LiftDoor>().OpenDoor();
-                doorRight.GetComponent<LiftDoor>().OpenDoor();
-            }
+            OpenCloseDoors();
+        }
+    }
+
+    private void OpenCloseDoors()
+    {
+        if (doorLeft.GetComponent<LiftDoor>().doorOpened)
+        {
+            doorLeft.GetComponent<LiftDoor>().CloseDoor();
+            doorRight.GetComponent<LiftDoor>().CloseDoor();
+            caveDoorsClosed = true;
+        }
+        else
+        {
+            doorLeft.GetComponent<LiftDoor>().OpenDoor();
+            doorRight.GetComponent<LiftDoor>().OpenDoor();
+            caveDoorsClosed = false;
         }
     }
 
@@ -63,7 +72,20 @@ public class LiftManager : MonoBehaviour
     public void SohleOne()
     {
         Debug.Log("SO1 ---------------");
-        
+
+        if (caveDoorsClosed)
+        {
+            GoToSohle1();
+        }
+        else
+        {
+            OpenCloseDoors();
+            Invoke("GoToSohle1", 2f);
+        }
+    }
+
+    private void GoToSohle1()
+    {
         StartMoving("sohle1");
         cave.GetComponent<LiftCaveShake>().StartShake();
     }
@@ -89,6 +111,16 @@ public class LiftManager : MonoBehaviour
 
     private void Update()
     {
+        if (caveDoorsClosed && exitScene.interactable)
+        {
+            exitScene.interactable = false;
+        }
+
+        if (!caveDoorsClosed && !exitScene.interactable)
+        {
+            exitScene.interactable = true;
+        }
+
         if (introPlayedOneTime  && !src11621Dad.isPlaying)
             GameData.liftIntroDadDone = true;
 
