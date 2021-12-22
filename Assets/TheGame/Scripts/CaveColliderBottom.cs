@@ -12,18 +12,23 @@ public class CaveColliderBottom : MonoBehaviour
             cave.currentStop = CurrentStop.Einstieg;
         }
         Debug.Log(" .." +other.name);
-        if (other.name == "TriggerSohle1")
+        if (other.name == "TriggerSohle1" && cave.targetStop == CurrentStop.Sohle1)
         {
             Debug.Log("Stop Cave");
             cave.StopCave();
             cave.currentStop = CurrentStop.Sohle1;
         }
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (other.name == "TriggerSohle2" && cave.targetStop == CurrentStop.Sohle2)
+        {
+            Debug.Log("Stop Cave");
+            cave.StopCave();
+            cave.currentStop = CurrentStop.Sohle2;
+        }
+        if (other.name == "TriggerSohle3" && cave.targetStop == CurrentStop.Sohle3)
+        {
+            Debug.Log("Stop Cave");
+            cave.StopCave();
+            cave.currentStop = CurrentStop.Sohle3;
+        }
     }
 }

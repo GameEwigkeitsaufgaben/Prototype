@@ -8,6 +8,7 @@ public class LiftManager : MonoBehaviour
     public AudioSource src11621Dad;
     public Button[] liftBtns;
     public Button exitScene;
+    public Button btnEinstieg;
 
     public GameObject triggerEinstieg;
 
@@ -15,7 +16,8 @@ public class LiftManager : MonoBehaviour
 
     private void Start()
     {
-        triggerEinstieg.SetActive(false); 
+        triggerEinstieg.SetActive(false);
+        btnEinstieg.GetComponent<CaveButton>().feedbackObject.SetActive(true);
 
         foreach (Button y in liftBtns)
         {
@@ -29,6 +31,11 @@ public class LiftManager : MonoBehaviour
         if (GameData.moveCave) return;
 
         cave.targetStop = CurrentStop.Einstieg;
+        btnEinstieg.GetComponent<CaveButton>().feedbackObject.SetActive(true);
+        foreach(Button a in liftBtns)
+        {
+            a.GetComponent<CaveButton>().feedbackObject.SetActive(false);
+        }
 
         if (cave.currentStop == CurrentStop.Einstieg)
         {
@@ -40,35 +47,21 @@ public class LiftManager : MonoBehaviour
             {
                 cave.CloseDoors();
             }
-        }else if (cave.currentStop == CurrentStop.Sohle1)
+        }
+        else if (cave.currentStop == CurrentStop.Sohle1)
         {
             GameData.moveCave = true;
-            cave.MoveToEinstieg();
+            cave.MoveTo(CurrentStop.Einstieg);
             triggerEinstieg.SetActive(true);
         }
-    }
-
-    public void PlayDaD1162Intro()
-    {
-        if (src11621Dad.isPlaying) return;
-
-        src11621Dad.Play();
-
-        introPlayedOneTime = true;
-
-    }
-
-    public void PlayAudioDadEGIntro(AudioSource src)
-    {
-        src.Play();
     }
 
     public void GoToSohle1()
     {
         Debug.Log("Go To SO1 ---------------");
-        
+
         if (GameData.moveCave) return;
-        
+
         cave.targetStop = CurrentStop.Sohle1;
 
         Debug.Log("WTF --------------- " + cave.currentStop);
@@ -96,14 +89,121 @@ public class LiftManager : MonoBehaviour
                 Invoke("StartMovingSohleOne", 2f); //Ruft GoToSpohle1 after 2 sec auf;
             }
         }
-        
-        
+        btnEinstieg.GetComponent<CaveButton>().feedbackObject.SetActive(false);
+        foreach (Button a in liftBtns)
+        {
+            a.GetComponent<CaveButton>().feedbackObject.SetActive(false);
+        }
+        liftBtns[0].GetComponent<CaveButton>().feedbackObject.SetActive(true);
+    }
+    public void GoToSohle2()
+    {
+        Debug.Log("Go To SO2 ---------------");
+
+        if (GameData.moveCave) return;
+
+        cave.targetStop = CurrentStop.Sohle2;
+
+        Debug.Log("WTF --------------- " + cave.currentStop);
+        if (cave.currentStop == CurrentStop.Sohle2)
+        {
+            if (cave.caveDoorsClosed)
+            {
+                cave.OpenDoors();
+            }
+            else
+            {
+                cave.CloseDoors();
+            }
+        }
+        else
+        {
+            //Start Moving, after doors closed
+            if (cave.caveDoorsClosed)
+            {
+                StartMovingSohleTwo();
+            }
+            else
+            {
+                cave.CloseDoors();
+                Invoke("StartMovingSohleTwo", 2f); //Ruft GoToSpohle1 after 2 sec auf;
+            }
+        }
+        btnEinstieg.GetComponent<CaveButton>().feedbackObject.SetActive(false);
+        foreach (Button a in liftBtns)
+        {
+            a.GetComponent<CaveButton>().feedbackObject.SetActive(false);
+        }
+        liftBtns[1].GetComponent<CaveButton>().feedbackObject.SetActive(true);
+    }
+
+    public void GoToSohle3()
+    {
+        Debug.Log("Go To SO3 ---------------");
+
+        if (GameData.moveCave) return;
+
+        cave.targetStop = CurrentStop.Sohle3;
+
+        Debug.Log("WTF --------------- " + cave.currentStop);
+        if (cave.currentStop == CurrentStop.Sohle3)
+        {
+            if (cave.caveDoorsClosed)
+            {
+                cave.OpenDoors();
+            }
+            else
+            {
+                cave.CloseDoors();
+            }
+        }
+        else
+        {
+            //Start Moving, after doors closed
+            if (cave.caveDoorsClosed)
+            {
+                StartMovingSohleThree();
+            }
+            else
+            {
+                cave.CloseDoors();
+                Invoke("StartMovingSohleThree", 2f); //Ruft GoToSpohle1 after 2 sec auf;
+            }
+        }
+        btnEinstieg.GetComponent<CaveButton>().feedbackObject.SetActive(false);
+        foreach (Button a in liftBtns)
+        {
+            a.GetComponent<CaveButton>().feedbackObject.SetActive(false);
+        }
+        liftBtns[2].GetComponent<CaveButton>().feedbackObject.SetActive(true);
+    }
+
+    public void PlayDaD1162Intro()
+    {
+        if (src11621Dad.isPlaying) return;
+
+        src11621Dad.Play();
+
+        introPlayedOneTime = true;
+    }
+
+    public void PlayAudioDadEGIntro(AudioSource src)
+    {
+        src.Play();
     }
 
     public void StartMovingSohleOne()
     {
-        cave.MoveToShole1();
-        cave.GetComponent<CaveShake>().StartShake();
+        cave.MoveTo(CurrentStop.Sohle1);
+    }
+
+    public void StartMovingSohleTwo()
+    {
+        cave.MoveTo(CurrentStop.Sohle2);
+    }
+    public void StartMovingSohleThree()
+    {
+        cave.MoveTo(CurrentStop.Sohle3);
     }
 
     public void SohleTwo()

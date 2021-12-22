@@ -33,22 +33,30 @@ public class Cave : MonoBehaviour
         }
     }
 
-    public void MoveToShole1()
+    public void MoveTo(CurrentStop tStop)
     {
-        targetStop = CurrentStop.Sohle1;
+        targetStop = tStop;
         moveDirecton = GetMoveDirection();
         GameData.moveCave = true;
         gameObject.GetComponent<CaveShake>().StartShake();
-        
+
     }
 
-    public void MoveToEinstieg()
-    {
-        targetStop = CurrentStop.Einstieg;
-        moveDirecton = GetMoveDirection();
-        GameData.moveCave = true;
-        gameObject.GetComponent<CaveShake>().StartShake();
-    }
+    //public void MoveToShole1()
+    //{
+    //    targetStop = CurrentStop.Sohle1;
+    //    moveDirecton = GetMoveDirection();
+    //    GameData.moveCave = true;
+    //    gameObject.GetComponent<CaveShake>().StartShake();  
+    //}
+
+    //public void MoveToEinstieg()
+    //{
+    //    targetStop = CurrentStop.Einstieg;
+    //    moveDirecton = GetMoveDirection();
+    //    GameData.moveCave = true;
+    //    gameObject.GetComponent<CaveShake>().StartShake();
+    //}
 
     private int GetMoveDirection()
     {
@@ -61,9 +69,11 @@ public class Cave : MonoBehaviour
                     break;
             case CurrentStop.Sohle1:
                 if (targetStop == CurrentStop.Einstieg) tmp = 1;
+                if ((targetStop == CurrentStop.Sohle2) || (targetStop == CurrentStop.Sohle3)) tmp = -1;
                 break;
             case CurrentStop.Sohle2:
-                //MoveUp
+                if (targetStop == CurrentStop.Einstieg || (targetStop == CurrentStop.Sohle1)) tmp = 1;
+                if (targetStop == CurrentStop.Sohle3) tmp = -1;
                 break;
             case CurrentStop.Sohle3:
                     tmp = 1;
