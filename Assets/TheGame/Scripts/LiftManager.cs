@@ -4,8 +4,6 @@ using UnityEngine.UI;
 public class LiftManager : MonoBehaviour
 {
     public Cave cave;
-    public GameObject doorLeft;
-    public GameObject doorRight;
 
     public AudioSource src11621Dad;
     public Button[] liftBtns;
@@ -33,27 +31,8 @@ public class LiftManager : MonoBehaviour
             {
                 cave.CloseDoors();
             }
-            //OpenCloseDoors();
         }
     }
-
-    /* private void OpenCloseDoors()
-     {
-         if (doorLeft.GetComponent<LiftDoor>().doorOpened)
-         {
-             doorLeft.GetComponent<LiftDoor>().CloseDoor();
-             doorRight.GetComponent<LiftDoor>().CloseDoor();
-             caveDoorsClosed = true;
-         }
-         else
-         {
-             doorLeft.GetComponent<LiftDoor>().OpenDoor();
-             doorRight.GetComponent<LiftDoor>().OpenDoor();
-             caveDoorsClosed = false;
-         }
-
-     }
-       */
 
     public void PlayDaD1162Intro()
     {
