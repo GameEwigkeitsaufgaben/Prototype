@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LiftManager : MonoBehaviour
 {
-    //public GameObject prefabStollenVertical;
-    public GameObject cave;
+    public Cave cave;
     public GameObject doorLeft;
     public GameObject doorRight;
 
@@ -15,7 +12,6 @@ public class LiftManager : MonoBehaviour
     public Button exitScene;
 
     bool introPlayedOneTime = false;
-    bool caveDoorsClosed = false;
 
     private void Start()
     {
@@ -29,25 +25,35 @@ public class LiftManager : MonoBehaviour
     {
         if (gameObject.GetComponent<SwitchSceneManager>().GetSceneName() == "Scene1162")
         {
-            OpenCloseDoors();
+            if (cave.caveDoorsClosed)
+            {
+                cave.OpenDoors();
+            }
+            else
+            {
+                cave.CloseDoors();
+            }
+            //OpenCloseDoors();
         }
     }
 
-    private void OpenCloseDoors()
-    {
-        if (doorLeft.GetComponent<LiftDoor>().doorOpened)
-        {
-            doorLeft.GetComponent<LiftDoor>().CloseDoor();
-            doorRight.GetComponent<LiftDoor>().CloseDoor();
-            caveDoorsClosed = true;
-        }
-        else
-        {
-            doorLeft.GetComponent<LiftDoor>().OpenDoor();
-            doorRight.GetComponent<LiftDoor>().OpenDoor();
-            caveDoorsClosed = false;
-        }
-    }
+    /* private void OpenCloseDoors()
+     {
+         if (doorLeft.GetComponent<LiftDoor>().doorOpened)
+         {
+             doorLeft.GetComponent<LiftDoor>().CloseDoor();
+             doorRight.GetComponent<LiftDoor>().CloseDoor();
+             caveDoorsClosed = true;
+         }
+         else
+         {
+             doorLeft.GetComponent<LiftDoor>().OpenDoor();
+             doorRight.GetComponent<LiftDoor>().OpenDoor();
+             caveDoorsClosed = false;
+         }
+
+     }
+       */
 
     public void PlayDaD1162Intro()
     {
@@ -73,20 +79,20 @@ public class LiftManager : MonoBehaviour
     {
         Debug.Log("SO1 ---------------");
 
-        if (caveDoorsClosed)
+        if (cave.caveDoorsClosed)
         {
             GoToSohle1();
         }
         else
         {
-            OpenCloseDoors();
+            cave.CloseDoors();
             Invoke("GoToSohle1", 2f);
         }
     }
 
     private void GoToSohle1()
     {
-        StartMoving("sohle1");
+        StartMoving();
         cave.GetComponent<LiftCaveShake>().StartShake();
     }
 
@@ -101,22 +107,19 @@ public class LiftManager : MonoBehaviour
         Debug.Log("SO3 ---------------");
     }
 
-    public void StartMoving(string destination) //"einstieg, sohle1, sohle2, sohle3"
+    public void StartMoving() //"einstieg, sohle1, sohle2, sohle3"
     {
         GameData.moveCave = true;
-        //GameObject go = Instantiate(prefabStollenVertical);
-        //go.transform.position = new Vector3(4.6f, -10.7f, -6.8f);
-        //go.GetComponent<Stollen>().StartMove();
     }
 
     private void Update()
     {
-        if (caveDoorsClosed && exitScene.interactable)
+        if (cave.caveDoorsClosed && exitScene.interactable)
         {
             exitScene.interactable = false;
         }
 
-        if (!caveDoorsClosed && !exitScene.interactable)
+        if (!cave.caveDoorsClosed && !exitScene.interactable)
         {
             exitScene.interactable = true;
         }
