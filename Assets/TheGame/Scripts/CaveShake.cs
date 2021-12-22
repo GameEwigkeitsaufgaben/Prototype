@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LiftCaveShake : MonoBehaviour
+public class CaveShake : MonoBehaviour
 {
     private Vector3 _lastPosition;
     private Vector3 _lastRotation;
@@ -14,14 +14,12 @@ public class LiftCaveShake : MonoBehaviour
 
     public bool shakeCabine = false;
 
-    // Update is called once per frame
     void Update()
     {
         if (shakeCabine)
         {
             StartShake();
         }
-      
     }
 
     public void StartShake()

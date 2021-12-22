@@ -93,13 +93,13 @@ public class LiftManager : MonoBehaviour
     private void GoToSohle1()
     {
         StartMoving();
-        cave.GetComponent<LiftCaveShake>().StartShake();
+        cave.GetComponent<CaveShake>().StartShake();
     }
 
     public void SohleTwo()
     {
         Debug.Log("SO2 ---------------");
-        cave.GetComponent<LiftCaveShake>().StopShake();
+        cave.GetComponent<CaveShake>().StopShake();
     }
 
     public void SohleThree()
