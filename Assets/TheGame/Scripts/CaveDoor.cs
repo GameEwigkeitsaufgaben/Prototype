@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LiftDoor : MonoBehaviour
+public class CaveDoor : MonoBehaviour
 {
     public Transform opendPosition;
     public float speed = 1f;
@@ -13,17 +13,12 @@ public class LiftDoor : MonoBehaviour
 
     private void Start()
     {
-        closedPosition = gameObject.transform.position;
+        closedPosition = gameObject.transform.localPosition;
         targetPosition = closedPosition;
         
-        gameObject.transform.position = opendPosition.transform.position;
+        gameObject.transform.localPosition = opendPosition.transform.localPosition;
         doorOpened = true;
         
-        //Debug.Log(gameObject.name + " closed pos " + closedPosition);
-        //Debug.Log(gameObject.name + " opened pos " + opendPosition.position);
-        //Debug.Log(gameObject.name + " go pos " + transform.position);
-        
-        //Invoke("CloseDoor", 2f);
     }
 
     // Update is called once per frame
@@ -31,9 +26,9 @@ public class LiftDoor : MonoBehaviour
     {
         if (move)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+            transform.localPosition = Vector3.MoveTowards(transform.localPosition, targetPosition, speed * Time.deltaTime);
             
-            if (transform.position == targetPosition)
+            if (transform.localPosition == targetPosition)
             {
                 move = false;
             }
@@ -50,6 +45,6 @@ public class LiftDoor : MonoBehaviour
     {
         move = true;
         doorOpened = true;
-        targetPosition = opendPosition.position;
+        targetPosition = opendPosition.localPosition;
     }
 }

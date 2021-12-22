@@ -9,10 +9,14 @@ public class LiftManager : MonoBehaviour
     public Button[] liftBtns;
     public Button exitScene;
 
+    public GameObject triggerEinstieg;
+
     bool introPlayedOneTime = false;
 
     private void Start()
     {
+        triggerEinstieg.SetActive(false); 
+
         foreach (Button y in liftBtns)
         {
             y.interactable = false;
@@ -21,7 +25,12 @@ public class LiftManager : MonoBehaviour
 
     public void GoToEinstieg()
     {
-        if (gameObject.GetComponent<SwitchSceneManager>().GetSceneName() == "Scene1162")
+        Debug.Log("Go To Einstieg  ---------------");
+        if (GameData.moveCave) return;
+
+        cave.targetStop = CurrentStop.Einstieg;
+
+        if (cave.currentStop == CurrentStop.Einstieg)
         {
             if (cave.caveDoorsClosed)
             {
@@ -31,6 +40,11 @@ public class LiftManager : MonoBehaviour
             {
                 cave.CloseDoors();
             }
+        }else if (cave.currentStop == CurrentStop.Sohle1)
+        {
+            GameData.moveCave = true;
+            cave.MoveToEinstieg();
+            triggerEinstieg.SetActive(true);
         }
     }
 
@@ -44,34 +58,51 @@ public class LiftManager : MonoBehaviour
 
     }
 
-    public void Eg()
-    {
-        Debug.Log("EG ---------------");
-    }
-
     public void PlayAudioDadEGIntro(AudioSource src)
     {
         src.Play();
     }
 
-    public void SohleOne()
+    public void GoToSohle1()
     {
-        Debug.Log("SO1 ---------------");
+        Debug.Log("Go To SO1 ---------------");
+        
+        if (GameData.moveCave) return;
+        
+        cave.targetStop = CurrentStop.Sohle1;
 
-        if (cave.caveDoorsClosed)
+        Debug.Log("WTF --------------- " + cave.currentStop);
+        if (cave.currentStop == CurrentStop.Sohle1)
         {
-            GoToSohle1();
+            if (cave.caveDoorsClosed)
+            {
+                cave.OpenDoors();
+            }
+            else
+            {
+                cave.CloseDoors();
+            }
         }
         else
         {
-            cave.CloseDoors();
-            Invoke("GoToSohle1", 2f);
+            //Start Moving, after doors closed
+            if (cave.caveDoorsClosed)
+            {
+                StartMovingSohleOne();
+            }
+            else
+            {
+                cave.CloseDoors();
+                Invoke("StartMovingSohleOne", 2f); //Ruft GoToSpohle1 after 2 sec auf;
+            }
         }
+        
+        
     }
 
-    private void GoToSohle1()
+    public void StartMovingSohleOne()
     {
-        StartMoving();
+        cave.MoveToShole1();
         cave.GetComponent<CaveShake>().StartShake();
     }
 

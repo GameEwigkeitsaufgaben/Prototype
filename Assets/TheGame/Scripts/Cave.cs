@@ -1,36 +1,95 @@
+using System;
 using UnityEngine;
+
+public enum CurrentStop
+{
+    Einstieg,
+    Sohle1,
+    Sohle2,
+    Sohle3,
+}
 
 public class Cave : MonoBehaviour
 {
     public GameObject doorLeft;
     public GameObject doorRight;
-
     public bool caveDoorsClosed = false;
+    
+    public CurrentStop currentStop;
+    public CurrentStop targetStop;
+    private int moveDirecton;//-1 for moving down, +1 for moving up
+
+    private void Start()
+    {
+        currentStop = CurrentStop.Einstieg;
+    }
 
     void Update()
     {
         if (GameData.moveCave)
         {
-            transform.position += new Vector3(0, -2 * Time.deltaTime, 0);
+            Debug.Log(moveDirecton + " movedir");
+            transform.position += new Vector3(0, moveDirecton * 2 * Time.deltaTime, 0);
         }
+    }
+
+    public void MoveToShole1()
+    {
+        targetStop = CurrentStop.Sohle1;
+        moveDirecton = GetMoveDirection();
+        GameData.moveCave = true;
+        gameObject.GetComponent<CaveShake>().StartShake();
+        
+    }
+
+    public void MoveToEinstieg()
+    {
+        targetStop = CurrentStop.Einstieg;
+        moveDirecton = GetMoveDirection();
+        GameData.moveCave = true;
+        gameObject.GetComponent<CaveShake>().StartShake();
+    }
+
+    private int GetMoveDirection()
+    {
+        int tmp = 0;
+
+        switch (currentStop)
+        {
+            case CurrentStop.Einstieg:
+                    tmp = -1;
+                    break;
+            case CurrentStop.Sohle1:
+                if (targetStop == CurrentStop.Einstieg) tmp = 1;
+                break;
+            case CurrentStop.Sohle2:
+                //MoveUp
+                break;
+            case CurrentStop.Sohle3:
+                    tmp = 1;
+                    break;
+        }
+
+        return tmp;
     }
 
     public void CloseDoors()
     {
-        doorLeft.GetComponent<LiftDoor>().CloseDoor();
-        doorRight.GetComponent<LiftDoor>().CloseDoor();
+        doorLeft.GetComponent<CaveDoor>().CloseDoor();
+        doorRight.GetComponent<CaveDoor>().CloseDoor();
         caveDoorsClosed = true;
     }
 
     public void OpenDoors()
     {
-        doorLeft.GetComponent<LiftDoor>().OpenDoor();
-        doorRight.GetComponent<LiftDoor>().OpenDoor();
+        doorLeft.GetComponent<CaveDoor>().OpenDoor();
+        doorRight.GetComponent<CaveDoor>().OpenDoor();
         caveDoorsClosed = false;
     }
 
     public void StopCave()
     {
         GameData.moveCave = false;
+        gameObject.GetComponent<CaveShake>().StopShake();
     }
 }

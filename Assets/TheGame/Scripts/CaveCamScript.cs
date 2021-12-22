@@ -1,7 +1,12 @@
 using UnityEngine;
 
-public class LiftCamScript : MonoBehaviour
+public class CaveCamScript : MonoBehaviour
 {
+    //Follow player
+    public GameObject player;
+    private Vector3 offset;
+
+    //Mousecontrol
     public float speedH = 2.0f;
     public float speedV = 2.0f;
 
@@ -10,9 +15,16 @@ public class LiftCamScript : MonoBehaviour
 
     bool mouseDown = false;
 
+    private void Start()
+    {
+        offset = transform.position - player.transform.position;
+    }
+
     // Update is called once per frame
     void Update()
     {
+
+        transform.position = player.transform.position + offset;
 
         if (Input.GetMouseButtonDown(0))
         {
