@@ -17,7 +17,7 @@ public class Cave : MonoBehaviour
     
     public CurrentStop currentStop;
     public CurrentStop targetStop;
-    private int moveDirecton;//-1 for moving down, +1 for moving up
+    public int moveDirecton;//-1 for moving down, +1 for moving up
 
     private void Start()
     {

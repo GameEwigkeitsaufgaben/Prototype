@@ -20,6 +20,7 @@ public static class GameData
     public static string overlayToLoad = "";
     public static bool liftIntroDadDone = false;
     public static bool moveCave = false;
+    //public static int moveDirection = -1; //-1 for moving down, +1 for moving up
     public static int nbrSchacht = 1;
 
     public static void PrintState()

@@ -178,7 +178,7 @@ public class LiftManager : MonoBehaviour
         liftBtns[2].GetComponent<CaveButton>().feedbackObject.SetActive(true);
     }
 
-    public void PlayDaD1162Intro()
+    public void PlayDaD1162Intro() //wird von button im inspector aufgerufen
     {
         if (src11621Dad.isPlaying) return;
 
