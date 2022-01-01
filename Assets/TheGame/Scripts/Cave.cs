@@ -19,9 +19,12 @@ public class Cave : MonoBehaviour
     public CurrentStop targetStop;
     public int moveDirecton;//-1 for moving down, +1 for moving up
 
+    private AudioSource src;
+
     private void Start()
     {
         currentStop = CurrentStop.Einstieg;
+        src = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -88,6 +91,10 @@ public class Cave : MonoBehaviour
         doorLeft.GetComponent<CaveDoor>().CloseDoor();
         doorRight.GetComponent<CaveDoor>().CloseDoor();
         caveDoorsClosed = true;
+        if (!src.isPlaying)
+        {
+            src.Play();
+        }
     }
 
     public void OpenDoors()
@@ -95,6 +102,9 @@ public class Cave : MonoBehaviour
         doorLeft.GetComponent<CaveDoor>().OpenDoor();
         doorRight.GetComponent<CaveDoor>().OpenDoor();
         caveDoorsClosed = false;
+        {
+            src.Play();
+        }
     }
 
     public void StopCave()

@@ -3,7 +3,7 @@ using UnityEngine;
 public class CaveDoor : MonoBehaviour
 {
     public Transform opendPosition;
-    public float speed = 1f;
+    public float speed = 0.1f;
     public bool move = false;
 
     public bool doorOpened = false;

@@ -4,18 +4,31 @@ using UnityEngine;
 
 public class LiftSohleOne : MonoBehaviour
 {
-    public AudioClip clip1, clip2;
+    public AudioClip clip1, clip2, clipEnvironmet;
     bool playNextAudio = false;
+
+    private AudioSource srcEnvironment;
+    private AudioSource srcTalk;
+
+    private void Start()
+    {
+        srcTalk = GetComponent<AudioSource>();
+        srcEnvironment = gameObject.AddComponent<AudioSource>();
+        srcEnvironment.clip = clipEnvironmet;
+        srcEnvironment.playOnAwake = false;
+
+    }
 
     public void PlayAudio()
     {
-        GetComponent<AudioSource>().Play();
+        srcEnvironment.Play();
+        srcTalk.Play();
         Invoke("PlayClip2", 15f);
     }
 
     private void PlayClip2()
     {
-        GetComponent<AudioSource>().clip = clip2;
-        GetComponent<AudioSource>().Play();
+        srcTalk.clip = clip2;
+        srcTalk.Play();
     }
 }
