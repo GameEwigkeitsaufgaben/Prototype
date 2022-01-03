@@ -26,12 +26,14 @@ public class CaveColliderBottom : MonoBehaviour
             Debug.Log("Stop Cave");
             cave.StopCave();
             cave.currentStop = CurrentStop.Sohle2;
+            other.GetComponent<LiftSohleTwo>().PlayAudio();
         }
         if (other.name == "TriggerSohle3" && cave.targetStop == CurrentStop.Sohle3)
         {
             Debug.Log("Stop Cave");
             cave.StopCave();
             cave.currentStop = CurrentStop.Sohle3;
+            other.GetComponent<LiftSohleThree>().PlayAudio();
         }
         if (other.name == "TriggerAudioGabi" && cave.moveDirecton < 0)
         {

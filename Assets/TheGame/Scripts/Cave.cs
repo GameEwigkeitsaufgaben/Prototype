@@ -19,12 +19,13 @@ public class Cave : MonoBehaviour
     public CurrentStop targetStop;
     public int moveDirecton;//-1 for moving down, +1 for moving up
 
-    private AudioSource src;
+    public AudioSource doorsMovingSrc;
+    public AudioSource liftMovingSrc;
 
     private void Start()
     {
         currentStop = CurrentStop.Einstieg;
-        src = GetComponent<AudioSource>();
+        //doorsMovingSrc = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -42,24 +43,9 @@ public class Cave : MonoBehaviour
         moveDirecton = GetMoveDirection();
         GameData.moveCave = true;
         gameObject.GetComponent<CaveShake>().StartShake();
+        liftMovingSrc.Play();
 
     }
-
-    //public void MoveToShole1()
-    //{
-    //    targetStop = CurrentStop.Sohle1;
-    //    moveDirecton = GetMoveDirection();
-    //    GameData.moveCave = true;
-    //    gameObject.GetComponent<CaveShake>().StartShake();  
-    //}
-
-    //public void MoveToEinstieg()
-    //{
-    //    targetStop = CurrentStop.Einstieg;
-    //    moveDirecton = GetMoveDirection();
-    //    GameData.moveCave = true;
-    //    gameObject.GetComponent<CaveShake>().StartShake();
-    //}
 
     private int GetMoveDirection()
     {
@@ -91,9 +77,9 @@ public class Cave : MonoBehaviour
         doorLeft.GetComponent<CaveDoor>().CloseDoor();
         doorRight.GetComponent<CaveDoor>().CloseDoor();
         caveDoorsClosed = true;
-        if (!src.isPlaying)
+        if (!doorsMovingSrc.isPlaying)
         {
-            src.Play();
+            doorsMovingSrc.Play();
         }
     }
 
@@ -103,7 +89,7 @@ public class Cave : MonoBehaviour
         doorRight.GetComponent<CaveDoor>().OpenDoor();
         caveDoorsClosed = false;
         {
-            src.Play();
+            doorsMovingSrc.Play();
         }
     }
 
@@ -111,5 +97,6 @@ public class Cave : MonoBehaviour
     {
         GameData.moveCave = false;
         gameObject.GetComponent<CaveShake>().StopShake();
+        liftMovingSrc.Stop();
     }
 }

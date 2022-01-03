@@ -16,7 +16,6 @@ public class LiftSohleOne : MonoBehaviour
         srcEnvironment = gameObject.AddComponent<AudioSource>();
         srcEnvironment.clip = clipEnvironmet;
         srcEnvironment.playOnAwake = false;
-
     }
 
     public void PlayAudio()
