@@ -17,4 +17,5 @@ public class SwitchSceneManager : MonoBehaviour
         GameData.overlayToLoad = overlayName;
         SwitchScene(GameData.sceneMainChapterOne);
     }
+
 }

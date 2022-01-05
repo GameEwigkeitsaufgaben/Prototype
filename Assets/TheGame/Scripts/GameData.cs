@@ -19,9 +19,19 @@ public static class GameData
     public static bool restorIntroVideo = false;
     public static string overlayToLoad = "";
     public static bool liftIntroDadDone = false;
+    public static bool liftBtnsEnabled = false;
+    public static float cavePosX = 0f;
+    public static float cavePosY = 0f;
+    public static float cavePosZ = 0f;
     public static bool moveCave = false;
     //public static int moveDirection = -1; //-1 for moving down, +1 for moving up
     public static int nbrSchacht = 1;
+
+    public static int sohleToReload = 0;
+    public static float playerOffsetToAnkerObjX = 0;
+    public static float playerOffsetToAnkerObjY = 0;
+    public static float playerOffsetToAnkerObjZ = 0;
+    public static bool scene1162LoadedOnce = false;
 
     public static void PrintState()
     {

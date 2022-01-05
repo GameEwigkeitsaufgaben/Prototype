@@ -25,7 +25,13 @@ public class Cave : MonoBehaviour
     private void Start()
     {
         currentStop = CurrentStop.Einstieg;
-        //doorsMovingSrc = GetComponent<AudioSource>();
+    }
+
+    public void StoreCavePosition()
+    {
+        GameData.cavePosX = transform.position.x;
+        GameData.cavePosY = transform.position.y;
+        GameData.cavePosZ = transform.position.z;
     }
 
     void Update()
@@ -44,7 +50,6 @@ public class Cave : MonoBehaviour
         GameData.moveCave = true;
         gameObject.GetComponent<CaveShake>().StartShake();
         liftMovingSrc.Play();
-
     }
 
     private int GetMoveDirection()
@@ -98,5 +103,15 @@ public class Cave : MonoBehaviour
         GameData.moveCave = false;
         gameObject.GetComponent<CaveShake>().StopShake();
         liftMovingSrc.Stop();
+    }
+
+    public void ReloadSohle3AsCurrent()
+    {
+        currentStop = targetStop = CurrentStop.Sohle3;
+        var tempPos = new Vector3(GameData.cavePosX, GameData.cavePosY, GameData.cavePosZ);
+        Debug.Log(tempPos);
+        gameObject.transform.position = tempPos;
+        StopCave();
+        OpenDoors();
     }
 }
