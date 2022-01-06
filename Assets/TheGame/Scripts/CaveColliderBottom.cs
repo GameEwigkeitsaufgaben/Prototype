@@ -33,8 +33,12 @@ public class CaveColliderBottom : MonoBehaviour
             Debug.Log("Stop Cave");
             cave.StopCave();
             cave.currentStop = CurrentStop.Sohle3;
-            other.GetComponent<LiftSohleThree>().PlayAudio();
-            other.GetComponent<LiftSohleThree>().StartTrain();
+            if (!GameData.sohle3IntroPlayedOnce)
+            {
+                other.GetComponent<LiftSohleThree>().PlayAudio();
+                other.GetComponent<LiftSohleThree>().StartTrain();
+                GameData.sohle3IntroPlayedOnce = true;
+            }
         }
         if (other.name == "TriggerAudioGabi" && cave.moveDirecton < 0)
         {

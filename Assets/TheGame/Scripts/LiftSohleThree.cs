@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LiftSohleThree : MonoBehaviour
@@ -44,7 +42,6 @@ public class LiftSohleThree : MonoBehaviour
         Debug.Log("sollte funken train start!!");
         train.StartTrainMoving();
     }
-
 
     public void PlayAudio()
     {

@@ -12,7 +12,15 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        SetupPlayerOffsetToAnkerObj(ankerObjToFollow);
+        try
+        {
+            SetupPlayerOffsetToAnkerObj(ankerObjToFollow);
+        }
+        catch (System.Exception)
+        {
+
+            Debug.Log("No ANKER OBJ SET");
+        }
     }
 
     public void SetTarget(GameObject target)

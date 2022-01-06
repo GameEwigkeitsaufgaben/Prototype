@@ -5,6 +5,7 @@ public class LiftManager : MonoBehaviour
 {
     public Cave cave;
     public Player player;
+    public SwitchSceneManager switchScene;
 
     public AudioSource src11621Dad;
     public Button[] liftBtns;
@@ -14,6 +15,7 @@ public class LiftManager : MonoBehaviour
     public GameObject triggerEinstieg;
 
     bool introPlayedOneTime = false;
+    
 
     private void Start()
     {
@@ -200,7 +202,7 @@ public class LiftManager : MonoBehaviour
 
     public void GoToSohle3Kohlehobel()
     {
-        GetComponent<SwitchSceneManager>().SwitchScene("Scene11651Kohlehobel");
+        switchScene.SwitchSceneWithTransition(GameData.scene1165Blackscreen);
         GameData.sohleToReload = (int)CurrentStop.Sohle3;
         cave.StoreCavePosition();
         

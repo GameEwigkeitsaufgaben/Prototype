@@ -10,6 +10,10 @@ public static class GameData
     public const string sceneMainChapterTwo = "Dummy";
     public const string sceneMainChapterThree = "Dummy";
     public const string sceneInstaMainChapterOne = "Scene11InstaMain";
+    public const string scene1165Blackscreen = "Scene11651Blackscreen";
+    public const string scene1162 = "Scene1162";
+    public const string scene11651Kohlehobel = "Scene11651Kohlehobel";
+
 
     public static bool progressWithAdmin = false; //if start chapter with admin pwd true, else false;
 
@@ -32,6 +36,8 @@ public static class GameData
     public static float playerOffsetToAnkerObjY = 0;
     public static float playerOffsetToAnkerObjZ = 0;
     public static bool scene1162LoadedOnce = false;
+    public static bool gotToKohlehobel = true;
+    internal static bool sohle3IntroPlayedOnce = false;
 
     public static void PrintState()
     {
