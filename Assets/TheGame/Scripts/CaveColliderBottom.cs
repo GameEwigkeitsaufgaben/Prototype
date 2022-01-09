@@ -10,6 +10,7 @@ public class CaveColliderBottom : MonoBehaviour
         {
             cave.StopCave();
             cave.currentStop = CurrentStop.Einstieg;
+            GameData.currentStopSohle = (int)cave.currentStop;
         }
         Debug.Log(" .." +other.name);
         if (other.name == "TriggerSohle1" && cave.targetStop == CurrentStop.Sohle1)
@@ -17,6 +18,7 @@ public class CaveColliderBottom : MonoBehaviour
             Debug.Log("Stop Cave");
             cave.StopCave();
             cave.currentStop = CurrentStop.Sohle1;
+            GameData.currentStopSohle = (int)cave.currentStop;
 
             other.GetComponent<LiftSohleOne>().PlayAudio();
 
@@ -26,6 +28,7 @@ public class CaveColliderBottom : MonoBehaviour
             Debug.Log("Stop Cave");
             cave.StopCave();
             cave.currentStop = CurrentStop.Sohle2;
+            GameData.currentStopSohle = (int)cave.currentStop;
             other.GetComponent<LiftSohleTwo>().PlayAudio();
         }
         if (other.name == "TriggerSohle3" && cave.targetStop == CurrentStop.Sohle3)
@@ -33,6 +36,7 @@ public class CaveColliderBottom : MonoBehaviour
             Debug.Log("Stop Cave");
             cave.StopCave();
             cave.currentStop = CurrentStop.Sohle3;
+            GameData.currentStopSohle = (int)cave.currentStop;
             if (!GameData.sohle3IntroPlayedOnce)
             {
                 other.GetComponent<LiftSohleThree>().PlayAudio();

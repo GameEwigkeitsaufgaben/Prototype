@@ -31,6 +31,7 @@ public static class GameData
     //public static int moveDirection = -1; //-1 for moving down, +1 for moving up
     public static int nbrSchacht = 1;
 
+    public static int currentStopSohle;
     public static int sohleToReload = 0;
     public static float playerOffsetToAnkerObjX = 0;
     public static float playerOffsetToAnkerObjY = 0;
