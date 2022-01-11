@@ -1,16 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LiftManager : MonoBehaviour
+public class CaveManager : MonoBehaviour
 {
     public Cave cave;
     public Player player;
     public SwitchSceneManager switchScene;
 
-    public AudioSource src11621Dad;
-    public Button[] liftBtns;
     public Button exitScene;
-    public Button btnEinstieg;
+    public SprechblaseController sprechblaseController;
 
     public GameObject triggerEinstieg;
 
@@ -19,14 +17,7 @@ public class LiftManager : MonoBehaviour
 
     private void Start()
     {
-        triggerEinstieg.SetActive(false);
-        btnEinstieg.GetComponent<CaveButton>().feedbackObject.SetActive(true);
-
-        foreach (Button y in liftBtns)
-        {
-            y.interactable = false;
-        }
-
+        //triggerEinstieg.SetActive(false);
         GameData.scene1162LoadedOnce = true;
     }
 
@@ -53,11 +44,8 @@ public class LiftManager : MonoBehaviour
         if (GameData.moveCave) return;
 
         cave.targetStop = CurrentStop.Einstieg;
-        btnEinstieg.GetComponent<CaveButton>().feedbackObject.SetActive(true);
-        foreach(Button a in liftBtns)
-        {
-            a.GetComponent<CaveButton>().feedbackObject.SetActive(false);
-        }
+        cave.liftBtns[(int)cave.currentStop].GetComponent<CaveButton>().feedbackObject.SetActive(false);
+        cave.liftBtns[(int)cave.targetStop].GetComponent<CaveButton>().feedbackObject.SetActive(true);
 
         if (cave.currentStop == CurrentStop.Einstieg)
         {
@@ -86,7 +74,6 @@ public class LiftManager : MonoBehaviour
 
         cave.targetStop = CurrentStop.Sohle1;
 
-        Debug.Log("WTF --------------- " + cave.currentStop);
         if (cave.currentStop == CurrentStop.Sohle1)
         {
             if (cave.caveDoorsClosed)
@@ -110,13 +97,15 @@ public class LiftManager : MonoBehaviour
                 cave.CloseDoors();
                 Invoke("StartMovingSohleOne", 2f); //Ruft GoToSpohle1 after 2 sec auf;
             }
+            if(cave.currentStop == CurrentStop.Einstieg)
+            {
+                sprechblaseController.sprechblaseDad.gameObject.SetActive(false);
+            }
         }
-        btnEinstieg.GetComponent<CaveButton>().feedbackObject.SetActive(false);
-        foreach (Button a in liftBtns)
-        {
-            a.GetComponent<CaveButton>().feedbackObject.SetActive(false);
-        }
-        liftBtns[0].GetComponent<CaveButton>().feedbackObject.SetActive(true);
+
+        cave.liftBtns[(int)cave.currentStop].GetComponent<CaveButton>().feedbackObject.SetActive(false);
+        cave.liftBtns[(int)cave.targetStop].GetComponent<CaveButton>().feedbackObject.SetActive(true);
+
     }
     public void GoToSohle2()
     {
@@ -151,12 +140,8 @@ public class LiftManager : MonoBehaviour
                 Invoke("StartMovingSohleTwo", 2f); //Ruft GoToSpohle1 after 2 sec auf;
             }
         }
-        btnEinstieg.GetComponent<CaveButton>().feedbackObject.SetActive(false);
-        foreach (Button a in liftBtns)
-        {
-            a.GetComponent<CaveButton>().feedbackObject.SetActive(false);
-        }
-        liftBtns[1].GetComponent<CaveButton>().feedbackObject.SetActive(true);
+        cave.liftBtns[(int)cave.currentStop].GetComponent<CaveButton>().feedbackObject.SetActive(false);
+        cave.liftBtns[(int)cave.targetStop].GetComponent<CaveButton>().feedbackObject.SetActive(true);
     }
 
     public void GoToSohle3()
@@ -192,12 +177,9 @@ public class LiftManager : MonoBehaviour
                 Invoke("StartMovingSohleThree", 2f); //Ruft GoToSpohle1 after 2 sec auf;
             }
         }
-        btnEinstieg.GetComponent<CaveButton>().feedbackObject.SetActive(false);
-        foreach (Button a in liftBtns)
-        {
-            a.GetComponent<CaveButton>().feedbackObject.SetActive(false);
-        }
-        liftBtns[2].GetComponent<CaveButton>().feedbackObject.SetActive(true);
+
+        cave.liftBtns[(int)cave.currentStop].GetComponent<CaveButton>().feedbackObject.SetActive(false);
+        cave.liftBtns[(int)cave.targetStop].GetComponent<CaveButton>().feedbackObject.SetActive(true);
     }
 
     public void GoToSohle3Kohlehobel()
@@ -206,20 +188,6 @@ public class LiftManager : MonoBehaviour
         GameData.sohleToReload = (int)CurrentStop.Sohle3;
         cave.StoreCavePosition();
         
-    }
-
-    public void PlayDaD1162Intro() //wird von button im inspector aufgerufen
-    {
-        if (src11621Dad.isPlaying) return;
-
-        src11621Dad.Play();
-
-        introPlayedOneTime = true;
-    }
-
-    public void PlayAudioDadEGIntro(AudioSource src)
-    {
-        src.Play();
     }
 
     public void StartMovingSohleOne()
@@ -267,20 +235,6 @@ public class LiftManager : MonoBehaviour
         if (!cave.caveDoorsClosed && !exitScene.interactable)
         {
             exitScene.interactable = true;
-        }
-
-        if (introPlayedOneTime  && !src11621Dad.isPlaying)
-            GameData.liftIntroDadDone = true;
-
-        if (GameData.liftIntroDadDone && !GameData.liftBtnsEnabled)
-        {
-            foreach (Button y in liftBtns)
-            {
-                y.interactable = true;
-            }
-
-            //GameData.liftIntroDadDone = false;
-            GameData.liftBtnsEnabled = true;
         }
     }
 }

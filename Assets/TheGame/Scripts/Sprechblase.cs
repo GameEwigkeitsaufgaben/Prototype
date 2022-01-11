@@ -4,99 +4,94 @@ using UnityEngine.UI;
 
 public class Sprechblase : MonoBehaviour
 {
-    public Image sprechblaseImg;
-    public Button sprechblaseInteraktion;
+    public Button btnInteraction;
     public Sprite play, reload, talking;
 
-    public bool vibrateSprechblase;
+    public bool isInteractable;
 
-    private Vector3 initialPosition;
-    //Vector3 directionOfShake = transform.forward;
-    public float amplitude; // the amount it moves
-    public float frequency; // the period of the earthquake
+    private AudioSource audioSrc;
+    private bool audioStarted = false;
+    public bool PlayedOnceMode = false;
 
-    public bool couroutineAllowed = true;
-
-    private IEnumerator StartPulsingOld()
+    public float GetClipLength()
     {
-        couroutineAllowed = false;
-        Debug.Log("local scale " + transform.localScale);
-        for (float i = 0f; i <= 1f; i += 0.1f)
-        {
-            transform.localScale = new Vector3(
-                (Mathf.Lerp(transform.localScale.x, transform.localScale.x + 0.025f, Mathf.SmoothStep(0f, 1f, i))),
-                (Mathf.Lerp(transform.localScale.y, transform.localScale.y + 0.025f, Mathf.SmoothStep(0f, 1f, i))),
-                (Mathf.Lerp(transform.localScale.z, transform.localScale.z + 0.025f, Mathf.SmoothStep(0f, 1f, i)))
-                );
-            yield return new WaitForSeconds(0.015f);
-        }
+        return audioSrc.clip.length;
+    }
+   
 
-        for (float i = 0f; i <= 1f; i += 0.1f)
-        {
-            transform.localScale = new Vector3(
-                (Mathf.Lerp(transform.localScale.x, transform.localScale.x - 0.025f, Mathf.SmoothStep(0f, 1f, i))),
-                (Mathf.Lerp(transform.localScale.y, transform.localScale.y - 0.025f, Mathf.SmoothStep(0f, 1f, i))),
-                (Mathf.Lerp(transform.localScale.z, transform.localScale.z - 0.025f, Mathf.SmoothStep(0f, 1f, i)))
-                );
-            yield return new WaitForSeconds(0.015f);
-        }
-
-        couroutineAllowed = true;
+    public void CreateAudioSource()
+    {
+        audioSrc = gameObject.GetComponent<AudioSource>();
     }
 
-    private IEnumerator StartPulsing()
+    public void SetAudioClip(AudioClip audioClip)
     {
-        couroutineAllowed = false;
-
-        transform.localScale = transform.localScale + new Vector3(0.1f, 0.1f, 0.1f);
-        yield return new WaitForSeconds(1f);
-
-        transform.localScale = transform.localScale - new Vector3(0.1f, 0.1f, 0.1f);
-        yield return new WaitForSeconds(1f);
-
-        couroutineAllowed = true;
-    }
-    
-    private void VibrateUncontrolled() //https://forum.unity.com/threads/vibrating-the-gameobjects.536217/
-    {
-        var speed = 5.0f;
-        var intensity = 0.1f;
-
-        transform.localPosition = intensity * new Vector3(
-            Mathf.PerlinNoise(speed * Time.time, 1),
-            Mathf.PerlinNoise(speed * Time.time, 2),
-            Mathf.PerlinNoise(speed * Time.time, 3));
+        audioSrc.clip = audioClip;
     }
 
-    private void Vibrate()
+    public AudioSource GetAudioSource()
     {
+        return audioSrc;
+    }
 
-        Debug.Log("in Transform: " + (-amplitude + Mathf.PingPong(frequency * Time.deltaTime, 2.0f * amplitude)));
-        //transform.position = initialPosition + transform.up * (-amplitude + Mathf.PingPong(frequency * Time.deltaTime, 2.0f * amplitude));
-        //Vector3 pos = initialPosition + Random.insideUnitSphere * amplitude;
-        //Mathf.PingPong(frequency * Time.deltaTime, 2.0f * amplitude)
-        Vector3 scale = gameObject.transform.localScale + transform.localScale * Mathf.PingPong(frequency, amplitude);
+    public void SetSprechblaseInNotPlayedMode()
+    {
+        gameObject.SetActive(true);
+        btnInteraction.GetComponent<Image>().sprite = play;
+        btnInteraction.GetComponent<Button>().onClick.AddListener(ChangeButtonEventMethod);
+    }
+
+    void ChangeButtonEventMethod()
+    {
+        Debug.Log("Test button");
+        if (audioSrc.isPlaying) return;
+
+        //audioSrc.SetAudioClip(introDad);
+        SetSprechblaseInPlayingMode();
+    } 
+
+    public void SetSprechblaseInPlayedOnceMode()
+    {
+        btnInteraction.GetComponent<Image>().sprite = reload;
+    }
+
+    public void SetSprechblaseInPlayingMode()
+    {
+        btnInteraction.GetComponent<Image>().sprite = talking;
+        gameObject.SetActive(true);
         
-        transform.localScale = scale;
+        if (audioSrc.isPlaying) return;
+
+        audioStarted = true;
+
+        audioSrc.Play();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        //initialPosition = transform.position; // store this to avoid floating point error drift
-        initialPosition = transform.localPosition;
-        if ((CurrentStop)GameData.currentStopSohle == CurrentStop.Einstieg)
+       // Debug.Log(audioSrc.isPlaying + " started " + audioStarted);
+        if(audioSrc != null) 
         {
+            if(audioSrc.clip != null)
+            {
+                Debug.Log(audioSrc.clip.name);
+            }
+            
+            Debug.Log(audioSrc.isPlaying + " started " + audioStarted);
 
+            if (!audioSrc.isPlaying && audioStarted)
+            {
+                if ((CurrentStop)GameData.currentStopSohle == CurrentStop.Einstieg && !GameData.moveCave)
+                {
+                    GameData.introPlayedOnce = true;
+                    return;
+                }
+
+                gameObject.SetActive(false);
+                audioStarted = false;
+            }
+     
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (vibrateSprechblase)
-        {
-            StartCoroutine("StartPulsing");
-        }
-    }
 }
