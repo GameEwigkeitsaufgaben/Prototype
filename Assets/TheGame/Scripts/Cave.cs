@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum CurrentStop
 {
@@ -9,12 +10,22 @@ public enum CurrentStop
     Sohle3,
 }
 
+public enum CaveButtonsState
+{
+    Disabled,
+    ToEnable,
+    Enabled,
+    ToDisable
+}
+
 public class Cave : MonoBehaviour
 {
     public GameObject doorLeft;
     public GameObject doorRight;
     public bool caveDoorsClosed = false;
-    
+
+    public Button[] liftBtns;
+
     public CurrentStop currentStop;
     public CurrentStop targetStop;
     public int moveDirecton;//-1 for moving down, +1 for moving up
@@ -25,7 +36,10 @@ public class Cave : MonoBehaviour
     private void Start()
     {
         currentStop = CurrentStop.Einstieg;
+        EnableButtons(false);
     }
+
+    
 
     public void StoreCavePosition()
     {
@@ -40,6 +54,11 @@ public class Cave : MonoBehaviour
         {
             Debug.Log(moveDirecton + " movedir");
             transform.position += new Vector3(0, moveDirecton * 2 * Time.deltaTime, 0);
+        }
+
+        if (GameData.liftBtnsEnabled)
+        {
+            EnableButtons(true);
         }
     }
 
@@ -86,6 +105,16 @@ public class Cave : MonoBehaviour
         {
             doorsMovingSrc.Play();
         }
+    }
+
+    public void EnableButtons(bool enableButtons)
+    {
+        foreach (Button y in liftBtns)
+        {
+            y.interactable = enableButtons;
+        }
+
+        GameData.liftBtnsEnabled = enableButtons;
     }
 
     public void OpenDoors()
