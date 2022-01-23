@@ -11,6 +11,8 @@ Prototype is based on https://miro.com/app/board/o9J_kmQ5v0g=/
 ### Targetplatform: WebGL Desktop
 ### Developmentplatform: Window 10, Unity 2020.3.18f1, Visual Studio Community 2019
 
+Packages: Shapes 4.1.1, Camera Shake FX 1.0;
+
 Das Spiel teilt sich auf in 3 Hauptbereiche: 
 Einführung, Grubenwasser, Ewigkeitsaufgabe. Das Spiel sollte auf 3 Einheiten aufgeteilt werden. Jedes Kapitel kann durch eine Code freigeschalten werden. Der Code wird am Ende es Kapitels bzw. durch die Betreuungsperson mitgeteilt. Es können zusätzliche Unterlagen zum Notieren von Infos runtergeladen werden, sowie wird es einen Guide für die Betreuungsperson gegen.  Spielstände werden nicht gespeichert. 
 
@@ -24,4 +26,6 @@ MainMenü:
 
 InstaMenü ch1:
 vom Instamenü kommt man ins Main retour, wenn man wieder einsteigt muss kein pwd mehr eingegeben werden. Hat man das AdminPwd ist alles freigeschalten.  
+
+Tutorials: Unity Transitions: https://www.youtube.com/watch?v=CE9VOZivb3I , https://www.youtube.com/watch?v=JNjLCAheWSc
 
