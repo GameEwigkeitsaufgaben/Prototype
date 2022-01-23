@@ -20,14 +20,14 @@ public class Overlay : MonoBehaviour
     private PostData postData;
     private GameIcons icons;
     private bool videoFinished = false;
-    private MenuManager menuManager;
+    private PostManagerChapterOne menuManager;
 
 
     private void Start()
     {
         icons = Resources.Load<GameIcons>("Icons");
         webglVideoPlayer = GameObject.FindObjectOfType<WebGlVideoPlayer>();
-        menuManager = FindObjectOfType<MenuManager>();
+        menuManager = FindObjectOfType<PostManagerChapterOne>();
     }
 
     public void SetReplayIcon()
@@ -101,7 +101,7 @@ public class Overlay : MonoBehaviour
 
     private void SwitchTheScene(string interactionScene)
     {
-        menuManager.GetComponent<CoalMineSceneManager>().SwitchScene(interactionScene);
+        menuManager.GetComponent<SwitchSceneManager>().SwitchScene(interactionScene);
     }
 
     public void SetOverlayData(PostData data)
