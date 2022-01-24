@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class CaveColliderBottom : MonoBehaviour
 {
-<<<<<<< HEAD
     public Cave cave;
     public SprechblaseController sprechblaseController;
 
@@ -82,7 +81,7 @@ public class CaveColliderBottom : MonoBehaviour
             sprechblaseController.sprechblaseDad.SetSprechblaseInPlayingMode();
         }
     }
-=======
+
     //public Cave cave;
     //public SprechblaseController sprechblaseController;
 
@@ -159,5 +158,5 @@ public class CaveColliderBottom : MonoBehaviour
     //        sprechblaseController.sprechblaseDad.SetSprechblaseInPlayingMode();
     //    }
     //}
->>>>>>> waypoints
+
 }
