@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class QuizQuestionManager : MonoBehaviour
 {
+
     public QuizData quizData;
     public Text questionText;
     public Text answerA;
@@ -21,7 +22,7 @@ public class QuizQuestionManager : MonoBehaviour
     private float elapsed;
     bool timeOutSet = false;
 
-    QuizRightAnser rightAnswer;
+    QuizAnswer[] rightAnswer;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +32,7 @@ public class QuizQuestionManager : MonoBehaviour
         answerB.text = quizData.answerB;
         answerC.text = quizData.answerC;
         answerD.text = quizData.answerD;
-        rightAnswer = quizData.rightAnswer;
+        //rightAnswer = quizData.rightAnswer;
         elapsed = maxTimeInSec;
     }
 
@@ -53,13 +54,13 @@ public class QuizQuestionManager : MonoBehaviour
         btn.interactable = false;
         btn.colors = cb;
 
-        Button btnOK = ReturnAnswerButton(quizData.rightAnswer);
-        btnOK.gameObject.SetActive(true);
-        btnOK.interactable = false;
-        cb = btnOK.colors;
-        cb.disabledColor = Color.green;
-        btnOK.colors = cb;
-        btnNext.gameObject.SetActive(true);
+        //Button btnOK = ReturnAnswerButton(quizData.rightAnswer);
+        //btnOK.gameObject.SetActive(true);
+        //btnOK.interactable = false;
+        //cb = btnOK.colors;
+        //cb.disabledColor = Color.green;
+        //btnOK.colors = cb;
+        //btnNext.gameObject.SetActive(true);
     }
 
     void SetUITimeOut()
@@ -68,70 +69,81 @@ public class QuizQuestionManager : MonoBehaviour
         answerB.transform.parent.gameObject.SetActive(false);
         answerC.transform.parent.gameObject.SetActive(false);
         answerD.transform.parent.gameObject.SetActive(false);
-        SetUIChoiceOK(ReturnAnswerButton(quizData.rightAnswer));
-        btnNext.gameObject.SetActive(true);
+        //SetUIChoiceOK(ReturnAnswerButton(quizData.rightAnswer));
+        //btnNext.gameObject.SetActive(true);
     }
        
 
     public void CheckAnswer(Button btn)
     {
-        QuizRightAnser answerToTest = ReturnTypeQuizRightAnswer(btn);
+        QuizAnswer answerToTest = ReturnTypeQuizRightAnswer(btn);
 
         answerA.transform.parent.gameObject.SetActive(false);
         answerB.transform.parent.gameObject.SetActive(false);
         answerC.transform.parent.gameObject.SetActive(false);
         answerD.transform.parent.gameObject.SetActive(false);
 
-        if (answerToTest == quizData.rightAnswer)
-        {
-            SetUIChoiceOK(btn);
-        }
-        else
-        {
-            SetUIChoiceWrong(btn);
-        }
+        //if (answerToTest == quizData.rightAnswer)
+        //{
+        //    SetUIChoiceOK(btn);
+        //}
+        //else
+        //{
+        //    SetUIChoiceWrong(btn);
+        //}
     }
 
-    private QuizRightAnser ReturnTypeQuizRightAnswer(Button btn)
+    private QuizAnswer ReturnTypeQuizRightAnswer(Button btn)
     {
         if (btn.name.EndsWith("A"))
         {
-            return QuizRightAnser.A;
+            return QuizAnswer.AnswersElement0;
         }
         else if (btn.name.EndsWith("B"))
         {
-            return QuizRightAnser.B;
+            return QuizAnswer.AnswersElement1;
         }
         else if (btn.name.EndsWith("C"))
         {
-            return QuizRightAnser.C;
+            return QuizAnswer.AnswersElement2;
         }
         else if (btn.name.EndsWith("D"))
         {
-            return QuizRightAnser.C;
+            return QuizAnswer.AnswersElement2;
         }
         else
         {
-            return QuizRightAnser.NONE;
+            return QuizAnswer.NONE;
         }
         
     }
 
-    private Button ReturnAnswerButton(QuizRightAnser aw)
+    private Button[] ReturnRightAnswers(QuizAnswer[] rightAnswers)
+    {
+        Button[] myRightAnswers = new Button[rightAnswers.Length];
+        for (int i = 0; i < rightAnswers.Length; i++)
+        {
+            myRightAnswers[i] = ReturnAnswerButton(rightAnswers[i]);
+        }
+        return myRightAnswers;
+    }
+
+    private Button ReturnAnswerButton(QuizAnswer aw)
     {
         switch (aw)
         {
-            case QuizRightAnser.A: 
+            case QuizAnswer.AnswersElement0:
                 return answerA.transform.parent.gameObject.GetComponent<Button>();
-            case QuizRightAnser.B:
+            case QuizAnswer.AnswersElement1:
                 return answerB.transform.parent.gameObject.GetComponent<Button>();
-            case QuizRightAnser.C:
+            case QuizAnswer.AnswersElement2:
                 return answerC.transform.parent.gameObject.GetComponent<Button>();
-            case QuizRightAnser.D:
+            case QuizAnswer.AnswersElement3:
                 return answerD.transform.parent.gameObject.GetComponent<Button>();
             default:
                 return null;
         }
+        
     }
 
     string FormatTime(float theTime)
