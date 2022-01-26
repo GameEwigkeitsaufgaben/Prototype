@@ -1,15 +1,20 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuizQuestionItem
 {
     private QuizData questionItemData;
     private QuizQuestionType questionType;
-    public List<QuizAnswerItem> answers = new List<QuizAnswerItem>();
+    //private VerticalLayoutGroup buttonGroup;
 
-    public QuizQuestionItem(QuizData cdata)
+    public List<QuizAnswerItem> answers = new List<QuizAnswerItem>();
+    public bool unProved = true;
+
+    public QuizQuestionItem(QuizData cdata, VerticalLayoutGroup parent)
     {
         questionItemData = cdata;
+        //buttonGroup = parent;
 
         for (int i = 0; i < questionItemData.answers.Length; i++)
         {
@@ -18,6 +23,7 @@ public class QuizQuestionItem
             aw.answer = questionItemData.answers[i];
             aw.answerIdentifier = i;
             aw.isCorrect = false;
+            aw.CreateButton(parent);
             answers.Add(aw);
         }
 
@@ -30,15 +36,6 @@ public class QuizQuestionItem
 
     public string GetQuestionText()
     {
-        if(questionItemData == null)
-        {
-            Debug.Log("data is null");
-        }
-        else
-        {
-            Debug.Log("question Data " + questionItemData.name);
-            Debug.Log("question Data " + questionItemData.question);
-        }
         return questionItemData.question;
     }
 

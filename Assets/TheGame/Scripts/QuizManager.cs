@@ -1,11 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class QuizManager : MonoBehaviour
 {
-    public VerticalLayoutGroup answerButtionGroup;
+    public Canvas endCanvas, quizCanvas;
+    public VerticalLayoutGroup answerButtonGroup;
     public Text uiQuestion;
 
     public QuizData[] quizDataItems;
@@ -19,12 +19,11 @@ public class QuizManager : MonoBehaviour
     {
         foreach(QuizData i in quizDataItems)
         {
-            questionItemList.Add(new QuizQuestionItem(i));
+            questionItemList.Add(new QuizQuestionItem(i, answerButtonGroup));
         }
 
         questionItemListshuffled = Shuffle(questionItemList);
-        //Debug.Log("---------shuffled");
-        //PrintList(questionItemListshuffled);
+
         if (questionItemListshuffled != null)
         {
             SetupQuestion(currentProgressIndex);
@@ -33,35 +32,45 @@ public class QuizManager : MonoBehaviour
 
     public void LoadNextQuestion()
     {
-        foreach (Transform child in answerButtionGroup.transform)
+        if (questionItemListshuffled[currentProgressIndex].unProved)
         {
-            GameObject.Destroy(child.gameObject);
+            foreach(QuizAnswerItem a in questionItemListshuffled[currentProgressIndex].answers)
+            {
+                a.ShowResult();
+            }
+            questionItemListshuffled[currentProgressIndex].unProved = false;
+            return;   
+        }
+
+        foreach (Transform child in answerButtonGroup.transform)
+        {
+            child.gameObject.SetActive(false);
         }
 
         currentProgressIndex++;
-        SetupQuestion(currentProgressIndex);
+        if (currentProgressIndex < questionItemListshuffled.Count)
+        {
+            SetupQuestion(currentProgressIndex);
+        }
+        else
+        {
+            endCanvas.gameObject.SetActive(true);
+            quizCanvas.gameObject.SetActive(false);
+        }    
+        
     }
 
     void SetupQuestion(int progressIndex)
     {
-        uiQuestion.text = questionItemListshuffled[progressIndex].GetQuestionText();
-        CreateAnswerButton(progressIndex);
+            uiQuestion.text = questionItemListshuffled[progressIndex].GetQuestionText();
+            ActivateAnswerButtons(progressIndex);
     }
 
-
-    void CreateAnswerButton(int progressIndex)
+    void ActivateAnswerButtons(int progressIndex)
     {
         foreach(var a in questionItemList[progressIndex].answers)
         {
-            var newButton = DefaultControls.CreateButton(new DefaultControls.Resources());
-            newButton.transform.SetParent(answerButtionGroup.transform);
-            newButton.transform.localScale = Vector3.one;
-            newButton.transform.localPosition = new Vector3(newButton.transform.localPosition.x,
-                                                                newButton.transform.localPosition.y,
-                                                                0);
-            newButton.GetComponent<Image>().sprite = Resources.Load<Sprite>("neon_square_orange");
-            newButton.GetComponentInChildren<Text>().text = a.answer;
-            newButton.GetComponentInChildren<Text>().fontSize = 20;
+            a.btn.gameObject.SetActive(true);
         }
     }
 
