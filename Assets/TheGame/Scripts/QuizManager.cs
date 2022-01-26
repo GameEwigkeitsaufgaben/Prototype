@@ -7,12 +7,14 @@ public class QuizManager : MonoBehaviour
     public Canvas endCanvas, quizCanvas;
     public VerticalLayoutGroup answerButtonGroup;
     public Text uiQuestion;
+    public Text uiPoints;
 
     public QuizData[] quizDataItems;
     public List<QuizQuestionItem> questionItemList = new List<QuizQuestionItem>();
     public List<QuizQuestionItem> questionItemListshuffled;
 
     int currentProgressIndex = 0;
+    int points = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -34,10 +36,19 @@ public class QuizManager : MonoBehaviour
     {
         if (questionItemListshuffled[currentProgressIndex].unProved)
         {
+           
             foreach(QuizAnswerItem a in questionItemListshuffled[currentProgressIndex].answers)
             {
                 a.ShowResult();
+                if(a.isCorrect && a.buttonSelected)
+                {
+                    //1x mit Zeit multipilzieren sind zeitpunkte;
+                    points++;
+                    uiPoints.text = points.ToString();
+
+                }
             }
+            
             questionItemListshuffled[currentProgressIndex].unProved = false;
             return;   
         }
@@ -51,6 +62,7 @@ public class QuizManager : MonoBehaviour
         if (currentProgressIndex < questionItemListshuffled.Count)
         {
             SetupQuestion(currentProgressIndex);
+            //Debug.Log(points);
         }
         else
         {
