@@ -24,6 +24,7 @@ public class QuizQuestionItem
             aw.answerIdentifier = i;
             aw.isCorrect = false;
             aw.CreateButton(parent);
+            aw.timeToAnswerInSec = questionItemData.timeToAnswerInSec;
             answers.Add(aw);
         }
 
@@ -37,6 +38,11 @@ public class QuizQuestionItem
     public string GetQuestionText()
     {
         return questionItemData.question;
+    }
+
+    public int GetTimeToAnswerQuestion()
+    {
+        return questionItemData.timeToAnswerInSec;
     }
 
     public void PrintCorrectAnswers()

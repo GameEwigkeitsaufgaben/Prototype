@@ -19,7 +19,7 @@ public class QuizData : ScriptableObject
     public QuizQuestionType questionType;
     public Sprite postImage;
 
-    //TimeForAnswering
+    public int timeToAnswerInSec;
 
     [TextArea(10, 100)]
     public string question;

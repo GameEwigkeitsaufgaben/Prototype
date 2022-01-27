@@ -9,8 +9,8 @@ public class QuizTimer : MonoBehaviour
     public Image uiTimer;
     public Text uiTimerText;
     
-    public float timeToCompleteQuestion = 30f;
-    public float timeToShowCorrectAnswer = 10f;
+    public float timeToCompleteQuestion;
+    public float timeToShowCorrectAnswer;
 
     public bool loadNextQuestion;
     public float fillFraction;
@@ -65,7 +65,16 @@ public class QuizTimer : MonoBehaviour
         timeToCompleteQuestion = maxTime;
         timerValue = timeToCompleteQuestion;
         timeRunout = false;
-    } 
+    }
+
+    public void StartTimer(int time)
+    {
+        isAnsweringQuestion = true;
+        timeToCompleteQuestion = time;
+        timerValue = timeToCompleteQuestion;
+        maxTime = timeToCompleteQuestion;
+        timeRunout = false;
+    }
 
     public bool IsTimeRunOut()
     {

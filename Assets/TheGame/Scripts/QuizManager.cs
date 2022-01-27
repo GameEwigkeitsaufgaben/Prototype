@@ -8,6 +8,8 @@ public class QuizManager : MonoBehaviour
     public VerticalLayoutGroup answerButtonGroup;
     public Text uiQuestion;
     public Text uiPoints;
+    public Slider uiProgressBar;
+
 
     public QuizData[] quizDataItems;
     public List<QuizQuestionItem> questionItemList = new List<QuizQuestionItem>();
@@ -28,12 +30,15 @@ public class QuizManager : MonoBehaviour
             questionItemList.Add(new QuizQuestionItem(i, answerButtonGroup));
         }
 
-        questionItemListshuffled = Shuffle(questionItemList);
-
+        //questionItemListshuffled = Shuffle(questionItemList);
+        questionItemListshuffled = questionItemList;
         if (questionItemListshuffled != null)
         {
             SetupQuestion(currentProgressIndex);
         }
+
+        uiProgressBar.maxValue = questionItemListshuffled.Count;
+        uiProgressBar.value = 1;
 
         uiPoints.text = points.ToString();
         quizTimer.StartTimer();
@@ -50,13 +55,18 @@ public class QuizManager : MonoBehaviour
                 a.ShowResult();
                 if(a.isCorrect && a.buttonSelected)
                 {
-                    //1x mit Zeit multipilzieren sind zeitpunkte;
+                    
                     points += quizTimer.GetCompletionTime();
                     uiPoints.text = points.ToString();
-
+                    
                 }
             }
-            
+
+            foreach (Transform child in answerButtonGroup.transform)
+            {
+                child.gameObject.GetComponent<Button>().interactable = false;
+            }
+
             questionItemListshuffled[currentProgressIndex].unProved = false;
             return;   
         }
@@ -67,10 +77,11 @@ public class QuizManager : MonoBehaviour
         }
 
         currentProgressIndex++;
+        uiProgressBar.value++;
+
         if (currentProgressIndex < questionItemListshuffled.Count)
         {
             SetupQuestion(currentProgressIndex);
-            quizTimer.StartTimer();
         }
         else
         {
@@ -83,8 +94,16 @@ public class QuizManager : MonoBehaviour
 
     void SetupQuestion(int progressIndex)
     {
-            uiQuestion.text = questionItemListshuffled[progressIndex].GetQuestionText();
-            ActivateAnswerButtons(progressIndex);
+        uiQuestion.text = questionItemListshuffled[progressIndex].GetQuestionText();
+
+
+        foreach (Transform child in answerButtonGroup.transform)
+        {
+            child.gameObject.GetComponent<Button>().interactable = true;
+        }
+        
+        ActivateAnswerButtons(progressIndex);
+        quizTimer.StartTimer(questionItemListshuffled[progressIndex].GetTimeToAnswerQuestion());
     }
 
     void ActivateAnswerButtons(int progressIndex)
@@ -102,7 +121,6 @@ public class QuizManager : MonoBehaviour
         for(var i = tmpList.Count-1; i > 0; i--)
         {
             var rndIndex = Random.Range(0, i);
-            Debug.Log("rndIndex: " + rndIndex);
             tmpList = Swap(tmpList, i, rndIndex);
         }
 

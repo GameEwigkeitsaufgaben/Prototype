@@ -11,6 +11,8 @@ public class QuizAnswerItem
     public bool buttonSelected = false;
     VerticalLayoutGroup buttonGroup;
 
+    public int timeToAnswerInSec;
+
     public QuizAnswerItem() {}
 
     public QuizAnswerItem(VerticalLayoutGroup parent) 
@@ -41,28 +43,37 @@ public class QuizAnswerItem
         btn = newButton.GetComponent<Button>();
         btn.onClick.AddListener(ToogleSelected);
         btn.gameObject.SetActive(false);
+        
+        //disable color when set buttons inactable
+        ColorBlock cb = btn.colors;
+        cb.disabledColor = new Color(1f, 1f, 1f, 1f);
+        btn.colors = cb;
     }
 
     private void ToogleSelected()
     {
         buttonSelected = !buttonSelected;
 
-        Color selectColor = Color.green;
+        Color selectColor = Color.cyan;
+        
         if (buttonSelected)
         {
-            selectColor = Color.green;
+            //selectColor = Color.cyan;
+            btn.GetComponent<Image>().color = Color.cyan;
         }
         else
         {
-            selectColor = Color.white;
+            //selectColor = Color.white;
+            btn.GetComponent<Image>().color = Color.white;
         }
 
-        ColorBlock cb = btn.colors;
-        cb.normalColor = selectColor;
-        cb.normalColor = selectColor;
-        cb.highlightedColor = selectColor;
-        cb.selectedColor = selectColor;
-        btn.colors = cb;
+        //ColorBlock cb = btn.colors;
+        //cb.normalColor = selectColor;
+        //cb.normalColor = selectColor;
+        //cb.highlightedColor = selectColor;
+        //cb.selectedColor = selectColor;
+        //cb.disabledColor = new Color(1f, 1f, 1f, 1f);
+        //btn.colors = cb;
     }
 
     public void ShowResult()
