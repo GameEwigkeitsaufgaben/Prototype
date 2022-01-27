@@ -15,10 +15,14 @@ public class QuizManager : MonoBehaviour
 
     int currentProgressIndex = 0;
     int points = 0;
+    
+    QuizTimer quizTimer;
 
     // Start is called before the first frame update
     void Start()
     {
+        quizTimer = FindObjectOfType<QuizTimer>();
+
         foreach(QuizData i in quizDataItems)
         {
             questionItemList.Add(new QuizQuestionItem(i, answerButtonGroup));
@@ -30,20 +34,24 @@ public class QuizManager : MonoBehaviour
         {
             SetupQuestion(currentProgressIndex);
         }
+
+        uiPoints.text = points.ToString();
+        quizTimer.StartTimer();
     }
 
     public void LoadNextQuestion()
     {
+        quizTimer.StopTimer();
+
         if (questionItemListshuffled[currentProgressIndex].unProved)
         {
-           
             foreach(QuizAnswerItem a in questionItemListshuffled[currentProgressIndex].answers)
             {
                 a.ShowResult();
                 if(a.isCorrect && a.buttonSelected)
                 {
                     //1x mit Zeit multipilzieren sind zeitpunkte;
-                    points++;
+                    points += quizTimer.GetCompletionTime();
                     uiPoints.text = points.ToString();
 
                 }
@@ -62,12 +70,13 @@ public class QuizManager : MonoBehaviour
         if (currentProgressIndex < questionItemListshuffled.Count)
         {
             SetupQuestion(currentProgressIndex);
-            //Debug.Log(points);
+            quizTimer.StartTimer();
         }
         else
         {
             endCanvas.gameObject.SetActive(true);
             quizCanvas.gameObject.SetActive(false);
+            GameData.quizChapterOnePoints = points;
         }    
         
     }
@@ -126,6 +135,15 @@ public class QuizManager : MonoBehaviour
         foreach(QuizQuestionItem a in tempList)
         {
             a.PrintQuestionIdenifier();
+        }
+    }
+
+    private void Update()
+    {
+        if (quizTimer.IsTimeRunOut())
+        {
+            quizTimer.ResetTimeRunOut();
+            LoadNextQuestion();
         }
     }
 }

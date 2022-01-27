@@ -40,6 +40,8 @@ public static class GameData
     public static bool gotToKohlehobel = true;
     internal static bool sohle3IntroPlayedOnce = false;
 
+    public static int quizChapterOnePoints = 0;
+
     public static void PrintState()
     {
         Debug.Log(
