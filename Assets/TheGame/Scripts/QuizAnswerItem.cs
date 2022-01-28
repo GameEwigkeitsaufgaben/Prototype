@@ -10,6 +10,7 @@ public class QuizAnswerItem
     public Button btn;
     public bool buttonSelected = false;
     VerticalLayoutGroup buttonGroup;
+    public bool longAnswer;
 
     public int timeToAnswerInSec;
 
@@ -43,7 +44,10 @@ public class QuizAnswerItem
         btn = newButton.GetComponent<Button>();
         btn.onClick.AddListener(ToogleSelected);
         btn.gameObject.SetActive(false);
-        
+        if (longAnswer)
+        {
+            //newButton.GetComponentInChildren<Text>().rectTransform.SetInsetAndSizeFromParentEdge();
+        }
         //disable color when set buttons inactable
         ColorBlock cb = btn.colors;
         cb.disabledColor = new Color(1f, 1f, 1f, 1f);
@@ -84,5 +88,10 @@ public class QuizAnswerItem
             btn.GetComponent<Image>().color = new Vector4(c.r, c.g, c.b, 0.2f);
             btn.GetComponentInChildren<Text>().color = new Vector4(c.r, c.g, c.b, 0.2f);
         }
+    }
+
+    public int GetPointForAnswer()
+    {
+        return (buttonSelected && isCorrect) ^ (!buttonSelected && !isCorrect) ? 1 : 0;
     }
 }

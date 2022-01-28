@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -61,5 +62,13 @@ public class QuizQuestionItem
         Debug.Log(questionItemData.name.Trim().ToLower());
     }
 
+    public string GetQuestionIdenifier()
+    {
+        return questionItemData.name.Trim().ToLower();
+    }
 
+    public Sprite GetPostImage()
+    {
+        return questionItemData.postImage;
+    }
 }

@@ -9,6 +9,9 @@ public class QuizManager : MonoBehaviour
     public Text uiQuestion;
     public Text uiPoints;
     public Slider uiProgressBar;
+    public Image uiPostImage;
+    public Button uiButtonNext;
+    public AudioSource audioAnswerCorrect, audioWrongAudio;
 
 
     public QuizData[] quizDataItems;
@@ -48,18 +51,27 @@ public class QuizManager : MonoBehaviour
     {
         quizTimer.StopTimer();
 
+        
         if (questionItemListshuffled[currentProgressIndex].unProved)
         {
-            foreach(QuizAnswerItem a in questionItemListshuffled[currentProgressIndex].answers)
+            int tmpPoints = 1;
+
+            foreach (QuizAnswerItem a in questionItemListshuffled[currentProgressIndex].answers)
             {
                 a.ShowResult();
-                if(a.isCorrect && a.buttonSelected)
-                {
-                    
-                    points += quizTimer.GetCompletionTime();
-                    uiPoints.text = points.ToString();
-                    
-                }
+                tmpPoints *= a.GetPointForAnswer();
+            }
+
+            points += quizTimer.GetCompletionTime() * tmpPoints;
+            
+            if (tmpPoints != 0)
+            {
+                uiPoints.text = points.ToString();
+                audioAnswerCorrect.Play();
+            }
+            else
+            {
+                audioWrongAudio.Play();
             }
 
             foreach (Transform child in answerButtonGroup.transform)
@@ -68,6 +80,7 @@ public class QuizManager : MonoBehaviour
             }
 
             questionItemListshuffled[currentProgressIndex].unProved = false;
+            uiButtonNext.GetComponentInChildren<Text>().text = "Weiter";
             return;   
         }
 
@@ -95,13 +108,15 @@ public class QuizManager : MonoBehaviour
     void SetupQuestion(int progressIndex)
     {
         uiQuestion.text = questionItemListshuffled[progressIndex].GetQuestionText();
+        uiPostImage.sprite = questionItemListshuffled[progressIndex].GetPostImage();
+        uiButtonNext.GetComponentInChildren<Text>().text = "Prüfen";
 
 
         foreach (Transform child in answerButtonGroup.transform)
         {
             child.gameObject.GetComponent<Button>().interactable = true;
         }
-        
+
         ActivateAnswerButtons(progressIndex);
         quizTimer.StartTimer(questionItemListshuffled[progressIndex].GetTimeToAnswerQuestion());
     }
