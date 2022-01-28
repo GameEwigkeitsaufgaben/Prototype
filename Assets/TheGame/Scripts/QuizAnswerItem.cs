@@ -38,16 +38,21 @@ public class QuizAnswerItem
         newButton.transform.localPosition = new Vector3(newButton.transform.localPosition.x,
                                                             newButton.transform.localPosition.y,
                                                             0);
+
         newButton.GetComponent<Image>().sprite = Resources.Load<Sprite>("neon_square_orange");
         newButton.GetComponentInChildren<Text>().fontSize = 20;
         newButton.GetComponentInChildren<Text>().text = answer;
         btn = newButton.GetComponent<Button>();
         btn.onClick.AddListener(ToogleSelected);
         btn.gameObject.SetActive(false);
-        if (longAnswer)
-        {
-            //newButton.GetComponentInChildren<Text>().rectTransform.SetInsetAndSizeFromParentEdge();
-        }
+
+        //https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/HOWTO-UIFitContentSize.html#fit-to-size-of-ui-element-with-child-text
+        btn.gameObject.AddComponent<HorizontalLayoutGroup>();
+        int myPadding = 50;
+        btn.gameObject.GetComponent<HorizontalLayoutGroup>().padding.left = myPadding;
+        btn.gameObject.GetComponent<HorizontalLayoutGroup>().padding.right = myPadding;
+        btn.gameObject.GetComponent<HorizontalLayoutGroup>().childAlignment = TextAnchor.MiddleCenter;
+        
         //disable color when set buttons inactable
         ColorBlock cb = btn.colors;
         cb.disabledColor = new Color(1f, 1f, 1f, 1f);
@@ -70,14 +75,6 @@ public class QuizAnswerItem
             //selectColor = Color.white;
             btn.GetComponent<Image>().color = Color.white;
         }
-
-        //ColorBlock cb = btn.colors;
-        //cb.normalColor = selectColor;
-        //cb.normalColor = selectColor;
-        //cb.highlightedColor = selectColor;
-        //cb.selectedColor = selectColor;
-        //cb.disabledColor = new Color(1f, 1f, 1f, 1f);
-        //btn.colors = cb;
     }
 
     public void ShowResult()

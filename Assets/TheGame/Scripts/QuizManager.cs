@@ -12,6 +12,7 @@ public class QuizManager : MonoBehaviour
     public Image uiPostImage;
     public Button uiButtonNext;
     public AudioSource audioAnswerCorrect, audioWrongAudio;
+    public bool randomizeQuestions = false;
 
 
     public QuizData[] quizDataItems;
@@ -33,8 +34,15 @@ public class QuizManager : MonoBehaviour
             questionItemList.Add(new QuizQuestionItem(i, answerButtonGroup));
         }
 
-        //questionItemListshuffled = Shuffle(questionItemList);
-        questionItemListshuffled = questionItemList;
+        if (randomizeQuestions)
+        {
+            questionItemListshuffled = Shuffle(questionItemList);
+        }
+        else
+        {
+            questionItemListshuffled = questionItemList;
+        }
+        
         if (questionItemListshuffled != null)
         {
             SetupQuestion(currentProgressIndex);
