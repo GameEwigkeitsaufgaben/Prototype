@@ -96,15 +96,15 @@ public class MainCapterSceneManager : MonoBehaviour
         switch (chapterCode)
         {
             case 1:
-                sceneToSwitch = GameData.sceneMainChapterOne;
+                sceneToSwitch = ScenesChapterOne.InstaMainChapterOne;
                 GameData.chapterOneUnlocked = 1;
                 break;
             case 2:
-                sceneToSwitch = GameData.sceneMainChapterTwo;
+                sceneToSwitch = GameData.sceneInstaMainChapterTwo;
                 GameData.chapterTwoUnlocked = 1;
                 break;
             case 3:
-                sceneToSwitch = GameData.sceneMainChapterThree;
+                sceneToSwitch = GameData.sceneInstaMainChapterThree;
                 GameData.chapterThreeUnlocked = 1;
                 break;
         }

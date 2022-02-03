@@ -32,7 +32,7 @@ public class KohlehobelManager : MonoBehaviour
 
     public void GoToBlackscreen()
     {
-        switchScene.SwitchSceneWithTransition(GameData.scene1165Blackscreen);
+        switchScene.SwitchSceneWithTransition(ScenesChapterOne.MineSoleThreeTrainRide);
         //GameData.gotToKohlehobel = true;
     }
 

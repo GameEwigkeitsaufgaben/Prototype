@@ -184,7 +184,7 @@ public class CaveManager : MonoBehaviour
 
     public void GoToSohle3Kohlehobel()
     {
-        switchScene.SwitchSceneWithTransition(GameData.scene1165Blackscreen);
+        switchScene.SwitchSceneWithTransition(ScenesChapterOne.MineSoleThreeTrainRide);
         GameData.sohleToReload = (int)CurrentStop.Sohle3;
         cave.StoreCavePosition();
         

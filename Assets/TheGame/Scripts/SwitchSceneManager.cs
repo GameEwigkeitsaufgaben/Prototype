@@ -12,6 +12,20 @@ public class SwitchSceneManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    //is called from more than one uielements in inspector
+    public void GoToChapterOverview()
+    {
+        SwitchScene(GameData.sceneChapterMainMenu);
+    }
+
+    //rideIn true if you go to the longwall cutter
+    //rideIn false if you go way from the longwal cutter, i.e. go back to surface
+    public void GoToTrainRide(bool rideIn)
+    {
+        GameData.rideIn = rideIn;
+        SwitchScene(ScenesChapterOne.MineSoleThreeTrainRide);
+    }
+
     public void SwitchSceneWithTransition(string sceneName)
     {
         StartCoroutine(LoadSceneWithTransition(sceneName));
@@ -24,7 +38,7 @@ public class SwitchSceneManager : MonoBehaviour
     public void SwitchToChapter1withOverlay(string overlayName)
     {
         GameData.overlayToLoad = overlayName;
-        SwitchScene(GameData.sceneMainChapterOne);
+        SwitchScene(ScenesChapterOne.InstaMainChapterOne); 
     }
 
     IEnumerator LoadSceneWithTransition(string name)
@@ -34,6 +48,5 @@ public class SwitchSceneManager : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         SwitchScene(name);
-
     }
 }

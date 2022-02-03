@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ManagerBlackscreen : MonoBehaviour
+public class ManagerTrainRide : MonoBehaviour
 {
    // AudioClip train, talkingDad;
 
@@ -15,7 +15,7 @@ public class ManagerBlackscreen : MonoBehaviour
     {
         envSoundTrain.Play();
 
-        if (GameData.gotToKohlehobel)
+        if (GameData.rideIn)
         {
             dad.Play();
         }
@@ -23,25 +23,18 @@ public class ManagerBlackscreen : MonoBehaviour
         Invoke("SwitchTheScene", 4f);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-
-    }
-
     public void SwitchTheScene()
     {
-        Debug.Log("kohlehobel in switch the scene: " + GameData.gotToKohlehobel);
-        if (GameData.gotToKohlehobel)
+        Debug.Log("kohlehobel in switch the scene: " + GameData.rideIn);
+        if (GameData.rideIn)
         {
-            switchScene.SwitchSceneWithTransition(GameData.scene11651Kohlehobel);
+            switchScene.SwitchSceneWithTransition(ScenesChapterOne.LongwallCutter);
         }
         else
         {
-            switchScene.SwitchSceneWithTransition(GameData.scene1162);  
+            switchScene.SwitchSceneWithTransition(ScenesChapterOne.MineSoleThreeStatic);  
         }
 
-        GameData.gotToKohlehobel = !GameData.gotToKohlehobel;
+        GameData.rideIn = !GameData.rideIn;
     }
 }
