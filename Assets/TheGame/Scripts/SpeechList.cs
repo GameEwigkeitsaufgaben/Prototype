@@ -62,11 +62,11 @@ public class SpeechList : MonoBehaviour
         {
             GameData.bubbleOnDad = true;
         }
-        else if (audioSrc.clip.name.Contains("mg"))
+        else if (audioSrc.clip.name.Contains("g"))
         {
             GameData.bubbleOnGeorg = true;
         }
-        else if (audioSrc.clip.name.Contains("g"))
+        else if (audioSrc.clip.name.Contains("m"))
         {
             GameData.bubbleOnMuseumGuide = true;
         }

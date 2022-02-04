@@ -8,19 +8,29 @@ public class CaveSpeechManger : MonoBehaviour
         audiosSole2,
         audiosSole3WPBahnsteig, audiosSole3WPBewetterung, audiosSole3WPCave, audiosSole3WPOVMine,
         audiosTrainRide,
-        ausiosMuseumHistoryMining, audiosMuseumMinerEquipment, audiosMuseumInfo, audiosMuseumCarbonification;
+        audiosLongwallCutterBahnsteig, audioLongwallCutterLongwallCutter,
+        audiosMuseumHistoryMining, audiosMuseumMinerEquipment, audiosMuseumInfo, audiosMuseumCarbonification;
 
     public SpeechBubble spEnya, spDad, spGeorg, spMuseumGuide;
     //fortesting
     public bool playEntryArea, playSchacht,
         playSole1, 
         playSole2, 
-        playSole3WPBahnsteig;
+        playSole3WPBahnsteig, playSole3WPBewetterung, playSole3WPCave, playSole3WPOVMine,
+        playTrainRide, 
+        playLongwallCutterBahnsteig, playLongwallCutterLongwallCutter,
+        playMuseum;
 
-    SpeechList speakEntryArea, speakSchacht, speakSole1, speakSole2;
+    SpeechList speakEntryArea, speakSchacht, speakSole1, speakSole2,
+        speakBewetterung, speakSole3Bahnsteig, speakSole3Cave,speakSole3BoardOVmine,
+        speakLongwallCutterBahnsteig, speakLongwallCutterLongwallCutter,
+        speakTrainRide,
+        speakLongwayCutterBahnsteig,
+        speakMuseum;
 
     SpeechList currentList = null;
     private List<AudioSource> listAudioSrcs = new List<AudioSource>();
+    private List<SpeechList> mySpeechLists = new List<SpeechList>();
     private AudioSource mySrc;
 
     // Start is called before the first frame update
@@ -30,25 +40,61 @@ public class CaveSpeechManger : MonoBehaviour
 
         speakEntryArea = gameObject.AddComponent<SpeechList>();
         speakEntryArea.SetUpList(audiosEntryArea, mySrc);
+        mySpeechLists.Add(speakEntryArea);
 
         speakSchacht = gameObject.AddComponent<SpeechList>();
         speakSchacht.SetUpList(audiosEntryAreaTriggerSchacht, mySrc);
+        mySpeechLists.Add(speakSchacht);
 
         speakSole1 = gameObject.AddComponent<SpeechList>();
         speakSole1.SetUpList(audiosSole1, mySrc);
+        mySpeechLists.Add(speakSole1);
 
         speakSole2 = gameObject.AddComponent<SpeechList>();
         speakSole2.SetUpList(audiosSole2, mySrc);
+        mySpeechLists.Add(speakSole2);
+
+        speakSole3Bahnsteig = gameObject.AddComponent<SpeechList>();
+        speakSole3Bahnsteig.SetUpList(audiosSole3WPBahnsteig, mySrc);
+        mySpeechLists.Add(speakSole3Bahnsteig);
+
+        speakBewetterung = gameObject.AddComponent<SpeechList>();
+        speakBewetterung.SetUpList(audiosSole3WPBewetterung, mySrc);
+        mySpeechLists.Add(speakBewetterung);
+
+        speakSole3BoardOVmine = gameObject.AddComponent<SpeechList>();
+        speakSole3BoardOVmine.SetUpList(audiosSole3WPOVMine, mySrc);
+        mySpeechLists.Add(speakSole3BoardOVmine);
+
+        speakSole3Cave = gameObject.AddComponent<SpeechList>();
+        speakSole3Cave.SetUpList(audiosSole3WPCave, mySrc);
+        mySpeechLists.Add(speakSole3Cave);
+
+        speakTrainRide = gameObject.AddComponent<SpeechList>();
+        speakTrainRide.SetUpList(audiosTrainRide, mySrc);
+        mySpeechLists.Add(speakTrainRide);
+
+        speakLongwallCutterBahnsteig = gameObject.AddComponent<SpeechList>();
+        speakLongwallCutterBahnsteig.SetUpList(audiosLongwallCutterBahnsteig, mySrc);
+        mySpeechLists.Add(speakLongwallCutterBahnsteig);
+
+        speakLongwallCutterLongwallCutter = gameObject.AddComponent<SpeechList>();
+        speakLongwallCutterLongwallCutter.SetUpList(audioLongwallCutterLongwallCutter, mySrc);
+        mySpeechLists.Add(speakLongwallCutterLongwallCutter);
+
+        speakMuseum = gameObject.AddComponent<SpeechList>();
+        speakMuseum.SetUpList(audiosMuseumInfo, mySrc);
+        mySpeechLists.Add(speakMuseum);
 
         DisableAllSpeechlists();
     }
 
     void DisableAllSpeechlists()
     {
-        speakEntryArea.enabled = false;
-        speakSchacht.enabled = false;
-        speakSole1.enabled = false;
-        speakSole2.enabled = false;
+        for(int i = 0; i<=mySpeechLists.Count; i++)
+        {
+            mySpeechLists[i].enabled = false;
+        }
     }
 
     void EnableListAndPlayAll(SpeechList list)
@@ -87,8 +133,48 @@ public class CaveSpeechManger : MonoBehaviour
             currentList = speakSole2;
             playSole2 = false;
         }
+        else if (playSole3WPBahnsteig)
+        {
+            currentList = speakSole3Bahnsteig;
+            playSole3WPBahnsteig = false;
+        }
+        else if (playSole3WPBewetterung)
+        {
+            currentList = speakBewetterung;
+            playSole3WPBewetterung = false;
+        }
+        else if (playSole3WPCave)
+        {
+            currentList = speakSole3Cave;
+            playSole3WPCave = false;
+        }
+        else if (playSole3WPOVMine)
+        {
+            currentList = speakSole3BoardOVmine;
+            playSole3WPOVMine = false;
+        }
+        else if (playTrainRide)
+        {
+            currentList = speakTrainRide;
+            playTrainRide = false;
+        }
+        else if (playLongwallCutterBahnsteig)
+        {
+            currentList = speakLongwayCutterBahnsteig;
+            playLongwallCutterBahnsteig = false;
+        }
+        else if (playLongwallCutterLongwallCutter)
+        {
+            currentList = speakLongwallCutterLongwallCutter;
+            playLongwallCutterLongwallCutter = false;
+        }
 
-        if(currentList != null)
+        //else if ()
+        //{
+
+        //}
+
+        if (currentList != null)
         {
             if (mySrc.isPlaying) mySrc.Stop();
 
