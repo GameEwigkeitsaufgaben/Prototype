@@ -591,8 +591,9 @@ GameObject:
   - component: {fileID: 229106828}
   - component: {fileID: 229106829}
   - component: {fileID: 229106830}
+  - component: {fileID: 229106831}
   m_Layer: 0
-  m_Name: SprechblaseGabi
+  m_Name: SpeechBubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -620,7 +621,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 229106827}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a14a23e58cb69d84583e964f7bac4743, type: 3}
   m_Name: 
@@ -727,6 +728,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &229106831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229106827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac2410f06c4adf459aba67a985f4e9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myCharacter: 0
 --- !u!1 &253342865
 GameObject:
   m_ObjectHideFlags: 0
@@ -2951,6 +2965,7 @@ GameObject:
   - component: {fileID: 1119981090}
   - component: {fileID: 1119981092}
   - component: {fileID: 1119981093}
+  - component: {fileID: 1119981094}
   m_Layer: 0
   m_Name: LiftManager
   m_TagString: Untagged
@@ -3023,6 +3038,40 @@ MonoBehaviour:
   dadspeed2: {fileID: 8300000, guid: 88be2b1e251478049a8fcb1bd2bb3f66, type: 3}
   cave: {fileID: 919132147999869086}
   caveColliderButtom: {fileID: 966452285}
+--- !u!114 &1119981094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119981089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f9a404e126ed64583bdbada8372a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audiosEntryArea: {fileID: 11400000, guid: 139b6e1bad73fe2418d03c4686441eaa, type: 2}
+  audiosEntryAreaTriggerSchacht: {fileID: 11400000, guid: 42aac5037418e734f95807b1b03c6deb, type: 2}
+  audiosSole1: {fileID: 11400000, guid: 8a82036e76e1212418f25d76c2b11910, type: 2}
+  audiosSole2: {fileID: 11400000, guid: 2faebea999a8ecf4ab4cf3f2a6a57f02, type: 2}
+  audiosSole3WPBahnsteig: {fileID: 11400000, guid: e293681608c7a2640a14ba9e140abf33, type: 2}
+  audiosSole3WPBewetterung: {fileID: 11400000, guid: 892465c2e6fa71f4db27633136469d29, type: 2}
+  audiosSole3WPCave: {fileID: 0}
+  audiosSole3WPOVMine: {fileID: 0}
+  audiosTrainRide: {fileID: 0}
+  ausiosMuseumHistoryMining: {fileID: 0}
+  audiosMuseumMinerEquipment: {fileID: 0}
+  audiosMuseumInfo: {fileID: 0}
+  audiosMuseumCarbonification: {fileID: 0}
+  spEnya: {fileID: 229106831}
+  spDad: {fileID: 1357478544}
+  spGeorg: {fileID: 1565534980}
+  spMuseumGuide: {fileID: 0}
+  playEntryArea: 0
+  playSchacht: 0
+  playSole1: 0
+  playSole2: 0
+  playSole3WPBahnsteig: 0
 --- !u!1 &1140331341
 GameObject:
   m_ObjectHideFlags: 0
@@ -3340,7 +3389,7 @@ GameObject:
   - component: {fileID: 1230175746}
   - component: {fileID: 1230175745}
   m_Layer: 5
-  m_Name: BergmannImg
+  m_Name: ImgCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4373,8 +4422,9 @@ GameObject:
   - component: {fileID: 1357478541}
   - component: {fileID: 1357478542}
   - component: {fileID: 1357478543}
+  - component: {fileID: 1357478544}
   m_Layer: 0
-  m_Name: SprechblaseBergmann
+  m_Name: SpeechBubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4402,7 +4452,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1357478540}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a14a23e58cb69d84583e964f7bac4743, type: 3}
   m_Name: 
@@ -4509,6 +4559,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1357478544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1357478540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac2410f06c4adf459aba67a985f4e9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myCharacter: 0
 --- !u!1 &1451543786
 GameObject:
   m_ObjectHideFlags: 0
@@ -5399,8 +5462,9 @@ GameObject:
   - component: {fileID: 1565534977}
   - component: {fileID: 1565534979}
   - component: {fileID: 1565534978}
+  - component: {fileID: 1565534980}
   m_Layer: 0
-  m_Name: Speechbubble
+  m_Name: SpeechBubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5524,7 +5588,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1565534976}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a14a23e58cb69d84583e964f7bac4743, type: 3}
   m_Name: 
@@ -5535,6 +5599,19 @@ MonoBehaviour:
   talking: {fileID: 21300000, guid: a6a0ad063ced42040838b89c687d9596, type: 3}
   isInteractable: 1
   PlayedOnceMode: 0
+--- !u!114 &1565534980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565534976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac2410f06c4adf459aba67a985f4e9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myCharacter: 0
 --- !u!1 &1567317897
 GameObject:
   m_ObjectHideFlags: 0
@@ -7165,7 +7242,7 @@ GameObject:
   - component: {fileID: 3643531837929230095}
   - component: {fileID: 3643531837929230094}
   m_Layer: 5
-  m_Name: BergmannImg
+  m_Name: ImgCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7844,7 +7921,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!222 &9105965527342593203
 CanvasRenderer:
   m_ObjectHideFlags: 0
