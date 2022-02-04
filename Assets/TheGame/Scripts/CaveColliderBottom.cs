@@ -67,13 +67,13 @@ public class CaveColliderBottom : MonoBehaviour
                 GameData.sohle3IntroPlayedOnce = true;
             }
         }
-        if (other.name == "TriggerAudioGabi" && cave.moveDirecton < 0)
+        if (other.name == "TriggerAudioGabi" && (cave.moveDirection ==  CaveMovement.MoveDown))
         {
             sprechblaseController.sprechblaseGabi.SetAudioClip(other.GetComponent<AudioSource>().clip);
             sprechblaseController.sprechblaseGabi.gameObject.SetActive(true);
             sprechblaseController.sprechblaseGabi.SetSprechblaseInPlayingMode();
         }
-        if (other.name == "TriggerAudioDad" && cave.moveDirecton < 0)
+        if (other.name == "TriggerAudioDad" && (cave.moveDirection == CaveMovement.MoveDown))
         {
             sprechblaseController.sprechblaseGabi.gameObject.SetActive(false);
             sprechblaseController.sprechblaseDad.gameObject.SetActive(true);

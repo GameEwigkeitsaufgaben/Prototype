@@ -3,30 +3,37 @@ using UnityEngine;
 
 public class CaveSpeechManger : MonoBehaviour
 {
-    public SoTalkingList audiosEntryArea, audiosEntryAreaTriggerSchacht,
+    public SoTalkingList
+        audiosEntryArea,
+        audiosEntryAreaTriggerSchacht,
         audiosSole1,
         audiosSole2,
         audiosSole3WPBahnsteig, audiosSole3WPBewetterung, audiosSole3WPCave, audiosSole3WPOVMine,
         audiosTrainRide,
-        audiosLongwallCutterBahnsteig, audioLongwallCutterLongwallCutter,
-        audiosMuseumHistoryMining, audiosMuseumMinerEquipment, audiosMuseumInfo, audiosMuseumCarbonification;
+        audiosLongwallCutterBahnsteig, audioLongwallCutterLongwallCutter;
+        //audiosMuseumHistoryMining, audiosMuseumMinerEquipment, audiosMuseumInfo, audiosMuseumCarbonification;
 
     public SpeechBubble spEnya, spDad, spGeorg, spMuseumGuide;
     //fortesting
-    public bool playEntryArea, playSchacht,
-        playSole1, 
-        playSole2, 
+    public bool
+        playEntryArea,
+        playSchacht,
+        playSole1,
+        playSole2,
         playSole3WPBahnsteig, playSole3WPBewetterung, playSole3WPCave, playSole3WPOVMine,
-        playTrainRide, 
-        playLongwallCutterBahnsteig, playLongwallCutterLongwallCutter,
-        playMuseum;
+        playTrainRide,
+        playLongwallCutterBahnsteig, playLongwallCutterLongwallCutter;
+    //playMuseumInfo, playMuseumCarbonification, MinerEquipment, HistoryMining;
 
-    SpeechList speakEntryArea, speakSchacht, speakSole1, speakSole2,
-        speakBewetterung, speakSole3Bahnsteig, speakSole3Cave,speakSole3BoardOVmine,
-        speakLongwallCutterBahnsteig, speakLongwallCutterLongwallCutter,
+    SpeechList
+        speakEntryArea,
+        speakSchacht,
+        speakSole1,
+        speakSole2,
+        speakBewetterung, speakSole3Bahnsteig, speakSole3Cave, speakSole3BoardOVmine,
         speakTrainRide,
-        speakLongwayCutterBahnsteig,
-        speakMuseum;
+        speakLongwallCutterBahnsteig, speakLongwallCutterLongwallCutter;
+        //speakMuseumInfo, speakMuseumCarbonification, speakMinerEquipment, speakHistroyMining;
 
     SpeechList currentList = null;
     private List<AudioSource> listAudioSrcs = new List<AudioSource>();
@@ -82,16 +89,28 @@ public class CaveSpeechManger : MonoBehaviour
         speakLongwallCutterLongwallCutter.SetUpList(audioLongwallCutterLongwallCutter, mySrc);
         mySpeechLists.Add(speakLongwallCutterLongwallCutter);
 
-        speakMuseum = gameObject.AddComponent<SpeechList>();
-        speakMuseum.SetUpList(audiosMuseumInfo, mySrc);
-        mySpeechLists.Add(speakMuseum);
+        //speakMuseumInfo = gameObject.AddComponent<SpeechList>();
+        //speakMuseumInfo.SetUpList(audiosMuseumInfo, mySrc);
+        //mySpeechLists.Add(speakMuseumInfo);
+
+        //speakHistroyMining = gameObject.AddComponent<SpeechList>();
+        //speakHistroyMining.SetUpList(audiosMuseumHistoryMining, mySrc);
+        //mySpeechLists.Add(speakHistroyMining);
+
+        //speakMuseumCarbonification = gameObject.AddComponent<SpeechList>();
+        //speakMuseumCarbonification.SetUpList(audiosMuseumCarbonification, mySrc);
+        //mySpeechLists.Add(speakMuseumCarbonification);
+
+        //speakMinerEquipment = gameObject.AddComponent<SpeechList>();
+        //speakMinerEquipment.SetUpList(audiosMuseumMinerEquipment, mySrc);
+        //mySpeechLists.Add(speakMinerEquipment);
 
         DisableAllSpeechlists();
     }
 
     void DisableAllSpeechlists()
     {
-        for(int i = 0; i<=mySpeechLists.Count; i++)
+        for(int i = 0; i<mySpeechLists.Count; i++)
         {
             mySpeechLists[i].enabled = false;
         }
@@ -160,7 +179,7 @@ public class CaveSpeechManger : MonoBehaviour
         }
         else if (playLongwallCutterBahnsteig)
         {
-            currentList = speakLongwayCutterBahnsteig;
+            currentList = speakLongwallCutterBahnsteig;
             playLongwallCutterBahnsteig = false;
         }
         else if (playLongwallCutterLongwallCutter)

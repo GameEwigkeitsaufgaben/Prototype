@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +17,13 @@ public enum CaveButtonsState
     ToDisable
 }
 
+public enum CaveMovement
+{
+    MoveDown = -1,
+    MoveUp = 1,
+    OnHold = 0,
+}
+
 public class Cave : MonoBehaviour
 {
     public GameObject doorLeft;
@@ -28,7 +34,7 @@ public class Cave : MonoBehaviour
 
     public CurrentStop currentStop;
     public CurrentStop targetStop;
-    public int moveDirecton;//-1 for moving down, +1 for moving up
+    public CaveMovement moveDirection;
 
     public AudioSource doorsMovingSrc;
     public AudioSource liftMovingSrc;
@@ -36,10 +42,8 @@ public class Cave : MonoBehaviour
     private void Start()
     {
         currentStop = CurrentStop.Einstieg;
-        EnableButtons(false);
+        EnableButtons(true);
     }
-
-    
 
     public void StoreCavePosition()
     {
@@ -52,8 +56,8 @@ public class Cave : MonoBehaviour
     {
         if (GameData.moveCave)
         {
-            Debug.Log(moveDirecton + " movedir");
-            transform.position += new Vector3(0, moveDirecton * 2 * Time.deltaTime, 0);
+            Debug.Log((int)moveDirection + " movedir");
+            transform.position += new Vector3(0, (int)moveDirection * 2 * Time.deltaTime, 0);
         }
 
         if (GameData.liftBtnsEnabled)
@@ -64,32 +68,32 @@ public class Cave : MonoBehaviour
 
     public void MoveTo(CurrentStop tStop)
     {
-        targetStop = tStop;
-        moveDirecton = GetMoveDirection();
         GameData.moveCave = true;
+        targetStop = tStop;
+        moveDirection = GetMoveDirection();
         gameObject.GetComponent<CaveShake>().StartShake();
         liftMovingSrc.Play();
     }
 
-    private int GetMoveDirection()
+    private CaveMovement GetMoveDirection()
     {
-        int tmp = 0;
+        CaveMovement tmp = CaveMovement.OnHold;
 
         switch (currentStop)
         {
             case CurrentStop.Einstieg:
-                    tmp = -1;
+                    tmp = CaveMovement.MoveDown;
                     break;
             case CurrentStop.Sohle1:
-                if (targetStop == CurrentStop.Einstieg) tmp = 1;
-                if ((targetStop == CurrentStop.Sohle2) || (targetStop == CurrentStop.Sohle3)) tmp = -1;
+                if (targetStop == CurrentStop.Einstieg) tmp = CaveMovement.MoveUp;
+                if ((targetStop == CurrentStop.Sohle2) || (targetStop == CurrentStop.Sohle3)) tmp = CaveMovement.MoveDown;
                 break;
             case CurrentStop.Sohle2:
-                if (targetStop == CurrentStop.Einstieg || (targetStop == CurrentStop.Sohle1)) tmp = 1;
-                if (targetStop == CurrentStop.Sohle3) tmp = -1;
+                if (targetStop == CurrentStop.Einstieg || (targetStop == CurrentStop.Sohle1)) tmp = CaveMovement.MoveUp;
+                if (targetStop == CurrentStop.Sohle3) tmp = CaveMovement.MoveDown;
                 break;
             case CurrentStop.Sohle3:
-                    tmp = 1;
+                    tmp = CaveMovement.MoveUp;
                     break;
         }
 

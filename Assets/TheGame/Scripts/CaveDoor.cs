@@ -18,7 +18,6 @@ public class CaveDoor : MonoBehaviour
         
         gameObject.transform.localPosition = opendPosition.transform.localPosition;
         doorOpened = true;
-        
     }
 
     // Update is called once per frame
