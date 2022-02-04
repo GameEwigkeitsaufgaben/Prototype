@@ -47,6 +47,11 @@ public static class GameData
 
     public static int quizChapterOnePoints = 0;
 
+    internal static bool bubbleOnEnvy = false;
+    internal static bool bubbleOnDad = false;
+    internal static bool bubbleOnGeorg = false;
+    internal static bool bubbleOnMuseumGuide = false;
+
     public static void PrintState()
     {
         Debug.Log(
