@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class CaveColliderBottom : MonoBehaviour
 {
     public Cave cave;
-    public SprechblaseController sprechblaseController;
+    public CaveSpeechManger speechManger;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -15,148 +15,47 @@ public class CaveColliderBottom : MonoBehaviour
             cave.StopCave();
             cave.currentStop = CurrentStop.Einstieg;
             GameData.currentStopSohle = (int)cave.currentStop;
-            sprechblaseController.sprechblaseDad.SetAudioClip(other.GetComponent<AudioSource>().clip);
-            sprechblaseController.sprechblaseDad.SetSprechblaseInNotPlayedMode();
-
-            sprechblaseController.sprechblaseGabi.gameObject.SetActive(false);
-            
-            cave.liftBtns[0].GetComponent<CaveButton>().feedbackObject.SetActive(true);
-            cave.liftBtns[0].gameObject.SetActive(true);
+            speechManger.playEntryArea = true;
             cave.liftBtns[0].gameObject.GetComponent<Button>().interactable = true;
-            
+            // es fehlt noch ein Audio bitte den Ausgang nehmen! wenn wir wieder da sind. 
+            //Es kann gleich weitergeschalten werden, noch keine Prüfung ob text fertig geprochen.
         }
-
-        if (other.name == "TriggerSohle1" && cave.targetStop == CurrentStop.Sohle1)
+        else if(other.name == "TriggerSohle1" && cave.targetStop == CurrentStop.Sohle1)
         {
             Debug.Log("Stop Cave");
             cave.StopCave();
             cave.currentStop = CurrentStop.Sohle1;
             GameData.currentStopSohle = (int)cave.currentStop;
-
-            other.GetComponent<LiftSohleOne>().PlayEnvironmentalSound();
-
-            sprechblaseController.sprechblaseGabi.SetAudioClip(other.GetComponent<LiftSohleOne>().clip1);
-            sprechblaseController.sprechblaseGabi.SetSprechblaseInPlayingMode();
-
-            sprechblaseController.sprechblaseDad.SetAudioClip(other.GetComponent<LiftSohleOne>().clip2);
-            sprechblaseController.sprechblaseDad.SetSprechblaseInNotPlayedMode();
-            sprechblaseController.sprechblaseDad.gameObject.SetActive(true);
-
-
+            speechManger.playSole1 = true;
             //StartCoroutine(sprechblaseController.PlayNextAudio("spdad", 10f, other.GetComponent<LiftSohleOne>().clip2));
         }
-
-        if (other.name == "TriggerSohle2" && cave.targetStop == CurrentStop.Sohle2)
+        else if (other.name == "TriggerSchacht" && cave.moveDirection == CaveMovement.MoveDown)
+        {
+            speechManger.playSchacht = true;
+        }
+        else if (other.name == "TriggerSohle2" && cave.targetStop == CurrentStop.Sohle2)
         {
             Debug.Log("Stop Cave");
             cave.StopCave();
             cave.currentStop = CurrentStop.Sohle2;
             GameData.currentStopSohle = (int)cave.currentStop;
-            other.GetComponent<LiftSohleTwo>().PlayAudio();
+            speechManger.playSole2 = true;
         }
-        if (other.name == "TriggerSohle3" && cave.targetStop == CurrentStop.Sohle3)
+        else if (other.name == "TriggerSohle3" && cave.targetStop == CurrentStop.Sohle3)
         {
             Debug.Log("Stop Cave");
             cave.StopCave();
             cave.currentStop = CurrentStop.Sohle3;
             GameData.currentStopSohle = (int)cave.currentStop;
-            if (!GameData.sohle3IntroPlayedOnce)
-            {
-                other.GetComponent<LiftSohleThree>().PlayAudio();
-                other.GetComponent<LiftSohleThree>().StartTrain();
-                GameData.sohle3IntroPlayedOnce = true;
-            }
+            speechManger.playSole3WPCave = true;
+            //if (!GameData.sohle3IntroPlayedOnce)
+            //{
+            //    other.GetComponent<LiftSohleThree>().PlayAudio();
+            //    other.GetComponent<LiftSohleThree>().StartTrain();
+            //    GameData.sohle3IntroPlayedOnce = true;
+            //}
         }
-        if (other.name == "TriggerAudioGabi" && (cave.moveDirection ==  CaveMovement.MoveDown))
-        {
-            sprechblaseController.sprechblaseGabi.SetAudioClip(other.GetComponent<AudioSource>().clip);
-            sprechblaseController.sprechblaseGabi.gameObject.SetActive(true);
-            sprechblaseController.sprechblaseGabi.SetSprechblaseInPlayingMode();
-        }
-        if (other.name == "TriggerAudioDad" && (cave.moveDirection == CaveMovement.MoveDown))
-        {
-            sprechblaseController.sprechblaseGabi.gameObject.SetActive(false);
-            sprechblaseController.sprechblaseDad.gameObject.SetActive(true);
-            sprechblaseController.sprechblaseDad.SetAudioClip(other.GetComponent<AudioSource>().clip);
-            sprechblaseController.sprechblaseDad.SetSprechblaseInPlayingMode();
-        }
+        
     }
-
-    //public Cave cave;
-    //public SprechblaseController sprechblaseController;
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    Debug.Log(" .." + other.name);
-
-    //    if (other.name == "TriggerEinstieg")
-    //    {
-    //        cave.StopCave();
-    //        cave.currentStop = CurrentStop.Einstieg;
-    //        GameData.currentStopSohle = (int)cave.currentStop;
-    //        sprechblaseController.sprechblaseDad.SetAudioClip(other.GetComponent<AudioSource>().clip);
-    //        sprechblaseController.sprechblaseDad.SetSprechblaseInNotPlayedMode();
-
-    //        sprechblaseController.sprechblaseGabi.gameObject.SetActive(false);
-            
-    //        cave.liftBtns[0].GetComponent<CaveButton>().feedbackObject.SetActive(true);
-    //        cave.liftBtns[0].gameObject.SetActive(true);
-    //        cave.liftBtns[0].gameObject.GetComponent<Button>().interactable = true;
-            
-    //    }
-
-    //    if (other.name == "TriggerSohle1" && cave.targetStop == CurrentStop.Sohle1)
-    //    {
-    //        Debug.Log("Stop Cave");
-    //        cave.StopCave();
-    //        cave.currentStop = CurrentStop.Sohle1;
-    //        GameData.currentStopSohle = (int)cave.currentStop;
-
-    //        other.GetComponent<LiftSohleOne>().PlayEnvironmentalSound();
-
-    //        sprechblaseController.sprechblaseGabi.SetAudioClip(other.GetComponent<LiftSohleOne>().clip1);
-    //        sprechblaseController.sprechblaseGabi.SetSprechblaseInPlayingMode();
-
-    //        sprechblaseController.sprechblaseDad.SetAudioClip(other.GetComponent<LiftSohleOne>().clip2);
-    //        sprechblaseController.sprechblaseDad.SetSprechblaseInNotPlayedMode();
-    //        sprechblaseController.sprechblaseDad.gameObject.SetActive(true);
-                       
-    //    }
-
-    //    if (other.name == "TriggerSohle2" && cave.targetStop == CurrentStop.Sohle2)
-    //    {
-    //        Debug.Log("Stop Cave");
-    //        cave.StopCave();
-    //        cave.currentStop = CurrentStop.Sohle2;
-    //        GameData.currentStopSohle = (int)cave.currentStop;
-    //        other.GetComponent<LiftSohleTwo>().PlayAudio();
-    //    }
-    //    if (other.name == "TriggerSohle3" && cave.targetStop == CurrentStop.Sohle3)
-    //    {
-    //        Debug.Log("Stop Cave");
-    //        cave.StopCave();
-    //        cave.currentStop = CurrentStop.Sohle3;
-    //        GameData.currentStopSohle = (int)cave.currentStop;
-    //        if (!GameData.sohle3IntroPlayedOnce)
-    //        {
-    //            other.GetComponent<LiftSohleThree>().PlayAudio();
-    //            other.GetComponent<LiftSohleThree>().StartTrain();
-    //            GameData.sohle3IntroPlayedOnce = true;
-    //        }
-    //    }
-    //    if (other.name == "TriggerAudioGabi" && cave.moveDirecton < 0)
-    //    {
-    //        sprechblaseController.sprechblaseGabi.SetAudioClip(other.GetComponent<AudioSource>().clip);
-    //        sprechblaseController.sprechblaseGabi.gameObject.SetActive(true);
-    //        sprechblaseController.sprechblaseGabi.SetSprechblaseInPlayingMode();
-    //    }
-    //    if (other.name == "TriggerAudioDad" && cave.moveDirecton < 0)
-    //    {
-    //        sprechblaseController.sprechblaseGabi.gameObject.SetActive(false);
-    //        sprechblaseController.sprechblaseDad.gameObject.SetActive(true);
-    //        sprechblaseController.sprechblaseDad.SetAudioClip(other.GetComponent<AudioSource>().clip);
-    //        sprechblaseController.sprechblaseDad.SetSprechblaseInPlayingMode();
-    //    }
-    //}
 
 }

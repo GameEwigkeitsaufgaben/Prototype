@@ -5,7 +5,7 @@ public class ScenesChapterOne
     public const string GameOnboarding = "ch01scene00-00-onboarding";
 
     public const string MineIntro = "ch01scene01-61-coalmine-intro";
-    public const string MineInteractiveCave = "ch01scene01-62-coalmine-cave";
+    public const string Mine = "ch01scene01-62-coalmine-cave";
     public const string MineAnimation = "ch01scene01-62-coalmine-cave-animation";
     public const string MineEntryAreaStatic = "ch01scene01-62-coalmine-cave-static-entryArea";
     public const string MineSoleOneStatic = "ch01scene01-62-coalmine-cave-static-soleOne";

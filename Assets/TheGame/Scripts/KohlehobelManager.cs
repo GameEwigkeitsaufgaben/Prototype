@@ -11,12 +11,16 @@ public class KohlehobelManager : MonoBehaviour
     void Start()
     {
         player.followAnker = false;
+        switchScene.LoadLongwallCutterStatic();
+        switchScene.LoadLongwallCutterAnim();
+        
         if (false)
         { //testing ohne sohle3
             GameData.cavePosX = 0.12937f;
             GameData.cavePosY = -176.2351f;
             GameData.cavePosZ = 0.46835f;
             GameData.sohleToReload = (int)CurrentStop.Sohle3;
+
         }
     }
 
@@ -34,12 +38,5 @@ public class KohlehobelManager : MonoBehaviour
     {
         switchScene.SwitchSceneWithTransition(ScenesChapterOne.MineSoleThreeTrainRide);
         //GameData.gotToKohlehobel = true;
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

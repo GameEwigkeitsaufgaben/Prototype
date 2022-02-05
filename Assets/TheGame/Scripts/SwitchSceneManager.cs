@@ -7,6 +7,41 @@ public class SwitchSceneManager : MonoBehaviour
     public Animator transition;
     public float transitionTime = 1f;
 
+    public void LoadMine()
+    {
+        SceneManager.LoadScene(ScenesChapterOne.Mine, LoadSceneMode.Additive);
+        Debug.Log("LoadScene sohle1");
+    }
+
+    public void LoadSohle1()
+    {
+        SceneManager.LoadScene(ScenesChapterOne.MineSoleOneStatic, LoadSceneMode.Additive);
+        Debug.Log("LoadScene sohle1");
+    }
+    public void LoadSohle2()
+    {
+        SceneManager.LoadScene(ScenesChapterOne.MineSoleTwoStatic, LoadSceneMode.Additive);
+    }
+    public void LoadEntryArea()
+    {
+        SceneManager.LoadScene(ScenesChapterOne.MineEntryAreaStatic, LoadSceneMode.Additive);
+    }
+
+    public void LoadLongwallCutter()
+    {
+        SceneManager.LoadScene(ScenesChapterOne.LongwallCutter, LoadSceneMode.Single);
+    }
+
+    public void LoadLongwallCutterStatic()
+    {
+        SceneManager.LoadScene(ScenesChapterOne.LongwallCutterStatic, LoadSceneMode.Additive);
+    }
+
+    public void LoadLongwallCutterAnim()
+    {
+        SceneManager.LoadScene(ScenesChapterOne.LongwallCutterAnimation, LoadSceneMode.Additive);
+    }
+
     public void SwitchScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);

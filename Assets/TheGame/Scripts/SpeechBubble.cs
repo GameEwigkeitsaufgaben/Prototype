@@ -18,9 +18,4 @@ public class SpeechBubble : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void switchOnOff(bool on)
-    {
-        gameObject.SetActive(on);
-    }
-
 }

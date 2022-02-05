@@ -1,3 +1,5 @@
+//Management Scene
+//
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +21,10 @@ public class CaveManager : MonoBehaviour
     {
         //triggerEinstieg.SetActive(false);
         GameData.scene1162LoadedOnce = true;
+        switchScene.LoadEntryArea();
+        switchScene.LoadSohle1();
+        switchScene.LoadSohle2();
+
     }
 
     public void SetTargetForPlayer(GameObject obj)

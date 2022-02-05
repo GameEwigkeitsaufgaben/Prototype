@@ -188,11 +188,6 @@ public class CaveSpeechManger : MonoBehaviour
             playLongwallCutterLongwallCutter = false;
         }
 
-        //else if ()
-        //{
-
-        //}
-
         if (currentList != null)
         {
             if (mySrc.isPlaying) mySrc.Stop();

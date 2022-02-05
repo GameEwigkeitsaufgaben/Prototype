@@ -24,6 +24,7 @@ public class SpeechList : MonoBehaviour
         //audioSrc = gameObject.AddComponent<AudioSource>();
         //audioSrc.playOnAwake = false;
         audioSrc = src;
+        audioSrc.playOnAwake = false;
         clips = list.orderedListOfAudioClips;
     }
 
