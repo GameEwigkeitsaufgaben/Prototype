@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class QuizAnswerItem
 {
+    private const string pathToBtnSprite = "neon_square_orange-v2gemma";
     public string questionIdentifier;
     public string answer;
     public int answerIdentifier;
@@ -39,7 +40,7 @@ public class QuizAnswerItem
                                                             newButton.transform.localPosition.y,
                                                             0);
 
-        newButton.GetComponent<Image>().sprite = Resources.Load<Sprite>("neon_square_orange");
+        newButton.GetComponent<Image>().sprite = Resources.Load<Sprite>(pathToBtnSprite);
         newButton.GetComponentInChildren<Text>().fontSize = 20;
         newButton.GetComponentInChildren<Text>().text = answer;
         btn = newButton.GetComponent<Button>();
