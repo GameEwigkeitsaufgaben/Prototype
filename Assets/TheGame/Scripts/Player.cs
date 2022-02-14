@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private const string triggerPlayerInCave = "TriggerPlayerInCave";
     public Camera mainCam;
     public GameObject ankerObjToFollow;
     public bool followAnker = true;
@@ -9,6 +10,25 @@ public class Player : MonoBehaviour
     private Vector3 offsetToAnkerObj;
     public GameObject targetObj = null;
     public float speed;
+
+    
+    public bool playerInCave = true;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.name == triggerPlayerInCave)
+        {
+            playerInCave = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.name == triggerPlayerInCave)
+        {
+            playerInCave = false;
+        }
+    }
 
     private void Start()
     {
@@ -57,30 +77,34 @@ public class Player : MonoBehaviour
         transform.position = ankerObjToFollow.transform.position + ReadPlayerOffsetToAnkerObj();
     }
 
-    public void MovePlayerToTargetObj()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, targetObj.transform.position, speed * Time.deltaTime);
-        Debug.Log("new position player: " + transform.position);
-        if(Vector3.Distance(transform.position, targetObj.transform.position) < 0.01)
-        {
-            targetObj = null;
-        }
-    }
+    ////wird nicht mehr gebruacht Prüfen!!! Jetzt in Cave controller drinnen
+    //public void MovePlayerToTargetObj()
+    //{
+    //    transform.position = Vector3.MoveTowards(transform.position, targetObj.transform.position, speed * Time.deltaTime);
+    //    Debug.Log("new position player: " + transform.position);
+    //    if (Vector3.Distance(transform.position, targetObj.transform.position) < 0.01)
+    //    {
+    //        targetObj = null;
+    //    }
+    //}
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        //Hinders the player to move the cave without being inside.
+        if (playerInCave)
+        {
+            GameData.liftBtnsEnabled = true;
+        }
+        else
+        {
+            GameData.liftBtnsEnabled = false;
+        }
+
+        //Cam follows capsule Player when cave is moving
         if (followAnker)
         {
             transform.position = ankerObjToFollow.transform.position + offsetToAnkerObj;
         }
 
-        if(targetObj != null)
-        {
-            followAnker = false;
-            MovePlayerToTargetObj();
-            Debug.Log("move player");
-        }
-        
     }
 }

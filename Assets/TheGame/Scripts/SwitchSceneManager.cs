@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,6 +23,12 @@ public class SwitchSceneManager : MonoBehaviour
     {
         SceneManager.LoadScene(ScenesChapterOne.MineSoleTwoStatic, LoadSceneMode.Additive);
     }
+
+    internal void LoadSohle3()
+    {
+        SceneManager.LoadScene(ScenesChapterOne.MineSoleThreeStatic, LoadSceneMode.Additive);
+    }
+
     public void LoadEntryArea()
     {
         SceneManager.LoadScene(ScenesChapterOne.MineEntryAreaStatic, LoadSceneMode.Additive);

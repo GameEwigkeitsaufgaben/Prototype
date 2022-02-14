@@ -1,5 +1,7 @@
 //Management Scene
-//
+//Cave Speech manager is onto paranet GameObject Characters
+
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,13 +11,14 @@ public class CaveManager : MonoBehaviour
     public Player player;
     public SwitchSceneManager switchScene;
 
-    public Button exitScene;
-    public SprechblaseController sprechblaseController;
+    public Button exitScene, sole1WPViewpointBtn, sole2WPViewpointBtn, sole1caveWP;
+   // public SprechblaseController sprechblaseController;
 
     public GameObject triggerEinstieg;
 
     bool introPlayedOneTime = false;
     
+
 
     private void Start()
     {
@@ -24,6 +27,7 @@ public class CaveManager : MonoBehaviour
         switchScene.LoadEntryArea();
         switchScene.LoadSohle1();
         switchScene.LoadSohle2();
+        switchScene.LoadSohle3();
 
     }
 
@@ -62,11 +66,13 @@ public class CaveManager : MonoBehaviour
         if (cave.caveDoorsClosed && exitScene.interactable)
         {
             exitScene.interactable = false;
+            sole1WPViewpointBtn.interactable = false;
         }
 
         if (!cave.caveDoorsClosed && !exitScene.interactable)
         {
             exitScene.interactable = true;
+            sole1WPViewpointBtn.interactable = true;
         }
     }
 }

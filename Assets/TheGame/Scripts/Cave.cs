@@ -26,6 +26,9 @@ public enum CaveMovement
 
 public class Cave : MonoBehaviour
 {
+
+    public float caveSpeed = 2.0f;
+
     public GameObject doorLeft;
     public GameObject doorRight;
     public bool caveDoorsClosed = false;
@@ -50,20 +53,6 @@ public class Cave : MonoBehaviour
         GameData.cavePosX = transform.position.x;
         GameData.cavePosY = transform.position.y;
         GameData.cavePosZ = transform.position.z;
-    }
-
-    void Update()
-    {
-        if (GameData.moveCave)
-        {
-            Debug.Log((int)moveDirection + " movedir");
-            transform.position += new Vector3(0, (int)moveDirection * 2 * Time.deltaTime, 0);
-        }
-
-        if (GameData.liftBtnsEnabled)
-        {
-            EnableButtons(true);
-        }
     }
 
     public void MoveTo(CurrentStop tStop)
@@ -146,5 +135,23 @@ public class Cave : MonoBehaviour
         gameObject.transform.position = tempPos;
         StopCave();
         OpenDoors();
+    }
+
+    void Update()
+    {
+        if (GameData.moveCave)
+        {
+            Debug.Log((int)moveDirection + " movedir");
+            transform.position += new Vector3(0, (int)moveDirection * caveSpeed * Time.deltaTime, 0);
+        }
+
+        if (GameData.liftBtnsEnabled)
+        {
+            EnableButtons(true);
+        }
+        else
+        {
+            EnableButtons(false);
+        }
     }
 }

@@ -3,6 +3,12 @@ using UnityEngine.UI;
 
 public class CaveColliderBottom : MonoBehaviour
 {
+    private const string TriggerEntryArea = "TriggerEntryArea";
+    private const string TriggerSole1 = "TriggerSole1";
+    private const string TriggerSole2 = "TriggerSole2";
+    private const string TriggerSole3 = "TriggerSohle3";
+    private const string TriggerTunnel = "TriggerSchacht";
+
     public Cave cave;
     public CaveSpeechManger speechManger;
 
@@ -10,7 +16,7 @@ public class CaveColliderBottom : MonoBehaviour
     {
         Debug.Log(" .." + other.name);
 
-        if (other.name == "TriggerEinstieg")
+        if (other.name == TriggerEntryArea)
         {
             cave.StopCave();
             cave.currentStop = CurrentStop.Einstieg;
@@ -20,7 +26,7 @@ public class CaveColliderBottom : MonoBehaviour
             // es fehlt noch ein Audio bitte den Ausgang nehmen! wenn wir wieder da sind. 
             //Es kann gleich weitergeschalten werden, noch keine Prüfung ob text fertig geprochen.
         }
-        else if(other.name == "TriggerSohle1" && cave.targetStop == CurrentStop.Sohle1)
+        else if(other.name == TriggerSole1 && cave.targetStop == CurrentStop.Sohle1)
         {
             Debug.Log("Stop Cave");
             cave.StopCave();
@@ -29,11 +35,11 @@ public class CaveColliderBottom : MonoBehaviour
             speechManger.playSole1 = true;
             //StartCoroutine(sprechblaseController.PlayNextAudio("spdad", 10f, other.GetComponent<LiftSohleOne>().clip2));
         }
-        else if (other.name == "TriggerSchacht" && cave.moveDirection == CaveMovement.MoveDown)
+        else if (other.name == TriggerTunnel && cave.moveDirection == CaveMovement.MoveDown)
         {
             speechManger.playSchacht = true;
         }
-        else if (other.name == "TriggerSohle2" && cave.targetStop == CurrentStop.Sohle2)
+        else if (other.name == TriggerSole2 && cave.targetStop == CurrentStop.Sohle2)
         {
             Debug.Log("Stop Cave");
             cave.StopCave();
@@ -41,7 +47,7 @@ public class CaveColliderBottom : MonoBehaviour
             GameData.currentStopSohle = (int)cave.currentStop;
             speechManger.playSole2 = true;
         }
-        else if (other.name == "TriggerSohle3" && cave.targetStop == CurrentStop.Sohle3)
+        else if (other.name == TriggerSole3 && cave.targetStop == CurrentStop.Sohle3)
         {
             Debug.Log("Stop Cave");
             cave.StopCave();
