@@ -19,7 +19,7 @@ public class KohlehobelManager : MonoBehaviour
             GameData.cavePosX = 0.12937f;
             GameData.cavePosY = -176.2351f;
             GameData.cavePosZ = 0.46835f;
-            GameData.sohleToReload = (int)CurrentStop.Sohle3;
+            GameData.sohleToReload = (int)CoalmineStop.Sole3;
 
         }
     }

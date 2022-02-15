@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum CurrentStop
+public enum CoalmineStop
 {
-    Einstieg,
-    Sohle1,
-    Sohle2,
-    Sohle3,
+    EntryArea,
+    Sole1,
+    Sole2,
+    Sole3,
 }
 
 public enum CaveButtonsState
@@ -35,8 +35,8 @@ public class Cave : MonoBehaviour
 
     public Button[] liftBtns;
 
-    public CurrentStop currentStop;
-    public CurrentStop targetStop;
+    public CoalmineStop currentStop;
+    public CoalmineStop targetStop;
     public CaveMovement moveDirection;
 
     public AudioSource doorsMovingSrc;
@@ -44,8 +44,17 @@ public class Cave : MonoBehaviour
 
     private void Start()
     {
-        currentStop = CurrentStop.Einstieg;
+        currentStop = CoalmineStop.EntryArea;
+        
         EnableButtons(true);
+    }
+
+    public void InitReachedStop(CoalmineStop reachedStop)
+    {
+        StopCave();
+        currentStop = reachedStop;
+        GameData.currentStopSohle = (int)currentStop;
+        //liftBtns[0].gameObject.GetComponent<Button>().interactable = true;
     }
 
     public void StoreCavePosition()
@@ -55,7 +64,7 @@ public class Cave : MonoBehaviour
         GameData.cavePosZ = transform.position.z;
     }
 
-    public void MoveTo(CurrentStop tStop)
+    public void MoveTo(CoalmineStop tStop)
     {
         GameData.moveCave = true;
         targetStop = tStop;
@@ -70,18 +79,18 @@ public class Cave : MonoBehaviour
 
         switch (currentStop)
         {
-            case CurrentStop.Einstieg:
+            case CoalmineStop.EntryArea:
                     tmp = CaveMovement.MoveDown;
                     break;
-            case CurrentStop.Sohle1:
-                if (targetStop == CurrentStop.Einstieg) tmp = CaveMovement.MoveUp;
-                if ((targetStop == CurrentStop.Sohle2) || (targetStop == CurrentStop.Sohle3)) tmp = CaveMovement.MoveDown;
+            case CoalmineStop.Sole1:
+                if (targetStop == CoalmineStop.EntryArea) tmp = CaveMovement.MoveUp;
+                if ((targetStop == CoalmineStop.Sole2) || (targetStop == CoalmineStop.Sole3)) tmp = CaveMovement.MoveDown;
                 break;
-            case CurrentStop.Sohle2:
-                if (targetStop == CurrentStop.Einstieg || (targetStop == CurrentStop.Sohle1)) tmp = CaveMovement.MoveUp;
-                if (targetStop == CurrentStop.Sohle3) tmp = CaveMovement.MoveDown;
+            case CoalmineStop.Sole2:
+                if (targetStop == CoalmineStop.EntryArea || (targetStop == CoalmineStop.Sole1)) tmp = CaveMovement.MoveUp;
+                if (targetStop == CoalmineStop.Sole3) tmp = CaveMovement.MoveDown;
                 break;
-            case CurrentStop.Sohle3:
+            case CoalmineStop.Sole3:
                     tmp = CaveMovement.MoveUp;
                     break;
         }
@@ -129,7 +138,7 @@ public class Cave : MonoBehaviour
 
     public void ReloadSohle3AsCurrent()
     {
-        currentStop = targetStop = CurrentStop.Sohle3;
+        currentStop = targetStop = CoalmineStop.Sole3;
         var tempPos = new Vector3(GameData.cavePosX, GameData.cavePosY, GameData.cavePosZ);
         Debug.Log(tempPos);
         gameObject.transform.position = tempPos;

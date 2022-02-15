@@ -81,7 +81,7 @@ public class Sprechblase : MonoBehaviour
 
             if (!audioSrc.isPlaying && audioStarted)
             {
-                if ((CurrentStop)GameData.currentStopSohle == CurrentStop.Einstieg && !GameData.moveCave)
+                if ((CoalmineStop)GameData.currentStopSohle == CoalmineStop.EntryArea && !GameData.moveCave)
                 {
                     GameData.introPlayedOnce = true;
                     return;

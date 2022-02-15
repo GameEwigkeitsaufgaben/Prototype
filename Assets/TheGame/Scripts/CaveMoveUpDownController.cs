@@ -1,11 +1,17 @@
-//Move Cave with button up and down
-//Close doors before moving
-//if target == current stop open/close doors
+//Control the cave with cavebuttons move to up and down between stops (soles1-3 and the entry area)
+//Before starting to move to the target stop, the doors of the cave will be closed.
+//if the current stop and the target stop is equivalent the doors will be opened or closed, no movement will be done.
 
 using UnityEngine;
 
 public class CaveMoveUpDownController : MonoBehaviour
 {
+    //Methodnames to be used in Invoke call
+    private const string StartMovingToEA = "StartMovingToEntryArea";
+    private const string StartMovingToS1 = "StartMovingSoleOne";
+    private const string StartMovingToS2 = "StartMovingSoleTwo";
+    private const string StartMovingToS3 = "StartMovingSoleThree";
+    
     public Cave cave;
 
     void MoveCaveDoors()
@@ -20,10 +26,12 @@ public class CaveMoveUpDownController : MonoBehaviour
         }
     }
 
-    public void GoToSohle(int nextStopInt)
+    public void GoToStop(int nextStopInt)
     {
-        CurrentStop nextStop = (CurrentStop)nextStopInt;
+        CoalmineStop nextStop = (CoalmineStop)nextStopInt;
+
         if (GameData.moveCave) return;
+
         if (cave.currentStop == nextStop)
         {
             MoveCaveDoors();
@@ -32,14 +40,16 @@ public class CaveMoveUpDownController : MonoBehaviour
 
         cave.targetStop = nextStop;
 
+        Debug.Log("############### Next Stop");
+
         if (cave.caveDoorsClosed)
         {
             switch (nextStop)
             {
-                case CurrentStop.Einstieg: StartMovingToEinstieg(); break;
-                case CurrentStop.Sohle1: StartMovingSohleOne(); break;
-                case CurrentStop.Sohle2: StartMovingSohleTwo(); break;
-                case CurrentStop.Sohle3: StartMovingSohleThree(); break;
+                case CoalmineStop.EntryArea: StartMovingToEntryArea(); break;
+                case CoalmineStop.Sole1: StartMovingSoleOne(); break;
+                case CoalmineStop.Sole2: StartMovingSoleTwo(); break;
+                case CoalmineStop.Sole3: StartMovingSoleThree(); break;
             }
         }
         else
@@ -47,10 +57,10 @@ public class CaveMoveUpDownController : MonoBehaviour
             cave.CloseDoors();
             switch (nextStop)
             {   //Calls GoToSpohle1 after 2 sec auf;
-                case CurrentStop.Einstieg: Invoke("StartMovingToEinstieg", 2f); break;
-                case CurrentStop.Sohle1: Invoke("StartMovingSohleOne", 2f); break;
-                case CurrentStop.Sohle2: Invoke("StartMovingSohleTwo", 2f); break;
-                case CurrentStop.Sohle3: Invoke("StartMovingSohleThree", 2f); break;
+                case CoalmineStop.EntryArea: Invoke(StartMovingToEA, 2f); break;
+                case CoalmineStop.Sole1: Invoke(StartMovingToS1, 2f); break;
+                case CoalmineStop.Sole2: Invoke(StartMovingToS2, 2f); break;
+                case CoalmineStop.Sole3: Invoke(StartMovingToS3, 2f); break;
             }
         }
 
@@ -58,22 +68,22 @@ public class CaveMoveUpDownController : MonoBehaviour
         cave.liftBtns[(int)cave.targetStop].GetComponent<CaveButton>().feedbackObject.SetActive(true);
     }
 
-    public void StartMovingSohleOne()
+    public void StartMovingSoleOne()
     {
-        cave.MoveTo(CurrentStop.Sohle1);
+        cave.MoveTo(CoalmineStop.Sole1);
     }
 
-    public void StartMovingToEinstieg()
+    public void StartMovingToEntryArea()
     {
-        cave.MoveTo(CurrentStop.Einstieg);
+        cave.MoveTo(CoalmineStop.EntryArea);
     }
 
-    public void StartMovingSohleTwo()
+    public void StartMovingSoleTwo()
     {
-        cave.MoveTo(CurrentStop.Sohle2);
+        cave.MoveTo(CoalmineStop.Sole2);
     }
-    public void StartMovingSohleThree()
+    public void StartMovingSoleThree()
     {
-        cave.MoveTo(CurrentStop.Sohle3);
+        cave.MoveTo(CoalmineStop.Sole3);
     }
 }

@@ -67,15 +67,15 @@ public class CoalmineWaypointManager : MonoBehaviour
         GameData.liftBtnsEnabled = false;
         
         //Adjust player position in y 
-        if(GameData.currentStopSohle == (int)CurrentStop.Sohle1)
+        if(GameData.currentStopSohle == (int)CoalmineStop.Sole1)
         {
             pathS1CaveToViewpoint.transform.position = new Vector3(0f, myPlayer.transform.position.y, 0f);
         }
-        else if (GameData.currentStopSohle == (int)CurrentStop.Sohle2)
+        else if (GameData.currentStopSohle == (int)CoalmineStop.Sole2)
         {
             pathS2CaveToViewpoint.transform.position = new Vector3(0f, myPlayer.transform.position.y, 0f);
         }
-        else if (GameData.currentStopSohle == (int)CurrentStop.Sohle3)
+        else if (GameData.currentStopSohle == (int)CoalmineStop.Sole3)
         {
             pathS3CaveToViewpoint.transform.position = new Vector3(0f, myPlayer.transform.position.y, 0f);
         }
@@ -101,21 +101,21 @@ public class CoalmineWaypointManager : MonoBehaviour
 
         myPlayer.followAnker = false;
 
-        if (GameData.currentStopSohle == (int)CurrentStop.Einstieg) return;
+        if (GameData.currentStopSohle == (int)CoalmineStop.EntryArea) return;
 
-        if (GameData.currentStopSohle == (int)CurrentStop.Sohle3 && !helperSetPath)
+        if (GameData.currentStopSohle == (int)CoalmineStop.Sole3 && !helperSetPath)
         {
             playerSplineMove.pathContainer = pathS3CaveToViewpoint;
             runtimeViewpointBtn = wps3ViewpointBtn;
             helperSetPath = true;
         }
-        else if (GameData.currentStopSohle == (int)CurrentStop.Sohle2 && !helperSetPath)
+        else if (GameData.currentStopSohle == (int)CoalmineStop.Sole2 && !helperSetPath)
         {
             playerSplineMove.pathContainer = pathS2CaveToViewpoint;
             runtimeViewpointBtn = wps2ViewpointBtn;
             helperSetPath = true;
         }
-        else if (GameData.currentStopSohle == (int)CurrentStop.Sohle1 && !helperSetPath)
+        else if (GameData.currentStopSohle == (int)CoalmineStop.Sole1 && !helperSetPath)
         {
             playerSplineMove.pathContainer = pathS1CaveToViewpoint;
             runtimeViewpointBtn = wps1ViewpointBtn;

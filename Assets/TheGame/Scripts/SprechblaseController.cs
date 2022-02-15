@@ -49,7 +49,7 @@ public class SprechblaseController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (cave.currentStop == CurrentStop.Einstieg)
+        if (cave.currentStop == CoalmineStop.EntryArea)
         {
          
             if(!(sprechblaseDad.btnInteraction.image.name == "dummy-videoPlayIcon") && GameData.introPlayedOnce)

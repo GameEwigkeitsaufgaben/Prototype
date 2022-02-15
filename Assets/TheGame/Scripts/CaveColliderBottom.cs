@@ -1,67 +1,53 @@
+//This script is responsible for to trigger at a coalmine stop depending on the stop and the direction the cave is reaching the stop.
+
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CaveColliderBottom : MonoBehaviour
 {
-    private const string TriggerEntryArea = "TriggerEntryArea";
-    private const string TriggerSole1 = "TriggerSole1";
-    private const string TriggerSole2 = "TriggerSole2";
-    private const string TriggerSole3 = "TriggerSole3";
+    private const string TriggerEntryArea = "TriggerStopEntryArea";
+    private const string TriggerSole1 = "TriggerStopSole1";
+    private const string TriggerSole2 = "TriggerStopSole2";
+    private const string TriggerSole3 = "TriggerStopSole3";
     private const string TriggerTalkSpeedCave = "TriggerTalkSpeedCave";
 
     public Cave cave;
     public CoalmineSpeechManger speechManger;
+    private bool revisitEntryArea; 
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(" .." + other.name);
-
-        if (other.name == TriggerEntryArea)
+        if (other.name == TriggerEntryArea && !revisitEntryArea)
         {
-            cave.StopCave();
-            cave.currentStop = CurrentStop.Einstieg;
-            GameData.currentStopSohle = (int)cave.currentStop;
+            cave.InitReachedStop(CoalmineStop.EntryArea);
             speechManger.playEntryArea = true;
-            cave.liftBtns[0].gameObject.GetComponent<Button>().interactable = true;
-            // es fehlt noch ein Audio bitte den Ausgang nehmen! wenn wir wieder da sind. 
-            //Es kann gleich weitergeschalten werden, noch keine Prüfung ob text fertig geprochen.
-        }
-        else if(other.name == TriggerSole1 && cave.targetStop == CurrentStop.Sohle1)
-        {
-            Debug.Log("Stop Cave");
-            cave.StopCave();
-            cave.currentStop = CurrentStop.Sohle1;
-            GameData.currentStopSohle = (int)cave.currentStop;
-            speechManger.playSole1 = true;
-            //StartCoroutine(sprechblaseController.PlayNextAudio("spdad", 10f, other.GetComponent<LiftSohleOne>().clip2));
-        }
-        else if (other.name == TriggerTalkSpeedCave && cave.moveDirection == CaveMovement.MoveDown)
-        {
-            speechManger.playSchacht = true;
-        }
-        else if (other.name == TriggerSole2 && cave.targetStop == CurrentStop.Sohle2)
-        {
-            Debug.Log("Stop Cave");
-            cave.StopCave();
-            cave.currentStop = CurrentStop.Sohle2;
-            GameData.currentStopSohle = (int)cave.currentStop;
-            speechManger.playSole2 = true;
-        }
-        else if (other.name == TriggerSole3 && cave.targetStop == CurrentStop.Sohle3)
-        {
-            Debug.Log("Stop Cave");
-            cave.StopCave();
-            cave.currentStop = CurrentStop.Sohle3;
-            GameData.currentStopSohle = (int)cave.currentStop;
-            speechManger.playSole3WPCave = true;
-            //if (!GameData.sohle3IntroPlayedOnce)
-            //{
-            //    other.GetComponent<LiftSohleThree>().PlayAudio();
-            //    other.GetComponent<LiftSohleThree>().StartTrain();
-            //    GameData.sohle3IntroPlayedOnce = true;
-            //}
-        }
-        
-    }
+            revisitEntryArea = true;
 
+            //cave.liftBtns[0].gameObject.GetComponent<Button>().interactable = true;
+        }
+        else if (other.name == TriggerEntryArea && revisitEntryArea)
+             {
+                cave.InitReachedStop(CoalmineStop.EntryArea);
+                //es fehlt noch ein Audio bitte den Ausgang nehmen! wenn wir wieder da sind. 
+                //Es kann gleich weitergeschalten werden, noch keine Prüfung ob text fertig geprochen.
+             }
+        else if (other.name == TriggerSole1 && cave.targetStop == CoalmineStop.Sole1)
+             {
+                cave.InitReachedStop(CoalmineStop.Sole1);
+                speechManger.playSole1 = true;
+             }
+        else if (other.name == TriggerTalkSpeedCave && cave.moveDirection == CaveMovement.MoveDown)
+             {
+                speechManger.playSchacht = true;
+             }
+        else if (other.name == TriggerSole2 && cave.targetStop == CoalmineStop.Sole2)
+             {
+                cave.InitReachedStop(CoalmineStop.Sole2);
+                speechManger.playSole2 = true;
+             }
+        else if (other.name == TriggerSole3 && cave.targetStop == CoalmineStop.Sole3)
+             {
+                cave.InitReachedStop(CoalmineStop.Sole3);
+                speechManger.playSole3WPCave = true;
+             }
+    }
 }
