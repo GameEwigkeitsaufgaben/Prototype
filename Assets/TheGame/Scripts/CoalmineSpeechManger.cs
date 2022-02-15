@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CaveSpeechManger : MonoBehaviour
+public class CoalmineSpeechManger : MonoBehaviour
 {
     public SoTalkingList
         audiosEntryArea,

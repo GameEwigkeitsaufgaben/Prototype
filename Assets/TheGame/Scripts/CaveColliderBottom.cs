@@ -6,11 +6,11 @@ public class CaveColliderBottom : MonoBehaviour
     private const string TriggerEntryArea = "TriggerEntryArea";
     private const string TriggerSole1 = "TriggerSole1";
     private const string TriggerSole2 = "TriggerSole2";
-    private const string TriggerSole3 = "TriggerSohle3";
-    private const string TriggerTunnel = "TriggerSchacht";
+    private const string TriggerSole3 = "TriggerSole3";
+    private const string TriggerTalkSpeedCave = "TriggerTalkSpeedCave";
 
     public Cave cave;
-    public CaveSpeechManger speechManger;
+    public CoalmineSpeechManger speechManger;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -35,7 +35,7 @@ public class CaveColliderBottom : MonoBehaviour
             speechManger.playSole1 = true;
             //StartCoroutine(sprechblaseController.PlayNextAudio("spdad", 10f, other.GetComponent<LiftSohleOne>().clip2));
         }
-        else if (other.name == TriggerTunnel && cave.moveDirection == CaveMovement.MoveDown)
+        else if (other.name == TriggerTalkSpeedCave && cave.moveDirection == CaveMovement.MoveDown)
         {
             speechManger.playSchacht = true;
         }

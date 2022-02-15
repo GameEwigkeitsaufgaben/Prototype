@@ -1,7 +1,6 @@
 //Management Scene
 //Cave Speech manager is onto paranet GameObject Characters
 
-
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,9 +15,7 @@ public class CaveManager : MonoBehaviour
 
     public GameObject triggerEinstieg;
 
-    bool introPlayedOneTime = false;
-    
-
+    private bool introPlayedOneTime = false;
 
     private void Start()
     {
@@ -41,7 +38,7 @@ public class CaveManager : MonoBehaviour
         Debug.Log("In On Enable");
         Debug.Log("sohle to reload " + GameData.sohleToReload);
 
-        if((CurrentStop)GameData.sohleToReload == CurrentStop.Sohle3)
+        if ((CurrentStop)GameData.sohleToReload == CurrentStop.Sohle3)
         {
             cave.ReloadSohle3AsCurrent();
             player.SetPlayerToAnkerPosition();
@@ -53,7 +50,6 @@ public class CaveManager : MonoBehaviour
         switchScene.SwitchSceneWithTransition(ScenesChapterOne.MineSoleThreeTrainRide);
         GameData.sohleToReload = (int)CurrentStop.Sohle3;
         cave.StoreCavePosition();
-
     }
 
     private void OnDestroy()
@@ -66,13 +62,13 @@ public class CaveManager : MonoBehaviour
         if (cave.caveDoorsClosed && exitScene.interactable)
         {
             exitScene.interactable = false;
-            sole1WPViewpointBtn.interactable = false;
+            //sole1WPViewpointBtn.interactable = false;
         }
 
         if (!cave.caveDoorsClosed && !exitScene.interactable)
         {
             exitScene.interactable = true;
-            sole1WPViewpointBtn.interactable = true;
+            //sole1WPViewpointBtn.interactable = true;
         }
     }
 }
