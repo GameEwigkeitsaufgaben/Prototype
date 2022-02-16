@@ -22,7 +22,9 @@ public class CaveManager : MonoBehaviour
     {
         //triggerEinstieg.SetActive(false);
         GameData.scene1162LoadedOnce = true;
+
         switchScene.LoadEntryArea();
+        switchScene.LoadCaveTunnel();
         switchScene.LoadSohle1();
         switchScene.LoadSohle2();
         switchScene.LoadSohle3();

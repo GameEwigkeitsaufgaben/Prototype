@@ -12,7 +12,7 @@ public class CoalmineWaypointManager : MonoBehaviour
 {
     public splineMove playerSplineMove;
     public PathManager pathS1CaveToViewpoint, pathS2CaveToViewpoint, pathS3CaveToViewpoint;
-    public GameObject wpS1ViewpointSign, wpS2ViewpointSign, wpS3ViewpointSign;
+    public GameObject wpS1ViewpointSign, wpS2ViewpointSign, wpS3ViewpointSign, caveSign;
     public float wpAdjustHightViewpoint;
 
     public GameObject triggerPlayerInCave;
@@ -42,10 +42,11 @@ public class CoalmineWaypointManager : MonoBehaviour
 
     public void AlignSignsWithViewpointWaypoints()
     {
-        wpS1ViewpointSign.transform.position = pathS1CaveToViewpoint.GetWaypoint(1).transform.position + new Vector3(0f, wpAdjustHightViewpoint, 0f);
+        //wpS1ViewpointSign.transform.position = pathS1CaveToViewpoint.GetWaypoint(1).transform.position + new Vector3(0f, wpAdjustHightViewpoint, 0f);
         wpS2ViewpointSign.transform.position = pathS2CaveToViewpoint.GetWaypoint(1).transform.position + new Vector3(0f, wpAdjustHightViewpoint, 0f);
         wpS3ViewpointSign.transform.position = pathS3CaveToViewpoint.GetWaypoint(1).transform.position + new Vector3(0f, wpAdjustHightViewpoint, 0f);
     }
+
 
     public void DeactivateButton()
     {

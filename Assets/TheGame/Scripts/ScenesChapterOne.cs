@@ -8,6 +8,7 @@ public class ScenesChapterOne
     public const string Mine = "ch01scene01-62-coalmine-cave";
     public const string MineAnimation = "ch01scene01-62-coalmine-cave-animation";
     public const string MineEntryAreaStatic = "ch01scene01-62-coalmine-cave-static-entryArea";
+    public const string MineCaveTunnelStatic = "ch01scene01-62-coalmine-cave-static-caveTunnel";
     public const string MineSoleOneStatic = "ch01scene01-62-coalmine-cave-static-soleOne";
     public const string MineSoleTwoStatic = "ch01scene01-62-coalmine-cave-static-soleTwo";
     public const string MineSoleThreeStatic = "ch01scene01-62-coalmine-cave-static-soleThree";

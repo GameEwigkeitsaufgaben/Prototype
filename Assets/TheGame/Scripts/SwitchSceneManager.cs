@@ -29,6 +29,11 @@ public class SwitchSceneManager : MonoBehaviour
         SceneManager.LoadScene(ScenesChapterOne.MineSoleThreeStatic, LoadSceneMode.Additive);
     }
 
+    internal void LoadCaveTunnel()
+    {
+        SceneManager.LoadScene(ScenesChapterOne.MineCaveTunnelStatic, LoadSceneMode.Additive);
+    }
+
     public void LoadEntryArea()
     {
         SceneManager.LoadScene(ScenesChapterOne.MineEntryAreaStatic, LoadSceneMode.Additive);

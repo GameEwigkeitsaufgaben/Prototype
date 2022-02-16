@@ -12,7 +12,7 @@ public class CaveColliderBottom : MonoBehaviour
 
     public Cave cave;
     public CoalmineSpeechManger speechManger;
-    private bool revisitEntryArea; 
+    public bool revisitEntryArea; 
 
     private void OnTriggerEnter(Collider other)
     {
