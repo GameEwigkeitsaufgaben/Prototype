@@ -1,17 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
+//Blinking Eyes in extra Script added to Georg, Enya, Dad, ...
+
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ManagerTrainRide : MonoBehaviour
 {
     public CoalmineSpeechManger speechManger;
-    public Image eyesEnya, eyesDad, eyesGeorg;
-   // AudioClip train, talkingDad;
+    public SwitchSceneManager switchScene;
 
     private void Awake()
     {
-       // Invoke("StartTalking", 5f);
+        Invoke("StartTalking", 3f);
     }
 
     private void StartTalking()
@@ -19,36 +17,8 @@ public class ManagerTrainRide : MonoBehaviour
         speechManger.playTrainRide = true;
     }
 
-    private void CloseEyes(Image eyes)
-    {
-        eyes.GetComponent<Image>().fillAmount = 0;
-    }
-
-    private void OpenEyes(Image eyes)
-    {
-        eyes.GetComponent<Image>().fillAmount = 0.8f;
-    }
-    
-    private void Blinking(Image eyes)
-    {
-        int blinkFrequenzy = Random.Range(0, 5);
-        CloseEyes(eyes);
-        //StartCoroutine(Blink(e));
-    }
-
-    IEnumerator Blink(Image eyes, int seconds)
-    {
-        CloseEyes(eyes);
-        yield return new WaitForSeconds(1);
-        OpenEyes(eyes);
-    }
-
-
-
-
     public void SwitchTheScene()
     {
-        Debug.Log("kohlehobel in switch the scene: " + GameData.rideIn);
         if (GameData.rideIn)
         {
             //switchScene.SwitchSceneWithTransition(ScenesChapterOne.LongwallCutter);
@@ -59,5 +29,14 @@ public class ManagerTrainRide : MonoBehaviour
         }
 
         GameData.rideIn = !GameData.rideIn;
+    }
+
+    private void Update()
+    {
+        if (speechManger.IsTrainRideTalkingFinished())
+        {
+            switchScene.LoadLongwallCutter();
+        }
+       
     }
 }

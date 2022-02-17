@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 public class SpeechList : MonoBehaviour
 {
-    public string name;
+    public string listName;
     public AudioClip[] clips;
     public AudioSource audioSrc;
     bool playAll;
@@ -13,14 +13,9 @@ public class SpeechList : MonoBehaviour
 
     bool enableBubbleEnya, enableBubbleDad, enableBubbleMuseumGuide, enableBubbleGeorg;
 
-    void Start()
-    {
-       
-    }
-
     public void SetUpList(SoTalkingList list, AudioSource src)
     {
-        name = list.listName;
+        listName = list.listName;
         //audioSrc = gameObject.AddComponent<AudioSource>();
         //audioSrc.playOnAwake = false;
         audioSrc = src;
@@ -45,7 +40,6 @@ public class SpeechList : MonoBehaviour
         GameData.bubbleOnDad = false;
         GameData.bubbleOnGeorg = false;
         GameData.bubbleOnMuseumGuide = false;
-        Debug.Log("Reset bubble on");
     }
 
     void SetSpeechBubbleFlagCharcters()
@@ -72,7 +66,7 @@ public class SpeechList : MonoBehaviour
             GameData.bubbleOnMuseumGuide = true;
         }
 
-        Debug.Log(audioSrc.clip.name + " bubble on e " + GameData.bubbleOnEnvy + " v " + GameData.bubbleOnDad+ " g " + GameData.bubbleOnGeorg);
+       // Debug.Log(audioSrc.clip.name + " bubble on e " + GameData.bubbleOnEnvy + " v " + GameData.bubbleOnDad+ " g " + GameData.bubbleOnGeorg);
     }
 
     // Update is called once per frame
@@ -80,7 +74,7 @@ public class SpeechList : MonoBehaviour
     {
         if (audioSrc == null) return;
         
-        Debug.Log("bubble on audiosource playing " +audioSrc.isPlaying);
+        //Debug.Log("bubble on audiosource playing " +audioSrc.isPlaying);
         if (!audioSrc.isPlaying)
         {
             ResetSpeechBubbles();
@@ -99,7 +93,6 @@ public class SpeechList : MonoBehaviour
 
             audioSrc.Play();
             SetSpeechBubbleFlagCharcters();
-
 
             currentIndex++;
         }

@@ -11,8 +11,8 @@ public class KohlehobelManager : MonoBehaviour
     void Start()
     {
         player.followAnker = false;
-        switchScene.LoadLongwallCutterStatic();
-        switchScene.LoadLongwallCutterAnim();
+        //switchScene.LoadLongwallCutterStatic();
+        //switchScene.LoadLongwallCutterAnim();
         
         if (false)
         { //testing ohne sohle3

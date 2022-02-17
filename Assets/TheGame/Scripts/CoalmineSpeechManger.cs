@@ -13,7 +13,8 @@ public class CoalmineSpeechManger : MonoBehaviour
         audiosLongwallCutterBahnsteig, audioLongwallCutterLongwallCutter;
         //audiosMuseumHistoryMining, audiosMuseumMinerEquipment, audiosMuseumInfo, audiosMuseumCarbonification;
 
-    public SpeechBubble spEnya, spDad, spGeorg, spMuseumGuide;
+    public SpeechBubble spEnya, spDad, spGeorg;
+
     //fortesting
     public bool
         playEntryArea,
@@ -25,7 +26,7 @@ public class CoalmineSpeechManger : MonoBehaviour
         playLongwallCutterBahnsteig, playLongwallCutterLongwallCutter;
     //playMuseumInfo, playMuseumCarbonification, MinerEquipment, HistoryMining;
 
-    SpeechList
+    private SpeechList
         speakEntryArea,
         speakSchacht,
         speakSole1,
@@ -33,9 +34,9 @@ public class CoalmineSpeechManger : MonoBehaviour
         speakBewetterung, speakSole3Bahnsteig, speakSole3Cave, speakSole3BoardOVmine,
         speakTrainRide,
         speakLongwallCutterBahnsteig, speakLongwallCutterLongwallCutter;
-        //speakMuseumInfo, speakMuseumCarbonification, speakMinerEquipment, speakHistroyMining;
+    //speakMuseumInfo, speakMuseumCarbonification, speakMinerEquipment, speakHistroyMining;
 
-    SpeechList currentList = null;
+    private SpeechList currentList = null;
     private List<AudioSource> listAudioSrcs = new List<AudioSource>();
     private List<SpeechList> mySpeechLists = new List<SpeechList>();
     private AudioSource mySrc;
@@ -129,6 +130,11 @@ public class CoalmineSpeechManger : MonoBehaviour
         list.PlayAll();
     }
 
+    public bool IsTrainRideTalkingFinished()
+    {
+        return mySpeechLists[8].finished;
+    }
+
 
     void Update()
     {
@@ -196,10 +202,7 @@ public class CoalmineSpeechManger : MonoBehaviour
             currentList.enabled = true;
             currentList.PlayAll();
             currentList = null;
-        }
-        else
-        {
-            Debug.Log("current list ist null");
+
         }
 
         spDad.gameObject.SetActive(GameData.bubbleOnDad);
