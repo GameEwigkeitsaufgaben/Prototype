@@ -84,6 +84,8 @@ public class CoalmineWaypointManager : MonoBehaviour
         if(playerSplineMove.currentPoint == (int)PathWaypoints.startPath)
         {
             if (playerSplineMove.pathContainer.name == pathS3CaveToViewpoint.name) return MineWayPoints.insideCave;
+            else if (playerSplineMove.pathContainer.name == pathS2CaveToViewpoint.name) return MineWayPoints.insideCave;
+            else if (playerSplineMove.pathContainer.name == pathS1CaveToViewpoint.name) return MineWayPoints.insideCave;
             else if (playerSplineMove.pathContainer.name == pathS3ViewpointToBahnsteig.name) return MineWayPoints.viewpoint;
             else if (playerSplineMove.pathContainer.name == pathS3ViewpointToBewetterung.name) return MineWayPoints.viewpoint;
             else if (playerSplineMove.pathContainer.name == pathS3ViewpointToOVMine.name) return MineWayPoints.viewpoint;
@@ -92,6 +94,8 @@ public class CoalmineWaypointManager : MonoBehaviour
         }
 
         if (playerSplineMove.pathContainer.name == pathS3CaveToViewpoint.name) return MineWayPoints.viewpoint;
+        else if (playerSplineMove.pathContainer.name == pathS2CaveToViewpoint.name) return MineWayPoints.viewpoint;
+        else if (playerSplineMove.pathContainer.name == pathS1CaveToViewpoint.name) return MineWayPoints.viewpoint;
         else if (playerSplineMove.pathContainer.name == pathS3ViewpointToBahnsteig.name) return MineWayPoints.viewpointBahnsteig;
         else if (playerSplineMove.pathContainer.name == pathS3ViewpointToBewetterung.name) return MineWayPoints.viewpointBewetterung;
         else if (playerSplineMove.pathContainer.name == pathS3ViewpointToOVMine.name) return MineWayPoints.viewpointOVMine;
@@ -129,6 +133,11 @@ public class CoalmineWaypointManager : MonoBehaviour
             {
                 playerSplineMove.pathContainer = pathS3ViewpointToOVMine;
                 playerSplineMove.reverse = true;
+            }
+            else if (currentWP == MineWayPoints.insideCave)
+            {
+                playerSplineMove.pathContainer = pathS3CaveToViewpoint;
+                playerSplineMove.reverse = false;
             }
         }
         else if (targetWP == MineWayPoints.viewpointBewetterung)
@@ -185,7 +194,7 @@ public class CoalmineWaypointManager : MonoBehaviour
                 playerSplineMove.reverse = false;
             }
         }
-        Debug.Log("current WP " + currentWP + " target WP " + targetWP + "pathname " + playerSplineMove.name + "reverse " + playerSplineMove.reverse);
+        Debug.Log("current WP " + currentWP + " target WP " + targetWP + " -pathname " + playerSplineMove.name + " -reverse " + playerSplineMove.reverse);
     }
 
     public void SetS3WaypointsInteractable(bool interactable)
@@ -201,20 +210,24 @@ public class CoalmineWaypointManager : MonoBehaviour
         if (tmp == MineWayPoints.insideCave)
         {
             caveBtn.gameObject.SetActive(false);
+            wps3ViewpointBtn.gameObject.SetActive(true);
+            wps2ViewpointBtn.gameObject.SetActive(true);
+            wps1ViewpointBtn.gameObject.SetActive(true);
         }
-        else
+        else if (tmp == MineWayPoints.viewpoint)
         {
+            caveBtn.gameObject.SetActive(true);
             wps3ViewpointBtn.gameObject.SetActive(false);
             wps2ViewpointBtn.gameObject.SetActive(false);
             wps1ViewpointBtn.gameObject.SetActive(false);
         }
-       
 
         if (GameData.currentStopSohle != (int)CoalmineStop.Sole3) return;
         
         if (tmp == MineWayPoints.viewpointBewetterung)
         {
             bewetterungBtn.gameObject.SetActive(false);
+            caveBtn.gameObject.SetActive(false);
 
             viewpoint.transform.localRotation = Quaternion.Euler(0, 40, 0);
             bahnsteig.transform.localRotation = Quaternion.Euler(0, 90, 0);
@@ -225,7 +238,7 @@ public class CoalmineWaypointManager : MonoBehaviour
         }
         else if (tmp == MineWayPoints.viewpoint)
         {
-            caveBtn.gameObject.SetActive(true);
+            SetAllWPBtnActive(true);
 
             bahnsteig.transform.localRotation = Quaternion.Euler(0, 90, 0);
             ovmine.transform.localRotation = Quaternion.Euler(0, 90, 0);
@@ -234,6 +247,7 @@ public class CoalmineWaypointManager : MonoBehaviour
         else if (tmp == MineWayPoints.viewpointBahnsteig)
         {
             bahnsteigBtn.gameObject.SetActive(false);
+            caveBtn.gameObject.SetActive(false);
 
             viewpoint.transform.localRotation = Quaternion.Euler(0, -55, 0);
             ovmine.transform.localRotation = Quaternion.Euler(0, 175, 0);
@@ -242,37 +256,33 @@ public class CoalmineWaypointManager : MonoBehaviour
         else if (tmp == MineWayPoints.viewpointOVMine)
         {
             ovmineBtn.gameObject.SetActive(false);
+            caveBtn.gameObject.SetActive(false);
+
             viewpoint.transform.localRotation = Quaternion.Euler(0, 180, 0);
             bahnsteig.transform.localRotation = Quaternion.Euler(0, -33, 0);
             bewetterung.transform.localRotation = Quaternion.Euler(0, -65, 0);
         }
         else if (tmp == MineWayPoints.insideCave)
         {
-            caveBtn.gameObject.SetActive(false);
+            SetAllWPBtnActive(false);
+            wps3ViewpointBtn.gameObject.SetActive(true);
         }
     }
 
     //called from inspector: UnityEvents in payerspline move
-    public void SetAllWPBtnActive()
+    public void SetAllWPBtnActive(bool active)
     {
-        if(GameData.currentStopSohle == (int)CoalmineStop.Sole3)
-        {
-            ovmineBtn.gameObject.SetActive(true);
-            bahnsteigBtn.gameObject.SetActive(true);
-            wps3ViewpointBtn.gameObject.SetActive(true);
-            bewetterungBtn.gameObject.SetActive(true);
+        caveBtn.gameObject.SetActive(active);
 
-        }
-        else if(GameData.currentStopSohle == (int)CoalmineStop.Sole1)
-        {
-            wps1ViewpointBtn.gameObject.SetActive(true);
-        }
-        else if (GameData.currentStopSohle == (int)CoalmineStop.Sole2)
-        {
-            wps2ViewpointBtn.gameObject.SetActive(true);
-        }
+        wps1ViewpointBtn.gameObject.SetActive(active);
+        wps2ViewpointBtn.gameObject.SetActive(active);
+        wps3ViewpointBtn.gameObject.SetActive(active);
+        
+        ovmineBtn.gameObject.SetActive(active);
+        bahnsteigBtn.gameObject.SetActive(active);
+        bewetterungBtn.gameObject.SetActive(active);
 
-        caveBtn.gameObject.SetActive(true);
+        Debug.Log("setAllbtn active---------------------------------");
     }
 
     //Methods Called from Inspector
@@ -346,8 +356,9 @@ public class CoalmineWaypointManager : MonoBehaviour
                 pathS3BewetterungToBahnsteig.transform.position = pathS3BewetterungToOVMine.transform.position = 
                 pathS3BahnsteigToOVMine.transform.position = 
                 new Vector3(0f, myPlayer.transform.position.y, 0f);
-            
-            runtimeViewpointBtn = wps3ViewpointBtn;
+
+            SetAllWPBtnActive(false);
+            wps3ViewpointBtn.gameObject.SetActive(true);
 
             helperSetPath = true;
         }
@@ -355,14 +366,20 @@ public class CoalmineWaypointManager : MonoBehaviour
         {
             playerSplineMove.pathContainer = pathS2CaveToViewpoint;
             pathS2CaveToViewpoint.transform.position = new Vector3(0f, myPlayer.transform.position.y, 0f);
-            runtimeViewpointBtn = wps2ViewpointBtn;
+            
+            SetAllWPBtnActive(true);
+            caveBtn.gameObject.SetActive(false);
+
             helperSetPath = true;
         }
         else if (GameData.currentStopSohle == (int)CoalmineStop.Sole1 && !helperSetPath)
         {
             playerSplineMove.pathContainer = pathS1CaveToViewpoint;
             pathS1CaveToViewpoint.transform.position = new Vector3(0f, myPlayer.transform.position.y, 0f);
-            runtimeViewpointBtn = wps1ViewpointBtn;
+
+            SetAllWPBtnActive(true);
+            caveBtn.gameObject.SetActive(false);
+
             helperSetPath = true;
         }
     }
