@@ -54,6 +54,11 @@ public class SwitchSceneManager : MonoBehaviour
         SceneManager.LoadScene(ScenesChapterOne.LongwallCutterAnimation, LoadSceneMode.Additive);
     }
 
+    public void LoadTrainRide()
+    {
+        SceneManager.LoadScene(ScenesChapterOne.MineSoleThreeTrainRide, LoadSceneMode.Single);
+    }
+
     public void SwitchScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
