@@ -8,6 +8,7 @@ public class QuizQuestionItem
     private QuizQuestionType questionType;
     //private VerticalLayoutGroup buttonGroup;
 
+
     public List<QuizAnswerItem> answers = new List<QuizAnswerItem>();
     public bool unProved = true;
 

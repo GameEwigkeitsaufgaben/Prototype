@@ -59,7 +59,6 @@ public class QuizManager : MonoBehaviour
     {
         quizTimer.StopTimer();
 
-        
         if (questionItemListshuffled[currentProgressIndex].unProved)
         {
             int tmpPoints = 1;
