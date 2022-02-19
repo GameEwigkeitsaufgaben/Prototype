@@ -4,10 +4,9 @@ using UnityEngine;
 public class PostManagerChapterOne : MonoBehaviour
 {
     public GameObject overlayParent;
+    
     private void Awake()
     {
-        Debug.Log("Awake in " + gameObject.name);
-
         if (GameData.overlayToLoad != "")
         {
             GameObject go = overlayParent.transform.Find(GameData.overlayToLoad).gameObject;
@@ -15,11 +14,5 @@ public class PostManagerChapterOne : MonoBehaviour
             GameData.overlayToLoad = "";
         }
     }
-
-    private void Start()
-    {
-        Debug.Log("Start in "+ gameObject.name);
-    }
-
 
 }

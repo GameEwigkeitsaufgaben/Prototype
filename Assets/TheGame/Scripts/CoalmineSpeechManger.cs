@@ -4,6 +4,7 @@ using UnityEngine;
 public class CoalmineSpeechManger : MonoBehaviour
 {
     public SoTalkingList
+        audiosCaveIntro,
         audiosEntryArea,
         audiosEntryAreaTriggerSchacht,
         audiosSole1,
@@ -17,6 +18,7 @@ public class CoalmineSpeechManger : MonoBehaviour
 
     //fortesting
     public bool
+        playCaveIntro,
         playEntryArea,
         playSchacht,
         playSole1,
@@ -27,6 +29,7 @@ public class CoalmineSpeechManger : MonoBehaviour
     //playMuseumInfo, playMuseumCarbonification, MinerEquipment, HistoryMining;
 
     private SpeechList
+        speakCaveIntro,
         speakEntryArea,
         speakSchacht,
         speakSole1,
@@ -45,6 +48,10 @@ public class CoalmineSpeechManger : MonoBehaviour
     void Start()
     {
         mySrc = gameObject.AddComponent<AudioSource>();
+
+        speakCaveIntro = gameObject.AddComponent<SpeechList>();
+        speakCaveIntro.SetUpList(audiosCaveIntro, mySrc);
+        mySpeechLists.Add(speakCaveIntro);
 
         speakEntryArea = gameObject.AddComponent<SpeechList>();
         speakEntryArea.SetUpList(audiosEntryArea, mySrc);
@@ -138,7 +145,12 @@ public class CoalmineSpeechManger : MonoBehaviour
 
     void Update()
     {
-        if (playEntryArea)
+        if (playCaveIntro)
+        {
+            currentList = speakCaveIntro;
+            playCaveIntro = false;
+        }
+        else if (playEntryArea)
         {
             currentList = speakEntryArea;
             playEntryArea = false;

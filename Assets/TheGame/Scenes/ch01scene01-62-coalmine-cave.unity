@@ -175,6 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96f9a404e126ed64583bdbada8372a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audiosCaveIntro: {fileID: 11400000, guid: 0b60167e101ecb845b840fccfd2d89d0, type: 2}
   audiosEntryArea: {fileID: 11400000, guid: 139b6e1bad73fe2418d03c4686441eaa, type: 2}
   audiosEntryAreaTriggerSchacht: {fileID: 11400000, guid: 42aac5037418e734f95807b1b03c6deb, type: 2}
   audiosSole1: {fileID: 11400000, guid: 8a82036e76e1212418f25d76c2b11910, type: 2}
@@ -189,7 +190,7 @@ MonoBehaviour:
   spEnya: {fileID: 229106831}
   spDad: {fileID: 1357478544}
   spGeorg: {fileID: 1565534980}
-  spMuseumGuide: {fileID: 0}
+  playCaveIntro: 0
   playEntryArea: 0
   playSchacht: 0
   playSole1: 0
@@ -6934,6 +6935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96f9a404e126ed64583bdbada8372a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audiosCaveIntro: {fileID: 0}
   audiosEntryArea: {fileID: 11400000, guid: 139b6e1bad73fe2418d03c4686441eaa, type: 2}
   audiosEntryAreaTriggerSchacht: {fileID: 11400000, guid: 42aac5037418e734f95807b1b03c6deb, type: 2}
   audiosSole1: {fileID: 11400000, guid: 8a82036e76e1212418f25d76c2b11910, type: 2}
@@ -6948,7 +6950,7 @@ MonoBehaviour:
   spEnya: {fileID: 598580762}
   spDad: {fileID: 672310652}
   spGeorg: {fileID: 443497845}
-  spMuseumGuide: {fileID: 0}
+  playCaveIntro: 0
   playEntryArea: 0
   playSchacht: 0
   playSole1: 0
@@ -10533,14 +10535,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1119981090}
         m_TargetAssemblyTypeName: SwitchSceneManager, Assembly-CSharp
-        m_MethodName: SwitchScene
+        m_MethodName: SwitchToChapter1withOverlay
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Scene1161
+          m_StringArgument: Overlay1116
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1552251374
