@@ -4,4 +4,5 @@ using UnityEngine;
 public class QuizConfig : ScriptableObject
 {
     public Sprite btnSprite;
+    public Color normal, selected, correct, incorrect;
 }

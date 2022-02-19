@@ -36,10 +36,6 @@ public class QuizAnswerItem
                   "isCorrect: " + isCorrect);
     }
 
-    public void SetBtnImage(Sprite sprite)
-    {
-       // btnSprite = sprite;
-    }
     
     //https://stackoverflow.com/questions/33431719/unity-9-slice-in-multiple-sprite-sheet
 
@@ -83,12 +79,12 @@ public class QuizAnswerItem
         if (buttonSelected)
         {
             //selectColor = Color.cyan;
-            btn.GetComponent<Image>().color = Color.cyan;
+            btn.GetComponent<Image>().color = myQuizConfig.selected;
         }
         else
         {
             //selectColor = Color.white;
-            btn.GetComponent<Image>().color = Color.white;
+            btn.GetComponent<Image>().color = myQuizConfig.normal;
         }
     }
 
@@ -97,8 +93,12 @@ public class QuizAnswerItem
         if (!isCorrect)
         {
             Color c = btn.GetComponent<Image>().color;
-            btn.GetComponent<Image>().color = new Vector4(c.r, c.g, c.b, 0.2f);
-            btn.GetComponentInChildren<Text>().color = new Vector4(c.r, c.g, c.b, 0.2f);
+            btn.GetComponent<Image>().color = myQuizConfig.incorrect;
+            //btn.GetComponentInChildren<Text>().color = new Vector4(c.r, c.g, c.b, 0.4f);
+        }
+        else
+        {
+            btn.GetComponent<Image>().color = myQuizConfig.correct;
         }
     }
 
