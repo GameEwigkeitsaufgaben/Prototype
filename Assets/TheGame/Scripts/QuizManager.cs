@@ -58,6 +58,11 @@ public class QuizManager : MonoBehaviour
         quizTimer.StartTimer();
     }
 
+    public void CloseQuiz()
+    {
+        switchScene.SwitchToChapter1withOverlay("Overlay119");
+    }
+
     public void LoadNextQuestion()
     {
         quizTimer.StopTimer();
@@ -113,8 +118,8 @@ public class QuizManager : MonoBehaviour
             //endCanvas.gameObject.SetActive(true);
             //quizCanvas.gameObject.SetActive(false);
             GameData.quizChapterOnePoints = points;
+            GameData.quizFinished = true;
             switchScene.SwitchToChapter1withOverlay("Overlay119");
-
         }    
         
     }
