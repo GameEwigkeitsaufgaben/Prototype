@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class Post : MonoBehaviour
 {
+    private const string codePost = "Post1110";
     private PostData postData;
     private SoGameIcons icons;
     public GameObject prefabImgLocked;
@@ -20,7 +21,6 @@ public class Post : MonoBehaviour
 
     public void UpdateIcon()
     {
-        //Debug.Log("Update Icon in Post " + gameObject.name);
         childIcon.GetComponent<Image>().sprite = icons.replayIcon;
     }
 
@@ -76,7 +76,7 @@ public class Post : MonoBehaviour
     {
         SetButtonFunctionInteractable(true);
         childIcon.GetComponent<Image>().sprite = postData.GetIcon();
-        if (gameObject.name == "Post1110")
+        if (gameObject.name == codePost)
         {
             childIcon.SetActive(false);
         }

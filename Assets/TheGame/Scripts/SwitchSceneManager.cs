@@ -10,53 +10,53 @@ public class SwitchSceneManager : MonoBehaviour
 
     public void LoadMine()
     {
-        SceneManager.LoadScene(ScenesChapterOne.Mine, LoadSceneMode.Additive);
+        SceneManager.LoadScene(GameScenes.ch01Mine, LoadSceneMode.Additive);
         Debug.Log("LoadScene sohle1");
     }
 
     public void LoadSohle1()
     {
-        SceneManager.LoadScene(ScenesChapterOne.MineSoleOneStatic, LoadSceneMode.Additive);
+        SceneManager.LoadScene(GameScenes.ch01MineSoleOneStatic, LoadSceneMode.Additive);
         Debug.Log("LoadScene sohle1");
     }
     public void LoadSohle2()
     {
-        SceneManager.LoadScene(ScenesChapterOne.MineSoleTwoStatic, LoadSceneMode.Additive);
+        SceneManager.LoadScene(GameScenes.ch01MineSoleTwoStatic, LoadSceneMode.Additive);
     }
 
     internal void LoadSohle3()
     {
-        SceneManager.LoadScene(ScenesChapterOne.MineSoleThreeStatic, LoadSceneMode.Additive);
+        SceneManager.LoadScene(GameScenes.ch01MineSoleThreeStatic, LoadSceneMode.Additive);
     }
 
     internal void LoadCaveTunnel()
     {
-        SceneManager.LoadScene(ScenesChapterOne.MineCaveTunnelStatic, LoadSceneMode.Additive);
+        SceneManager.LoadScene(GameScenes.ch01MineCaveTunnelStatic, LoadSceneMode.Additive);
     }
 
     public void LoadEntryArea()
     {
-        SceneManager.LoadScene(ScenesChapterOne.MineEntryAreaStatic, LoadSceneMode.Additive);
+        SceneManager.LoadScene(GameScenes.ch01MineEntryAreaStatic, LoadSceneMode.Additive);
     }
 
     public void LoadLongwallCutter()
     {
-        SceneManager.LoadScene(ScenesChapterOne.LongwallCutter, LoadSceneMode.Single);
+        SceneManager.LoadScene(GameScenes.ch01LongwallCutter, LoadSceneMode.Single);
     }
 
     public void LoadLongwallCutterStatic()
     {
-        SceneManager.LoadScene(ScenesChapterOne.LongwallCutterStatic, LoadSceneMode.Additive);
+        SceneManager.LoadScene(GameScenes.ch01LongwallCutterStatic, LoadSceneMode.Additive);
     }
 
     public void LoadLongwallCutterAnim()
     {
-        SceneManager.LoadScene(ScenesChapterOne.LongwallCutterAnimation, LoadSceneMode.Additive);
+        SceneManager.LoadScene(GameScenes.ch01LongwallCutterAnimation, LoadSceneMode.Additive);
     }
 
     public void LoadTrainRide()
     {
-        SceneManager.LoadScene(ScenesChapterOne.MineSoleThreeTrainRide, LoadSceneMode.Single);
+        SceneManager.LoadScene(GameScenes.ch01MineSoleThreeTrainRide, LoadSceneMode.Single);
     }
 
     public void SwitchScene(string sceneName)
@@ -67,7 +67,8 @@ public class SwitchSceneManager : MonoBehaviour
     //is called from more than one uielements in inspector
     public void GoToChapterOverview()
     {
-        SwitchScene(GameData.sceneChapterMainMenu);
+        //SwitchScene(GameData.sceneChapterMainMenu);
+        SwitchScene(GameScenes.ch00ChapterOverview);
     }
 
     //rideIn true if you go to the longwall cutter
@@ -75,7 +76,7 @@ public class SwitchSceneManager : MonoBehaviour
     public void GoToTrainRide(bool rideIn)
     {
         GameData.rideIn = rideIn;
-        SwitchScene(ScenesChapterOne.MineSoleThreeTrainRide);
+        SwitchScene(GameScenes.ch01MineSoleThreeTrainRide);
     }
 
     public void SwitchSceneWithTransition(string sceneName)
@@ -90,7 +91,7 @@ public class SwitchSceneManager : MonoBehaviour
     public void SwitchToChapter1withOverlay(string overlayName)
     {
         GameData.overlayToLoad = overlayName;
-        SwitchScene(ScenesChapterOne.InstaMainChapterOne); 
+        SwitchScene(GameScenes.ch01InstaMain); 
     }
 
     IEnumerator LoadSceneWithTransition(string name)

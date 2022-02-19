@@ -1,7 +1,5 @@
 //Class is resposible for post activation and pin check
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Video;
 
 public class PostManagerChapterOne : MonoBehaviour
 {

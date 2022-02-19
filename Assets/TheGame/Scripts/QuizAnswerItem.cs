@@ -5,7 +5,7 @@ public class QuizAnswerItem
 {
     //Is not a Monobehavior script so so gameObject is available to ref sprite; 
     private const string pathToConfig = "QuizChapterOneConfig";
-    private QuizConfig myQuizConfig; 
+    private SoQuizConfig myQuizConfig; 
     public string questionIdentifier;
     public string answer;
     public int answerIdentifier;
@@ -19,7 +19,7 @@ public class QuizAnswerItem
 
     public QuizAnswerItem() 
     {
-    myQuizConfig = Resources.Load<QuizConfig>(pathToConfig);
+    myQuizConfig = Resources.Load<SoQuizConfig>(pathToConfig);
     }
 
     public QuizAnswerItem(VerticalLayoutGroup parent) 

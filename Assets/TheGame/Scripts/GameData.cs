@@ -5,20 +5,6 @@ public static class GameData
     public static int chapterOneUnlocked = 0;
     public static int chapterTwoUnlocked = 0;
     public static int chapterThreeUnlocked = 0;
-    
-    //Chapter overview
-    public const string sceneChapterMainMenu = "ch00scene00-00-chapterOV";
-    public const string sceneGameCredits = "ch00scene01-00-credits";
-   
-    public const string scene1162 = "Scene1162";
-    public const string scene11651Kohlehobel = "Scene11651Kohlehobel";
-
-    //Chapter two
-    public const string sceneInstaMainChapterTwo = "Dummy";
-    public const string sceneInstaMainChapterThree = "Dummy";
-    //public const string sceneInstaMainChapterOne = "Scene11InstaMain";
-    
-
 
     public static bool progressWithAdmin = false; //if start chapter with admin pwd true, else false;
 
