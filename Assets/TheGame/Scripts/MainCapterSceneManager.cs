@@ -12,6 +12,8 @@ public class MainCapterSceneManager : MonoBehaviour
     [SerializeField] InputField inputFieldChapterTwo;
     [SerializeField] InputField inputFieldChapterThree;
 
+    [SerializeField] Text lawNotice;
+
     //shake effect of InputField
     public float shakeAmount = 0.7f;
     public float decreaseFactor = 0.0f;
@@ -20,6 +22,7 @@ public class MainCapterSceneManager : MonoBehaviour
     private Vector3 origPos;
     private bool shakeObj = false;
     private GameObject toShakeObj;
+
 
     private void Start()
     {
@@ -35,6 +38,8 @@ public class MainCapterSceneManager : MonoBehaviour
         {
             inputFieldChapterThree.gameObject.SetActive(false);
         }
+
+        lawNotice.text = GameData.lawNotiz;
     }
     private void Update()
     {
