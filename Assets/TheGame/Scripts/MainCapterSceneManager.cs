@@ -96,20 +96,19 @@ public class MainCapterSceneManager : MonoBehaviour
         switch (chapterCode)
         {
             case 1:
-                sceneToSwitch = ScenesChapterOne.InstaMainChapterOne;
+                sceneToSwitch = GameScenes.ch01InstaMain;
                 GameData.chapterOneUnlocked = 1;
                 break;
             case 2:
-                sceneToSwitch = GameData.sceneInstaMainChapterTwo;
+                //sceneToSwitch = GameData.sceneInstaMainChapterTwo;
                 GameData.chapterTwoUnlocked = 1;
                 break;
             case 3:
-                sceneToSwitch = GameData.sceneInstaMainChapterThree;
+                //sceneToSwitch = GameData.sceneInstaMainChapterThree;
                 GameData.chapterThreeUnlocked = 1;
                 break;
         }
 
-        Debug.Log(GameData.chapterOneUnlocked + " " + GameData.chapterTwoUnlocked + " " + GameData.chapterThreeUnlocked);
         gameObject.GetComponent<SwitchSceneManager>().SwitchScene(sceneToSwitch);
     }
 

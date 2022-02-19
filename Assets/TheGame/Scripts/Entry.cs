@@ -1,3 +1,7 @@
+//An entry consists of 2 parts, the post and the corresponding overlay.
+//The data for both is located in the corresponding Scriptable object under Resources PostDataXXX
+//Unlocking a post is here in the update methode and based on bool vals in the static class GameData.
+
 using UnityEngine;
 using UnityEngine.Video;
 
@@ -38,7 +42,6 @@ public class Entry : MonoBehaviour
         if (gameObject.name == Entry115)
         {
             GameData.introPlayedOnce = true;
-            
         }
     }
 
@@ -54,6 +57,13 @@ public class Entry : MonoBehaviour
             GameData.PrintState();
             post.GetComponent<Post>().UnlockPost();
             GameData.introPlayedOnce = false;
+        }
+        if (GameData.quizFinished && gameObject.name == "Entry1110")
+        {
+            post.GetComponent<Post>().UnlockPost();
+            overlay.GetComponent<Overlay>().UpdateOverlayText();
+            GameData.quizFinished = false;
+            GameData.chapterOneUnlocked = 1;
         }
     }
 

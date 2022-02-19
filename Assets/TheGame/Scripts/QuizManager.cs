@@ -8,12 +8,14 @@ public class QuizManager : MonoBehaviour
     public VerticalLayoutGroup answerButtonGroup;
     public Text uiQuestion;
     public Text uiPoints;
+    public Text uiQuestType;
     public Slider uiProgressBar;
+    public Text uiSimpleProgressView;
     public Image uiPostImage;
     public Button uiButtonNext;
     public AudioSource audioAnswerCorrect, audioWrongAudio;
     public bool randomizeQuestions = false;
-
+    public SwitchSceneManager switchScene;
 
     public QuizData[] quizDataItems;
     public List<QuizQuestionItem> questionItemList = new List<QuizQuestionItem>();
@@ -48,6 +50,7 @@ public class QuizManager : MonoBehaviour
             SetupQuestion(currentProgressIndex);
         }
 
+        uiSimpleProgressView.text = "FRAGE\n1 von " + questionItemListshuffled.Count;
         uiProgressBar.maxValue = questionItemListshuffled.Count;
         uiProgressBar.value = 1;
 
@@ -55,11 +58,15 @@ public class QuizManager : MonoBehaviour
         quizTimer.StartTimer();
     }
 
+    public void CloseQuiz()
+    {
+        switchScene.SwitchToChapter1withOverlay("Overlay119");
+    }
+
     public void LoadNextQuestion()
     {
         quizTimer.StopTimer();
 
-        
         if (questionItemListshuffled[currentProgressIndex].unProved)
         {
             int tmpPoints = 1;
@@ -100,15 +107,19 @@ public class QuizManager : MonoBehaviour
         currentProgressIndex++;
         uiProgressBar.value++;
 
+        uiSimpleProgressView.text = "FRAGE\n" + (currentProgressIndex+1) + " von " + questionItemListshuffled.Count;
+
         if (currentProgressIndex < questionItemListshuffled.Count)
         {
             SetupQuestion(currentProgressIndex);
         }
         else
         {
-            endCanvas.gameObject.SetActive(true);
-            quizCanvas.gameObject.SetActive(false);
+            //endCanvas.gameObject.SetActive(true);
+            //quizCanvas.gameObject.SetActive(false);
             GameData.quizChapterOnePoints = points;
+            GameData.quizFinished = true;
+            switchScene.SwitchToChapter1withOverlay("Overlay119");
         }    
         
     }
@@ -118,6 +129,7 @@ public class QuizManager : MonoBehaviour
         uiQuestion.text = questionItemListshuffled[progressIndex].GetQuestionText();
         uiPostImage.sprite = questionItemListshuffled[progressIndex].GetPostImage();
         uiButtonNext.GetComponentInChildren<Text>().text = "Prüfen";
+        uiQuestType.text = questionItemListshuffled[progressIndex].GetQuestionTypeString();
 
 
         foreach (Transform child in answerButtonGroup.transform)

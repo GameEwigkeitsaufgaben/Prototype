@@ -4,9 +4,12 @@ using UnityEngine.UI;
 
 public class QuizQuestionItem
 {
+    private const string eineAntwortRichtig = "#eineRichtig";
+    private const string mehrereAntwortenRichtig = "#mehrereRichtig";
     private QuizData questionItemData;
     private QuizQuestionType questionType;
     //private VerticalLayoutGroup buttonGroup;
+
 
     public List<QuizAnswerItem> answers = new List<QuizAnswerItem>();
     public bool unProved = true;
@@ -33,6 +36,22 @@ public class QuizQuestionItem
         {
             answers[(int)questionItemData.correctAnswers[i]].isCorrect = true;
         }
+    }
+
+    public string GetQuestionTypeString()
+    {
+        string x = "";
+
+        if(questionItemData.questionType == QuizQuestionType.OneTrue || questionItemData.questionType == QuizQuestionType.TrueFalse)
+        {
+            x = eineAntwortRichtig;
+        }
+        else if(questionItemData.questionType == QuizQuestionType.AtLeastOneTrue)
+        {
+            x = mehrereAntwortenRichtig;
+        }
+        
+        return x;
     }
 
     public string GetQuestionText()

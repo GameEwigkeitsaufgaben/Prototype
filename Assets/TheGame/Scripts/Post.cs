@@ -3,8 +3,9 @@ using UnityEngine.UI;
 
 public class Post : MonoBehaviour
 {
+    private const string codePost = "Post1110";
     private PostData postData;
-    private GameIcons icons;
+    private SoGameIcons icons;
     public GameObject prefabImgLocked;
 
     private WebGlVideoPlayer webglVideoPlayer;
@@ -15,12 +16,11 @@ public class Post : MonoBehaviour
     void Start()
     {
         webglVideoPlayer = GameObject.FindObjectOfType<WebGlVideoPlayer>();
-        icons = Resources.Load<GameIcons>("Icons");
+        icons = Resources.Load<SoGameIcons>("Icons");
     }
 
     public void UpdateIcon()
     {
-        //Debug.Log("Update Icon in Post " + gameObject.name);
         childIcon.GetComponent<Image>().sprite = icons.replayIcon;
     }
 
@@ -33,10 +33,13 @@ public class Post : MonoBehaviour
         //if locked a corresponding symbol is shown and the post is not interactable
 
         //Maybe better to create it not at runtime, only set it active.
+        //Todo: create it via script not via prefab
         childIcon = Instantiate(prefabImgLocked);
         childIcon.transform.SetParent(gameObject.transform.parent, false);
         childIcon.GetComponent<RectTransform>().localPosition = Vector3.zero;
         childIcon.GetComponent<RectTransform>().localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        childIcon.GetComponent<Image>().sprite = icons.lockedIcon;
+        childIcon.GetComponent<Image>().preserveAspect = true;
         childIcon.GetComponent<Image>().raycastTarget = false;
 
         gameObject.GetComponent<Button>().interactable = false;
@@ -56,8 +59,6 @@ public class Post : MonoBehaviour
         }
 
         childIcon.GetComponent<Image>().sprite = postData.GetIcon();
-
-        
     }
 
     public void SetOverlayData(PostData data)
@@ -69,12 +70,15 @@ public class Post : MonoBehaviour
     public void SetButtonFunctionInteractable(bool interactable)
     {
         gameObject.GetComponent<Button>().interactable = interactable;
-
     }
 
     public void UnlockPost()
     {
         SetButtonFunctionInteractable(true);
         childIcon.GetComponent<Image>().sprite = postData.GetIcon();
+        if (gameObject.name == codePost)
+        {
+            childIcon.SetActive(false);
+        }
     }
 }

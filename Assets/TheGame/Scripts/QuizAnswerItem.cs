@@ -3,7 +3,9 @@ using UnityEngine.UI;
 
 public class QuizAnswerItem
 {
-    private const string pathToBtnSprite = "neon_square_orange-v2gemma";
+    //Is not a Monobehavior script so so gameObject is available to ref sprite; 
+    private const string pathToConfig = "QuizChapterOneConfig";
+    private SoQuizConfig myQuizConfig; 
     public string questionIdentifier;
     public string answer;
     public int answerIdentifier;
@@ -15,7 +17,10 @@ public class QuizAnswerItem
 
     public int timeToAnswerInSec;
 
-    public QuizAnswerItem() {}
+    public QuizAnswerItem() 
+    {
+    myQuizConfig = Resources.Load<SoQuizConfig>(pathToConfig);
+    }
 
     public QuizAnswerItem(VerticalLayoutGroup parent) 
     {
@@ -31,6 +36,9 @@ public class QuizAnswerItem
                   "isCorrect: " + isCorrect);
     }
 
+    
+    //https://stackoverflow.com/questions/33431719/unity-9-slice-in-multiple-sprite-sheet
+
     public void CreateButton(VerticalLayoutGroup parent)
     {
         var newButton = DefaultControls.CreateButton(new DefaultControls.Resources());
@@ -40,7 +48,7 @@ public class QuizAnswerItem
                                                             newButton.transform.localPosition.y,
                                                             0);
 
-        newButton.GetComponent<Image>().sprite = Resources.Load<Sprite>(pathToBtnSprite);
+        newButton.GetComponent<Image>().sprite = myQuizConfig.btnSprite;
         newButton.GetComponentInChildren<Text>().fontSize = 20;
         newButton.GetComponentInChildren<Text>().text = answer;
         btn = newButton.GetComponent<Button>();
@@ -53,8 +61,10 @@ public class QuizAnswerItem
         btn.gameObject.GetComponent<HorizontalLayoutGroup>().padding.left = myPadding;
         btn.gameObject.GetComponent<HorizontalLayoutGroup>().padding.right = myPadding;
         btn.gameObject.GetComponent<HorizontalLayoutGroup>().childAlignment = TextAnchor.MiddleCenter;
-        
-        //disable color when set buttons inactable
+        btn.gameObject.GetComponent<Image>().type = Image.Type.Sliced;
+        btn.gameObject.GetComponent<Image>().pixelsPerUnitMultiplier = 1f;
+
+            //disable color when set buttons inactable
         ColorBlock cb = btn.colors;
         cb.disabledColor = new Color(1f, 1f, 1f, 1f);
         btn.colors = cb;
@@ -69,12 +79,12 @@ public class QuizAnswerItem
         if (buttonSelected)
         {
             //selectColor = Color.cyan;
-            btn.GetComponent<Image>().color = Color.cyan;
+            btn.GetComponent<Image>().color = myQuizConfig.selected;
         }
         else
         {
             //selectColor = Color.white;
-            btn.GetComponent<Image>().color = Color.white;
+            btn.GetComponent<Image>().color = myQuizConfig.normal;
         }
     }
 
@@ -83,8 +93,12 @@ public class QuizAnswerItem
         if (!isCorrect)
         {
             Color c = btn.GetComponent<Image>().color;
-            btn.GetComponent<Image>().color = new Vector4(c.r, c.g, c.b, 0.2f);
-            btn.GetComponentInChildren<Text>().color = new Vector4(c.r, c.g, c.b, 0.2f);
+            btn.GetComponent<Image>().color = myQuizConfig.incorrect;
+            //btn.GetComponentInChildren<Text>().color = new Vector4(c.r, c.g, c.b, 0.4f);
+        }
+        else
+        {
+            btn.GetComponent<Image>().color = myQuizConfig.correct;
         }
     }
 
