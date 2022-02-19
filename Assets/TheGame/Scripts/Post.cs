@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class Post : MonoBehaviour
 {
     private PostData postData;
-    private GameIcons icons;
+    private SoGameIcons icons;
     public GameObject prefabImgLocked;
 
     private WebGlVideoPlayer webglVideoPlayer;
@@ -15,7 +15,7 @@ public class Post : MonoBehaviour
     void Start()
     {
         webglVideoPlayer = GameObject.FindObjectOfType<WebGlVideoPlayer>();
-        icons = Resources.Load<GameIcons>("Icons");
+        icons = Resources.Load<SoGameIcons>("Icons");
     }
 
     public void UpdateIcon()
@@ -33,10 +33,13 @@ public class Post : MonoBehaviour
         //if locked a corresponding symbol is shown and the post is not interactable
 
         //Maybe better to create it not at runtime, only set it active.
+        //Todo: create it via script not via prefab
         childIcon = Instantiate(prefabImgLocked);
         childIcon.transform.SetParent(gameObject.transform.parent, false);
         childIcon.GetComponent<RectTransform>().localPosition = Vector3.zero;
         childIcon.GetComponent<RectTransform>().localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        childIcon.GetComponent<Image>().sprite = icons.lockedIcon;
+        childIcon.GetComponent<Image>().preserveAspect = true;
         childIcon.GetComponent<Image>().raycastTarget = false;
 
         gameObject.GetComponent<Button>().interactable = false;

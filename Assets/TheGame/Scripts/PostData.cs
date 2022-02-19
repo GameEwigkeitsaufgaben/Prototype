@@ -7,7 +7,7 @@ using UnityEngine;
 public class PostData : ScriptableObject
 {
     public OverlayType overlayType;
-    public GameIcons icons;
+    public SoGameIcons icons;
     public Sprite postSprite;
     [TextArea(10, 100)]
     public string postDescription;
@@ -47,7 +47,6 @@ public class PostData : ScriptableObject
                 break;
         }
 
-        Debug.Log("obj is null " + xy == null);
         return xy;
     }
 }

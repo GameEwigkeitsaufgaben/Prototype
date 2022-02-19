@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "GameIcons")]
-public class GameIcons : ScriptableObject
+public class SoGameIcons : ScriptableObject
 {
     public Sprite lockedIcon;
     public Sprite interactIcon;

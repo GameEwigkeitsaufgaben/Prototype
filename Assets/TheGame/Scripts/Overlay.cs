@@ -18,14 +18,14 @@ public class Overlay : MonoBehaviour
     private WebGlVideoPlayer webglVideoPlayer;
 
     private PostData postData;
-    private GameIcons icons;
+    private SoGameIcons icons;
     private bool videoFinished = false;
     private PostManagerChapterOne menuManager;
 
 
     private void Start()
     {
-        icons = Resources.Load<GameIcons>("Icons");
+        icons = Resources.Load<SoGameIcons>("Icons");
         webglVideoPlayer = GameObject.FindObjectOfType<WebGlVideoPlayer>();
         menuManager = FindObjectOfType<PostManagerChapterOne>();
     }
