@@ -56,8 +56,6 @@ public class Post : MonoBehaviour
         }
 
         childIcon.GetComponent<Image>().sprite = postData.GetIcon();
-
-        
     }
 
     public void SetOverlayData(PostData data)
@@ -69,12 +67,15 @@ public class Post : MonoBehaviour
     public void SetButtonFunctionInteractable(bool interactable)
     {
         gameObject.GetComponent<Button>().interactable = interactable;
-
     }
 
     public void UnlockPost()
     {
         SetButtonFunctionInteractable(true);
         childIcon.GetComponent<Image>().sprite = postData.GetIcon();
+        if (gameObject.name == "Post1110")
+        {
+            childIcon.SetActive(false);
+        }
     }
 }

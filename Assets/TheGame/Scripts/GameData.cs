@@ -51,7 +51,7 @@ public static class GameData
     internal static bool bubbleOnDad = false;
     internal static bool bubbleOnGeorg = false;
     internal static bool bubbleOnMuseumGuide = false;
-    internal static bool quizFinished = false;
+    internal static bool quizFinished = false; //changed in QuizManager.LoadNextQuestion();
 
     public static void PrintState()
     {

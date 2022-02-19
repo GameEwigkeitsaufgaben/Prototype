@@ -61,7 +61,6 @@ public class Overlay : MonoBehaviour
 
     private void SetUpOverlay()
     {
-        Debug.Log("Overlay " + gameObject.name + " type of " + postData.overlayType);
         allOverlayChildren = gameObject.transform.GetComponentsInChildren<Transform>(true); //inclusive inactive elements
         
         ShowOverlayChildrenInArray();
@@ -95,8 +94,6 @@ public class Overlay : MonoBehaviour
         allOverlayChildren[OVERLAYTYPEICON].gameObject.GetComponent<Image>().sprite = postData.GetIcon();
         allOverlayChildren[OVERLAYTYPEICON].gameObject.GetComponent<Image>().gameObject.SetActive(true);
         allOverlayChildren[OVERLAYTYPEICON].gameObject.GetComponent<Image>().raycastTarget = false;
-        
-        Debug.Log("**************" + gameObject.name + " " + postData.overlayType);
     }
 
     private void SwitchTheScene(string interactionScene)
@@ -118,6 +115,12 @@ public class Overlay : MonoBehaviour
             Debug.Log("obj at "+index+": " + f.gameObject.name);
             index++;
         }
+    }
+
+    public void UpdateOverlayText()
+    {
+        string points = GameData.quizChapterOnePoints.ToString();
+        allOverlayChildren[OVERLAYDESCRIPTION].gameObject.GetComponent<Text>().text = $"Punkte: {points}\n" + postData.postDescription;
     }
 
     public void CloseOverlay()
