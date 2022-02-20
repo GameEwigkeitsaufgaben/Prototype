@@ -8,28 +8,40 @@ using UnityEngine.Video;
 public class Entry : MonoBehaviour
 {
     private const string Entry115 = "Entry115";
+    private const string Entry116 = "Entry116";
+    private const string Entry1110 = "Entry1110";
     public GameObject post;
     public GameObject overlay;
     public PostData postData;
-    private WebGlVideoPlayer webglVideoPlayer;
 
+    //public bool testVideoPlayed = false;
+
+    private WebGlVideoPlayer webglVideoPlayer;
 
     private OverlayType overlayType; // Enum
 
     // Start is called before the first frame update
     void Start()
     {
-        post.GetComponent<Post>().SetOverlayData(postData);
+        post.GetComponent<Post>().SetPostData(postData);
         overlay.GetComponent<Overlay>().SetOverlayData(postData);
-        Debug.Log("Entry created, post overlay set" + gameObject.name);
-        webglVideoPlayer = GameObject.FindObjectOfType<WebGlVideoPlayer>();
-        webglVideoPlayer.videoPlayer.loopPointReached += SetReplayIcon;
-        Debug.Log("webglplaer ist null in entry "+ webglVideoPlayer);
+
+        try
+        {
+            webglVideoPlayer = GameObject.FindObjectOfType<WebGlVideoPlayer>();
+            webglVideoPlayer.videoPlayer.loopPointReached += SetReplayIcon;
+        }
+        catch (System.Exception)
+        {
+
+            Debug.Log("No Videoplayer found");
+        }
+
+        Debug.Log(gameObject.name + " created.");
     }
 
     public void SetReplayIcon(VideoPlayer vp)
     {
-
         //is only important for video, so if type is not a video return
         if (postData.overlayType != OverlayType.VIDEO) return;
 
@@ -39,10 +51,10 @@ public class Entry : MonoBehaviour
         post.GetComponent<Post>().UpdateIcon();
         overlay.GetComponent<Overlay>().SetReplayIcon();       
 
-        if (gameObject.name == Entry115)
-        {
-            GameData.introPlayedOnce = true;
-        }
+        //if (gameObject.name == Entry115)
+        //{
+        //    GameData.introPlayedOnce = true;
+        //}
     }
 
     public void OpenOverlay()
@@ -52,13 +64,13 @@ public class Entry : MonoBehaviour
 
     private void Update()
     {
-        if (GameData.introPlayedOnce && gameObject.name == "Entry116")
+        if (GameData.introVideoPlayedOnce && gameObject.name == Entry116)
         {
             GameData.PrintState();
             post.GetComponent<Post>().UnlockPost();
-            GameData.introPlayedOnce = false;
+            GameData.introVideoPlayedOnce = false;
         }
-        if (GameData.quizFinished && gameObject.name == "Entry1110")
+        if (GameData.quizFinished && gameObject.name == Entry1110)
         {
             post.GetComponent<Post>().UnlockPost();
             overlay.GetComponent<Overlay>().UpdateOverlayText();
@@ -66,5 +78,4 @@ public class Entry : MonoBehaviour
             GameData.chapterOneUnlocked = 1;
         }
     }
-
 }

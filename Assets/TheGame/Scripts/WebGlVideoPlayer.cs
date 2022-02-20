@@ -28,18 +28,33 @@ public class WebGlVideoPlayer : MonoBehaviour
 
         this.videoPostName = videoPostName;
         
-        if (!videoIsPlaying)
-        {       
+        if (!videoIsPlaying && !videoPlayer.isPlaying)
+        {
             videoPlayer.Play();
-            videoPlayer.loopPointReached += SetVideopostToRead;
+
+            if(videoPostName == "Overlay115")
+            {
+                videoPlayer.loopPointReached += SetVideopostToRead;
+            }
+
             videoIsPlaying = true;
         }else
         {
-            videoPlayer.Stop();
+            if (videoPlayer.isPlaying)
+            {
+                videoPlayer.Stop();
+            }
+
             videoIsPlaying = false;
         }
 
         rawImage.transform.parent.transform.parent.GetComponent<Overlay>().SetIconActive(!videoIsPlaying);
+    }
+
+    public void PlayTheVideo(VideoPlayer vp)
+    {
+        videoPlayer.Play();
+        videoPlayer.loopPointReached += SetVideopostToRead;
     }
 
     public void SetVideo(string videoName, RawImage imgRaw)
@@ -65,6 +80,7 @@ public class WebGlVideoPlayer : MonoBehaviour
     public void SetVideopostToRead(VideoPlayer vp)
     {
         videoIsPlaying = false;
+        GameData.introVideoPlayedOnce = true;
     }
 
 }

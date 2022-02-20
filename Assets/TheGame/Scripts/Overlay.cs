@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -55,7 +54,7 @@ public class Overlay : MonoBehaviour
         }
         else
         {
-            Debug.Log("Webgl player is null");
+            Debug.Log("Webgl player is null on Overlay: " + gameObject.name);
         }
     }
 
@@ -112,7 +111,6 @@ public class Overlay : MonoBehaviour
         int index = 0;
         foreach(Transform f in allOverlayChildren)
         {
-            Debug.Log("obj at "+index+": " + f.gameObject.name);
             index++;
         }
     }
@@ -128,6 +126,11 @@ public class Overlay : MonoBehaviour
         //SetIconActive(true);
         gameObject.SetActive(false);
         webglVideoPlayer.StopTheVideo();
+    }
+
+    public PostData GetPostData()
+    {
+        return postData;
     }
 
 }

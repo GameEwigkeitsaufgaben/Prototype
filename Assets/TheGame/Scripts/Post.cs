@@ -29,8 +29,8 @@ public class Post : MonoBehaviour
     {
         gameObject.GetComponent<Image>().sprite = postData.postSprite;
 
-        //generate child obj as image container locked, ineract, video.
-        //if locked a corresponding symbol is shown and the post is not interactable
+        //generate child obj with local positioning
+        //per defalt set post locked, corresponding symbol is shown and the post is not interactable
 
         //Maybe better to create it not at runtime, only set it active.
         //Todo: create it via script not via prefab
@@ -43,14 +43,36 @@ public class Post : MonoBehaviour
         childIcon.GetComponent<Image>().raycastTarget = false;
 
         gameObject.GetComponent<Button>().interactable = false;
+
+        //If you entered the adminpin go futher to unlock post
+        if (GameData.progressWithAdmin)
+        {
+            postData.postUnLocked = true;
+        }
         
-        //&& to unlock all || to lock all
-        if (!GameData.progressWithAdmin && !postData.postUnLocked) return;
+        //if post unlocked go further to unlock post in instamenu
+        if (!postData.postUnLocked) return;
 
         //if the post is unlocked the post is interactable, the sprite is set and icon is set 
         //if it is an image without an icon, the lockicon will be deactivated.
+
+        UnlockPost();
+    }
+
+    public void SetPostData(PostData data)
+    {
+        postData = data;
+        SetUpPost();
+    }
+
+
+    public void UnlockPost()
+    {
         postData.postUnLocked = true;
+
         gameObject.GetComponent<Button>().interactable = true;
+
+        Debug.Log("Post " + gameObject.name + " unlocked.");
 
         if (OverlayType.IMAGE == postData.overlayType)
         {
@@ -59,26 +81,10 @@ public class Post : MonoBehaviour
         }
 
         childIcon.GetComponent<Image>().sprite = postData.GetIcon();
-    }
 
-    public void SetOverlayData(PostData data)
-    {
-        postData = data;
-        SetUpPost();
-    }
-
-    public void SetButtonFunctionInteractable(bool interactable)
-    {
-        gameObject.GetComponent<Button>().interactable = interactable;
-    }
-
-    public void UnlockPost()
-    {
-        SetButtonFunctionInteractable(true);
-        childIcon.GetComponent<Image>().sprite = postData.GetIcon();
-        if (gameObject.name == codePost)
-        {
-            childIcon.SetActive(false);
-        }
+        //if (gameObject.name == codePost)
+        //{
+        //    childIcon.SetActive(false);
+        //}
     }
 }

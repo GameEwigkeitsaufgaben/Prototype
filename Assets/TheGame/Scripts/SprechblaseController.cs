@@ -52,12 +52,12 @@ public class SprechblaseController : MonoBehaviour
         if (cave.currentStop == CoalmineStop.EntryArea)
         {
          
-            if(!(sprechblaseDad.btnInteraction.image.name == "dummy-videoPlayIcon") && GameData.introPlayedOnce)
-            {
-                sprechblaseDad.PlayedOnceMode = true;
-                cave.EnableButtons(true);
-                sprechblaseDad.SetSprechblaseInPlayedOnceMode();
-            }
+            //if(!(sprechblaseDad.btnInteraction.image.name == "dummy-videoPlayIcon") && GameData.introPlayedOnce)
+            //{
+            //    sprechblaseDad.PlayedOnceMode = true;
+            //    cave.EnableButtons(true);
+            //    sprechblaseDad.SetSprechblaseInPlayedOnceMode();
+            //}
         }
                 
         //if (!sprechblaseDad.GetAudioSource().isPlaying && !GameData.introPlayedOnce)

@@ -83,7 +83,7 @@ public class Sprechblase : MonoBehaviour
             {
                 if ((CoalmineStop)GameData.currentStopSohle == CoalmineStop.EntryArea && !GameData.moveCave)
                 {
-                    GameData.introPlayedOnce = true;
+                   // GameData.introPlayedOnce = true;
                     return;
                 }
 
