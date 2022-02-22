@@ -139,7 +139,7 @@ public class CoalmineSpeechManger : MonoBehaviour
 
     public bool IsTrainRideTalkingFinished()
     {
-        return mySpeechLists[8].finished;
+        return mySpeechLists[9].finished;
     }
 
 

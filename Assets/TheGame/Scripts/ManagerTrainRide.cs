@@ -34,6 +34,7 @@ public class ManagerTrainRide : MonoBehaviour
     private void Update()
     {
         Debug.Log(speechManger.IsTrainRideTalkingFinished());
+        
         if (speechManger.IsTrainRideTalkingFinished())
         {
             switchScene.LoadLongwallCutter();
