@@ -27,8 +27,12 @@ public class WebGlVideoPlayer : MonoBehaviour
         }
 
         this.videoPostName = videoPostName;
+
+        if (videoPlayer.isPlaying) return;
+
+
         
-        if (!videoIsPlaying && !videoPlayer.isPlaying)
+        if (!videoIsPlaying)
         {
             videoPlayer.Play();
 
@@ -42,6 +46,7 @@ public class WebGlVideoPlayer : MonoBehaviour
         {
             if (videoPlayer.isPlaying)
             {
+                //Debug.Log("will stop the video: " + videoPlayer.)
                 videoPlayer.Stop();
             }
 

@@ -69,10 +69,13 @@ public class Post : MonoBehaviour
     public void UnlockPost()
     {
         postData.postUnLocked = true;
+        Debug.Log("Post " + gameObject.name + " unlocked: " + postData.postUnLocked);
 
-        gameObject.GetComponent<Button>().interactable = true;
-
-        Debug.Log("Post " + gameObject.name + " unlocked.");
+        if (postData.postUnLocked)
+        {
+            gameObject.GetComponent<Button>().interactable = true;
+        }
+       
 
         if (OverlayType.IMAGE == postData.overlayType)
         {
@@ -80,6 +83,7 @@ public class Post : MonoBehaviour
             return;
         }
 
+        //if post is type of video, .... set the corresponding sprite.
         childIcon.GetComponent<Image>().sprite = postData.GetIcon();
 
         //if (gameObject.name == codePost)

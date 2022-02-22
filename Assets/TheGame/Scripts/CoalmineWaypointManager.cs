@@ -44,6 +44,8 @@ public class CoalmineWaypointManager : MonoBehaviour
     private Player myPlayer;
     MineWayPoints currentWP;
 
+    public bool trainArrived = false;
+
 
     private void Start()
     {

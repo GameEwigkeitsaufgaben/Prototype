@@ -50,7 +50,7 @@ public static class GameData
             "chapterOneUnlocked: " + chapterOneUnlocked + "\n" +
             "chaperTwoUnlocked: " + chapterTwoUnlocked + "\n" +
             "chapterThreeUnlocked: " + chapterThreeUnlocked + "\n" +
-            "introPlayedOnce: " + introVideoPlayedOnce
+            "introVideoPlayedOnce: " + introVideoPlayedOnce
             );
     }
 }
