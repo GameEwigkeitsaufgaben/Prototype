@@ -16,7 +16,7 @@ public class Overlay : MonoBehaviour
 
     private WebGlVideoPlayer webglVideoPlayer;
 
-    private PostData postData;
+    private SoPostData postData;
     private SoGameIcons icons;
     private bool videoFinished = false;
     private PostManagerChapterOne menuManager;
@@ -100,7 +100,7 @@ public class Overlay : MonoBehaviour
         menuManager.GetComponent<SwitchSceneManager>().SwitchScene(interactionScene);
     }
 
-    public void SetOverlayData(PostData data)
+    public void SetOverlayData(SoPostData data)
     {
         postData = data;
         SetUpOverlay();
@@ -128,7 +128,7 @@ public class Overlay : MonoBehaviour
         webglVideoPlayer.StopTheVideo();
     }
 
-    public PostData GetPostData()
+    public SoPostData GetPostData()
     {
         return postData;
     }
