@@ -214,7 +214,6 @@ public class CoalmineSpeechManger : MonoBehaviour
             currentList.enabled = true;
             currentList.PlayAll();
             currentList = null;
-
         }
 
         spDad.gameObject.SetActive(GameData.bubbleOnDad);

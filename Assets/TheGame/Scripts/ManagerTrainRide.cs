@@ -37,7 +37,7 @@ public class ManagerTrainRide : MonoBehaviour
         
         if (speechManger.IsTrainRideTalkingFinished())
         {
-            switchScene.LoadLongwallCutter();
+            switchScene.GoToLongwallCutter();
         }
        
     }
