@@ -1,42 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class KohlehobelManager : MonoBehaviour
 {
     public Player player;
     public SwitchSceneManager switchScene;
+    public Transform firstPlayerPos;
+    public CoalmineSpeechManger speechManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        player.followAnker = false;
-        //switchScene.LoadLongwallCutterStatic();
-        //switchScene.LoadLongwallCutterAnim();
+        switchScene.LoadLongwallCutterStatic();
+    }
+
+    //Positionieren und Ausrichten Player (entry Area)    
+    //Buttons mit Pfaden verlinken (3sohle)
+    //Audios auf Buttons abspielen (3sohle)
+    //SFX 
+
+    private void Update()
+    {
         
-        if (false)
-        { //testing ohne sohle3
-            GameData.cavePosX = 0.12937f;
-            GameData.cavePosY = -176.2351f;
-            GameData.cavePosZ = 0.46835f;
-            GameData.sohleToReload = (int)CoalmineStop.Sole3;
-
-        }
-    }
-
-    public void TeleportToTafelTransportKohle(GameObject obj)
-    {
-        player.SetTarget(obj);
-    }
-
-    public void TeleportToKohleHobel(GameObject obj)
-    {
-        player.SetTarget(obj);
-    }
-
-    public void GoToBlackscreen()
-    {
-        switchScene.SwitchSceneWithTransition(GameScenes.ch01MineSoleThreeTrainRide);
-        //GameData.gotToKohlehobel = true;
     }
 }
