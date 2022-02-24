@@ -10,7 +10,7 @@ public class CoalmineSpeechManger : MonoBehaviour
         audiosSole1,
         audiosSole2,
         audiosSole3WPBahnsteig, audiosSole3WPBewetterung, audiosSole3WPCave, audiosSole3WPOVMine,
-        audiosTrainRide,
+        audiosTrainRideIn, audiosTrainRideOut,
         audiosLongwallCutterBahnsteig, audioLongwallCutterLongwallCutter;
         //audiosMuseumHistoryMining, audiosMuseumMinerEquipment, audiosMuseumInfo, audiosMuseumCarbonification;
 
@@ -24,7 +24,7 @@ public class CoalmineSpeechManger : MonoBehaviour
         playSole1,
         playSole2,
         playSole3WPBahnsteig, playSole3WPBewetterung, playSole3WPCave, playSole3WPOVMine,
-        playTrainRide,
+        playTrainRideIn, playTrainRideOut,
         playLongwallCutterBahnsteig, playLongwallCutterLongwallCutter;
     //playMuseumInfo, playMuseumCarbonification, MinerEquipment, HistoryMining;
 
@@ -35,7 +35,7 @@ public class CoalmineSpeechManger : MonoBehaviour
         speakSole1,
         speakSole2,
         speakBewetterung, speakSole3Bahnsteig, speakSole3Cave, speakSole3BoardOVmine,
-        speakTrainRide,
+        speakTrainRideIn, speakTrainRideOut,
         speakLongwallCutterBahnsteig, speakLongwallCutterLongwallCutter;
     //speakMuseumInfo, speakMuseumCarbonification, speakMinerEquipment, speakHistroyMining;
 
@@ -85,9 +85,13 @@ public class CoalmineSpeechManger : MonoBehaviour
         speakSole3Cave.SetUpList(audiosSole3WPCave, mySrc);
         mySpeechLists.Add(speakSole3Cave);
 
-        speakTrainRide = gameObject.AddComponent<SpeechList>();
-        speakTrainRide.SetUpList(audiosTrainRide, mySrc);
-        mySpeechLists.Add(speakTrainRide);
+        speakTrainRideIn = gameObject.AddComponent<SpeechList>();
+        speakTrainRideIn.SetUpList(audiosTrainRideIn, mySrc);
+        mySpeechLists.Add(speakTrainRideIn);
+
+        speakTrainRideOut = gameObject.AddComponent<SpeechList>();
+        speakTrainRideIn.SetUpList(audiosTrainRideOut, mySrc);
+        mySpeechLists.Add(speakTrainRideOut);
 
         speakLongwallCutterBahnsteig = gameObject.AddComponent<SpeechList>();
         speakLongwallCutterBahnsteig.SetUpList(audiosLongwallCutterBahnsteig, mySrc);
@@ -142,6 +146,11 @@ public class CoalmineSpeechManger : MonoBehaviour
         return mySpeechLists[9].finished;
     }
 
+    public void ToggleTrainRideTalkingFinished()
+    {
+        mySpeechLists[9].finished = !mySpeechLists[9].finished;
+    }
+
 
     void Update()
     {
@@ -190,10 +199,15 @@ public class CoalmineSpeechManger : MonoBehaviour
             currentList = speakSole3BoardOVmine;
             playSole3WPOVMine = false;
         }
-        else if (playTrainRide)
+        else if (playTrainRideIn)
         {
-            currentList = speakTrainRide;
-            playTrainRide = false;
+            currentList = speakTrainRideIn;
+            playTrainRideIn = false;
+        }
+        else if (playTrainRideOut)
+        {
+            currentList = speakTrainRideOut;
+            playTrainRideOut = false;
         }
         else if (playLongwallCutterBahnsteig)
         {

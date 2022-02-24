@@ -84,7 +84,7 @@ public class SwitchSceneManager : MonoBehaviour
         StartCoroutine(LoadSceneWithTransition(sceneName));
     }
 
-    public string GetSceneName()
+    public static string GetCurrentSceneName()
     {
         return SceneManager.GetActiveScene().name;
     }
