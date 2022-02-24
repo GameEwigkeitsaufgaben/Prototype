@@ -1,6 +1,8 @@
 //This script manages the coalmine interactive scene, loads necessary static scenes and scenes with animation. 
-//The cave.cs 
-//The player.cs Speech manager is onto paranet GameObject Characters
+//It uses the following scripts: 
+//The cave.cs (in combination with BottomCollider) manages the movement of the cave up/down, doors open/close. 
+//The player.cs Speech manager resides on parent GameObject Characters and manages all dialogue. 
+//The SwitchSceneManager which is responsible for loading scenens in the game. 
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,18 +23,12 @@ public class CaveManager : MonoBehaviour
     private void Start()
     {
         //triggerEinstieg.SetActive(false);
-        GameData.scene1162LoadedOnce = true;
 
         switchScene.LoadEntryArea();
         switchScene.LoadCaveTunnel();
-        switchScene.LoadSohle1();
-        switchScene.LoadSohle2();
-        switchScene.LoadSohle3();
-    }
-
-    public void SetTargetForPlayer(GameObject obj)
-    {
-        player.SetTarget(obj);
+        switchScene.LoadSole1();
+        switchScene.LoadSole2();
+        switchScene.LoadSole3();
     }
 
     private void OnEnable()
@@ -45,13 +41,6 @@ public class CaveManager : MonoBehaviour
             cave.ReloadSohle3AsCurrent();
             player.SetPlayerToAnkerPosition();
         }
-    }
-
-    public void GoToSohle3Kohlehobel()
-    {
-        switchScene.SwitchSceneWithTransition(GameScenes.ch01MineSoleThreeTrainRide);
-        GameData.sohleToReload = (int)CoalmineStop.Sole3;
-        cave.StoreCavePosition();
     }
 
     private void OnDestroy()

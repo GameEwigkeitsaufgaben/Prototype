@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class Post : MonoBehaviour
 {
     private const string codePost = "Post1110";
-    private PostData postData;
+    private SoPostData postData;
     private SoGameIcons icons;
     public GameObject prefabImgLocked;
 
@@ -59,7 +59,7 @@ public class Post : MonoBehaviour
         UnlockPost();
     }
 
-    public void SetPostData(PostData data)
+    public void SetPostData(SoPostData data)
     {
         postData = data;
         SetUpPost();

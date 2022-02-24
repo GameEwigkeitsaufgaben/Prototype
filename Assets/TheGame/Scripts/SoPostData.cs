@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName ="PostData")]
-public class PostData : ScriptableObject
+[CreateAssetMenu(menuName ="SoPostData")]
+public class SoPostData : ScriptableObject
 {
     public OverlayType overlayType;
     public SoGameIcons icons;
