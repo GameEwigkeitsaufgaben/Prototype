@@ -110,14 +110,6 @@ public class CoalmineWaypointManager : MonoBehaviour
         return MineWayPoints.error;
     }
 
-    public MineWayPoints GetCurrentLongWallCutterWP()
-    {
-        if (playerSplineMove.currentPoint == (int)PathWaypoints.startPath)
-        {
-            if (playerSplineMove.pathContainer.name == pa)
-        }
-    }
-
 
     public void DetectAndSetPath(MineWayPoints targetWP)
     {

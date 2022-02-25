@@ -26,11 +26,6 @@ public class Player : MonoBehaviour
 
             Debug.Log("No ANKER OBJ SET");
         }
-
-        if (GameScenes.ch01LongwallCutter == SwitchSceneManager.GetCurrentSceneName())
-        {
-            this.transform.position = myFirstplayerPos.transform.position;
-        }
     }
 
     private void OnTriggerEnter(Collider other)
