@@ -6,6 +6,7 @@ public class KohlehobelManager : MonoBehaviour
     public SwitchSceneManager switchScene;
     public CoalmineSpeechManger speechManager;
     public LongwallCutterWaypointManager lwcManager;
+    public Character enya, georg, dad;
 
     // Start is called before the first frame update
     void Start()
@@ -14,6 +15,8 @@ public class KohlehobelManager : MonoBehaviour
         switchScene.LoadLongwallCutterAnim();
 
         Invoke("StartViewpointBahnsteig", 3.0f);
+
+        dad.RotateCharacter(-114f);
     }
 
     //Positionieren und Ausrichten in LongwallCutterWaypointManager
@@ -40,10 +43,5 @@ public class KohlehobelManager : MonoBehaviour
     public void StartViewpointBahnsteig()
     {
         speechManager.playLongwallCutterBahnsteig = true;
-    }
-
-    private void Update()
-    {
-        
     }
 }

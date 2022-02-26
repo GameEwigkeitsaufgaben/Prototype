@@ -146,6 +146,11 @@ public class CoalmineSpeechManger : MonoBehaviour
         return mySpeechLists[9].finished;
     }
 
+    public bool IsLWCBahnsteigFinished()
+    {
+        return mySpeechLists[10].finished;
+    }
+
     public void ToggleTrainRideTalkingFinished()
     {
         mySpeechLists[9].finished = !mySpeechLists[9].finished;

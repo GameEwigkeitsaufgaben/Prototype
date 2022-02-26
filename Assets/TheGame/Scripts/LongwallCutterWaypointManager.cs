@@ -1,14 +1,19 @@
 using SWS;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LongwallCutterWaypointManager : MonoBehaviour
 {
     public splineMove playerSplineMove;
-    public splineMove characterSplineMove;
+    public splineMove georgSplineMove, enyaSplineMove, vaterSplineMove;
     public PathManager pathViewpointToKohlehobel;
     public Button btnBahnsteig, btnKohlehobel;
+
+    private void Start()
+    {
+        HandleCurrentWP();
+        playerSplineMove.gameObject.transform.position = pathViewpointToKohlehobel.waypoints[0].transform.position;
+    }
 
     public MineWayPoints GetCurrentLongWallCutterWP()
     {
@@ -28,12 +33,10 @@ public class LongwallCutterWaypointManager : MonoBehaviour
         if (StandingOnBahnsteig())
         {
             btnKohlehobel.gameObject.SetActive(true);
-            //btnKohlehobel.transform.parent.transform.localRotation = Quaternion.Euler(0, 60, 0);
         }
         else
         {
             btnBahnsteig.gameObject.SetActive(true);
-            //btnBahnsteig.transform.parent.transform.localRotation = Quaternion.Euler(0, 90, 0);
         }
 
         Debug.Log("Handle Current wp: " + GetCurrentLongWallCutterWP());
@@ -47,7 +50,9 @@ public class LongwallCutterWaypointManager : MonoBehaviour
     public void MoveToLongwallCutter()
     {
         playerSplineMove.StartMove();
-        characterSplineMove.StartMove();
+        georgSplineMove.StartMove();
+        enyaSplineMove.StartMove();
+        vaterSplineMove.StartMove();
     }
 
     public void MoveToLWCBahnsteig()
@@ -56,9 +61,10 @@ public class LongwallCutterWaypointManager : MonoBehaviour
         playerSplineMove.StartMove();
     }
 
-    void Start()
+    public void RotateCharacters()
     {
-        HandleCurrentWP();
-        playerSplineMove.gameObject.transform.position =  pathViewpointToKohlehobel.waypoints[0].transform.position;
+        georgSplineMove.gameObject.GetComponent<Character>().RotateCharacter(0);
+        enyaSplineMove.gameObject.GetComponent<Character>().RotateCharacter(0);
+        vaterSplineMove.gameObject.GetComponent<Character>().RotateCharacter(0);
     }
 }
