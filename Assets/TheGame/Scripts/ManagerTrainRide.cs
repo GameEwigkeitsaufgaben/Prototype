@@ -9,26 +9,46 @@ public class ManagerTrainRide : MonoBehaviour
 
     private void Awake()
     {
-        Invoke("StartTalking", 3f);
-    }
-
-    private void StartTalking()
-    {
-        speechManger.playTrainRide = true;
-    }
-
-    public void SwitchTheScene()
-    {
         if (GameData.rideIn)
         {
-            //switchScene.SwitchSceneWithTransition(ScenesChapterOne.LongwallCutter);
+            Invoke("StartTalkingIn", 3f);
+            
         }
         else
         {
-            //switchScene.SwitchSceneWithTransition(ScenesChapterOne.MineSoleThreeStatic);  
+            Invoke("StartTalkingOut", 3f);
         }
+    }
 
-        GameData.rideIn = !GameData.rideIn;
+
+
+    private void StartTalkingIn()
+    {
+        speechManger.playTrainRideIn = true;
+    }
+
+    private void StartTalkingOut()
+    {
+        speechManger.playTrainRideOut = true;
+    }
+
+    //public void SwitchTheScene()
+    //{
+    //    if (GameData.rideIn)
+    //    {
+    //        //switchScene.SwitchSceneWithTransition(ScenesChapterOne.LongwallCutter);
+    //    }
+    //    else
+    //    {
+    //        //switchScene.SwitchSceneWithTransition(ScenesChapterOne.MineSoleThreeStatic);  
+    //    }
+
+    //    GameData.rideIn = !GameData.rideIn;
+    //}
+
+    private void GoToLongwallcutter()
+    {
+        switchScene.GoToLongwallCutter();
     }
 
     private void Update()
@@ -37,7 +57,8 @@ public class ManagerTrainRide : MonoBehaviour
         
         if (speechManger.IsTrainRideTalkingFinished())
         {
-            switchScene.LoadLongwallCutter();
+            Invoke("GoToLongwallcutter", 3f);
+            speechManger.ToggleTrainRideTalkingFinished();
         }
        
     }

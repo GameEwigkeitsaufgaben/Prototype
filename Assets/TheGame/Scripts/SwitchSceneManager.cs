@@ -14,17 +14,17 @@ public class SwitchSceneManager : MonoBehaviour
         Debug.Log("LoadScene sohle1");
     }
 
-    public void LoadSohle1()
+    public void LoadSole1()
     {
         SceneManager.LoadScene(GameScenes.ch01MineSoleOneStatic, LoadSceneMode.Additive);
         Debug.Log("LoadScene sohle1");
     }
-    public void LoadSohle2()
+    public void LoadSole2()
     {
         SceneManager.LoadScene(GameScenes.ch01MineSoleTwoStatic, LoadSceneMode.Additive);
     }
 
-    internal void LoadSohle3()
+    internal void LoadSole3()
     {
         SceneManager.LoadScene(GameScenes.ch01MineSoleThreeStatic, LoadSceneMode.Additive);
     }
@@ -39,7 +39,7 @@ public class SwitchSceneManager : MonoBehaviour
         SceneManager.LoadScene(GameScenes.ch01MineEntryAreaStatic, LoadSceneMode.Additive);
     }
 
-    public void LoadLongwallCutter()
+    public void GoToLongwallCutter()
     {
         SceneManager.LoadScene(GameScenes.ch01LongwallCutter, LoadSceneMode.Single);
     }
@@ -54,7 +54,7 @@ public class SwitchSceneManager : MonoBehaviour
         SceneManager.LoadScene(GameScenes.ch01LongwallCutterAnimation, LoadSceneMode.Additive);
     }
 
-    public void LoadTrainRide()
+    public void GoToTrainRide()
     {
         SceneManager.LoadScene(GameScenes.ch01MineSoleThreeTrainRide, LoadSceneMode.Single);
     }
@@ -84,7 +84,7 @@ public class SwitchSceneManager : MonoBehaviour
         StartCoroutine(LoadSceneWithTransition(sceneName));
     }
 
-    public string GetSceneName()
+    public static string GetCurrentSceneName()
     {
         return SceneManager.GetActiveScene().name;
     }

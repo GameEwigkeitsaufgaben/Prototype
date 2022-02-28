@@ -1,42 +1,47 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class KohlehobelManager : MonoBehaviour
 {
     public Player player;
     public SwitchSceneManager switchScene;
+    public CoalmineSpeechManger speechManager;
+    public LongwallCutterWaypointManager lwcManager;
+    public Character enya, georg, dad;
 
     // Start is called before the first frame update
     void Start()
     {
-        player.followAnker = false;
-        //switchScene.LoadLongwallCutterStatic();
-        //switchScene.LoadLongwallCutterAnim();
-        
-        if (false)
-        { //testing ohne sohle3
-            GameData.cavePosX = 0.12937f;
-            GameData.cavePosY = -176.2351f;
-            GameData.cavePosZ = 0.46835f;
-            GameData.sohleToReload = (int)CoalmineStop.Sole3;
+        switchScene.LoadLongwallCutterStatic();
+        switchScene.LoadLongwallCutterAnim();
 
-        }
+        Invoke("StartViewpointBahnsteig", 3.0f);
+
+        dad.RotateCharacter(-114f);
     }
 
-    public void TeleportToTafelTransportKohle(GameObject obj)
+    //Positionieren und Ausrichten in LongwallCutterWaypointManager
+
+    //Audios auf Buttons abspielen (3sohle)
+    //SFX 
+
+    public void StartTalking()
     {
-        player.SetTarget(obj);
+        Debug.Log("in start Talking");
+
+        Debug.Log(lwcManager.StandingOnBahnsteig());
+
+        if (lwcManager.StandingOnBahnsteig()) return;
+
+        speechManager.playLongwallCutterLongwallCutter = true;
     }
 
-    public void TeleportToKohleHobel(GameObject obj)
+    public void StartLongwalllCutterSpeech()
     {
-        player.SetTarget(obj);
+        speechManager.playLongwallCutterLongwallCutter = true;
     }
 
-    public void GoToBlackscreen()
+    public void StartViewpointBahnsteig()
     {
-        switchScene.SwitchSceneWithTransition(GameScenes.ch01MineSoleThreeTrainRide);
-        //GameData.gotToKohlehobel = true;
+        speechManager.playLongwallCutterBahnsteig = true;
     }
 }

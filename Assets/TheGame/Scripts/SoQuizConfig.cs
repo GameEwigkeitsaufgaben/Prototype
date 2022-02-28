@@ -6,5 +6,5 @@ public class SoQuizConfig : ScriptableObject
 {
     public Sprite btnSprite;
     public Color normal, selected, correct, incorrect;
-    public PostData overlayKeySO;
+    public SoPostData overlayKeySO;
 }

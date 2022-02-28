@@ -12,7 +12,7 @@ public class Entry : MonoBehaviour
     private const string Entry1110 = "Entry1110";
     public GameObject post;
     public GameObject overlay;
-    public PostData postData;
+    public SoPostData postData;
 
     //public bool testVideoPlayed = false;
 

@@ -6,13 +6,27 @@ public class Player : MonoBehaviour
     public Camera mainCam;
     public GameObject ankerObjToFollow;
     public bool followAnker = true;
+    
+    public GameObject myFirstplayerPos;
 
     private Vector3 offsetToAnkerObj;
     public GameObject targetObj = null;
     public float speed;
-
     
     public bool playerInCave = true;
+
+    private void Start()
+    {
+        try
+        {
+            SetupPlayerOffsetToAnkerObj(ankerObjToFollow);
+        }
+        catch (System.Exception)
+        {
+
+            Debug.Log("No ANKER OBJ SET");
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -27,19 +41,6 @@ public class Player : MonoBehaviour
         if (other.name == triggerPlayerInCave)
         {
             playerInCave = false;
-        }
-    }
-
-    private void Start()
-    {
-        try
-        {
-            SetupPlayerOffsetToAnkerObj(ankerObjToFollow);
-        }
-        catch (System.Exception)
-        {
-
-            Debug.Log("No ANKER OBJ SET");
         }
     }
 
@@ -90,7 +91,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        //Hinders the player to move the cave without being inside.
+        //Hinders the player to move the cave without the player being inside.
         if (playerInCave)
         {
             GameData.liftBtnsEnabled = true;
@@ -101,7 +102,7 @@ public class Player : MonoBehaviour
         }
 
         //Cam follows capsule Player when cave is moving
-        if (followAnker)
+        if (followAnker && (SwitchSceneManager.GetCurrentSceneName() == GameScenes.ch01Mine))
         {
             transform.position = ankerObjToFollow.transform.position + offsetToAnkerObj;
         }

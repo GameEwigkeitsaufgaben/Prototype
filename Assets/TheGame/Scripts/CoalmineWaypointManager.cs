@@ -13,7 +13,9 @@ public enum MineWayPoints
     viewpointBewetterung = 2,
     viewpointBahnsteig = 3,
     viewpointOVMine = 4,
-    error = 5
+    viewpointLWBahnsteig = 5,
+    viewpointLWLWCutter = 6,
+    error = 7
 }
 
 public enum PathWaypoints
@@ -28,6 +30,7 @@ public class CoalmineWaypointManager : MonoBehaviour
     public PathManager pathS1CaveToViewpoint, pathS2CaveToViewpoint, pathS3CaveToViewpoint;
     public PathManager pathS3ViewpointToBewetterung, pathS3ViewpointToBahnsteig, pathS3ViewpointToOVMine, 
                        pathS3BahnsteigToOVMine, pathS3BewetterungToBahnsteig, pathS3BewetterungToOVMine;
+    public PathManager pathLWBahnsteigToLWC;
     public GameObject wpS1ViewpointSign, wpS2ViewpointSign, wpS3ViewpointSign, caveSign;
     public float wpAdjustHightViewpoint;
 
@@ -106,6 +109,7 @@ public class CoalmineWaypointManager : MonoBehaviour
 
         return MineWayPoints.error;
     }
+
 
     public void DetectAndSetPath(MineWayPoints targetWP)
     {
