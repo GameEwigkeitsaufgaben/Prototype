@@ -18,7 +18,8 @@ public static class GameScenes
     public const string ch01MineSoleOneStatic = "ch01scene01-62-coalmine-cave-static-soleOne";
     public const string ch01MineSoleTwoStatic = "ch01scene01-62-coalmine-cave-static-soleTwo";
     public const string ch01MineSoleThreeStatic = "ch01scene01-62-coalmine-cave-static-soleThree";
-    public const string ch01MineSoleThreeTrainRide = "ch01scene01-62-coalmine-trainride";
+    public const string ch01MineSoleThreeTrainRideOut = "ch01scene01-62-coalmine-trainrideOut";
+    public const string ch01MineSoleThreeTrainRideIn = "ch01scene01-62-coalmine-trainrideIn";
     public const string ch01LongwallCutter = "ch01scene01-62-coalmine-longwallCutter";
     public const string ch01LongwallCutterStatic = "ch01scene01-62-coalmine-longwallCutter-static";
     public const string ch01LongwallCutterAnimation = "ch01scene01-62-coalmine-longwallCutter-animation";

@@ -3,6 +3,7 @@
 //The cave.cs (in combination with BottomCollider) manages the movement of the cave up/down, doors open/close. 
 //The player.cs Speech manager resides on parent GameObject Characters and manages all dialogue. 
 //The SwitchSceneManager which is responsible for loading scenens in the game. 
+//It has a link to Cave Collider Button to reset the character sprites accordingly to the coalmine stop.
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,12 +12,13 @@ public class CaveManager : MonoBehaviour
 {
     public Cave cave;
     public Player player;
-    public SwitchSceneManager switchScene;
+    private SwitchSceneManager switchScene;
+    public Character characterEnya, characterDad, characterGeorg;
 
     public Button exitScene, sole1WPViewpointBtn, sole2WPViewpointBtn, sole1caveWP;
    // public SprechblaseController sprechblaseController;
 
-    public GameObject triggerEinstieg;
+    //public GameObject triggerEinstieg;
 
     private bool introPlayedOneTime = false;
 
@@ -24,11 +26,15 @@ public class CaveManager : MonoBehaviour
     {
         //triggerEinstieg.SetActive(false);
 
+        switchScene = gameObject.GetComponent<SwitchSceneManager>();
+
         switchScene.LoadEntryArea();
         switchScene.LoadCaveTunnel();
         switchScene.LoadSole1();
         switchScene.LoadSole2();
         switchScene.LoadSole3();
+
+        cave.caveTriggerBottom.SetCharacters(characterEnya, characterDad, characterGeorg);
     }
 
     private void OnEnable()

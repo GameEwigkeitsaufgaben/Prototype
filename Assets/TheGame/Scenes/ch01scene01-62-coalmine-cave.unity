@@ -184,7 +184,8 @@ MonoBehaviour:
   audiosSole3WPBewetterung: {fileID: 11400000, guid: 892465c2e6fa71f4db27633136469d29, type: 2}
   audiosSole3WPCave: {fileID: 11400000, guid: 215b2a6dbe108744eb895c0d3f3cbe28, type: 2}
   audiosSole3WPOVMine: {fileID: 11400000, guid: 51e12c5353063194ea95dd033187122c, type: 2}
-  audiosTrainRide: {fileID: 11400000, guid: fb6c85bbdeb9ba048975efa039696be0, type: 2}
+  audiosTrainRideIn: {fileID: 11400000, guid: fb6c85bbdeb9ba048975efa039696be0, type: 2}
+  audiosTrainRideOut: {fileID: 11400000, guid: 333cf4c97c40d7742b7b1c12ad109560, type: 2}
   audiosLongwallCutterBahnsteig: {fileID: 11400000, guid: 281c2c0765c65534ea6ff815d2326cb8, type: 2}
   audioLongwallCutterLongwallCutter: {fileID: 11400000, guid: a6349f0514eabff4ba74825f5dd7fe10, type: 2}
   spEnya: {fileID: 229106831}
@@ -199,7 +200,8 @@ MonoBehaviour:
   playSole3WPBewetterung: 0
   playSole3WPCave: 0
   playSole3WPOVMine: 0
-  playTrainRide: 0
+  playTrainRideIn: 0
+  playTrainRideOut: 0
   playLongwallCutterBahnsteig: 0
   playLongwallCutterLongwallCutter: 0
 --- !u!114 &28434981
@@ -1437,6 +1439,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCharacter: 0
+  bubbleImage: {fileID: 0}
+  bubbleButton: {fileID: 0}
 --- !u!1 &235849898
 GameObject:
   m_ObjectHideFlags: 0
@@ -2786,6 +2790,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCharacter: 0
+  bubbleImage: {fileID: 0}
+  bubbleButton: {fileID: 0}
 --- !u!82 &443497846
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3763,6 +3769,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCharacter: 0
+  bubbleImage: {fileID: 0}
+  bubbleButton: {fileID: 0}
 --- !u!82 &598580763
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4195,8 +4203,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1119981090}
         m_TargetAssemblyTypeName: SwitchSceneManager, Assembly-CSharp
-        m_MethodName: GoToTrainRide
-        m_Mode: 6
+        m_MethodName: GoToTrainRideIn
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4481,6 +4489,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 410b4ad366e15d648be7714e91a1e056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  caveTriggerBottom: {fileID: 0}
   caveSpeed: 15
   doorLeft: {fileID: 993477602}
   doorRight: {fileID: 1265952486}
@@ -4777,6 +4786,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCharacter: 0
+  bubbleImage: {fileID: 0}
+  bubbleButton: {fileID: 0}
 --- !u!82 &672310653
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5270,6 +5281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6573e5d25012ee441a998117efead92c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterConfigSO: {fileID: 0}
 --- !u!114 &834417841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6231,6 +6243,9 @@ MonoBehaviour:
   cave: {fileID: 919132147999869086}
   speechManger: {fileID: 28434980}
   revisitEntryArea: 0
+  enya: {fileID: 0}
+  dad: {fileID: 0}
+  georg: {fileID: 0}
 --- !u!65 &966452286
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6608,6 +6623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6573e5d25012ee441a998117efead92c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterConfigSO: {fileID: 11400000, guid: 82fcf07e22a103f4a89b4c8922d93b03, type: 2}
 --- !u!1 &1052803933
 GameObject:
   m_ObjectHideFlags: 0
@@ -6674,6 +6690,9 @@ MonoBehaviour:
   cave: {fileID: 653222970}
   speechManger: {fileID: 1118120251}
   revisitEntryArea: 0
+  enya: {fileID: 0}
+  dad: {fileID: 0}
+  georg: {fileID: 0}
 --- !u!65 &1052803937
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7095,7 +7114,8 @@ MonoBehaviour:
   audiosSole3WPBewetterung: {fileID: 11400000, guid: 892465c2e6fa71f4db27633136469d29, type: 2}
   audiosSole3WPCave: {fileID: 11400000, guid: 215b2a6dbe108744eb895c0d3f3cbe28, type: 2}
   audiosSole3WPOVMine: {fileID: 11400000, guid: 51e12c5353063194ea95dd033187122c, type: 2}
-  audiosTrainRide: {fileID: 11400000, guid: fb6c85bbdeb9ba048975efa039696be0, type: 2}
+  audiosTrainRideIn: {fileID: 0}
+  audiosTrainRideOut: {fileID: 0}
   audiosLongwallCutterBahnsteig: {fileID: 11400000, guid: 281c2c0765c65534ea6ff815d2326cb8, type: 2}
   audioLongwallCutterLongwallCutter: {fileID: 11400000, guid: a6349f0514eabff4ba74825f5dd7fe10, type: 2}
   spEnya: {fileID: 598580762}
@@ -7110,7 +7130,8 @@ MonoBehaviour:
   playSole3WPBewetterung: 0
   playSole3WPCave: 0
   playSole3WPOVMine: 0
-  playTrainRide: 0
+  playTrainRideIn: 0
+  playTrainRideOut: 0
   playLongwallCutterBahnsteig: 0
   playLongwallCutterLongwallCutter: 0
 --- !u!114 &1118120252
@@ -7239,12 +7260,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cave: {fileID: 919132147999869086}
   player: {fileID: 809927908}
-  switchScene: {fileID: 1993124916}
+  characterEnya: {fileID: 1324286206}
+  characterDad: {fileID: 1926901844}
+  characterGeorg: {fileID: 1011334277}
   exitScene: {fileID: 1552251373}
   sole1WPViewpointBtn: {fileID: 470595797}
-  sole2WPViewpointBtn: {fileID: 0}
+  sole2WPViewpointBtn: {fileID: 5456735633618335329}
   sole1caveWP: {fileID: 1608430798}
-  triggerEinstieg: {fileID: 0}
 --- !u!114 &1119981093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7267,6 +7289,7 @@ MonoBehaviour:
   pathS3BahnsteigToOVMine: {fileID: 2076315199}
   pathS3BewetterungToBahnsteig: {fileID: 1335994932}
   pathS3BewetterungToOVMine: {fileID: 384042034}
+  pathLWBahnsteigToLWC: {fileID: 0}
   wpS1ViewpointSign: {fileID: 592025669}
   wpS2ViewpointSign: {fileID: 5456735634042148593}
   wpS3ViewpointSign: {fileID: 5456735633144931191}
@@ -9114,6 +9137,7 @@ GameObject:
   - component: {fileID: 1324286209}
   - component: {fileID: 1324286208}
   - component: {fileID: 1324286207}
+  - component: {fileID: 1324286206}
   m_Layer: 5
   m_Name: Enya
   m_TagString: Untagged
@@ -9142,6 +9166,19 @@ RectTransform:
   m_AnchoredPosition: {x: -1.687, y: 0}
   m_SizeDelta: {x: 5, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1324286206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324286204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6573e5d25012ee441a998117efead92c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterConfigSO: {fileID: 11400000, guid: 6dc0f1cf0cbf3cb4587f1fcf45214089, type: 2}
 --- !u!114 &1324286207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9668,6 +9705,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCharacter: 0
+  bubbleImage: {fileID: 0}
+  bubbleButton: {fileID: 0}
 --- !u!1 &1378719312
 GameObject:
   m_ObjectHideFlags: 0
@@ -10896,6 +10935,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCharacter: 2
+  bubbleImage: {fileID: 0}
+  bubbleButton: {fileID: 0}
 --- !u!1 &1567317897
 GameObject:
   m_ObjectHideFlags: 0
@@ -12125,6 +12166,7 @@ MonoBehaviour:
   mainCam: {fileID: 6442690}
   ankerObjToFollow: {fileID: 1280383084}
   followAnker: 1
+  myFirstplayerPos: {fileID: 0}
   targetObj: {fileID: 0}
   speed: 1
   playerInCave: 1
@@ -13399,6 +13441,7 @@ GameObject:
   - component: {fileID: 1926901847}
   - component: {fileID: 1926901846}
   - component: {fileID: 1926901845}
+  - component: {fileID: 1926901844}
   m_Layer: 5
   m_Name: Dad
   m_TagString: Untagged
@@ -13406,6 +13449,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1926901844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926901843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6573e5d25012ee441a998117efead92c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterConfigSO: {fileID: 11400000, guid: d8fe53f684c35c64bb938f1ec7ce42fb, type: 2}
 --- !u!114 &1926901845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13840,17 +13896,6 @@ Transform:
   m_Father: {fileID: 1091697644}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1993124916 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9057732709806453197, guid: d7f9da9a3885e8843bca70a9d03fa65f, type: 3}
-  m_PrefabInstance: {fileID: 961359947}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f13b6f5887cc3a548beebc09ae2674a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2023663527 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e10a53e0a9590d2479f8671dd006447c, type: 3}
@@ -14235,6 +14280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 410b4ad366e15d648be7714e91a1e056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  caveTriggerBottom: {fileID: 0}
   caveSpeed: 15
   doorLeft: {fileID: 7226370446328513486}
   doorRight: {fileID: 7706008439822622315}

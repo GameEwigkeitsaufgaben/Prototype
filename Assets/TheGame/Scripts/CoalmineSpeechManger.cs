@@ -42,6 +42,8 @@ public class CoalmineSpeechManger : MonoBehaviour
     private SpeechList currentList = null;
     private List<AudioSource> listAudioSrcs = new List<AudioSource>();
     private List<SpeechList> mySpeechLists = new List<SpeechList>();
+    private Dictionary<string, SpeechList> mySpeechDict = new Dictionary<string, SpeechList>();
+
     private AudioSource mySrc;
 
     // Start is called before the first frame update
@@ -90,7 +92,7 @@ public class CoalmineSpeechManger : MonoBehaviour
         mySpeechLists.Add(speakTrainRideIn);
 
         speakTrainRideOut = gameObject.AddComponent<SpeechList>();
-        speakTrainRideIn.SetUpList(audiosTrainRideOut, mySrc);
+        speakTrainRideOut.SetUpList(audiosTrainRideOut, mySrc);
         mySpeechLists.Add(speakTrainRideOut);
 
         speakLongwallCutterBahnsteig = gameObject.AddComponent<SpeechList>();
@@ -100,6 +102,11 @@ public class CoalmineSpeechManger : MonoBehaviour
         speakLongwallCutterLongwallCutter = gameObject.AddComponent<SpeechList>();
         speakLongwallCutterLongwallCutter.SetUpList(audioLongwallCutterLongwallCutter, mySrc);
         mySpeechLists.Add(speakLongwallCutterLongwallCutter);
+
+        for (int i = 0; i < mySpeechLists.Count; i++)
+        {
+            mySpeechDict.Add(mySpeechLists[i].listName, mySpeechLists[i]);
+        }
 
         //speakMuseumInfo = gameObject.AddComponent<SpeechList>();
         //speakMuseumInfo.SetUpList(audiosMuseumInfo, mySrc);
@@ -141,9 +148,15 @@ public class CoalmineSpeechManger : MonoBehaviour
         list.PlayAll();
     }
 
-    public bool IsTrainRideTalkingFinished()
+    public bool IsTrainRideInTalkingFinished()
     {
-        return mySpeechLists[9].finished;
+        return mySpeechDict["Audios100160CaveTrainRideIn"].finished;
+    }
+
+    public bool IsTrainRideOutTalkingFinished()
+    {
+        return mySpeechDict["Audios100160CaveTrainRideOut"].finished;
+        //return mySpeechLists[9].finished;
     }
 
     public bool IsLWCBahnsteigFinished()
@@ -151,11 +164,15 @@ public class CoalmineSpeechManger : MonoBehaviour
         return mySpeechLists[10].finished;
     }
 
-    public void ToggleTrainRideTalkingFinished()
+    public void ToggleTrainRideOutTalkingFinished()
     {
-        mySpeechLists[9].finished = !mySpeechLists[9].finished;
+        mySpeechDict["Audios100160CaveTrainRideOut"].finished = !mySpeechDict["Audios100160CaveTrainRideOut"].finished;
     }
 
+    public void ToggleTrainRideInTalkingFinished()
+    {
+        mySpeechDict["Audios100160CaveTrainRideIn"].finished = !mySpeechDict["Audios100160CaveTrainRideIn"].finished;
+    }
 
     void Update()
     {
