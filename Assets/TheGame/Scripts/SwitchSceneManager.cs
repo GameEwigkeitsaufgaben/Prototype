@@ -37,6 +37,7 @@ public class SwitchSceneManager : MonoBehaviour
     public void LoadEntryArea()
     {
         SceneManager.LoadScene(GameScenes.ch01MineEntryAreaStatic, LoadSceneMode.Additive);
+        
     }
 
     public void GoToLongwallCutter()
@@ -54,9 +55,14 @@ public class SwitchSceneManager : MonoBehaviour
         SceneManager.LoadScene(GameScenes.ch01LongwallCutterAnimation, LoadSceneMode.Additive);
     }
 
-    public void GoToTrainRide()
+    public void GoToTrainRideOut()
     {
-        SceneManager.LoadScene(GameScenes.ch01MineSoleThreeTrainRide, LoadSceneMode.Single);
+        SceneManager.LoadScene(GameScenes.ch01MineSoleThreeTrainRideOut, LoadSceneMode.Single);
+    }
+
+    public void GoToTrainRideIn()
+    {
+        SceneManager.LoadScene(GameScenes.ch01MineSoleThreeTrainRideIn, LoadSceneMode.Single);
     }
 
     public void SwitchScene(string sceneName)
@@ -73,11 +79,11 @@ public class SwitchSceneManager : MonoBehaviour
 
     //rideIn true if you go to the longwall cutter
     //rideIn false if you go way from the longwal cutter, i.e. go back to surface
-    public void GoToTrainRide(bool rideIn)
-    {
-        GameData.rideIn = rideIn;
-        SwitchScene(GameScenes.ch01MineSoleThreeTrainRide);
-    }
+    //public void GoToTrainRide(bool rideIn)
+    //{
+    //    GameData.rideIn = rideIn;
+    //    SwitchScene(GameScenes.ch01MineSoleThreeTrainRide);
+    //}
 
     public void SwitchSceneWithTransition(string sceneName)
     {

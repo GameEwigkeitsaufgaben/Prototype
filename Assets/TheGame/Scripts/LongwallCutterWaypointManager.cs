@@ -32,11 +32,14 @@ public class LongwallCutterWaypointManager : MonoBehaviour
 
         if (StandingOnBahnsteig())
         {
+            Debug.Log("----------------------------me on bahnsteig");
             btnKohlehobel.gameObject.SetActive(true);
+            RotateCharacters(-114.0f, -53.0f, -80.0f);
         }
         else
         {
             btnBahnsteig.gameObject.SetActive(true);
+            RotateCharacters(-180.0f, 0.0f, 0.0f);
         }
 
         Debug.Log("Handle Current wp: " + GetCurrentLongWallCutterWP());
@@ -49,9 +52,13 @@ public class LongwallCutterWaypointManager : MonoBehaviour
 
     public void MoveToLongwallCutter()
     {
+        playerSplineMove.reverse = false;
         playerSplineMove.StartMove();
+        georgSplineMove.reverse = false;
         georgSplineMove.StartMove();
+        enyaSplineMove.reverse = false;
         enyaSplineMove.StartMove();
+        vaterSplineMove.reverse = false;
         vaterSplineMove.StartMove();
     }
 
@@ -59,12 +66,18 @@ public class LongwallCutterWaypointManager : MonoBehaviour
     {
         playerSplineMove.reverse = true;
         playerSplineMove.StartMove();
+        georgSplineMove.reverse = true;
+        georgSplineMove.StartMove();
+        enyaSplineMove.reverse = true;
+        enyaSplineMove.StartMove();
+        vaterSplineMove.reverse = true;
+        vaterSplineMove.StartMove();
     }
 
-    public void RotateCharacters()
+    public void RotateCharacters(float yDad, float yEnya, float yGeorg)
     {
-        georgSplineMove.gameObject.GetComponent<Character>().RotateCharacter(0);
-        enyaSplineMove.gameObject.GetComponent<Character>().RotateCharacter(0);
-        vaterSplineMove.gameObject.GetComponent<Character>().RotateCharacter(0);
+        vaterSplineMove.gameObject.GetComponent<Character>().RotateCharacter(yDad);
+        enyaSplineMove.gameObject.GetComponent<Character>().RotateCharacter(yEnya);
+        georgSplineMove.gameObject.GetComponent<Character>().RotateCharacter(yGeorg);
     }
 }

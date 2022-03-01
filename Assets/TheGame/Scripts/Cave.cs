@@ -26,6 +26,7 @@ public enum CaveMovement
 
 public class Cave : MonoBehaviour
 {
+    public CaveColliderBottom caveTriggerBottom;
 
     public float caveSpeed = 2.0f;
 
@@ -150,7 +151,8 @@ public class Cave : MonoBehaviour
     {
         if (GameData.moveCave)
         {
-            Debug.Log((int)moveDirection + " movedir");
+            //Debug.Log((int)moveDirection + " movedir");
+            GameData.moveDirection = (int)moveDirection;
             transform.position += new Vector3(0, (int)moveDirection * caveSpeed * Time.deltaTime, 0);
         }
 

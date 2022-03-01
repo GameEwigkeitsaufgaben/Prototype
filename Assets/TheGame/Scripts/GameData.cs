@@ -19,7 +19,7 @@ public static class GameData
     public static float cavePosY = 0f;
     public static float cavePosZ = 0f;
     public static bool moveCave = false;
-    //public static int moveDirection = -1; //-1 for moving down, +1 for moving up
+    public static int moveDirection = -1; //-1 for moving down, +1 for moving up
     public static int nbrSchacht = 1;
 
     public static int currentStopSohle;

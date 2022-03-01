@@ -16,7 +16,7 @@ public class KohlehobelManager : MonoBehaviour
 
         Invoke("StartViewpointBahnsteig", 3.0f);
 
-        dad.RotateCharacter(-114f);
+        lwcManager.RotateCharacters(-114.0f, -53.0f, -80.0f);
     }
 
     //Positionieren und Ausrichten in LongwallCutterWaypointManager
@@ -44,4 +44,6 @@ public class KohlehobelManager : MonoBehaviour
     {
         speechManager.playLongwallCutterBahnsteig = true;
     }
+
+    
 }
