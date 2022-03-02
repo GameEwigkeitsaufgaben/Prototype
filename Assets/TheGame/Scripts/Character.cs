@@ -51,7 +51,7 @@ public class Character : MonoBehaviour
         }
         else if (SwitchSceneManager.GetCurrentSceneName() == GameScenes.ch01MineIntro)
         {
-            characterImage.GetComponent<Image>().sprite = characterConfigSO.outsideMineStandingSilient;
+            ChangeCharacterImage(CoalmineStop.Outside);
         }
     }
 
@@ -64,6 +64,9 @@ public class Character : MonoBehaviour
     {
         switch (stop)
         {
+            case CoalmineStop.Outside:
+                characterImage.GetComponent<Image>().sprite = characterConfigSO.outsideMineStandingSilient;
+                break;
             case CoalmineStop.EntryArea:
                 entryAreaUpdated = true;
                 characterImage.GetComponent<Image>().sprite = characterConfigSO.entryAreaStandingSilent;

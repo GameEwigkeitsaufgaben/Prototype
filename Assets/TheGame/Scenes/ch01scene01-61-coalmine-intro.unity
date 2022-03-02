@@ -526,15 +526,15 @@ RectTransform:
   m_GameObject: {fileID: 959480242}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 7.6822557, y: 11.437139, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1921452170}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -593, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &959480244
 MonoBehaviour:
@@ -556,7 +556,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3755f0ff298b9fc45887c618d014effb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c3f9e8635c77744697182fd496341e1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3226,7 +3226,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -85.41}
   m_SizeDelta: {x: 100, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5864595907910399679
@@ -3241,6 +3241,7 @@ GameObject:
   - component: {fileID: 5864595907910399810}
   - component: {fileID: 5864595907910399811}
   - component: {fileID: 5864595907910399676}
+  - component: {fileID: 5864595907910399680}
   m_Layer: 5
   m_Name: Enya
   m_TagString: Untagged
@@ -3248,6 +3249,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5864595907910399680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5864595907910399679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6573e5d25012ee441a998117efead92c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterConfigSO: {fileID: 11400000, guid: 6dc0f1cf0cbf3cb4587f1fcf45214089, type: 2}
+  sole1ImgUpdated: 0
+  s2ImgUpdated: 0
+  s3ImgUpdated: 0
+  entryAreaUpdated: 0
 --- !u!223 &5864595907910399810
 Canvas:
   m_ObjectHideFlags: 0
@@ -3509,6 +3527,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCharacter: 2
+  bubbleImage: {fileID: 0}
+  bubbleButton: {fileID: 0}
 --- !u!82 &5864595908346449100
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3670,6 +3690,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCharacter: 0
+  bubbleImage: {fileID: 0}
+  bubbleButton: {fileID: 0}
 --- !u!114 &5864595908840425536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3833,6 +3855,7 @@ GameObject:
   - component: {fileID: 5864595908913546772}
   - component: {fileID: 5864595908913546773}
   - component: {fileID: 5864595908913546774}
+  - component: {fileID: 5864595908913546769}
   m_Layer: 5
   m_Name: Dad
   m_TagString: Untagged
@@ -3840,6 +3863,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5864595908913546769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5864595908913546768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6573e5d25012ee441a998117efead92c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterConfigSO: {fileID: 11400000, guid: d8fe53f684c35c64bb938f1ec7ce42fb, type: 2}
+  sole1ImgUpdated: 0
+  s2ImgUpdated: 0
+  s3ImgUpdated: 0
+  entryAreaUpdated: 0
 --- !u!223 &5864595908913546772
 Canvas:
   m_ObjectHideFlags: 0
@@ -3919,7 +3959,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -118}
   m_SizeDelta: {x: 100, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5864595908972090056
@@ -3954,6 +3994,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCharacter: 0
+  bubbleImage: {fileID: 0}
+  bubbleButton: {fileID: 0}
 --- !u!82 &5864595908972090061
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4187,7 +4229,8 @@ MonoBehaviour:
   audiosSole3WPBewetterung: {fileID: 11400000, guid: 892465c2e6fa71f4db27633136469d29, type: 2}
   audiosSole3WPCave: {fileID: 11400000, guid: 215b2a6dbe108744eb895c0d3f3cbe28, type: 2}
   audiosSole3WPOVMine: {fileID: 11400000, guid: 51e12c5353063194ea95dd033187122c, type: 2}
-  audiosTrainRide: {fileID: 11400000, guid: fb6c85bbdeb9ba048975efa039696be0, type: 2}
+  audiosTrainRideIn: {fileID: 11400000, guid: fb6c85bbdeb9ba048975efa039696be0, type: 2}
+  audiosTrainRideOut: {fileID: 11400000, guid: 333cf4c97c40d7742b7b1c12ad109560, type: 2}
   audiosLongwallCutterBahnsteig: {fileID: 11400000, guid: 281c2c0765c65534ea6ff815d2326cb8, type: 2}
   audioLongwallCutterLongwallCutter: {fileID: 11400000, guid: a6349f0514eabff4ba74825f5dd7fe10, type: 2}
   spEnya: {fileID: 5864595908972090060}
@@ -4202,7 +4245,8 @@ MonoBehaviour:
   playSole3WPBewetterung: 0
   playSole3WPCave: 0
   playSole3WPOVMine: 0
-  playTrainRide: 0
+  playTrainRideIn: 0
+  playTrainRideOut: 0
   playLongwallCutterBahnsteig: 0
   playLongwallCutterLongwallCutter: 0
 --- !u!224 &5864595909380296768
@@ -4638,6 +4682,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6573e5d25012ee441a998117efead92c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterConfigSO: {fileID: 11400000, guid: 82fcf07e22a103f4a89b4c8922d93b03, type: 2}
+  sole1ImgUpdated: 0
+  s2ImgUpdated: 0
+  s3ImgUpdated: 0
+  entryAreaUpdated: 0
 --- !u!223 &5864595909762730695
 Canvas:
   m_ObjectHideFlags: 0

@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public enum CoalmineStop
 {
+    Outside,
     EntryArea,
     Sole1,
     Sole2,
