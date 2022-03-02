@@ -10,6 +10,7 @@ public class Entry : MonoBehaviour
     private const string Entry115 = "Entry115";
     private const string Entry116 = "Entry116";
     private const string Entry1110 = "Entry1110";
+    private const float changeVolumeAmount = 0.15f;
     public GameObject post;
     public GameObject overlay;
     public SoPostData postData;
@@ -19,10 +20,12 @@ public class Entry : MonoBehaviour
     private WebGlVideoPlayer webglVideoPlayer;
 
     private OverlayType overlayType; // Enum
+    private SoSfx sfx;
 
     // Start is called before the first frame update
     void Start()
     {
+        sfx = Resources.Load<SoSfx>("SfxConfig");
         post.GetComponent<Post>().SetPostData(postData);
         overlay.GetComponent<Overlay>().SetOverlayData(postData);
 
@@ -30,6 +33,7 @@ public class Entry : MonoBehaviour
         {
             webglVideoPlayer = GameObject.FindObjectOfType<WebGlVideoPlayer>();
             webglVideoPlayer.videoPlayer.loopPointReached += SetReplayIcon;
+            webglVideoPlayer.SetSFX(sfx);
         }
         catch (System.Exception)
         {
@@ -50,16 +54,23 @@ public class Entry : MonoBehaviour
 
         post.GetComponent<Post>().UpdateIcon();
         overlay.GetComponent<Overlay>().SetReplayIcon();       
-
-        //if (gameObject.name == Entry115)
-        //{
-        //    GameData.introPlayedOnce = true;
-        //}
     }
 
     public void OpenOverlay()
     {
         overlay.SetActive(true);
+        sfx.ReduceVolume(sfx.instaMenuBGmusicLoop, changeVolumeAmount);
+    }
+
+    public void CloseOverlay()
+    {
+        overlay.GetComponent<Overlay>().CloseOverlay();
+        sfx.IncreaseVolume(sfx.instaMenuBGmusicLoop, changeVolumeAmount);
+        if (!sfx.IsInstaBGMusicPlaying())
+        {
+            sfx.PlayClip(sfx.instaMenuBGmusicLoop);
+        }
+       
     }
 
     private void Update()

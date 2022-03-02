@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class QuizManager : MonoBehaviour
 {
+    public SoSfx sfx;
     public Canvas endCanvas, quizCanvas;
     public VerticalLayoutGroup answerButtonGroup;
     public Text uiQuestion;
@@ -30,6 +31,9 @@ public class QuizManager : MonoBehaviour
     void Start()
     {
         quizTimer = FindObjectOfType<QuizTimer>();
+        audioAnswerCorrect.clip = sfx.correctAnswer;
+        audioWrongAudio.clip = sfx.incorrectAnswer;
+        uiButtonNext.GetComponent<AudioSource>().clip = sfx.btnClick;
 
         foreach(QuizData i in quizDataItems)
         {

@@ -10,11 +10,17 @@ public class WebGlVideoPlayer : MonoBehaviour
     
     private GameObject rawImage;
     private bool videoIsPlaying = false;
-    private bool videoSetUpDone = false; 
+    private bool videoSetUpDone = false;
+    private SoSfx sfx; //will be assigned from Entry;
 
     private void Start()
     {
         Debug.Log("Set Video Url and configurations: " + videoPlayer.url);
+    }
+
+    public void SetSFX(SoSfx tmpSFX)
+    {
+        sfx = tmpSFX;
     }
 
     public void StartTheVideo(string videoPostName, string videoName, RawImage imgRaw)
@@ -29,11 +35,11 @@ public class WebGlVideoPlayer : MonoBehaviour
         this.videoPostName = videoPostName;
 
         if (videoPlayer.isPlaying) return;
-
-
         
         if (!videoIsPlaying)
         {
+            sfx.StopClip(sfx.instaMenuBGmusicLoop);
+
             videoPlayer.Play();
 
             if(videoPostName == "Overlay115")
@@ -67,7 +73,9 @@ public class WebGlVideoPlayer : MonoBehaviour
         Debug.Log("SetVideoData in Player");
         rawImage = imgRaw.gameObject;
         rawImage.GetComponent<RawImage>().texture = videoPlayer.targetTexture;
+        
         videoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, videoName);
+
         videoPlayer.isLooping = false;
     }
 

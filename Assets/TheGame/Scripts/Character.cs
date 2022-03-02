@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -55,7 +53,6 @@ public class Character : MonoBehaviour
         {
             characterImage.GetComponent<Image>().sprite = characterConfigSO.outsideMineStandingSilient;
         }
-        
     }
 
     public void RotateCharacter(float yRotation)
@@ -68,7 +65,6 @@ public class Character : MonoBehaviour
         switch (stop)
         {
             case CoalmineStop.EntryArea:
-                Debug.Log("in change img ea");
                 entryAreaUpdated = true;
                 characterImage.GetComponent<Image>().sprite = characterConfigSO.entryAreaStandingSilent;
                 if (characterImage.GetComponent<Image>().sprite.name != "noCharacterSprite") break;
@@ -76,7 +72,6 @@ public class Character : MonoBehaviour
                 break;
 
             case CoalmineStop.Sole1:
-                Debug.Log("in change img s1");
                 sole1ImgUpdated = true;
                 characterImage.GetComponent<Image>().sprite = characterConfigSO.sole1StandingSilent;
                 if (characterImage.GetComponent<Image>().sprite.name != "noCharacterSprite") break;
@@ -84,7 +79,6 @@ public class Character : MonoBehaviour
                 break;
 
             case CoalmineStop.Sole2:
-                Debug.Log("in change img s2");
                 s2ImgUpdated = true;
                 characterImage.GetComponent<Image>().sprite = characterConfigSO.sole2StandingSilent;
                 if (characterImage.GetComponent<Image>().sprite.name != "noCharacterSprite") break;
@@ -92,7 +86,6 @@ public class Character : MonoBehaviour
                 break;
 
             case CoalmineStop.Sole3:
-                Debug.Log("in change img s3");
                 s3ImgUpdated = true;
                 characterImage.GetComponent<Image>().sprite = characterConfigSO.sole3StandingSilent;
                 if (characterImage.GetComponent<Image>().sprite.name != "noCharacterSprite") break;

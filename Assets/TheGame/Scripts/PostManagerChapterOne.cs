@@ -8,9 +8,12 @@ public class PostManagerChapterOne : MonoBehaviour
     private List <Overlay> overlayList = new List<Overlay>();
     private Overlay[] overlayArray;
     private Dictionary<string, Overlay> dictOverlay= new Dictionary<string, Overlay>();
-
+    private SoSfx sfx;
     private void Awake()
     {
+        sfx = Resources.Load<SoSfx>("SfxConfig");
+        sfx.PlayClip(gameObject, sfx.instaMenuBGmusicLoop);
+
         overlayArray = overlayParent.GetComponentsInChildren<Overlay>(true);
 
         foreach (Overlay a in overlayArray)
@@ -21,8 +24,11 @@ public class PostManagerChapterOne : MonoBehaviour
         if (GameData.overlayToLoad != "" && dictOverlay != null)
         {
             dictOverlay[GameData.overlayToLoad].gameObject.SetActive(true);
+            Debug.Log("Time to stop clip instabgmusic");
+            sfx.StopClip(sfx.instaMenuBGmusicLoop);
             GameData.overlayToLoad = "";
         }
+        
     }
 
     private void PrintAllDictKeys(string calledFrom)
