@@ -13,7 +13,7 @@ public class CaveColliderBottom : MonoBehaviour
     public Cave cave;
     public CoalmineSpeechManger speechManger;
     public bool revisitEntryArea;
-    public Character enya, dad, georg;
+    //public Character enya, dad, georg;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -52,10 +52,10 @@ public class CaveColliderBottom : MonoBehaviour
              }
     }
 
-    public void SetCharacters(Character enya, Character dad, Character georg)
-    {
-        this.enya = enya;
-        this.dad = dad;
-        this.georg = georg;
-    }
+    //public void SetCharacters(Character enya, Character dad, Character georg)
+    //{
+    //    this.enya = enya;
+    //    this.dad = dad;
+    //    this.georg = georg;
+    //}
 }

@@ -34,7 +34,7 @@ public class CaveManager : MonoBehaviour
         switchScene.LoadSole2();
         switchScene.LoadSole3();
 
-        cave.caveTriggerBottom.SetCharacters(characterEnya, characterDad, characterGeorg);
+        //cave.caveTriggerBottom.SetCharacters(characterEnya, characterDad, characterGeorg);
     }
 
     private void OnEnable()
