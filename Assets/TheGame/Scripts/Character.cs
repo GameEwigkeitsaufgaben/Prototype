@@ -12,6 +12,8 @@ public class Character : MonoBehaviour
     public bool sole1ImgUpdated = false, s2ImgUpdated = false, s3ImgUpdated = false;
     public bool entryAreaUpdated = false;
 
+    public SoGameIcons icon;
+
     void Start()
     {
         //Aufbau: Name des Characters (Canvas, CanvasScaler Spline Move, this Script)
@@ -36,6 +38,8 @@ public class Character : MonoBehaviour
                 characterImage = character[i].GetComponent<Image>();
             }
         }
+
+        icon = Resources.Load<SoGameIcons>("Icons");
 
         //setze speechbubble sprite
         speechBubble.SetBubbleSprite(characterConfigSO.speechBubble);

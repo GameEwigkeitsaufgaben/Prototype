@@ -16,6 +16,7 @@ public class SpeechBubble : MonoBehaviour
     public Image bubbleImage;
     public Button bubbleButton;
 
+
     bool isOn = false;
 
     private void Awake()

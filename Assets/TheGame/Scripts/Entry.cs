@@ -14,6 +14,7 @@ public class Entry : MonoBehaviour
     public GameObject post;
     public GameObject overlay;
     public SoPostData postData;
+   
 
     //public bool testVideoPlayed = false;
 
