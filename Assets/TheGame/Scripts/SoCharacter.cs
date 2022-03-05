@@ -24,8 +24,6 @@ public class SoCharacter : ScriptableObject
     public Sprite longwallCutterStandingSilent;
     public Sprite trainRideBlinkEyes;
 
-    public Sprite speechBubble;
-
     private void Awake()
     {
         
