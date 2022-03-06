@@ -65,6 +65,11 @@ public class SwitchSceneManager : MonoBehaviour
         SceneManager.LoadScene(GameScenes.ch01MineSoleThreeTrainRideIn, LoadSceneMode.Single);
     }
 
+    public void GoToInstaChapOne()
+    {
+        SceneManager.LoadScene(GameScenes.ch01InstaMain, LoadSceneMode.Single);
+    }
+
     public void SwitchScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);

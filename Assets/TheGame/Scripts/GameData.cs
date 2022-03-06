@@ -2,6 +2,8 @@ using UnityEngine;
 
 public static class GameData
 {
+    public const string SfxConfig = "SfxConfig";
+
     public static int chapterOneUnlocked = 0;
     public static int chapterTwoUnlocked = 0;
     public static int chapterThreeUnlocked = 0;

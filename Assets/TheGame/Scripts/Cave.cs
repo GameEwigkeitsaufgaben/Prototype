@@ -52,11 +52,9 @@ public class Cave : MonoBehaviour
 
     public void InitReachedStop(CoalmineStop reachedStop)
     {
-        
         StopCave();
         currentStop = reachedStop;
         GameData.currentStopSohle = (int)currentStop;
-        //liftBtns[0].gameObject.GetComponent<Button>().interactable = true;
     }
 
     public void StoreCavePosition()
