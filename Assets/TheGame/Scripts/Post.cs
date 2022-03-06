@@ -34,6 +34,7 @@ public class Post : MonoBehaviour
 
         //Maybe better to create it not at runtime, only set it active.
         //Todo: create it via script not via prefab
+        //Color of Locked post is in Prefab EntryXXX
         childIcon = Instantiate(prefabImgLocked);
         childIcon.transform.SetParent(gameObject.transform.parent, false);
         childIcon.GetComponent<RectTransform>().localPosition = Vector3.zero;
