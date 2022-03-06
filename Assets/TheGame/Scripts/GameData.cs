@@ -2,6 +2,8 @@ using UnityEngine;
 
 public static class GameData
 {
+    public const string SfxConfig = "SfxConfig";
+
     public static int chapterOneUnlocked = 0;
     public static int chapterTwoUnlocked = 0;
     public static int chapterThreeUnlocked = 0;
@@ -52,5 +54,17 @@ public static class GameData
             "chapterThreeUnlocked: " + chapterThreeUnlocked + "\n" +
             "introVideoPlayedOnce: " + introVideoPlayedOnce
             );
+    }
+
+    public static int GetCurrentStop(CoalmineStop stop)
+    {
+        switch (stop)
+        {
+            case CoalmineStop.EntryArea: return 0;
+            case CoalmineStop.Sole1: return 1;
+            case CoalmineStop.Sole2: return 2;
+            case CoalmineStop.Sole3: return 3;
+            default: return -1;
+        }
     }
 }

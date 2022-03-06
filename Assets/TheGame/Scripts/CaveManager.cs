@@ -21,9 +21,11 @@ public class CaveManager : MonoBehaviour
     //public GameObject triggerEinstieg;
 
     private bool introPlayedOneTime = false;
+    private SoSfx sfx;
 
     private void Start()
     {
+        sfx = Resources.Load<SoSfx>(GameData.SfxConfig);
         //triggerEinstieg.SetActive(false);
 
         switchScene = gameObject.GetComponent<SwitchSceneManager>();
@@ -34,6 +36,7 @@ public class CaveManager : MonoBehaviour
         switchScene.LoadSole2();
         switchScene.LoadSole3();
 
+        sfx.PlayClip(cave.gameObject, sfx.coalmineWindInTunnel);
         //cave.caveTriggerBottom.SetCharacters(characterEnya, characterDad, characterGeorg);
     }
 
