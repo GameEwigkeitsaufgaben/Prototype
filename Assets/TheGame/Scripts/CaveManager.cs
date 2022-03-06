@@ -36,7 +36,6 @@ public class CaveManager : MonoBehaviour
         switchScene.LoadSole2();
         switchScene.LoadSole3();
 
-        sfx.PlayClip(cave.gameObject, sfx.coalmineWindInTunnel);
         //cave.caveTriggerBottom.SetCharacters(characterEnya, characterDad, characterGeorg);
     }
 

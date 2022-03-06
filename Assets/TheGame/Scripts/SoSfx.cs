@@ -38,6 +38,25 @@ public class SoSfx : ScriptableObject
         go.GetComponent<AudioSource>().Play();
     }
 
+    public void PlayClip(AudioSource audioSource, AudioClip clip)
+    {
+        audioSource.clip = clip;
+
+        if (audioSource.loop)
+        {
+            if (!playingSourcesLoop.ContainsKey(audioSource.clip.name))
+                playingSourcesLoop.Add(audioSource.clip.name, audioSource);
+        }
+        else
+        {
+            if (!playingSourcesOneShot.ContainsKey(audioSource.clip.name))
+                playingSourcesOneShot.Add(audioSource.clip.name, audioSource);
+        }
+
+        Debug.Log("00 play audio: " +audioSource.name);
+        audioSource.Play();
+    }
+
     public void PlayClip(AudioClip clip)
     {
         if (playingSourcesLoop.ContainsKey(clip.name))
