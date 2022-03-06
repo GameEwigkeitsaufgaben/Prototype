@@ -674,6 +674,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedbackObject: {fileID: 858749000}
+  myStop: 0
+  isSelected: 0
+  hasChanged: 0
 --- !u!114 &55500735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3847,6 +3850,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedbackObject: {fileID: 1725051234}
+  myStop: 0
+  isSelected: 0
+  hasChanged: 0
 --- !u!114 &537043734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7733,6 +7739,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedbackObject: {fileID: 1674873240}
+  myStop: 0
+  isSelected: 0
+  hasChanged: 0
 --- !u!222 &1129489448
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8420,14 +8429,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 919132147999869089}
-        m_TargetAssemblyTypeName: CaveMoveUpDownController, Assembly-CSharp
-        m_MethodName: GoToStop
-        m_Mode: 3
+      - m_Target: {fileID: 1223926022}
+        m_TargetAssemblyTypeName: CaveButton, Assembly-CSharp
+        m_MethodName: GoToMyStop
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -8483,6 +8492,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedbackObject: {fileID: 74647854}
+  myStop: 1
+  isSelected: 0
+  hasChanged: 0
 --- !u!1 &1228932695
 GameObject:
   m_ObjectHideFlags: 0
@@ -8985,14 +8997,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 919132147999869089}
-        m_TargetAssemblyTypeName: CaveMoveUpDownController, Assembly-CSharp
-        m_MethodName: GoToStop
-        m_Mode: 3
+      - m_Target: {fileID: 1264847892}
+        m_TargetAssemblyTypeName: CaveButton, Assembly-CSharp
+        m_MethodName: GoToMyStop
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: Dummy
           m_BoolArgument: 0
@@ -9048,6 +9060,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedbackObject: {fileID: 1577440549}
+  myStop: 3
+  isSelected: 0
+  hasChanged: 0
 --- !u!1 &1265952486
 GameObject:
   m_ObjectHideFlags: 0
@@ -9792,14 +9807,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 919132147999869089}
-        m_TargetAssemblyTypeName: CaveMoveUpDownController, Assembly-CSharp
-        m_MethodName: GoToStop
-        m_Mode: 3
+      - m_Target: {fileID: 1342910292}
+        m_TargetAssemblyTypeName: CaveButton, Assembly-CSharp
+        m_MethodName: GoToMyStop
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: Dummy
           m_BoolArgument: 0
@@ -9855,6 +9870,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedbackObject: {fileID: 1309923995}
+  myStop: 4
+  isSelected: 0
+  hasChanged: 0
 --- !u!1 &1357478540
 GameObject:
   m_ObjectHideFlags: 0
@@ -10884,14 +10902,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 919132147999869089}
-        m_TargetAssemblyTypeName: CaveMoveUpDownController, Assembly-CSharp
-        m_MethodName: GoToStop
-        m_Mode: 3
+      - m_Target: {fileID: 1530691722}
+        m_TargetAssemblyTypeName: CaveButton, Assembly-CSharp
+        m_MethodName: GoToMyStop
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: Dummy
           m_BoolArgument: 0
@@ -10947,6 +10965,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedbackObject: {fileID: 851452274}
+  myStop: 2
+  isSelected: 0
+  hasChanged: 0
 --- !u!4 &1539345906 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e10a53e0a9590d2479f8671dd006447c, type: 3}
@@ -12348,6 +12369,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedbackObject: {fileID: 1336024764}
+  myStop: 0
+  isSelected: 0
+  hasChanged: 0
 --- !u!114 &1691370367
 MonoBehaviour:
   m_ObjectHideFlags: 0

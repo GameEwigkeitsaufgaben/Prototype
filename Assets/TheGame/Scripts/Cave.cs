@@ -47,12 +47,12 @@ public class Cave : MonoBehaviour
     private void Start()
     {
         currentStop = CoalmineStop.EntryArea;
-        
         EnableButtons(true);
     }
 
     public void InitReachedStop(CoalmineStop reachedStop)
     {
+        
         StopCave();
         currentStop = reachedStop;
         GameData.currentStopSohle = (int)currentStop;

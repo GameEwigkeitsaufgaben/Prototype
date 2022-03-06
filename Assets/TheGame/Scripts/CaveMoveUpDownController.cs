@@ -26,9 +26,9 @@ public class CaveMoveUpDownController : MonoBehaviour
         }
     }
 
-    public void GoToStop(int nextStopInt)
+    public void GoToStop(CoalmineStop nextStopInt)
     {
-        CoalmineStop nextStop = (CoalmineStop)nextStopInt;
+        CoalmineStop nextStop = nextStopInt;
 
         if (GameData.moveCave) return;
 
@@ -40,7 +40,7 @@ public class CaveMoveUpDownController : MonoBehaviour
 
         cave.targetStop = nextStop;
 
-        Debug.Log("############### Next Stop");
+        Debug.Log("############### Next Stop " + cave.targetStop);
 
         if (cave.caveDoorsClosed)
         {
@@ -64,8 +64,8 @@ public class CaveMoveUpDownController : MonoBehaviour
             }
         }
 
-        cave.liftBtns[(int)cave.currentStop].GetComponent<CaveButton>().feedbackObject.SetActive(false);
-        cave.liftBtns[(int)cave.targetStop].GetComponent<CaveButton>().feedbackObject.SetActive(true);
+        Debug.Log("current sTop " + cave.currentStop);
+        cave.liftBtns[GameData.GetCurrentStop(cave.currentStop)].GetComponent<CaveButton>().DisableIsSelected();
     }
 
     public void StartMovingSoleOne()
