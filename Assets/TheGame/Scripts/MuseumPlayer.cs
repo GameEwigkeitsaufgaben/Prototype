@@ -1,5 +1,6 @@
 using SWS;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum MuseumWaypoints
 {
@@ -17,6 +18,8 @@ public class MuseumPlayer : MonoBehaviour
     public PathManager p0P1, p1P2, p1P3, p1P4, p1P5, p2P3, p2P4, p2P5, p3P4, p3P5, p4P5;
 
     public MuseumWaypoints currentWP, targetWP;
+
+    public Button btnWPInfo;
     
     // Start is called before the first frame update
     void Start()
@@ -55,11 +58,17 @@ public class MuseumPlayer : MonoBehaviour
     public void ReachedWP()
     {
         currentWP = targetWP;
+        if (currentWP == MuseumWaypoints.WP1)
+        {
+            btnWPInfo.gameObject.SetActive(false);
+        }
+        
         Debug.Log("current WP " + currentWP);
     }
 
     public void MoveToWaypoint (int id)
     {
+        Debug.Log("-----------Move to waypoint: " +id);
         if (mySplineMove.IsMoving()) return;
 
         targetWP = (MuseumWaypoints)id;
