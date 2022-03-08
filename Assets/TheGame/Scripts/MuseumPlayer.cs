@@ -5,11 +5,11 @@ using UnityEngine.UI;
 public enum MuseumWaypoints
 {
     WP0 = 0,
-    WP1 = 1,
-    WP2 = 2,
-    WP3 = 3,
-    WP4 = 4,
-    WP5 = 5,
+    WPInfo = 1,
+    WPInkohlung = 2,
+    WPBergmann = 3,
+    WPMythos = 4,
+    WPWelt = 5,
 }
 
 public class MuseumPlayer : MonoBehaviour
@@ -20,6 +20,7 @@ public class MuseumPlayer : MonoBehaviour
     public MuseumWaypoints currentWP, targetWP;
 
     public Button btnWPInfo, btnWPInkohlung, btnWPBergmann, btnWPSchwein, btnWPWelt;
+    public MuseumOverlay overlay;
     
     // Start is called before the first frame update
     void Start()
@@ -36,23 +37,23 @@ public class MuseumPlayer : MonoBehaviour
         Debug.Log("collider trigger " +other.name);
         if (other.name.Contains("WP1"))
         {
-            currentWP = MuseumWaypoints.WP1;
+            currentWP = MuseumWaypoints.WPInfo;
         }
         else if (other.name.Contains("WP2"))
         {
-            currentWP = MuseumWaypoints.WP2;
+            currentWP = MuseumWaypoints.WPInkohlung;
         }
         else if (other.name.Contains("WP3"))
         {
-            currentWP = MuseumWaypoints.WP3;
+            currentWP = MuseumWaypoints.WPBergmann;
         }
         else if (other.name.Contains("WP4"))
         {
-            currentWP = MuseumWaypoints.WP4;
+            currentWP = MuseumWaypoints.WPMythos;
         }
         else if (other.name.Contains("WP5"))
         {
-            currentWP = MuseumWaypoints.WP5;
+            currentWP = MuseumWaypoints.WPWelt;
         }
     }
 
@@ -77,26 +78,31 @@ public class MuseumPlayer : MonoBehaviour
     public void ReachedWP()
     {
         currentWP = targetWP;
-        if (currentWP == MuseumWaypoints.WP1)
+        if (currentWP == MuseumWaypoints.WPInfo)
         {
             btnWPInfo.gameObject.SetActive(false);
             ShowStations();
+            overlay.ActivateOverlay(MuseumWaypoints.WPInfo);
         }
-        else if (currentWP == MuseumWaypoints.WP2)
+        else if (currentWP == MuseumWaypoints.WPInkohlung)
         {
             btnWPInkohlung.gameObject.SetActive(false);
+            overlay.ActivateOverlay(MuseumWaypoints.WPInkohlung);
         }
-        else if (currentWP == MuseumWaypoints.WP3)
+        else if (currentWP == MuseumWaypoints.WPBergmann)
         {
             btnWPBergmann.gameObject.SetActive(false);
+            overlay.ActivateOverlay(MuseumWaypoints.WPBergmann);
         }
-        else if (currentWP == MuseumWaypoints.WP4)
+        else if (currentWP == MuseumWaypoints.WPMythos)
         {
             btnWPSchwein.gameObject.SetActive(false);
+            overlay.ActivateOverlay(MuseumWaypoints.WPMythos);
         }
-        else if (currentWP == MuseumWaypoints.WP5)
+        else if (currentWP == MuseumWaypoints.WPWelt)
         {
             btnWPWelt.gameObject.SetActive(false);
+            overlay.ActivateOverlay(MuseumWaypoints.WPWelt);
         }
 
         Debug.Log("current WP " + currentWP);
@@ -123,112 +129,112 @@ public class MuseumPlayer : MonoBehaviour
     {
 
         if (currentWP == targetWP) return null;
-        else if(currentWP == MuseumWaypoints.WP0 && targetWP == MuseumWaypoints.WP1)
+        else if(currentWP == MuseumWaypoints.WP0 && targetWP == MuseumWaypoints.WPInfo)
         {
             mySplineMove.reverse = false;
             return p0P1;
         }
-        else if (currentWP == MuseumWaypoints.WP1 && targetWP == MuseumWaypoints.WP0)
+        else if (currentWP == MuseumWaypoints.WPInfo && targetWP == MuseumWaypoints.WP0)
         {
             mySplineMove.reverse = true;
             return p0P1;
         }
-        else if (currentWP == MuseumWaypoints.WP1 && targetWP == MuseumWaypoints.WP2)
+        else if (currentWP == MuseumWaypoints.WPInfo && targetWP == MuseumWaypoints.WPInkohlung)
         {
             mySplineMove.reverse = false;
             return p1P2;
         }
-        else if (currentWP == MuseumWaypoints.WP2 && targetWP == MuseumWaypoints.WP1)
+        else if (currentWP == MuseumWaypoints.WPInkohlung && targetWP == MuseumWaypoints.WPInfo)
         {
             mySplineMove.reverse = true;
             return p1P2;
         }
-        else if (currentWP == MuseumWaypoints.WP1 && targetWP == MuseumWaypoints.WP3)
+        else if (currentWP == MuseumWaypoints.WPInfo && targetWP == MuseumWaypoints.WPBergmann)
         {
             mySplineMove.reverse = false;
             return p1P3;
         }
-        else if (currentWP == MuseumWaypoints.WP3 && targetWP == MuseumWaypoints.WP1)
+        else if (currentWP == MuseumWaypoints.WPBergmann && targetWP == MuseumWaypoints.WPInfo)
         {
             mySplineMove.reverse = true;
             return p1P3;
         }
-        else if (currentWP == MuseumWaypoints.WP1 && targetWP == MuseumWaypoints.WP4)
+        else if (currentWP == MuseumWaypoints.WPInfo && targetWP == MuseumWaypoints.WPMythos)
         {
             mySplineMove.reverse = false;
             return p1P4;
         }
-        else if (currentWP == MuseumWaypoints.WP4 && targetWP == MuseumWaypoints.WP1)
+        else if (currentWP == MuseumWaypoints.WPMythos && targetWP == MuseumWaypoints.WPInfo)
         {
             mySplineMove.reverse = true;
             return p1P4;
         }
-        else if (currentWP == MuseumWaypoints.WP1 && targetWP == MuseumWaypoints.WP5)
+        else if (currentWP == MuseumWaypoints.WPInfo && targetWP == MuseumWaypoints.WPWelt)
         {
             mySplineMove.reverse = false;
             return p1P5;
         }
-        else if (currentWP == MuseumWaypoints.WP5 && targetWP == MuseumWaypoints.WP1)
+        else if (currentWP == MuseumWaypoints.WPWelt && targetWP == MuseumWaypoints.WPInfo)
         {
             mySplineMove.reverse = true;
             return p1P5;
         }
-        else if (currentWP == MuseumWaypoints.WP2 && targetWP == MuseumWaypoints.WP3)
+        else if (currentWP == MuseumWaypoints.WPInkohlung && targetWP == MuseumWaypoints.WPBergmann)
         {
             mySplineMove.reverse = false;
             return p2P3;
         }
-        else if (currentWP == MuseumWaypoints.WP3 && targetWP == MuseumWaypoints.WP2)
+        else if (currentWP == MuseumWaypoints.WPBergmann && targetWP == MuseumWaypoints.WPInkohlung)
         {
             mySplineMove.reverse = true;
             return p2P3;
         }
-        else if (currentWP == MuseumWaypoints.WP2 && targetWP == MuseumWaypoints.WP4)
+        else if (currentWP == MuseumWaypoints.WPInkohlung && targetWP == MuseumWaypoints.WPMythos)
         {
             mySplineMove.reverse = false;
             return p2P4;
         }
-        else if (currentWP == MuseumWaypoints.WP4 && targetWP == MuseumWaypoints.WP2)
+        else if (currentWP == MuseumWaypoints.WPMythos && targetWP == MuseumWaypoints.WPInkohlung)
         {
             mySplineMove.reverse = true;
             return p2P4;
         }
-        else if (currentWP == MuseumWaypoints.WP2 && targetWP == MuseumWaypoints.WP5)
+        else if (currentWP == MuseumWaypoints.WPInkohlung && targetWP == MuseumWaypoints.WPWelt)
         {
             mySplineMove.reverse = false;
             return p2P5;
         }
-        else if (currentWP == MuseumWaypoints.WP5 && targetWP == MuseumWaypoints.WP2)
+        else if (currentWP == MuseumWaypoints.WPWelt && targetWP == MuseumWaypoints.WPInkohlung)
         {
             mySplineMove.reverse = true;
             return p2P5;
         }
-        else if (currentWP == MuseumWaypoints.WP3 && targetWP == MuseumWaypoints.WP4)
+        else if (currentWP == MuseumWaypoints.WPBergmann && targetWP == MuseumWaypoints.WPMythos)
         {
             mySplineMove.reverse = false;
             return p3P4;
         }
-        else if (currentWP == MuseumWaypoints.WP4 && targetWP == MuseumWaypoints.WP3)
+        else if (currentWP == MuseumWaypoints.WPMythos && targetWP == MuseumWaypoints.WPBergmann)
         {
             mySplineMove.reverse = true;
             return p3P4;
         }
-        else if (currentWP == MuseumWaypoints.WP3 && targetWP == MuseumWaypoints.WP5)
+        else if (currentWP == MuseumWaypoints.WPBergmann && targetWP == MuseumWaypoints.WPWelt)
         {
             mySplineMove.reverse = false;
             return p3P5;
         }
-        else if (currentWP == MuseumWaypoints.WP5 && targetWP == MuseumWaypoints.WP3)
+        else if (currentWP == MuseumWaypoints.WPWelt && targetWP == MuseumWaypoints.WPBergmann)
         {
             mySplineMove.reverse = true;
             return p3P5;
         }
-        else if (currentWP == MuseumWaypoints.WP4 && targetWP == MuseumWaypoints.WP5)
+        else if (currentWP == MuseumWaypoints.WPMythos && targetWP == MuseumWaypoints.WPWelt)
         {
             mySplineMove.reverse = false;
             return p4P5;
         }
-        else if (currentWP == MuseumWaypoints.WP5 && targetWP == MuseumWaypoints.WP4)
+        else if (currentWP == MuseumWaypoints.WPWelt && targetWP == MuseumWaypoints.WPMythos)
         {
             mySplineMove.reverse = true;
             return p4P5;
