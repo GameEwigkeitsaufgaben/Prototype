@@ -19,12 +19,13 @@ public class MuseumPlayer : MonoBehaviour
 
     public MuseumWaypoints currentWP, targetWP;
 
-    public Button btnWPInfo;
+    public Button btnWPInfo, btnWPInkohlung, btnWPBergmann, btnWPSchwein, btnWPWelt;
     
     // Start is called before the first frame update
     void Start()
     {
         mySplineMove = gameObject.GetComponent<splineMove>();
+        ShowOnlyInfo();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -55,14 +56,49 @@ public class MuseumPlayer : MonoBehaviour
         }
     }
 
+    public void ShowOnlyInfo()
+    {
+        btnWPInfo.gameObject.SetActive(true);
+        btnWPInkohlung.gameObject.SetActive(false);
+        btnWPBergmann.gameObject.SetActive(false);
+        btnWPSchwein.gameObject.SetActive(false);
+        btnWPWelt.gameObject.SetActive(false);
+    }
+
+    public void ShowStations()
+    {
+        btnWPInfo.gameObject.SetActive(false);
+        btnWPInkohlung.gameObject.SetActive(true);
+        btnWPBergmann.gameObject.SetActive(true);
+        btnWPSchwein.gameObject.SetActive(true);
+        btnWPWelt.gameObject.SetActive(true);
+    }
+
     public void ReachedWP()
     {
         currentWP = targetWP;
         if (currentWP == MuseumWaypoints.WP1)
         {
             btnWPInfo.gameObject.SetActive(false);
+            ShowStations();
         }
-        
+        else if (currentWP == MuseumWaypoints.WP2)
+        {
+            btnWPInkohlung.gameObject.SetActive(false);
+        }
+        else if (currentWP == MuseumWaypoints.WP3)
+        {
+            btnWPBergmann.gameObject.SetActive(false);
+        }
+        else if (currentWP == MuseumWaypoints.WP4)
+        {
+            btnWPSchwein.gameObject.SetActive(false);
+        }
+        else if (currentWP == MuseumWaypoints.WP5)
+        {
+            btnWPWelt.gameObject.SetActive(false);
+        }
+
         Debug.Log("current WP " + currentWP);
     }
 
