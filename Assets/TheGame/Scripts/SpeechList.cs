@@ -9,15 +9,13 @@ public class SpeechList : MonoBehaviour
     bool playAll;
     int currentIndex = 0;
     bool resetBubbles;
-    public bool finished;
+    public bool finishedToogle;
 
     bool enableBubbleEnya, enableBubbleDad, enableBubbleMuseumGuide, enableBubbleGeorg;
 
     public void SetUpList(SoTalkingList list, AudioSource src)
     {
         listName = list.listName;
-        //audioSrc = gameObject.AddComponent<AudioSource>();
-        //audioSrc.playOnAwake = false;
         audioSrc = src;
         audioSrc.playOnAwake = false;
         clips = list.orderedListOfAudioClips;
@@ -32,6 +30,14 @@ public class SpeechList : MonoBehaviour
     {
         playAll = true;
         currentIndex = 0;
+    }
+
+    private void ResetFlags()
+    {
+        playAll = false;
+        currentIndex = 0;
+        finishedToogle = false;
+        Debug.Log("Reset all flags;");
     }
 
     void ResetSpeechBubbles()
@@ -66,27 +72,27 @@ public class SpeechList : MonoBehaviour
             GameData.bubbleOnMuseumGuide = true;
         }
 
-       // Debug.Log(audioSrc.clip.name + " bubble on e " + GameData.bubbleOnEnvy + " v " + GameData.bubbleOnDad+ " g " + GameData.bubbleOnGeorg);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (audioSrc == null) return;
         
-        //Debug.Log("bubble on audiosource playing " +audioSrc.isPlaying);
         if (!audioSrc.isPlaying)
         {
             ResetSpeechBubbles();
         }
 
+        if (finishedToogle)
+        {
+            ResetFlags();
+        }
+
         if (playAll && !audioSrc.isPlaying)
         {
-            
-            finished = true;
+            finishedToogle = true;
             if (currentIndex >= clips.Length) return;
-            
-            finished = false;
+            finishedToogle = false;
             audioSrc.clip = clips[currentIndex];
             
             if (audioSrc.clip == null) return;

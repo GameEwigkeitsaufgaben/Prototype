@@ -19,6 +19,7 @@ public class SoSfx : ScriptableObject
     private Dictionary<string, AudioSource> playingSourcesLoop = new Dictionary<string, AudioSource>();
     private Dictionary<string, AudioSource> playingSourcesOneShot = new Dictionary<string, AudioSource>();
 
+    public bool EntryAreaSfxStarted = false, sole1SfxStarted = false, sole2SfxStarted = false, sole3SfxStarted = false;
 
     public void PlayClip(GameObject go, AudioClip clip)
     {
@@ -36,6 +37,72 @@ public class SoSfx : ScriptableObject
         }
 
         go.GetComponent<AudioSource>().Play();
+    }
+
+    public void PlaySfxSole2()
+    {
+        if (sole2SfxStarted) return;
+        Debug.Log("++++++++++++++++++++++ " + sole2SfxStarted);
+        //wind is further looping
+        sole1SfxStarted = false;
+        sole2SfxStarted = true;
+        StopClip(caolmineLader);
+        StopClip(coalmineWorkingMachinesMetal);
+
+        PlayClip(caolmineSplashingWater);
+        Debug.Log("Water is playing  " +playingSourcesLoop[caolmineSplashingWater.name].isPlaying);
+    }
+
+    public void PlayClipsInSole1Sfx()
+    {
+        Debug.Log("++++++++++++++++++++++ " + sole1SfxStarted);
+        if (sole1SfxStarted) return;
+        
+        Debug.Log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        sole1SfxStarted = true;
+
+        //wind
+        if (!playingSourcesLoop[coalmineWindInTunnel.name].isPlaying)
+        {
+            IncreaseVolume(coalmineWindInTunnel, 0.4f);
+        }
+
+        //baukipper
+        if (!playingSourcesLoop[coalmineWorkingMachinesMetal.name].isPlaying)
+        {
+            PlayClip(coalmineWorkingMachinesMetal);
+        }
+
+        //lader
+        if (!playingSourcesLoop[caolmineLader.name].isPlaying)
+        {
+            PlayClip(caolmineLader);
+        }
+        
+    }
+
+    public void PlayClip(AudioSource audioSource, AudioClip clip)
+    {
+        SetClipByAddToDict(audioSource, clip);
+
+        Debug.Log("00 play audio: " + audioSource.name);
+        audioSource.Play();
+    }
+
+    public void SetClipByAddToDict(AudioSource audioSource, AudioClip clip)
+    {
+        audioSource.clip = clip;
+
+        if (audioSource.loop)
+        {
+            if (!playingSourcesLoop.ContainsKey(audioSource.clip.name))
+                playingSourcesLoop.Add(audioSource.clip.name, audioSource);
+        }
+        else
+        {
+            if (!playingSourcesOneShot.ContainsKey(audioSource.clip.name))
+                playingSourcesOneShot.Add(audioSource.clip.name, audioSource);
+        }
     }
 
     public void PlayClip(AudioClip clip)

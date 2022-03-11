@@ -9,6 +9,8 @@ public class CaveDoor : MonoBehaviour
     public bool doorOpened = false;
     private Vector3 targetPosition;
     private Vector3 closedPosition;
+    private SoSfx sfx;
+    public bool playDoorSound;
     
 
     private void Start()
@@ -18,11 +20,27 @@ public class CaveDoor : MonoBehaviour
         
         gameObject.transform.localPosition = opendPosition.transform.localPosition;
         doorOpened = true;
+
+        sfx = Resources.Load<SoSfx>(GameData.SfxConfig);
+        gameObject.GetComponent<AudioSource>().clip = sfx.coalmineCaveMoveDoors;
+    }
+
+    public void PlayMoveSfx()
+    {
+        playDoorSound = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (playDoorSound && !gameObject.GetComponent<AudioSource>().isPlaying)
+        {
+            gameObject.GetComponent<AudioSource>().Play();
+            playDoorSound =  false;
+        }
+
+        Debug.Log(gameObject.name + "is playing  " + gameObject.GetComponent<AudioSource>().isPlaying);
+
         if (move)
         {
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, targetPosition, speed * Time.deltaTime);

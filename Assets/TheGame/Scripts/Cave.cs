@@ -41,13 +41,25 @@ public class Cave : MonoBehaviour
     public CoalmineStop targetStop;
     public CaveMovement moveDirection;
 
-    public AudioSource doorsMovingSrc;
+    public AudioSource wind;
+    public AudioSource cbelt;
     public AudioSource liftMovingSrc;
+    private SoSfx sfx;
 
     private void Start()
     {
+        sfx = Resources.Load<SoSfx>(GameData.SfxConfig);
         currentStop = CoalmineStop.EntryArea;
         EnableButtons(true);
+
+        sfx.PlayClip(wind, sfx.coalmineWindInTunnel);
+        sfx.ReduceVolume(sfx.coalmineWindInTunnel, 0.7f);
+
+        sfx.PlayClip(cbelt, sfx.coalmineConveyorBelt);
+        sfx.ReduceVolume(sfx.coalmineConveyorBelt, 0.8f);
+
+        liftMovingSrc.clip = sfx.coalmineMoveCave;
+
     }
 
     public void InitReachedStop(CoalmineStop reachedStop)
@@ -103,9 +115,25 @@ public class Cave : MonoBehaviour
         doorLeft.GetComponent<CaveDoor>().CloseDoor();
         doorRight.GetComponent<CaveDoor>().CloseDoor();
         caveDoorsClosed = true;
-        if (!doorsMovingSrc.isPlaying)
+        PlayDoorMoveSound();
+    }
+
+    public void OpenDoors()
+    {
+        doorLeft.GetComponent<CaveDoor>().OpenDoor();
+        doorRight.GetComponent<CaveDoor>().OpenDoor();
+        caveDoorsClosed = false;
+
+        PlayDoorMoveSound();
+    }
+
+    private void PlayDoorMoveSound()
+    {
+        if (!doorRight.GetComponent<CaveDoor>().GetComponent<AudioSource>().isPlaying &&
+                   !doorLeft.GetComponent<CaveDoor>().GetComponent<AudioSource>().isPlaying)
         {
-            doorsMovingSrc.Play();
+            doorLeft.GetComponent<CaveDoor>().PlayMoveSfx();
+            doorRight.GetComponent<CaveDoor>().PlayMoveSfx();
         }
     }
 
@@ -117,16 +145,6 @@ public class Cave : MonoBehaviour
         }
 
         GameData.liftBtnsEnabled = enableButtons;
-    }
-
-    public void OpenDoors()
-    {
-        doorLeft.GetComponent<CaveDoor>().OpenDoor();
-        doorRight.GetComponent<CaveDoor>().OpenDoor();
-        caveDoorsClosed = false;
-        {
-            doorsMovingSrc.Play();
-        }
     }
 
     public void StopCave()

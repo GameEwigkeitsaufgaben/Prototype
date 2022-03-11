@@ -23,6 +23,8 @@ public class CaveManager : MonoBehaviour
     private bool introPlayedOneTime = false;
     private SoSfx sfx;
 
+    public AudioSource baukipper, kran, water;
+
     private void Start()
     {
         sfx = Resources.Load<SoSfx>(GameData.SfxConfig);
@@ -36,8 +38,10 @@ public class CaveManager : MonoBehaviour
         switchScene.LoadSole2();
         switchScene.LoadSole3();
 
-        sfx.PlayClip(cave.gameObject, sfx.coalmineWindInTunnel);
-        //cave.caveTriggerBottom.SetCharacters(characterEnya, characterDad, characterGeorg);
+        sfx.SetClipByAddToDict(baukipper, sfx.caolmineLader);
+        sfx.SetClipByAddToDict(kran, sfx.coalmineWorkingMachinesMetal);
+        sfx.SetClipByAddToDict(water, sfx.caolmineSplashingWater);
+
     }
 
     private void OnEnable()
@@ -59,16 +63,24 @@ public class CaveManager : MonoBehaviour
 
     private void Update()
     {
-        if (cave.caveDoorsClosed && exitScene.interactable)
+        if(GameData.currentStopSohle == (int)CoalmineStop.Sole1)
         {
-            exitScene.interactable = false;
-            //sole1WPViewpointBtn.interactable = false;
+            sfx.PlayClipsInSole1Sfx();
         }
+        if (GameData.currentStopSohle == (int)CoalmineStop.Sole2)
+        {
+            sfx.PlaySfxSole2();
+        }
+        //if (cave.caveDoorsClosed && exitScene.interactable)
+        //{
+        //    exitScene.interactable = false;
+        //    //sole1WPViewpointBtn.interactable = false;
+        //}
 
-        if (!cave.caveDoorsClosed && !exitScene.interactable)
-        {
-            exitScene.interactable = true;
-            //sole1WPViewpointBtn.interactable = true;
-        }
+        //if (!cave.caveDoorsClosed && !exitScene.interactable)
+        //{
+        //    exitScene.interactable = true;
+        //    //sole1WPViewpointBtn.interactable = true;
+        //}
     }
 }
