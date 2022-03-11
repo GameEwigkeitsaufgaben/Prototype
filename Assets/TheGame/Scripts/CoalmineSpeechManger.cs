@@ -12,7 +12,6 @@ public class CoalmineSpeechManger : MonoBehaviour
         audiosSole3WPBahnsteig, audiosSole3WPBewetterung, audiosSole3WPCave, audiosSole3WPOVMine,
         audiosTrainRideIn, audiosTrainRideOut,
         audiosLongwallCutterBahnsteig, audioLongwallCutterLongwallCutter;
-        //audiosMuseumHistoryMining, audiosMuseumMinerEquipment, audiosMuseumInfo, audiosMuseumCarbonification;
 
     public SpeechBubble spEnya, spDad, spGeorg;
 
@@ -26,7 +25,6 @@ public class CoalmineSpeechManger : MonoBehaviour
         playSole3WPBahnsteig, playSole3WPBewetterung, playSole3WPCave, playSole3WPOVMine,
         playTrainRideIn, playTrainRideOut,
         playLongwallCutterBahnsteig, playLongwallCutterLongwallCutter;
-    //playMuseumInfo, playMuseumCarbonification, MinerEquipment, HistoryMining;
 
     private SpeechList
         speakCaveIntro,
@@ -37,7 +35,6 @@ public class CoalmineSpeechManger : MonoBehaviour
         speakBewetterung, speakSole3Bahnsteig, speakSole3Cave, speakSole3BoardOVmine,
         speakTrainRideIn, speakTrainRideOut,
         speakLongwallCutterBahnsteig, speakLongwallCutterLongwallCutter;
-    //speakMuseumInfo, speakMuseumCarbonification, speakMinerEquipment, speakHistroyMining;
 
     private SpeechList currentList = null;
     private List<AudioSource> listAudioSrcs = new List<AudioSource>();
@@ -108,22 +105,6 @@ public class CoalmineSpeechManger : MonoBehaviour
             mySpeechDict.Add(mySpeechLists[i].listName, mySpeechLists[i]);
         }
 
-        //speakMuseumInfo = gameObject.AddComponent<SpeechList>();
-        //speakMuseumInfo.SetUpList(audiosMuseumInfo, mySrc);
-        //mySpeechLists.Add(speakMuseumInfo);
-
-        //speakHistroyMining = gameObject.AddComponent<SpeechList>();
-        //speakHistroyMining.SetUpList(audiosMuseumHistoryMining, mySrc);
-        //mySpeechLists.Add(speakHistroyMining);
-
-        //speakMuseumCarbonification = gameObject.AddComponent<SpeechList>();
-        //speakMuseumCarbonification.SetUpList(audiosMuseumCarbonification, mySrc);
-        //mySpeechLists.Add(speakMuseumCarbonification);
-
-        //speakMinerEquipment = gameObject.AddComponent<SpeechList>();
-        //speakMinerEquipment.SetUpList(audiosMuseumMinerEquipment, mySrc);
-        //mySpeechLists.Add(speakMinerEquipment);
-
         DisableAllSpeechlists();
     }
 
@@ -150,28 +131,28 @@ public class CoalmineSpeechManger : MonoBehaviour
 
     public bool IsTrainRideInTalkingFinished()
     {
-        return mySpeechDict["Audios100160CaveTrainRideIn"].finished;
+        return mySpeechDict["Audios100160CaveTrainRideIn"].finishedToogle;
     }
 
     public bool IsTrainRideOutTalkingFinished()
     {
-        return mySpeechDict["Audios100160CaveTrainRideOut"].finished;
+        return mySpeechDict["Audios100160CaveTrainRideOut"].finishedToogle;
         //return mySpeechLists[9].finished;
     }
 
     public bool IsLWCBahnsteigFinished()
     {
-        return mySpeechLists[10].finished;
+        return mySpeechLists[10].finishedToogle;
     }
 
     public void ToggleTrainRideOutTalkingFinished()
     {
-        mySpeechDict["Audios100160CaveTrainRideOut"].finished = !mySpeechDict["Audios100160CaveTrainRideOut"].finished;
+        mySpeechDict["Audios100160CaveTrainRideOut"].finishedToogle = !mySpeechDict["Audios100160CaveTrainRideOut"].finishedToogle;
     }
 
     public void ToggleTrainRideInTalkingFinished()
     {
-        mySpeechDict["Audios100160CaveTrainRideIn"].finished = !mySpeechDict["Audios100160CaveTrainRideIn"].finished;
+        mySpeechDict["Audios100160CaveTrainRideIn"].finishedToogle = !mySpeechDict["Audios100160CaveTrainRideIn"].finishedToogle;
     }
 
     void Update()

@@ -75,7 +75,7 @@ public class MuseumPlayer : MonoBehaviour
         btnWPWelt.gameObject.SetActive(true);
     }
 
-    public void ReachedWP()
+    public void ReachedWP()//Called from UnityEvent Gruppe in Inspector
     {
         currentWP = targetWP;
         if (currentWP == MuseumWaypoints.WPInfo)
