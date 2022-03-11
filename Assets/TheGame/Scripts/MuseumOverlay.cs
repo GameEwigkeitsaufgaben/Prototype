@@ -41,15 +41,14 @@ public class MuseumOverlay : MonoBehaviour
 
     private void Update()
     {
+        //playOverlay will be set to true in ActivateOverlay()
         if (speechManager.IsMusuemInfoIntroFinished() && playOverlay)
         {
-            Debug.Log("......................................info finished set overlay False");
             playOverlay = false;
         }
 
         if (speechManager.IsMusuemMinerEquipmentFinished() && playOverlay)
         {
-            Debug.Log("......................................miner finished set overlay False");
             playOverlay = false;
         }
 
@@ -57,6 +56,5 @@ public class MuseumOverlay : MonoBehaviour
         {
             parentMaskPanel.SetActive(false);
         }
-
     }
 }
