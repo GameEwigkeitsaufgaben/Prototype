@@ -8,10 +8,11 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
 {
     public MinerEquipmentItem equipmentItem; //Enum
     public SnapetTo snapedTo; //Enum
-    private GameObject miner; //set from Methodcall in Manager
+    public SnapetTo previous;
+    private GameObject miner = null; //set in onTrigger
     
     private GameObject itemOnTable; //this object where this script is attached to
-    private Vector3 origPosTable;
+    public Vector3 origPosTable;
     public GameObject correspondingItemOnMiner;
     
     public string desc;
@@ -23,17 +24,23 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
     private Canvas myCanvas;
     private RectTransform dragRectTransform;
 
-    private bool snapToMiner;
-    private Texture2D lampTexture; 
+    private bool snapToggled = false;
+    private Texture2D lampTexture;
+    private SoMinerEquipment myConifg;
+
+    //private GameObject handschuhLeft = null, handschuhRight = null;
+    private ManagerMuseumMinerEquipment manager;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        manager = FindObjectOfType<ManagerMuseumMinerEquipment>();
         itemOnTable = gameObject;
         origPosTable = itemOnTable.transform.position;
         lampTexture = GetComponent<Image>().sprite.texture;
-        
+        myConifg = Resources.Load<SoMinerEquipment>("ConfigMinerEquipment");
+
         //origTransformTable = Instantiate(itemOnTable.transform, itemOnTable.transform.position, itemOnTable.transform.rotation);
 
         //Get the parent Canvas Obj
@@ -46,6 +53,7 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
 
         myCanvas = canvasItem.GetComponent<Canvas>();
         dragRectTransform = GetComponent<RectTransform>();
+        previous = snapedTo;
     }
     public void SetMiner(GameObject miner)
     {
@@ -60,19 +68,52 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
     public void OnEndDrag(PointerEventData eventData)
     {
         Debug.Log("End Drag");
-        if (snapToMiner)
+        Debug.Log("Event data  +++++++++++++++++++++ " + eventData.pointerEnter.name + " " + equipmentItem);
+
+        snapToggled = (previous != snapedTo) ? true : false;
+
+        //Special: 2 different sprites for table and miner
+        switch (equipmentItem)
+        {
+            case MinerEquipmentItem.Lampe:
+                if (snapedTo == SnapetTo.Miner) GetComponent<Image>().sprite = myConifg.lampMiner;
+                else GetComponent<Image>().sprite = myConifg.lampTable;
+                break;
+            case MinerEquipmentItem.Stechkarte:
+                if (snapedTo == SnapetTo.Miner) GetComponent<Image>().sprite = myConifg.cardMiner;
+                else GetComponent<Image>().sprite = myConifg.cardTable;
+                break;
+        }
+
+        //Set transform for items, with special handschuhe
+        if (snapedTo == SnapetTo.Miner)
         {
             transform.position = correspondingItemOnMiner.transform.position;
 
-            if (equipmentItem == MinerEquipmentItem.Lampe)
-            {
-                GetComponent<Image>().sprite.texture = lampTexture;
-            }
+            if (equipmentItem == MinerEquipmentItem.Handschuhe) gameObject.transform.parent.GetComponent<MuseumHandschuhe>().SetMinerPos();
+
+            if (snapToggled) manager.itemsOnMiner++;
         }
-        else
+        else if (snapedTo == SnapetTo.Table)
         {
             transform.position = origPosTable;
+
+            if (equipmentItem == MinerEquipmentItem.Handschuhe) gameObject.transform.parent.GetComponent<MuseumHandschuhe>().SetTablePos();
+
+            if (snapToggled) manager.itemsOnMiner--;
         }
+
+        
+        if (snapToggled)
+        {
+            previous = snapedTo;
+
+            if(equipmentItem == MinerEquipmentItem.Handschuhe)
+            {
+                gameObject.transform.parent.GetComponent<MuseumHandschuhe>().SetToogleSameForBoth();
+            }
+        }
+       
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -85,8 +126,18 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
     {
         if (collision.name == "MinerImg")
         {
-            Debug.Log("Set it to miner");
-            snapToMiner = true;
+            Debug.Log("Set it to miner " + gameObject.name);
+            snapedTo = SnapetTo.Miner;
+            
+            if (equipmentItem == MinerEquipmentItem.Handschuhe)
+            {
+                gameObject.transform.parent.GetComponent<MuseumHandschuhe>().SetBothSnapedToMiner();
+            }
+
+            if (miner == null)
+            {
+                miner = collision.gameObject;
+            }
         }
         else if (collision.name == "Scanarea")
         {
@@ -99,7 +150,12 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
     {
         if (collision.name == "MinerImg")
         {
-            snapToMiner = false;
+            Debug.Log("Set it to table " + gameObject.name);
+            snapedTo = SnapetTo.Table;
+            if (equipmentItem == MinerEquipmentItem.Handschuhe)
+            {
+                gameObject.transform.parent.GetComponent<MuseumHandschuhe>().SetBothSnapedToTable();
+            }
         }
         else if (collision.name == "Scanarea")
         {

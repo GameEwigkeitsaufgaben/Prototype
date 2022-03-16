@@ -250,6 +250,7 @@ GameObject:
   m_Component:
   - component: {fileID: 36808995}
   - component: {fileID: 36808996}
+  - component: {fileID: 36808997}
   m_Layer: 5
   m_Name: HandschuheTable
   m_TagString: Untagged
@@ -304,6 +305,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 54.78, y: 100}
   m_EdgeRadius: 0
+--- !u!114 &36808997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36808994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a6179eb47ee9994bab678df5d3c95b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftHand: {fileID: 388615593}
+  rightHand: {fileID: 1410976360}
 --- !u!1 &47595511
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,7 +562,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 143583110}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 149081977}
+        m_TargetAssemblyTypeName: ManagerMuseumMinerEquipment, Assembly-CSharp
+        m_MethodName: CheckRound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &143583110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -617,6 +644,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items:
   - {fileID: 1482616526}
+  - {fileID: 1096155854}
+  - {fileID: 1770919744}
+  - {fileID: 660839067}
+  - {fileID: 963523488}
+  - {fileID: 1424009165}
+  - {fileID: 1702116417}
+  - {fileID: 1371544355}
+  - {fileID: 1318282814}
+  - {fileID: 388615593}
+  - {fileID: 1410976360}
+  itemsOnMiner: 0
+  round: 0
 --- !u!4 &149081978
 Transform:
   m_ObjectHideFlags: 0
@@ -1465,8 +1504,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0225a858ff6571d4caa128bf01b55d1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipmentItem: 10
+  equipmentItem: 107
   snapedTo: 0
+  previous: 0
+  origPosTable: {x: 0, y: 0, z: 0}
   correspondingItemOnMiner: {fileID: 297204067}
   desc: "Die Handschuhe sch\xFCtzen die H\xE4nde bei schweren Arbeiten vor Blasen
     und Schwielen."
@@ -2753,8 +2794,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0225a858ff6571d4caa128bf01b55d1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipmentItem: 6
+  equipmentItem: 15
   snapedTo: 0
+  previous: 0
+  origPosTable: {x: 0, y: 0, z: 0}
   correspondingItemOnMiner: {fileID: 1011234270}
   desc: "Die Schutzbrille, sch\xFCtzt die Augen vor allem vor Staub, aber auch vor
     Augenverletzungen durch Gegenst\xE4nde im Stollen."
@@ -3488,6 +3531,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equipmentItem: 1
   snapedTo: 0
+  previous: 0
+  origPosTable: {x: 0, y: 0, z: 0}
   correspondingItemOnMiner: {fileID: 1224329166}
   desc: "Der Helm, sch\xFCtzt vor Kopfverletzungen durch herabfallenden Einbauten
     oder in Stollen mit geringer H\xF6he."
@@ -3821,8 +3866,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0225a858ff6571d4caa128bf01b55d1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipmentItem: 3
+  equipmentItem: 5
   snapedTo: 0
+  previous: 0
+  origPosTable: {x: 0, y: 0, z: 0}
   correspondingItemOnMiner: {fileID: 2104868484}
   desc: "Die Atemschutzmaske, verhindert, dass krankmachender Kohlenstaub in gro\xDFen
     Mengen eingeatmet wird."
@@ -4485,8 +4532,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0225a858ff6571d4caa128bf01b55d1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipmentItem: 2
+  equipmentItem: 3
   snapedTo: 0
+  previous: 0
+  origPosTable: {x: 0, y: 0, z: 0}
   correspondingItemOnMiner: {fileID: 432178482}
   desc: "Die Lampe, dient zum Ausleuchten der Stollen, um nicht mit Gegenst\xE4nden
     oder Einbauten zusammenzusto\xDFen."
@@ -4758,8 +4807,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0225a858ff6571d4caa128bf01b55d1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipmentItem: 9
+  equipmentItem: 105
   snapedTo: 0
+  previous: 0
+  origPosTable: {x: 0, y: 0, z: 0}
   correspondingItemOnMiner: {fileID: 1954867649}
   desc: Das Halstuch kann zur Not als Mundschutz dienen und ist angenehm zu tragen.
   solutionItemRound1: 0
@@ -5180,8 +5231,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0225a858ff6571d4caa128bf01b55d1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipmentItem: 10
+  equipmentItem: 107
   snapedTo: 0
+  previous: 0
+  origPosTable: {x: 0, y: 0, z: 0}
   correspondingItemOnMiner: {fileID: 1755077468}
   desc: "Die Handschuhe sch\xFCtzen die H\xE4nde bei schweren Arbeiten vor Blasen
     und Schwielen."
@@ -5423,8 +5476,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0225a858ff6571d4caa128bf01b55d1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipmentItem: 5
+  equipmentItem: 13
   snapedTo: 0
+  previous: 0
+  origPosTable: {x: 0, y: 0, z: 0}
   correspondingItemOnMiner: {fileID: 1748427335}
   desc: "Die Stechkarte, sorgt daf\xFCr, dass man wei\xDF, wer im Bergwerk unterwegs
     ist und die Grubenwehr helfen kann, wenn jemand vermisst wird."
@@ -5621,8 +5676,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0225a858ff6571d4caa128bf01b55d1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipmentItem: 8
+  equipmentItem: 103
   snapedTo: 0
+  previous: 0
+  origPosTable: {x: 0, y: 0, z: 0}
   correspondingItemOnMiner: {fileID: 1377316924}
   desc: "Der wei\xDFe Bergmannsanzug, aus Baumwolle kann nicht elektrostatisch aufgeladen
     werden und ist bequem."
@@ -6676,8 +6733,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0225a858ff6571d4caa128bf01b55d1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipmentItem: 7
+  equipmentItem: 101
   snapedTo: 0
+  previous: 0
+  origPosTable: {x: 0, y: 0, z: 0}
   correspondingItemOnMiner: {fileID: 251552848}
   desc: "Die Schienbeinsch\xFCtzer, sch\xFCtzen vor allem in Engstellen und niederen
     Stollenstrecken, die man nicht aufrecht durchlaufen kann."
@@ -7298,8 +7357,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0225a858ff6571d4caa128bf01b55d1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipmentItem: 4
+  equipmentItem: 11
   snapedTo: 0
+  previous: 0
+  origPosTable: {x: 0, y: 0, z: 0}
   correspondingItemOnMiner: {fileID: 1021229436}
   desc: "Die Sicherheitsschuhe, verhindern Fu\xDFverletzungen durch herabfallende
     Gegenst\xE4nde."
