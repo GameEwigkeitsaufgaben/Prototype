@@ -9,13 +9,18 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     public MuseumMinerEquipmentItem[] items;
     public int itemsOnMiner;
     public EquipmentRound round;
+    public Image denkbubbleWorstcase;
     private Dictionary<MinerEquipmentItem, MuseumMinerEquipmentItem> listItemsOnMiner  = new Dictionary<MinerEquipmentItem, MuseumMinerEquipmentItem>();
+    private List<MinerEquipmentItem> plainList = new List<MinerEquipmentItem>();
+    private IEnumerator worstcasesCoroutine;
+    public Sprite sNoHelm, sNoLamp, sNoMask, s4;
 
     // Start is called before the first frame update
     void Start()
     {
         itemsOnMiner = 0;
         round = EquipmentRound.Essential;
+
     }
 
     // Update is called once per frame
@@ -33,32 +38,56 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
 
     public void CheckRound()
     {
-
         if(round == EquipmentRound.Essential && itemsOnMiner == 3)
         {
+            //foreach(MuseumMinerEquipmentItem i in items)
+            //{
+            //    if(i.snapedTo == SnapetTo.Miner)
+            //    {
+            //        listItemsOnMiner.Add(i.equipmentItem, i);
+            //    }
+            //}
+
             foreach(MuseumMinerEquipmentItem i in items)
             {
                 if(i.snapedTo == SnapetTo.Miner)
                 {
-                    listItemsOnMiner.Add(i.equipmentItem, i);
+                    if(!plainList.Contains(i.equipmentItem)) plainList.Add(i.equipmentItem);
                 }
-               
             }
         }
+        worstcasesCoroutine = PlayWorstcases(plainList.Contains(MinerEquipmentItem.Helm), plainList.Contains(MinerEquipmentItem.Atemmaske), plainList.Contains(MinerEquipmentItem.Lampe));
+        StartCoroutine(worstcasesCoroutine);
 
-        if (!listItemsOnMiner.ContainsKey(MinerEquipmentItem.Helm))
+    }
+
+    IEnumerator PlayWorstcases(bool helm, bool mask, bool lamp)
+    {
+        denkbubbleWorstcase.transform.parent.gameObject.SetActive(!helm || !mask || !lamp);
+
+        denkbubbleWorstcase.GetComponent<Image>().preserveAspect = true;
+        
+        if (!helm)
         {
+            denkbubbleWorstcase.GetComponent<Image>().sprite = sNoHelm;
             Debug.Log("No Helm");
+            yield return new WaitForSeconds(2f);
         }
-        if (!listItemsOnMiner.ContainsKey(MinerEquipmentItem.Atemmaske))
+        if (!mask)
         {
+            denkbubbleWorstcase.GetComponent<Image>().sprite = sNoMask;
             Debug.Log("No Atemmaske");
+            yield return new WaitForSeconds(2f);
         }
-        if (!listItemsOnMiner.ContainsKey(MinerEquipmentItem.Lampe))
+        if (!lamp)
         {
+            denkbubbleWorstcase.GetComponent<Image>().sprite = sNoLamp;
             Debug.Log("No lampe");
+            yield return new WaitForSeconds(2f);
         }
-  
+
+        denkbubbleWorstcase.transform.parent.gameObject.SetActive(false);
+        listItemsOnMiner.Clear();
     }
 
     private void SetTableItemsInactive(bool inactive)
