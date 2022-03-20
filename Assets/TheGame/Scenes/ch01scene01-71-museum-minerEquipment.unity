@@ -655,13 +655,23 @@ MonoBehaviour:
   - {fileID: 388615593}
   - {fileID: 1410976360}
   itemsOnMiner: 0
-  round: 0
+  currentRound: 0
   denkbubbleWorstcase: {fileID: 1163917697}
   sNoHelm: {fileID: 21300000, guid: aa362b1a2d4ec6b4fbfff950ea57dc26, type: 3}
   sNoLamp: {fileID: 21300000, guid: 06ed3eb414aaacc4887637869a473737, type: 3}
   sNoMask: {fileID: 21300000, guid: e9ec7f7494a95ed4d95a4af2e5ce6708, type: 3}
   s4: {fileID: 21300000, guid: aa362b1a2d4ec6b4fbfff950ea57dc26, type: 3}
   btnCheckEquipment: {fileID: 143583109}
+  round1: 
+  round2: "Ziehe dem Bergmann 3 weitere Dinge an die ihn vor schweren Verletzungen
+    sch\xFCtzen?"
+  round3: "Ziehe den Bergmann fertig an und schaue wof\xFCr die restlichen Dinge
+    f\xFCr den Bergmann wichtig sind."
+  headingR1: Runde 1
+  headingR2: Runde 2
+  headingR3: Runde 3
+  headingRound: {fileID: 1867195026}
+  textRound: {fileID: 842134964}
 --- !u!4 &149081978
 Transform:
   m_ObjectHideFlags: 0
@@ -842,16 +852,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 177321167}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 654522340}
   m_Father: {fileID: 851862710}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -350, y: -145}
   m_SizeDelta: {x: 292, y: 295.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &177321169
@@ -1550,10 +1561,8 @@ MonoBehaviour:
   equipmentItem: 107
   snapedTo: 0
   previous: 0
-  origPosTable: {x: 0, y: 0, z: 0}
   correspondingItemOnMiner: {fileID: 297204067}
-  desc: "Die Handschuhe sch\xFCtzen die H\xE4nde bei schweren Arbeiten vor Blasen
-    und Schwielen."
+  individualDesc: 
   solutionItemRound1: 0
   solutionItemRound2: 0
   solutionItemRound3: 1
@@ -1618,8 +1627,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -135, y: -220}
-  m_SizeDelta: {x: 482.2, y: 265.8}
+  m_AnchoredPosition: {x: -55.3752, y: -225.6875}
+  m_SizeDelta: {x: 322.9505, y: 277.1749}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &406129268
 MonoBehaviour:
@@ -2625,12 +2634,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 654522339}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 851862710}
-  m_RootOrder: 2
+  m_Father: {fileID: 177321168}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2840,10 +2849,8 @@ MonoBehaviour:
   equipmentItem: 15
   snapedTo: 0
   previous: 0
-  origPosTable: {x: 0, y: 0, z: 0}
   correspondingItemOnMiner: {fileID: 1011234270}
-  desc: "Die Schutzbrille, sch\xFCtzt die Augen vor allem vor Staub, aber auch vor
-    Augenverletzungen durch Gegenst\xE4nde im Stollen."
+  individualDesc: 
   solutionItemRound1: 0
   solutionItemRound2: 1
   solutionItemRound3: 0
@@ -3550,9 +3557,8 @@ RectTransform:
   m_Children:
   - {fileID: 406129267}
   - {fileID: 177321168}
-  - {fileID: 654522340}
   m_Father: {fileID: 1903416691}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3651,10 +3657,8 @@ MonoBehaviour:
   equipmentItem: 1
   snapedTo: 0
   previous: 0
-  origPosTable: {x: 0, y: 0, z: 0}
   correspondingItemOnMiner: {fileID: 1224329166}
-  desc: "Der Helm, sch\xFCtzt vor Kopfverletzungen durch herabfallenden Einbauten
-    oder in Stollen mit geringer H\xF6he."
+  individualDesc: 
   solutionItemRound1: 1
   solutionItemRound2: 0
   solutionItemRound3: 0
@@ -3988,10 +3992,8 @@ MonoBehaviour:
   equipmentItem: 5
   snapedTo: 0
   previous: 0
-  origPosTable: {x: 0, y: 0, z: 0}
   correspondingItemOnMiner: {fileID: 2104868484}
-  desc: "Die Atemschutzmaske, verhindert, dass krankmachender Kohlenstaub in gro\xDFen
-    Mengen eingeatmet wird."
+  individualDesc: 
   solutionItemRound1: 1
   solutionItemRound2: 0
   solutionItemRound3: 0
@@ -4729,10 +4731,8 @@ MonoBehaviour:
   equipmentItem: 3
   snapedTo: 0
   previous: 0
-  origPosTable: {x: 0, y: 0, z: 0}
   correspondingItemOnMiner: {fileID: 432178482}
-  desc: "Die Lampe, dient zum Ausleuchten der Stollen, um nicht mit Gegenst\xE4nden
-    oder Einbauten zusammenzusto\xDFen."
+  individualDesc: 
   solutionItemRound1: 1
   solutionItemRound2: 0
   solutionItemRound3: 0
@@ -5004,12 +5004,11 @@ MonoBehaviour:
   equipmentItem: 105
   snapedTo: 0
   previous: 0
-  origPosTable: {x: 0, y: 0, z: 0}
   correspondingItemOnMiner: {fileID: 1954867649}
-  desc: Das Halstuch kann zur Not als Mundschutz dienen und ist angenehm zu tragen.
+  individualDesc: 
   solutionItemRound1: 0
   solutionItemRound2: 0
-  solutionItemRound3: 0
+  solutionItemRound3: 1
 --- !u!61 &1371544356
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5428,10 +5427,8 @@ MonoBehaviour:
   equipmentItem: 107
   snapedTo: 0
   previous: 0
-  origPosTable: {x: 0, y: 0, z: 0}
   correspondingItemOnMiner: {fileID: 1755077468}
-  desc: "Die Handschuhe sch\xFCtzen die H\xE4nde bei schweren Arbeiten vor Blasen
-    und Schwielen."
+  individualDesc: 
   solutionItemRound1: 0
   solutionItemRound2: 0
   solutionItemRound3: 1
@@ -5673,10 +5670,8 @@ MonoBehaviour:
   equipmentItem: 13
   snapedTo: 0
   previous: 0
-  origPosTable: {x: 0, y: 0, z: 0}
   correspondingItemOnMiner: {fileID: 1748427335}
-  desc: "Die Stechkarte, sorgt daf\xFCr, dass man wei\xDF, wer im Bergwerk unterwegs
-    ist und die Grubenwehr helfen kann, wenn jemand vermisst wird."
+  individualDesc: 
   solutionItemRound1: 0
   solutionItemRound2: 0
   solutionItemRound3: 1
@@ -5873,10 +5868,8 @@ MonoBehaviour:
   equipmentItem: 103
   snapedTo: 0
   previous: 0
-  origPosTable: {x: 0, y: 0, z: 0}
   correspondingItemOnMiner: {fileID: 1377316924}
-  desc: "Der wei\xDFe Bergmannsanzug, aus Baumwolle kann nicht elektrostatisch aufgeladen
-    werden und ist bequem."
+  individualDesc: 
   solutionItemRound1: 0
   solutionItemRound2: 0
   solutionItemRound3: 1
@@ -6930,10 +6923,8 @@ MonoBehaviour:
   equipmentItem: 101
   snapedTo: 0
   previous: 0
-  origPosTable: {x: 0, y: 0, z: 0}
   correspondingItemOnMiner: {fileID: 251552848}
-  desc: "Die Schienbeinsch\xFCtzer, sch\xFCtzen vor allem in Engstellen und niederen
-    Stollenstrecken, die man nicht aufrecht durchlaufen kann."
+  individualDesc: 
   solutionItemRound1: 0
   solutionItemRound2: 1
   solutionItemRound3: 0
@@ -7554,10 +7545,8 @@ MonoBehaviour:
   equipmentItem: 11
   snapedTo: 0
   previous: 0
-  origPosTable: {x: 0, y: 0, z: 0}
   correspondingItemOnMiner: {fileID: 1021229436}
-  desc: "Die Sicherheitsschuhe, verhindern Fu\xDFverletzungen durch herabfallende
-    Gegenst\xE4nde."
+  individualDesc: 
   solutionItemRound1: 0
   solutionItemRound2: 1
   solutionItemRound3: 0
@@ -8012,8 +8001,8 @@ RectTransform:
   - {fileID: 1097881681}
   - {fileID: 1963712834}
   - {fileID: 351590182}
-  - {fileID: 851862710}
   - {fileID: 2138494281}
+  - {fileID: 851862710}
   - {fileID: 761167442}
   - {fileID: 143583108}
   - {fileID: 833241064}
@@ -8463,7 +8452,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2077145071}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -8472,8 +8461,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7.0656, y: -1.5382}
-  m_SizeDelta: {x: 410.131, y: 234.1339}
+  m_AnchoredPosition: {x: -0.043754578, y: 2.7274017}
+  m_SizeDelta: {x: 265.1001, y: 236.9777}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2077145073
 MonoBehaviour:
@@ -8624,7 +8613,7 @@ RectTransform:
   - {fileID: 127584842}
   - {fileID: 1879079181}
   m_Father: {fileID: 1903416691}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
