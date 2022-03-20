@@ -32,7 +32,7 @@ public enum SnapetTo
 public class SoMinerEquipment : ScriptableObject
 {
     public Sprite lampTable, lampMiner;
-    public Sprite handschuheTable, handschuheMiner;
+    public Sprite handschuhLeft, handschuhRight;
     public Sprite cardTable, cardMiner;
     public Sprite anzug, brille, schuhe, schienbeinschuetzer, halstuch, mask;
 }

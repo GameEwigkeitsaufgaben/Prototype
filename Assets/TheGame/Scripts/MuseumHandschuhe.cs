@@ -23,15 +23,15 @@ public class MuseumHandschuhe : MonoBehaviour
         rightHand.snapedTo = SnapetTo.Table;
     }
 
-    public void SetMinerPos()
+    public void ResetBothToMiner()
     {
-        leftHand.transform.position = leftHand.correspondingItemOnMiner.transform.position;
-        rightHand.transform.position = rightHand.correspondingItemOnMiner.transform.position;
+        leftHand.ResetToMiner();
+        rightHand.ResetToMiner();
     }
 
-    public void SetTablePos()
+    public void ResetBothToTable()
     {
-        leftHand.transform.position = leftHand.origPosTable;
-        rightHand.transform.position = rightHand.origPosTable;
+        leftHand.ResetToTable();
+        rightHand.ResetToTable();
     }
 }
