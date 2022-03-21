@@ -50,6 +50,7 @@ public class MuseumOverlay : MonoBehaviour
         if (speechManager.IsMusuemMinerEquipmentFinished() && playOverlay)
         {
             playOverlay = false;
+            gameObject.GetComponent<SwitchSceneManager>().GoToMinerEquipment();
         }
 
         if (!playOverlay)

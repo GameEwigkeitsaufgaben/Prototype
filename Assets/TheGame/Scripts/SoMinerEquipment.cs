@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public enum MinerEquipmentItem
 {
@@ -35,4 +37,5 @@ public class SoMinerEquipment : ScriptableObject
     public Sprite handschuhLeft, handschuhRight;
     public Sprite cardTable, cardMiner;
     public Sprite anzug, brille, schuhe, schienbeinschuetzer, halstuch, mask;
+    public AudioClip beginDrag,endDrag, badJobClip, goodJobClip;
 }

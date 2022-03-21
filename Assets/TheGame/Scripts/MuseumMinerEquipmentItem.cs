@@ -32,6 +32,9 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
 
     //private GameObject handschuhLeft = null, handschuhRight = null;
     private ManagerMuseumMinerEquipment myManager;
+    AudioSource myAudioSrc;
+
+    public Text uiTextTooltip; //set for every item in managermuseumminerequipment
 
     string descHelmet = "Der Helm, schützt vor Kopfverletzungen durch herabfallenden Einbauten oder in Stollen mit geringer Höhe.";
     string descLamp = "Die Lampe, dient zum Ausleuchten der Stollen, um nicht mit Gegenständen oder Einbauten zusammenzustoßen.";
@@ -44,7 +47,6 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
     string descScarf = "Das Halstuch kann zur Not als Mundschutz dienen und ist angenehm zu tragen.";
     string descGloves = "Die Handschuhe schützen die Hände bei schweren Arbeiten vor Blasen und Schwielen.";
 
-    // Start is called before the first frame update
 void Start()
     {
         myManager = FindObjectOfType<ManagerMuseumMinerEquipment>();
@@ -64,6 +66,8 @@ void Start()
         
         previous = snapedTo;
         SetupDescription();
+        ChooseSprite();
+        myAudioSrc = gameObject.AddComponent<AudioSource>();
     }
 
     private void SetupDescription()
@@ -108,15 +112,32 @@ void Start()
 
     public void ChooseSprite()
     {
+        //https://stackoverflow.com/questions/44471568/how-to-calculate-sizedelta-in-recttransform
         switch (equipmentItem)
         {
             case MinerEquipmentItem.Lampe:
-                if (snapedTo == SnapetTo.Miner) GetComponent<Image>().sprite = myConifg.lampMiner;
-                else GetComponent<Image>().sprite = myConifg.lampTable;
+                if (snapedTo == SnapetTo.Miner)
+                {
+                    GetComponent<Image>().sprite = myConifg.lampMiner;
+                    GetComponent<RectTransform>().sizeDelta = new Vector2(190f, 219.9f); //needed for drag and drop to opitmize drag area
+                }
+                else
+                {
+                    GetComponent<Image>().sprite = myConifg.lampTable;
+                    GetComponent<RectTransform>().sizeDelta = new Vector2(190f, 65f); //needed for drag and drop to opitmize drag area
+                }
                 break;
             case MinerEquipmentItem.Stechkarte:
-                if (snapedTo == SnapetTo.Miner) GetComponent<Image>().sprite = myConifg.cardMiner;
-                else GetComponent<Image>().sprite = myConifg.cardTable;
+                if (snapedTo == SnapetTo.Miner)
+                {
+                    GetComponent<Image>().sprite = myConifg.cardMiner;
+                    GetComponent<RectTransform>().sizeDelta = new Vector2(158.71f, 125.2f); //needed for drag and drop to opitmize drag area
+                }
+                else
+                {
+                    GetComponent<Image>().sprite = myConifg.cardTable;
+                    GetComponent<RectTransform>().sizeDelta = new Vector2(158.71f, 71f); //needed for drag and drop to opitmize drag area
+                }
                 break;
         }
     }
@@ -148,6 +169,8 @@ void Start()
     public void OnBeginDrag(PointerEventData eventData)
     {
         Debug.Log("Begin Drag");
+        myAudioSrc.clip = myConifg.beginDrag;
+        myAudioSrc.Play();
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -156,6 +179,8 @@ void Start()
         Debug.Log("Event data  +++++++++++++++++++++ " + eventData.pointerEnter.name + " " + equipmentItem);
 
         positionChanged = GetHasPositionChanged();
+        myAudioSrc.clip = myConifg.endDrag;
+        myAudioSrc.Play();
 
         //Special: 2 different sprites for table and miner
         ChooseSprite();
@@ -220,6 +245,15 @@ void Start()
         }
     }
 
+    public void ShowTooltip()
+    {
+       uiTextTooltip.text = individualDesc;
+    }
+
+    public void HideTooltip()
+    {
+        uiTextTooltip.text = "";
+    }
 
     private void OnTriggerExit2D(Collider2D collision)
     {

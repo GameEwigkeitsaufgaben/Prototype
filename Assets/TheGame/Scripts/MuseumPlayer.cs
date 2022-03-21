@@ -22,7 +22,6 @@ public class MuseumPlayer : MonoBehaviour
     public Button btnWPInfo, btnWPInkohlung, btnWPBergmann, btnWPSchwein, btnWPWelt;
     public MuseumOverlay overlay;
     
-    // Start is called before the first frame update
     void Start()
     {
         mySplineMove = gameObject.GetComponent<splineMove>();
