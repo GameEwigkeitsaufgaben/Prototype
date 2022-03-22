@@ -3,6 +3,7 @@ using UnityEngine;
 public static class GameData
 {
     public const string SfxConfig = "SfxConfig";
+    public const string ConfigMinerEquiment = "ConfigMinerEquipment";
 
     public static int chapterOneUnlocked = 0;
     public static int chapterTwoUnlocked = 0;
