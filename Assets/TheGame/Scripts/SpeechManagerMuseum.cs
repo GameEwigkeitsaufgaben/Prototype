@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,6 +50,11 @@ public class SpeechManagerMuseum : MonoBehaviour
         //speakMuseumCarbonification.SetUpList(audiosMuseumCarbonification, mySrc);
         //mySpeechLists.Add(speakMuseumCarbonification);
 
+    }
+
+    internal void StopSpeaking()
+    {
+        mySrc.Stop();
     }
 
     public bool IsMusuemInfoIntroFinished()
