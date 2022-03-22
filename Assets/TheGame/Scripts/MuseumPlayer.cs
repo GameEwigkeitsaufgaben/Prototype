@@ -21,12 +21,25 @@ public class MuseumPlayer : MonoBehaviour
 
     public Button btnWPInfo, btnWPInkohlung, btnWPBergmann, btnWPSchwein, btnWPWelt;
     public MuseumOverlay overlay;
-    
-    // Start is called before the first frame update
+    private SoChapOneRuntimeData runtimeData;
+
+    private void Awake()
+    {
+        runtimeData = Resources.Load<SoChapOneRuntimeData>("RuntimeExchangeData");
+        
+    }
+
     void Start()
     {
         mySplineMove = gameObject.GetComponent<splineMove>();
-        ShowOnlyInfo();
+        if(runtimeData.currentMuseumWaypoint == MuseumWaypoints.WP0) 
+            ShowOnlyInfo();
+        else if (runtimeData.currentMuseumWaypoint != MuseumWaypoints.WP0)
+        {
+            gameObject.transform.position = runtimeData.currentGroupPos;
+            currentWP = targetWP = runtimeData.currentMuseumWaypoint;
+            ShowOtherStations(currentWP);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -75,24 +88,51 @@ public class MuseumPlayer : MonoBehaviour
         btnWPWelt.gameObject.SetActive(true);
     }
 
+    public void ShowOtherStations(MuseumWaypoints currntWp)
+    {
+
+        btnWPInfo.gameObject.SetActive(true);
+        btnWPInkohlung.gameObject.SetActive(true);
+        btnWPBergmann.gameObject.SetActive(true);
+        btnWPSchwein.gameObject.SetActive(true);
+        btnWPWelt.gameObject.SetActive(true);
+
+        switch (currentWP)
+        {
+            case MuseumWaypoints.WPBergmann: 
+                btnWPBergmann.gameObject.SetActive(false);
+                break;
+            case MuseumWaypoints.WPInfo:
+                btnWPInfo.gameObject.SetActive(false);
+                break;
+        }
+
+    }
+
     public void ReachedWP()//Called from UnityEvent Gruppe in Inspector
     {
         currentWP = targetWP;
         if (currentWP == MuseumWaypoints.WPInfo)
         {
             btnWPInfo.gameObject.SetActive(false);
-            ShowStations();
+            ShowOtherStations(currentWP);
             overlay.ActivateOverlay(MuseumWaypoints.WPInfo);
+            runtimeData.currentGroupPos = gameObject.transform.position;
+            runtimeData.currentMuseumWaypoint = currentWP;
         }
         else if (currentWP == MuseumWaypoints.WPInkohlung)
         {
             btnWPInkohlung.gameObject.SetActive(false);
             overlay.ActivateOverlay(MuseumWaypoints.WPInkohlung);
+            
         }
         else if (currentWP == MuseumWaypoints.WPBergmann)
         {
             btnWPBergmann.gameObject.SetActive(false);
+            ShowOtherStations(currentWP);
             overlay.ActivateOverlay(MuseumWaypoints.WPBergmann);
+            runtimeData.currentGroupPos = gameObject.transform.position;
+            runtimeData.currentMuseumWaypoint = currentWP;
         }
         else if (currentWP == MuseumWaypoints.WPMythos)
         {

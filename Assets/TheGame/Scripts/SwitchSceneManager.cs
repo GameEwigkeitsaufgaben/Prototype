@@ -70,6 +70,17 @@ public class SwitchSceneManager : MonoBehaviour
         SceneManager.LoadScene(GameScenes.ch01InstaMain, LoadSceneMode.Single);
     }
 
+    public void GoToMuseum()
+    {
+        Debug.Log("Scene schould be loaded");
+        SceneManager.LoadScene(GameScenes.ch01Museum, LoadSceneMode.Single);
+    }
+    public void GoToMinerEquipment()
+    {
+        Debug.Log("Scene schould be loaded");
+        SceneManager.LoadScene(GameScenes.ch01MuseumMinerEquipment, LoadSceneMode.Single);
+    }
+
     public void SwitchScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
