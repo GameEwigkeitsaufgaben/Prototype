@@ -26,7 +26,6 @@ public class MuseumPlayer : MonoBehaviour
     private void Awake()
     {
         runtimeData = Resources.Load<SoChapOneRuntimeData>("RuntimeExchangeData");
-        
     }
 
     void Start()
@@ -112,13 +111,11 @@ public class MuseumPlayer : MonoBehaviour
     public void ReachedWP()//Called from UnityEvent Gruppe in Inspector
     {
         currentWP = targetWP;
+        
         if (currentWP == MuseumWaypoints.WPInfo)
         {
             btnWPInfo.gameObject.SetActive(false);
-            ShowOtherStations(currentWP);
             overlay.ActivateOverlay(MuseumWaypoints.WPInfo);
-            runtimeData.currentGroupPos = gameObject.transform.position;
-            runtimeData.currentMuseumWaypoint = currentWP;
         }
         else if (currentWP == MuseumWaypoints.WPInkohlung)
         {
@@ -129,10 +126,7 @@ public class MuseumPlayer : MonoBehaviour
         else if (currentWP == MuseumWaypoints.WPBergmann)
         {
             btnWPBergmann.gameObject.SetActive(false);
-            ShowOtherStations(currentWP);
             overlay.ActivateOverlay(MuseumWaypoints.WPBergmann);
-            runtimeData.currentGroupPos = gameObject.transform.position;
-            runtimeData.currentMuseumWaypoint = currentWP;
         }
         else if (currentWP == MuseumWaypoints.WPMythos)
         {
@@ -145,6 +139,10 @@ public class MuseumPlayer : MonoBehaviour
             overlay.ActivateOverlay(MuseumWaypoints.WPWelt);
         }
 
+        runtimeData.currentGroupPos = gameObject.transform.position;
+        runtimeData.currentMuseumWaypoint = currentWP;
+        ShowOtherStations(currentWP);
+        
         Debug.Log("current WP " + currentWP);
     }
 
