@@ -27,17 +27,29 @@ public class MuseumOverlay : MonoBehaviour
 
         if(wp == MuseumWaypoints.WPInfo)
         {
-            Debug.Log(configMuseum.info.name);
             container.sprite = configMuseum.info;
             speechManager.playMuseumInfoArrival = true;
         }
         else if (wp == MuseumWaypoints.WPBergmann)
         {
-            Debug.Log(configMuseum.miner.name);
             container.sprite = configMuseum.miner;
             speechManager.playMinerEquipment = true;
         }
-
+        else if (wp == MuseumWaypoints.WPWelt)
+        {
+            container.sprite = configMuseum.world;
+            speechManager.playMuseumWorld = true;
+        }
+        else if (wp == MuseumWaypoints.WPMythos)
+        {
+            container.sprite = configMuseum.myth;
+            speechManager.playMuseumCoalHistory = true;
+        }
+        else if (wp == MuseumWaypoints.WPInkohlung)
+        {
+            container.sprite = configMuseum.carbonification;
+            speechManager.playMuseumCarbonification = true;
+        }
         closeBtn.gameObject.SetActive(true);
     }
 
@@ -59,6 +71,22 @@ public class MuseumOverlay : MonoBehaviour
         {
             playOverlay = false;
             gameObject.GetComponent<SwitchSceneManager>().GoToMinerEquipment();
+        }
+
+        if (speechManager.IsMusuemWorldFinished() && playOverlay)
+        {
+            playOverlay = false;
+            //gameObject.GetComponent<SwitchSceneManager>().GoToMinerEquipment();
+        }
+        if (speechManager.IsMusuemCoalHistoryFinished() && playOverlay)
+        {
+            playOverlay = false;
+            //gameObject.GetComponent<SwitchSceneManager>().GoToMinerEquipment();
+        }
+        if (speechManager.IsMusuemCarbonificationFinished() && playOverlay)
+        {
+            playOverlay = false;
+            //gameObject.GetComponent<SwitchSceneManager>().GoToMinerEquipment();
         }
 
         if (!playOverlay)
