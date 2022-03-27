@@ -10,6 +10,8 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     private const int MaxItemsRoundProtection = 6;
     private const int MaxItemsRoundSpectialTask = 10;
 
+    public Animator anim;
+    public AnimationClip noHelmAnim, noMaskAnim, noLightAnim, badJobAnim, goodJobAnim;
     public MuseumMinerEquipmentItem[] items;
     public int itemsOnMiner;
     public EquipmentRound currentRound;
@@ -35,6 +37,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         itemsOnMiner = 0;
         currentRound = EquipmentRound.Essential;
         denkbubbleWorstcase.GetComponent<Image>().preserveAspect = true;
@@ -174,9 +177,9 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
         denkbubbleWorstcase.transform.parent.gameObject.SetActive(true);
         audioSrc.clip = badJobClip;
         audioSrc.Play();
-        denkbubbleWorstcase.GetComponent<Image>().sprite = minerBadJob;
-        denkbubbleWorstcase.GetComponent<Image>().color = Color.white;
-        yield return new WaitForSeconds(5f);
+        float length = badJobAnim.length;
+        anim.Play("BadJob");
+        yield return new WaitForSeconds(length);
         denkbubbleWorstcase.transform.parent.gameObject.SetActive(false);
 
         runningCorouine = false;
@@ -191,13 +194,12 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
         runningCorouine = true;
 
         denkbubbleWorstcase.transform.parent.gameObject.SetActive(true);
-        denkbubbleWorstcase.transform.parent.gameObject.GetComponent<Image>().color = Color.white;
-        denkbubbleWorstcase.color = Color.white;
-        denkbubbleWorstcase.GetComponent<Image>().sprite = minerGoodJob;
-        
+        float length = goodJobAnim.length;
+        anim.Play("GoodJob");
+
         audioSrc.clip = goodJobClip;
         audioSrc.Play();
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(length);
         
         denkbubbleWorstcase.transform.parent.gameObject.SetActive(false);
 
@@ -217,43 +219,42 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
 
         if (!helm)
         {
-            denkbubbleWorstcase.GetComponent<Image>().sprite = sNoHelm;
-            Debug.Log("No Helm");
+            anim.Play("NoHelmet");
+            float length = noHelmAnim.length;
+            Debug.Log("No Helm + length: " + length );
             audioSrc.clip = autsch;
             audioSrc.Play();
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(length);
         }
         if (!mask)
         {
-            denkbubbleWorstcase.GetComponent<Image>().sprite = sNoMask;
-            Debug.Log("No Atemmaske");
+            anim.Play("NoMask");
+            float length = noMaskAnim.length;
+            Debug.Log("No Atemmaske + length: " + length );
             audioSrc.clip = husten;
             audioSrc.Play();
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(length);
         }
         if (!lamp)
         {
-            denkbubbleWorstcase.GetComponent<Image>().sprite = sNoLamp;
-            denkbubbleWorstcase.GetComponent<Image>().color = Color.black;
+            anim.Play("NoLight");
+            float length = noLightAnim.length;
             audioSrc.clip = lichtaus;
             audioSrc.Play();
-            denkbubbleWorstcase.transform.parent.gameObject.GetComponent<Image>().color = Color.black;
-            yield return new WaitForSeconds(1f);
-            denkbubbleWorstcase.transform.parent.gameObject.GetComponent<Image>().color = Color.gray;
             audioSrc.clip = autsch;
             audioSrc.Play();
-            Debug.Log("No lampe");
+            Debug.Log("No lampe + length:" + length);
 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(length);
         }
 
         if (missingItem)
         {
             audioSrc.clip = badJobClip;
             audioSrc.Play();
-            denkbubbleWorstcase.GetComponent<Image>().sprite = minerBadJob;
-            denkbubbleWorstcase.GetComponent<Image>().color = Color.white;
-            yield return new WaitForSeconds(5f);
+            float length = badJobAnim.length;
+            anim.Play("BadJob");
+            yield return new WaitForSeconds(length);
         }
         denkbubbleWorstcase.transform.parent.gameObject.SetActive(false);
 
