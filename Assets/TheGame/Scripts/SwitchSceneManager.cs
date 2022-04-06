@@ -81,6 +81,12 @@ public class SwitchSceneManager : MonoBehaviour
         SceneManager.LoadScene(GameScenes.ch01MuseumMinerEquipment, LoadSceneMode.Single);
     }
 
+    public void GoToWorld()
+    {
+        Debug.Log("Scene schould be loaded");
+        SceneManager.LoadScene(GameScenes.ch01MuseumCarbonPeriod, LoadSceneMode.Single);
+    }
+
     public void SwitchScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);

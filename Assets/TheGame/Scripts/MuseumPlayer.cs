@@ -31,6 +31,7 @@ public class MuseumPlayer : MonoBehaviour
     void Start()
     {
         mySplineMove = gameObject.GetComponent<splineMove>();
+
         if(runtimeData.currentMuseumWaypoint == MuseumWaypoints.WP0) 
             ShowOnlyInfo();
         else if (runtimeData.currentMuseumWaypoint != MuseumWaypoints.WP0)
@@ -103,6 +104,9 @@ public class MuseumPlayer : MonoBehaviour
                 break;
             case MuseumWaypoints.WPInfo:
                 btnWPInfo.gameObject.SetActive(false);
+                break;
+            case MuseumWaypoints.WPWelt:
+                btnWPWelt.gameObject.SetActive(false);
                 break;
         }
 

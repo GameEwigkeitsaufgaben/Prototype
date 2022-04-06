@@ -19,7 +19,7 @@ public class SpeechManagerMuseum : MonoBehaviour
     public bool resetFin;
 
     private SpeechList
-       speakMuseumIntro, speakMinerEquipment, speakMuseumCarbonificationPeriod, speakMuseumCoalHistory, speakMuseumCarbonification;
+       speakMuseumIntro, speakMinerEquipment, speakMuseumWorld, speakMuseumCoalHistory, speakMuseumCarbonification;
    
 
     private Dictionary<string, SpeechList> mySpeechDict = new Dictionary<string, SpeechList>();
@@ -41,9 +41,9 @@ public class SpeechManagerMuseum : MonoBehaviour
         speakMinerEquipment.SetUpList(audiosMuseumMinerEquipment, mySrc);
         mySpeechDict.Add(speakMinerEquipment.listName, speakMinerEquipment);
 
-        speakMuseumCarbonificationPeriod = gameObject.AddComponent<SpeechList>();
-        speakMuseumCarbonificationPeriod.SetUpList(audiosMuseumWorld, mySrc);
-        mySpeechDict.Add(speakMuseumCarbonificationPeriod.listName, speakMuseumCarbonificationPeriod);
+        speakMuseumWorld = gameObject.AddComponent<SpeechList>();
+        speakMuseumWorld.SetUpList(audiosMuseumWorld, mySrc);
+        mySpeechDict.Add(speakMuseumWorld.listName, speakMuseumWorld);
 
         speakMuseumCoalHistory = gameObject.AddComponent<SpeechList>();
         speakMuseumCoalHistory.SetUpList(audiosCoalHistory, mySrc);
@@ -146,7 +146,7 @@ public class SpeechManagerMuseum : MonoBehaviour
         }
         else if (playMuseumWorld)
         {
-            currentList = speakMuseumCarbonificationPeriod;
+            currentList = speakMuseumWorld;
             playMuseumWorld = false;
         }
         else if (playMuseumCoalHistory)
