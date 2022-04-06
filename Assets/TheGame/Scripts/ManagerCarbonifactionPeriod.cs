@@ -7,7 +7,7 @@ public class ManagerCarbonifactionPeriod : MonoBehaviour
 
     public void OpenTheUrl()
     {
-        Application.OpenURL("www.google.com");
+        Application.OpenURL("https://dinosaurpictures.org/ancient-earth/#240");
     }
 
     // Start is called before the first frame update
