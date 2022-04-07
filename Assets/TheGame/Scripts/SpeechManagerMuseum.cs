@@ -60,7 +60,7 @@ public class SpeechManagerMuseum : MonoBehaviour
         mySrc.Stop();
     }
 
-    public bool IsMusuemCarbonificationFinished()
+    public bool IsMusuemCoalifictionFinished()
     {
         return mySpeechDict[ListCarbonification].finishedToogle;
     }

@@ -25,8 +25,8 @@ public static class GameScenes
     public const string ch01LongwallCutterAnimation = "ch01scene01-62-coalmine-longwallCutter-animation";
     public const string ch01Museum = "ch01scene01-71-museum";
     public const string ch01MuseumCarbonPeriod = "ch01scene01-71-museum-carbonificationPeriod";
-    public const string ch01MuseumHistoryMining = "ch01scene01-73-museum-historyMining";
-    public const string ch01MuseumCoalification = "ch01scene01-74-museum-coalification";
+    public const string ch01MuseumHistoryMining = "ch01scene01-71-museum-historyMining";
+    public const string ch01MuseumCoalification = "ch01scene01-71-museum-coalification";
     public const string ch01MuseumMinerEquipment = "ch01scene01-71-museum-minerEquipment";
     public const string ch01Quiz = "ch01scene01-91-quiz";
 

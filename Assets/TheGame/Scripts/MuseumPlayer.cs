@@ -108,6 +108,9 @@ public class MuseumPlayer : MonoBehaviour
             case MuseumWaypoints.WPWelt:
                 btnWPWelt.gameObject.SetActive(false);
                 break;
+            case MuseumWaypoints.WPMythos:
+                btnWPSchwein.gameObject.SetActive(false);
+                break;
         }
 
     }
