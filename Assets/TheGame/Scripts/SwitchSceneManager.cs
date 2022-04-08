@@ -37,7 +37,11 @@ public class SwitchSceneManager : MonoBehaviour
     public void LoadEntryArea()
     {
         SceneManager.LoadScene(GameScenes.ch01MineEntryAreaStatic, LoadSceneMode.Additive);
-        
+    }
+
+    public void LoadMineAnimation()
+    {
+        SceneManager.LoadScene(GameScenes.ch01MineAnimation, LoadSceneMode.Additive);
     }
 
     public void GoToLongwallCutter()

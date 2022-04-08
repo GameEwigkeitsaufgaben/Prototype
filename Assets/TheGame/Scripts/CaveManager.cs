@@ -37,6 +37,7 @@ public class CaveManager : MonoBehaviour
         switchScene.LoadSole1();
         switchScene.LoadSole2();
         switchScene.LoadSole3();
+        switchScene.LoadMineAnimation();
 
         sfx.SetClipByAddToDict(baukipper, sfx.caolmineLader);
         sfx.SetClipByAddToDict(kran, sfx.coalmineWorkingMachinesMetal);
