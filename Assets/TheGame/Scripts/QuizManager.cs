@@ -1,13 +1,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class QuizManager : MonoBehaviour
 {
+    private const string generalKeyOverlay = "Overlay1110";
+    private const string btnTextCheckAnswers = "Prüfen";
+    private const string btnTextNextAnswer = "Weiter";
     public SoSfx sfx;
     public Canvas endCanvas, quizCanvas;
     public VerticalLayoutGroup answerButtonGroup;
-    public Text uiQuestion;
+    //public Text uiQuestion;
+    public TextMeshProUGUI uiQuestion;
     public Text uiPoints;
     public Text uiQuestType;
     public Slider uiProgressBar;
@@ -62,10 +67,10 @@ public class QuizManager : MonoBehaviour
         quizTimer.StartTimer();
     }
 
-    public void CloseQuiz()
-    {
-        switchScene.SwitchToChapter1withOverlay("Overlay119");
-    }
+    //public void CloseQuiz()
+    //{
+    //    switchScene.SwitchToChapter1withOverlay(generalKeyOverlay);
+    //}
 
     public void LoadNextQuestion()
     {
@@ -99,7 +104,7 @@ public class QuizManager : MonoBehaviour
             }
 
             questionItemListshuffled[currentProgressIndex].unProved = false;
-            uiButtonNext.GetComponentInChildren<Text>().text = "Weiter";
+            uiButtonNext.GetComponentInChildren<Text>().text = btnTextNextAnswer;
             return;   
         }
 
@@ -111,7 +116,7 @@ public class QuizManager : MonoBehaviour
         currentProgressIndex++;
         uiProgressBar.value++;
 
-        uiSimpleProgressView.text = "FRAGE\n" + (currentProgressIndex+1) + " von " + questionItemListshuffled.Count;
+        uiSimpleProgressView.text = "FRAGE " + (currentProgressIndex+1) + " von " + questionItemListshuffled.Count;
 
         if (currentProgressIndex < questionItemListshuffled.Count)
         {
@@ -123,18 +128,16 @@ public class QuizManager : MonoBehaviour
             //quizCanvas.gameObject.SetActive(false);
             GameData.quizChapterOnePoints = points;
             GameData.quizFinished = true;
-            switchScene.SwitchToChapter1withOverlay("Overlay119");
+            switchScene.SwitchToChapter1withOverlay(generalKeyOverlay);
         }    
-        
     }
 
     void SetupQuestion(int progressIndex)
     {
         uiQuestion.text = questionItemListshuffled[progressIndex].GetQuestionText();
         uiPostImage.sprite = questionItemListshuffled[progressIndex].GetPostImage();
-        uiButtonNext.GetComponentInChildren<Text>().text = "Prüfen";
+        uiButtonNext.GetComponentInChildren<Text>().text = btnTextCheckAnswers;
         uiQuestType.text = questionItemListshuffled[progressIndex].GetQuestionTypeString();
-
 
         foreach (Transform child in answerButtonGroup.transform)
         {

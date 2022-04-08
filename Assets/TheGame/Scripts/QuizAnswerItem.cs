@@ -19,7 +19,7 @@ public class QuizAnswerItem
 
     public QuizAnswerItem() 
     {
-    myQuizConfig = Resources.Load<SoQuizConfig>(pathToConfig);
+        myQuizConfig = Resources.Load<SoQuizConfig>(pathToConfig);
     }
 
     public QuizAnswerItem(VerticalLayoutGroup parent) 
@@ -62,9 +62,11 @@ public class QuizAnswerItem
         btn.gameObject.GetComponent<HorizontalLayoutGroup>().padding.right = myPadding;
         btn.gameObject.GetComponent<HorizontalLayoutGroup>().childAlignment = TextAnchor.MiddleCenter;
         btn.gameObject.GetComponent<Image>().type = Image.Type.Sliced;
-        btn.gameObject.GetComponent<Image>().pixelsPerUnitMultiplier = 1f;
+        btn.gameObject.GetComponent<Image>().pixelsPerUnitMultiplier = 0.5f;
+        btn.GetComponentInChildren<Text>().fontSize = 30;
+        btn.GetComponent<Image>().color = myQuizConfig.normal;
 
-            //disable color when set buttons inactable
+        //disable color when set buttons inactable
         ColorBlock cb = btn.colors;
         cb.disabledColor = new Color(1f, 1f, 1f, 1f);
         btn.colors = cb;
