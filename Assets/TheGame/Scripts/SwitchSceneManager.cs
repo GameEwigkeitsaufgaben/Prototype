@@ -59,6 +59,11 @@ public class SwitchSceneManager : MonoBehaviour
         SceneManager.LoadScene(GameScenes.ch01LongwallCutterAnimation, LoadSceneMode.Additive);
     }
 
+    public void GotToCredits()
+    {
+        SceneManager.LoadScene(GameScenes.ch00GameCredits, LoadSceneMode.Single);
+    }
+
     public void GoToTrainRideOut()
     {
         SceneManager.LoadScene(GameScenes.ch01MineSoleThreeTrainRideOut, LoadSceneMode.Single);
@@ -132,6 +137,7 @@ public class SwitchSceneManager : MonoBehaviour
     {
         return SceneManager.GetActiveScene().name;
     }
+
     public void SwitchToChapter1withOverlay(string overlayName)
     {
         GameData.overlayToLoad = overlayName;

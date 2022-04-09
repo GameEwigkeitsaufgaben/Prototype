@@ -22,7 +22,7 @@ public class ManagerOverviewCaptersScene : MonoBehaviour
     [SerializeField] InputField inputFieldChapterTwo;
     [SerializeField] InputField inputFieldChapterThree;
 
-    [SerializeField] Button enterChapterOne, enterChapterTwo, enterChapterThree, Credits;
+    [SerializeField] Button enterChapterOne, enterChapterTwo, enterChapterThree, credits;
 
     [SerializeField] Text lawNotice;
 
@@ -60,6 +60,7 @@ public class ManagerOverviewCaptersScene : MonoBehaviour
         enterChapterOne.colors = interactiveButton;
         enterChapterTwo.colors = interactiveButton;
         enterChapterThree.colors = interactiveButton;
+        credits.colors = interactiveButton;
 
 
         lawNotice.text = GameData.lawNotiz;
