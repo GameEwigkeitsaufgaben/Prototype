@@ -182,13 +182,4 @@ public class ManagerOverviewCaptersScene : MonoBehaviour
         origPos = toShakeObj.transform.localPosition;
         shakeObj = true;
     }
-
-    private void DeselectClickedButton(GameObject button)
-    {
-        if (EventSystem.current.currentSelectedGameObject == button)
-        {
-            EventSystem.current.SetSelectedGameObject(null);
-        }
-    }
-
 }
