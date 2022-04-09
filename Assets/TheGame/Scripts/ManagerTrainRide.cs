@@ -60,13 +60,23 @@ public class ManagerTrainRide : MonoBehaviour
         
         if (speechManger.IsTrainRideInTalkingFinished())
         {
-            Invoke("GoToLongwallcutter", 3f);
-            speechManger.ToggleTrainRideOutTalkingFinished();
+            if (SwitchSceneManager.GetCurrentSceneName() == GameScenes.ch01MineSoleThreeTrainRideIn)
+            {
+                Debug.Log("ride in");
+                Invoke("GoToLongwallcutter", 3f);
+                speechManger.ToggleTrainRideOutTalkingFinished();
+            }
+               
         }
        else if (speechManger.IsTrainRideOutTalkingFinished())
         {
-            Invoke("GoToMine", 3f);
-            speechManger.ToggleTrainRideOutTalkingFinished();
+            if (SwitchSceneManager.GetCurrentSceneName() == GameScenes.ch01MineSoleThreeTrainRideOut)
+            {
+
+                Debug.Log("ride out");
+                Invoke("GoToMine", 3f);
+                speechManger.ToggleTrainRideOutTalkingFinished();
+            }
         }
     }
 }
