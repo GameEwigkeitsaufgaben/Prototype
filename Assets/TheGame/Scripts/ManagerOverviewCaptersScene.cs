@@ -1,7 +1,17 @@
+/* Handle Enter Chapter with Adminpin and Enterpin
+ * Adminpin --> all posts are unlocked
+ * Enterpin --> pin to start game with partly locked posts
+ * 
+ * if pin incorrect there is a shake effect and die inputfield is for a short time red.
+ * the placeholder will be set to default: Freischalt-/Generalschlüssel eingeben.
+ * Navigation Propery of button is set to one in inspector!
+ */
+
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class MainCapterSceneManager : MonoBehaviour
+public class ManagerOverviewCaptersScene : MonoBehaviour
 {
     private const string pwdChapterOne = "111";
     private const string pwdAdminChapterOne = "1212";
@@ -11,6 +21,8 @@ public class MainCapterSceneManager : MonoBehaviour
     [SerializeField] InputField inputFieldChapterOne;
     [SerializeField] InputField inputFieldChapterTwo;
     [SerializeField] InputField inputFieldChapterThree;
+
+    [SerializeField] Button enterChapterOne, enterChapterTwo, enterChapterThree, Credits;
 
     [SerializeField] Text lawNotice;
 
@@ -22,7 +34,6 @@ public class MainCapterSceneManager : MonoBehaviour
     private Vector3 origPos;
     private bool shakeObj = false;
     private GameObject toShakeObj;
-
 
     private void Start()
     {
@@ -38,6 +49,18 @@ public class MainCapterSceneManager : MonoBehaviour
         {
             inputFieldChapterThree.gameObject.SetActive(false);
         }
+
+        ColorBlock interactiveButton = ColorBlock.defaultColorBlock;
+        interactiveButton.normalColor = GameColors.defaultInteractionColorNormal;
+        interactiveButton.highlightedColor = GameColors.defaultInteractionColorHighlighted;
+        interactiveButton.pressedColor = GameColors.defaultInteractionColorPresses;
+        interactiveButton.selectedColor = interactiveButton.normalColor;
+        interactiveButton.disabledColor = GameColors.defaultInteractionColorDisabled;
+
+        enterChapterOne.colors = interactiveButton;
+        enterChapterTwo.colors = interactiveButton;
+        enterChapterThree.colors = interactiveButton;
+
 
         lawNotice.text = GameData.lawNotiz;
     }
@@ -56,7 +79,7 @@ public class MainCapterSceneManager : MonoBehaviour
                 shakeDuration = 1f;
                 toShakeObj.transform.localPosition = origPos;
                 shakeObj = false;
-                toShakeObj.GetComponent<InputField>().image.color = Color.white;
+                toShakeObj.GetComponent<InputField>().image.color = GameColors.defaultInteractionColorNormal;
             }
         }
     }
@@ -158,6 +181,14 @@ public class MainCapterSceneManager : MonoBehaviour
         toShakeObj = obj;
         origPos = toShakeObj.transform.localPosition;
         shakeObj = true;
+    }
+
+    private void DeselectClickedButton(GameObject button)
+    {
+        if (EventSystem.current.currentSelectedGameObject == button)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
     }
 
 }
