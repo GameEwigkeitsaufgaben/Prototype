@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,6 +16,7 @@ public class LookaroundWithMouse : MonoBehaviour
     private float pitch = 0.0f;
 
     bool mouseDown = false;
+    bool setYaw = true;
 
     private void OnEnable()
     {
@@ -36,11 +38,13 @@ public class LookaroundWithMouse : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             mouseDown = true;
+           
         }
 
         if (Input.GetMouseButtonUp(0))
         {
             mouseDown = false;
+           
         }
 
         if (mouseDown)
@@ -50,6 +54,12 @@ public class LookaroundWithMouse : MonoBehaviour
 
             transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
         }
-        
+    }
+
+    public void SetPlayerBodyRotation(float yaw)
+    {
+        transform.parent.transform.localRotation = Quaternion.Euler(0f, yaw , 0f);
+        this.yaw = yaw;
+        Debug.Log("set player bodypos");
     }
 }

@@ -59,7 +59,6 @@ public class Cave : MonoBehaviour
         sfx.ReduceVolume(sfx.coalmineConveyorBelt, 0.8f);
 
         liftMovingSrc.clip = sfx.coalmineMoveCave;
-
     }
 
     public void InitReachedStop(CoalmineStop reachedStop)
@@ -159,7 +158,7 @@ public class Cave : MonoBehaviour
     {
         currentStop = targetStop = CoalmineStop.Sole3;
         var tempPosCavePos = new Vector3(GameData.cavePosX, GameData.cavePosY, GameData.cavePosZ);
-        Debug.Log("reload cave positon: " + tempPosCavePos);
+        
         gameObject.transform.position = tempPosCavePos;
         StopCave();
         if (caveDoorsClosed)

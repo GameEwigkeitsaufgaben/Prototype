@@ -42,18 +42,20 @@ public class CaveManager : MonoBehaviour
         sfx.SetClipByAddToDict(baukipper, sfx.caolmineLader);
         sfx.SetClipByAddToDict(kran, sfx.coalmineWorkingMachinesMetal);
         sfx.SetClipByAddToDict(water, sfx.caolmineSplashingWater);
-
+       
     }
 
     private void OnEnable()
     {
         Debug.Log("In On Enable");
         Debug.Log("sohle to reload " + GameData.sohleToReload);
-
+        player.SetPlayerBodyRotation(90f);
+        
         if ((CoalmineStop)GameData.sohleToReload == CoalmineStop.Sole3)
         {
             cave.ReloadSohle3AsCurrent();
             //player.SetPlayerToAnkerPosition();
+            player.SetPlayerBodyRotation(20f);
             player.SetPlayerPos();
         }
     }

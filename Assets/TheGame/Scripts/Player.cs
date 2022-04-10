@@ -27,6 +27,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void SetPlayerBodyRotation(float yaw)
+    {
+        mainCam.GetComponent<LookaroundWithMouse>().SetPlayerBodyRotation(yaw);
+    }
+
     public void StorePlayerPos()
     {
         GameData.playerPosX = transform.position.x;
@@ -87,6 +92,8 @@ public class Player : MonoBehaviour
     public void SetPlayerPos()
     {
         transform.position = new Vector3(GameData.playerPosX, GameData.playerPoxY, GameData.playerPosZ);
+        mainCam.GetComponent<LookaroundWithMouse>().SetPlayerBodyRotation(20f);
+        //mainCam.transform.localRotation = Quaternion.Euler(0f,-60f,0f);
         Debug.Log("Player pos after reload: " + transform.position);
     }
 
