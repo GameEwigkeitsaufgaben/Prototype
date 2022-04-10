@@ -120,6 +120,7 @@ public class Cave : MonoBehaviour
 
     public void OpenDoors()
     {
+        Debug.Log("Doors open -------------------");
         doorLeft.GetComponent<CaveDoor>().OpenDoor();
         doorRight.GetComponent<CaveDoor>().OpenDoor();
         caveDoorsClosed = false;
@@ -161,7 +162,11 @@ public class Cave : MonoBehaviour
         Debug.Log("reload cave positon: " + tempPosCavePos);
         gameObject.transform.position = tempPosCavePos;
         StopCave();
-        OpenDoors();
+        if (caveDoorsClosed)
+        {
+            OpenDoors();
+        }
+        
     }
 
     void Update()
