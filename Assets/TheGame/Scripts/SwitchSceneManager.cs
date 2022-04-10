@@ -11,13 +11,12 @@ public class SwitchSceneManager : MonoBehaviour
     public void LoadMine()
     {
         SceneManager.LoadScene(GameScenes.ch01Mine, LoadSceneMode.Single);
-        Debug.Log("LoadScene sohle1");
+        Debug.Log("LoadScene Mine");
     }
 
     public void LoadSole1()
     {
         SceneManager.LoadScene(GameScenes.ch01MineSoleOneStatic, LoadSceneMode.Additive);
-        Debug.Log("LoadScene sohle1");
     }
     public void LoadSole2()
     {

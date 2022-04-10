@@ -53,8 +53,17 @@ public class CaveManager : MonoBehaviour
         if ((CoalmineStop)GameData.sohleToReload == CoalmineStop.Sole3)
         {
             cave.ReloadSohle3AsCurrent();
-            player.SetPlayerToAnkerPosition();
+            //player.SetPlayerToAnkerPosition();
+            player.SetPlayerPos();
         }
+    }
+
+    public void GoToTrainRideIn()
+    {
+        GameData.sohleToReload = (int)CoalmineStop.Sole3;
+        cave.StoreCavePosition();
+        player.StorePlayerPos();
+        switchScene.GoToTrainRideIn();
     }
 
     private void OnDestroy()

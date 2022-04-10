@@ -157,9 +157,9 @@ public class Cave : MonoBehaviour
     public void ReloadSohle3AsCurrent()
     {
         currentStop = targetStop = CoalmineStop.Sole3;
-        var tempPos = new Vector3(GameData.cavePosX, GameData.cavePosY, GameData.cavePosZ);
-        Debug.Log(tempPos);
-        gameObject.transform.position = tempPos;
+        var tempPosCavePos = new Vector3(GameData.cavePosX, GameData.cavePosY, GameData.cavePosZ);
+        Debug.Log("reload cave positon: " + tempPosCavePos);
+        gameObject.transform.position = tempPosCavePos;
         StopCave();
         OpenDoors();
     }

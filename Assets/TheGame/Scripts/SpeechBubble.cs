@@ -41,7 +41,7 @@ public class SpeechBubble : MonoBehaviour
             bubbleImage = myElements[1].GetComponent<Image>();
             bubbleButton = myElements[2].GetComponent<Button>();
 
-            Debug.Log("in speechbubble " + i + myElements[i].name);
+           // Debug.Log("in speechbubble " + i + myElements[i].name);
         }
     }
 

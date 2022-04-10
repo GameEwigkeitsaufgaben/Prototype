@@ -30,6 +30,9 @@ public static class GameData
     public static float playerOffsetToAnkerObjX = 0;
     public static float playerOffsetToAnkerObjY = 0;
     public static float playerOffsetToAnkerObjZ = 0;
+    public static float playerPosX = 0;
+    public static float playerPoxY = 0;
+    public static float playerPosZ = 0;
     //public static bool scene1162LoadedOnce = false;
     public static bool rideIn = true;
     internal static bool sohle3IntroPlayedOnce = false;

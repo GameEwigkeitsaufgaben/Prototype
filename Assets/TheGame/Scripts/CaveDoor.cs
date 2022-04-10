@@ -39,7 +39,7 @@ public class CaveDoor : MonoBehaviour
             playDoorSound =  false;
         }
 
-        Debug.Log(gameObject.name + "is playing  " + gameObject.GetComponent<AudioSource>().isPlaying);
+        //Debug.Log(gameObject.name + "is playing  " + gameObject.GetComponent<AudioSource>().isPlaying);
 
         if (move)
         {

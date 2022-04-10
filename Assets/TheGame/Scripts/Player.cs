@@ -23,9 +23,15 @@ public class Player : MonoBehaviour
         }
         catch (System.Exception)
         {
-
             Debug.Log("No ANKER OBJ SET");
         }
+    }
+
+    public void StorePlayerPos()
+    {
+        GameData.playerPosX = transform.position.x;
+        GameData.playerPoxY = transform.position.y;
+        GameData.playerPosZ = transform.position.z;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -76,6 +82,12 @@ public class Player : MonoBehaviour
     public void SetPlayerToAnkerPosition()
     {
         transform.position = ankerObjToFollow.transform.position + ReadPlayerOffsetToAnkerObj();
+    }
+
+    public void SetPlayerPos()
+    {
+        transform.position = new Vector3(GameData.playerPosX, GameData.playerPoxY, GameData.playerPosZ);
+        Debug.Log("Player pos after reload: " + transform.position);
     }
 
     ////wird nicht mehr gebruacht Prüfen!!! Jetzt in Cave controller drinnen
