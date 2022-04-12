@@ -60,6 +60,6 @@ public class LookaroundWithMouse : MonoBehaviour
     {
         transform.parent.transform.localRotation = Quaternion.Euler(0f, yaw , 0f);
         this.yaw = yaw;
-        Debug.Log("set player bodypos");
+        Debug.Log("set player body rotation");
     }
 }

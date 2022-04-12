@@ -1,6 +1,6 @@
 //Add a new Waypoint to s3:
-//make to gameobjects with colliders, got to Waypoint Manager in your Project. Set Name of path, add to collider Objects the paths (press p).
-//Copy postion from S3CaveToViewpoint to the newly created path. Adjust your Waypoints position, copy/paste values bewetterung, etc. to your wps.
+//1) make a gameobject with a collider, 2) go to Waypoint Manager in your Project. 3) Set Name of path, add to collider Objects the paths (press p).
+//4) Copy postion from S3CaveToViewpoint to the newly created path. 5) Adjust your Waypoints position, copy/paste values bewetterung, etc. to your wps.
 
 using SWS;
 using UnityEngine;
@@ -15,7 +15,8 @@ public enum MineWayPoints
     viewpointOVMine = 4,
     viewpointLWBahnsteig = 5,
     viewpointLWLWCutter = 6,
-    error = 7
+    error = 7,
+    reloadBahnsteig = 8
 }
 
 public enum PathWaypoints
@@ -49,6 +50,18 @@ public class CoalmineWaypointManager : MonoBehaviour
 
     public bool trainArrived = false;
 
+    //https://forum.unity.com/threads/onenable-before-awake.361429/
+    private void Awake()
+    {
+        wps1ViewpointBtn = wpS1ViewpointSign.GetComponentsInChildren<Transform>()[1].GetComponent<Button>();
+        wps2ViewpointBtn = wpS2ViewpointSign.GetComponentsInChildren<Transform>()[1].GetComponent<Button>();
+        wps3ViewpointBtn = wpS3ViewpointSign.GetComponentsInChildren<Transform>()[1].GetComponent<Button>();
+
+        //if (GameData.sohleToReload == (int)MineWayPoints.reloadBahnsteig)
+        //{
+        //    ReloadWPBahnsteig();
+        //}
+    }
 
     private void Start()
     {
@@ -58,10 +71,6 @@ public class CoalmineWaypointManager : MonoBehaviour
         {
             caveBtn.gameObject.SetActive(false);
         }
-
-        wps1ViewpointBtn = wpS1ViewpointSign.GetComponentsInChildren<Transform>()[1].GetComponent<Button>();
-        wps2ViewpointBtn = wpS2ViewpointSign.GetComponentsInChildren<Transform>()[1].GetComponent<Button>();
-        wps3ViewpointBtn = wpS3ViewpointSign.GetComponentsInChildren<Transform>()[1].GetComponent<Button>();
 
         bahnsteigBtn = bahnsteig.GetComponentInChildren<Button>();
         bewetterungBtn = bewetterung.GetComponentInChildren<Button>();
@@ -86,6 +95,8 @@ public class CoalmineWaypointManager : MonoBehaviour
 
     public MineWayPoints GetCurrentWP()
     {
+        if (currentWP == MineWayPoints.reloadBahnsteig) return MineWayPoints.viewpointBahnsteig;
+
         if(playerSplineMove.currentPoint == (int)PathWaypoints.startPath)
         {
             if (playerSplineMove.pathContainer.name == pathS3CaveToViewpoint.name) return MineWayPoints.insideCave;
@@ -209,9 +220,16 @@ public class CoalmineWaypointManager : MonoBehaviour
             bewetterungBtn.interactable = caveBtn.interactable = interactable;
     }
 
+    public void ReloadWPBahnsteig()
+    {
+        currentWP = MineWayPoints.reloadBahnsteig;
+        SetWaypointMarkers();
+    }
+
     public void SetWaypointMarkers()
     {
         MineWayPoints tmp = GetCurrentWP();
+        Debug.Log("MineWaypoint is :"  + tmp);
 
         if (tmp == MineWayPoints.insideCave)
         {
@@ -229,7 +247,9 @@ public class CoalmineWaypointManager : MonoBehaviour
         }
 
         if (GameData.currentStopSohle != (int)CoalmineStop.Sole3) return;
-        
+
+        SetAllWPBtnActive(true);
+
         if (tmp == MineWayPoints.viewpointBewetterung)
         {
             bewetterungBtn.gameObject.SetActive(false);
@@ -239,19 +259,17 @@ public class CoalmineWaypointManager : MonoBehaviour
             bahnsteig.transform.localRotation = Quaternion.Euler(0, 90, 0);
             ovmine.transform.localRotation = Quaternion.Euler(0, 90, 0);
             
-
             Debug.Log(tmp + "sould be set " + transform.localPosition);
         }
         else if (tmp == MineWayPoints.viewpoint)
         {
-            SetAllWPBtnActive(true);
-
             bahnsteig.transform.localRotation = Quaternion.Euler(0, 90, 0);
             ovmine.transform.localRotation = Quaternion.Euler(0, 90, 0);
             bewetterung.transform.localRotation = Quaternion.Euler(0, 180, 0);
         }
         else if (tmp == MineWayPoints.viewpointBahnsteig)
         {
+            Debug.Log("--------------------SetBahnsteig Viewpoints!!!!!!!!!!!!!!");
             bahnsteigBtn.gameObject.SetActive(false);
             caveBtn.gameObject.SetActive(false);
 
@@ -272,6 +290,7 @@ public class CoalmineWaypointManager : MonoBehaviour
         {
             SetAllWPBtnActive(false);
             wps3ViewpointBtn.gameObject.SetActive(true);
+            Debug.Log("------------------SetInsideCave");
         }
     }
 
@@ -288,7 +307,7 @@ public class CoalmineWaypointManager : MonoBehaviour
         bahnsteigBtn.gameObject.SetActive(active);
         bewetterungBtn.gameObject.SetActive(active);
 
-        Debug.Log("setAllbtn active---------------------------------");
+        Debug.Log("setAllbtn to "+ active + " ---------------------------------");
     }
 
     //Methods Called from Inspector
@@ -363,10 +382,18 @@ public class CoalmineWaypointManager : MonoBehaviour
                 pathS3BahnsteigToOVMine.transform.position = 
                 new Vector3(0f, myPlayer.transform.position.y, 0f);
 
+            helperSetPath = true;
+
+            if (GameData.sohleToReload == (int)MineWayPoints.reloadBahnsteig)
+            {
+                ReloadWPBahnsteig();
+                return;
+            }
+
             SetAllWPBtnActive(false);
             wps3ViewpointBtn.gameObject.SetActive(true);
 
-            helperSetPath = true;
+
         }
         else if (GameData.currentStopSohle == (int)CoalmineStop.Sole2 && !helperSetPath)
         {

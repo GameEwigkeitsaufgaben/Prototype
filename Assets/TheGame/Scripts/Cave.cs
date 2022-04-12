@@ -154,7 +154,7 @@ public class Cave : MonoBehaviour
         liftMovingSrc.Stop();
     }
 
-    public void ReloadSohle3AsCurrent()
+    public void ReloadCaveAtSohle3()
     {
         currentStop = targetStop = CoalmineStop.Sole3;
         var tempPosCavePos = new Vector3(GameData.cavePosX, GameData.cavePosY, GameData.cavePosZ);
@@ -165,7 +165,6 @@ public class Cave : MonoBehaviour
         {
             OpenDoors();
         }
-        
     }
 
     void Update()

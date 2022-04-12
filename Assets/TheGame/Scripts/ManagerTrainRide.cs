@@ -6,9 +6,12 @@ public class ManagerTrainRide : MonoBehaviour
 {
     public CoalmineSpeechManger speechManger;
     public SwitchSceneManager switchScene;
+    public bool isNextSceneLoaded = false;
 
     private void Awake()
     {
+        isNextSceneLoaded = false;
+
         if (SwitchSceneManager.GetCurrentSceneName() == GameScenes.ch01MineSoleThreeTrainRideIn)
         {
             Invoke("StartTalkingIn", 3f);
@@ -62,8 +65,15 @@ public class ManagerTrainRide : MonoBehaviour
         {
             if (SwitchSceneManager.GetCurrentSceneName() == GameScenes.ch01MineSoleThreeTrainRideIn)
             {
-                Invoke("GoToLongwallcutter", 3f);
-                speechManger.ToggleTrainRideOutTalkingFinished();
+               
+                if (!isNextSceneLoaded)
+                {
+                    speechManger.ToggleTrainRideInTalkingFinished();
+                    Invoke("GoToLongwallcutter", 3f);
+                    isNextSceneLoaded = true;
+                }
+                
+                
             }
                
         }
@@ -71,8 +81,15 @@ public class ManagerTrainRide : MonoBehaviour
         {
             if (SwitchSceneManager.GetCurrentSceneName() == GameScenes.ch01MineSoleThreeTrainRideOut)
             {
-                Invoke("GoToMine", 3f);
-                speechManger.ToggleTrainRideOutTalkingFinished();
+                
+                if (!isNextSceneLoaded)
+                {
+                    speechManger.ToggleTrainRideOutTalkingFinished();
+                    Invoke("GoToMine", 3f);
+                    isNextSceneLoaded = true;
+                }
+                
+               
             }
         }
     }

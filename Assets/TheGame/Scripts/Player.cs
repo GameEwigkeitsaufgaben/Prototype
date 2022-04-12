@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -84,6 +85,12 @@ public class Player : MonoBehaviour
             GameData.playerOffsetToAnkerObjZ);
     }
 
+    public  void RealoadPlayerAtS3Bahnsteig()
+    {
+        SetPlayerPos();
+        SetPlayerBodyRotation(20f);
+    }
+
     public void SetPlayerToAnkerPosition()
     {
         transform.position = ankerObjToFollow.transform.position + ReadPlayerOffsetToAnkerObj();
@@ -94,7 +101,7 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(GameData.playerPosX, GameData.playerPoxY, GameData.playerPosZ);
         mainCam.GetComponent<LookaroundWithMouse>().SetPlayerBodyRotation(20f);
         //mainCam.transform.localRotation = Quaternion.Euler(0f,-60f,0f);
-        Debug.Log("Player pos after reload: " + transform.position);
+        Debug.Log("set Player Pos after reload: " + transform.position);
     }
 
     ////wird nicht mehr gebruacht Prüfen!!! Jetzt in Cave controller drinnen
