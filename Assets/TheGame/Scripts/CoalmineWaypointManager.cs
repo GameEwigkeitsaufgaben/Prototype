@@ -128,12 +128,16 @@ public class CoalmineWaypointManager : MonoBehaviour
         return MineWayPoints.error;
     }
 
+    public void SetCurrentWaypoint()
+    {
+        currentWP = GetCurrentWP();
+        SetWaypointMarkers();
+    }
+
 
     public void DetectAndSetPath(MineWayPoints targetWP)
     {
-        currentWP = GetCurrentWP();
-
-        SetWaypointMarkers();
+        SetCurrentWaypoint();
 
         if(currentWP == MineWayPoints.error)
         {
@@ -141,6 +145,7 @@ public class CoalmineWaypointManager : MonoBehaviour
             return;
         }
 
+        
         if (targetWP == MineWayPoints.viewpoint)
         {
             if (currentWP == MineWayPoints.viewpointBewetterung)
@@ -148,7 +153,7 @@ public class CoalmineWaypointManager : MonoBehaviour
                 playerSplineMove.pathContainer = pathS3ViewpointToBewetterung;
                 playerSplineMove.reverse = true;
             }
-            else if (currentWP == MineWayPoints.viewpointBahnsteig)
+            else if (IsBahnsteigCurrentWP())
             {
                 playerSplineMove.pathContainer = pathS3ViewpointToBahnsteig;
                 playerSplineMove.reverse = true;
@@ -171,7 +176,7 @@ public class CoalmineWaypointManager : MonoBehaviour
                 playerSplineMove.pathContainer = pathS3ViewpointToBewetterung;
                 playerSplineMove.reverse = false;
             }
-            else if (currentWP == MineWayPoints.viewpointBahnsteig)
+            else if (IsBahnsteigCurrentWP())
             {
                 playerSplineMove.pathContainer = pathS3BewetterungToBahnsteig;
                 playerSplineMove.reverse = true;
@@ -207,7 +212,7 @@ public class CoalmineWaypointManager : MonoBehaviour
                 playerSplineMove.pathContainer = pathS3ViewpointToOVMine;
                 playerSplineMove.reverse = false;
             }
-            else if (currentWP == MineWayPoints.viewpointBahnsteig)
+            else if (IsBahnsteigCurrentWP())
             {
                 playerSplineMove.pathContainer = pathS3BahnsteigToOVMine;
                 playerSplineMove.reverse = false;
@@ -235,18 +240,16 @@ public class CoalmineWaypointManager : MonoBehaviour
 
     public void SetWaypointMarkers()
     {
-        MineWayPoints tmp = GetCurrentWP();
-        currentWP = tmp;
-        Debug.Log("MineWaypoint is :"  + tmp);
+        Debug.Log("MineWaypoint is :"  + currentWP);
 
-        if (tmp == MineWayPoints.insideCave)
+        if (currentWP == MineWayPoints.insideCave)
         {
             caveBtn.gameObject.SetActive(false);
             wps3ViewpointBtn.gameObject.SetActive(true);
             wps2ViewpointBtn.gameObject.SetActive(true);
             wps1ViewpointBtn.gameObject.SetActive(true);
         }
-        else if (tmp == MineWayPoints.viewpoint)
+        else if (currentWP == MineWayPoints.viewpoint)
         {
             caveBtn.gameObject.SetActive(true);
             wps3ViewpointBtn.gameObject.SetActive(false);
@@ -258,20 +261,20 @@ public class CoalmineWaypointManager : MonoBehaviour
 
         SetAllWPBtnActive(true);
 
-        if (tmp == MineWayPoints.viewpointBewetterung)
+        if (currentWP == MineWayPoints.viewpointBewetterung)
         {
             bewetterungBtn.gameObject.SetActive(false);
             caveBtn.gameObject.SetActive(false);
 
             ChangeS3WPRotations(40.0f, 90.0f, 90.0f, 0.0f);
 
-            Debug.Log(tmp + "sould be set " + transform.localPosition);
+            Debug.Log(currentWP + "sould be set " + transform.localPosition);
         }
-        else if (tmp == MineWayPoints.viewpoint)
+        else if (currentWP == MineWayPoints.viewpoint)
         {
             ChangeS3WPRotations(0.0f, 90.0f, 90.0f, 235.0f);
         }
-        else if (tmp == MineWayPoints.viewpointBahnsteig)
+        else if (currentWP == MineWayPoints.viewpointBahnsteig)
         {
             Debug.Log("--------------------SetBahnsteig Viewpoints!!!!!!!!!!!!!!");
             bahnsteigBtn.gameObject.SetActive(false);
@@ -279,14 +282,14 @@ public class CoalmineWaypointManager : MonoBehaviour
 
             ChangeS3WPRotations(-55.0f, 0.0f, 175.0f, -100.0f);
         }
-        else if (tmp == MineWayPoints.viewpointOVMine)
+        else if (currentWP == MineWayPoints.viewpointOVMine)
         {
             ovmineBtn.gameObject.SetActive(false);
             caveBtn.gameObject.SetActive(false);
 
             ChangeS3WPRotations(180.0f, -33.0f, 0.0f, -65.0f);
         }
-        else if (tmp == MineWayPoints.insideCave)
+        else if (currentWP == MineWayPoints.insideCave)
         {
             SetAllWPBtnActive(false);
             wps3ViewpointBtn.gameObject.SetActive(true);
