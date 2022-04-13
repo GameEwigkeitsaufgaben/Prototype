@@ -21,7 +21,7 @@ public class CaveDoor : MonoBehaviour
         gameObject.transform.localPosition = opendPosition.transform.localPosition;
         doorOpened = true;
 
-        sfx = Resources.Load<SoSfx>(GameData.SfxConfig);
+        sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
         gameObject.GetComponent<AudioSource>().clip = sfx.coalmineCaveMoveDoors;
     }
 

@@ -9,5 +9,6 @@ public class SoChapOneRuntimeData : ScriptableObject
     public MuseumWaypoints currentMuseumWaypoint = MuseumWaypoints.WP0;
 
     public float playerRotation; //needed for lookaroundMouse
+    public bool trainArrived;
 
 }

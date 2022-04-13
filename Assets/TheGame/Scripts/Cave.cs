@@ -48,7 +48,7 @@ public class Cave : MonoBehaviour
 
     private void Start()
     {
-        sfx = Resources.Load<SoSfx>(GameData.SfxConfig);
+        sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
         currentStop = CoalmineStop.EntryArea;
         EnableButtons(true);
 

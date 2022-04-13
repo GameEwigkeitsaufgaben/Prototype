@@ -15,7 +15,9 @@ public class CaveManager : MonoBehaviour
     private SwitchSceneManager switchScene;
     public Character characterEnya, characterDad, characterGeorg;
 
-    public Button exitScene, sole1WPViewpointBtn, sole2WPViewpointBtn, sole1caveWP;
+    private SoChapOneRuntimeData runtimeStoredData;
+
+    public Button exitSceneBtn, sole1WPViewpointBtn, sole2WPViewpointBtn, sole1caveWPBtn, sole3EnterTrainBtn;
    // public SprechblaseController sprechblaseController;
 
     //public GameObject triggerEinstieg;
@@ -27,7 +29,8 @@ public class CaveManager : MonoBehaviour
 
     private void Start()
     {
-        sfx = Resources.Load<SoSfx>(GameData.SfxConfig);
+        sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
+        runtimeStoredData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
         //triggerEinstieg.SetActive(false);
 
         switchScene = gameObject.GetComponent<SwitchSceneManager>();
@@ -81,6 +84,21 @@ public class CaveManager : MonoBehaviour
         {
             sfx.PlaySfxSole2();
         }
+
+        if (GetComponent<CoalmineWaypointManager>().IsBahnsteigCurrentWP())
+        {
+            if(!sole3EnterTrainBtn.IsActive())
+                sole3EnterTrainBtn.gameObject.SetActive(true);
+        }
+        else
+        {
+            if (sole3EnterTrainBtn.IsActive())
+                sole3EnterTrainBtn.gameObject.SetActive(false);
+        }
+           
+        
+
+
         //if (cave.caveDoorsClosed && exitScene.interactable)
         //{
         //    exitScene.interactable = false;

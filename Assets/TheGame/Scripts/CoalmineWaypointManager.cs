@@ -46,9 +46,9 @@ public class CoalmineWaypointManager : MonoBehaviour
     public Canvas bahnsteig, bewetterung, ovmine, viewpoint;
     private bool helperSetPath = false;
     private Player myPlayer;
-    MineWayPoints currentWP;
+    public MineWayPoints currentWP;
 
-    public bool trainArrived = false;
+    //public bool trainArrived = false;
 
     //https://forum.unity.com/threads/onenable-before-awake.361429/
     private void Awake()
@@ -56,11 +56,6 @@ public class CoalmineWaypointManager : MonoBehaviour
         wps1ViewpointBtn = wpS1ViewpointSign.GetComponentsInChildren<Transform>()[1].GetComponent<Button>();
         wps2ViewpointBtn = wpS2ViewpointSign.GetComponentsInChildren<Transform>()[1].GetComponent<Button>();
         wps3ViewpointBtn = wpS3ViewpointSign.GetComponentsInChildren<Transform>()[1].GetComponent<Button>();
-
-        //if (GameData.sohleToReload == (int)MineWayPoints.reloadBahnsteig)
-        //{
-        //    ReloadWPBahnsteig();
-        //}
     }
 
     private void Start()
@@ -75,6 +70,13 @@ public class CoalmineWaypointManager : MonoBehaviour
         bahnsteigBtn = bahnsteig.GetComponentInChildren<Button>();
         bewetterungBtn = bewetterung.GetComponentInChildren<Button>();
         ovmineBtn = ovmine.GetComponentInChildren<Button>();
+    }
+
+    public bool IsBahnsteigCurrentWP()
+    {
+        Debug.Log("for train: is bahnsteig current wP: " + (currentWP == MineWayPoints.viewpointBahnsteig || currentWP == MineWayPoints.reloadBahnsteig));
+        Debug.Log("for train: " + currentWP);
+        return (currentWP == MineWayPoints.viewpointBahnsteig || currentWP == MineWayPoints.reloadBahnsteig);
     }
 
     //von splinemove im inspector aufgerufen
@@ -96,9 +98,11 @@ public class CoalmineWaypointManager : MonoBehaviour
     public MineWayPoints GetCurrentWP()
     {
         if (currentWP == MineWayPoints.reloadBahnsteig) return MineWayPoints.viewpointBahnsteig;
+        Debug.Log("player current point start (0): " + playerSplineMove.currentPoint);
 
         if(playerSplineMove.currentPoint == (int)PathWaypoints.startPath)
         {
+            Debug.Log("player current point start (0) name : " + playerSplineMove.pathContainer.name);
             if (playerSplineMove.pathContainer.name == pathS3CaveToViewpoint.name) return MineWayPoints.insideCave;
             else if (playerSplineMove.pathContainer.name == pathS2CaveToViewpoint.name) return MineWayPoints.insideCave;
             else if (playerSplineMove.pathContainer.name == pathS1CaveToViewpoint.name) return MineWayPoints.insideCave;
@@ -110,6 +114,7 @@ public class CoalmineWaypointManager : MonoBehaviour
             else if (playerSplineMove.pathContainer.name == pathS3BahnsteigToOVMine.name) return MineWayPoints.viewpointBahnsteig;
         }
 
+        Debug.Log("player current point end (1) name : " + playerSplineMove.pathContainer.name);
         if (playerSplineMove.pathContainer.name == pathS3CaveToViewpoint.name) return MineWayPoints.viewpoint;
         else if (playerSplineMove.pathContainer.name == pathS2CaveToViewpoint.name) return MineWayPoints.viewpoint;
         else if (playerSplineMove.pathContainer.name == pathS1CaveToViewpoint.name) return MineWayPoints.viewpoint;
@@ -231,6 +236,7 @@ public class CoalmineWaypointManager : MonoBehaviour
     public void SetWaypointMarkers()
     {
         MineWayPoints tmp = GetCurrentWP();
+        currentWP = tmp;
         Debug.Log("MineWaypoint is :"  + tmp);
 
         if (tmp == MineWayPoints.insideCave)
@@ -327,7 +333,7 @@ public class CoalmineWaypointManager : MonoBehaviour
 
     public void MoveIn()
     {
-        //needed because more than one path in this sole is shares the viewpoint waypoint
+        //needed because more than one path uses the viewpoint waypoint
         if (GameData.currentStopSohle == (int)CoalmineStop.Sole3)
         {
             playerSplineMove.pathContainer = pathS3CaveToViewpoint;

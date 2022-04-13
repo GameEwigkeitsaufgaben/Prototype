@@ -2,8 +2,10 @@ using UnityEngine;
 
 public static class GameData
 {
-    public const string SfxConfig = "SfxConfig";
-    public const string ConfigMinerEquiment = "ConfigMinerEquipment";
+    //Name of objects in Folder "Resources" 
+    public const string NameConfigSfx = "SfxConfig";
+    public const string NameRuntimeStoreData = "RuntimeExchangeData";
+    public const string NameConfigMinerEquiment = "ConfigMinerEquipment";
 
     public static int chapterOneUnlocked = 0;
     public static int chapterTwoUnlocked = 0;

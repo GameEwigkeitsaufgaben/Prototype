@@ -52,7 +52,7 @@ void Start()
         myManager = FindObjectOfType<ManagerMuseumMinerEquipment>();
         origPosOnTable = gameObject.transform.position; //every instance of class is reference type and any instance of structure is value type.
         
-        myConifg = Resources.Load<SoMinerEquipment>(GameData.ConfigMinerEquiment);
+        myConifg = Resources.Load<SoMinerEquipment>(GameData.NameConfigMinerEquiment);
         myDragRectTransform = GetComponent<RectTransform>();
 
 
