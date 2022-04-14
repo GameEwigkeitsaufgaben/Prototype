@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -18,14 +17,14 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        try
-        {
-            SetupPlayerOffsetToAnkerObj(ankerObjToFollow);
-        }
-        catch (System.Exception)
-        {
-            Debug.Log("No ANKER OBJ SET");
-        }
+            try
+            {
+                SetupPlayerOffsetToAnkerObj(ankerObjToFollow);
+            }
+            catch (System.Exception)
+            {
+                Debug.Log("No ANKER OBJ SET");
+            }
     }
 
     public void SetPlayerBodyRotation(float yaw)
@@ -33,11 +32,12 @@ public class Player : MonoBehaviour
         mainCam.GetComponent<LookaroundWithMouse>().SetPlayerBodyRotation(yaw);
     }
 
-    public void StorePlayerPos()
+    public void StorePlayerAtBahnsteigPositon()
     {
-        GameData.playerPosX = transform.position.x;
-        GameData.playerPoxY = transform.position.y;
-        GameData.playerPosZ = transform.position.z;
+        GameData.playerPositonXatS3Bahnsteig = transform.position.x;
+        GameData.playerPositonYatS3Bahnsteig = transform.position.y;
+        GameData.playerPositonZatS3Bahnsteig = transform.position.z;
+        Debug.Log("Write to gamedata players bahnsteig position: " + transform.position);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -64,11 +64,19 @@ public class Player : MonoBehaviour
     private void SetupPlayerOffsetToAnkerObj(GameObject ankerObj)
     {
         ankerObjToFollow = ankerObj;
-        var tmpOffset = transform.position - ankerObj.transform.position;
 
-        offsetToAnkerObj = tmpOffset;
-
-        WritePlayerOffsetToAnkerObj();
+        if (GameData.sohleToReload != (int)CoalmineStop.Sole3)
+        {
+            var tmpOffset = transform.position - ankerObj.transform.position;
+            offsetToAnkerObj = tmpOffset;
+            playerInCave = true;
+            WritePlayerOffsetToAnkerObj();
+        }
+        else
+        {
+            offsetToAnkerObj = ReadPlayerOffsetToAnkerObj();
+            playerInCave = false;
+        }
     }
 
     private void WritePlayerOffsetToAnkerObj()
@@ -87,7 +95,7 @@ public class Player : MonoBehaviour
 
     public  void RealoadPlayerAtS3Bahnsteig()
     {
-        SetPlayerPos();
+        SetPlayerToS3ViewpointBahnsteigPosition();
         SetPlayerBodyRotation(20f);
     }
 
@@ -96,12 +104,14 @@ public class Player : MonoBehaviour
         transform.position = ankerObjToFollow.transform.position + ReadPlayerOffsetToAnkerObj();
     }
 
-    public void SetPlayerPos()
+    public void SetPlayerToS3ViewpointBahnsteigPosition()
     {
-        transform.position = new Vector3(GameData.playerPosX, GameData.playerPoxY, GameData.playerPosZ);
-        mainCam.GetComponent<LookaroundWithMouse>().SetPlayerBodyRotation(20f);
-        //mainCam.transform.localRotation = Quaternion.Euler(0f,-60f,0f);
-        Debug.Log("set Player Pos after reload: " + transform.position);
+        transform.position = new Vector3(
+            GameData.playerPositonXatS3Bahnsteig, 
+            GameData.playerPositonYatS3Bahnsteig, 
+            GameData.playerPositonZatS3Bahnsteig);
+
+        Debug.Log("Read Player Pos from Gamedata and set transform.postion (Bahnsteig): " + transform.position);
     }
 
     ////wird nicht mehr gebruacht Prüfen!!! Jetzt in Cave controller drinnen

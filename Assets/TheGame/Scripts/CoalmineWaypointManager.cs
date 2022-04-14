@@ -32,30 +32,39 @@ public class CoalmineWaypointManager : MonoBehaviour
     public PathManager pathS3ViewpointToBewetterung, pathS3ViewpointToBahnsteig, pathS3ViewpointToOVMine, 
                        pathS3BahnsteigToOVMine, pathS3BewetterungToBahnsteig, pathS3BewetterungToOVMine;
     public PathManager pathLWBahnsteigToLWC;
-    public GameObject wpS1ViewpointSign, wpS2ViewpointSign, wpS3ViewpointSign, caveSign;
+    //wpSx represent 
+    public GameObject wpS1ViewpointSign, wpS2ViewpointSign, wpS3ViewpointSign, wpInsideCaveSign;
     public float wpAdjustHightViewpoint;
 
     public GameObject triggerPlayerInCave;
+    public Canvas bahnsteig, bewetterung, ovmine, viewpoint;
 
+    private bool helperSetPath = false;
+    private Player myPlayer;
+
+    [Header("Assigned during runtime")]
     [SerializeField]
     private Button wps1ViewpointBtn, wps2ViewpointBtn, wps3ViewpointBtn;
+    
     [SerializeField] 
     private Button runtimeViewpointBtn, caveBtn, bahnsteigBtn, bewetterungBtn, ovmineBtn;
     
-
-    public Canvas bahnsteig, bewetterung, ovmine, viewpoint;
-    private bool helperSetPath = false;
-    private Player myPlayer;
-    public MineWayPoints currentWP;
+    [SerializeField]
+    private MineWayPoints currentWP;
 
     //public bool trainArrived = false;
 
     //https://forum.unity.com/threads/onenable-before-awake.361429/
     private void Awake()
     {
+        //The order has to be Canvas (parent), first child ist btn, second child is text; 
         wps1ViewpointBtn = wpS1ViewpointSign.GetComponentsInChildren<Transform>()[1].GetComponent<Button>();
         wps2ViewpointBtn = wpS2ViewpointSign.GetComponentsInChildren<Transform>()[1].GetComponent<Button>();
         wps3ViewpointBtn = wpS3ViewpointSign.GetComponentsInChildren<Transform>()[1].GetComponent<Button>();
+        bahnsteigBtn = bahnsteig.GetComponentsInChildren<Transform>()[1].GetComponentInChildren<Button>();
+        bewetterungBtn = bewetterung.GetComponentsInChildren<Transform>()[1].GetComponentInChildren<Button>();
+        ovmineBtn = ovmine.GetComponentsInChildren<Transform>()[1].GetComponentInChildren<Button>();
+        caveBtn = wpInsideCaveSign.GetComponentsInChildren<Transform>()[1].GetComponentInChildren<Button>();
     }
 
     private void Start()
@@ -66,10 +75,6 @@ public class CoalmineWaypointManager : MonoBehaviour
         {
             caveBtn.gameObject.SetActive(false);
         }
-
-        bahnsteigBtn = bahnsteig.GetComponentInChildren<Button>();
-        bewetterungBtn = bewetterung.GetComponentInChildren<Button>();
-        ovmineBtn = ovmine.GetComponentInChildren<Button>();
     }
 
     public bool IsBahnsteigCurrentWP()
@@ -274,7 +279,7 @@ public class CoalmineWaypointManager : MonoBehaviour
         {
             ChangeS3WPRotations(0.0f, 90.0f, 90.0f, 235.0f);
         }
-        else if (currentWP == MineWayPoints.viewpointBahnsteig)
+        else if (IsBahnsteigCurrentWP())
         {
             Debug.Log("--------------------SetBahnsteig Viewpoints!!!!!!!!!!!!!!");
             bahnsteigBtn.gameObject.SetActive(false);
@@ -293,6 +298,9 @@ public class CoalmineWaypointManager : MonoBehaviour
         {
             SetAllWPBtnActive(false);
             wps3ViewpointBtn.gameObject.SetActive(true);
+
+            ChangeS3WPRotations(102.0f, 0.0f, 0.0f, 0.0f);
+            myPlayer.SetPlayerToAnkerPosition();
             Debug.Log("------------------SetInsideCave");
         }
     }
@@ -397,10 +405,12 @@ public class CoalmineWaypointManager : MonoBehaviour
 
             helperSetPath = true;
 
-            Debug.Log("sohle to reload " + GameData.sohleToReload);
+            
             if (GameData.sohleToReload == (int)CoalmineStop.Sole3)
             {
+                Debug.Log("Reload sohle 3######################################!");
                 ReloadWPBahnsteig();
+                myPlayer.RealoadPlayerAtS3Bahnsteig();
                 return;
             }
 
