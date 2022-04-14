@@ -53,6 +53,11 @@ public class CaveManager : MonoBehaviour
         Debug.Log("In On Enable");
         Debug.Log("sohle to reload " + GameData.sohleToReload);
         player.SetPlayerBodyRotation(90f); //Default 90 for Cave
+
+        if(GameData.currentStopSohle == (int)CoalmineStop.Unset)
+        {
+            GameData.currentStopSohle = (int)CoalmineStop.EntryArea;
+        }
         
         if ((CoalmineStop)GameData.sohleToReload == CoalmineStop.Sole3)
         {

@@ -27,8 +27,8 @@ public static class GameData
     public static int moveDirection = -1; //-1 for moving down, +1 for moving up
     public static int nbrSchacht = 1;
 
-    public static int currentStopSohle;
-    public static int sohleToReload = 0;
+    public static int currentStopSohle = -1; //Based on enum Coalminestop defined in Cave, -1 = unset
+    public static int sohleToReload = -1; //Based on enum Coalminestop defined in Cave, -1 = unset
     public static float playerOffsetToAnkerObjX = 0;
     public static float playerOffsetToAnkerObjY = 0;
     public static float playerOffsetToAnkerObjZ = 0;

@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public enum CoalmineStop
 {
+    Unset = -1,
     Outside,
     EntryArea,
     Sole1,
@@ -49,7 +50,11 @@ public class Cave : MonoBehaviour
     private void Start()
     {
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
-        currentStop = CoalmineStop.EntryArea;
+        
+        //Default setting: current Sole is Entry Area;
+        GameData.currentStopSohle = (int)CoalmineStop.EntryArea;
+        currentStop = (CoalmineStop)GameData.currentStopSohle;
+        
         EnableButtons(true);
 
         sfx.PlayClip(wind, sfx.coalmineWindInTunnel);

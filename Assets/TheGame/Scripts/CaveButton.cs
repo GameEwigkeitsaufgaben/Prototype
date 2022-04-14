@@ -11,7 +11,8 @@ public class CaveButton : MonoBehaviour
     private void Start()
     {
         caveMoveController = transform.parent.transform.parent.transform.parent.GetComponent<CaveMoveUpDownController>(); //go to cave, set controller
-        if (myStop == CoalmineStop.EntryArea)
+
+        if(myStop == (CoalmineStop)GameData.currentStopSohle)
         {
             isSelected = true;
         }
@@ -34,10 +35,8 @@ public class CaveButton : MonoBehaviour
     {
         if(isSelected != hasChanged)
         {
-            Debug.Log(gameObject.name + " " + isSelected);
             feedbackObject.SetActive(isSelected);
             hasChanged = isSelected;
         }
     }
-
 }
