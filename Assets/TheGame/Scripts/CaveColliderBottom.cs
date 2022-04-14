@@ -48,7 +48,8 @@ public class CaveColliderBottom : MonoBehaviour
         else if (other.name == TriggerSole3 && cave.targetStop == CoalmineStop.Sole3)
              {
                 cave.InitReachedStop(CoalmineStop.Sole3);
-                speechManger.playSole3WPCave = true;
+
+                speechManger.playSole3WPCave = (GameData.currentStopSohle == (int)CoalmineStop.Unset) ? true : false;
              }
     }
 

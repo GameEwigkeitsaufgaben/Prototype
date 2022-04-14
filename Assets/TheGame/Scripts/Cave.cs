@@ -51,19 +51,24 @@ public class Cave : MonoBehaviour
     {
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
         
-        //Default setting: current Sole is Entry Area;
-        GameData.currentStopSohle = (int)CoalmineStop.EntryArea;
-        currentStop = (CoalmineStop)GameData.currentStopSohle;
+        if(GameData.currentStopSohle == (int)CoalmineStop.Unset)
+        {
+            //Default setting: current Sole is Entry Area;
+            GameData.currentStopSohle = (int)CoalmineStop.EntryArea;
+            currentStop = (CoalmineStop)GameData.currentStopSohle;
+            
+            EnableButtons(true);
+
+            sfx.PlayClip(wind, sfx.coalmineWindInTunnel);
+            sfx.ReduceVolume(sfx.coalmineWindInTunnel, 0.7f);
+
+            sfx.PlayClip(cbelt, sfx.coalmineConveyorBelt);
+            sfx.ReduceVolume(sfx.coalmineConveyorBelt, 0.8f);
+
+            liftMovingSrc.clip = sfx.coalmineMoveCave;
+        }
         
-        EnableButtons(true);
-
-        sfx.PlayClip(wind, sfx.coalmineWindInTunnel);
-        sfx.ReduceVolume(sfx.coalmineWindInTunnel, 0.7f);
-
-        sfx.PlayClip(cbelt, sfx.coalmineConveyorBelt);
-        sfx.ReduceVolume(sfx.coalmineConveyorBelt, 0.8f);
-
-        liftMovingSrc.clip = sfx.coalmineMoveCave;
+        
     }
 
     public void InitReachedStop(CoalmineStop reachedStop)
