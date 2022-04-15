@@ -13,6 +13,7 @@ public class LongwallCutterWaypointManager : MonoBehaviour
     {
         HandleCurrentWP();
         playerSplineMove.gameObject.transform.position = pathViewpointToKohlehobel.waypoints[0].transform.position;
+
     }
 
     public MineWayPoints GetCurrentLongWallCutterWP()

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class KohlehobelManager : MonoBehaviour
 {
-    public Player player;
+    public Player myPlayer;
     public SwitchSceneManager switchScene;
     public CoalmineSpeechManger speechManager;
     public LongwallCutterWaypointManager lwcManager;
@@ -17,6 +17,8 @@ public class KohlehobelManager : MonoBehaviour
         Invoke("StartViewpointBahnsteig", 3.0f);
 
         lwcManager.RotateCharacters(-114.0f, -53.0f, -80.0f);
+        myPlayer.SetPlayerRotation(0f,false);
+        
     }
 
     //Positionieren und Ausrichten in LongwallCutterWaypointManager

@@ -300,7 +300,8 @@ public class CoalmineWaypointManager : MonoBehaviour
             wps3ViewpointBtn.gameObject.SetActive(true);
 
             ChangeS3WPRotations(102.0f, 0.0f, 0.0f, 0.0f);
-            myPlayer.SetPlayerToAnkerPosition();
+            //myPlayer.SetPlayerToAnkerPosition();
+            //myPlayer.ReloadPlayerAtS3Cave();
             Debug.Log("------------------SetInsideCave");
         }
     }

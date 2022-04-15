@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 public class CaveManager : MonoBehaviour
 {
-    private const float defaultYawInCave = 90f;
+    private const float defaultYawInCave = 0f;
     public Cave cave;
     public Player player;
     private SwitchSceneManager switchScene;
@@ -54,17 +54,20 @@ public class CaveManager : MonoBehaviour
         Debug.Log("In On Enable");
         Debug.Log("sohle to reload " + GameData.sohleToReload);
         
-
+        //At first load
         if(GameData.currentStopSohle == (int)CoalmineStop.Unset)
         {
             GameData.currentStopSohle = (int)CoalmineStop.EntryArea;
-            player.SetPlayerBodyRotation(defaultYawInCave); //Default 90 degree for cave orientation
+            player.SetPlayerRotation(defaultYawInCave, false); //Default 90 degree for cave orientation
         }
         
+        //at Reload
         if ((CoalmineStop)GameData.sohleToReload == CoalmineStop.Sole3)
         {
             GameData.currentStopSohle = (int)CoalmineStop.Sole3;
             cave.ReloadCaveAtSohle3();
+            //player=?
+            //player.SetPlayerBodyRotation(defaultYawInCave, false); //Default 90 degree for cave orientation
         }
     }
 

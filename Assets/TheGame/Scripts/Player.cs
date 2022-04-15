@@ -27,9 +27,10 @@ public class Player : MonoBehaviour
             }
     }
 
-    public void SetPlayerBodyRotation(float yaw)
+    public void SetPlayerRotation(float yaw, bool inclMainCamAdjustment)
     {
-        mainCam.GetComponent<LookaroundWithMouse>().SetPlayerBodyRotation(yaw);
+        mainCam.GetComponent<LookaroundWithMouse>().SetPlayerBodyRotation(yaw, inclMainCamAdjustment);
+       
     }
 
     public void StorePlayerAtBahnsteigPositon()
@@ -96,7 +97,13 @@ public class Player : MonoBehaviour
     public  void RealoadPlayerAtS3Bahnsteig()
     {
         SetPlayerToS3ViewpointBahnsteigPosition();
-        SetPlayerBodyRotation(20f);
+        SetPlayerRotation(-64f, false);
+    }
+
+    public void ReloadPlayerAtS3Cave()
+    {
+        SetPlayerToAnkerPosition();
+        SetPlayerRotation(0f, true);
     }
 
     public void SetPlayerToAnkerPosition()
@@ -131,6 +138,11 @@ public class Player : MonoBehaviour
         if (playerInCave)
         {
             GameData.liftBtnsEnabled = true;
+            if(GameData.currentStopSohle == (int)CoalmineStop.Sole3 && GameData.sohleToReload == (int)CoalmineStop.Sole3)
+            {
+                GameData.sohleToReload = (int)CoalmineStop.Unset;
+                //ReloadPlayerAtS3Cave();
+            }
         }
         else
         {

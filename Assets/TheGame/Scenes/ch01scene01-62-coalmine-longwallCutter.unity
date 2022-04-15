@@ -503,6 +503,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterConfigSO: {fileID: 11400000, guid: d8fe53f684c35c64bb938f1ec7ce42fb, type: 2}
+  sole1ImgUpdated: 0
+  s2ImgUpdated: 0
+  s3ImgUpdated: 0
+  entryAreaUpdated: 0
+  iconConfigSo: {fileID: 0}
 --- !u!114 &128231664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -742,6 +747,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterConfigSO: {fileID: 11400000, guid: 6dc0f1cf0cbf3cb4587f1fcf45214089, type: 2}
+  sole1ImgUpdated: 0
+  s2ImgUpdated: 0
+  s3ImgUpdated: 0
+  entryAreaUpdated: 0
+  iconConfigSo: {fileID: 0}
 --- !u!1 &273707385 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8336510799352492964, guid: 385c69fb9b7e14d45a2705b4388cfdf3, type: 3}
@@ -1517,6 +1527,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6024920554889665765, guid: cda8a293f1b440243ad8e0d6333170c5, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 343192998}
     - target: {fileID: 6024920555482340304, guid: cda8a293f1b440243ad8e0d6333170c5, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -2476,7 +2490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb543f8432abe3c4eaf805c619969cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 343193003}
+  myPlayer: {fileID: 343193003}
   switchScene: {fileID: 2101321466}
   speechManager: {fileID: 1835446229}
   lwcManager: {fileID: 1964985975}
