@@ -5,6 +5,7 @@ public class MuseumOverlay : MonoBehaviour
 {
     //public Canvas panel;
     public Image container;
+    public Image graying;
 
     public SpeechManagerMuseum speechManager;
     public Button closeBtn;
@@ -51,6 +52,7 @@ public class MuseumOverlay : MonoBehaviour
             speechManager.playMuseumCarbonification = true;
         }
         closeBtn.gameObject.SetActive(true);
+        graying.gameObject.SetActive(true);
     }
 
     public void StopOverlay()
@@ -92,6 +94,7 @@ public class MuseumOverlay : MonoBehaviour
         if (!playOverlay)
         {
             parentMaskPanel.SetActive(false);
+            graying.gameObject.SetActive(false);
             closeBtn.gameObject.SetActive(false);
             speechManager.StopSpeaking();
         }

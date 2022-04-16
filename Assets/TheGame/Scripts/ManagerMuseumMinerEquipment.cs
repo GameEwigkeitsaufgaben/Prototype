@@ -33,11 +33,12 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     private AudioSource audioSrc;
     public Text uiTooltipText, uiInfoText, btnConfirmText;
     bool runningCorouine = false;
+    private SoChapOneRuntimeData runtimeData;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
         itemsOnMiner = 0;
         currentRound = EquipmentRound.Essential;
         denkbubbleWorstcase.GetComponent<Image>().preserveAspect = true;
@@ -144,6 +145,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
             case EquipmentRound.SpecialTask:
                 Debug.Log("SpecialTask");
                 gameObject.GetComponent<SwitchSceneManager>().GoToMuseum();
+                runtimeData.isMinerDone = true;
                 break;
         }
     }
