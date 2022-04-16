@@ -11,6 +11,9 @@ public class ManagerMuseum : MonoBehaviour
     public Button btnExitMuseum;
     private Image btnExitImage;
     private SoChapOneRuntimeData runtimeData;
+    public SpeechManagerMuseum speechManager;
+
+    private bool startOutro;
 
     // Start is called before the first frame update
     void Start()
@@ -24,10 +27,17 @@ public class ManagerMuseum : MonoBehaviour
     {
         if(btnExitImage.color.a < 0.8f)
         {
-            if (runtimeData.isMinerDone && isMythDone && isCoalifictionDone && isEarthHistroyDone)
+            if (runtimeData.isMinerDone && runtimeData.isMythDone && runtimeData.isCoalifiationDone && runtimeData.isCarbonificationPeriodDone)
             {
                 btnExitImage.color += new Color32(0, 0, 0, 200);
+                speechManager.playMuseumOutro = true;
             }
+        }
+
+        if (startOutro)
+        {
+            startOutro = false;
+            //speechManager.playMuseumInfoArrival = true;
         }
         
     }

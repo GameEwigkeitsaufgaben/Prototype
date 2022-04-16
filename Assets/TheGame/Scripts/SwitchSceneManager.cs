@@ -97,7 +97,7 @@ public class SwitchSceneManager : MonoBehaviour
 
     public void GoToCoalification()
     {
-        Debug.Log("Scene schould be loaded");
+        Debug.Log("Scene schould be loaded --------------------------------------------------------------------");
         SceneManager.LoadScene(GameScenes.ch01MuseumCoalification, LoadSceneMode.Single);
     }
 

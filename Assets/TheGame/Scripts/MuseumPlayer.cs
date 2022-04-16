@@ -25,7 +25,7 @@ public class MuseumPlayer : MonoBehaviour
 
     private void Awake()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>("RuntimeExchangeData");
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
     }
 
     void Start()
@@ -112,7 +112,6 @@ public class MuseumPlayer : MonoBehaviour
                 btnWPSchwein.gameObject.SetActive(false);
                 break;
         }
-
     }
 
     public void ReachedWP()//Called from UnityEvent Gruppe in Inspector

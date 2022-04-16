@@ -9,17 +9,18 @@ public class SpeechManagerMuseum : MonoBehaviour
     private const string ListWorld = "Audios100160MuseumCarbonifictionPeriod";
     private const string ListCoalHistory = "Audios100160MuseumHistoryMining";
     private const string ListCarbonification = "Audios100160MuseumHistoryCarbonification";
+    private const string ListOutro = "Audios100170MuseumOutro";
 
-    public SoTalkingList audiosMuseumInfoArrival, audiosMuseumMinerEquipment, audiosMuseumWorld, audiosCoalHistory, audiosMuseumCarbonification;
+    public SoTalkingList audiosMuseumInfoArrival, audiosMuseumMinerEquipment, audiosMuseumWorld, audiosCoalHistory, audiosMuseumCarbonification, audiosMuseumOutro;
 
-    public bool playMuseumInfoArrival, playMinerEquipment, playMuseumWorld, playMuseumCoalHistory, playMuseumCarbonification;
+    public bool playMuseumInfoArrival, playMinerEquipment, playMuseumWorld, playMuseumCoalHistory, playMuseumCarbonification, playMuseumOutro;
     
     private AudioSource mySrc;
 
     public bool resetFin;
 
     private SpeechList
-       speakMuseumIntro, speakMinerEquipment, speakMuseumWorld, speakMuseumCoalHistory, speakMuseumCarbonification;
+       speakMuseumIntro, speakMinerEquipment, speakMuseumWorld, speakMuseumCoalHistory, speakMuseumCarbonification, speakMuseumOutro;
    
 
     private Dictionary<string, SpeechList> mySpeechDict = new Dictionary<string, SpeechList>();
@@ -53,11 +54,19 @@ public class SpeechManagerMuseum : MonoBehaviour
         speakMuseumCarbonification.SetUpList(audiosMuseumCarbonification, mySrc);
         mySpeechDict.Add(speakMuseumCarbonification.listName, speakMuseumCarbonification);
 
+        speakMuseumOutro = gameObject.AddComponent<SpeechList>();
+        speakMuseumOutro.SetUpList(audiosMuseumOutro, mySrc);
+        mySpeechDict.Add(speakMuseumOutro.listName, speakMuseumOutro);
     }
 
     internal void StopSpeaking()
     {
         mySrc.Stop();
+    }
+
+    public bool IsMuseumOutroFinished()
+    {
+        return mySpeechDict[ListOutro].finishedToogle;
     }
 
     public bool IsMusuemCoalifictionFinished()
@@ -78,6 +87,11 @@ public class SpeechManagerMuseum : MonoBehaviour
     public bool IsMusuemInfoIntroFinished()
     {
         return mySpeechDict[InfoIntro].finishedToogle;
+    }
+
+    public void ResetMuseumOutro()
+    {
+        mySpeechDict[ListOutro].finishedToogle = false;
     }
 
     public void ResetMusuemCarbonifiction()
@@ -158,6 +172,11 @@ public class SpeechManagerMuseum : MonoBehaviour
         {
             currentList = speakMuseumCarbonification;
             playMuseumCarbonification = false;
+        }
+        else if (playMuseumOutro)
+        {
+            currentList = speakMuseumOutro;
+            playMuseumOutro = false;
         }
 
         if (currentList != null)

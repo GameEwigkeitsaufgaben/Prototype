@@ -10,6 +10,6 @@ public class SoChapOneRuntimeData : ScriptableObject
 
     public float playerRotation; //needed for lookaroundMouse
     public bool trainArrived;
-    public bool isMinerDone, isMythDone, isCoalifiationDone, isEarthHistoryDone;
+    public bool isMinerDone, isMythDone, isCoalifiationDone, isCarbonificationPeriodDone;
 
 }

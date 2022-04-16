@@ -51,6 +51,7 @@ public class MuseumOverlay : MonoBehaviour
             container.sprite = configMuseum.carbonification;
             speechManager.playMuseumCarbonification = true;
         }
+
         closeBtn.gameObject.SetActive(true);
         graying.gameObject.SetActive(true);
     }
@@ -62,36 +63,39 @@ public class MuseumOverlay : MonoBehaviour
 
     private void Update()
     {
-        //playOverlay will be set to true in ActivateOverlay()
+        //playOverlay with will be set to true in ActivateOverlay(), speechmanager starts the audio, here is proved if audio is finished.
         if (speechManager.IsMusuemInfoIntroFinished() && playOverlay)
         {
             playOverlay = false;
             //https://forum.unity.com/threads/solved-scenemanager-loadscene-make-the-scene-darker-a-bug.542440/
         }
 
-        if (speechManager.IsMusuemMinerEquipmentFinished() && playOverlay)
+        if (playOverlay)
         {
-            playOverlay = false;
-            gameObject.GetComponent<SwitchSceneManager>().GoToMinerEquipment();
+            if (speechManager.IsMusuemMinerEquipmentFinished())
+            {
+                gameObject.GetComponent<SwitchSceneManager>().GoToMinerEquipment();
+                playOverlay = false;
+            }
+            else if (speechManager.IsMusuemWorldFinished())
+            {
+                gameObject.GetComponent<SwitchSceneManager>().GoToWorld();
+                playOverlay = false;
+            }
+            else if (speechManager.IsMusuemCoalHistoryFinished())
+            {
+                gameObject.GetComponent<SwitchSceneManager>().GoToMythos();
+                playOverlay = false;
+            }
+            else if (speechManager.IsMusuemCoalifictionFinished())
+            {
+                gameObject.GetComponent<SwitchSceneManager>().GoToCoalification();
+                playOverlay = false;
+            }
         }
+        
 
-        if (speechManager.IsMusuemWorldFinished() && playOverlay)
-        {
-            playOverlay = false;
-            gameObject.GetComponent<SwitchSceneManager>().GoToWorld();
-        }
-        if (speechManager.IsMusuemCoalHistoryFinished() && playOverlay)
-        {
-            playOverlay = false;
-            gameObject.GetComponent<SwitchSceneManager>().GoToMythos();
-        }
-        if (speechManager.IsMusuemCoalifictionFinished() && playOverlay)
-        {
-            playOverlay = false;
-            gameObject.GetComponent<SwitchSceneManager>().GoToCoalification();
-        }
-
-        if (!playOverlay)
+        if (!playOverlay && parentMaskPanel.activeSelf)
         {
             parentMaskPanel.SetActive(false);
             graying.gameObject.SetActive(false);

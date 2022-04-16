@@ -38,7 +38,7 @@ public class ManagerManagerPostits : MonoBehaviour
             }
            
         }
-        Debug.Log("Ritht selet" + rightSelect);
+        Debug.Log("Right select" + rightSelect);
         if (maxValTrueSolution == rightSelect)
         {
             btnCheck.gameObject.SetActive(false);
