@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
+    private const string noCharacterSprite = "noCharacterSprite";
     public SoCharacter characterConfigSO;
 
     SpeechBubble speechBubble;
@@ -74,28 +75,25 @@ public class Character : MonoBehaviour
             case CoalmineStop.EntryArea:
                 entryAreaUpdated = true;
                 characterImage.GetComponent<Image>().sprite = characterConfigSO.entryAreaStandingSilent;
-                if (characterImage.GetComponent<Image>().sprite.name != "noCharacterSprite") break;
+                if (characterImage.GetComponent<Image>().sprite.name != noCharacterSprite) break;
                 characterImage.GetComponent<Image>().sprite = characterConfigSO.entryAreaStandingTalking;
                 break;
-
             case CoalmineStop.Sole1:
                 sole1ImgUpdated = true;
                 characterImage.GetComponent<Image>().sprite = characterConfigSO.sole1StandingSilent;
-                if (characterImage.GetComponent<Image>().sprite.name != "noCharacterSprite") break;
+                if (characterImage.GetComponent<Image>().sprite.name != noCharacterSprite) break;
                 characterImage.GetComponent<Image>().sprite = characterConfigSO.sole1StandingTalking;
                 break;
-
             case CoalmineStop.Sole2:
                 s2ImgUpdated = true;
                 characterImage.GetComponent<Image>().sprite = characterConfigSO.sole2StandingSilent;
-                if (characterImage.GetComponent<Image>().sprite.name != "noCharacterSprite") break;
+                if (characterImage.GetComponent<Image>().sprite.name != noCharacterSprite) break;
                 characterImage.GetComponent<Image>().sprite = characterConfigSO.sole2StandingTalking;
                 break;
-
             case CoalmineStop.Sole3:
                 s3ImgUpdated = true;
                 characterImage.GetComponent<Image>().sprite = characterConfigSO.sole3StandingSilent;
-                if (characterImage.GetComponent<Image>().sprite.name != "noCharacterSprite") break;
+                if (characterImage.GetComponent<Image>().sprite.name != noCharacterSprite) break;
                 characterImage.GetComponent<Image>().sprite = characterConfigSO.sole3StandingTalking;
                 break;
         }

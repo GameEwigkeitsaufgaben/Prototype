@@ -65,7 +65,7 @@ public class CaveMoveUpDownController : MonoBehaviour
         }
 
         Debug.Log("current sTop " + cave.currentStop);
-        cave.liftBtns[GameData.GetCurrentStop(cave.currentStop)].GetComponent<CaveButton>().DisableIsSelected();
+        cave.liftBtns[GameData.GetCurrentStop(cave.currentStop)].GetComponent<CaveButton>().DisableButtonSelected();
     }
 
     public void StartMovingSoleOne()

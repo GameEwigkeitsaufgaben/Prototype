@@ -1,6 +1,7 @@
 //This script is responsible for to trigger at a coalmine stop depending on the stop and the direction the cave is reaching the stop.
 
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CaveColliderBottom : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class CaveColliderBottom : MonoBehaviour
             speechManger.playEntryArea = true;
             revisitEntryArea = true;
 
-            //cave.liftBtns[0].gameObject.GetComponent<Button>().interactable = true;
+            cave.liftBtns[0].gameObject.GetComponent<Button>().interactable = true;
         }
         else if (other.name == TriggerEntryArea && revisitEntryArea)
              {

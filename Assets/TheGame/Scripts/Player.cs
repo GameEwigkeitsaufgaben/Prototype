@@ -141,7 +141,6 @@ public class Player : MonoBehaviour
             if(GameData.currentStopSohle == (int)CoalmineStop.Sole3 && GameData.sohleToReload == (int)CoalmineStop.Sole3)
             {
                 GameData.sohleToReload = (int)CoalmineStop.Unset;
-                //ReloadPlayerAtS3Cave();
             }
         }
         else

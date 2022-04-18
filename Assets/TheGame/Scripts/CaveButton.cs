@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CaveButton : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class CaveButton : MonoBehaviour
         {
             isSelected = true;
         }
+
+        //GetComponent<Button>().interactable = false;
     }
 
     public void GoToMyStop()
@@ -26,9 +29,14 @@ public class CaveButton : MonoBehaviour
         isSelected = true;
     }
 
-    public void DisableIsSelected()
+    public void DisableButtonSelected()
     {
         isSelected = false;
+    }
+
+    public void SetInteractable(bool interactable)
+    {
+        GetComponent<Button>().interactable = interactable;
     }
 
     private void Update()

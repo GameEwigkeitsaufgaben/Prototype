@@ -57,7 +57,7 @@ public class Cave : MonoBehaviour
             GameData.currentStopSohle = (int)CoalmineStop.EntryArea;
             currentStop = (CoalmineStop)GameData.currentStopSohle;
             
-            EnableButtons(true);
+            //EnableButtons(true);
 
             sfx.PlayClip(wind, sfx.coalmineWindInTunnel);
             sfx.ReduceVolume(sfx.coalmineWindInTunnel, 0.7f);
@@ -67,8 +67,6 @@ public class Cave : MonoBehaviour
 
             liftMovingSrc.clip = sfx.coalmineMoveCave;
         }
-        
-        
     }
 
     public void InitReachedStop(CoalmineStop reachedStop)
@@ -101,8 +99,8 @@ public class Cave : MonoBehaviour
         switch (currentStop)
         {
             case CoalmineStop.EntryArea:
-                    tmp = CaveMovement.MoveDown;
-                    break;
+                tmp = CaveMovement.MoveDown;
+                break;
             case CoalmineStop.Sole1:
                 if (targetStop == CoalmineStop.EntryArea) tmp = CaveMovement.MoveUp;
                 if ((targetStop == CoalmineStop.Sole2) || (targetStop == CoalmineStop.Sole3)) tmp = CaveMovement.MoveDown;
@@ -112,8 +110,8 @@ public class Cave : MonoBehaviour
                 if (targetStop == CoalmineStop.Sole3) tmp = CaveMovement.MoveDown;
                 break;
             case CoalmineStop.Sole3:
-                    tmp = CaveMovement.MoveUp;
-                    break;
+                tmp = CaveMovement.MoveUp;
+                break;
         }
 
         return tmp;

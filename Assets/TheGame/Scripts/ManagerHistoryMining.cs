@@ -1,8 +1,16 @@
 using UnityEngine;
 
+public enum Century
+{
+    century13,
+    century16,
+    century19
+}
+
 public class ManagerHistoryMining : MonoBehaviour
 {
     private SoChapOneRuntimeData runtimeData;
+    
 
     private void Start()
     {
