@@ -6,6 +6,7 @@ public static class GameData
     public const string NameConfigSfx = "SfxConfig";
     public const string NameRuntimeStoreData = "RuntimeExchangeData";
     public const string NameConfigMinerEquiment = "ConfigMinerEquipment";
+    public const string NameConfigMuseum = "ConfigMuseum";
 
     public static int chapterOneUnlocked = 0;
     public static int chapterTwoUnlocked = 0;

@@ -7,6 +7,6 @@ public class SoMuseumConfig : ScriptableObject
     public Sprite memoryBackside;
 
     [TextArea(10,100)]
-    public string textCentury13,textCentury16,textCentury19;
+    public string textCentury13,textCentury16,textCentury19, textCentury21;
 
 }
