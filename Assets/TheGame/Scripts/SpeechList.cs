@@ -19,11 +19,22 @@ public class SpeechList : MonoBehaviour
         audioSrc = src;
         audioSrc.playOnAwake = false;
         clips = list.orderedListOfAudioClips;
+        Debug.Log("set audio src " + audioSrc.name);
+    }
+
+    public bool isPlaying()
+    {
+        return playAll;
     }
 
     public float GetClipLength()
     {
         return audioSrc.clip.length;
+    }
+
+    public void StopList()
+    {
+        currentIndex = clips.Length;
     }
 
     public void PlayAll()
@@ -37,7 +48,7 @@ public class SpeechList : MonoBehaviour
         playAll = false;
         currentIndex = 0;
         finishedToogle = false;
-        Debug.Log("Reset all flags;");
+        Debug.Log("Reset all flags in speechlist;");
     }
 
     void ResetSpeechBubbles()
@@ -71,7 +82,6 @@ public class SpeechList : MonoBehaviour
         {
             GameData.bubbleOnMuseumGuide = true;
         }
-
     }
 
     void Update()
@@ -92,6 +102,7 @@ public class SpeechList : MonoBehaviour
         {
             finishedToogle = true;
             if (currentIndex >= clips.Length) return;
+
             finishedToogle = false;
             audioSrc.clip = clips[currentIndex];
             

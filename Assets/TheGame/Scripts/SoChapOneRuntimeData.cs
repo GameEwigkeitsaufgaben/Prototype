@@ -3,14 +3,20 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SoChapOneRuntimeData")]
 public class SoChapOneRuntimeData : ScriptableObject, ISerializationCallbackReceiver
 {
+    //Museum
     public Vector3 currentGroupPos = Vector3.zero; //-13.44922, 2.4, -2.670441
     public MuseumWaypoints currentMuseumWaypoint = MuseumWaypoints.WP0;
 
+    //Lookaround cave
     public float playerRotation; //needed for lookaroundMouse
     public bool trainArrived;
+
+    //GameProgress
     public bool isMinerDone, isMythDone, isCoalifiationDone, isCarbonificationPeriodDone;
     public bool sole1done, sole2done, sole3BewetterungDone, sole3GebaeudeDone, trainRideInDone, trainRideOutDone;
     public bool interaction116Done, interaction117done;
+    
+    //General Settings
     public bool musicOn = true;
 
     public void OnAfterDeserialize()

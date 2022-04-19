@@ -93,13 +93,14 @@ public class MuseumOverlay : MonoBehaviour
                 playOverlay = false;
             }
         }
-        
 
+        
         if (!playOverlay && parentMaskPanel.activeSelf)
         {
             parentMaskPanel.SetActive(false);
             graying.gameObject.SetActive(false);
             closeBtn.gameObject.SetActive(false);
+            Debug.Log("Play overlay" + playOverlay + " active mask panel " + parentMaskPanel.activeSelf);
             speechManager.StopSpeaking();
         }
     }

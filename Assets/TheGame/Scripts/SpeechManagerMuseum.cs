@@ -59,9 +59,18 @@ public class SpeechManagerMuseum : MonoBehaviour
         mySpeechDict.Add(speakMuseumOutro.listName, speakMuseumOutro);
     }
 
-    internal void StopSpeaking()
+    public void StopSpeaking()
     {
         mySrc.Stop();
+
+        foreach (var i in mySpeechDict)
+        {
+            if (i.Value.isPlaying())
+            {
+                i.Value.StopList();
+            }
+        }
+
     }
 
     public bool IsMuseumOutroFinished()
