@@ -22,11 +22,14 @@ public class Entry : MonoBehaviour
 
     private OverlayType overlayType; // Enum
     private SoSfx sfx;
+    private SoChapOneRuntimeData runtimeData;
 
     // Start is called before the first frame update
     void Start()
     {
-        sfx = Resources.Load<SoSfx>("SfxConfig");
+        sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
+
         post.GetComponent<Post>().SetPostData(postData);
         overlay.GetComponent<Overlay>().SetOverlayData(postData);
 
@@ -38,7 +41,6 @@ public class Entry : MonoBehaviour
         }
         catch (System.Exception)
         {
-
             Debug.Log("No Videoplayer found");
         }
 
@@ -60,18 +62,24 @@ public class Entry : MonoBehaviour
     public void OpenOverlay()
     {
         overlay.SetActive(true);
-        sfx.ReduceVolume(sfx.instaMenuBGmusicLoop, changeVolumeAmount);
+        if (runtimeData.musicOn)
+        {
+            sfx.ReduceVolume(sfx.instaMenuBGmusicLoop, changeVolumeAmount);
+        }
+        
     }
 
     public void CloseOverlay()
     {
         overlay.GetComponent<Overlay>().CloseOverlay();
-        sfx.IncreaseVolume(sfx.instaMenuBGmusicLoop, changeVolumeAmount);
-        if (!sfx.IsInstaBGMusicPlaying())
+        if (runtimeData.musicOn)
         {
-            sfx.PlayClip(sfx.instaMenuBGmusicLoop);
+            sfx.IncreaseVolume(sfx.instaMenuBGmusicLoop, changeVolumeAmount);
+            if (!sfx.IsInstaBGMusicPlaying())
+            {
+                sfx.PlayClip(sfx.instaMenuBGmusicLoop);
+            }
         }
-       
     }
 
     private void Update()

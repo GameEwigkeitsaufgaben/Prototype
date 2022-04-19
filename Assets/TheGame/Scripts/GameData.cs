@@ -7,6 +7,7 @@ public static class GameData
     public const string NameRuntimeStoreData = "RuntimeExchangeData";
     public const string NameConfigMinerEquiment = "ConfigMinerEquipment";
     public const string NameConfigMuseum = "ConfigMuseum";
+    public const string NameGameIcons = "Icons";
 
     public static int chapterOneUnlocked = 0;
     public static int chapterTwoUnlocked = 0;
@@ -52,6 +53,7 @@ public static class GameData
         "soweit nicht ausdrücklich anders gekennzeichnet, bei Frau Susanne Meerwald-Stadler. Alle Rechte vorbehalten. Jede Art der Vervielfältigung, " +
         "Verbreitung, Vermietung, Verleihung, öffentlichen Zugänglichmachung oder andere Nutzung bedarf der ausdrücklichen, schriftlichen Zustimmung von Frau Susanne Meerwald-Stadler.  " +
         "Das Herunterladen der in diesem Internetangebot enthaltenen Informationen ist grundsätzlich nicht gestattet, sofern dies nicht ausdrücklich abweichend kenntlich gemacht wird.";
+
 
     public static void PrintState()
     {

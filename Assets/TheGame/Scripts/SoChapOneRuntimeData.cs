@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "SoChapOneRuntimeData")]
@@ -12,6 +11,7 @@ public class SoChapOneRuntimeData : ScriptableObject, ISerializationCallbackRece
     public bool isMinerDone, isMythDone, isCoalifiationDone, isCarbonificationPeriodDone;
     public bool sole1done, sole2done, sole3BewetterungDone, sole3GebaeudeDone, trainRideInDone, trainRideOutDone;
     public bool interaction116Done, interaction117done;
+    public bool musicOn = true;
 
     public void OnAfterDeserialize()
     {
@@ -21,6 +21,7 @@ public class SoChapOneRuntimeData : ScriptableObject, ISerializationCallbackRece
         isMinerDone = isMythDone = isCarbonificationPeriodDone = isCoalifiationDone = false;
         sole1done = sole2done = sole3BewetterungDone = sole3GebaeudeDone = trainRideInDone = trainRideOutDone = false;
         interaction116Done = interaction117done = false;
+        musicOn = true;
     }
 
     public void OnBeforeSerialize()
