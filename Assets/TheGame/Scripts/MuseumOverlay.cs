@@ -14,11 +14,15 @@ public class MuseumOverlay : MonoBehaviour
 
     bool playOverlay;
     private SoMuseumConfig configMuseum;
+    private SoChapOneRuntimeData runtimeData;
 
     private void Start()
     {
         parentMaskPanel = container.transform.parent.gameObject;
         configMuseum = Resources.Load<SoMuseumConfig>("ConfigMuseum");
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
+        gameObject.transform.localPosition = runtimeData.currentGroupPos;
+        //Debug.Log("in start musum overlay " + runtimeData.currentGroupPos);
     }
 
     public void ActivateOverlay(MuseumWaypoints wp)

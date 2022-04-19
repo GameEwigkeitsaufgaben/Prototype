@@ -36,7 +36,7 @@ public class MuseumPlayer : MonoBehaviour
             ShowOnlyInfo();
         else if (runtimeData.currentMuseumWaypoint != MuseumWaypoints.WP0)
         {
-            gameObject.transform.position = runtimeData.currentGroupPos;
+            gameObject.transform.localPosition = runtimeData.currentGroupPos;
             currentWP = targetWP = runtimeData.currentMuseumWaypoint;
             ShowOtherStations(currentWP);
         }
@@ -148,7 +148,7 @@ public class MuseumPlayer : MonoBehaviour
             overlay.ActivateOverlay(MuseumWaypoints.WPWelt);
         }
 
-        runtimeData.currentGroupPos = gameObject.transform.position;
+        runtimeData.currentGroupPos = gameObject.transform.localPosition;
         runtimeData.currentMuseumWaypoint = currentWP;
         ShowOtherStations(currentWP);
         
