@@ -105,16 +105,7 @@ public class CaveManager : MonoBehaviour
             if (sole3EnterTrainBtn.IsActive())
                 sole3EnterTrainBtn.gameObject.SetActive(false);
         }
-
-        if (!runtimeData.interaction116Done)
-        {
-            if(runtimeData.sole1done && runtimeData.sole2done && runtimeData.sole3BewetterungDone && runtimeData.sole3GebaeudeDone && runtimeData.trainRideInDone && runtimeData.trainRideOutDone && runtimeData.isLongwallCutterDone)
-            {
-                runtimeData.interaction116Done = true;
-            }
-        }
-           
-
+          
         //if (cave.caveDoorsClosed && exitScene.interactable)
         //{
         //    exitScene.interactable = false;

@@ -86,6 +86,8 @@ public class Entry : MonoBehaviour
 
     private void Update()
     {
+        if (gameObject.name == GameData.NamePost117) Debug.Log("117");
+
         if (post.GetComponent<Post>().isPostLocked())
         {
             if (gameObject.name == Entry116 && GameData.introVideoPlayedOnce)
@@ -93,12 +95,12 @@ public class Entry : MonoBehaviour
                 Debug.Log("Unlock 116 bergwerk");
                 GameData.PrintState();
                 post.GetComponent<Post>().UnlockPost();
-                GameData.introVideoPlayedOnce = false;
+                //GameData.introVideoPlayedOnce = false;
             }
-            else if (gameObject.name == GameData.NamePost117 && runtimeData.interaction116Done)
+            
+            if (gameObject.name == GameData.NameEntry117 && runtimeData.interaction116Done)
             {
                 Debug.Log("Unlock 117 Museum");
-
                 post.GetComponent<Post>().UnlockPost();
             }
             else if (gameObject.name == Entry118 && runtimeData.interaction117Done)
