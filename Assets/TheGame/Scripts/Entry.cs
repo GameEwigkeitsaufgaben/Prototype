@@ -86,27 +86,37 @@ public class Entry : MonoBehaviour
 
     private void Update()
     {
-        if (GameData.introVideoPlayedOnce && gameObject.name == Entry116)
+        if (post.GetComponent<Post>().isPostLocked())
         {
-            GameData.PrintState();
-            post.GetComponent<Post>().UnlockPost();
-            GameData.introVideoPlayedOnce = false;
-        }
-        if (GameData.quizFinished && gameObject.name == Entry1110)
-        {
-            post.GetComponent<Post>().UnlockPost();
-            overlay.GetComponent<Overlay>().UpdateOverlayText();
-            GameData.quizFinished = false;
-            GameData.chapterOneUnlocked = 1;
-        }
-        if (runtimeData.interaction117done && gameObject.name == Entry118)
-        {
-            post.GetComponent<Post>().UnlockPost();
-        }
-        if (runtimeData.interaction117done && gameObject.name == Entry119)
-        {
-            post.GetComponent<Post>().UnlockPost();
-            runtimeData.interaction117done = false;
+            if (gameObject.name == Entry116 && GameData.introVideoPlayedOnce)
+            {
+                Debug.Log("Unlock 116 bergwerk");
+                GameData.PrintState();
+                post.GetComponent<Post>().UnlockPost();
+                GameData.introVideoPlayedOnce = false;
+            }
+            else if (gameObject.name == GameData.NamePost117 && runtimeData.interaction116Done)
+            {
+                Debug.Log("Unlock 117 Museum");
+
+                post.GetComponent<Post>().UnlockPost();
+            }
+            else if (gameObject.name == Entry118 && runtimeData.interaction117Done)
+            {
+                post.GetComponent<Post>().UnlockPost();
+            }
+            else if (gameObject.name == Entry119 && runtimeData.interaction117Done)
+            {
+                post.GetComponent<Post>().UnlockPost();
+                runtimeData.interaction117Done = false;
+            }
+            else if (gameObject.name == Entry1110 && GameData.quizFinished)
+            {
+                post.GetComponent<Post>().UnlockPost();
+                overlay.GetComponent<Overlay>().UpdateOverlayText();
+                GameData.quizFinished = false;
+                GameData.chapterOneUnlocked = 1;
+            }
         }
     }
 }

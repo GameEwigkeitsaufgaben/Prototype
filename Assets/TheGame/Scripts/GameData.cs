@@ -9,6 +9,12 @@ public static class GameData
     public const string NameConfigMuseum = "ConfigMuseum";
     public const string NameGameIcons = "Icons";
 
+    public const string NamePost116 = "Post116";
+    public const string NamePost117 = "Post117";
+    public const string NamePost118 = "Post118";
+    public const string NamePost119 = "Post119";
+    public const string NamePost1110 = "Post1110";
+
     public static int chapterOneUnlocked = 0;
     public static int chapterTwoUnlocked = 0;
     public static int chapterThreeUnlocked = 0;

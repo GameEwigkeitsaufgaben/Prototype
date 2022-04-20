@@ -24,6 +24,11 @@ public class Post : MonoBehaviour
         //icons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
     }
 
+    public bool isPostLocked()
+    {
+        return !postData.postUnLocked;
+    }
+
     public void UpdateIcon()
     {
         childIcon.GetComponent<Image>().sprite = icons.replayIcon;

@@ -42,6 +42,8 @@ public class CoalmineWaypointManager : MonoBehaviour
     private bool helperSetPath = false;
     private Player myPlayer;
 
+    private SoChapOneRuntimeData runtimeData;
+
     [Header("Assigned during runtime")]
     [SerializeField]
     private Button wps1ViewpointBtn, wps2ViewpointBtn, wps3ViewpointBtn;
@@ -70,6 +72,7 @@ public class CoalmineWaypointManager : MonoBehaviour
     private void Start()
     {
         myPlayer = playerSplineMove.gameObject.GetComponent<Player>();
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
         
         if (myPlayer.playerInCave)
         {
@@ -136,6 +139,8 @@ public class CoalmineWaypointManager : MonoBehaviour
     public void SetCurrentWaypoint()
     {
         currentWP = GetCurrentWP();
+      
+
         SetWaypointMarkers();
     }
 
@@ -245,6 +250,11 @@ public class CoalmineWaypointManager : MonoBehaviour
 
     public void SetWaypointMarkers()
     {
+
+        //sole1 wp
+        //sole2 wp
+        //sole3 wp bewetterung
+        //sole3 wp gebaude
         Debug.Log("MineWaypoint is :"  + currentWP);
 
         if (currentWP == MineWayPoints.insideCave)
@@ -260,6 +270,15 @@ public class CoalmineWaypointManager : MonoBehaviour
             wps3ViewpointBtn.gameObject.SetActive(false);
             wps2ViewpointBtn.gameObject.SetActive(false);
             wps1ViewpointBtn.gameObject.SetActive(false);
+        
+            if(GameData.currentStopSohle == (int)CoalmineStop.Sole1)
+            {
+                runtimeData.sole1done = true;
+            }
+            else if (GameData.currentStopSohle == (int)CoalmineStop.Sole2)
+            {
+                runtimeData.sole2done = true;
+            }
         }
 
         if (GameData.currentStopSohle != (int)CoalmineStop.Sole3) return;
@@ -272,6 +291,8 @@ public class CoalmineWaypointManager : MonoBehaviour
             caveBtn.gameObject.SetActive(false);
 
             ChangeS3WPRotations(40.0f, 90.0f, 90.0f, 0.0f);
+
+            runtimeData.sole3BewetterungDone = true;
 
             Debug.Log(currentWP + "sould be set " + transform.localPosition);
         }
@@ -293,6 +314,9 @@ public class CoalmineWaypointManager : MonoBehaviour
             caveBtn.gameObject.SetActive(false);
 
             ChangeS3WPRotations(180.0f, -33.0f, 0.0f, -65.0f);
+
+            runtimeData.sole3GebaeudeDone = true;
+
         }
         else if (currentWP == MineWayPoints.insideCave)
         {

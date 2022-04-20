@@ -33,7 +33,7 @@ public class ManagerMuseum : MonoBehaviour
                 btnExitImage.color += new Color32(0, 0, 0, 200);
                 speechManager.playMuseumOutro = true;
                 walkingGroup.MoveToWaypoint((int)MuseumWaypoints.WPExitMuseum);
-                runtimeData.interaction117done = true;
+                runtimeData.interaction117Done = true;
             }
         }
 
