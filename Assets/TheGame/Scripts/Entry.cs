@@ -10,6 +10,9 @@ public class Entry : MonoBehaviour
     private const string Entry115 = "Entry115";
     private const string Entry116 = "Entry116";
     private const string Entry1110 = "Entry1110";
+    private const string Entry117 = "Entry117";
+    private const string Entry118 = "Entry118";
+    private const string Entry119 = "Entry119";
     private const float changeVolumeAmount = 0.15f;
     public GameObject post;
     public GameObject overlay;
@@ -66,7 +69,6 @@ public class Entry : MonoBehaviour
         {
             sfx.ReduceVolume(sfx.instaMenuBGmusicLoop, changeVolumeAmount);
         }
-        
     }
 
     public void CloseOverlay()
@@ -96,6 +98,15 @@ public class Entry : MonoBehaviour
             overlay.GetComponent<Overlay>().UpdateOverlayText();
             GameData.quizFinished = false;
             GameData.chapterOneUnlocked = 1;
+        }
+        if (runtimeData.interaction117done && gameObject.name == Entry118)
+        {
+            post.GetComponent<Post>().UnlockPost();
+        }
+        if (runtimeData.interaction117done && gameObject.name == Entry119)
+        {
+            post.GetComponent<Post>().UnlockPost();
+            runtimeData.interaction117done = false;
         }
     }
 }

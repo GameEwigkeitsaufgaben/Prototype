@@ -10,12 +10,13 @@ public enum MuseumWaypoints
     WPBergmann = 3,
     WPMythos = 4,
     WPWelt = 5,
+    WPExitMuseum = 6
 }
 
 public class MuseumPlayer : MonoBehaviour
 {
     splineMove mySplineMove;
-    public PathManager p0P1, p1P2, p1P3, p1P4, p1P5, p2P3, p2P4, p2P5, p3P4, p3P5, p4P5;
+    public PathManager p0P1, p1P2, p1P3, p1P4, p1P5, p2P3, p2P4, p2P5, p3P4, p3P5, p4P5, p1P6, p2P6, p3P6, p4P6, p5P6;
 
     public MuseumWaypoints currentWP, targetWP;
 
@@ -285,6 +286,56 @@ public class MuseumPlayer : MonoBehaviour
         {
             mySplineMove.reverse = true;
             return p4P5;
+        }
+        else if (currentWP == MuseumWaypoints.WPInfo && targetWP == MuseumWaypoints.WPExitMuseum)
+        {
+            mySplineMove.reverse = false;
+            return p1P6;
+        }
+        else if (currentWP == MuseumWaypoints.WPInkohlung && targetWP == MuseumWaypoints.WPExitMuseum)
+        {
+            mySplineMove.reverse = false;
+            return p2P6;
+        }
+        else if (currentWP == MuseumWaypoints.WPBergmann && targetWP == MuseumWaypoints.WPExitMuseum)
+        {
+            mySplineMove.reverse = false;
+            return p3P6;
+        }
+        else if (currentWP == MuseumWaypoints.WPMythos && targetWP == MuseumWaypoints.WPExitMuseum)
+        {
+            mySplineMove.reverse = false;
+            return p4P6;
+        }
+        else if (currentWP == MuseumWaypoints.WPWelt && targetWP == MuseumWaypoints.WPExitMuseum)
+        {
+            mySplineMove.reverse = false;
+            return p5P6;
+        }
+        else if (currentWP == MuseumWaypoints.WPExitMuseum && targetWP == MuseumWaypoints.WPInfo)
+        {
+            mySplineMove.reverse = true;
+            return p1P6;
+        }
+        else if (currentWP == MuseumWaypoints.WPExitMuseum && targetWP == MuseumWaypoints.WPInkohlung)
+        {
+            mySplineMove.reverse = true;
+            return p2P6;
+        }
+        else if (currentWP == MuseumWaypoints.WPExitMuseum && targetWP == MuseumWaypoints.WPBergmann)
+        {
+            mySplineMove.reverse = true;
+            return p3P6;
+        }
+        else if (currentWP == MuseumWaypoints.WPExitMuseum && targetWP == MuseumWaypoints.WPMythos)
+        {
+            mySplineMove.reverse = true;
+            return p4P6;
+        }
+        else if (currentWP == MuseumWaypoints.WPExitMuseum && targetWP == MuseumWaypoints.WPWelt)
+        {
+            mySplineMove.reverse = true;
+            return p5P6;
         }
         else {
             return null;
