@@ -3,8 +3,15 @@ using UnityEngine.UI;
 
 public class ManagerManagerPostits : MonoBehaviour
 {
+    public GameObject prefabCard;
+    public GameObject parentCards;
+    public SoMuseumCard[] soResourcesCards;
 
+    public GameObject[] card;
+
+    
     public PostItDrag[] postits;
+    
     int rightSelect = 0;
     int maxValTrueSolution = 0;
     public Button btnCheck, btnExit;
@@ -13,6 +20,7 @@ public class ManagerManagerPostits : MonoBehaviour
     {
         maxValTrueSolution = GetMaxRightSolutions();
         rightSelect = 0;
+        CreateCards();
     }
 
     int GetMaxRightSolutions()
@@ -23,6 +31,16 @@ public class ManagerManagerPostits : MonoBehaviour
             if (i.statementTrue) tmpMaxVal++;
         }
         return tmpMaxVal;
+    }
+
+    private void CreateCards()
+    {
+        foreach(var i in soResourcesCards)
+        {
+           GameObject tmp = Instantiate(prefabCard);
+           tmp.transform.parent = parentCards.transform;
+            tmp.transform.localScale = Vector3.one;
+        }
     }
 
     public void CheckPostits()
