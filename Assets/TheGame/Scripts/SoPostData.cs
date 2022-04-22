@@ -46,4 +46,18 @@ public class SoPostData : ScriptableObject
 
         return xy;
     }
+
+    private void OnEnable()
+    {
+        if(this.name == GameData.NamePost116 ||
+            this.name == GameData.NamePost117 ||
+            this.name == GameData.NamePost118 ||
+            this.name == GameData.NamePost119 ||
+            this.name == GameData.NamePost1110)
+        {
+            postUnLocked = false;
+        }
+
+        
+    }
 }

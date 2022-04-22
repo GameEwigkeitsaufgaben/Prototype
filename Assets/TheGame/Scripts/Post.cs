@@ -13,10 +13,20 @@ public class Post : MonoBehaviour
     private GameObject childIcon = null;
     private SpriteRenderer iconSpriteRenderer = null;
 
+    private void Awake()
+    {
+        icons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
+    }
+
     void Start()
     {
         webglVideoPlayer = GameObject.FindObjectOfType<WebGlVideoPlayer>();
-        icons = Resources.Load<SoGameIcons>("Icons");
+        //icons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
+    }
+
+    public bool isPostLocked()
+    {
+        return !postData.postUnLocked;
     }
 
     public void UpdateIcon()
@@ -27,11 +37,13 @@ public class Post : MonoBehaviour
     //will be called form Class Entry!
     private void SetUpPost()
     {
+        Debug.Log("Setup Post: " + gameObject.name);
         gameObject.GetComponent<Image>().sprite = postData.postSprite;
 
         //generate child obj with local positioning
         //per defalt set post locked, corresponding symbol is shown and the post is not interactable
 
+        
         //Maybe better to create it not at runtime, only set it active.
         //Todo: create it via script not via prefab
         //Color of Locked post is in Prefab EntryXXX
@@ -43,6 +55,7 @@ public class Post : MonoBehaviour
         childIcon.GetComponent<Image>().preserveAspect = true;
         childIcon.GetComponent<Image>().raycastTarget = false;
 
+        Debug.Log("Setup Post cild obj: " + childIcon.name);
         gameObject.GetComponent<Button>().interactable = false;
 
         //If you entered the adminpin go futher to unlock post

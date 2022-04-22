@@ -9,11 +9,13 @@ public class LongwallCutterWaypointManager : MonoBehaviour
     public PathManager pathViewpointToKohlehobel;
     public Button btnBahnsteig, btnKohlehobel;
 
+    private SoChapOneRuntimeData runtimeData;
+
     private void Start()
     {
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
         HandleCurrentWP();
         playerSplineMove.gameObject.transform.position = pathViewpointToKohlehobel.waypoints[0].transform.position;
-
     }
 
     public MineWayPoints GetCurrentLongWallCutterWP()
@@ -41,6 +43,8 @@ public class LongwallCutterWaypointManager : MonoBehaviour
         {
             btnBahnsteig.gameObject.SetActive(true);
             RotateCharacters(-180.0f, 0.0f, 0.0f);
+
+            runtimeData.isLongwallCutterDone = true;
         }
 
         Debug.Log("Handle Current wp: " + GetCurrentLongWallCutterWP());

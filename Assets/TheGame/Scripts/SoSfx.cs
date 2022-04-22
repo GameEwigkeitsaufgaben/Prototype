@@ -78,7 +78,6 @@ public class SoSfx : ScriptableObject
         {
             PlayClip(caolmineLader);
         }
-        
     }
 
     public void PlayClip(AudioSource audioSource, AudioClip clip)

@@ -49,7 +49,6 @@ public class PostItDrag : MonoBehaviour
                     myImage.sprite = myConfig.memoryBackside;
                     
                 }
-               
             }
         }
 

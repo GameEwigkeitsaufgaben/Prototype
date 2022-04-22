@@ -12,6 +12,7 @@ public class ManagerMuseum : MonoBehaviour
     private Image btnExitImage;
     private SoChapOneRuntimeData runtimeData;
     public SpeechManagerMuseum speechManager;
+    public MuseumPlayer walkingGroup;
 
     private bool startOutro;
 
@@ -31,6 +32,8 @@ public class ManagerMuseum : MonoBehaviour
             {
                 btnExitImage.color += new Color32(0, 0, 0, 200);
                 speechManager.playMuseumOutro = true;
+                walkingGroup.MoveToWaypoint((int)MuseumWaypoints.WPExitMuseum);
+                runtimeData.interaction117Done = true;
             }
         }
 
