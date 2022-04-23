@@ -18,15 +18,15 @@ public class MuseumCard : MonoBehaviour
         myConfig = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
     }
 
-    private void Start()
+    public void PopulateElements()
     {
-        Debug.Log("--------------------------------------------------------------------- Start Begin " +gameObject.name);
-        Debug.Log("--------------------------------------------------------------------- Start End ");
+        myStatement.text = myResource.statement;
     }
 
     public void SetDefaults()
     {
         AssignChildElements();
+        PopulateElements();
         cardFaceDown = myResource.cardFaceDown;
 
         Debug.Log("cdf " + cardFaceDown + " "+ gameObject.name);
