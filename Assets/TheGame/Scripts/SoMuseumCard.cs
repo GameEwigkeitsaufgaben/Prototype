@@ -7,10 +7,10 @@ public class SoMuseumCard : ScriptableObject
     public string statement = "";
     public bool statementTrue = false;
     public Sprite mySprite;
-    public bool cardFaceDown = true;
+    public bool cardFaceDown = false;
 
     private void OnEnable()
     {
-        cardFaceDown = true;
+        cardFaceDown = false;
     }
 }
