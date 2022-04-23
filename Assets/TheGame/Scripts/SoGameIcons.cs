@@ -8,6 +8,7 @@ public class SoGameIcons : ScriptableObject
     public Sprite videoIcon;
     public Sprite replayIcon;
     public Sprite speechBubble;
+    public Sprite talking;
     public Sprite musicOn, musicOff;
 
     public Color lockedColor;

@@ -13,7 +13,8 @@ public class Character : MonoBehaviour
     public bool sole1ImgUpdated = false, s2ImgUpdated = false, s3ImgUpdated = false;
     public bool entryAreaUpdated = false;
 
-    public SoGameIcons iconConfigSo;
+    [Header("Assigned in Runtime")]
+    [SerializeField] private SoGameIcons iconConfigSo;
 
     void Start()
     {
@@ -40,10 +41,10 @@ public class Character : MonoBehaviour
             }
         }
 
-        iconConfigSo = Resources.Load<SoGameIcons>("Icons");
+        iconConfigSo = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
 
         //setze speechbubble sprite
-        speechBubble.SetBubbleSprite(iconConfigSo.speechBubble);
+        speechBubble.PopulateBubbleSprites();
 
         //setzte default sprite für character
         if (SwitchSceneManager.GetCurrentSceneName() == GameScenes.ch01LongwallCutter)
