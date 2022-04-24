@@ -258,6 +258,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 73356793}
   m_CullTransparentMesh: 1
+--- !u!1 &78434795 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5456735633696834355, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
+  m_PrefabInstance: {fileID: 645698515}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &78434797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78434795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d98161c44e33e6d428302eded71c24b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vpLocation: 1
 --- !u!1 &79812072
 GameObject:
   m_ObjectHideFlags: 0
@@ -1187,6 +1205,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 2.68
       objectReference: {fileID: 0}
+    - target: {fileID: 5456735633696834355, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
+      propertyPath: m_Name
+      value: ViewpointMuseumWorld
+      objectReference: {fileID: 0}
     - target: {fileID: 5456735633696834367, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
       propertyPath: m_Camera
       value: 
@@ -1195,7 +1217,8 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5842129662304391470, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
 --- !u!1 &152107944
 GameObject:
@@ -1476,6 +1499,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &202891256 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5456735633696834355, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
+  m_PrefabInstance: {fileID: 2070295325}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &202891258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202891256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d98161c44e33e6d428302eded71c24b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vpLocation: 1
 --- !u!1 &213679482
 GameObject:
   m_ObjectHideFlags: 0
@@ -1822,6 +1863,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 263163988}
   m_CullTransparentMesh: 1
+--- !u!1 &269954313 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5456735633696834355, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
+  m_PrefabInstance: {fileID: 1003936407}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &269954315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269954313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d98161c44e33e6d428302eded71c24b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vpLocation: 1
 --- !u!1 &272822646
 GameObject:
   m_ObjectHideFlags: 0
@@ -3312,11 +3371,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: UiViewPointInfo
       objectReference: {fileID: 0}
+    - target: {fileID: 5456735633696834355, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
+      propertyPath: m_Name
+      value: ViewpointMuseumInfo
+      objectReference: {fileID: 0}
     - target: {fileID: 5456735633696834367, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 656000514}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5842129662304391470, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
 --- !u!1 &656000512
 GameObject:
@@ -3506,6 +3570,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &709355697 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5456735633696834355, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
+  m_PrefabInstance: {fileID: 143499156}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &709355699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 709355697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d98161c44e33e6d428302eded71c24b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vpLocation: 1
 --- !u!1 &725752032
 GameObject:
   m_ObjectHideFlags: 0
@@ -4812,6 +4894,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 2.68
       objectReference: {fileID: 0}
+    - target: {fileID: 5456735633696834355, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
+      propertyPath: m_Name
+      value: ViewpointMuseumInkohlung
+      objectReference: {fileID: 0}
     - target: {fileID: 5456735633696834367, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
       propertyPath: m_Camera
       value: 
@@ -4820,7 +4906,8 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5842129662304391470, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
 --- !u!1 &1009686478
 GameObject:
@@ -5754,6 +5841,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 2.68
       objectReference: {fileID: 0}
+    - target: {fileID: 5456735633696834355, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
+      propertyPath: m_Name
+      value: ViewpointMuseumMyth
+      objectReference: {fileID: 0}
     - target: {fileID: 5456735633696834367, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
       propertyPath: m_Camera
       value: 
@@ -5762,7 +5853,8 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5842129662304391470, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
 --- !u!1 &1220047634
 GameObject:
@@ -8126,6 +8218,24 @@ MonoBehaviour:
   radius: 0.4
   skipCustomNames: 1
   replaceObject: {fileID: 0}
+--- !u!1 &1757582218 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5456735633696834355, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
+  m_PrefabInstance: {fileID: 1196321879}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1757582220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757582218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d98161c44e33e6d428302eded71c24b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vpLocation: 1
 --- !u!1 &1762640732
 GameObject:
   m_ObjectHideFlags: 0
@@ -9576,6 +9686,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 2.68
       objectReference: {fileID: 0}
+    - target: {fileID: 5456735633696834355, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
+      propertyPath: m_Name
+      value: ViewpointMusumMiner
+      objectReference: {fileID: 0}
     - target: {fileID: 5456735633696834367, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
       propertyPath: m_Camera
       value: 
@@ -9584,7 +9698,8 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5842129662304391470, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
 --- !u!1 &2079968925
 GameObject:

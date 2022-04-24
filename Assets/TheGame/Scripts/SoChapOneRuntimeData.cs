@@ -3,6 +3,10 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SoChapOneRuntimeData")]
 public class SoChapOneRuntimeData : ScriptableObject
 {
+    public string postOverlayToLoad = "";
+    public bool videoPlaying = false;
+    public OverlaySoundState overlaySoundState;
+
     [Header("Coalmine 116")]
     //Lookaround cave
     public float playerRotation; //needed for lookaroundMouse
@@ -16,20 +20,22 @@ public class SoChapOneRuntimeData : ScriptableObject
 
     [Header("GameProgress")]
     public bool video115Done, interaction116Done, interaction117Done, quiz119Done;
-    
 
     [Header("General Settings")]
     public bool musicOn = true;
 
     private void OnEnable()
     {
+        Debug.Log("RELOAD RUNTIME DATA");
+
+        postOverlayToLoad = "";
         video115Done = false;
         currentGroupPos = Vector3.zero;
         currentMuseumWaypoint = MuseumWaypoints.WP0;
         playerRotation = 0f;
         isMinerDone = isMythDone = isCarbonificationPeriodDone = isCoalifiationDone = false;
         sole1done = sole2done = sole3BewetterungDone = sole3GebaeudeDone = trainRideInDone = trainRideOutDone = isLongwallCutterDone = false;
-        interaction116Done = interaction117Done = false;
+        interaction116Done = interaction117Done = quiz119Done = false;
         musicOn = true;
     }
 

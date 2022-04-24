@@ -22,6 +22,9 @@ public static class GameData
     public static int chapterTwoUnlocked = 0;
     public static int chapterThreeUnlocked = 0;
 
+    public static float maxBGVolumeInsta = 0.8f;
+    public static float overlayVolumeInsta = 0.5f;
+
     public static bool progressWithAdmin = false; //if start chapter with admin pwd true, else false;
 
 

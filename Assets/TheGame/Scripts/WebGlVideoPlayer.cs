@@ -38,6 +38,8 @@ public class WebGlVideoPlayer : MonoBehaviour
             Debug.Log("Setup Videooutput" + videoPostName);
         }
 
+        
+
         this.videoPostName = videoPostName;
 
         if (videoPlayer.isPlaying) return;
@@ -54,7 +56,10 @@ public class WebGlVideoPlayer : MonoBehaviour
             }
 
             videoIsPlaying = true;
-        }else
+            //runtimeData.videoPlaying = true;
+            runtimeData.overlaySoundState = OverlaySoundState.NoSound;
+        }
+        else
         {
             if (videoPlayer.isPlaying)
             {
@@ -63,6 +68,8 @@ public class WebGlVideoPlayer : MonoBehaviour
             }
 
             videoIsPlaying = false;
+            runtimeData.videoPlaying = false;
+            runtimeData.overlaySoundState = OverlaySoundState.SoudAjusted;
         }
 
         rawImage.transform.parent.transform.parent.GetComponent<Overlay>().SetIconActive(!videoIsPlaying);
@@ -93,12 +100,16 @@ public class WebGlVideoPlayer : MonoBehaviour
         }
 
         videoIsPlaying = false;
+        runtimeData.videoPlaying = false;
     }
 
     //Method called (from local method StartTheVideo) if event player finished is fired
     public void SetVideopostToRead(VideoPlayer vp)
     {
         videoIsPlaying = false;
+        //runtimeData.videoPlaying = false;
+        runtimeData.overlaySoundState = OverlaySoundState.SoudAjusted;
+
         //GameData.introVideoPlayedOnce = true;
         runtimeData.video115Done = true;
     }

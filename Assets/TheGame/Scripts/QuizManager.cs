@@ -10,6 +10,8 @@ public class QuizManager : MonoBehaviour
     private const string btnTextNextAnswer = "Weiter";
 
     public SoSfx sfx;
+    public SoChapOneRuntimeData runtimeData;
+
     public Canvas endCanvas, quizCanvas;
     public VerticalLayoutGroup answerButtonGroup;
     //public Text uiQuestion;
@@ -32,6 +34,11 @@ public class QuizManager : MonoBehaviour
     int points = 0;
     
     QuizTimer quizTimer;
+
+    private void Awake()
+    {
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -120,10 +127,8 @@ public class QuizManager : MonoBehaviour
         }
         else
         {
-            //endCanvas.gameObject.SetActive(true);
-            //quizCanvas.gameObject.SetActive(false);
             GameData.quizChapterOnePoints = points;
-            GameData.quizFinished = true;
+            runtimeData.quiz119Done = true;
             switchScene.SwitchToChapter1withOverlay(generalKeyOverlay);
         }    
     }

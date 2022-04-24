@@ -6,6 +6,14 @@ public enum OverlayChildType
     IMAGE, TYPEICON, DESCRIPTION, TAGS,
 }
 
+public enum OverlaySoundState
+{
+    Closed,
+    Opened,
+    SoudAjusted,
+    NoSound
+}
+
 public class Overlay : MonoBehaviour
 {
     private Transform[] allOverlayChildren;
@@ -20,10 +28,12 @@ public class Overlay : MonoBehaviour
     private SoGameIcons icons;
     //private bool videoFinished = false;
     private PostManagerChapterOne menuManager;
+    private SoChapOneRuntimeData runtimeData;
 
     private void Start()
     {
         icons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
         webglVideoPlayer = GameObject.FindObjectOfType<WebGlVideoPlayer>();
         menuManager = FindObjectOfType<PostManagerChapterOne>();
     }
@@ -121,6 +131,7 @@ public class Overlay : MonoBehaviour
     public void CloseOverlay()
     {
         gameObject.SetActive(false);
+        runtimeData.overlaySoundState = OverlaySoundState.Closed;
         webglVideoPlayer.StopTheVideo();
     }
 

@@ -11,6 +11,7 @@ public class PostManagerChapterOne : MonoBehaviour
     private List <Overlay> overlayList = new List<Overlay>();
     private Overlay[] overlayArray;
     private Dictionary<string, Overlay> dictOverlay= new Dictionary<string, Overlay>();
+    
     private SoSfx sfx;
     private SoChapOneRuntimeData runtimeData;
     private SoGameIcons gameIcons;
@@ -21,10 +22,6 @@ public class PostManagerChapterOne : MonoBehaviour
         gameIcons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
 
-        EnableDisableMusic(runtimeData.musicOn);
-        //musicOnOff.GetComponent<Image>().sprite = gameIcons.musicOn;
-        //sfx.PlayClip(gameObject, sfx.instaMenuBGmusicLoop);
-
         overlayArray = overlayParent.GetComponentsInChildren<Overlay>(true);
 
         foreach (Overlay a in overlayArray)
@@ -32,30 +29,52 @@ public class PostManagerChapterOne : MonoBehaviour
             dictOverlay.Add(a.name, a);
         }
 
-        if (GameData.overlayToLoad != "" && dictOverlay != null)
+        gameObject.GetComponent<AudioSource>().clip = sfx.instaMenuBGmusicLoop;
+        gameObject.GetComponent<AudioSource>().volume = GameData.maxBGVolumeInsta;
+        gameObject.GetComponent<AudioSource>().Play();
+
+        EnableDisableMusic(runtimeData.musicOn);
+
+        if (runtimeData.postOverlayToLoad != "" && dictOverlay != null)
         {
-            dictOverlay[GameData.overlayToLoad].gameObject.SetActive(true);
-            Debug.Log("Time to stop clip instabgmusic");
-            sfx.StopClip(sfx.instaMenuBGmusicLoop);
-            GameData.overlayToLoad = "";
+            dictOverlay[runtimeData.postOverlayToLoad].gameObject.SetActive(true);
+            
+            if (runtimeData.musicOn)
+            {
+                Debug.Log("svx is null: " + (sfx == null));
+                ReduceVolumeBGMusic(GameData.overlayVolumeInsta);
+            }
+            
+            runtimeData.postOverlayToLoad = "";
         }
+    }
+
+    void ReduceVolumeBGMusic(float value)
+    {
+        gameObject.GetComponent<AudioSource>().volume -= value;
     }
 
     private void EnableDisableMusic(bool enable)
     {
         if (enable)
         {
-            sfx.PlayClip(gameObject, sfx.instaMenuBGmusicLoop);
+            if (!gameObject.GetComponent<AudioSource>().isPlaying)
+            {
+                gameObject.GetComponent<AudioSource>().Play();
+            }
             musicOnOff.GetComponent<Image>().sprite = gameIcons.musicOn;
         }
         else
         {
-            sfx.StopClip(sfx.instaMenuBGmusicLoop);
+            if (gameObject.GetComponent<AudioSource>().isPlaying)
+            {
+                gameObject.GetComponent<AudioSource>().Stop();
+            }
             musicOnOff.GetComponent<Image>().sprite = gameIcons.musicOff;
         }
     }
 
-
+    //Called from Inspector BtnMusicOnOff OnClick()
     public void ToggleMusicOnOff()
     {
         runtimeData.musicOn = !runtimeData.musicOn;
@@ -65,7 +84,6 @@ public class PostManagerChapterOne : MonoBehaviour
 
     private void PrintAllDictKeys(string calledFrom)
     {
-        //Debug.Log("Dict length in "+ calledFrom +" "+ dictOverlay.Count);
         foreach (string key in dictOverlay.Keys)
         {
             Debug.Log(calledFrom + ": " + key);
@@ -74,7 +92,28 @@ public class PostManagerChapterOne : MonoBehaviour
 
     private void Update()
     {
+        
         runtimeData.CheckInteraction116Done();
         runtimeData.CheckInteraction117Done();
+
+        //potential für verbesserung,nur anschauen wenn ötig
+        if (runtimeData.overlaySoundState == OverlaySoundState.NoSound)
+        {
+            gameObject.GetComponent<AudioSource>().volume = 0f;
+        } 
+        else if (runtimeData.overlaySoundState == OverlaySoundState.Opened)
+        {
+            ReduceVolumeBGMusic(GameData.overlayVolumeInsta);
+            runtimeData.overlaySoundState = OverlaySoundState.SoudAjusted;
+        }
+        else if (runtimeData.overlaySoundState == OverlaySoundState.Closed)
+        {
+            gameObject.GetComponent<AudioSource>().volume = GameData.maxBGVolumeInsta;
+        }
+        else if (runtimeData.overlaySoundState == OverlaySoundState.SoudAjusted)
+        {
+            gameObject.GetComponent<AudioSource>().volume = GameData.overlayVolumeInsta;
+        }
+
     }
 }

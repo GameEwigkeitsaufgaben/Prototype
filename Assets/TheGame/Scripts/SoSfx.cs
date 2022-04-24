@@ -16,27 +16,29 @@ public class SoSfx : ScriptableObject
 
     public AudioClip correctAnswer, incorrectAnswer, btnClick;
 
-    private Dictionary<string, AudioSource> playingSourcesLoop = new Dictionary<string, AudioSource>();
-    private Dictionary<string, AudioSource> playingSourcesOneShot = new Dictionary<string, AudioSource>();
+    public GameObject instaAudioSrc;
+
+    public Dictionary<string, AudioSource> playingSourcesLoop = new Dictionary<string, AudioSource>();
+    public Dictionary<string, AudioSource> playingSourcesOneShot = new Dictionary<string, AudioSource>();
 
     public bool EntryAreaSfxStarted = false, sole1SfxStarted = false, sole2SfxStarted = false, sole3SfxStarted = false;
 
-    public void PlayClip(GameObject go, AudioClip clip)
+    public void PlayClip(GameObject goWithAudioSrc, AudioClip clip)
     {
-        go.GetComponent<AudioSource>().clip = clip;
+        goWithAudioSrc.GetComponent<AudioSource>().clip = clip;
 
-        if (go.GetComponent<AudioSource>().loop)
+        if (goWithAudioSrc.GetComponent<AudioSource>().loop)
         {
-            if (!playingSourcesLoop.ContainsKey (go.GetComponent<AudioSource>().clip.name))
-            playingSourcesLoop.Add(go.GetComponent<AudioSource>().clip.name, go.GetComponent<AudioSource>());
+            if (!playingSourcesLoop.ContainsKey (goWithAudioSrc.GetComponent<AudioSource>().clip.name))
+            playingSourcesLoop.Add(goWithAudioSrc.GetComponent<AudioSource>().clip.name, goWithAudioSrc.GetComponent<AudioSource>());
         }
         else
         {
-            if (!playingSourcesOneShot.ContainsKey(go.GetComponent<AudioSource>().clip.name))
-                playingSourcesOneShot.Add(go.GetComponent<AudioSource>().clip.name, go.GetComponent<AudioSource>());
+            if (!playingSourcesOneShot.ContainsKey(goWithAudioSrc.GetComponent<AudioSource>().clip.name))
+                playingSourcesOneShot.Add(goWithAudioSrc.GetComponent<AudioSource>().clip.name, goWithAudioSrc.GetComponent<AudioSource>());
         }
 
-        go.GetComponent<AudioSource>().Play();
+        goWithAudioSrc.GetComponent<AudioSource>().Play();
     }
 
     public void PlaySfxSole2()
@@ -128,9 +130,10 @@ public class SoSfx : ScriptableObject
     {
         if (playingSourcesLoop.ContainsKey(clip.name))
         {
+            Debug.Log(clip.name + "in loop list, method stop clip");
             playingSourcesLoop[clip.name].Stop();
             //playingSourcesLoop.Remove(clip.name);
-            Debug.Log(clip.name + "in loop list");
+           
         }
         else if (playingSourcesOneShot.ContainsKey(clip.name))
         {
@@ -166,8 +169,15 @@ public class SoSfx : ScriptableObject
 
     public void ReduceVolume(AudioClip clip, float value)
     {
+        Debug.Log("playing sources loop is null" + (playingSourcesLoop == null)) ;
+        Debug.Log("clipname " + (clip.name));
         if (playingSourcesLoop.ContainsKey(clip.name))
         {
+            if(playingSourcesLoop[clip.name] == null)
+            {
+
+            }
+
             playingSourcesLoop[clip.name].volume -= value;
         }
         else if (playingSourcesOneShot.ContainsKey(clip.name))

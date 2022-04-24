@@ -22,6 +22,10 @@ public class Viewpoint : MonoBehaviour
     public ViewpointLocation vpLocation;
 
     //Interactive viewpoints in museum to interact with
+    public static string viewpointMuseumMiner = "ViewpointMusumMiner";
+    public static string viewpointMuseumMyth = "ViewpointMuseumMyth";
+    public static string viewpointMuseumInkohlung = "ViewpointMuseumInkohlung";
+    public static string viewpointMuseumWorld = "ViewpointMuseumWorld";
 
 
     SoGameColors gameColors; //SoGAmeColors
@@ -74,7 +78,6 @@ public class Viewpoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         if (!discSetToDone)
         {
             if(runtimeData.interaction116Done && vpLocation == ViewpointLocation.Mine) SetInteractionDone();
@@ -83,7 +86,12 @@ public class Viewpoint : MonoBehaviour
             else if (runtimeData.sole3BewetterungDone && gameObject.name == viewpointSole3Bewetterung) SetInteractionDone();
             else if (runtimeData.sole3GebaeudeDone && gameObject.name == viewpointSole3OVMine) SetInteractionDone();
             else if (runtimeData.isLongwallCutterDone && gameObject.name == viewpointSole3Longwallcutter) SetInteractionDone();
-        }
 
+            if (runtimeData.interaction117Done && vpLocation == ViewpointLocation.Museum) SetInteractionDone();
+            else if (runtimeData.isMinerDone && gameObject.name == viewpointMuseumMiner) SetInteractionDone();
+            else if (runtimeData.isCoalifiationDone && gameObject.name == viewpointMuseumInkohlung) SetInteractionDone();
+            else if (runtimeData.isCarbonificationPeriodDone && gameObject.name == viewpointMuseumWorld) SetInteractionDone();
+            else if (runtimeData.isMythDone && gameObject.name == viewpointMuseumMyth) SetInteractionDone();
+        }
     }
 }

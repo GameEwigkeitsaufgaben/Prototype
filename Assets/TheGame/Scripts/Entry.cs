@@ -67,7 +67,8 @@ public class Entry : MonoBehaviour
         overlay.SetActive(true);
         if (runtimeData.musicOn)
         {
-            sfx.ReduceVolume(sfx.instaMenuBGmusicLoop, changeVolumeAmount);
+            runtimeData.overlaySoundState = OverlaySoundState.Opened;
+            //sfx.ReduceVolume(sfx.instaMenuBGmusicLoop, changeVolumeAmount);
         }
     }
 
@@ -76,11 +77,11 @@ public class Entry : MonoBehaviour
         overlay.GetComponent<Overlay>().CloseOverlay();
         if (runtimeData.musicOn)
         {
-            sfx.IncreaseVolume(sfx.instaMenuBGmusicLoop, changeVolumeAmount);
-            if (!sfx.IsInstaBGMusicPlaying())
-            {
-                sfx.PlayClip(sfx.instaMenuBGmusicLoop);
-            }
+            //sfx.IncreaseVolume(sfx.instaMenuBGmusicLoop, changeVolumeAmount);
+            //if (!sfx.IsInstaBGMusicPlaying())
+            //{
+            //    sfx.PlayClip(sfx.instaMenuBGmusicLoop);
+            //}
         }
     }
 
@@ -90,13 +91,11 @@ public class Entry : MonoBehaviour
 
         if (post.GetComponent<Post>().isPostLocked())
         {
-            //if (gameObject.name == Entry116 && GameData.introVideoPlayedOnce)
             if (gameObject.name == Entry116 && runtimeData.video115Done)
             {
                 Debug.Log("Unlock 116 bergwerk");
                 GameData.PrintState();
                 post.GetComponent<Post>().UnlockPost();
-                //GameData.introVideoPlayedOnce = false;
             }
             
             if (gameObject.name == GameData.NameEntry117 && runtimeData.interaction116Done)
@@ -113,11 +112,11 @@ public class Entry : MonoBehaviour
                 post.GetComponent<Post>().UnlockPost();
                 //runtimeData.interaction117Done = false;
             }
-            else if (gameObject.name == Entry1110 && GameData.quizFinished)
+            else if (gameObject.name == Entry1110 && runtimeData.quiz119Done)
             {
                 post.GetComponent<Post>().UnlockPost();
                 overlay.GetComponent<Overlay>().UpdateOverlayText();
-                GameData.quizFinished = false;
+               // GameData.quizFinished = false;
                 GameData.chapterOneUnlocked = 1;
             }
         }

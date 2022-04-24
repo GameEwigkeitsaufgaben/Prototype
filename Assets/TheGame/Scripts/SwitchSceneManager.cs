@@ -7,6 +7,12 @@ public class SwitchSceneManager : MonoBehaviour
 {
     public Animator transition;
     public float transitionTime = 1f;
+    SoChapOneRuntimeData runtimeData;
+
+    private void Awake()
+    {
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
+    }
 
     public void LoadMine()
     {
@@ -119,14 +125,6 @@ public class SwitchSceneManager : MonoBehaviour
         SwitchScene(GameScenes.ch00ChapterOverview);
     }
 
-    //rideIn true if you go to the longwall cutter
-    //rideIn false if you go way from the longwal cutter, i.e. go back to surface
-    //public void GoToTrainRide(bool rideIn)
-    //{
-    //    GameData.rideIn = rideIn;
-    //    SwitchScene(GameScenes.ch01MineSoleThreeTrainRide);
-    //}
-
     public void SwitchSceneWithTransition(string sceneName)
     {
         StartCoroutine(LoadSceneWithTransition(sceneName));
@@ -139,7 +137,7 @@ public class SwitchSceneManager : MonoBehaviour
 
     public void SwitchToChapter1withOverlay(string overlayName)
     {
-        GameData.overlayToLoad = overlayName;
+        runtimeData.postOverlayToLoad = overlayName;
         SwitchScene(GameScenes.ch01InstaMain); 
     }
 
