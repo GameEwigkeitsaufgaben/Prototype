@@ -8,6 +8,7 @@ public static class GameData
     public const string NameConfigMinerEquiment = "ConfigMinerEquipment";
     public const string NameConfigMuseum = "ConfigMuseum";
     public const string NameGameIcons = "Icons";
+    public const string NameGameColors = "ConfigGameColors";
 
     public const string NamePost116 = "Post116";
     public const string NamePost117 = "Post117";

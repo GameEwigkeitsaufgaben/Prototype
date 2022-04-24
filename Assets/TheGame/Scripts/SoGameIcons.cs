@@ -11,5 +11,7 @@ public class SoGameIcons : ScriptableObject
     public Sprite talking;
     public Sprite musicOn, musicOff;
 
+    public Sprite viewpointArrow;
+
     public Color lockedColor;
 }
