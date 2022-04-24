@@ -70,8 +70,8 @@ public static class GameData
         Debug.Log(
             "chapterOneUnlocked: " + chapterOneUnlocked + "\n" +
             "chaperTwoUnlocked: " + chapterTwoUnlocked + "\n" +
-            "chapterThreeUnlocked: " + chapterThreeUnlocked + "\n" +
-            "introVideoPlayedOnce: " + introVideoPlayedOnce
+            "chapterThreeUnlocked: " + chapterThreeUnlocked + "\n"
+            //"introVideoPlayedOnce: " + introVideoPlayedOnce
             );
     }
 

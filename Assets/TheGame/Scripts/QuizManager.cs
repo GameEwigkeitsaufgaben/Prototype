@@ -8,6 +8,7 @@ public class QuizManager : MonoBehaviour
     private const string generalKeyOverlay = "Overlay1110";
     private const string btnTextCheckAnswers = "Prüfen";
     private const string btnTextNextAnswer = "Weiter";
+
     public SoSfx sfx;
     public Canvas endCanvas, quizCanvas;
     public VerticalLayoutGroup answerButtonGroup;
@@ -66,11 +67,6 @@ public class QuizManager : MonoBehaviour
         uiPoints.text = points.ToString();
         quizTimer.StartTimer();
     }
-
-    //public void CloseQuiz()
-    //{
-    //    switchScene.SwitchToChapter1withOverlay(generalKeyOverlay);
-    //}
 
     public void LoadNextQuestion()
     {

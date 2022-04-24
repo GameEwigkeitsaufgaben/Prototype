@@ -28,12 +28,13 @@ public class ManagerMuseum : MonoBehaviour
     {
         if(btnExitImage.color.a < 0.8f)
         {
-            if (runtimeData.isMinerDone && runtimeData.isMythDone && runtimeData.isCoalifiationDone && runtimeData.isCarbonificationPeriodDone)
+            runtimeData.CheckInteraction117Done();
+
+            if (runtimeData.interaction117Done)
             {
                 btnExitImage.color += new Color32(0, 0, 0, 200);
                 speechManager.playMuseumOutro = true;
                 walkingGroup.MoveToWaypoint((int)MuseumWaypoints.WPExitMuseum);
-                runtimeData.interaction117Done = true;
             }
         }
 

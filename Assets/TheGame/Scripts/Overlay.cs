@@ -18,9 +18,8 @@ public class Overlay : MonoBehaviour
 
     private SoPostData postData;
     private SoGameIcons icons;
-    private bool videoFinished = false;
+    //private bool videoFinished = false;
     private PostManagerChapterOne menuManager;
-
 
     private void Start()
     {
@@ -31,7 +30,7 @@ public class Overlay : MonoBehaviour
 
     public void SetReplayIcon()
     {
-        videoFinished = true;
+        //videoFinished = true;
         allOverlayChildren[OVERLAYTYPEICON].gameObject.GetComponent<Image>().sprite = postData.GetReplayIcon();
         SetIconActive(true);
     }
@@ -68,7 +67,6 @@ public class Overlay : MonoBehaviour
         allOverlayChildren[OVERLAYTAGS].gameObject.GetComponent<Text>().text = postData.postTags;
         allOverlayChildren[OVERLAYIMAGE].gameObject.GetComponent<RawImage>().texture = postData.postSprite.texture;
 
-
         if (postData.overlayType == OverlayType.IMAGE)
         {
             allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().interactable = false;
@@ -88,7 +86,6 @@ public class Overlay : MonoBehaviour
             allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().interactable = true;
             allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().onClick.AddListener(delegate { SwitchTheScene(postData.interactionScene); });
         }
-        
 
         allOverlayChildren[OVERLAYTYPEICON].gameObject.GetComponent<Image>().sprite = postData.GetIcon();
         allOverlayChildren[OVERLAYTYPEICON].gameObject.GetComponent<Image>().gameObject.SetActive(true);
@@ -123,7 +120,6 @@ public class Overlay : MonoBehaviour
 
     public void CloseOverlay()
     {
-        //SetIconActive(true);
         gameObject.SetActive(false);
         webglVideoPlayer.StopTheVideo();
     }
@@ -132,5 +128,4 @@ public class Overlay : MonoBehaviour
     {
         return postData;
     }
-
 }

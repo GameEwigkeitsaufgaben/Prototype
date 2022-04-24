@@ -12,7 +12,13 @@ public class WebGlVideoPlayer : MonoBehaviour
     private bool videoIsPlaying = false;
     private bool videoSetUpDone = false;
     private SoSfx sfx; //will be assigned from Entry;
+    private SoChapOneRuntimeData runtimeData;
 
+
+    private void Awake()
+    {
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
+    }
     private void Start()
     {
         Debug.Log("Set Video Url and configurations: " + videoPlayer.url);
@@ -93,7 +99,8 @@ public class WebGlVideoPlayer : MonoBehaviour
     public void SetVideopostToRead(VideoPlayer vp)
     {
         videoIsPlaying = false;
-        GameData.introVideoPlayedOnce = true;
+        //GameData.introVideoPlayedOnce = true;
+        runtimeData.video115Done = true;
     }
 
 }

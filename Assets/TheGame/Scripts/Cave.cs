@@ -47,9 +47,12 @@ public class Cave : MonoBehaviour
     public AudioSource liftMovingSrc;
     private SoSfx sfx;
 
+    private SoChapOneRuntimeData runtimeData;
+
     private void Start()
     {
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
         
         if(GameData.currentStopSohle == (int)CoalmineStop.Unset)
         {
@@ -192,5 +195,7 @@ public class Cave : MonoBehaviour
         {
             EnableButtons(false);
         }
+
+        runtimeData.CheckInteraction116Done();
     }
 }

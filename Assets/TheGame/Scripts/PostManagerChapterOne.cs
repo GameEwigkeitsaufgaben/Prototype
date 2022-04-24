@@ -74,13 +74,7 @@ public class PostManagerChapterOne : MonoBehaviour
 
     private void Update()
     {
-        if (!runtimeData.interaction116Done)
-        {
-            if (runtimeData.sole1done && runtimeData.sole2done && runtimeData.sole3BewetterungDone && runtimeData.sole3GebaeudeDone && runtimeData.trainRideInDone && runtimeData.trainRideOutDone && runtimeData.isLongwallCutterDone)
-            {
-                runtimeData.interaction116Done = true;
-            }
-        }
-        
+        runtimeData.CheckInteraction116Done();
+        runtimeData.CheckInteraction117Done();
     }
 }

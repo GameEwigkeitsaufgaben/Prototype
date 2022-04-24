@@ -13,6 +13,7 @@ public class Post : MonoBehaviour
     private GameObject childIcon = null;
     private SpriteRenderer iconSpriteRenderer = null;
 
+
     private void Awake()
     {
         icons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
@@ -79,7 +80,6 @@ public class Post : MonoBehaviour
         SetUpPost();
     }
 
-
     public void UnlockPost()
     {
         postData.postUnLocked = true;
@@ -89,7 +89,6 @@ public class Post : MonoBehaviour
         {
             gameObject.GetComponent<Button>().interactable = true;
         }
-       
 
         if (OverlayType.IMAGE == postData.overlayType)
         {
@@ -105,4 +104,5 @@ public class Post : MonoBehaviour
         //    childIcon.SetActive(false);
         //}
     }
+
 }

@@ -90,7 +90,8 @@ public class Entry : MonoBehaviour
 
         if (post.GetComponent<Post>().isPostLocked())
         {
-            if (gameObject.name == Entry116 && GameData.introVideoPlayedOnce)
+            //if (gameObject.name == Entry116 && GameData.introVideoPlayedOnce)
+            if (gameObject.name == Entry116 && runtimeData.video115Done)
             {
                 Debug.Log("Unlock 116 bergwerk");
                 GameData.PrintState();
@@ -110,7 +111,7 @@ public class Entry : MonoBehaviour
             else if (gameObject.name == Entry119 && runtimeData.interaction117Done)
             {
                 post.GetComponent<Post>().UnlockPost();
-                runtimeData.interaction117Done = false;
+                //runtimeData.interaction117Done = false;
             }
             else if (gameObject.name == Entry1110 && GameData.quizFinished)
             {

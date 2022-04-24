@@ -32,13 +32,16 @@ public class Viewpoint : MonoBehaviour
     Disc myDisc;
     bool discSetToDone = false;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         gameColors = Resources.Load<SoGameColors>(GameData.NameGameColors);
         gameIcons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
+    }
 
+    // Start is called before the first frame update
+    void Start()
+    {
         AssignLocalElements();
 
         myViewpointImg.sprite = gameIcons.viewpointArrow;
@@ -47,7 +50,7 @@ public class Viewpoint : MonoBehaviour
 
     void AssignLocalElements()
     {
-        Transform[] elements = GetComponentsInChildren<Transform>();
+        Transform[] elements = GetComponentsInChildren<Transform>(true);
         
         for(int i = 0; i < elements.Length; i++)
         {
