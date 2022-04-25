@@ -20,11 +20,11 @@ public class CaveButton : MonoBehaviour
 
         //GetComponent<Button>().interactable = false;
     }
+    
 
     public void GoToMyStop()
     {
-        if (GameData.moveCave) return;
-
+        if (caveMoveController.CheckNextStopInvalid()) return;
         caveMoveController.GoToStop(myStop);
         isSelected = true;
     }

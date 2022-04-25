@@ -26,12 +26,26 @@ public class CaveMoveUpDownController : MonoBehaviour
         }
     }
 
-    public void GoToStop(CoalmineStop nextStopInt)
+    public bool CheckNextStopInvalid()
     {
-        CoalmineStop nextStop = nextStopInt;
+        //next stop is invalid if the cave is moving, or an ohter sole is already chosen.
+        return GameData.moveCave || (cave.currentStop != cave.targetStop);
+    }
 
-        if (GameData.moveCave) return;
+    public void GoToStop(CoalmineStop nextStop)
+    {
+        ////CoalmineStop nextStop = nextStopInt;
+        //Debug.Log("cave current +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        //Debug.Log("cave current " + cave.currentStop);
+        //Debug.Log("cave target " + cave.targetStop);
+        //Debug.Log("nextstop " + nextStop);
+        
+        ////do nothing: cave is moving, other sole is already selected;
+        //if (GameData.moveCave) return;
+        //if (cave.currentStop != cave.targetStop) return;
+        //Debug.Log("nach current != target +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
+        //open close doors if the same sole is pressed
         if (cave.currentStop == nextStop)
         {
             MoveCaveDoors();

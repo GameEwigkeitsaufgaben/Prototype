@@ -82,8 +82,8 @@ public class CoalmineWaypointManager : MonoBehaviour
 
     public bool IsBahnsteigCurrentWP()
     {
-        Debug.Log("for train: is bahnsteig current wP: " + (currentWP == MineWayPoints.viewpointBahnsteig || currentWP == MineWayPoints.reloadBahnsteig));
-        Debug.Log("for train: " + currentWP);
+        //Debug.Log("for train: is bahnsteig current wP: " + (currentWP == MineWayPoints.viewpointBahnsteig || currentWP == MineWayPoints.reloadBahnsteig));
+        //Debug.Log("for train: " + currentWP);
         return (currentWP == MineWayPoints.viewpointBahnsteig || currentWP == MineWayPoints.reloadBahnsteig);
     }
 

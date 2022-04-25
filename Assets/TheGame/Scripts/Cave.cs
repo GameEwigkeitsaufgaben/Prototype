@@ -136,11 +136,9 @@ public class Cave : MonoBehaviour
 
     public void OpenDoors()
     {
-        Debug.Log("Doors open -------------------");
         doorLeft.GetComponent<CaveDoor>().OpenDoor();
         doorRight.GetComponent<CaveDoor>().OpenDoor();
         caveDoorsClosed = false;
-
         PlayDoorMoveSound();
     }
 
@@ -152,6 +150,11 @@ public class Cave : MonoBehaviour
             doorLeft.GetComponent<CaveDoor>().PlayMoveSfx();
             doorRight.GetComponent<CaveDoor>().PlayMoveSfx();
         }
+    }
+
+    public bool GoToNextStopValid()
+    {
+        return currentStop != targetStop;
     }
 
     public void EnableButtons(bool enableButtons)
