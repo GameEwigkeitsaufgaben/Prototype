@@ -40,8 +40,6 @@ public class CaveMoveUpDownController : MonoBehaviour
 
         cave.targetStop = nextStop;
 
-        Debug.Log("############### Next Stop " + cave.targetStop);
-
         if (cave.caveDoorsClosed)
         {
             switch (nextStop)
@@ -64,7 +62,6 @@ public class CaveMoveUpDownController : MonoBehaviour
             }
         }
 
-        Debug.Log("current sTop " + cave.currentStop);
         cave.liftBtns[GameData.GetCurrentStop(cave.currentStop)].GetComponent<CaveButton>().DisableButtonSelected();
     }
 

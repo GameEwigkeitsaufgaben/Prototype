@@ -14,13 +14,12 @@ public class CaveColliderBottom : MonoBehaviour
     public Cave cave;
     public CoalmineSpeechManger speechManger;
     public bool revisitEntryArea;
-    //public Character enya, dad, georg;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.name == TriggerEntryArea && !revisitEntryArea)
         {
-            cave.InitReachedStop(CoalmineStop.EntryArea);
+            //cave.InitReachedStop(CoalmineStop.EntryArea);
             speechManger.playEntryArea = true;
             revisitEntryArea = true;
 
@@ -53,11 +52,4 @@ public class CaveColliderBottom : MonoBehaviour
                 speechManger.playSole3WPCave = (GameData.currentStopSohle == (int)CoalmineStop.Unset) ? true : false;
              }
     }
-
-    //public void SetCharacters(Character enya, Character dad, Character georg)
-    //{
-    //    this.enya = enya;
-    //    this.dad = dad;
-    //    this.georg = georg;
-    //}
 }

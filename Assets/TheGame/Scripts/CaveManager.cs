@@ -57,7 +57,6 @@ public class CaveManager : MonoBehaviour
         //At first load
         if(GameData.currentStopSohle == (int)CoalmineStop.Unset)
         {
-            GameData.currentStopSohle = (int)CoalmineStop.EntryArea;
             player.SetPlayerRotation(defaultYawInCave, false); //Default 90 degree for cave orientation
         }
         

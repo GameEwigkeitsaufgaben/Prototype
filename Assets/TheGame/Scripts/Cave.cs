@@ -53,13 +53,17 @@ public class Cave : MonoBehaviour
     {
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
-        
+
+        Debug.Log("Game Data " + GameData.currentStopSohle);
+
         if(GameData.currentStopSohle == (int)CoalmineStop.Unset)
         {
+            Debug.Log("**********************************");
             //Default setting: current Sole is Entry Area;
             GameData.currentStopSohle = (int)CoalmineStop.EntryArea;
-            currentStop = (CoalmineStop)GameData.currentStopSohle;
-            
+            currentStop = targetStop = (CoalmineStop)GameData.currentStopSohle;
+            liftBtns[0].GetComponent<CaveButton>().isSelected = true;
+
             //EnableButtons(true);
 
             sfx.PlayClip(wind, sfx.coalmineWindInTunnel);
@@ -76,6 +80,8 @@ public class Cave : MonoBehaviour
     {
         StopCave();
         currentStop = reachedStop;
+        moveDirection = CaveMovement.OnHold;
+        OpenDoors();
         GameData.currentStopSohle = (int)currentStop;
     }
 
