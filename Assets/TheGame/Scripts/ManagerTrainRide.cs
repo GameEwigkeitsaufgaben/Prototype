@@ -8,10 +8,13 @@ public class ManagerTrainRide : MonoBehaviour
     public SwitchSceneManager switchScene;
     public bool isNextSceneLoaded = false;
     private SoChapOneRuntimeData runtimeData;
+    public AudioClip trainride;
 
     private void Awake()
     {
-        
+        gameObject.GetComponent<AudioSource>().clip = trainride;
+        gameObject.GetComponent<AudioSource>().Play();
+
         isNextSceneLoaded = false;
 
         if (SwitchSceneManager.GetCurrentSceneName() == GameScenes.ch01MineSoleThreeTrainRideIn)
