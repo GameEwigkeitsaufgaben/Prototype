@@ -10,13 +10,13 @@ public class MouseChange : MonoBehaviour
 
     public void OnMouseEnter()
     {
-        Debug.Log("set cursur enter");
+        //Debug.Log("set cursur enter");
         Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
     }
 
     public void OnMouseExit()
     {
-        Debug.Log("set cursur exit");
+        //Debug.Log("set cursur exit");
         Cursor.SetCursor(null, Vector2.zero, cursorMode);
     }
 }
