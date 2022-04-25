@@ -30,7 +30,6 @@ public class Player : MonoBehaviour
     public void SetPlayerRotation(float yaw, bool inclMainCamAdjustment)
     {
         mainCam.GetComponent<LookaroundWithMouse>().SetPlayerBodyRotation(yaw, inclMainCamAdjustment);
-       
     }
 
     public void StorePlayerAtBahnsteigPositon()

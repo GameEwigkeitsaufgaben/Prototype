@@ -250,11 +250,6 @@ public class CoalmineWaypointManager : MonoBehaviour
 
     public void SetWaypointMarkers()
     {
-
-        //sole1 wp
-        //sole2 wp
-        //sole3 wp bewetterung
-        //sole3 wp gebaude
         Debug.Log("MineWaypoint is :"  + currentWP);
 
         if (currentWP == MineWayPoints.insideCave)
@@ -263,6 +258,8 @@ public class CoalmineWaypointManager : MonoBehaviour
             wps3ViewpointBtn.gameObject.SetActive(true);
             wps2ViewpointBtn.gameObject.SetActive(true);
             wps1ViewpointBtn.gameObject.SetActive(true);
+            myPlayer.SetPlayerRotation(0f,false);
+           
         }
         else if (currentWP == MineWayPoints.viewpoint)
         {
@@ -433,7 +430,6 @@ public class CoalmineWaypointManager : MonoBehaviour
             
             if (GameData.sohleToReload == (int)CoalmineStop.Sole3)
             {
-                Debug.Log("Reload sohle 3######################################!");
                 ReloadWPBahnsteig();
                 myPlayer.RealoadPlayerAtS3Bahnsteig();
                 return;
