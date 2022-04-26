@@ -38,11 +38,13 @@ public class CoalmineWaypointManager : MonoBehaviour
 
     public GameObject triggerPlayerInCave;
     public Canvas bahnsteig, bewetterung, ovmine, viewpoint;
+    public CoalmineSpeechManger speechManager;
 
     private bool helperSetPath = false;
     private Player myPlayer;
 
     private SoChapOneRuntimeData runtimeData;
+    private SoSfx sfx;
 
     [Header("Assigned during runtime")]
     [SerializeField]
@@ -59,6 +61,8 @@ public class CoalmineWaypointManager : MonoBehaviour
     //https://forum.unity.com/threads/onenable-before-awake.361429/
     private void Awake()
     {
+        sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
+
         //The order has to be Canvas (parent), first child ist btn, second child is text; 
         wps1ViewpointBtn = wpS1ViewpointSign.GetComponentsInChildren<Transform>()[1].GetComponent<Button>();
         wps2ViewpointBtn = wpS2ViewpointSign.GetComponentsInChildren<Transform>()[1].GetComponent<Button>();
@@ -139,7 +143,6 @@ public class CoalmineWaypointManager : MonoBehaviour
     public void SetCurrentWaypoint()
     {
         currentWP = GetCurrentWP();
-      
 
         SetWaypointMarkers();
     }
@@ -242,11 +245,33 @@ public class CoalmineWaypointManager : MonoBehaviour
             bewetterungBtn.interactable = caveBtn.interactable = interactable;
     }
 
+
+
     public void ReloadWPBahnsteig()
     {
         currentWP = MineWayPoints.reloadBahnsteig;
         SetWaypointMarkers();
     }
+
+    public void PlayViewpointtTalking()
+    {
+        switch (currentWP)
+        {
+            case MineWayPoints.viewpoint:
+                if (GameData.currentStopSohle == (int)CoalmineStop.Sole1) speechManager.playSole1Badewannen = true;
+                break;
+            case MineWayPoints.viewpointBewetterung:
+                speechManager.playSole3WPBewetterung = true;
+                break;
+            case MineWayPoints.viewpointLWBahnsteig:
+                speechManager.playSole3WPBahnsteig = true;
+                break;
+            case MineWayPoints.viewpointOVMine:
+                speechManager.playSole3WPOVMine = true;
+                break;
+        }
+    }
+    
 
     public void SetWaypointMarkers()
     {
@@ -287,7 +312,7 @@ public class CoalmineWaypointManager : MonoBehaviour
             bewetterungBtn.gameObject.SetActive(false);
             caveBtn.gameObject.SetActive(false);
 
-            ChangeS3WPRotations(40.0f, 90.0f, 90.0f, 0.0f);
+            ChangeS3WPRotations(-90.0f, -90.0f, -90.0f, 0.0f);
 
             runtimeData.sole3BewetterungDone = true;
 
@@ -295,7 +320,7 @@ public class CoalmineWaypointManager : MonoBehaviour
         }
         else if (currentWP == MineWayPoints.viewpoint)
         {
-            ChangeS3WPRotations(0.0f, 90.0f, 90.0f, 235.0f);
+            ChangeS3WPRotations(0.0f, 90.0f, 90.0f, 150.0f);
         }
         else if (IsBahnsteigCurrentWP())
         {
@@ -310,7 +335,7 @@ public class CoalmineWaypointManager : MonoBehaviour
             ovmineBtn.gameObject.SetActive(false);
             caveBtn.gameObject.SetActive(false);
 
-            ChangeS3WPRotations(180.0f, -33.0f, 0.0f, -65.0f);
+            ChangeS3WPRotations(180.0f, -33.0f, 0.0f, -250.0f);
 
             runtimeData.sole3GebaeudeDone = true;
 

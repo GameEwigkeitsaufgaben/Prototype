@@ -158,7 +158,7 @@ RectTransform:
   m_LocalScale: {x: 1.8279, y: 1.8279, z: 1.8279}
   m_Children: []
   m_Father: {fileID: 2046574423}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -371,6 +371,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: db682199c78b96241afdf27eb67c2640, type: 3}
+    - target: {fileID: 2943527447134746292, guid: c9306be944fb27e4a9a143cc841247e2, type: 3}
+      propertyPath: m_Color.b
+      value: 0.7176471
+      objectReference: {fileID: 0}
+    - target: {fileID: 2943527447134746292, guid: c9306be944fb27e4a9a143cc841247e2, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7921569
+      objectReference: {fileID: 0}
+    - target: {fileID: 2943527447134746292, guid: c9306be944fb27e4a9a143cc841247e2, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8745098
+      objectReference: {fileID: 0}
     - target: {fileID: 2943527447217895523, guid: c9306be944fb27e4a9a143cc841247e2, type: 3}
       propertyPath: m_Color.b
       value: 0.33333334
@@ -605,7 +617,7 @@ RectTransform:
   m_Children:
   - {fileID: 1801093938}
   m_Father: {fileID: 2046574423}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -752,7 +764,7 @@ RectTransform:
   m_LocalScale: {x: 0.61494213, y: 0.61494213, z: 0.61494213}
   m_Children: []
   m_Father: {fileID: 2046574423}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -802,6 +814,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 865508749}
   m_CullTransparentMesh: 1
+--- !u!1 &984708801
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 984708802}
+  - component: {fileID: 984708804}
+  - component: {fileID: 984708803}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &984708802
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984708801}
+  m_LocalRotation: {x: -0, y: -0, z: 0.351109, w: 0.93633467}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 4.0199924, y: 4.0199924, z: 4.019993}
+  m_Children: []
+  m_Father: {fileID: 2046574423}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 41.11}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -744, y: 294}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &984708803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984708801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -2902996317134794323, guid: 7707a15f28ff84a41a1cb60d54bc7afa, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &984708804
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984708801}
+  m_CullTransparentMesh: 1
 --- !u!114 &1040476260 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2943527447711519980, guid: c9306be944fb27e4a9a143cc841247e2, type: 3}
@@ -828,6 +915,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: db682199c78b96241afdf27eb67c2640, type: 3}
+    - target: {fileID: 2943527447134746292, guid: c9306be944fb27e4a9a143cc841247e2, type: 3}
+      propertyPath: m_Color.b
+      value: 0.7176471
+      objectReference: {fileID: 0}
+    - target: {fileID: 2943527447134746292, guid: c9306be944fb27e4a9a143cc841247e2, type: 3}
+      propertyPath: m_Color.g
+      value: 0.79215693
+      objectReference: {fileID: 0}
+    - target: {fileID: 2943527447134746292, guid: c9306be944fb27e4a9a143cc841247e2, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8745099
+      objectReference: {fileID: 0}
     - target: {fileID: 2943527447217895523, guid: c9306be944fb27e4a9a143cc841247e2, type: 3}
       propertyPath: m_Color.b
       value: 0.33333334
@@ -1260,7 +1359,7 @@ RectTransform:
   - {fileID: 130422711}
   - {fileID: 54579817}
   m_Father: {fileID: 2046574423}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1448,6 +1547,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 984708802}
   - {fileID: 2089821280}
   - {fileID: 865508750}
   - {fileID: 88595628}
@@ -1491,7 +1591,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2046574423}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1558,6 +1658,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: db682199c78b96241afdf27eb67c2640, type: 3}
+    - target: {fileID: 2943527447134746292, guid: c9306be944fb27e4a9a143cc841247e2, type: 3}
+      propertyPath: m_Color.b
+      value: 0.7176471
+      objectReference: {fileID: 0}
+    - target: {fileID: 2943527447134746292, guid: c9306be944fb27e4a9a143cc841247e2, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7921569
+      objectReference: {fileID: 0}
+    - target: {fileID: 2943527447134746292, guid: c9306be944fb27e4a9a143cc841247e2, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8745098
+      objectReference: {fileID: 0}
     - target: {fileID: 2943527447217895523, guid: c9306be944fb27e4a9a143cc841247e2, type: 3}
       propertyPath: m_Color.b
       value: 0.33333334

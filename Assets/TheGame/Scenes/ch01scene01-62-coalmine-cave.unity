@@ -254,6 +254,7 @@ MonoBehaviour:
   audiosEntryArea: {fileID: 11400000, guid: 139b6e1bad73fe2418d03c4686441eaa, type: 2}
   audiosEntryAreaTriggerSchacht: {fileID: 11400000, guid: 42aac5037418e734f95807b1b03c6deb, type: 2}
   audiosSole1: {fileID: 11400000, guid: 8a82036e76e1212418f25d76c2b11910, type: 2}
+  audiosSole1Badewannen: {fileID: 11400000, guid: 24f5dd58431a2a946bacac1e100e6367, type: 2}
   audiosSole2: {fileID: 11400000, guid: 2faebea999a8ecf4ab4cf3f2a6a57f02, type: 2}
   audiosSole3WPBahnsteig: {fileID: 11400000, guid: e293681608c7a2640a14ba9e140abf33, type: 2}
   audiosSole3WPBewetterung: {fileID: 11400000, guid: 892465c2e6fa71f4db27633136469d29, type: 2}
@@ -270,6 +271,7 @@ MonoBehaviour:
   playEntryArea: 0
   playSchacht: 0
   playSole1: 0
+  playSole1Badewannen: 0
   playSole2: 0
   playSole3WPBahnsteig: 0
   playSole3WPBewetterung: 0
@@ -7508,6 +7510,7 @@ MonoBehaviour:
   audiosEntryArea: {fileID: 11400000, guid: 139b6e1bad73fe2418d03c4686441eaa, type: 2}
   audiosEntryAreaTriggerSchacht: {fileID: 11400000, guid: 42aac5037418e734f95807b1b03c6deb, type: 2}
   audiosSole1: {fileID: 11400000, guid: 8a82036e76e1212418f25d76c2b11910, type: 2}
+  audiosSole1Badewannen: {fileID: 0}
   audiosSole2: {fileID: 11400000, guid: 2faebea999a8ecf4ab4cf3f2a6a57f02, type: 2}
   audiosSole3WPBahnsteig: {fileID: 11400000, guid: e293681608c7a2640a14ba9e140abf33, type: 2}
   audiosSole3WPBewetterung: {fileID: 11400000, guid: 892465c2e6fa71f4db27633136469d29, type: 2}
@@ -7524,6 +7527,7 @@ MonoBehaviour:
   playEntryArea: 0
   playSchacht: 0
   playSole1: 0
+  playSole1Badewannen: 0
   playSole2: 0
   playSole3WPBahnsteig: 0
   playSole3WPBewetterung: 0
@@ -7703,6 +7707,7 @@ MonoBehaviour:
   bewetterung: {fileID: 1430700512}
   ovmine: {fileID: 1456795165}
   viewpoint: {fileID: 5456735634192201560}
+  speechManager: {fileID: 28434980}
   wps1ViewpointBtn: {fileID: 0}
   wps2ViewpointBtn: {fileID: 0}
   wps3ViewpointBtn: {fileID: 0}
@@ -16626,6 +16631,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1091697645}
     - target: {fileID: 6024920555482340309, guid: cda8a293f1b440243ad8e0d6333170c5, type: 3}
+      propertyPath: movementEnd.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024920555482340309, guid: cda8a293f1b440243ad8e0d6333170c5, type: 3}
+      propertyPath: movementStart.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024920555482340309, guid: cda8a293f1b440243ad8e0d6333170c5, type: 3}
+      propertyPath: movementEnd.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024920555482340309, guid: cda8a293f1b440243ad8e0d6333170c5, type: 3}
       propertyPath: movementEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1119981093}
@@ -16634,8 +16651,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1119981093}
     - target: {fileID: 6024920555482340309, guid: cda8a293f1b440243ad8e0d6333170c5, type: 3}
+      propertyPath: movementEnd.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1119981093}
+    - target: {fileID: 6024920555482340309, guid: cda8a293f1b440243ad8e0d6333170c5, type: 3}
       propertyPath: movementStart.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024920555482340309, guid: cda8a293f1b440243ad8e0d6333170c5, type: 3}
+      propertyPath: movementStart.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6024920555482340309, guid: cda8a293f1b440243ad8e0d6333170c5, type: 3}
       propertyPath: movementStart.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -16646,8 +16671,48 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1119981093}
     - target: {fileID: 6024920555482340309, guid: cda8a293f1b440243ad8e0d6333170c5, type: 3}
+      propertyPath: movementStart.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1119981093}
+    - target: {fileID: 6024920555482340309, guid: cda8a293f1b440243ad8e0d6333170c5, type: 3}
+      propertyPath: movementEnd.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024920555482340309, guid: cda8a293f1b440243ad8e0d6333170c5, type: 3}
       propertyPath: movementEnd.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetCurrentWaypoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024920555482340309, guid: cda8a293f1b440243ad8e0d6333170c5, type: 3}
+      propertyPath: movementEnd.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: PlayViewpointtTalking
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024920555482340309, guid: cda8a293f1b440243ad8e0d6333170c5, type: 3}
+      propertyPath: movementStart.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024920555482340309, guid: cda8a293f1b440243ad8e0d6333170c5, type: 3}
+      propertyPath: movementStart.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: PlayViewportTalking
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024920555482340309, guid: cda8a293f1b440243ad8e0d6333170c5, type: 3}
+      propertyPath: movementEnd.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: CoalmineWaypointManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024920555482340309, guid: cda8a293f1b440243ad8e0d6333170c5, type: 3}
+      propertyPath: movementEnd.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024920555482340309, guid: cda8a293f1b440243ad8e0d6333170c5, type: 3}
+      propertyPath: movementStart.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: CoalmineWaypointManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024920555482340309, guid: cda8a293f1b440243ad8e0d6333170c5, type: 3}
+      propertyPath: movementEnd.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024920555482340309, guid: cda8a293f1b440243ad8e0d6333170c5, type: 3}
+      propertyPath: movementStart.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6024920555482340331, guid: cda8a293f1b440243ad8e0d6333170c5, type: 3}
       propertyPath: m_Name

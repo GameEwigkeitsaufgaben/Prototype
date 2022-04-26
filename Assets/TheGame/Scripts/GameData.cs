@@ -25,8 +25,32 @@ public static class GameData
     public static float maxBGVolumeInsta = 0.8f;
     public static float overlayVolumeInsta = 0.5f;
 
-    public static bool progressWithAdmin = false; //if start chapter with admin pwd true, else false;
+    //Talkinglist Mine: TL-TalkingList, EA-EntryArea, LWC-Longwallcutter
+    public const string NameTLMineEACave = "Audios100160CaveEntryArea";
+    public const string NameTLMineEATriggerSchacht = "Audios100160CaveEntryAreaTriggerSchacht";
+    public const string NameTLMineIntro = "Audios100160CaveIntro";
+    public const string NameTLMineLWCBahnsteig= "Audios100160CaveLongwallCutterWpBahnsteig";
+    public const string NameTLMineLWCCutter = "Audios100160CaveLongwallCutterWpLongwallCutter";
+    public const string NameTLMineS1Cave = "Audios100160CaveSole1";
+    public const string NameTLMineS2VpBadewanne = "Audios100160CaveSole2wpBadewanne";
+    public const string NameTLMineS2Cave = "Audios100160CaveSole2";
+    public const string NameTLMineS3Bahnsteig = "Audios100160CaveSole3wpBahnsteig";
+    public const string NameTLMineS3Bewetterung = "Audios100160CaveSole3wpBewetterung";
+    public const string NameTLMineS3Cave = "Audios100160CaveSole3wpCave";
+    public const string NameTLMineS3OvMine = "Audios100160CaveSole3wpOVMine";
+    public const string NameTLMineS3TrainrideIn = "Audios100160CaveTrainRideIn";
+    public const string NameTLMineS3TrainrideOut = "Audios100160CaveTrainRideOut";
 
+    //Talkinglist Museum: TL-TalkingList
+    public const string NameTLMuseumInfoArrival = "Audios100170MuseumInfoArrival";
+    public const string NameTLMuseumOutro = "Audios100170MuseumOutro";
+    public const string NameTLMuseumCarbonificationPeriod = "Audios100170MuseumCarbonifictionPeriod";
+    public const string NameTLMuseumCoalification = "Audios100170MuseumCoalification";
+    public const string NameTLMuseumHistoryMining = "Audios100170MuseumHistoryMining";
+    public const string NameTLMuseumMinerEquipment = "Audios100170MuseumMinerEquipment";
+
+
+    public static bool progressWithAdmin = false; //if start chapter with admin pwd true, else false;
 
     //Unlock Posts data; is Introvideo played as a whole, than next post is to unlock
     public static bool introVideoPlayedOnce = false;
