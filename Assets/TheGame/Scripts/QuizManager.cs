@@ -241,7 +241,5 @@ public class QuizManager : MonoBehaviour
                 textMinerFeedback.transform.parent.gameObject.SetActive(true);
                 break;
         }
-
-
     }
 }
