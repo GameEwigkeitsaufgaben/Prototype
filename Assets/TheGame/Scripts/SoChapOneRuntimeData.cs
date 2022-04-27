@@ -18,8 +18,13 @@ public class SoChapOneRuntimeData : ScriptableObject
     public MuseumWaypoints currentMuseumWaypoint = MuseumWaypoints.WP0;
     public bool isMinerDone, isMythDone, isCoalifiationDone, isCarbonificationPeriodDone;
 
+    [Header("Quiz 119")]
+    public MinerFeedback quizMinerFeedback;
+
     [Header("GameProgress")]
     public bool video115Done, interaction116Done, interaction117Done, quiz119Done;
+
+
 
     [Header("General Settings")]
     public bool musicOn = true;

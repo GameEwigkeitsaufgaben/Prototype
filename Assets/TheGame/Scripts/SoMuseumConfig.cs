@@ -9,5 +9,4 @@ public class SoMuseumConfig : ScriptableObject
 
     [TextArea(10,100)]
     public string textmyth, textCentury13,textCentury16,textCentury19, textCentury21;
-
 }

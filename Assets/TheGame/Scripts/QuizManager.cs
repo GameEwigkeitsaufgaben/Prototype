@@ -3,14 +3,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+public enum MinerFeedback
+{
+    Idle,
+    Correct,
+    Incorrect
+}
+
 public class QuizManager : MonoBehaviour
 {
     private const string generalKeyOverlay = "Overlay1110";
     private const string btnTextCheckAnswers = "Prüfen";
     private const string btnTextNextAnswer = "Weiter";
-
-    public SoSfx sfx;
-    public SoChapOneRuntimeData runtimeData;
 
     public Canvas endCanvas, quizCanvas;
     public VerticalLayoutGroup answerButtonGroup;
@@ -22,6 +26,8 @@ public class QuizManager : MonoBehaviour
     public Text uiSimpleProgressView;
     public Image uiPostImage;
     public Button uiButtonNext;
+    public Image imgMinerFeedback;
+    public Text textMinerFeedback;
     public AudioSource audioAnswerCorrect, audioWrongAudio;
     public bool randomizeQuestions = false;
     public SwitchSceneManager switchScene;
@@ -30,14 +36,22 @@ public class QuizManager : MonoBehaviour
     public List<QuizQuestionItem> questionItemList = new List<QuizQuestionItem>();
     public List<QuizQuestionItem> questionItemListshuffled;
 
-    int currentProgressIndex = 0;
-    int points = 0;
+    private int currentProgressIndex = 0;
+    private int points = 0;
     
-    QuizTimer quizTimer;
+    private QuizTimer quizTimer;
+
+    [Header("Assigned at runtime")]
+    [SerializeField] private SoSfx sfx;
+    [SerializeField] private SoChapOneRuntimeData runtimeData;
+    [SerializeField] private SoQuizConfig quizConfig;
+
 
     private void Awake()
     {
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
+        sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
+        quizConfig = Resources.Load<SoQuizConfig>(GameData.NameConfigQuiz);
     }
 
     // Start is called before the first frame update
@@ -67,7 +81,7 @@ public class QuizManager : MonoBehaviour
             SetupQuestion(currentProgressIndex);
         }
 
-        uiSimpleProgressView.text = "FRAGE\n1 von " + questionItemListshuffled.Count;
+        uiSimpleProgressView.text = "FRAGE 1 von " + questionItemListshuffled.Count;
         uiProgressBar.maxValue = questionItemListshuffled.Count;
         uiProgressBar.value = 1;
 
@@ -95,10 +109,12 @@ public class QuizManager : MonoBehaviour
             {
                 uiPoints.text = points.ToString();
                 audioAnswerCorrect.Play();
+                runtimeData.quizMinerFeedback = MinerFeedback.Correct;
             }
             else
             {
                 audioWrongAudio.Play();
+                runtimeData.quizMinerFeedback = MinerFeedback.Incorrect;
             }
 
             foreach (Transform child in answerButtonGroup.transform)
@@ -135,6 +151,7 @@ public class QuizManager : MonoBehaviour
 
     void SetupQuestion(int progressIndex)
     {
+        runtimeData.quizMinerFeedback = MinerFeedback.Idle;
         uiQuestion.text = questionItemListshuffled[progressIndex].GetQuestionText();
         uiPostImage.sprite = questionItemListshuffled[progressIndex].GetPostImage();
         uiButtonNext.GetComponentInChildren<Text>().text = btnTextCheckAnswers;
@@ -206,5 +223,25 @@ public class QuizManager : MonoBehaviour
             quizTimer.ResetTimeRunOut();
             LoadNextQuestion();
         }
+
+        switch (runtimeData.quizMinerFeedback)
+        {
+            case MinerFeedback.Idle:
+                imgMinerFeedback.sprite = quizConfig.minerFeedbackIdle;
+                textMinerFeedback.transform.parent.gameObject.SetActive(false);
+                break;
+            case MinerFeedback.Correct:
+                imgMinerFeedback.sprite = quizConfig.minerFeedbackCorrect;
+                textMinerFeedback.text = "Richtig, \n echt super!";
+                textMinerFeedback.transform.parent.gameObject.SetActive(true);
+                break;
+            case MinerFeedback.Incorrect:
+                imgMinerFeedback.sprite = quizConfig.minerFeedbackIncorrect;
+                textMinerFeedback.text = "Oh nein, \n richtig wäre ... ";
+                textMinerFeedback.transform.parent.gameObject.SetActive(true);
+                break;
+        }
+
+
     }
 }

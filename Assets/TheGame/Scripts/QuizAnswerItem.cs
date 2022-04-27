@@ -15,11 +15,14 @@ public class QuizAnswerItem
     VerticalLayoutGroup buttonGroup;
     public bool longAnswer;
 
+    SoChapOneRuntimeData runtimeData;
+
     public int timeToAnswerInSec;
 
     public QuizAnswerItem() 
     {
         myQuizConfig = Resources.Load<SoQuizConfig>(pathToConfig);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
     }
 
     public QuizAnswerItem(VerticalLayoutGroup parent) 
@@ -96,11 +99,13 @@ public class QuizAnswerItem
         {
             Color c = btn.GetComponent<Image>().color;
             btn.GetComponent<Image>().color = myQuizConfig.incorrect;
+            
             //btn.GetComponentInChildren<Text>().color = new Vector4(c.r, c.g, c.b, 0.4f);
         }
         else
         {
             btn.GetComponent<Image>().color = myQuizConfig.correct;
+           
         }
     }
 

@@ -9,6 +9,7 @@ public static class GameData
     public const string NameConfigMuseum = "ConfigMuseum";
     public const string NameGameIcons = "Icons";
     public const string NameGameColors = "ConfigGameColors";
+    public static string NameConfigQuiz = "QuizChapterOneConfig";
 
     public const string NamePost116 = "Post116";
     public const string NamePost117 = "Post117";
@@ -90,7 +91,6 @@ public static class GameData
         "Verbreitung, Vermietung, Verleihung, öffentlichen Zugänglichmachung oder andere Nutzung bedarf der ausdrücklichen, schriftlichen Zustimmung von Frau Susanne Meerwald-Stadler.  " +
         "Das Herunterladen der in diesem Internetangebot enthaltenen Informationen ist grundsätzlich nicht gestattet, sofern dies nicht ausdrücklich abweichend kenntlich gemacht wird.";
 
-  
 
     public static void PrintState()
     {
