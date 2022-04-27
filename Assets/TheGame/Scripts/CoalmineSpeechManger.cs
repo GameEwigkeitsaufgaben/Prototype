@@ -10,7 +10,7 @@ public class CoalmineSpeechManger : MonoBehaviour
         playCaveIntro,
         playEntryArea,
         playSchacht,
-        playSole1, playSole1Badewannen,
+        playSole1, playSole2Badewannen,
         playSole2,
         playSole3WPBahnsteig, playSole3WPBewetterung, playSole3WPCave, playSole3WPOVMine,
         playTrainRideIn, playTrainRideOut,
@@ -209,10 +209,10 @@ public class CoalmineSpeechManger : MonoBehaviour
             currentList = speakSole1;
             playSole1 = false;
         }
-        else if (playSole1Badewannen)
+        else if (playSole2Badewannen)
         {
             currentList = speakSole1Badewannen;
-            playSole1Badewannen = false;
+            playSole2Badewannen = false;
         }
         else if (playSole2)
         {

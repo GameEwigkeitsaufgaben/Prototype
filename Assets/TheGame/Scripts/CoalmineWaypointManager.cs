@@ -28,6 +28,8 @@ public enum PathWaypoints
 public class CoalmineWaypointManager : MonoBehaviour
 {  
     public splineMove playerSplineMove;
+    public splineMove characterSplineMove;
+
     public PathManager pathS1CaveToViewpoint, pathS2CaveToViewpoint, pathS3CaveToViewpoint;
     public PathManager pathS3ViewpointToBewetterung, pathS3ViewpointToBahnsteig, pathS3ViewpointToOVMine, 
                        pathS3BahnsteigToOVMine, pathS3BewetterungToBahnsteig, pathS3BewetterungToOVMine;
@@ -76,6 +78,8 @@ public class CoalmineWaypointManager : MonoBehaviour
     private void Start()
     {
         myPlayer = playerSplineMove.gameObject.GetComponent<Player>();
+        
+
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
         
         if (myPlayer.playerInCave)
@@ -245,8 +249,6 @@ public class CoalmineWaypointManager : MonoBehaviour
             bewetterungBtn.interactable = caveBtn.interactable = interactable;
     }
 
-
-
     public void ReloadWPBahnsteig()
     {
         currentWP = MineWayPoints.reloadBahnsteig;
@@ -258,7 +260,7 @@ public class CoalmineWaypointManager : MonoBehaviour
         switch (currentWP)
         {
             case MineWayPoints.viewpoint:
-                if (GameData.currentStopSohle == (int)CoalmineStop.Sole1) speechManager.playSole1Badewannen = true;
+                if (GameData.currentStopSohle == (int)CoalmineStop.Sole2) speechManager.playSole2Badewannen = true;
                 break;
             case MineWayPoints.viewpointBewetterung:
                 speechManager.playSole3WPBewetterung = true;
@@ -284,7 +286,6 @@ public class CoalmineWaypointManager : MonoBehaviour
             wps2ViewpointBtn.gameObject.SetActive(true);
             wps1ViewpointBtn.gameObject.SetActive(true);
             myPlayer.SetPlayerRotation(0f,false);
-           
         }
         else if (currentWP == MineWayPoints.viewpoint)
         {
@@ -338,7 +339,6 @@ public class CoalmineWaypointManager : MonoBehaviour
             ChangeS3WPRotations(180.0f, -33.0f, 0.0f, -250.0f);
 
             runtimeData.sole3GebaeudeDone = true;
-
         }
         else if (currentWP == MineWayPoints.insideCave)
         {
@@ -387,6 +387,9 @@ public class CoalmineWaypointManager : MonoBehaviour
 
         playerSplineMove.reverse = false;
         playerSplineMove.StartMove();
+
+        //characterSplineMove.reverse = false;
+        //characterSplineMove.StartMove();
     }
 
     public void MoveIn()
@@ -399,6 +402,9 @@ public class CoalmineWaypointManager : MonoBehaviour
 
         playerSplineMove.reverse = true;
         playerSplineMove.StartMove();
+
+       // characterSplineMove.reverse = true;
+        //characterSplineMove.StartMove();
     }
 
     public void MoveToBewetterung()
