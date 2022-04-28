@@ -10,6 +10,8 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     private const int MaxItemsRoundProtection = 6;
     private const int MaxItemsRoundSpectialTask = 10;
 
+
+    public MinerEquipmentRound roundEssential, roundProtection, roundSpecialTask;
     public Animator anim;
     public AnimationClip noHelmAnim, noMaskAnim, noLightAnim, badJobAnim, goodJobAnim;
     public MuseumMinerEquipmentItem[] items;
@@ -22,10 +24,10 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     public Sprite sNoHelm, sNoLamp, sNoMask, s4, minerGoodJob, minerBadJob;
     public Button btnCheckEquipment;
     
-    private string 
-        round1 = "Drag & Drop: Ziehe 3 überlebensnotwendige Dinge auf den Bergmann.", 
-        round2 = "Drag & Drop: Ziehe ihm 3 Dinge an die direkt vor schweren Verletzungen schützen.", 
-        round3 = "Drag & Drop: Wofür braucht der Bergmann die restlichen Dinge? Ziehe ihn fertig an.";
+   // private string 
+   //     round1 = "Drag & Drop: Ziehe 3 überlebensnotwendige Dinge auf den Bergmann.", 
+   //     round2 = "Drag & Drop: Ziehe ihm 3 Dinge an die direkt vor schweren Verletzungen schützen.", 
+   //     round3 = "Drag & Drop: Wofür braucht der Bergmann die restlichen Dinge? Ziehe ihn fertig an.";
     private string headingR1 = "Runde 1", headingR2 = "Runde 2", headingR3 = "Runde 3";
 
     public AudioClip autsch, lichtaus, husten, badJobClip, goodJobClip;
@@ -38,6 +40,14 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        roundEssential.nbrItemsOnMiner = MaxItemsRoundEssential;
+        roundProtection.nbrItemsOnMiner = MaxItemsRoundProtection;
+        roundSpecialTask.nbrItemsOnMiner = MaxItemsRoundSpectialTask;
+
+        roundEssential.roundActive = true;
+        roundProtection.roundActive = false;
+        roundSpecialTask.roundActive = false;
+
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
         itemsOnMiner = 0;
         currentRound = EquipmentRound.Essential;
@@ -46,7 +56,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
         audioSrc.playOnAwake = false;
         SetUiTooltip();
         btnConfirmText = btnCheckEquipment.GetComponentInChildren<Text>();
-        uiInfoText.text = round1;
+        //uiInfoText.text = round1;
     }
 
     private void SetUiTooltip()
@@ -74,12 +84,21 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
         {
             case EquipmentRound.Essential:
                 maxItemsReached = itemsOnMiner == MaxItemsRoundEssential;
+                roundEssential.roundActive = true;
+                roundProtection.roundActive = false;
+                roundSpecialTask.roundActive = false;
                 break;
             case EquipmentRound.Protection:
                 maxItemsReached = itemsOnMiner == MaxItemsRoundProtection;
+                roundEssential.roundActive = false;
+                roundProtection.roundActive = true;
+                roundSpecialTask.roundActive = false;
                 break;
             case EquipmentRound.SpecialTask:
                 maxItemsReached = itemsOnMiner == MaxItemsRoundSpectialTask;
+                roundEssential.roundActive = false;
+                roundProtection.roundActive = false;
+                roundSpecialTask.roundActive = true;
                 break;
         }
 
@@ -154,7 +173,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     {
         itemsOnMiner = 6;
         currentRound = EquipmentRound.SpecialTask;
-        uiInfoText.text = round3;
+       // uiInfoText.text = round3;
         headingRound.text = headingR3;
         btnConfirmText.text = "Ab in die Mine!";
 
@@ -279,7 +298,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     {
         itemsOnMiner = 3;
         currentRound = EquipmentRound.Protection;
-        uiInfoText.text = round2;
+       // uiInfoText.text = round2;
         headingRound.text = headingR2;
 
         foreach (MuseumMinerEquipmentItem i in items)

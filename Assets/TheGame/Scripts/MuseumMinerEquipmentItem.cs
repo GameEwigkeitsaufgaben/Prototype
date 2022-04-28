@@ -47,14 +47,13 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
     string descScarf = "Das Halstuch kann zur Not als Mundschutz dienen und ist angenehm zu tragen.";
     string descGloves = "Die Handschuhe schützen die Hände bei schweren Arbeiten vor Blasen und Schwielen.";
 
-void Start()
+    private void Start()
     {
         myManager = FindObjectOfType<ManagerMuseumMinerEquipment>();
         origPosOnTable = gameObject.transform.position; //every instance of class is reference type and any instance of structure is value type.
         
         myConifg = Resources.Load<SoMinerEquipment>(GameData.NameConfigMinerEquiment);
         myDragRectTransform = GetComponent<RectTransform>();
-
 
         //Get the parent Canvas Obj, for dragging mechanics - needed for scalefactor in differenct screen spaces! 
         GameObject tempCanvasItem = gameObject; //start with gameobject
@@ -105,7 +104,7 @@ void Start()
                 individualDesc = descCard;
                 break;
             default:
-                individualDesc = "Kein Beschreibung vorhanden";
+                individualDesc = "Keine Beschreibung vorhanden";
                 break;
         }
     }
@@ -163,7 +162,7 @@ void Start()
 
     public void SetMiner(GameObject miner)
     {
-        miner = miner;
+        this.miner = miner;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
