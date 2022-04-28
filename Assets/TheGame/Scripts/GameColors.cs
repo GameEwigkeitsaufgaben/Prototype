@@ -14,4 +14,6 @@ public static class GameColors
 
     public static Color discInteractonDoneColor = new Color32(0, 197, 26, a);
 
+    public static Color showBackgroundInfoColor = new Color32(223, 202, 183, a);
+
 }
