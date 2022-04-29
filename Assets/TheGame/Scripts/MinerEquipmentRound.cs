@@ -8,7 +8,7 @@ public class MinerEquipmentRound : MonoBehaviour
 {
     public Image imgHideRound;
     public TextMeshProUGUI tmpNbrItemsToDropOnMiner;
-    public int nbrItemsOnMiner;
+    //public int nbrItemsOnMiner;
     public bool roundActive; //only one round can be active to one time;
     public bool change;
 
@@ -16,6 +16,7 @@ public class MinerEquipmentRound : MonoBehaviour
     void Start()
     {
         change = roundActive;
+        ShowRound();
     }
 
     // Update is called once per frame
@@ -23,16 +24,23 @@ public class MinerEquipmentRound : MonoBehaviour
     {
         if (change != roundActive)
         {
-            if (roundActive)
-            {
-                imgHideRound.gameObject.SetActive(false);
-            }
-            else
-            {
-                imgHideRound.gameObject.SetActive(true);
-            }
+            ShowRound();
+
+            change = roundActive;
         }
 
-        tmpNbrItemsToDropOnMiner.text = nbrItemsOnMiner.ToString(); 
+      //  tmpNbrItemsToDropOnMiner.text = nbrItemsOnMiner.ToString(); 
+    }
+
+    private void ShowRound()
+    {
+        if (roundActive)
+        {
+            imgHideRound.gameObject.SetActive(false);
+        }
+        else
+        {
+            imgHideRound.gameObject.SetActive(true);
+        }
     }
 }

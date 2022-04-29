@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
-    private const string COScanarea = "Scanarea";
+    //private const string COScanarea = "Scanarea";
     private const string COMiner = "MinerImg";
+    private const string EmptyString = "";
     public MinerEquipmentItem equipmentItem; //Enum
     public SnapetTo snapedTo; //Enum
     public SnapetTo previous;
@@ -167,6 +168,8 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (!myManager.IsDragItemOk()) return;
+        
         Debug.Log("Begin Drag");
         myAudioSrc.clip = myConifg.beginDrag;
         myAudioSrc.Play();
@@ -174,6 +177,8 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (!myManager.IsDragItemOk()) return;
+
         Debug.Log("End Drag");
         Debug.Log("Event data  +++++++++++++++++++++ " + eventData.pointerEnter.name + " " + equipmentItem);
 
@@ -205,7 +210,7 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
             if (equipmentItem == MinerEquipmentItem.Handschuhe) gameObject.transform.parent.GetComponent<MuseumHandschuhe>().ResetBothToTable();
         }
 
-
+        
         if (positionChanged)
         {
             previous = snapedTo;
@@ -214,10 +219,14 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (!myManager.IsDragItemOk()) return;
+
         Debug.Log("Drag");
         myDragRectTransform.anchoredPosition += eventData.delta / myParentCanvas.scaleFactor; //important when using screen space
+        
     }
 
+    //Snapt to Miner if collision is detected, Snapet to Table if item exits collision miner  ------------
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.name == COMiner)
@@ -235,23 +244,6 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
                 miner = collision.gameObject;
             }
         }
-        else if (collision.name == COScanarea)
-        {
-            if (uiDescItems == null) uiDescItems = collision.transform.parent.transform.parent.GetComponentInChildren<Text>();
-
-            Debug.Log("Set it to scanarea");
-            uiDescItems.text = individualDesc;
-        }
-    }
-
-    public void ShowTooltip()
-    {
-       uiTextTooltip.text = individualDesc;
-    }
-
-    public void HideTooltip()
-    {
-        uiTextTooltip.text = "";
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -265,10 +257,16 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
                 gameObject.transform.parent.GetComponent<MuseumHandschuhe>().SetBothSnapedToTable();
             }
         }
-        else if (collision.name == COScanarea)
-        {
-            Debug.Log("Set it to scanarea ");
-            uiDescItems.text = "";
-        }
+    }
+    //------------------------------------------------------------------------------------------ ------------
+
+    public void ShowTooltip()
+    {
+       uiTextTooltip.text = individualDesc;
+    }
+
+    public void HideTooltip()
+    {
+        uiTextTooltip.text = EmptyString;
     }
 }

@@ -6,43 +6,49 @@ using TMPro;
 
 public class ManagerMuseumMinerEquipment : MonoBehaviour
 {
-    private const int MaxItemsRoundEssential = 3;
-    private const int MaxItemsRoundProtection = 6;
-    private const int MaxItemsRoundSpectialTask = 10;
+    private const int MaxItemsOnMinerRoundEssential = 3;
+    private const int MaxItemsOnMinerRoundProtection = 6;
+    private const int MaxItemsOnMinerRoundSpectialTask = 10;
 
-
+    //3 rounds with different question
     public MinerEquipmentRound roundEssential, roundProtection, roundSpecialTask;
+    public EquipmentRound currentRound;
+
+    //worstcase scenarios in shown bubble
     public Animator anim;
     public AnimationClip noHelmAnim, noMaskAnim, noLightAnim, badJobAnim, goodJobAnim;
+    public Image denkbubbleWorstcase;
+    public Sprite sNoHelm, sNoLamp, sNoMask, s4, minerGoodJob, minerBadJob;
+    private IEnumerator worstcasesCoroutine, goodJobCoroutine, badJobCoroutine;
+
+    //single items hold in lists
     public MuseumMinerEquipmentItem[] items;
     public int itemsOnMiner;
-    public EquipmentRound currentRound;
-    public Image denkbubbleWorstcase;
     private Dictionary<MinerEquipmentItem, MuseumMinerEquipmentItem> listItemsOnMiner  = new Dictionary<MinerEquipmentItem, MuseumMinerEquipmentItem>();
     private List<MinerEquipmentItem> plainList = new List<MinerEquipmentItem>();
-    private IEnumerator worstcasesCoroutine, goodJobCoroutine, badJobCoroutine;
-    public Sprite sNoHelm, sNoLamp, sNoMask, s4, minerGoodJob, minerBadJob;
+
     public Button btnCheckEquipment;
-    
-   // private string 
-   //     round1 = "Drag & Drop: Ziehe 3 überlebensnotwendige Dinge auf den Bergmann.", 
-   //     round2 = "Drag & Drop: Ziehe ihm 3 Dinge an die direkt vor schweren Verletzungen schützen.", 
-   //     round3 = "Drag & Drop: Wofür braucht der Bergmann die restlichen Dinge? Ziehe ihn fertig an.";
-    private string headingR1 = "Runde 1", headingR2 = "Runde 2", headingR3 = "Runde 3";
 
     public AudioClip autsch, lichtaus, husten, badJobClip, goodJobClip;
-    public TextMeshProUGUI headingRound, textRound;
+    //public TextMeshProUGUI headingRound, textRound;
+    public TMP_Text uiNbrItemsEssential, uiNbrItemProtection, uiNbrItemsSpecialTask, btnText;
     private AudioSource audioSrc;
-    public Text uiTooltipText, uiInfoText, btnConfirmText;
+    public Text uiTooltipText;
     bool runningCorouine = false;
     private SoChapOneRuntimeData runtimeData;
 
     // Start is called before the first frame update
     void Start()
     {
-        roundEssential.nbrItemsOnMiner = MaxItemsRoundEssential;
-        roundProtection.nbrItemsOnMiner = MaxItemsRoundProtection;
-        roundSpecialTask.nbrItemsOnMiner = MaxItemsRoundSpectialTask;
+        Debug.Log("go name " + uiNbrItemsEssential.name);
+        Debug.Log("go name + val " + uiNbrItemsEssential.text);
+        //uiNbrItemsEssential.text = "1";
+
+        //roundEssential.nbrItemsOnMiner = MaxItemsOnMinerRoundEssential;
+        //roundProtection.nbrItemsOnMiner = MaxItemsOnMinerRoundProtection - MaxItemsOnMinerRoundEssential;
+        //roundSpecialTask.nbrItemsOnMiner = MaxItemsOnMinerRoundSpectialTask - MaxItemsOnMinerRoundProtection;
+
+        currentRound = EquipmentRound.Essential;
 
         roundEssential.roundActive = true;
         roundProtection.roundActive = false;
@@ -50,13 +56,23 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
 
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
         itemsOnMiner = 0;
-        currentRound = EquipmentRound.Essential;
+       
         denkbubbleWorstcase.GetComponent<Image>().preserveAspect = true;
         audioSrc = gameObject.AddComponent<AudioSource>();
         audioSrc.playOnAwake = false;
         SetUiTooltip();
-        btnConfirmText = btnCheckEquipment.GetComponentInChildren<Text>();
+       // btnConfirmText = btnCheckEquipment.GetComponentInChildren<Text>();
         //uiInfoText.text = round1;
+    }
+
+    public bool IsDragItemOk()
+    {
+        Debug.Log("items on miner " + itemsOnMiner + " current raound: " + currentRound  );
+        //itemsOnMiner start value is 0;
+        if (itemsOnMiner < MaxItemsOnMinerRoundEssential && currentRound == EquipmentRound.Essential) return true;
+        else if (itemsOnMiner < MaxItemsOnMinerRoundProtection && currentRound == EquipmentRound.Protection) return true;
+        else if (itemsOnMiner < MaxItemsOnMinerRoundSpectialTask && currentRound == EquipmentRound.SpecialTask) return true;
+        else return false;
     }
 
     private void SetUiTooltip()
@@ -79,26 +95,23 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     void Update()
     {
         bool maxItemsReached = false;
-
+        
         switch (currentRound)
         {
             case EquipmentRound.Essential:
-                maxItemsReached = itemsOnMiner == MaxItemsRoundEssential;
-                roundEssential.roundActive = true;
-                roundProtection.roundActive = false;
-                roundSpecialTask.roundActive = false;
+                uiNbrItemsEssential.text = (MaxItemsOnMinerRoundEssential - itemsOnMiner).ToString();
+                maxItemsReached = itemsOnMiner == MaxItemsOnMinerRoundEssential;
+                SetRoundsVisible(true, false, false);
                 break;
             case EquipmentRound.Protection:
-                maxItemsReached = itemsOnMiner == MaxItemsRoundProtection;
-                roundEssential.roundActive = false;
-                roundProtection.roundActive = true;
-                roundSpecialTask.roundActive = false;
+                uiNbrItemProtection.text = (MaxItemsOnMinerRoundProtection - itemsOnMiner).ToString();
+                maxItemsReached = itemsOnMiner == MaxItemsOnMinerRoundProtection;
+                SetRoundsVisible(false, true, false);
                 break;
             case EquipmentRound.SpecialTask:
-                maxItemsReached = itemsOnMiner == MaxItemsRoundSpectialTask;
-                roundEssential.roundActive = false;
-                roundProtection.roundActive = false;
-                roundSpecialTask.roundActive = true;
+                uiNbrItemsSpecialTask.text = (MaxItemsOnMinerRoundSpectialTask - itemsOnMiner).ToString();
+                maxItemsReached = itemsOnMiner == MaxItemsOnMinerRoundSpectialTask;
+                SetRoundsVisible(false, false, true);
                 break;
         }
 
@@ -115,6 +128,14 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
         SetTableItemsInactive(maxItemsReached);
     }
 
+    private void SetRoundsVisible(bool essential, bool protection, bool spectialTask)
+    {
+        roundEssential.roundActive = essential;
+        roundProtection.roundActive = protection;
+        roundSpecialTask.roundActive = spectialTask;
+    }
+
+    //called from Inspector button
     public void CheckRound()
     {
         //Create List which items are snaped to the miner
@@ -134,7 +155,6 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
             case EquipmentRound.Essential:
                 if (plainList.Contains(MinerEquipmentItem.Helm) && plainList.Contains(MinerEquipmentItem.Atemmaske) && plainList.Contains(MinerEquipmentItem.Lampe))
                 {
-                    //Set Miner Items
                     ResetToMostImportantItems();
                     goodJobCoroutine = PlayGoodJob();
                     StartCoroutine(goodJobCoroutine);
@@ -149,7 +169,6 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
             case EquipmentRound.Protection:
                 if (plainList.Contains(MinerEquipmentItem.Schienbeinschuetzer) && plainList.Contains(MinerEquipmentItem.Sicherheitsschuhe) && plainList.Contains(MinerEquipmentItem.Schutzbrille))
                 {
-                    //Set Miner Items
                     ResetToSpecialTaskItems();
                     goodJobCoroutine = PlayGoodJob();
                     StartCoroutine(goodJobCoroutine);
@@ -171,11 +190,11 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
 
     private void ResetToSpecialTaskItems()
     {
-        itemsOnMiner = 6;
+        //the items form protesction are on miner = 6
+        itemsOnMiner = MaxItemsOnMinerRoundProtection;
         currentRound = EquipmentRound.SpecialTask;
-       // uiInfoText.text = round3;
-        headingRound.text = headingR3;
-        btnConfirmText.text = "Ab in die Mine!";
+        btnText.text = "Zur Mine!";
+        //btnConfirmText.text = "Ab in die Mine!";
 
         foreach (MuseumMinerEquipmentItem i in items)
         {
@@ -183,7 +202,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
             {
                 i.ResetToMiner();
                 i.GetComponent<Image>().raycastTarget = false;
-                i.GetComponent<Image>().color = Color.yellow;
+               // i.GetComponent<Image>().color = Color.yellow;
             }
             else
             {
@@ -208,12 +227,12 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
 
     IEnumerator PlayGoodJob()
     {
-        headingRound.gameObject.SetActive(false);
-        uiInfoText.gameObject.SetActive(false);
-        btnConfirmText.gameObject.SetActive(false);
+       // headingRound.gameObject.SetActive(false);
+       // uiInfoText.gameObject.SetActive(false);
+       // btnConfirmText.gameObject.SetActive(false);
 
         runningCorouine = true;
-
+        Debug.Log("GOOOOOOOOOOOOOOOOOOOOOOOD");
         denkbubbleWorstcase.transform.parent.gameObject.SetActive(true);
         float length = goodJobAnim.length;
         anim.Play("GoodJob");
@@ -225,9 +244,9 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
         denkbubbleWorstcase.transform.parent.gameObject.SetActive(false);
 
         runningCorouine = false;
-        headingRound.gameObject.SetActive(true);
-        uiInfoText.gameObject.SetActive(true);
-        btnConfirmText.gameObject.SetActive(true);
+        //headingRound.gameObject.SetActive(true);
+        //uiInfoText.gameObject.SetActive(true);
+        //btnConfirmText.gameObject.SetActive(true);
     }
     
     IEnumerator PlayWorstcases(bool helm, bool mask, bool lamp)
@@ -296,10 +315,8 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
 
     private void ResetToMostImportantItems()
     {
-        itemsOnMiner = 3;
+        itemsOnMiner = MaxItemsOnMinerRoundEssential;
         currentRound = EquipmentRound.Protection;
-       // uiInfoText.text = round2;
-        headingRound.text = headingR2;
 
         foreach (MuseumMinerEquipmentItem i in items)
         {
@@ -307,7 +324,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
             {
                 i.ResetToMiner();
                 i.GetComponent<Image>().raycastTarget = false;
-                i.GetComponent<Image>().color = Color.yellow;
+                //i.GetComponent<Image>().color = Color.yellow;
             }
             else
             {
