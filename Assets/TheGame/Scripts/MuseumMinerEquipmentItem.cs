@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -6,9 +5,9 @@ using TMPro;
 
 public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
-    //private const string COScanarea = "Scanarea";
     private const string COMiner = "MinerImg";
-    private const string EmptyString = "";
+    private const string plainTextEmptyString = "";
+    private const string plainTextNoDescription = "Keine Beschreibung vorhanden";
     public MinerEquipmentItem equipmentItem; //Enum
     public SnapetTo snapedTo; //Enum
     public SnapetTo previous;
@@ -26,15 +25,15 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
     
     private Canvas myParentCanvas;
     private RectTransform myDragRectTransform;
-    private Text uiDescItems;
+    //private Text uiDescItems;
 
     private bool positionChanged = false;
-    //private Texture2D lampTexture;
     private SoMinerEquipment myConifg;
-
-    //private GameObject handschuhLeft = null, handschuhRight = null;
+   
     private ManagerMuseumMinerEquipment myManager;
-    AudioSource myAudioSrc;
+    private AudioSource myAudioSrc;
+    public GameObject dragObjParent, dragObjDefaultParent, orderTopParent;
+    public bool isDragable;
 
     public TMP_Text uiTextTooltip; //set for every item in managermuseumminerequipment
 
@@ -53,9 +52,12 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
     {
         myManager = FindObjectOfType<ManagerMuseumMinerEquipment>();
         origPosOnTable = gameObject.transform.position; //every instance of class is reference type and any instance of structure is value type.
+        isDragable = true;
         
         myConifg = Resources.Load<SoMinerEquipment>(GameData.NameConfigMinerEquiment);
         myDragRectTransform = GetComponent<RectTransform>();
+
+        dragObjDefaultParent = gameObject.transform.parent.transform.gameObject;
 
         //Get the parent Canvas Obj, for dragging mechanics - needed for scalefactor in differenct screen spaces! 
         GameObject tempCanvasItem = gameObject; //start with gameobject
@@ -106,7 +108,7 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
                 individualDesc = descCard;
                 break;
             default:
-                individualDesc = "Keine Beschreibung vorhanden";
+                individualDesc = plainTextNoDescription;
                 break;
         }
     }
@@ -169,19 +171,21 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (!isDragable) return;
+
         if (!myManager.IsDragItemOk()) return;
         
-        Debug.Log("Begin Drag");
+        gameObject.transform.parent = dragObjParent.transform;
         myAudioSrc.clip = myConifg.beginDrag;
         myAudioSrc.Play();
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (!isDragable) return;
         if (!myManager.IsDragItemOk()) return;
 
-        Debug.Log("End Drag");
-        Debug.Log("Event data  +++++++++++++++++++++ " + eventData.pointerEnter.name + " " + equipmentItem);
+        gameObject.transform.parent = dragObjDefaultParent.transform;
 
         positionChanged = GetHasPositionChanged();
         myAudioSrc.clip = myConifg.endDrag;
@@ -199,8 +203,6 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
 
             //if item is one handschuh, also make changes for the other handschuh
             if (equipmentItem == MinerEquipmentItem.Handschuhe) gameObject.transform.parent.GetComponent<MuseumHandschuhe>().ResetBothToMiner();
-
-
         }
         else if (snapedTo == SnapetTo.Table)
         {
@@ -210,7 +212,6 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
 
             if (equipmentItem == MinerEquipmentItem.Handschuhe) gameObject.transform.parent.GetComponent<MuseumHandschuhe>().ResetBothToTable();
         }
-
         
         if (positionChanged)
         {
@@ -220,19 +221,17 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (!isDragable) return;
         if (!myManager.IsDragItemOk()) return;
 
-        Debug.Log("Drag");
         myDragRectTransform.anchoredPosition += eventData.delta / myParentCanvas.scaleFactor; //important when using screen space
-        
     }
 
-    //Snapt to Miner if collision is detected, Snapet to Table if item exits collision miner  ------------
+    //Snapt to Miner if collision is detected, Snapet to Table if item exits collision miner Enter2D/Exit2D
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.name == COMiner)
         {
-            Debug.Log("Set it to miner " + gameObject.name);
             snapedTo = SnapetTo.Miner;
             
             if (equipmentItem == MinerEquipmentItem.Handschuhe)
@@ -251,7 +250,6 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
     {
         if (collision.name == COMiner)
         {
-            Debug.Log("Set it to table " + gameObject.name);
             snapedTo = SnapetTo.Table;
             if (equipmentItem == MinerEquipmentItem.Handschuhe)
             {
@@ -259,7 +257,6 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
             }
         }
     }
-    //------------------------------------------------------------------------------------------ ------------
 
     public void ShowTooltip()
     {
@@ -268,6 +265,26 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
 
     public void HideTooltip()
     {
-        uiTextTooltip.text = EmptyString;
+        uiTextTooltip.text = plainTextEmptyString;
+    }
+
+    private void Update()
+    {
+        if (myManager.currentRound == EquipmentRound.Protection)
+        {
+            if (solutionItemRound1)
+            {
+                isDragable = false;
+                gameObject.transform.parent = orderTopParent.transform;
+            }
+        }
+        else if (myManager.currentRound == EquipmentRound.SpecialTask)
+        {
+            if (solutionItemRound2)
+            {
+                isDragable = false;
+                gameObject.transform.parent = orderTopParent.transform;
+            }
+        }
     }
 }

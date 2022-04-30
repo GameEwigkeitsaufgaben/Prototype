@@ -27,6 +27,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     public int itemsOnMiner;
     private Dictionary<MinerEquipmentItem, MuseumMinerEquipmentItem> listItemsOnMiner  = new Dictionary<MinerEquipmentItem, MuseumMinerEquipmentItem>();
     private List<MinerEquipmentItem> plainList = new List<MinerEquipmentItem>();
+    public GameObject dragParentBringItemToFront, reorderParentTop;
 
     public Button btnCheckEquipment;
 
@@ -38,42 +39,52 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     bool runningCorouine = false;
     private SoChapOneRuntimeData runtimeData;
 
+    private void Awake()
+    {
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("go name " + uiNbrItemsEssential.name);
         Debug.Log("go name + val " + uiNbrItemsEssential.text);
-        //uiNbrItemsEssential.text = "1";
 
-        //roundEssential.nbrItemsOnMiner = MaxItemsOnMinerRoundEssential;
-        //roundProtection.nbrItemsOnMiner = MaxItemsOnMinerRoundProtection - MaxItemsOnMinerRoundEssential;
-        //roundSpecialTask.nbrItemsOnMiner = MaxItemsOnMinerRoundSpectialTask - MaxItemsOnMinerRoundProtection;
+        foreach(MuseumMinerEquipmentItem i in items)
+        {
+            i.dragObjParent = dragParentBringItemToFront;
+            i.orderTopParent = reorderParentTop;
+            i.isDragable = true;
+        }
 
         currentRound = EquipmentRound.Essential;
 
-        roundEssential.roundActive = true;
-        roundProtection.roundActive = false;
-        roundSpecialTask.roundActive = false;
-
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
+        SetRoundsVisible(true, false, false);
+        
         itemsOnMiner = 0;
        
         denkbubbleWorstcase.GetComponent<Image>().preserveAspect = true;
         audioSrc = gameObject.AddComponent<AudioSource>();
         audioSrc.playOnAwake = false;
         SetUiTooltip();
-       // btnConfirmText = btnCheckEquipment.GetComponentInChildren<Text>();
-        //uiInfoText.text = round1;
     }
 
     public bool IsDragItemOk()
     {
         Debug.Log("items on miner " + itemsOnMiner + " current raound: " + currentRound  );
         //itemsOnMiner start value is 0;
-        if (itemsOnMiner < MaxItemsOnMinerRoundEssential && currentRound == EquipmentRound.Essential) return true;
-        else if (itemsOnMiner < MaxItemsOnMinerRoundProtection && currentRound == EquipmentRound.Protection) return true;
-        else if (itemsOnMiner < MaxItemsOnMinerRoundSpectialTask && currentRound == EquipmentRound.SpecialTask) return true;
-        else return false;
+
+        switch (currentRound)
+        {
+            case EquipmentRound.Essential:
+                return itemsOnMiner < MaxItemsOnMinerRoundEssential;
+            case EquipmentRound.Protection:
+                return itemsOnMiner < MaxItemsOnMinerRoundProtection;
+            case EquipmentRound.SpecialTask:
+                return itemsOnMiner < MaxItemsOnMinerRoundSpectialTask;
+            default:
+                return false;
+        }
     }
 
     private void SetUiTooltip()
@@ -101,17 +112,17 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
         {
             case EquipmentRound.Essential:
                 uiNbrItemsEssential.text = (MaxItemsOnMinerRoundEssential - itemsOnMiner).ToString();
-                maxItemsReached = itemsOnMiner == MaxItemsOnMinerRoundEssential;
+                maxItemsReached = (itemsOnMiner == MaxItemsOnMinerRoundEssential);
                 SetRoundsVisible(true, false, false);
                 break;
             case EquipmentRound.Protection:
                 uiNbrItemProtection.text = (MaxItemsOnMinerRoundProtection - itemsOnMiner).ToString();
-                maxItemsReached = itemsOnMiner == MaxItemsOnMinerRoundProtection;
+                maxItemsReached = (itemsOnMiner == MaxItemsOnMinerRoundProtection);
                 SetRoundsVisible(false, true, false);
                 break;
             case EquipmentRound.SpecialTask:
                 uiNbrItemsSpecialTask.text = (MaxItemsOnMinerRoundSpectialTask - itemsOnMiner).ToString();
-                maxItemsReached = itemsOnMiner == MaxItemsOnMinerRoundSpectialTask;
+                maxItemsReached = (itemsOnMiner == MaxItemsOnMinerRoundSpectialTask);
                 SetRoundsVisible(false, false, true);
                 break;
         }
