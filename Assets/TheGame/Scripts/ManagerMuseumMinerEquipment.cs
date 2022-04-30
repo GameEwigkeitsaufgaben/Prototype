@@ -9,6 +9,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     private const int MaxItemsOnMinerRoundEssential = 3;
     private const int MaxItemsOnMinerRoundProtection = 6;
     private const int MaxItemsOnMinerRoundSpectialTask = 10;
+    private const string plainTextMine = "Zur Grube!";
 
     //3 rounds with different question
     public MinerEquipmentRound roundEssential, roundProtection, roundSpecialTask;
@@ -33,7 +34,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     //public TextMeshProUGUI headingRound, textRound;
     public TMP_Text uiNbrItemsEssential, uiNbrItemProtection, uiNbrItemsSpecialTask, btnText;
     private AudioSource audioSrc;
-    public Text uiTooltipText;
+    public TMP_Text uiTooltipText;
     bool runningCorouine = false;
     private SoChapOneRuntimeData runtimeData;
 
@@ -193,7 +194,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
         //the items form protesction are on miner = 6
         itemsOnMiner = MaxItemsOnMinerRoundProtection;
         currentRound = EquipmentRound.SpecialTask;
-        btnText.text = "Zur Mine!";
+        btnText.text = plainTextMine;
         //btnConfirmText.text = "Ab in die Mine!";
 
         foreach (MuseumMinerEquipmentItem i in items)

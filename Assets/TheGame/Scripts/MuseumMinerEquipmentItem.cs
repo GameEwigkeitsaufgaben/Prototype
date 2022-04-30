@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
@@ -35,7 +36,7 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
     private ManagerMuseumMinerEquipment myManager;
     AudioSource myAudioSrc;
 
-    public Text uiTextTooltip; //set for every item in managermuseumminerequipment
+    public TMP_Text uiTextTooltip; //set for every item in managermuseumminerequipment
 
     string descHelmet = "Der Helm, schützt vor Kopfverletzungen durch herabfallenden Einbauten oder in Stollen mit geringer Höhe.";
     string descLamp = "Die Lampe, dient zum Ausleuchten der Stollen, um nicht mit Gegenständen oder Einbauten zusammenzustoßen.";
