@@ -6,7 +6,7 @@ public static class GameData
     public const string NameConfigSfx = "SfxConfig";
     public const string NameRuntimeStoreData = "RuntimeExchangeData";
     public const string NameConfigMinerEquiment = "ConfigMinerEquipment";
-    public const string NameConfigMuseum = "ConfigMuseum";
+    public const string NameMuseumCard = "ConfigMuseum";
     public const string NameGameIcons = "Icons";
     public const string NameGameColors = "ConfigGameColors";
     public static string NameConfigQuiz = "QuizChapterOneConfig";

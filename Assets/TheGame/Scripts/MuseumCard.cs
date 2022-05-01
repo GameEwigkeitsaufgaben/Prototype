@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class MuseumCard : MonoBehaviour
 {
     public bool cardFaceDown = true;
     
     [SerializeField] private Image myContentImg, mySolutionImg, overallBgImg;
-    [SerializeField] private Text myStatement;
+    [SerializeField] private TMP_Text myStatement;
     [SerializeField] private Sprite helperSprite;
 
     [SerializeField] private Canvas myParentCanvas;
@@ -15,7 +16,8 @@ public class MuseumCard : MonoBehaviour
 
     private void Awake()
     {
-        myConfig = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
+        myConfig = Resources.Load<SoMuseumConfig>(GameData.NameMuseumCard);
+        //myResource = Resources.Load<SoMuseumConfig>(GameData.NameMuseumCard);
     }
 
     public void PopulateElements()
@@ -60,7 +62,9 @@ public class MuseumCard : MonoBehaviour
 
         myContentImg.gameObject.SetActive(false);
         myStatement.gameObject.SetActive(false);
-        overallBgImg.color = Color.black;
+        overallBgImg.color = GameColors.defaultInteractionColorNormal;
+        overallBgImg.sprite = myConfig.memoryBackside;
+        //myContentImg.sprite = myConfig.memoryBackside;
     }
 
     private void AssignChildElements()
@@ -76,9 +80,9 @@ public class MuseumCard : MonoBehaviour
         foreach (Transform i in tmpObjs)
         {
             Debug.Log(i.name);
-            if (i.GetComponent<Text>() != null)
+            if (i.GetComponent<TMP_Text>() != null)
             {
-                myStatement = i.GetComponent<Text>();
+                myStatement = i.GetComponent<TMP_Text>();
                 Debug.Log(i.name + " set statatement component");
             }
             if (i.GetComponent<Image>() != null)
@@ -144,8 +148,9 @@ public class MuseumCard : MonoBehaviour
     private void SetCardFaceUp()
     {
         myContentImg.gameObject.SetActive(true);
-        overallBgImg.color = Color.white;
-        //myContentImg.sprite = helperSprite;
+        overallBgImg.color = GameColors.defaultInteractionColorNormal;
+        overallBgImg.sprite = null;
+        //myContentImg.sprite = ;
         myStatement.gameObject.SetActive(true);
     }
 }

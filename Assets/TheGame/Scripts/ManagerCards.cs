@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ManagerManagerPostits : MonoBehaviour
+public class ManagerCards : MonoBehaviour
 {
     public GameObject prefabCard;
     public GameObject parentCards;
@@ -11,15 +11,15 @@ public class ManagerManagerPostits : MonoBehaviour
 
     public GameObject[] cards;
     
-    int rightSelect = 0;
+    private int rightSelect, falseSelect;
     [SerializeField] int maxValTrueSolution = 0;
     public Button btnCheck, btnExit;
     SoMuseumConfig myConfig;
 
     private void Start()
     {
-        myConfig = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
-        rightSelect = 0;
+        myConfig = Resources.Load<SoMuseumConfig>(GameData.NameMuseumCard);
+        rightSelect = falseSelect = 0;
         soResourcesCards = GetShuffeldResources();
         CreateCards();
         maxValTrueSolution = GetMaxRightSolutions();
@@ -39,14 +39,7 @@ public class ManagerManagerPostits : MonoBehaviour
 
     public SoMuseumCard[] GetShuffeldResources()
     {
-
-        Debug.Log("shuffle");
         List<SoMuseumCard> tmpObjs = new List<SoMuseumCard>();
-        
-        foreach(var i in soResourcesCards)
-        {
-            Debug.Log("sh " +i.name);
-        }
 
         foreach(var i in soResourcesCards)
         {
@@ -54,11 +47,6 @@ public class ManagerManagerPostits : MonoBehaviour
         }
 
         tmpObjs.Shuffle();
-
-        foreach (var i in tmpObjs)
-        {
-            Debug.Log("sh obj " + i.name);
-        }
 
         return tmpObjs.ToArray();
     }
@@ -82,14 +70,13 @@ public class ManagerManagerPostits : MonoBehaviour
 
         foreach (var i in cards)
         {
-            //Debug.Log("set defult for  " + i.GetComponent<MuseumCard>().myResource.name);
             i.GetComponent<MuseumCard>().SetDefaults();
         }
     }
 
     public void CheckPostits()
     {
-        rightSelect = 0;
+        rightSelect = falseSelect = 0;
 
         foreach (var i in cards)
         {
@@ -98,7 +85,10 @@ public class ManagerManagerPostits : MonoBehaviour
             if (!i.GetComponent<MuseumCard>().cardFaceDown && i.GetComponent<MuseumCard>().IsStatementTrue())
             {
                 rightSelect += 1;
-                Debug.Log("+1");
+            }
+            else if(!i.GetComponent<MuseumCard>().cardFaceDown && !i.GetComponent<MuseumCard>().IsStatementTrue())
+            {
+                falseSelect += 1;
             }
            
         }
@@ -111,9 +101,14 @@ public class ManagerManagerPostits : MonoBehaviour
             }
         }
 
+        minerImg.sprite = myConfig.minerThumpDown;
+        Debug.Log("Sprite sollte gesettz sein");
 
         if (maxValTrueSolution == rightSelect)
         {
+           Debug.Log(cards.Length + " - max " + maxValTrueSolution+ "fsele" + falseSelect);
+            if (falseSelect > 0) return;
+
             minerImg.sprite = myConfig.minerThumpUp;
             btnCheck.gameObject.SetActive(false);
             btnExit.gameObject.SetActive(true);
@@ -121,8 +116,7 @@ public class ManagerManagerPostits : MonoBehaviour
             return;
         }
 
-        minerImg.sprite = myConfig.minerThumpDown;
-        Debug.Log("Sprite sollte gesettz sein");
+       
     }
 
 }

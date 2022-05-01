@@ -30,7 +30,7 @@ public class ManagerHistoryMining : MonoBehaviour
     private void Start()
     {
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
-        museumConfig = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
+        museumConfig = Resources.Load<SoMuseumConfig>(GameData.NameMuseumCard);
         sliderCentury = Century.none;
         btnBackToMuseum.interactable = false;
     }
