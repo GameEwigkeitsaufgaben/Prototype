@@ -827,7 +827,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1802753904}
-  backToMuseum: {fileID: 1893977092}
+  btnBackToMuseum: {fileID: 1893977092}
+  btnUrlToSage: {fileID: 889990900}
   centuryText: {fileID: 995589230}
   museumConfig: {fileID: 0}
   sliderCentury: 0
@@ -3190,6 +3191,7 @@ RectTransform:
   - {fileID: 1334641728}
   - {fileID: 1802753903}
   - {fileID: 889990899}
+  - {fileID: 1050693782}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4007,7 +4009,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &889990899
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9538,7 +9540,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 8
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -14791,12 +14793,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1050693781}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1810066087}
-  m_RootOrder: 4
+  m_Father: {fileID: 780231017}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -22293,7 +22295,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -420.6, y: 281.93}
+  m_AnchoredPosition: {x: -420.6, y: 311}
   m_SizeDelta: {x: 767.28, y: 427.41}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1566350248
@@ -23475,7 +23477,6 @@ RectTransform:
   - {fileID: 1893977091}
   - {fileID: 693642784}
   - {fileID: 489033893}
-  - {fileID: 1050693782}
   - {fileID: 1930170209}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -23723,7 +23724,7 @@ GameObject:
   - component: {fileID: 1893977093}
   - component: {fileID: 1893977092}
   m_Layer: 5
-  m_Name: Button
+  m_Name: BtnBackToMuseum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
