@@ -21,9 +21,7 @@ public class ManagerHistoryMining : MonoBehaviour
     public TextMeshProUGUI centuryText;
     public SoMuseumConfig museumConfig;
     
-
     public Century sliderCentury;
-    
 
     private void Start()
     {
@@ -51,34 +49,55 @@ public class ManagerHistoryMining : MonoBehaviour
             runtimeData.isMythDone = true;
             backToMuseum.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
             backToMuseum.interactable = true;
-
         }
         else
         {
             sliderCentury = Century.none;
         }
 
-        if (Century.myth == sliderCentury) centuryText.text = museumConfig.textmyth;
-        else if (Century.century13 == sliderCentury)
+        switch (sliderCentury)
         {
-            centuryText.text = museumConfig.textCentury13;
+            case Century.myth:
+                centuryText.text = museumConfig.textmyth;
+                break;
+            case Century.century13:
+                centuryText.text = museumConfig.textCentury13;
+                break;
+            case Century.century16:
+                centuryText.text = museumConfig.textCentury16;
+                break;
+            case Century.century19:
+                centuryText.text = museumConfig.textCentury19;
+                break;
+            case Century.century21:
+                centuryText.text = museumConfig.textCentury21;
+                break;
+            default:
+                centuryText.text = "";
+                break;
         }
-        else if (Century.century16 == sliderCentury)
-        {
-            centuryText.text = museumConfig.textCentury16;
-        }
-        else if (Century.century19 == sliderCentury)
-        {
-            centuryText.text = museumConfig.textCentury19;
-        }
-        else if (Century.century21 == sliderCentury)
-        {
-            centuryText.text = museumConfig.textCentury21;
-        }
-        else if (Century.none == sliderCentury)
-        {
-            centuryText.text = "";
-        }
+
+        //if (Century.myth == sliderCentury) centuryText.text = museumConfig.textmyth;
+        //else if (Century.century13 == sliderCentury)
+        //{
+        //    centuryText.text = museumConfig.textCentury13;
+        //}
+        //else if (Century.century16 == sliderCentury)
+        //{
+        //    centuryText.text = museumConfig.textCentury16;
+        //}
+        //else if (Century.century19 == sliderCentury)
+        //{
+        //    centuryText.text = museumConfig.textCentury19;
+        //}
+        //else if (Century.century21 == sliderCentury)
+        //{
+        //    centuryText.text = museumConfig.textCentury21;
+        //}
+        //else if (Century.none == sliderCentury)
+        //{
+        //    centuryText.text = "";
+        //}
     }
 
 }
