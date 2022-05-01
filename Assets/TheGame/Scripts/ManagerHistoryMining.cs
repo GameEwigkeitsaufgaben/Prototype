@@ -15,6 +15,8 @@ public enum Century
 public class ManagerHistoryMining : MonoBehaviour
 {
     //https://forum.unity.com/threads/many-text-mesh-pro-elements-in-a-scene-what-is-a-possible-solution.665614/ TMP Performance
+    //https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@10.9/manual/requirements.html urp for 2020.3.18f1
+    
     public Slider slider;
     public Button backToMuseum;
 
@@ -30,6 +32,11 @@ public class ManagerHistoryMining : MonoBehaviour
         museumConfig = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
         sliderCentury = Century.none;
         backToMuseum.interactable = false;
+    }
+
+    public void OpenUrlSage()
+    {
+        Application.OpenURL("https://www.hamsterkiste-lesen-und-schreiben.de/schweinehirt");
     }
 
     public void GoBackToMuseum()
