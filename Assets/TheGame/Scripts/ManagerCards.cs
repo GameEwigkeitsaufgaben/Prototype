@@ -18,7 +18,7 @@ public class ManagerCards : MonoBehaviour
 
     private void Start()
     {
-        myConfig = Resources.Load<SoMuseumConfig>(GameData.NameMuseumCard);
+        myConfig = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
         rightSelect = falseSelect = 0;
         soResourcesCards = GetShuffeldResources();
         CreateCards();

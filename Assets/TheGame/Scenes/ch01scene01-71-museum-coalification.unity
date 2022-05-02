@@ -1987,6 +1987,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efa3cff2184580846b117b911ed9bf4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slider: {fileID: 2010016625}
+  infoText: {fileID: 1123138872}
+  statesInkohlung: 0
+  btnGoToMuseum: {fileID: 2083363463}
 --- !u!1 &368594290
 GameObject:
   m_ObjectHideFlags: 0
@@ -3685,7 +3689,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BackGroundColor: {r: 0.7411765, g: 0.7411765, b: 0.7411765, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -4479,14 +4483,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 8
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -4515,7 +4519,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -725.01794, y: -154.37563, z: 521.1329, w: 0}
+  m_margin: {x: -725.01794, y: -216.15442, z: 534.942, w: -417.22815}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -7250,8 +7254,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.15000153}
-  m_SizeDelta: {x: 500, y: 121.7}
+  m_AnchoredPosition: {x: 0, y: 1.2199574}
+  m_SizeDelta: {x: 514.08, y: 219.34009}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2003734644
 MonoBehaviour:
@@ -7382,7 +7386,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 347166289}
+        m_TargetAssemblyTypeName: ManagerCoalification, Assembly-CSharp
+        m_MethodName: SetStateAndText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2015065826
 GameObject:
   m_ObjectHideFlags: 0
@@ -7511,7 +7527,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6648444348925132328, guid: a703ace2cd3c7974884d3d99383c09d1, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6648444348925132328, guid: a703ace2cd3c7974884d3d99383c09d1, type: 3}
       propertyPath: m_AnchorMax.x
@@ -7856,8 +7872,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 698, y: -395}
-  m_SizeDelta: {x: 785.92, y: 297.42}
+  m_AnchoredPosition: {x: 707.43, y: -393.14}
+  m_SizeDelta: {x: 291.14, y: 293.71}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2083363463
 MonoBehaviour:
@@ -7898,7 +7914,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 2083363464}
   m_OnClick:
     m_PersistentCalls:

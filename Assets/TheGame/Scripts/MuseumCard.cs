@@ -16,7 +16,7 @@ public class MuseumCard : MonoBehaviour
 
     private void Awake()
     {
-        myConfig = Resources.Load<SoMuseumConfig>(GameData.NameMuseumCard);
+        myConfig = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
         //myResource = Resources.Load<SoMuseumConfig>(GameData.NameMuseumCard);
     }
 
