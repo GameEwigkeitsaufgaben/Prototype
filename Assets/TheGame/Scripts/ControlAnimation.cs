@@ -9,14 +9,12 @@ public class ControlAnimation : MonoBehaviour
     [SerializeField]
     public string stateName;
 
-    // Use this for initialization
     void Start()
     {
         anim = GetComponent<Animator>();
         anim.speed = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
         anim.Play(stateName, -1, slider.normalizedValue);
