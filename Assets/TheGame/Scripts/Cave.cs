@@ -42,6 +42,8 @@ public class Cave : MonoBehaviour
     public CoalmineStop targetStop;
     public CaveMovement moveDirection;
 
+    public GameObject hideS2Top;
+
     public AudioSource wind;
     public AudioSource cbelt;
     public AudioSource liftMovingSrc;
@@ -83,6 +85,15 @@ public class Cave : MonoBehaviour
         moveDirection = CaveMovement.OnHold;
         OpenDoors();
         GameData.currentStopSohle = (int)currentStop;
+
+        if(currentStop == CoalmineStop.Sole2)
+        {
+            hideS2Top.SetActive(true);
+        }
+        else
+        {
+            hideS2Top.SetActive(false);
+        }
     }
 
     public void StoreCavePosition()

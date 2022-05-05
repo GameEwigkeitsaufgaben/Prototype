@@ -17,6 +17,7 @@ public class CaveManager : MonoBehaviour
     public Character characterEnya, characterDad, characterGeorg;
 
     private SoChapOneRuntimeData runtimeData;
+    
 
     public Button exitSceneBtn, sole1WPViewpointBtn, sole2WPViewpointBtn, sole1caveWPBtn, sole3EnterTrainBtn;
    // public SprechblaseController sprechblaseController;
