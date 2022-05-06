@@ -32,7 +32,7 @@ public class SoChapOneRuntimeData : ScriptableObject
     private void OnEnable()
     {
         Debug.Log("RELOAD RUNTIME DATA");
-
+        trainArrived = viewPointS3passed = false;
         postOverlayToLoad = "";
         video115Done = false;
         currentGroupPos = Vector3.zero;
