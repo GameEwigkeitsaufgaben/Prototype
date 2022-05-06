@@ -8,9 +8,9 @@ public class SoChapOneRuntimeData : ScriptableObject
     public OverlaySoundState overlaySoundState;
 
     [Header("Coalmine 116")]
-    //Lookaround cave
     public float playerRotation; //needed for lookaroundMouse
     public bool trainArrived;
+    public bool viewPointS3passed;
     public bool sole1done, sole2done, sole3BewetterungDone, sole3GebaeudeDone, trainRideInDone, trainRideOutDone, isLongwallCutterDone;
 
     [Header("Museum 117")]

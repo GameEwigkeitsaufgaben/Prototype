@@ -322,6 +322,7 @@ public class CoalmineWaypointManager : MonoBehaviour
         else if (currentWP == MineWayPoints.viewpoint)
         {
             ChangeS3WPRotations(0.0f, 90.0f, 90.0f, 150.0f);
+            runtimeData.viewPointS3passed = true;
         }
         else if (IsBahnsteigCurrentWP())
         {
@@ -329,7 +330,7 @@ public class CoalmineWaypointManager : MonoBehaviour
             bahnsteigBtn.gameObject.SetActive(false);
             caveBtn.gameObject.SetActive(false);
 
-            ChangeS3WPRotations(-55.0f, 0.0f, 175.0f, -100.0f);
+            ChangeS3WPRotations(-55.0f, 0.0f, 175.0f, 158.0f);
         }
         else if (currentWP == MineWayPoints.viewpointOVMine)
         {

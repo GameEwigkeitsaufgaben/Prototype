@@ -47,6 +47,8 @@ public class CaveManager : MonoBehaviour
         sfx.SetClipByAddToDict(baukipper, sfx.caolmineLader);
         sfx.SetClipByAddToDict(kran, sfx.coalmineWorkingMachinesMetal);
         sfx.SetClipByAddToDict(water, sfx.caolmineSplashingWater);
+
+        sole3EnterTrainBtn.gameObject.SetActive(false);
        
     }
 
@@ -95,7 +97,7 @@ public class CaveManager : MonoBehaviour
             sfx.PlaySfxSole2();
         }
 
-        if (GetComponent<CoalmineWaypointManager>().IsBahnsteigCurrentWP())
+        if (GetComponent<CoalmineWaypointManager>().IsBahnsteigCurrentWP() && runtimeData.trainArrived)
         {
             if(!sole3EnterTrainBtn.IsActive())
                 sole3EnterTrainBtn.gameObject.SetActive(true);
