@@ -9,6 +9,7 @@ public class ManagerArriveTrain : MonoBehaviour
     public AudioSource audioSrcTrain;
 
     private SoChapOneRuntimeData runtimeData;
+    private bool trainComesStarted;
 
     private void Awake()
     {
@@ -19,6 +20,7 @@ public class ManagerArriveTrain : MonoBehaviour
     void Start()
     {
         runtimeData.trainArrived = false;
+        trainComesStarted = false;
     }
 
     public void StartTrain()
@@ -31,7 +33,7 @@ public class ManagerArriveTrain : MonoBehaviour
         audioSrcTrain.Play();
     }
 
-    public void SetTrainArraived()
+    public void SetTrainArrived()
     {
         runtimeData.trainArrived = true;
         audioSrcTrain.Stop();
@@ -39,9 +41,9 @@ public class ManagerArriveTrain : MonoBehaviour
 
     private void Update()
     {
-        if (runtimeData.viewPointS3passed)
+        if (!trainComesStarted && runtimeData.viewPointS3passed)
         {
-            runtimeData.viewPointS3passed = false;
+            trainComesStarted = true;
             Invoke("StartTrain" , 4);
         }
     }
