@@ -28,9 +28,13 @@ public class CaveManager : MonoBehaviour
     private SoSfx sfx;
 
     public AudioSource baukipper, kran, water;
+    public Texture2D cursorTexture;
+
+
 
     private void Start()
     {
+        Cursor.SetCursor(cursorTexture, new Vector2(64f,64f), CursorMode.Auto);
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
         //triggerEinstieg.SetActive(false);
