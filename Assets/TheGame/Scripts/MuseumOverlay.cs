@@ -108,22 +108,22 @@ public class MuseumOverlay : MonoBehaviour
             if (speechManager.IsMusuemMinerEquipmentFinished())
             {
                 gameObject.GetComponent<SwitchSceneManager>().GoToMinerEquipment();
-                playOverlay = false;
+                //playOverlay = false;
             }
             else if (speechManager.IsMusuemHistroyCarbonFinished())
             {
                 gameObject.GetComponent<SwitchSceneManager>().GoToWorld();
-                playOverlay = false;
+                //playOverlay = false;
             }
             else if (speechManager.IsMusuemHistoryMiningFinished())
             {
                 gameObject.GetComponent<SwitchSceneManager>().GoToMythos();
-                playOverlay = false;
+                //playOverlay = false;
             }
             else if (speechManager.IsMusuemCoalifictionFinished())
             {
                 gameObject.GetComponent<SwitchSceneManager>().GoToCoalification();
-                playOverlay = false;
+                //playOverlay = false;
             }
         }
 

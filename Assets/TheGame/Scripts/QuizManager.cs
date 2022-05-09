@@ -26,6 +26,7 @@ public class QuizManager : MonoBehaviour
     public Text uiSimpleProgressView;
     public Image uiPostImage;
     public Button uiButtonNext;
+    public Image buzzerTop;
     public Image imgMinerFeedback;
     public Text textMinerFeedback;
     public AudioSource audioAnswerCorrect, audioWrongAudio;
@@ -123,6 +124,7 @@ public class QuizManager : MonoBehaviour
             }
 
             questionItemListshuffled[currentProgressIndex].unProved = false;
+            buzzerTop.color = GameColors.defaultInteractionColorNormal;
             uiButtonNext.GetComponentInChildren<Text>().text = btnTextNextAnswer;
             return;   
         }
@@ -154,7 +156,9 @@ public class QuizManager : MonoBehaviour
         runtimeData.quizMinerFeedback = MinerFeedback.Idle;
         uiQuestion.text = questionItemListshuffled[progressIndex].GetQuestionText();
         uiPostImage.sprite = questionItemListshuffled[progressIndex].GetPostImage();
+        buzzerTop.color = GameColors.buzzerInteractionColor;
         uiButtonNext.GetComponentInChildren<Text>().text = btnTextCheckAnswers;
+
         uiQuestType.text = questionItemListshuffled[progressIndex].GetQuestionTypeString();
 
         foreach (Transform child in answerButtonGroup.transform)

@@ -12,6 +12,8 @@ public static class GameColors
     public static Color defaultInteractionColorPresses = new Color32(r - 55, g - 55, b - 55, a);
     public static Color defaultInteractionColorDisabled = new Color32(r - 55, g - 55, b - 55, a-128);
 
+    public static Color buzzerInteractionColor = new Color32(227, 86,60,255);
+
     public static Color discInteractonDoneColor = new Color32(0, 197, 26, a);
 
     public static Color showBackgroundInfoColor = new Color32(223, 202, 183, a);
