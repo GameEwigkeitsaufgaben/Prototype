@@ -13,7 +13,7 @@ public class ManagerArriveTrain : MonoBehaviour
 
     private void Awake()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);    
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);    
     }
 
     // Start is called before the first frame update

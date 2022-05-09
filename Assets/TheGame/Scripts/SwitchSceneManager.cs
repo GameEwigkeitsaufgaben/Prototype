@@ -11,7 +11,7 @@ public class SwitchSceneManager : MonoBehaviour
 
     private void Awake()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
     }
 
     public void LoadMine()

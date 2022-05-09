@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class MuseumOverlay : MonoBehaviour
@@ -8,61 +9,89 @@ public class MuseumOverlay : MonoBehaviour
     public Image graying;
 
     public SpeechManagerMuseum speechManager;
-    public Button closeBtn;
+    public Button btnClose;
+    public Button btnSkipIntro;
 
     private GameObject parentMaskPanel;
 
     bool playOverlay;
     private SoMuseumConfig configMuseum;
+
     private SoChapOneRuntimeData runtimeData;
+
+    private UnityAction openCarbonPeriodGame, openMinerEquipment, openCoalification, openHistoryMining;
 
     private void Start()
     {
         parentMaskPanel = container.transform.parent.gameObject;
         configMuseum = Resources.Load<SoMuseumConfig>("ConfigMuseum");
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
         gameObject.transform.localPosition = runtimeData.currentGroupPos;
+        btnSkipIntro.GetComponent<Image>().color = GameColors.defaultInteractionColorNormal;
+        btnClose.GetComponent<Image>().color = GameColors.defaultInteractionColorNormal;
         //Debug.Log("in start musum overlay " + runtimeData.currentGroupPos);
+
+        openCarbonPeriodGame += gameObject.GetComponent<SwitchSceneManager>().GoToWorld;
+        openCoalification += gameObject.GetComponent<SwitchSceneManager>().GoToCoalification;
+        openMinerEquipment += gameObject.GetComponent<SwitchSceneManager>().GoToMinerEquipment;
+        openHistoryMining += gameObject.GetComponent<SwitchSceneManager>().GoToMythos;
+
+
     }
 
     public void ActivateOverlay(MuseumWaypoints wp)
     {
         parentMaskPanel.SetActive(true);
         playOverlay = true;
+        runtimeData.soundSettingMuseum = SoundMuseum.Overlay;
+        bool showSkip = false;
 
-        if(wp == MuseumWaypoints.WPInfo)
+        if (wp == MuseumWaypoints.WPInfo)
         {
             container.sprite = configMuseum.info;
             speechManager.playMuseumInfoArrival = true;
+           
         }
         else if (wp == MuseumWaypoints.WPBergmann)
         {
             container.sprite = configMuseum.miner;
             speechManager.playMinerEquipment = true;
+            btnSkipIntro.onClick.AddListener(openMinerEquipment);
+            if (runtimeData.isMinerDone) showSkip = true;
+            //btnSkipIntro.onClick.AddListener(gameObject.GetComponent<SwitchSceneManager>().GoToMinerEquipment());
         }
         else if (wp == MuseumWaypoints.WPWelt)
         {
             container.sprite = configMuseum.world;
             speechManager.playMuseumWorld = true;
+            btnSkipIntro.onClick.AddListener(openCarbonPeriodGame);
+            if (runtimeData.isCarbonificationPeriodDone) showSkip = true;
         }
         else if (wp == MuseumWaypoints.WPMythos)
         {
             container.sprite = configMuseum.myth;
             speechManager.playMuseumCoalHistory = true;
+            btnSkipIntro.onClick.AddListener(openHistoryMining);
+            if (runtimeData.isMythDone) showSkip = true;
         }
         else if (wp == MuseumWaypoints.WPInkohlung)
         {
             container.sprite = configMuseum.carbonification;
             speechManager.playMuseumCarbonification = true;
+            btnSkipIntro.onClick.AddListener(openCoalification);
+            if (runtimeData.isCoalifiationDone) showSkip = true;
         }
 
-        closeBtn.gameObject.SetActive(true);
+        if(showSkip) btnSkipIntro.gameObject.SetActive(true);
+        
+        btnClose.gameObject.SetActive(true);
         graying.gameObject.SetActive(true);
     }
 
     public void StopOverlay()
     {
         playOverlay = false;
+        runtimeData.soundSettingMuseum = SoundMuseum.Showroom;
     }
 
     private void Update()
@@ -103,8 +132,8 @@ public class MuseumOverlay : MonoBehaviour
         {
             parentMaskPanel.SetActive(false);
             graying.gameObject.SetActive(false);
-            closeBtn.gameObject.SetActive(false);
-            Debug.Log("Play overlay" + playOverlay + " active mask panel " + parentMaskPanel.activeSelf);
+            btnClose.gameObject.SetActive(false);
+            btnSkipIntro.gameObject.SetActive(false);
             speechManager.StopSpeaking();
         }
     }

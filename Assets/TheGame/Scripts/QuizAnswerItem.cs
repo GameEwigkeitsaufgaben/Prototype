@@ -22,7 +22,7 @@ public class QuizAnswerItem
     public QuizAnswerItem() 
     {
         myQuizConfig = Resources.Load<SoQuizConfig>(pathToConfig);
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
     }
 
     public QuizAnswerItem(VerticalLayoutGroup parent) 

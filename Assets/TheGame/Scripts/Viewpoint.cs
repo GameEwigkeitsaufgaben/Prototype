@@ -38,7 +38,7 @@ public class Viewpoint : MonoBehaviour
     {
         gameColors = Resources.Load<SoGameColors>(GameData.NameGameColors);
         gameIcons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
     }
 
     // Start is called before the first frame update

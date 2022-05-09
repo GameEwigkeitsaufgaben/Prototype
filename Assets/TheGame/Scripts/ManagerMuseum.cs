@@ -1,6 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum SoundMuseum
+{
+    Showroom,
+    Overlay,
+    None
+}
+
 public class ManagerMuseum : MonoBehaviour
 {
     //public bool isMinerDone;
@@ -19,12 +26,21 @@ public class ManagerMuseum : MonoBehaviour
     private bool museumDoneSet;
     public GameObject characterDad, characterGuide, waitingGuide;
 
+    private AudioSource audioSrcBGMusic;
+
     // Start is called before the first frame update
     void Start()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
         walkingGroup.SetCharcters(characterDad, characterGuide, waitingGuide);
+        audioSrcBGMusic = gameObject.GetComponent<AudioSource>();
+        runtimeData.soundSettingMuseum = SoundMuseum.Showroom;
 
+        if(runtimeData.currentMuseumWaypoint != MuseumWaypoints.WP0)
+        {
+            SetInMuseumGroup();
+        }
+       
         btnExitImage = btnExitMuseum.GetComponent<Image>();
         btnExitImage.gameObject.GetComponent<Button>().interactable = false;
         museumDoneSet = false;
@@ -44,27 +60,43 @@ public class ManagerMuseum : MonoBehaviour
 
         if (speechManager.IsMusuemInfoIntroFinished())
         {
-           characterDad.gameObject.SetActive(false);
-           characterGuide.gameObject.SetActive(true);
-            waitingGuide.gameObject.SetActive(false);
+            SetInMuseumGroup();
         }
-        
+
         if (speechManager.IsMuseumOutroFinished())
         {
-            walkingGroup.MoveToWaypoint((int)MuseumWaypoints.WPExitMuseum1);
+            switchScene.SwitchToChapter1withOverlay("Overlay117"); 
         }
-
-        if(runtimeData.currentMuseumWaypoint == MuseumWaypoints.None)
-        {
-            switchScene.SwitchToChapter1withOverlay("Overlay117");
-        }
-
-
 
         if (startOutro)
         {
             startOutro = false;
         }
-        
+
+        switch (runtimeData.soundSettingMuseum)
+        {
+            case SoundMuseum.Showroom:
+                PlayAdjustedBGMusic(0.5f);
+                break;
+            case SoundMuseum.Overlay:
+                PlayAdjustedBGMusic(0.2f);
+                break;
+            case SoundMuseum.None:
+                audioSrcBGMusic.Stop();
+                break;
+        }
+    }
+
+    private void SetInMuseumGroup()
+    {
+        characterDad.gameObject.SetActive(false);
+        characterGuide.gameObject.SetActive(true);
+        waitingGuide.gameObject.SetActive(false);
+    }
+
+    private void PlayAdjustedBGMusic(float volume)
+    {
+        if (!audioSrcBGMusic.isPlaying) audioSrcBGMusic.Play();
+        if (audioSrcBGMusic.volume != volume) audioSrcBGMusic.volume = volume;
     }
 }

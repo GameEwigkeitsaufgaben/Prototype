@@ -30,7 +30,7 @@ public class ManagerTrainRide : MonoBehaviour
 
     private void Start()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
     }
 
     private void StartTalkingIn()

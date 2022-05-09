@@ -54,7 +54,7 @@ public class Cave : MonoBehaviour
     private void Start()
     {
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
 
         Debug.Log("Game Data " + GameData.currentStopSohle);
 

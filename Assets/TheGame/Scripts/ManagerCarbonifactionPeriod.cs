@@ -15,7 +15,7 @@ public class ManagerCarbonifactionPeriod : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
     }
 
     public void GoBackToMuseum()

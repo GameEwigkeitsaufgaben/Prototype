@@ -36,7 +36,7 @@ public class CaveManager : MonoBehaviour
     {
         Cursor.SetCursor(cursorTexture, new Vector2(64f,64f), CursorMode.Auto);
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
         //triggerEinstieg.SetActive(false);
 
         switchScene = gameObject.GetComponent<SwitchSceneManager>();

@@ -49,7 +49,7 @@ public class QuizManager : MonoBehaviour
 
     private void Awake()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
         quizConfig = Resources.Load<SoQuizConfig>(GameData.NameConfigQuiz);
     }

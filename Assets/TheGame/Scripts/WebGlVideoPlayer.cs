@@ -17,7 +17,7 @@ public class WebGlVideoPlayer : MonoBehaviour
 
     private void Awake()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
     }
     private void Start()
     {

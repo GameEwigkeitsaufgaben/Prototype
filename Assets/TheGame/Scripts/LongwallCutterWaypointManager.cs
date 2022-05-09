@@ -13,7 +13,7 @@ public class LongwallCutterWaypointManager : MonoBehaviour
 
     private void Start()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
         HandleCurrentWP();
         playerSplineMove.gameObject.transform.position = pathViewpointToKohlehobel.waypoints[0].transform.position;
     }

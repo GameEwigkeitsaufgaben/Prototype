@@ -34,7 +34,7 @@ public class MuseumPlayer : MonoBehaviour
 
     private void Awake()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
         configMuseum = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
     }
 
@@ -148,7 +148,7 @@ public class MuseumPlayer : MonoBehaviour
     {
         currentWP = targetWP;
         characterGuide.GetComponent<Image>().sprite = configMuseum.guideStanding;
-        characterGuide.transform.rotation = Quaternion.EulerRotation(Vector3.zero);
+        characterGuide.transform.rotation = Quaternion.Euler(Vector3.zero);
 
         if (currentWP == MuseumWaypoints.WPInfo)
         {
@@ -179,9 +179,6 @@ public class MuseumPlayer : MonoBehaviour
         else if (currentWP == MuseumWaypoints.WPExitMuseum0)
         {
             mySplineMove.ChangeSpeed(1.0f);
-            //mySplineMove.pathContainer = p6P7;
-            //mySplineMove.StartMove();
-            //targetWP = MuseumWaypoints.WPExitMuseum1;
         }
         else if (currentWP == MuseumWaypoints.WPExitMuseum1)
         {
@@ -386,11 +383,11 @@ public class MuseumPlayer : MonoBehaviour
             mySplineMove.reverse = true;
             return p5P6;
         }
-        else if(currentWP == MuseumWaypoints.WPExitMuseum0 && targetWP == MuseumWaypoints.WPExitMuseum1)
-        {
-            mySplineMove.reverse = false;
-            return p6P7;
-        }
+        //else if(currentWP == MuseumWaypoints.WPExitMuseum0 && targetWP == MuseumWaypoints.WPExitMuseum1)
+        //{
+        //    mySplineMove.reverse = false;
+        //    return p6P7;
+        //}
         else {
             return null;
         }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ManagerCards : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class ManagerCards : MonoBehaviour
     public GameObject parentCards;
     public SoMuseumCard[] soResourcesCards;
     public Image minerImg;
+    public TMP_Text minerMsg;
 
     public GameObject[] cards;
     
@@ -15,6 +17,7 @@ public class ManagerCards : MonoBehaviour
     [SerializeField] int maxValTrueSolution = 0;
     public Button btnCheck, btnExit;
     SoMuseumConfig myConfig;
+    private SoChapOneRuntimeData runtimeData;
 
     private void Start()
     {
@@ -24,6 +27,7 @@ public class ManagerCards : MonoBehaviour
         CreateCards();
         maxValTrueSolution = GetMaxRightSolutions();
         minerImg.sprite = myConfig.minerIdle;
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
     }
 
     int GetMaxRightSolutions()
@@ -80,8 +84,6 @@ public class ManagerCards : MonoBehaviour
 
         foreach (var i in cards)
         {
-            Debug.Log(i.gameObject.name + " bsu: " + i.GetComponent<MuseumCard>().cardFaceDown + " st: " + i.GetComponent<MuseumCard>().IsStatementTrue());
-
             if (!i.GetComponent<MuseumCard>().cardFaceDown && i.GetComponent<MuseumCard>().IsStatementTrue())
             {
                 rightSelect += 1;
@@ -93,6 +95,19 @@ public class ManagerCards : MonoBehaviour
            
         }
 
+        minerMsg.transform.parent.gameObject.SetActive(true);
+
+        if (falseSelect > 0)
+        {
+            minerImg.sprite = myConfig.minerThumpDown;
+            minerMsg.text = "Oh nein!\nRichtig wäre ...";
+        }
+        else
+        {
+            minerImg.sprite = myConfig.minerThumpUp;
+            minerMsg.text = "\nSuper gemacht!";
+        }
+
         foreach (var i in cards)
         {
             if (i.GetComponent<MuseumCard>().IsStatementTrue())
@@ -101,22 +116,20 @@ public class ManagerCards : MonoBehaviour
             }
         }
 
-        minerImg.sprite = myConfig.minerThumpDown;
-        Debug.Log("Sprite sollte gesettz sein");
-
-        if (maxValTrueSolution == rightSelect)
+        foreach(var i in cards)
         {
-           Debug.Log(cards.Length + " - max " + maxValTrueSolution+ "fsele" + falseSelect);
-            if (falseSelect > 0) return;
-
-            minerImg.sprite = myConfig.minerThumpUp;
-            btnCheck.gameObject.SetActive(false);
-            btnExit.gameObject.SetActive(true);
-            Debug.Log("Right solution found ----------------");
-            return;
+            if (i.GetComponent<MuseumCard>().IsStatementTrue())
+            {
+                i.GetComponent<MuseumCard>().SetCardFaceUp();
+            }
+            else
+            {
+                i.GetComponent<MuseumCard>().SetCardFaceDown();
+            }
         }
 
-       
+        btnCheck.gameObject.SetActive(false);
+        btnExit.gameObject.SetActive(true);
     }
 
 }

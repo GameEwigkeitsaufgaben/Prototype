@@ -145,7 +145,7 @@ public class MuseumCard : MonoBehaviour
         }
     }
 
-    private void SetCardFaceUp()
+    public void SetCardFaceUp()
     {
         myContentImg.gameObject.SetActive(true);
         overallBgImg.color = GameColors.defaultInteractionColorNormal;

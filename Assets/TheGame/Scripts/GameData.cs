@@ -4,7 +4,7 @@ public static class GameData
 {
     //Name of objects in Folder "Resources" 
     public const string NameConfigSfx = "SfxConfig";
-    public const string NameRuntimeStoreData = "RuntimeExchangeData";
+    public const string NameRuntimeData = "RuntimeExchangeData";
     public const string NameConfigMinerEquiment = "ConfigMinerEquipment";
     public const string NameConfigMuseum = "ConfigMuseum";
     public const string NameGameIcons = "Icons";
