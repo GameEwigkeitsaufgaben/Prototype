@@ -6,6 +6,7 @@ public class SoChapOneRuntimeData : ScriptableObject
     public string postOverlayToLoad = "";
     public bool videoPlaying = false;
     public OverlaySoundState overlaySoundState;
+    public Texture2D cursorTexture3DCave;
 
     [Header("Coalmine 116")]
     public float playerRotation; //needed for lookaroundMouse

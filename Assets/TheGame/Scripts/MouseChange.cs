@@ -5,8 +5,16 @@ using UnityEngine;
 public class MouseChange : MonoBehaviour
 {
     public Texture2D cursorTexture;
+    public Texture2D caveCursourTexture;
     public CursorMode cursorMode = CursorMode.Auto;
     public Vector2 hotSpot = Vector2.zero;
+    private SoChapOneRuntimeData runtimeData;
+
+    private void Start()
+    {
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        
+    }
 
     public void OnMouseEnter()
     {
@@ -17,6 +25,6 @@ public class MouseChange : MonoBehaviour
     public void OnMouseExit()
     {
         //Debug.Log("set cursur exit");
-        Cursor.SetCursor(null, Vector2.zero, cursorMode);
+        Cursor.SetCursor(runtimeData.cursorTexture3DCave, Vector2.zero, cursorMode);
     }
 }
