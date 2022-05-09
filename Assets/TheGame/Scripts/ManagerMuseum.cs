@@ -3,45 +3,67 @@ using UnityEngine.UI;
 
 public class ManagerMuseum : MonoBehaviour
 {
-    public bool isMinerDone;
-    public bool isMythDone;
-    public bool isCoalifictionDone;
-    public bool isEarthHistroyDone;
+    //public bool isMinerDone;
+    //public bool isMythDone;
+    //public bool isCoalifictionDone;
+    //public bool isEarthHistroyDone;
 
     public Button btnExitMuseum;
-    private Image btnExitImage;
-    private SoChapOneRuntimeData runtimeData;
     public SpeechManagerMuseum speechManager;
     public MuseumPlayer walkingGroup;
+    public SwitchSceneManager switchScene;
 
     private bool startOutro;
+    private Image btnExitImage;
+    private SoChapOneRuntimeData runtimeData;
+    private bool museumDoneSet;
+    public GameObject characterDad, characterGuide, waitingGuide;
 
     // Start is called before the first frame update
     void Start()
     {
-        btnExitImage = btnExitMuseum.GetComponent<Image>();
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
+        walkingGroup.SetCharcters(characterDad, characterGuide, waitingGuide);
+
+        btnExitImage = btnExitMuseum.GetComponent<Image>();
+        btnExitImage.gameObject.GetComponent<Button>().interactable = false;
+        museumDoneSet = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(btnExitImage.color.a < 0.8f)
+        runtimeData.CheckInteraction117Done();
+        
+        if (!museumDoneSet && runtimeData.interaction117Done)
         {
-            runtimeData.CheckInteraction117Done();
-
-            if (runtimeData.interaction117Done)
-            {
-                btnExitImage.color += new Color32(0, 0, 0, 200);
-                speechManager.playMuseumOutro = true;
-                walkingGroup.MoveToWaypoint((int)MuseumWaypoints.WPExitMuseum);
-            }
+            speechManager.playMuseumOutro = true;
+            museumDoneSet = true;
+            walkingGroup.MoveToWaypoint((int)MuseumWaypoints.WPExitMuseum0);
         }
+
+        if (speechManager.IsMusuemInfoIntroFinished())
+        {
+           characterDad.gameObject.SetActive(false);
+           characterGuide.gameObject.SetActive(true);
+            waitingGuide.gameObject.SetActive(false);
+        }
+        
+        if (speechManager.IsMuseumOutroFinished())
+        {
+            walkingGroup.MoveToWaypoint((int)MuseumWaypoints.WPExitMuseum1);
+        }
+
+        if(runtimeData.currentMuseumWaypoint == MuseumWaypoints.None)
+        {
+            switchScene.SwitchToChapter1withOverlay("Overlay117");
+        }
+
+
 
         if (startOutro)
         {
             startOutro = false;
-            //speechManager.playMuseumInfoArrival = true;
         }
         
     }

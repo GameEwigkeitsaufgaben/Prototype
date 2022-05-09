@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SoMuseumConfig")]
 public class SoMuseumConfig : ScriptableObject
 {
+    public Sprite guideStanding, guideWalking;
     public Sprite info, world, carbonification, myth, miner;
     public Sprite memoryBackside;
     public Sprite minerIdle, minerThumpUp, minerThumpDown;

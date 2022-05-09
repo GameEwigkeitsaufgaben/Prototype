@@ -1,4 +1,5 @@
 using SWS;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,30 +11,39 @@ public enum MuseumWaypoints
     WPBergmann = 3,
     WPMythos = 4,
     WPWelt = 5,
-    WPExitMuseum = 6
+    WPExitMuseum0 = 6,
+    WPExitMuseum1 = 7,
+    None
 }
 
 public class MuseumPlayer : MonoBehaviour
 {
     splineMove mySplineMove;
-    public PathManager p0P1, p1P2, p1P3, p1P4, p1P5, p2P3, p2P4, p2P5, p3P4, p3P5, p4P5, p1P6, p2P6, p3P6, p4P6, p5P6;
+    public PathManager p0P1, p1P2, p1P3, p1P4, p1P5, p2P3, p2P4, p2P5, p3P4, p3P5, p4P5, p1P6, p2P6, p3P6, p4P6, p5P6, p6P7;
 
     public MuseumWaypoints currentWP, targetWP;
 
     public Button btnWPInfo, btnWPInkohlung, btnWPBergmann, btnWPSchwein, btnWPWelt;
     public MuseumOverlay overlay;
     private SoChapOneRuntimeData runtimeData;
+    private SoMuseumConfig configMuseum;
+    public SwitchSceneManager switchScene;
+
+    private GameObject characterDad, characterGuide, waitingGuide;
+    //public bool switchToGuide;
 
     private void Awake()
     {
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeStoreData);
+        configMuseum = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
     }
 
     void Start()
     {
         mySplineMove = gameObject.GetComponent<splineMove>();
+        mySplineMove.ChangeSpeed(5.0f);
 
-        if(runtimeData.currentMuseumWaypoint == MuseumWaypoints.WP0) 
+        if (runtimeData.currentMuseumWaypoint == MuseumWaypoints.WP0) 
             ShowOnlyInfo();
         else if (runtimeData.currentMuseumWaypoint != MuseumWaypoints.WP0)
         {
@@ -42,6 +52,13 @@ public class MuseumPlayer : MonoBehaviour
             ShowOtherStations(currentWP);
         }
     }
+
+    public void SetCharcters(GameObject characterDad, GameObject characterGuide, GameObject waitingGuide)
+    {
+        this.characterDad = characterDad;
+        this.characterGuide = characterGuide;
+        this.waitingGuide = waitingGuide;
+}
 
     private void OnTriggerEnter(Collider other)
     {
@@ -69,6 +86,15 @@ public class MuseumPlayer : MonoBehaviour
         {
             currentWP = MuseumWaypoints.WPWelt;
         }
+    }
+
+    public void ShowNoStation()
+    {
+        btnWPInfo.gameObject.SetActive(false);
+        btnWPInkohlung.gameObject.SetActive(false);
+        btnWPBergmann.gameObject.SetActive(false);
+        btnWPSchwein.gameObject.SetActive(false);
+        btnWPWelt.gameObject.SetActive(false);
     }
 
     public void ShowOnlyInfo()
@@ -121,17 +147,19 @@ public class MuseumPlayer : MonoBehaviour
     public void ReachedWP()//Called from UnityEvent Gruppe in Inspector
     {
         currentWP = targetWP;
-        
+        characterGuide.GetComponent<Image>().sprite = configMuseum.guideStanding;
+        characterGuide.transform.rotation = Quaternion.EulerRotation(Vector3.zero);
+
         if (currentWP == MuseumWaypoints.WPInfo)
         {
             btnWPInfo.gameObject.SetActive(false);
             overlay.ActivateOverlay(MuseumWaypoints.WPInfo);
+            
         }
         else if (currentWP == MuseumWaypoints.WPInkohlung)
         {
             btnWPInkohlung.gameObject.SetActive(false);
             overlay.ActivateOverlay(MuseumWaypoints.WPInkohlung);
-            
         }
         else if (currentWP == MuseumWaypoints.WPBergmann)
         {
@@ -148,12 +176,29 @@ public class MuseumPlayer : MonoBehaviour
             btnWPWelt.gameObject.SetActive(false);
             overlay.ActivateOverlay(MuseumWaypoints.WPWelt);
         }
+        else if (currentWP == MuseumWaypoints.WPExitMuseum0)
+        {
+            mySplineMove.ChangeSpeed(1.0f);
+            //mySplineMove.pathContainer = p6P7;
+            //mySplineMove.StartMove();
+            //targetWP = MuseumWaypoints.WPExitMuseum1;
+        }
+        else if (currentWP == MuseumWaypoints.WPExitMuseum1)
+        {
+            currentWP = MuseumWaypoints.None;
+        }
 
         runtimeData.currentGroupPos = gameObject.transform.localPosition;
         runtimeData.currentMuseumWaypoint = currentWP;
-        ShowOtherStations(currentWP);
         
         Debug.Log("current WP " + currentWP);
+        
+        if (currentWP == MuseumWaypoints.None) return;
+        if (currentWP == MuseumWaypoints.WPExitMuseum0) return;
+        if (currentWP == MuseumWaypoints.WPExitMuseum1) return;
+
+        ShowOtherStations(currentWP);
+        
     }
 
     public void MoveToWaypoint (int id)
@@ -164,18 +209,22 @@ public class MuseumPlayer : MonoBehaviour
         targetWP = (MuseumWaypoints)id;
         Debug.Log("SET target Waypoint to :  " + targetWP + "id is: " + id);
         
+
         if (currentWP == 0)
         {
             currentWP = MuseumWaypoints.WP0;
         }
-
+        
         mySplineMove.pathContainer = GetPath(currentWP, targetWP);
         mySplineMove.StartMove();
+        ShowNoStation();
+        characterGuide.GetComponent<Image>().sprite = configMuseum.guideWalking;
+        characterGuide.transform.rotation = Quaternion.Euler(0f,-180f,0f);
+
     }
 
     private PathManager GetPath(MuseumWaypoints cwp, MuseumWaypoints twp)
     {
-
         if (currentWP == targetWP) return null;
         else if(currentWP == MuseumWaypoints.WP0 && targetWP == MuseumWaypoints.WPInfo)
         {
@@ -287,55 +336,60 @@ public class MuseumPlayer : MonoBehaviour
             mySplineMove.reverse = true;
             return p4P5;
         }
-        else if (currentWP == MuseumWaypoints.WPInfo && targetWP == MuseumWaypoints.WPExitMuseum)
+        else if (currentWP == MuseumWaypoints.WPInfo && targetWP == MuseumWaypoints.WPExitMuseum0)
         {
             mySplineMove.reverse = false;
             return p1P6;
         }
-        else if (currentWP == MuseumWaypoints.WPInkohlung && targetWP == MuseumWaypoints.WPExitMuseum)
+        else if (currentWP == MuseumWaypoints.WPInkohlung && targetWP == MuseumWaypoints.WPExitMuseum0)
         {
             mySplineMove.reverse = false;
             return p2P6;
         }
-        else if (currentWP == MuseumWaypoints.WPBergmann && targetWP == MuseumWaypoints.WPExitMuseum)
+        else if (currentWP == MuseumWaypoints.WPBergmann && targetWP == MuseumWaypoints.WPExitMuseum0)
         {
             mySplineMove.reverse = false;
             return p3P6;
         }
-        else if (currentWP == MuseumWaypoints.WPMythos && targetWP == MuseumWaypoints.WPExitMuseum)
+        else if (currentWP == MuseumWaypoints.WPMythos && targetWP == MuseumWaypoints.WPExitMuseum0)
         {
             mySplineMove.reverse = false;
             return p4P6;
         }
-        else if (currentWP == MuseumWaypoints.WPWelt && targetWP == MuseumWaypoints.WPExitMuseum)
+        else if (currentWP == MuseumWaypoints.WPWelt && targetWP == MuseumWaypoints.WPExitMuseum0)
         {
             mySplineMove.reverse = false;
             return p5P6;
         }
-        else if (currentWP == MuseumWaypoints.WPExitMuseum && targetWP == MuseumWaypoints.WPInfo)
+        else if (currentWP == MuseumWaypoints.WPExitMuseum0 && targetWP == MuseumWaypoints.WPInfo)
         {
             mySplineMove.reverse = true;
             return p1P6;
         }
-        else if (currentWP == MuseumWaypoints.WPExitMuseum && targetWP == MuseumWaypoints.WPInkohlung)
+        else if (currentWP == MuseumWaypoints.WPExitMuseum0 && targetWP == MuseumWaypoints.WPInkohlung)
         {
             mySplineMove.reverse = true;
             return p2P6;
         }
-        else if (currentWP == MuseumWaypoints.WPExitMuseum && targetWP == MuseumWaypoints.WPBergmann)
+        else if (currentWP == MuseumWaypoints.WPExitMuseum0 && targetWP == MuseumWaypoints.WPBergmann)
         {
             mySplineMove.reverse = true;
             return p3P6;
         }
-        else if (currentWP == MuseumWaypoints.WPExitMuseum && targetWP == MuseumWaypoints.WPMythos)
+        else if (currentWP == MuseumWaypoints.WPExitMuseum0 && targetWP == MuseumWaypoints.WPMythos)
         {
             mySplineMove.reverse = true;
             return p4P6;
         }
-        else if (currentWP == MuseumWaypoints.WPExitMuseum && targetWP == MuseumWaypoints.WPWelt)
+        else if (currentWP == MuseumWaypoints.WPExitMuseum0 && targetWP == MuseumWaypoints.WPWelt)
         {
             mySplineMove.reverse = true;
             return p5P6;
+        }
+        else if(currentWP == MuseumWaypoints.WPExitMuseum0 && targetWP == MuseumWaypoints.WPExitMuseum1)
+        {
+            mySplineMove.reverse = false;
+            return p6P7;
         }
         else {
             return null;
