@@ -23,7 +23,7 @@ public class CaveColliderBottom : MonoBehaviour
             speechManger.playEntryArea = true;
             revisitEntryArea = true;
 
-            cave.liftBtns[0].gameObject.GetComponent<Button>().interactable = true;
+            //cave.liftBtns[0].gameObject.GetComponent<Button>().interactable = true;
         }
         else if (other.name == TriggerEntryArea && revisitEntryArea)
              {

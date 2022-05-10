@@ -66,7 +66,7 @@ public class Cave : MonoBehaviour
             currentStop = targetStop = (CoalmineStop)GameData.currentStopSohle;
             liftBtns[0].GetComponent<CaveButton>().isSelected = true;
 
-            //EnableButtons(true);
+            //EnableButtons(false);
 
             sfx.PlayClip(wind, sfx.coalmineWindInTunnel);
             sfx.ReduceVolume(sfx.coalmineWindInTunnel, 0.7f);
@@ -168,7 +168,7 @@ public class Cave : MonoBehaviour
         return currentStop != targetStop;
     }
 
-    public void EnableButtons(bool enableButtons)
+    public void SetAllButtonsInteractable(bool enableButtons)
     {
         foreach (Button y in liftBtns)
         {
@@ -200,22 +200,35 @@ public class Cave : MonoBehaviour
 
     void Update()
     {
+        runtimeData.CheckInteraction116Done();
+
         if (GameData.moveCave)
         {
             //Debug.Log((int)moveDirection + " movedir");
             GameData.moveDirection = (int)moveDirection;
             transform.position += new Vector3(0, (int)moveDirection * caveSpeed * Time.deltaTime, 0);
+            return;
         }
 
-        if (GameData.liftBtnsEnabled)
+
+        if (!runtimeData.playerInsideCave)
         {
-            EnableButtons(true);
+            SetAllButtonsInteractable(false);
         }
         else
         {
-            EnableButtons(false);
+            SetAllButtonsInteractable(true);
         }
 
-        runtimeData.CheckInteraction116Done();
+        //if (GameData.liftBtnsEnabled)
+        //{
+        //    SetAllButtonsInteractable(true);
+        //}
+        //else
+        //{
+        //    SetAllButtonsInteractable(false);
+        //}
+
+        
     }
 }

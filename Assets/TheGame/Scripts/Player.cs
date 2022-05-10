@@ -14,6 +14,12 @@ public class Player : MonoBehaviour
     public float speed;
     
     public bool playerInCave = true;
+    SoChapOneRuntimeData runtimeData;
+
+    private void OnEnable()
+    {
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData); 
+    }
 
     private void Start()
     {
@@ -45,6 +51,7 @@ public class Player : MonoBehaviour
         if (other.name == triggerPlayerInCave)
         {
             playerInCave = true;
+            runtimeData.playerInsideCave = true;
         }
     }
 
@@ -53,6 +60,7 @@ public class Player : MonoBehaviour
         if (other.name == triggerPlayerInCave)
         {
             playerInCave = false;
+            runtimeData.playerInsideCave = false;
         }
     }
 

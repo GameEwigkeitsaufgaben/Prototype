@@ -7,9 +7,12 @@ public class SoChapOneRuntimeData : ScriptableObject
     public bool videoPlaying = false;
     public OverlaySoundState overlaySoundState;
     public Texture2D cursorTexture3DCave;
+    public Texture2D sceneDefualtcursor;
+    
 
     [Header("Coalmine 116")]
     public float playerRotation; //needed for lookaroundMouse
+    public bool playerInsideCave;
     public bool trainArrived;
     public bool viewPointS3passed;
     public bool sole1done, sole2done, sole3BewetterungDone, sole3GebaeudeDone, trainRideInDone, trainRideOutDone, isLongwallCutterDone;

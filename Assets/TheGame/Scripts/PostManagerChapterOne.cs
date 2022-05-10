@@ -18,6 +18,7 @@ public class PostManagerChapterOne : MonoBehaviour
 
     private void Awake()
     {
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
         gameIcons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);

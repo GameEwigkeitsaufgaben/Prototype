@@ -159,7 +159,10 @@ public class CoalmineSpeechManger : MonoBehaviour
         list.PlayAll();
     }
 
-
+    public bool IsMineEATalkingFinished()
+    {
+        return mySpeechDict[GameData.NameTLMineEACave].finishedToogle;
+    }
 
     public bool IsTrainRideInTalkingFinished()
     {
