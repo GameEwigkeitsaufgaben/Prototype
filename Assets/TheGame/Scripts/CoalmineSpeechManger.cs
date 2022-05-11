@@ -42,7 +42,7 @@ public class CoalmineSpeechManger : MonoBehaviour
         audiosEntryArea,
         audiosEntryAreaTriggerSchacht, audiosTriggerSchachtS1,
         audiosSole1, audiosSole1Vp, 
-        audiosSole2, audiosSole2Badewannen,
+        audiosSole2, audiosSole2Grubenwasser,
         audiosSole3WPBahnsteig, audiosSole3WPBewetterung, audiosSole3WPCave, audiosSole3WPOVMine,
         audiosTrainRideIn, audiosTrainRideOut,
         audiosLongwallCutterBahnsteig, audioLongwallCutterLongwallCutter;
@@ -56,7 +56,7 @@ public class CoalmineSpeechManger : MonoBehaviour
         audiosEntryAreaTriggerSchacht = Resources.Load<SoTalkingList>(GameData.NameTLMineEATriggerSchacht);
         audiosSole1 = Resources.Load<SoTalkingList>(GameData.NameTLMineS1Cave);
         audiosSole1Vp = Resources.Load<SoTalkingList>(GameData.NameTLMineS1Vp);
-        audiosSole2Badewannen = Resources.Load<SoTalkingList>(GameData.NameTLMineS2VpBadewanne);
+        audiosSole2Grubenwasser = Resources.Load<SoTalkingList>(GameData.NameTLMineS2VpGrubenwasser);
         audiosSole2 = Resources.Load<SoTalkingList>(GameData.NameTLMineS2Cave);
         audiosSole3WPBahnsteig = Resources.Load<SoTalkingList>(GameData.NameTLMineS3Bahnsteig);
         audiosSole3WPBewetterung = Resources.Load<SoTalkingList>(GameData.NameTLMineS3Bewetterung);
@@ -103,7 +103,7 @@ public class CoalmineSpeechManger : MonoBehaviour
         mySpeechLists.Add(speakSole1Vp);
 
         speakSole2Badewannen = gameObject.AddComponent<SpeechList>();
-        speakSole2Badewannen.SetUpList(audiosSole2Badewannen, mySrc);
+        speakSole2Badewannen.SetUpList(audiosSole2Grubenwasser, mySrc);
         mySpeechLists.Add(speakSole2Badewannen);
 
         speakSole2 = gameObject.AddComponent<SpeechList>();
@@ -169,6 +169,17 @@ public class CoalmineSpeechManger : MonoBehaviour
 
         list.enabled = true;
         list.PlayAll();
+    }
+
+
+    public bool IsMineS2VpTalkingFinished()
+    {
+        return mySpeechDict[GameData.NameTLMineS2VpGrubenwasser].finishedToogle;
+    }
+
+    public bool IsMineS2CaveTalkingFinished()
+    {
+        return mySpeechDict[GameData.NameTLMineS2Cave].finishedToogle;
     }
 
     public bool IsMineS1CaveTalkingFinished()

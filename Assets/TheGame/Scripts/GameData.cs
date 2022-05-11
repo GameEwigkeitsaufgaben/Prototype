@@ -35,7 +35,7 @@ public static class GameData
     public const string NameTLMineLWCCutter = "Audios100160CaveLongwallCutterWpLongwallCutter";
     public const string NameTLMineS1Cave = "Audios100160MineSole1Cave";
     public const string NameTLMineS1Vp = "Audios100160MineSole1Vp";
-    public const string NameTLMineS2VpBadewanne = "Audios100160CaveSole2wpBadewanne";
+    public const string NameTLMineS2VpGrubenwasser = "Audios100160CaveSole2wpGrubenwasser";
     public const string NameTLMineS2Cave = "Audios100160CaveSole2";
     public const string NameTLMineS3Bahnsteig = "Audios100160CaveSole3wpBahnsteig";
     public const string NameTLMineS3Bewetterung = "Audios100160CaveSole3wpBewetterung";

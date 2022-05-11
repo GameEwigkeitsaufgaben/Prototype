@@ -453,7 +453,6 @@ public class CoalmineWaypointManager : MonoBehaviour
 
         if(GameData.currentStopSohle == (int)CoalmineStop.Sole1 && !runtimeData.sole1Done)
         {
-            Debug.Log(speechManager.IsMineS1CaveTalkingFinished() + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             if (speechManager.IsMineS1CaveTalkingFinished() && !wps1ViewpointBtn.GetComponent<Button>().interactable)
             {
                 wps1ViewpointBtn.GetComponent<Button>().interactable = true;
@@ -464,14 +463,20 @@ public class CoalmineWaypointManager : MonoBehaviour
             {
                 runtimeData.sole1Done = true;
             }
-            //if (GameData.currentStopSohle == (int)CoalmineStop.Sole1)
-            //{
-            //    runtimeData.sole1Done = true;
-            //}
-            //else if (GameData.currentStopSohle == (int)CoalmineStop.Sole2)
-            //{
-            //    runtimeData.sole2Done = true;
-            //}
+        }
+
+        if (GameData.currentStopSohle == (int)CoalmineStop.Sole2 && !runtimeData.sole2Done)
+        {
+            if (speechManager.IsMineS2CaveTalkingFinished() && !wps2ViewpointBtn.GetComponent<Button>().interactable)
+            {
+                wps2ViewpointBtn.GetComponent<Button>().interactable = true;
+                return;
+            }
+
+            if (speechManager.IsMineS2VpTalkingFinished())
+            {
+                runtimeData.sole2Done = true;
+            }
         }
 
         if (GameData.currentStopSohle == (int)CoalmineStop.Sole3 && !helperSetPath)
