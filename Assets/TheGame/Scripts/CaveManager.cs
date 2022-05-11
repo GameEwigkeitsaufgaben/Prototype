@@ -35,8 +35,8 @@ public class CaveManager : MonoBehaviour
     {
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
-        runtimeData.sceneDefualtcursor = runtimeData.cursorTexture3DCave;
-        Cursor.SetCursor(runtimeData.sceneDefualtcursor, Vector2.zero, CursorMode.Auto);
+        runtimeData.sceneDefaultcursor = runtimeData.cursorTexture3DCave;
+        Cursor.SetCursor(runtimeData.sceneDefaultcursor, Vector2.zero, CursorMode.Auto);
         speechManagerMine = characterDad.transform.parent.GetComponent<CoalmineSpeechManger>();
 
         //triggerEinstieg.SetActive(false);
@@ -118,6 +118,7 @@ public class CaveManager : MonoBehaviour
         {
             cave.SetAllButtonsInteractable(true);
             introPlayedOneTime = true;
+            runtimeData.entryAreaDone = true;
         }
           
         //if (cave.caveDoorsClosed && exitScene.interactable)

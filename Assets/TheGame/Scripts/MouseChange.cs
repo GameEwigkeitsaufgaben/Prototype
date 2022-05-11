@@ -11,6 +11,7 @@ public class MouseChange : MonoBehaviour
     private void Start()
     {
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        cursorTexture = runtimeData.cursorInteract;
     }
 
     public void OnMouseEnter()
@@ -20,6 +21,6 @@ public class MouseChange : MonoBehaviour
 
     public void OnMouseExit()
     {
-        Cursor.SetCursor(runtimeData.sceneDefualtcursor, Vector2.zero, cursorMode);
+        Cursor.SetCursor(runtimeData.sceneDefaultcursor, Vector2.zero, cursorMode);
     }
 }

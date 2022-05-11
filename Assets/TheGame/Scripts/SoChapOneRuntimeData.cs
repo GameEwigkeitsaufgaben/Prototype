@@ -7,7 +7,8 @@ public class SoChapOneRuntimeData : ScriptableObject
     public bool videoPlaying = false;
     public OverlaySoundState overlaySoundState;
     public Texture2D cursorTexture3DCave;
-    public Texture2D sceneDefualtcursor;
+    public Texture2D cursorInteract;
+    public Texture2D sceneDefaultcursor;
     
 
     [Header("Coalmine 116")]
@@ -15,7 +16,8 @@ public class SoChapOneRuntimeData : ScriptableObject
     public bool playerInsideCave;
     public bool trainArrived;
     public bool viewPointS3passed;
-    public bool sole1done, sole2done, sole3BewetterungDone, sole3GebaeudeDone, trainRideInDone, trainRideOutDone, isLongwallCutterDone;
+    public bool entryAreaDone;
+    public bool sole1Done, sole2Done, sole3BewetterungDone, sole3GebaeudeDone, trainRideInDone, trainRideOutDone, isLongwallCutterDone;
 
     [Header("Museum 117")]
     public Vector3 currentGroupPos = Vector3.zero; //-13.44922, 2.4, -2.670441
@@ -39,12 +41,13 @@ public class SoChapOneRuntimeData : ScriptableObject
         Debug.Log("RELOAD RUNTIME DATA");
         trainArrived = viewPointS3passed = false;
         postOverlayToLoad = "";
+        playerInsideCave = false;
         video115Done = false;
         currentGroupPos = Vector3.zero;
         currentMuseumWaypoint = MuseumWaypoints.WP0;
         playerRotation = 0f;
         isMinerDone = isMythDone = isCarbonificationPeriodDone = isCoalifiationDone = false;
-        sole1done = sole2done = sole3BewetterungDone = sole3GebaeudeDone = trainRideInDone = trainRideOutDone = isLongwallCutterDone = false;
+        sole1Done = sole2Done = sole3BewetterungDone = sole3GebaeudeDone = trainRideInDone = trainRideOutDone = isLongwallCutterDone = false;
         interaction116Done = interaction117Done = quiz119Done = false;
         musicOn = true;
     }
@@ -64,7 +67,7 @@ public class SoChapOneRuntimeData : ScriptableObject
     {
         if (!interaction116Done)
         {
-            if (sole1done && sole2done && sole3BewetterungDone && sole3GebaeudeDone && trainRideInDone && trainRideOutDone && isLongwallCutterDone)
+            if (sole1Done && sole2Done && sole3BewetterungDone && sole3GebaeudeDone && trainRideInDone && trainRideOutDone && isLongwallCutterDone)
             {
                 interaction116Done = true;
             }

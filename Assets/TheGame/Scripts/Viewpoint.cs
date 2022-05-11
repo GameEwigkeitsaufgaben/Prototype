@@ -79,8 +79,8 @@ public class Viewpoint : MonoBehaviour
         if (!discSetToDone)
         {
             if(runtimeData.interaction116Done && vpLocation == ViewpointLocation.Mine) SetInteractionDone();
-            else if (runtimeData.sole1done && gameObject.name == viewpointSole1) SetInteractionDone();
-            else if (runtimeData.sole2done && gameObject.name == viewpointSole2) SetInteractionDone();
+            else if (runtimeData.sole1Done && gameObject.name == viewpointSole1) SetInteractionDone();
+            else if (runtimeData.sole2Done && gameObject.name == viewpointSole2) SetInteractionDone();
             else if (runtimeData.sole3BewetterungDone && gameObject.name == viewpointSole3Bewetterung) SetInteractionDone();
             else if (runtimeData.sole3GebaeudeDone && gameObject.name == viewpointSole3OVMine) SetInteractionDone();
             else if (runtimeData.isLongwallCutterDone && gameObject.name == viewpointSole3Longwallcutter) SetInteractionDone();

@@ -211,6 +211,8 @@ public class Cave : MonoBehaviour
         }
 
 
+        if (!runtimeData.entryAreaDone) return;
+
         if (!runtimeData.playerInsideCave)
         {
             SetAllButtonsInteractable(false);
@@ -219,16 +221,5 @@ public class Cave : MonoBehaviour
         {
             SetAllButtonsInteractable(true);
         }
-
-        //if (GameData.liftBtnsEnabled)
-        //{
-        //    SetAllButtonsInteractable(true);
-        //}
-        //else
-        //{
-        //    SetAllButtonsInteractable(false);
-        //}
-
-        
     }
 }

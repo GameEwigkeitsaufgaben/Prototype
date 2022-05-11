@@ -49,7 +49,7 @@ public class CaveColliderBottom : MonoBehaviour
              {
                 cave.InitReachedStop(CoalmineStop.Sole3);
 
-                speechManger.playSole3WPCave = (GameData.currentStopSohle == (int)CoalmineStop.Unset) ? true : false;
+                speechManger.playSole3WPCave = (GameData.currentStopSohle == (int)CoalmineStop.Sole3) ? true : false;
              }
     }
 }
