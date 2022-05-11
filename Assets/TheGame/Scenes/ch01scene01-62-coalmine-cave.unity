@@ -255,10 +255,12 @@ MonoBehaviour:
   spGeorg: {fileID: 1565534980}
   playCaveIntro: 0
   playEntryArea: 0
+  playSchachtS1: 0
   playSchacht: 0
   playSole1: 0
-  playSole2Badewannen: 0
+  playSole1Vp: 0
   playSole2: 0
+  playSole2Badewannen: 0
   playSole3WPBahnsteig: 0
   playSole3WPBewetterung: 0
   playSole3WPCave: 0
@@ -270,9 +272,11 @@ MonoBehaviour:
   audiosCaveIntro: {fileID: 11400000, guid: 0b60167e101ecb845b840fccfd2d89d0, type: 2}
   audiosEntryArea: {fileID: 11400000, guid: 139b6e1bad73fe2418d03c4686441eaa, type: 2}
   audiosEntryAreaTriggerSchacht: {fileID: 11400000, guid: 42aac5037418e734f95807b1b03c6deb, type: 2}
+  audiosTriggerSchachtS1: {fileID: 0}
   audiosSole1: {fileID: 11400000, guid: 8a82036e76e1212418f25d76c2b11910, type: 2}
-  audiosSole1Badewannen: {fileID: 11400000, guid: 24f5dd58431a2a946bacac1e100e6367, type: 2}
+  audiosSole1Vp: {fileID: 0}
   audiosSole2: {fileID: 11400000, guid: 2faebea999a8ecf4ab4cf3f2a6a57f02, type: 2}
+  audiosSole2Badewannen: {fileID: 0}
   audiosSole3WPBahnsteig: {fileID: 11400000, guid: e293681608c7a2640a14ba9e140abf33, type: 2}
   audiosSole3WPBewetterung: {fileID: 11400000, guid: 892465c2e6fa71f4db27633136469d29, type: 2}
   audiosSole3WPCave: {fileID: 11400000, guid: 215b2a6dbe108744eb895c0d3f3cbe28, type: 2}
@@ -4512,6 +4516,101 @@ MonoBehaviour:
   radius: 0.4
   skipCustomNames: 1
   replaceObject: {fileID: 0}
+--- !u!1 &623904484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 623904485}
+  - component: {fileID: 623904488}
+  - component: {fileID: 623904487}
+  - component: {fileID: 623904486}
+  m_Layer: 0
+  m_Name: TriggerTalkNextStopS1
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &623904485
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623904484}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -20.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 710439186}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &623904486
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623904484}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: -3, y: 0.5, z: 0.1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &623904487
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623904484}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: eebb20172050ed04fbda903aed8aa33b, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &623904488
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623904484}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &625271696
 GameObject:
   m_ObjectHideFlags: 0
@@ -5675,6 +5774,7 @@ Transform:
   - {fileID: 420858271}
   - {fileID: 1944404899}
   - {fileID: 40656054}
+  - {fileID: 623904485}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8028,10 +8128,12 @@ MonoBehaviour:
   spGeorg: {fileID: 443497845}
   playCaveIntro: 0
   playEntryArea: 0
+  playSchachtS1: 0
   playSchacht: 0
   playSole1: 0
-  playSole2Badewannen: 0
+  playSole1Vp: 0
   playSole2: 0
+  playSole2Badewannen: 0
   playSole3WPBahnsteig: 0
   playSole3WPBewetterung: 0
   playSole3WPCave: 0
@@ -8043,9 +8145,11 @@ MonoBehaviour:
   audiosCaveIntro: {fileID: 0}
   audiosEntryArea: {fileID: 11400000, guid: 139b6e1bad73fe2418d03c4686441eaa, type: 2}
   audiosEntryAreaTriggerSchacht: {fileID: 11400000, guid: 42aac5037418e734f95807b1b03c6deb, type: 2}
+  audiosTriggerSchachtS1: {fileID: 0}
   audiosSole1: {fileID: 11400000, guid: 8a82036e76e1212418f25d76c2b11910, type: 2}
-  audiosSole1Badewannen: {fileID: 0}
+  audiosSole1Vp: {fileID: 0}
   audiosSole2: {fileID: 11400000, guid: 2faebea999a8ecf4ab4cf3f2a6a57f02, type: 2}
+  audiosSole2Badewannen: {fileID: 0}
   audiosSole3WPBahnsteig: {fileID: 11400000, guid: e293681608c7a2640a14ba9e140abf33, type: 2}
   audiosSole3WPBewetterung: {fileID: 11400000, guid: 892465c2e6fa71f4db27633136469d29, type: 2}
   audiosSole3WPCave: {fileID: 11400000, guid: 215b2a6dbe108744eb895c0d3f3cbe28, type: 2}
@@ -13916,7 +14020,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1744609452}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -55, z: 0}
+  m_LocalPosition: {x: 0, y: -109.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 710439186}
@@ -18502,6 +18606,10 @@ PrefabInstance:
     - target: {fileID: 8315763029252495739, guid: b38fa4bebf1b496449a7f2ab25168f17, type: 3}
       propertyPath: m_Name
       value: ViewpointS1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8315763030784929224, guid: b38fa4bebf1b496449a7f2ab25168f17, type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8315763030784929224, guid: b38fa4bebf1b496449a7f2ab25168f17, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

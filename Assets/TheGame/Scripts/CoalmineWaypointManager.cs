@@ -260,6 +260,7 @@ public class CoalmineWaypointManager : MonoBehaviour
         switch (currentWP)
         {
             case MineWayPoints.viewpoint:
+                if (GameData.currentStopSohle == (int)CoalmineStop.Sole1) speechManager.playSole1Vp = true;
                 if (GameData.currentStopSohle == (int)CoalmineStop.Sole2) speechManager.playSole2Badewannen = true;
                 break;
             case MineWayPoints.viewpointBewetterung:
@@ -294,14 +295,14 @@ public class CoalmineWaypointManager : MonoBehaviour
             wps2ViewpointBtn.gameObject.SetActive(false);
             wps1ViewpointBtn.gameObject.SetActive(false);
         
-            if(GameData.currentStopSohle == (int)CoalmineStop.Sole1)
-            {
-                runtimeData.sole1Done = true;
-            }
-            else if (GameData.currentStopSohle == (int)CoalmineStop.Sole2)
-            {
-                runtimeData.sole2Done = true;
-            }
+            //if(GameData.currentStopSohle == (int)CoalmineStop.Sole1)
+            //{
+            //    runtimeData.sole1Done = true;
+            //}
+            //else if (GameData.currentStopSohle == (int)CoalmineStop.Sole2)
+            //{
+            //    runtimeData.sole2Done = true;
+            //}
         }
 
         if (GameData.currentStopSohle != (int)CoalmineStop.Sole3) return;
@@ -449,6 +450,29 @@ public class CoalmineWaypointManager : MonoBehaviour
         myPlayer.followAnker = false;
 
         if (GameData.currentStopSohle == (int)CoalmineStop.EntryArea) return;
+
+        if(GameData.currentStopSohle == (int)CoalmineStop.Sole1 && !runtimeData.sole1Done)
+        {
+            Debug.Log(speechManager.IsMineS1CaveTalkingFinished() + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            if (speechManager.IsMineS1CaveTalkingFinished() && !wps1ViewpointBtn.GetComponent<Button>().interactable)
+            {
+                wps1ViewpointBtn.GetComponent<Button>().interactable = true;
+                return;
+            }
+
+            if (speechManager.IsMineS1VpTalkingFinished())
+            {
+                runtimeData.sole1Done = true;
+            }
+            //if (GameData.currentStopSohle == (int)CoalmineStop.Sole1)
+            //{
+            //    runtimeData.sole1Done = true;
+            //}
+            //else if (GameData.currentStopSohle == (int)CoalmineStop.Sole2)
+            //{
+            //    runtimeData.sole2Done = true;
+            //}
+        }
 
         if (GameData.currentStopSohle == (int)CoalmineStop.Sole3 && !helperSetPath)
         {

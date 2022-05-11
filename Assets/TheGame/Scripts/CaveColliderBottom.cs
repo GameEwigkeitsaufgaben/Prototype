@@ -9,6 +9,7 @@ public class CaveColliderBottom : MonoBehaviour
     private const string TriggerSole1 = "TriggerStopSole1";
     private const string TriggerSole2 = "TriggerStopSole2";
     private const string TriggerSole3 = "TriggerStopSole3";
+    private const string TriggerTalkNextStopS1 = "TriggerTalkNextStopS1";
     private const string TriggerTalkSpeedCave = "TriggerTalkSpeedCave";
 
     public Cave cave;
@@ -36,6 +37,10 @@ public class CaveColliderBottom : MonoBehaviour
                 cave.InitReachedStop(CoalmineStop.Sole1);
                 speechManger.playSole1 = true;
              }
+        else if (other.name == TriggerTalkNextStopS1 && cave.moveDirection == CaveMovement.MoveDown)
+        {
+            speechManger.playSchachtS1 = true;
+        }
         else if (other.name == TriggerTalkSpeedCave && cave.moveDirection == CaveMovement.MoveDown)
              {
                 speechManger.playSchacht = true;
