@@ -9,6 +9,7 @@ public class CaveColliderBottom : MonoBehaviour
     private const string TriggerSole1 = "TriggerStopSole1";
     private const string TriggerSole2 = "TriggerStopSole2";
     private const string TriggerSole3 = "TriggerStopSole3";
+    private const string TriggerTalkNextStopS1 = "TriggerTalkNextStopS1";
     private const string TriggerTalkSpeedCave = "TriggerTalkSpeedCave";
 
     public Cave cave;
@@ -23,7 +24,7 @@ public class CaveColliderBottom : MonoBehaviour
             speechManger.playEntryArea = true;
             revisitEntryArea = true;
 
-            cave.liftBtns[0].gameObject.GetComponent<Button>().interactable = true;
+            //cave.liftBtns[0].gameObject.GetComponent<Button>().interactable = true;
         }
         else if (other.name == TriggerEntryArea && revisitEntryArea)
              {
@@ -36,6 +37,10 @@ public class CaveColliderBottom : MonoBehaviour
                 cave.InitReachedStop(CoalmineStop.Sole1);
                 speechManger.playSole1 = true;
              }
+        else if (other.name == TriggerTalkNextStopS1 && cave.moveDirection == CaveMovement.MoveDown)
+        {
+            speechManger.playSchachtS1 = true;
+        }
         else if (other.name == TriggerTalkSpeedCave && cave.moveDirection == CaveMovement.MoveDown)
              {
                 speechManger.playSchacht = true;
@@ -49,7 +54,7 @@ public class CaveColliderBottom : MonoBehaviour
              {
                 cave.InitReachedStop(CoalmineStop.Sole3);
 
-                speechManger.playSole3WPCave = (GameData.currentStopSohle == (int)CoalmineStop.Unset) ? true : false;
+                speechManger.playSole3WPCave = (GameData.currentStopSohle == (int)CoalmineStop.Sole3) ? true : false;
              }
     }
 }

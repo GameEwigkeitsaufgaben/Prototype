@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MouseChange : MonoBehaviour
@@ -13,18 +11,16 @@ public class MouseChange : MonoBehaviour
     private void Start()
     {
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
-        
+        cursorTexture = runtimeData.cursorInteract;
     }
 
     public void OnMouseEnter()
     {
-        //Debug.Log("set cursur enter");
         Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
     }
 
     public void OnMouseExit()
     {
-        //Debug.Log("set cursur exit");
-        Cursor.SetCursor(runtimeData.cursorTexture3DCave, Vector2.zero, cursorMode);
+        Cursor.SetCursor(runtimeData.sceneDefaultcursor, Vector2.zero, cursorMode);
     }
 }

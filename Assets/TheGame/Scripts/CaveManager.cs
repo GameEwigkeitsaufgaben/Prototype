@@ -8,6 +8,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class CaveManager : MonoBehaviour
 {
     private const float defaultYawInCave = 0f;
@@ -17,8 +18,8 @@ public class CaveManager : MonoBehaviour
     public Character characterEnya, characterDad, characterGeorg;
 
     private SoChapOneRuntimeData runtimeData;
+    private CoalmineSpeechManger speechManagerMine;
     
-
     public Button exitSceneBtn, sole1WPViewpointBtn, sole2WPViewpointBtn, sole1caveWPBtn, sole3EnterTrainBtn;
    // public SprechblaseController sprechblaseController;
 
@@ -30,13 +31,14 @@ public class CaveManager : MonoBehaviour
     public AudioSource baukipper, kran, water;
     public Texture2D cursorTexture;
 
-
-
     private void Start()
     {
-        Cursor.SetCursor(cursorTexture, new Vector2(64f,64f), CursorMode.Auto);
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        runtimeData.sceneDefaultcursor = runtimeData.cursorTexture3DCave;
+        Cursor.SetCursor(runtimeData.sceneDefaultcursor, Vector2.zero, CursorMode.Auto);
+        speechManagerMine = characterDad.transform.parent.GetComponent<CoalmineSpeechManger>();
+
         //triggerEinstieg.SetActive(false);
 
         switchScene = gameObject.GetComponent<SwitchSceneManager>();
@@ -65,6 +67,8 @@ public class CaveManager : MonoBehaviour
         if(GameData.currentStopSohle == (int)CoalmineStop.Unset)
         {
             player.SetPlayerRotation(defaultYawInCave, false); //Default 90 degree for cave orientation
+            cave.SetAllButtonsInteractable(false);
+            cave.liftBtns[0].gameObject.GetComponent<Button>().interactable = true;
         }
         
         //at Reload
@@ -72,8 +76,6 @@ public class CaveManager : MonoBehaviour
         {
             GameData.currentStopSohle = (int)CoalmineStop.Sole3;
             cave.ReloadCaveAtSohle3();
-            //player=?
-            //player.SetPlayerBodyRotation(defaultYawInCave, false); //Default 90 degree for cave orientation
         }
     }
 
@@ -110,6 +112,13 @@ public class CaveManager : MonoBehaviour
         {
             if (sole3EnterTrainBtn.IsActive())
                 sole3EnterTrainBtn.gameObject.SetActive(false);
+        }
+
+        if(!introPlayedOneTime && speechManagerMine.IsMineEATalkingFinished())
+        {
+            cave.SetAllButtonsInteractable(true);
+            introPlayedOneTime = true;
+            runtimeData.entryAreaDone = true;
         }
           
         //if (cave.caveDoorsClosed && exitScene.interactable)

@@ -9,9 +9,10 @@ public class CoalmineSpeechManger : MonoBehaviour
     public bool
         playCaveIntro,
         playEntryArea,
+        playSchachtS1,
         playSchacht,
-        playSole1, playSole2Badewannen,
-        playSole2,
+        playSole1, playSole1Vp,
+        playSole2, playSole2Badewannen,
         playSole3WPBahnsteig, playSole3WPBewetterung, playSole3WPCave, playSole3WPOVMine,
         playTrainRideIn, playTrainRideOut,
         playLongwallCutterBahnsteig, playLongwallCutterLongwallCutter;
@@ -20,8 +21,9 @@ public class CoalmineSpeechManger : MonoBehaviour
         speakCaveIntro,
         speakEntryArea,
         speakSchacht,
-        speakSole1, speakSole1Badewannen,
-        speakSole2,
+        speakSchachtS1,
+        speakSole1, speakSole1Vp,
+        speakSole2, speakSole2Badewannen,
         speakBewetterung, speakSole3Bahnsteig, speakSole3Cave, speakSole3BoardOVmine,
         speakTrainRideIn, speakTrainRideOut,
         speakLongwallCutterBahnsteig, speakLongwallCutterLongwallCutter;
@@ -38,9 +40,9 @@ public class CoalmineSpeechManger : MonoBehaviour
     private SoTalkingList
         audiosCaveIntro,
         audiosEntryArea,
-        audiosEntryAreaTriggerSchacht,
-        audiosSole1, audiosSole1Badewannen,
-        audiosSole2,
+        audiosEntryAreaTriggerSchacht, audiosTriggerSchachtS1,
+        audiosSole1, audiosSole1Vp, 
+        audiosSole2, audiosSole2Grubenwasser,
         audiosSole3WPBahnsteig, audiosSole3WPBewetterung, audiosSole3WPCave, audiosSole3WPOVMine,
         audiosTrainRideIn, audiosTrainRideOut,
         audiosLongwallCutterBahnsteig, audioLongwallCutterLongwallCutter;
@@ -50,9 +52,11 @@ public class CoalmineSpeechManger : MonoBehaviour
     {
         audiosCaveIntro = Resources.Load<SoTalkingList>(GameData.NameTLMineIntro);
         audiosEntryArea = Resources.Load<SoTalkingList>(GameData.NameTLMineEACave);
+        audiosTriggerSchachtS1 = Resources.Load<SoTalkingList>(GameData.NameTLMineTriggerSchachtS1);
         audiosEntryAreaTriggerSchacht = Resources.Load<SoTalkingList>(GameData.NameTLMineEATriggerSchacht);
         audiosSole1 = Resources.Load<SoTalkingList>(GameData.NameTLMineS1Cave);
-        audiosSole1Badewannen = Resources.Load<SoTalkingList>(GameData.NameTLMineS2VpBadewanne);
+        audiosSole1Vp = Resources.Load<SoTalkingList>(GameData.NameTLMineS1Vp);
+        audiosSole2Grubenwasser = Resources.Load<SoTalkingList>(GameData.NameTLMineS2VpGrubenwasser);
         audiosSole2 = Resources.Load<SoTalkingList>(GameData.NameTLMineS2Cave);
         audiosSole3WPBahnsteig = Resources.Load<SoTalkingList>(GameData.NameTLMineS3Bahnsteig);
         audiosSole3WPBewetterung = Resources.Load<SoTalkingList>(GameData.NameTLMineS3Bewetterung);
@@ -82,6 +86,10 @@ public class CoalmineSpeechManger : MonoBehaviour
         speakEntryArea.SetUpList(audiosEntryArea, mySrc);
         mySpeechLists.Add(speakEntryArea);
 
+        speakSchachtS1 = gameObject.AddComponent<SpeechList>();
+        speakSchachtS1.SetUpList(audiosTriggerSchachtS1, mySrc);
+        mySpeechLists.Add(speakSchachtS1);
+
         speakSchacht = gameObject.AddComponent<SpeechList>();
         speakSchacht.SetUpList(audiosEntryAreaTriggerSchacht, mySrc);
         mySpeechLists.Add(speakSchacht);
@@ -90,9 +98,13 @@ public class CoalmineSpeechManger : MonoBehaviour
         speakSole1.SetUpList(audiosSole1, mySrc);
         mySpeechLists.Add(speakSole1);
 
-        speakSole1Badewannen = gameObject.AddComponent<SpeechList>();
-        speakSole1Badewannen.SetUpList(audiosSole1Badewannen, mySrc);
-        mySpeechLists.Add(speakSole1Badewannen);
+        speakSole1Vp = gameObject.AddComponent<SpeechList>();
+        speakSole1Vp.SetUpList(audiosSole1Vp, mySrc);
+        mySpeechLists.Add(speakSole1Vp);
+
+        speakSole2Badewannen = gameObject.AddComponent<SpeechList>();
+        speakSole2Badewannen.SetUpList(audiosSole2Grubenwasser, mySrc);
+        mySpeechLists.Add(speakSole2Badewannen);
 
         speakSole2 = gameObject.AddComponent<SpeechList>();
         speakSole2.SetUpList(audiosSole2, mySrc);
@@ -160,6 +172,30 @@ public class CoalmineSpeechManger : MonoBehaviour
     }
 
 
+    public bool IsMineS2VpTalkingFinished()
+    {
+        return mySpeechDict[GameData.NameTLMineS2VpGrubenwasser].finishedToogle;
+    }
+
+    public bool IsMineS2CaveTalkingFinished()
+    {
+        return mySpeechDict[GameData.NameTLMineS2Cave].finishedToogle;
+    }
+
+    public bool IsMineS1CaveTalkingFinished()
+    {
+        return mySpeechDict[GameData.NameTLMineS1Cave].finishedToogle;
+    }
+
+    public bool IsMineS1VpTalkingFinished()
+    {
+        return mySpeechDict[GameData.NameTLMineS1Vp].finishedToogle;
+    }
+
+    public bool IsMineEATalkingFinished()
+    {
+        return mySpeechDict[GameData.NameTLMineEACave].finishedToogle;
+    }
 
     public bool IsTrainRideInTalkingFinished()
     {
@@ -204,14 +240,26 @@ public class CoalmineSpeechManger : MonoBehaviour
             currentList = speakSchacht;
             playSchacht = false;
         }
+        else if (playSchachtS1)
+        {
+            currentList = speakSchachtS1;
+            playSchachtS1 = false;
+        }
         else if (playSole1)
         {
             currentList = speakSole1;
             playSole1 = false;
         }
+
+        else if (playSole1Vp)
+        {
+            currentList = speakSole1Vp;
+            playSole1Vp = false;
+        }
+
         else if (playSole2Badewannen)
         {
-            currentList = speakSole1Badewannen;
+            currentList = speakSole2Badewannen;
             playSole2Badewannen = false;
         }
         else if (playSole2)

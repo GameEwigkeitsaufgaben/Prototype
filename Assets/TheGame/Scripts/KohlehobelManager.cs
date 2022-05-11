@@ -8,6 +8,13 @@ public class KohlehobelManager : MonoBehaviour
     public LongwallCutterWaypointManager lwcManager;
     public Character enya, georg, dad;
 
+    private SoChapOneRuntimeData runtimeData;
+
+    private void Awake()
+    {
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +25,10 @@ public class KohlehobelManager : MonoBehaviour
 
         lwcManager.RotateCharacters(-114.0f, -53.0f, -80.0f);
         myPlayer.SetPlayerRotation(0f,false);
-        
+
+        runtimeData.sceneDefaultcursor = runtimeData.cursorTexture3DCave;
+        Cursor.SetCursor(runtimeData.cursorTexture3DCave, Vector2.zero, CursorMode.Auto);
+
     }
 
     //Positionieren und Ausrichten in LongwallCutterWaypointManager

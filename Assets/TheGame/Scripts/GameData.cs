@@ -29,11 +29,13 @@ public static class GameData
     //Talkinglist Mine: TL-TalkingList, EA-EntryArea, LWC-Longwallcutter
     public const string NameTLMineEACave = "Audios100160CaveEntryArea";
     public const string NameTLMineEATriggerSchacht = "Audios100160CaveEntryAreaTriggerSchacht";
+    public const string NameTLMineTriggerSchachtS1 = "Audios100160CaveTriggerSchachtNextS1";
     public const string NameTLMineIntro = "Audios100160CaveIntro";
     public const string NameTLMineLWCBahnsteig= "Audios100160CaveLongwallCutterWpBahnsteig";
     public const string NameTLMineLWCCutter = "Audios100160CaveLongwallCutterWpLongwallCutter";
-    public const string NameTLMineS1Cave = "Audios100160CaveSole1";
-    public const string NameTLMineS2VpBadewanne = "Audios100160CaveSole2wpBadewanne";
+    public const string NameTLMineS1Cave = "Audios100160MineSole1Cave";
+    public const string NameTLMineS1Vp = "Audios100160MineSole1Vp";
+    public const string NameTLMineS2VpGrubenwasser = "Audios100160CaveSole2wpGrubenwasser";
     public const string NameTLMineS2Cave = "Audios100160CaveSole2";
     public const string NameTLMineS3Bahnsteig = "Audios100160CaveSole3wpBahnsteig";
     public const string NameTLMineS3Bewetterung = "Audios100160CaveSole3wpBewetterung";
@@ -49,6 +51,7 @@ public static class GameData
     public const string NameTLMuseumCoalification = "Audios100170MuseumCoalification";
     public const string NameTLMuseumHistoryMining = "Audios100170MuseumHistoryMining";
     public const string NameTLMuseumMinerEquipment = "Audios100170MuseumMinerEquipment";
+    
 
 
     public static bool progressWithAdmin = false; //if start chapter with admin pwd true, else false;
