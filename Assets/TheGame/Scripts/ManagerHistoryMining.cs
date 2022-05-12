@@ -42,6 +42,8 @@ public class ManagerHistoryMining : MonoBehaviour
         museumConfig = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
         sliderCentury = Century.none;
         btnBackToMuseum.interactable = false;
+
+        runtimeData.sceneDefaultcursor = null;
     }
 
     public void OpenUrlSage()

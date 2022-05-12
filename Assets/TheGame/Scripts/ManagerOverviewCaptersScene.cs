@@ -10,6 +10,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class ManagerOverviewCaptersScene : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class ManagerOverviewCaptersScene : MonoBehaviour
 
     [SerializeField] Button enterChapterOne, enterChapterTwo, enterChapterThree, credits;
 
-    [SerializeField] Text lawNotice;
+    [SerializeField] TMP_Text lawNotice;
 
     //shake effect of InputField
     public float shakeAmount = 0.7f;
