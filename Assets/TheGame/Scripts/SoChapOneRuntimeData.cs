@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(menuName = "SoChapOneRuntimeData")]
 public class SoChapOneRuntimeData : ScriptableObject
@@ -8,8 +9,9 @@ public class SoChapOneRuntimeData : ScriptableObject
     public OverlaySoundState overlaySoundState;
     public Texture2D cursorTexture3DCave;
     public Texture2D cursorInteract;
-    public Texture2D sceneDefaultcursor;
-    
+    public Texture2D cursorDefault;
+
+    public bool ch1GeneralUnlocked, ch2GrubenwasserUnlocked;
 
     [Header("Coalmine 116")]
     public float playerRotation; //needed for lookaroundMouse
@@ -29,7 +31,7 @@ public class SoChapOneRuntimeData : ScriptableObject
     public MinerFeedback quizMinerFeedback;
 
     [Header("GameProgress")]
-    public bool video115Done, interaction116Done, interaction117Done, quiz119Done;
+    public bool video115Done, interaction116Done, interaction117Done, quiz119Done, progressCh1WithAdmin;
 
 
 
@@ -38,6 +40,8 @@ public class SoChapOneRuntimeData : ScriptableObject
 
     private void OnEnable()
     {
+        ch1GeneralUnlocked = false;
+        ch2GrubenwasserUnlocked = false;
         Debug.Log("RELOAD RUNTIME DATA");
         trainArrived = viewPointS3passed = false;
         postOverlayToLoad = "";
@@ -50,6 +54,7 @@ public class SoChapOneRuntimeData : ScriptableObject
         sole1Done = sole2Done = sole3BewetterungDone = sole3GebaeudeDone = trainRideInDone = trainRideOutDone = isLongwallCutterDone = false;
         interaction116Done = interaction117Done = quiz119Done = false;
         musicOn = true;
+        //Cursor.SetCursor(cursorInteract, Vector2.zero, CursorMode.Auto);
     }
 
     public void CheckInteraction117Done()

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MouseChange : MonoBehaviour
 {
@@ -11,16 +12,19 @@ public class MouseChange : MonoBehaviour
     private void Start()
     {
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
-        cursorTexture = runtimeData.cursorInteract;
+        
+        //if (SceneManager.GetActiveScene().name != GameScenes.ch01Mine) return;
+        
+        Cursor.SetCursor(runtimeData.cursorDefault, hotSpot, cursorMode);
     }
 
-    public void OnMouseEnter()
+    public void MouseEnter()
     {
-        Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+        Cursor.SetCursor(runtimeData.cursorInteract, hotSpot, cursorMode);
     }
 
-    public void OnMouseExit()
+    public void MouseExit()
     {
-        Cursor.SetCursor(runtimeData.sceneDefaultcursor, Vector2.zero, cursorMode);
+        Cursor.SetCursor(runtimeData.cursorDefault, Vector2.zero, cursorMode);
     }
 }

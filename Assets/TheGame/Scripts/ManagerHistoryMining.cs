@@ -43,7 +43,7 @@ public class ManagerHistoryMining : MonoBehaviour
         sliderCentury = Century.none;
         btnBackToMuseum.interactable = false;
 
-        runtimeData.sceneDefaultcursor = null;
+        runtimeData.cursorDefault = null;
     }
 
     public void OpenUrlSage()

@@ -42,7 +42,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     private void Awake()
     {
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
-        runtimeData.sceneDefaultcursor = null;
+        runtimeData.cursorDefault = null;
     }
 
     // Start is called before the first frame update
