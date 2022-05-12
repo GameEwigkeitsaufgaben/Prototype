@@ -30,6 +30,7 @@ public class ManagerCoalification : MonoBehaviour
     private void Start()
     {
         statesInkohlung = StatesInkohlung.None;
+        runtimeData.sceneDefaultcursor = null;
     }
 
     public void SetStateAndText()
