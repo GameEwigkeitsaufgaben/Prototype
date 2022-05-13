@@ -12,11 +12,13 @@ public class Post : MonoBehaviour
 
     private GameObject childIcon = null;
     private SpriteRenderer iconSpriteRenderer = null;
+    private SoChapOneRuntimeData runtimeData;
 
 
     private void Awake()
     {
         icons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
     }
 
     void Start()
@@ -60,7 +62,7 @@ public class Post : MonoBehaviour
         gameObject.GetComponent<Button>().interactable = false;
 
         //If you entered the adminpin go futher to unlock post
-        if (GameData.progressWithAdmin)
+        if (runtimeData.progressCh1WithAdmin)
         {
             postData.postUnLocked = true;
         }

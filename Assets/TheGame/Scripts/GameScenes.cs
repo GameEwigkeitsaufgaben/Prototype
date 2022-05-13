@@ -30,4 +30,7 @@ public static class GameScenes
     public const string ch01MuseumMinerEquipment = "ch01scene01-71-museum-minerEquipment";
     public const string ch01Quiz = "ch01scene01-91-quiz";
 
+    //Chapter two Bergbau allgemein
+    public const string ch02InstaMain = "ch02scene01-00-instaMenu";
+
 }

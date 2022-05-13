@@ -2,6 +2,12 @@ using UnityEngine;
 
 public static class GameData
 {
+    public const string pwdChapterOne = "1111";
+    public const string pwdAdminChapterOne = "1212";
+    public const string pwdChapterTwo = "2222";
+    public const string pwdAdminChapterTwo = "2323";
+    public const string pwdChapterThree = "3333";
+
     //Name of objects in Folder "Resources" 
     public const string NameConfigSfx = "SfxConfig";
     public const string NameRuntimeData = "RuntimeExchangeData";
@@ -52,8 +58,6 @@ public static class GameData
     public const string NameTLMuseumHistoryMining = "Audios100170MuseumHistoryMining";
     public const string NameTLMuseumMinerEquipment = "Audios100170MuseumMinerEquipment";
     
-
-
     public static bool progressWithAdmin = false; //if start chapter with admin pwd true, else false;
 
     //Unlock Posts data; is Introvideo played as a whole, than next post is to unlock

@@ -26,7 +26,7 @@ public class KohlehobelManager : MonoBehaviour
         lwcManager.RotateCharacters(-114.0f, -53.0f, -80.0f);
         myPlayer.SetPlayerRotation(0f,false);
 
-        runtimeData.sceneDefaultcursor = runtimeData.cursorTexture3DCave;
+        runtimeData.cursorDefault = runtimeData.cursorTexture3DCave;
         Cursor.SetCursor(runtimeData.cursorTexture3DCave, Vector2.zero, CursorMode.Auto);
 
     }

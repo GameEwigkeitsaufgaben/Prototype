@@ -413,21 +413,21 @@ public class CoalmineWaypointManager : MonoBehaviour
     {
         DetectAndSetPath(MineWayPoints.viewpointBewetterung);
         playerSplineMove.StartMove();
-        Cursor.SetCursor(runtimeData.sceneDefaultcursor, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(runtimeData.cursorDefault, Vector2.zero, CursorMode.Auto);
     }
 
     public void MoveToBahnsteig()
     {
         DetectAndSetPath(MineWayPoints.viewpointBahnsteig);
         playerSplineMove.StartMove();
-        Cursor.SetCursor(runtimeData.sceneDefaultcursor, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(runtimeData.cursorDefault, Vector2.zero, CursorMode.Auto);
     }
 
     public void MoveToOVMine()
     {
         DetectAndSetPath(MineWayPoints.viewpointOVMine);
         playerSplineMove.StartMove();
-        Cursor.SetCursor(runtimeData.sceneDefaultcursor, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(runtimeData.cursorDefault, Vector2.zero, CursorMode.Auto);
     }
 
     public void MoveToViewpoint()
@@ -435,7 +435,7 @@ public class CoalmineWaypointManager : MonoBehaviour
         if (GameData.currentStopSohle != (int)CoalmineStop.Sole3) return;
         DetectAndSetPath(MineWayPoints.viewpoint);
         playerSplineMove.StartMove();
-        Cursor.SetCursor(runtimeData.sceneDefaultcursor, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(runtimeData.cursorDefault, Vector2.zero, CursorMode.Auto);
     }
 
     private void Update()

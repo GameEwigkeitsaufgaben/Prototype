@@ -18,13 +18,12 @@ public class PostManagerChapterOne : MonoBehaviour
 
     private void Awake()
     {
-        
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
         gameIcons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
 
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-        runtimeData.sceneDefaultcursor = null;
+        runtimeData.cursorDefault = null;
 
         overlayArray = overlayParent.GetComponentsInChildren<Overlay>(true);
 

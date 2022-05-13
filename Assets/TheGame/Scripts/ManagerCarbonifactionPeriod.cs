@@ -16,7 +16,7 @@ public class ManagerCarbonifactionPeriod : MonoBehaviour
     void Start()
     {
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
-        runtimeData.sceneDefaultcursor = null;
+        runtimeData.cursorDefault = null;
     }
 
     public void GoBackToMuseum()
