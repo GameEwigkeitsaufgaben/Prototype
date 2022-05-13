@@ -81,9 +81,10 @@ public class Overlay : MonoBehaviour
         if (postData.overlayType == OverlayType.IMAGE)
         {
             allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().interactable = false;
-            ColorBlock ab = allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().colors;
-            ab.disabledColor = Color.white;
-            allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().colors = ab;
+            //ColorBlock ab = allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().colors;
+            //ab.disabledColor = Color.white;
+            //allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().colors = GameColors.GetOverlayColorBlock();
+            allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().colors = GameColors.GetOverlayColorBlock();
             allOverlayChildren[OVERLAYTYPEICON].gameObject.SetActive(false);
             return;
         }

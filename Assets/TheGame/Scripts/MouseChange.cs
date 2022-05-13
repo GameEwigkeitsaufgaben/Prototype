@@ -24,6 +24,11 @@ public class MouseChange : MonoBehaviour
                 gameObject.GetComponent<Button>().colors = GameColors.GetPostColorBlock();
                 return;
             }
+            if (gameObject.GetComponent<RawImage>() != null)
+            {
+                //gameObject.GetComponent<Button>().colors = GameColors.GetOverlayColorBlock();
+                return;
+            }
 
             gameObject.GetComponent<Button>().colors = GameColors.GetInteractionColorBlock();
         }
@@ -43,7 +48,11 @@ public class MouseChange : MonoBehaviour
         {
             Cursor.SetCursor(runtimeData.cursorInteract, hotSpot, cursorMode);
         }
-        
+        else
+        {
+            Cursor.SetCursor(runtimeData.cursorNoInteract, hotSpot, cursorMode);
+        }
+
     }
 
     public void MouseExit()

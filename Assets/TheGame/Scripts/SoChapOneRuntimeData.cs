@@ -9,6 +9,7 @@ public class SoChapOneRuntimeData : ScriptableObject
     public OverlaySoundState overlaySoundState;
     public Texture2D cursorTexture3DCave;
     public Texture2D cursorInteract;
+    public Texture2D cursorNoInteract;
     public Texture2D cursorDefault;
 
     public bool ch1GeneralUnlocked, ch2GrubenwasserUnlocked;

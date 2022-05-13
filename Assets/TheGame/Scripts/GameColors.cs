@@ -43,4 +43,16 @@ public static class GameColors
         return uiInteractionColors;
     }
 
+    public static ColorBlock GetOverlayColorBlock()
+    {
+        ColorBlock uiInteractionColors = ColorBlock.defaultColorBlock;
+        uiInteractionColors.normalColor = Color.white;
+        uiInteractionColors.highlightedColor = GameColors.defaultInteractionColorNormal;
+        uiInteractionColors.pressedColor = GameColors.defaultInteractionColorPresses;
+        uiInteractionColors.selectedColor = uiInteractionColors.normalColor;
+        uiInteractionColors.disabledColor = new Color32(255, 255, 255, 255);
+
+        return uiInteractionColors;
+    }
+
 }
