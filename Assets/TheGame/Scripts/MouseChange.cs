@@ -17,11 +17,15 @@ public class MouseChange : MonoBehaviour
 
     private void Start()
     {
-
-
         if(gameObject.GetComponent<Button>() != null)
         {
-            gameObject.GetComponent<Button>().colors = (gameObject.GetComponent<Post>() != null) ? GameColors.GetPostColorBlock() : GameColors.GetInteractionColorBlock();
+            if (gameObject.GetComponent<Post>() != null || gameObject.GetComponent<Overlay>())
+            {
+                gameObject.GetComponent<Button>().colors = GameColors.GetPostColorBlock();
+                return;
+            }
+
+            gameObject.GetComponent<Button>().colors = GameColors.GetInteractionColorBlock();
         }
         else if(gameObject.GetComponent<Scrollbar>() != null)
         {
@@ -35,7 +39,11 @@ public class MouseChange : MonoBehaviour
 
     public void MouseEnter()
     {
-        Cursor.SetCursor(runtimeData.cursorInteract, hotSpot, cursorMode);
+        if(gameObject.GetComponent<Button>() != null && gameObject.GetComponent<Button>().interactable)
+        {
+            Cursor.SetCursor(runtimeData.cursorInteract, hotSpot, cursorMode);
+        }
+        
     }
 
     public void MouseExit()

@@ -38,7 +38,7 @@ public static class GameColors
         uiInteractionColors.highlightedColor = GameColors.defaultInteractionColorNormal;
         uiInteractionColors.pressedColor = GameColors.defaultInteractionColorPresses;
         uiInteractionColors.selectedColor = uiInteractionColors.normalColor;
-        uiInteractionColors.disabledColor = GameColors.defaultInteractionColorDisabled;
+        uiInteractionColors.disabledColor = Color.white;
 
         return uiInteractionColors;
     }

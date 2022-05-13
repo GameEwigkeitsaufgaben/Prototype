@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public enum OverlayChildType
 {
@@ -73,8 +74,8 @@ public class Overlay : MonoBehaviour
         
         ShowOverlayChildrenInArray();
 
-        allOverlayChildren[OVERLAYDESCRIPTION].gameObject.GetComponent<Text>().text = postData.postDescription;
-        allOverlayChildren[OVERLAYTAGS].gameObject.GetComponent<Text>().text = postData.postTags;
+        allOverlayChildren[OVERLAYDESCRIPTION].gameObject.GetComponent<TMP_Text>().text = postData.postDescription;
+        allOverlayChildren[OVERLAYTAGS].gameObject.GetComponent<TMP_Text>().text = postData.postTags;
         allOverlayChildren[OVERLAYIMAGE].gameObject.GetComponent<RawImage>().texture = postData.postSprite.texture;
 
         if (postData.overlayType == OverlayType.IMAGE)
