@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3280342795776638451}
   - component: {fileID: 5241457475764168983}
   - component: {fileID: 1548385172672006753}
+  - component: {fileID: 4125685803792550347}
   - component: {fileID: 1328110600678696042}
   m_Layer: 5
   m_Name: Post111
@@ -147,6 +148,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabImgLocked: {fileID: 3235929023653920015, guid: 405d4c1d2e3a0e446a906815bd6d1576, type: 3}
+--- !u!114 &4125685803792550347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548385172672006754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b294cdbedabc9dd4fa7f122528806e07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorTexture: {fileID: 0}
+  caveCursourTexture: {fileID: 0}
+  cursorMode: 0
+  hotSpot: {x: 0, y: 0}
 --- !u!114 &1328110600678696042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,9 +181,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 4125685803792550347}
           m_TargetAssemblyTypeName: MouseChange, Assembly-CSharp
-          m_MethodName: OnMouseEnter
+          m_MethodName: MouseEnter
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -180,9 +197,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 4125685803792550347}
           m_TargetAssemblyTypeName: MouseChange, Assembly-CSharp
-          m_MethodName: OnMouseExit
+          m_MethodName: MouseExit
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

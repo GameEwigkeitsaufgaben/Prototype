@@ -31,4 +31,16 @@ public static class GameColors
         return uiInteractionColors;
     }
 
+    public static ColorBlock GetPostColorBlock()
+    {
+        ColorBlock uiInteractionColors = ColorBlock.defaultColorBlock;
+        uiInteractionColors.normalColor = Color.white;
+        uiInteractionColors.highlightedColor = GameColors.defaultInteractionColorNormal;
+        uiInteractionColors.pressedColor = GameColors.defaultInteractionColorPresses;
+        uiInteractionColors.selectedColor = uiInteractionColors.normalColor;
+        uiInteractionColors.disabledColor = GameColors.defaultInteractionColorDisabled;
+
+        return uiInteractionColors;
+    }
+
 }
