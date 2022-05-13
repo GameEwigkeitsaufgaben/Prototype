@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MouseChange : MonoBehaviour
@@ -9,9 +10,27 @@ public class MouseChange : MonoBehaviour
     public Vector2 hotSpot = Vector2.zero;
     private SoChapOneRuntimeData runtimeData;
 
-    private void Start()
+    private void Awake()
     {
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+    }
+
+    private void Start()
+    {
+        if(gameObject.GetComponent<Button>() != null)
+        {
+            if (gameObject.GetComponent<Post>() != null || gameObject.GetComponent<Overlay>())
+            {
+                gameObject.GetComponent<Button>().colors = GameColors.GetPostColorBlock();
+                return;
+            }
+
+            gameObject.GetComponent<Button>().colors = GameColors.GetInteractionColorBlock();
+        }
+        else if(gameObject.GetComponent<Scrollbar>() != null)
+        {
+            gameObject.GetComponent<Scrollbar>().colors = GameColors.GetInteractionColorBlock();
+        }
         
         //if (SceneManager.GetActiveScene().name != GameScenes.ch01Mine) return;
         
@@ -20,7 +39,11 @@ public class MouseChange : MonoBehaviour
 
     public void MouseEnter()
     {
-        Cursor.SetCursor(runtimeData.cursorInteract, hotSpot, cursorMode);
+        if(gameObject.GetComponent<Button>() != null && gameObject.GetComponent<Button>().interactable)
+        {
+            Cursor.SetCursor(runtimeData.cursorInteract, hotSpot, cursorMode);
+        }
+        
     }
 
     public void MouseExit()

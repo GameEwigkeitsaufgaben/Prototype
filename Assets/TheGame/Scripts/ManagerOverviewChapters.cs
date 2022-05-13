@@ -9,7 +9,7 @@ public enum Chapters
     Ch03Ewigkeitsaufgabe = 3
 }
 
-public class ManagerOverviewCaptersScene : MonoBehaviour
+public class ManagerOverviewChapters : MonoBehaviour
 {
     [SerializeField] Button credits;
     [SerializeField] TMP_Text lawNotice;
@@ -20,6 +20,5 @@ public class ManagerOverviewCaptersScene : MonoBehaviour
         credits.colors = interactiveButton;
 
         lawNotice.text = GameData.lawNotiz;
-        
     }
 }

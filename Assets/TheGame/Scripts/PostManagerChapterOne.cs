@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class PostManagerChapterOne : MonoBehaviour
 {
     public GameObject overlayParent;
-    public Button musicOnOff;
+    public Button musicOnOff, chaptersHome;
+    public Scrollbar scrollbar;
     
     private List <Overlay> overlayList = new List<Overlay>();
     private Overlay[] overlayArray;
@@ -22,8 +23,8 @@ public class PostManagerChapterOne : MonoBehaviour
         gameIcons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
 
-        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-        runtimeData.cursorDefault = null;
+        musicOnOff.colors = GameColors.GetInteractionColorBlock();
+        scrollbar.colors = GameColors.GetInteractionColorBlock();
 
         overlayArray = overlayParent.GetComponentsInChildren<Overlay>(true);
 
