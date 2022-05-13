@@ -227,39 +227,28 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     IEnumerator PlayBadJob()
     {
         runningCorouine = true;
-        denkbubbleWorstcase.transform.parent.gameObject.SetActive(true);
         audioSrc.clip = badJobClip;
         audioSrc.Play();
         float length = badJobAnim.length;
         anim.Play("BadJob");
         yield return new WaitForSeconds(length);
-        denkbubbleWorstcase.transform.parent.gameObject.SetActive(false);
 
         runningCorouine = false;
     }
 
     IEnumerator PlayGoodJob()
     {
-       // headingRound.gameObject.SetActive(false);
-       // uiInfoText.gameObject.SetActive(false);
-       // btnConfirmText.gameObject.SetActive(false);
-
         runningCorouine = true;
         Debug.Log("GOOOOOOOOOOOOOOOOOOOOOOOD");
-        denkbubbleWorstcase.transform.parent.gameObject.SetActive(true);
         float length = goodJobAnim.length;
         anim.Play("GoodJob");
 
         audioSrc.clip = goodJobClip;
         audioSrc.Play();
         yield return new WaitForSeconds(length);
-        
-        denkbubbleWorstcase.transform.parent.gameObject.SetActive(false);
 
         runningCorouine = false;
-        //headingRound.gameObject.SetActive(true);
-        //uiInfoText.gameObject.SetActive(true);
-        //btnConfirmText.gameObject.SetActive(true);
+
     }
     
     IEnumerator PlayWorstcases(bool helm, bool mask, bool lamp)
@@ -267,11 +256,11 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
         runningCorouine = true;
         bool missingItem = !helm || !mask || !lamp;
         denkbubbleWorstcase.transform.parent.gameObject.SetActive(missingItem);
-        denkbubbleWorstcase.transform.parent.gameObject.GetComponent<Image>().color = Color.gray;
-        denkbubbleWorstcase.GetComponent<Image>().color = Color.white;
 
         if (!helm)
         {
+            anim.Play("Alert");
+            yield return new WaitForSeconds(2f);
             anim.Play("NoHelmet");
             float length = noHelmAnim.length;
             Debug.Log("No Helm + length: " + length );
@@ -281,6 +270,8 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
         }
         if (!mask)
         {
+            anim.Play("Alert");
+            yield return new WaitForSeconds(2f);
             anim.Play("NoMask");
             float length = noMaskAnim.length;
             Debug.Log("No Atemmaske + length: " + length );
@@ -290,6 +281,8 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
         }
         if (!lamp)
         {
+            anim.Play("Alert");
+            yield return new WaitForSeconds(2f);
             anim.Play("NoLight");
             float length = noLightAnim.length;
             audioSrc.clip = lichtaus;
