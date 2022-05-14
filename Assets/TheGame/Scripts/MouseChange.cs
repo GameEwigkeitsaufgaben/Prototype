@@ -31,6 +31,8 @@ public class MouseChange : MonoBehaviour
             }
 
             gameObject.GetComponent<Button>().colors = GameColors.GetInteractionColorBlock();
+
+            gameObject.GetComponent<Button>().navigation = GameData.GetNoneNavigation();
         }
         else if(gameObject.GetComponent<Scrollbar>() != null)
         {

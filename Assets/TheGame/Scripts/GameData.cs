@@ -1,7 +1,10 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public static class GameData
 {
+    public static Navigation customNav = new Navigation();
+
     public const string pwdChapterOne = "1111";
     public const string pwdAdminChapterOne = "1212";
     public const string pwdChapterTwo = "2222";
@@ -99,6 +102,13 @@ public static class GameData
         "Das Herunterladen der in diesem Internetangebot enthaltenen Informationen ist grundsätzlich nicht gestattet, sofern dies nicht ausdrücklich abweichend kenntlich gemacht wird.";
 
     public const string EmptyString = "";
+
+    public static Navigation GetNoneNavigation()
+    {//for mouse interaction only, highlight, press, select, btn do not stay in select state as in automatic mode.
+     //https://answers.unity.com/questions/1165542/setting-a-button-navigation-mode-throug-code.html
+        customNav.mode = Navigation.Mode.None;
+        return customNav;
+    }
 
     public static void PrintState()
     {
