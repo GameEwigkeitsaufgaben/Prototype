@@ -31,16 +31,16 @@ public class QuizData : ScriptableObject
 
     //delete ab hier
     
-    [TextArea(10, 100)]
-    public string answerA;
+    //[TextArea(10, 100)]
+    //public string answerA;
     
-    [TextArea(10, 100)]
-    public string answerB;
+    //[TextArea(10, 100)]
+    //public string answerB;
     
-    [TextArea(10, 100)]
-    public string answerC;
+    //[TextArea(10, 100)]
+    //public string answerC;
     
-    [TextArea(10, 100)]
-    public string answerD;
+    //[TextArea(10, 100)]
+    //public string answerD;
 
 }

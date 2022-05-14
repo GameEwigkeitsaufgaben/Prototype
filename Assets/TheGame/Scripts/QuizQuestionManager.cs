@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class QuizQuestionManager : MonoBehaviour
 {
-
     public QuizData quizData;
     public Text questionText;
     public Text answerA;
@@ -28,10 +27,10 @@ public class QuizQuestionManager : MonoBehaviour
     void Start()
     {
         questionText.text = quizData.question;
-        answerA.text = quizData.answerA;
-        answerB.text = quizData.answerB;
-        answerC.text = quizData.answerC;
-        answerD.text = quizData.answerD;
+        //answerA.text = quizData.answerA;
+        //answerB.text = quizData.answerB;
+        //answerC.text = quizData.answerC;
+        //answerD.text = quizData.answerD;
         //rightAnswer = quizData.rightAnswer;
         elapsed = maxTimeInSec;
     }

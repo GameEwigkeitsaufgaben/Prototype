@@ -275,10 +275,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1802753904}
-  backToMuseum: {fileID: 1893977092}
+  btnBackToMuseum: {fileID: 0}
+  btnUrlToSage: {fileID: 0}
   centuryText: {fileID: 995589230}
   museumConfig: {fileID: 0}
   sliderCentury: 0
+  sageRange: {x: 0, y: 0}
+  thirteenthRange: {x: 0, y: 0}
+  sixteenthRange: {x: 0, y: 0}
+  nineteenthRange: {x: 0, y: 0}
+  twentyfirstRange: {x: 0, y: 0}
 --- !u!1 &177335057
 GameObject:
   m_ObjectHideFlags: 0
@@ -926,7 +932,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Kohlebergbau \xFCber die Jahrhunderte"
+  m_Text: Grundwasserneubildung im Bergwerk
 --- !u!222 &489033895
 CanvasRenderer:
   m_ObjectHideFlags: 0
