@@ -54,9 +54,9 @@ public class Overlay : MonoBehaviour
     public void PlayVideo() //wird von OnClick von Button aufgerufen. 
     {
         allOverlayChildren[OVERLAYTYPEICON].gameObject.SetActive(false);
-        
-        ColorBlock ab = allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().colors;
-        ab.disabledColor = Color.white;
+        allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().colors = GameColors.GetOverlayColorBlock();
+        //ColorBlock ab = allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().colors;
+        //ab.disabledColor = Color.white;
         
         if (webglVideoPlayer != null)
         {
@@ -80,21 +80,26 @@ public class Overlay : MonoBehaviour
 
         if (postData.overlayType == OverlayType.IMAGE)
         {
-            allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().interactable = false;
-            ColorBlock ab = allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().colors;
-            ab.disabledColor = Color.white;
-            allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().colors = ab;
+            //allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().interactable = false;
+            Destroy(allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>());
+            Destroy(allOverlayChildren[OVERLAYIMAGE].GetComponent<MouseChange>());
+            //ColorBlock ab = allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().colors;
+            //ab.disabledColor = Color.white;
+            //allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().colors = GameColors.GetOverlayColorBlock();
+            //allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().colors = GameColors.GetOverlayColorBlock();
             allOverlayChildren[OVERLAYTYPEICON].gameObject.SetActive(false);
             return;
         }
         else if(postData.overlayType == OverlayType.QUIZ)
         {
             allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().interactable = true;
+            allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().colors = GameColors.GetOverlayColorBlock();
             allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().onClick.AddListener(delegate { SwitchTheScene(postData.interactionScene); });
         }
         else if(postData.overlayType == OverlayType.INTERACTION)
         {
             allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().interactable = true;
+            allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().colors = GameColors.GetOverlayColorBlock();
             allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().onClick.AddListener(delegate { SwitchTheScene(postData.interactionScene); });
         }
 

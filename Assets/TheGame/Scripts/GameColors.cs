@@ -22,11 +22,11 @@ public static class GameColors
     public static ColorBlock GetInteractionColorBlock() 
     {
         ColorBlock uiInteractionColors = ColorBlock.defaultColorBlock;
-        uiInteractionColors.normalColor = GameColors.defaultInteractionColorNormal;
-        uiInteractionColors.highlightedColor = GameColors.defaultInteractionColorHighlighted;
-        uiInteractionColors.pressedColor = GameColors.defaultInteractionColorPresses;
+        uiInteractionColors.normalColor = defaultInteractionColorNormal;
+        uiInteractionColors.highlightedColor = defaultInteractionColorHighlighted;
+        uiInteractionColors.pressedColor = defaultInteractionColorPresses;
         uiInteractionColors.selectedColor = uiInteractionColors.normalColor;
-        uiInteractionColors.disabledColor = GameColors.defaultInteractionColorDisabled;
+        uiInteractionColors.disabledColor = defaultInteractionColorDisabled;
 
         return uiInteractionColors;
     }
@@ -35,10 +35,22 @@ public static class GameColors
     {
         ColorBlock uiInteractionColors = ColorBlock.defaultColorBlock;
         uiInteractionColors.normalColor = Color.white;
-        uiInteractionColors.highlightedColor = GameColors.defaultInteractionColorNormal;
-        uiInteractionColors.pressedColor = GameColors.defaultInteractionColorPresses;
+        uiInteractionColors.highlightedColor = defaultInteractionColorNormal;
+        uiInteractionColors.pressedColor = defaultInteractionColorPresses;
         uiInteractionColors.selectedColor = uiInteractionColors.normalColor;
-        uiInteractionColors.disabledColor = Color.white;
+        uiInteractionColors.disabledColor = new Color32(226, 89, 57, 255);
+
+        return uiInteractionColors;
+    }
+
+    public static ColorBlock GetOverlayColorBlock()
+    {
+        ColorBlock uiInteractionColors = ColorBlock.defaultColorBlock;
+        uiInteractionColors.normalColor = Color.white;
+        uiInteractionColors.highlightedColor = defaultInteractionColorNormal;
+        uiInteractionColors.pressedColor = defaultInteractionColorPresses;
+        uiInteractionColors.selectedColor = uiInteractionColors.normalColor;
+        uiInteractionColors.disabledColor = new Color32(255, 255, 255, 255);
 
         return uiInteractionColors;
     }

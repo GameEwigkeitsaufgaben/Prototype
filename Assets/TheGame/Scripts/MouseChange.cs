@@ -19,13 +19,20 @@ public class MouseChange : MonoBehaviour
     {
         if(gameObject.GetComponent<Button>() != null)
         {
-            if (gameObject.GetComponent<Post>() != null || gameObject.GetComponent<Overlay>())
+            if (gameObject.GetComponent<Post>() != null)
             {
                 gameObject.GetComponent<Button>().colors = GameColors.GetPostColorBlock();
                 return;
             }
+            if (gameObject.GetComponent<RawImage>() != null)
+            {
+                gameObject.GetComponent<Button>().colors = GameColors.GetOverlayColorBlock();
+                return;
+            }
 
             gameObject.GetComponent<Button>().colors = GameColors.GetInteractionColorBlock();
+
+            gameObject.GetComponent<Button>().navigation = GameData.GetNoneNavigation();
         }
         else if(gameObject.GetComponent<Scrollbar>() != null)
         {
@@ -43,7 +50,15 @@ public class MouseChange : MonoBehaviour
         {
             Cursor.SetCursor(runtimeData.cursorInteract, hotSpot, cursorMode);
         }
-        
+        else if (gameObject.GetComponent<Scrollbar>() != null)
+        {
+            Cursor.SetCursor(runtimeData.cursorInteract, hotSpot, cursorMode);
+        }
+        else
+        {
+            Cursor.SetCursor(runtimeData.cursorNoInteract, hotSpot, cursorMode);
+        }
+
     }
 
     public void MouseExit()

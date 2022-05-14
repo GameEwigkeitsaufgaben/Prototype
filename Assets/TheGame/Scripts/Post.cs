@@ -52,8 +52,8 @@ public class Post : MonoBehaviour
         //Color of Locked post is in Prefab EntryXXX
         childIcon = Instantiate(prefabImgLocked);
         childIcon.transform.SetParent(gameObject.transform.parent, false);
-        childIcon.GetComponent<RectTransform>().localPosition = Vector3.zero;
-        childIcon.GetComponent<RectTransform>().localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        childIcon.GetComponent<RectTransform>().sizeDelta = new Vector2(100f, 100f);
+        childIcon.GetComponent<RectTransform>().localScale = Vector3.one;
         childIcon.GetComponent<Image>().sprite = icons.lockedIcon;
         childIcon.GetComponent<Image>().preserveAspect = true;
         childIcon.GetComponent<Image>().raycastTarget = false;
