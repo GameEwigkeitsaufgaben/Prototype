@@ -19,14 +19,14 @@ public class MouseChange : MonoBehaviour
     {
         if(gameObject.GetComponent<Button>() != null)
         {
-            if (gameObject.GetComponent<Post>() != null || gameObject.GetComponent<Overlay>())
+            if (gameObject.GetComponent<Post>() != null)
             {
                 gameObject.GetComponent<Button>().colors = GameColors.GetPostColorBlock();
                 return;
             }
             if (gameObject.GetComponent<RawImage>() != null)
             {
-                //gameObject.GetComponent<Button>().colors = GameColors.GetOverlayColorBlock();
+                gameObject.GetComponent<Button>().colors = GameColors.GetOverlayColorBlock();
                 return;
             }
 
@@ -45,6 +45,10 @@ public class MouseChange : MonoBehaviour
     public void MouseEnter()
     {
         if(gameObject.GetComponent<Button>() != null && gameObject.GetComponent<Button>().interactable)
+        {
+            Cursor.SetCursor(runtimeData.cursorInteract, hotSpot, cursorMode);
+        }
+        else if (gameObject.GetComponent<Scrollbar>() != null)
         {
             Cursor.SetCursor(runtimeData.cursorInteract, hotSpot, cursorMode);
         }
