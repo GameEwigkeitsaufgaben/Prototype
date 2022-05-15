@@ -81,15 +81,6 @@ public class QuizQuestionManager : MonoBehaviour
         answerB.transform.parent.gameObject.SetActive(false);
         answerC.transform.parent.gameObject.SetActive(false);
         answerD.transform.parent.gameObject.SetActive(false);
-
-        //if (answerToTest == quizData.rightAnswer)
-        //{
-        //    SetUIChoiceOK(btn);
-        //}
-        //else
-        //{
-        //    SetUIChoiceWrong(btn);
-        //}
     }
 
     private QuizAnswer ReturnTypeQuizRightAnswer(Button btn)

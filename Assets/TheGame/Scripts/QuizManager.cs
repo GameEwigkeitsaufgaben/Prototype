@@ -16,10 +16,9 @@ public class QuizManager : MonoBehaviour
     private const string btnTextCheckAnswers = "Prüfen";
     private const string btnTextNextAnswer = "Weiter";
 
-    public Canvas endCanvas, quizCanvas;
+    public Canvas quizCanvas;
     public VerticalLayoutGroup answerButtonGroup;
-    //public Text uiQuestion;
-    public TextMeshProUGUI uiQuestion;
+    public TMP_Text uiQuestion;
     public Text uiPoints;
     public Text uiQuestType;
     public Slider uiProgressBar;
@@ -28,7 +27,7 @@ public class QuizManager : MonoBehaviour
     public Button uiButtonNext;
     public Image buzzerTop;
     public Image imgMinerFeedback;
-    public Text textMinerFeedback;
+    public TMP_Text textMinerFeedback;
     public AudioSource audioAnswerCorrect, audioWrongAudio;
     public bool randomizeQuestions = false;
     public SwitchSceneManager switchScene;
@@ -38,7 +37,8 @@ public class QuizManager : MonoBehaviour
     public List<QuizQuestionItem> questionItemListshuffled;
 
     private int currentProgressIndex = 0;
-    private int points = 0;
+    private int pointsSum = 0;
+    private int pointsPerQuestion = 0;
     
     private QuizTimer quizTimer;
 
@@ -68,14 +68,7 @@ public class QuizManager : MonoBehaviour
             questionItemList.Add(new QuizQuestionItem(i, answerButtonGroup));
         }
 
-        if (randomizeQuestions)
-        {
-            questionItemListshuffled = Shuffle(questionItemList);
-        }
-        else
-        {
-            questionItemListshuffled = questionItemList;
-        }
+        questionItemListshuffled = (randomizeQuestions) ? Shuffle(questionItemList) : questionItemList;
         
         if (questionItemListshuffled != null)
         {
@@ -86,7 +79,7 @@ public class QuizManager : MonoBehaviour
         uiProgressBar.maxValue = questionItemListshuffled.Count;
         uiProgressBar.value = 1;
 
-        uiPoints.text = points.ToString();
+        uiPoints.text = pointsSum.ToString();
         quizTimer.StartTimer();
     }
 
@@ -104,11 +97,12 @@ public class QuizManager : MonoBehaviour
                 tmpPoints *= a.GetPointForAnswer();
             }
 
-            points += quizTimer.GetCompletionTime() * tmpPoints;
+            pointsPerQuestion = quizTimer.GetCompletionTime() * tmpPoints;
+            pointsSum += pointsPerQuestion;
             
             if (tmpPoints != 0)
             {
-                uiPoints.text = points.ToString();
+                uiPoints.text = pointsSum.ToString();
                 audioAnswerCorrect.Play();
                 runtimeData.quizMinerFeedback = MinerFeedback.Correct;
             }
@@ -125,7 +119,7 @@ public class QuizManager : MonoBehaviour
 
             questionItemListshuffled[currentProgressIndex].unProved = false;
             buzzerTop.color = GameColors.defaultInteractionColorNormal;
-            uiButtonNext.GetComponentInChildren<Text>().text = btnTextNextAnswer;
+            uiButtonNext.GetComponentInChildren<TMP_Text>().text = btnTextNextAnswer;
             return;   
         }
 
@@ -145,7 +139,7 @@ public class QuizManager : MonoBehaviour
         }
         else
         {
-            GameData.quizChapterOnePoints = points;
+            GameData.quizChapterOnePoints = pointsSum;
             runtimeData.quiz119Done = true;
             switchScene.SwitchToChapter1withOverlay(generalKeyOverlay);
         }    
@@ -157,13 +151,14 @@ public class QuizManager : MonoBehaviour
         uiQuestion.text = questionItemListshuffled[progressIndex].GetQuestionText();
         uiPostImage.sprite = questionItemListshuffled[progressIndex].GetPostImage();
         buzzerTop.color = GameColors.buzzerInteractionColor;
-        uiButtonNext.GetComponentInChildren<Text>().text = btnTextCheckAnswers;
+        uiButtonNext.GetComponentInChildren<TMP_Text>().text = btnTextCheckAnswers;
 
         uiQuestType.text = questionItemListshuffled[progressIndex].GetQuestionTypeString();
 
         foreach (Transform child in answerButtonGroup.transform)
         {
             child.gameObject.GetComponent<Button>().interactable = true;
+            Debug.Log(child.gameObject.name + " selected color: " +child.gameObject.GetComponent<Button>().colors.selectedColor);
         }
 
         ActivateAnswerButtons(progressIndex);
@@ -175,6 +170,7 @@ public class QuizManager : MonoBehaviour
         foreach(var a in questionItemList[progressIndex].answers)
         {
             a.btn.gameObject.SetActive(true);
+            Debug.Log(a.btn.name + " selected activate color: " + a.btn.gameObject.GetComponent<Button>().colors.selectedColor);
         }
     }
 
@@ -236,12 +232,12 @@ public class QuizManager : MonoBehaviour
                 break;
             case MinerFeedback.Correct:
                 imgMinerFeedback.sprite = quizConfig.minerFeedbackCorrect;
-                textMinerFeedback.text = "Richtig, \n echt super!";
+                textMinerFeedback.text = "+ " +pointsPerQuestion+ " Punkte\nSuper gemacht!";
                 textMinerFeedback.transform.parent.gameObject.SetActive(true);
                 break;
             case MinerFeedback.Incorrect:
                 imgMinerFeedback.sprite = quizConfig.minerFeedbackIncorrect;
-                textMinerFeedback.text = "Oh nein, \n richtig wäre ... ";
+                textMinerFeedback.text = "+ " + pointsPerQuestion + " Punkte\nFalsch, die Antwort ist ... ";
                 textMinerFeedback.transform.parent.gameObject.SetActive(true);
                 break;
         }

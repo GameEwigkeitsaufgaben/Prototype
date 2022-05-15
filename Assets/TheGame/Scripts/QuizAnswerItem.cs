@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class QuizAnswerItem
 {
     //Is not a Monobehavior script so so gameObject is available to ref sprite; 
-    private const string pathToConfig = "QuizChapterOneConfig";
     private SoQuizConfig myQuizConfig; 
     public string questionIdentifier;
     public string answer;
@@ -14,6 +14,7 @@ public class QuizAnswerItem
     public bool buttonSelected = false;
     VerticalLayoutGroup buttonGroup;
     public bool longAnswer;
+    public int btnNbr = 0;
 
     SoChapOneRuntimeData runtimeData;
 
@@ -21,7 +22,7 @@ public class QuizAnswerItem
 
     public QuizAnswerItem() 
     {
-        myQuizConfig = Resources.Load<SoQuizConfig>(pathToConfig);
+        myQuizConfig = Resources.Load<SoQuizConfig>(GameData.NameConfigQuiz);
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
     }
 
@@ -44,7 +45,8 @@ public class QuizAnswerItem
 
     public void CreateButton(VerticalLayoutGroup parent)
     {
-        var newButton = DefaultControls.CreateButton(new DefaultControls.Resources());
+        //var newButton = DefaultControls.CreateButton(new DefaultControls.Resources());
+        var newButton = TMP_DefaultControls.CreateButton(new TMP_DefaultControls.Resources());
         newButton.transform.SetParent(parent.transform);
         newButton.transform.localScale = Vector3.one;
         newButton.transform.localPosition = new Vector3(newButton.transform.localPosition.x,
@@ -52,9 +54,15 @@ public class QuizAnswerItem
                                                             0);
 
         newButton.GetComponent<Image>().sprite = myQuizConfig.btnSprite;
-        newButton.GetComponentInChildren<Text>().fontSize = 20;
-        newButton.GetComponentInChildren<Text>().text = answer;
+        //newButton.GetComponentInChildren<Text>().fontSize = 20;
+        //newButton.GetComponentInChildren<Text>().text = answer;
         btn = newButton.GetComponent<Button>();
+        btn.name = "AnswerBtn";
+        btn.gameObject.AddComponent<MouseInteractionElement>();
+        btn.gameObject.GetComponent<MouseInteractionElement>().uiType = MouseInteraction.BtnQuizAnswer;
+        btn.gameObject.AddComponent<MouseChange>();
+        btn.gameObject.AddComponent<ButtonHoverTriggers>();
+        btn.gameObject.AddComponent<ReactOnlyOnInTranspartentParts>();
         btn.onClick.AddListener(ToogleSelected);
         btn.gameObject.SetActive(false);
 
@@ -66,30 +74,29 @@ public class QuizAnswerItem
         btn.gameObject.GetComponent<HorizontalLayoutGroup>().childAlignment = TextAnchor.MiddleCenter;
         btn.gameObject.GetComponent<Image>().type = Image.Type.Sliced;
         btn.gameObject.GetComponent<Image>().pixelsPerUnitMultiplier = 0.5f;
-        btn.GetComponentInChildren<Text>().fontSize = 30;
-        btn.GetComponent<Image>().color = myQuizConfig.normal;
+        btn.GetComponentInChildren<TMP_Text>().fontSize = 30;
+        btn.GetComponentInChildren<TMP_Text>().font = myQuizConfig.font;
+        btn.GetComponentInChildren<TMP_Text>().fontMaterial = myQuizConfig.font.material;
+        btn.GetComponentInChildren<TMP_Text>().text = answer;
 
-        //disable color when set buttons inactable
-        ColorBlock cb = btn.colors;
-        cb.disabledColor = new Color(1f, 1f, 1f, 1f);
-        btn.colors = cb;
+        btnNbr++;
     }
 
     private void ToogleSelected()
     {
         buttonSelected = !buttonSelected;
-
-        Color selectColor = Color.cyan;
         
         if (buttonSelected)
         {
             //selectColor = Color.cyan;
-            btn.GetComponent<Image>().color = myQuizConfig.selected;
+            //btn.GetComponent<Image>().color = myQuizConfig.selected;
+            btn.Select();
+            
         }
         else
         {
             //selectColor = Color.white;
-            btn.GetComponent<Image>().color = myQuizConfig.normal;
+            //btn.GetComponent<Image>().color = myQuizConfig.normal;
         }
     }
 
@@ -99,13 +106,10 @@ public class QuizAnswerItem
         {
             Color c = btn.GetComponent<Image>().color;
             btn.GetComponent<Image>().color = myQuizConfig.incorrect;
-            
-            //btn.GetComponentInChildren<Text>().color = new Vector4(c.r, c.g, c.b, 0.4f);
         }
         else
         {
             btn.GetComponent<Image>().color = myQuizConfig.correct;
-           
         }
     }
 

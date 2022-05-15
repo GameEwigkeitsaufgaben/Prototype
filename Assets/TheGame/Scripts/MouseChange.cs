@@ -17,6 +17,7 @@ public class MouseChange : MonoBehaviour
 
     private void Start()
     {
+        
         if(gameObject.GetComponent<Button>() != null)
         {
             if (gameObject.GetComponent<Post>() != null)
@@ -30,8 +31,16 @@ public class MouseChange : MonoBehaviour
                 return;
             }
 
-            gameObject.GetComponent<Button>().colors = GameColors.GetInteractionColorBlock();
+            if (gameObject.GetComponent<MouseInteractionElement>() != null)
+            {
+                if (gameObject.GetComponent<MouseInteractionElement>().uiType == MouseInteraction.BtnQuizAnswer)
+                {
+                    gameObject.GetComponent<Button>().colors = GameColors.GetQuizAnswerColorBlock();
+                    return;
+                }
+            }
 
+            gameObject.GetComponent<Button>().colors = GameColors.GetInteractionColorBlock();
             gameObject.GetComponent<Button>().navigation = GameData.GetNoneNavigation();
         }
         else if(gameObject.GetComponent<Scrollbar>() != null)

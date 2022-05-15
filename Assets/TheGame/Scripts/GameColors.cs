@@ -31,6 +31,19 @@ public static class GameColors
         return uiInteractionColors;
     }
 
+    public static ColorBlock GetQuizAnswerColorBlock()
+    {
+        ColorBlock uiInteractionColors = ColorBlock.defaultColorBlock;
+        uiInteractionColors.normalColor = defaultInteractionColorNormal;
+        uiInteractionColors.highlightedColor = defaultInteractionColorHighlighted;
+        uiInteractionColors.pressedColor = defaultInteractionColorPresses;
+        //uiInteractionColors.selectedColor = new Color32(227, 86, 60, 255); rot
+        uiInteractionColors.selectedColor = new Color32(59, 59, 59, 255);
+        uiInteractionColors.disabledColor = new Color32(255,255,255,255);
+
+        return uiInteractionColors;
+    }
+
     public static ColorBlock GetPostColorBlock()
     {
         ColorBlock uiInteractionColors = ColorBlock.defaultColorBlock;
