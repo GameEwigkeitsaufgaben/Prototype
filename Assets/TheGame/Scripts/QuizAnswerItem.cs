@@ -54,8 +54,6 @@ public class QuizAnswerItem
                                                             0);
 
         newButton.GetComponent<Image>().sprite = myQuizConfig.btnSprite;
-        //newButton.GetComponentInChildren<Text>().fontSize = 20;
-        //newButton.GetComponentInChildren<Text>().text = answer;
         btn = newButton.GetComponent<Button>();
         btn.name = "AnswerBtn";
         btn.gameObject.AddComponent<MouseInteractionElement>();
@@ -74,10 +72,14 @@ public class QuizAnswerItem
         btn.gameObject.GetComponent<HorizontalLayoutGroup>().childAlignment = TextAnchor.MiddleCenter;
         btn.gameObject.GetComponent<Image>().type = Image.Type.Sliced;
         btn.gameObject.GetComponent<Image>().pixelsPerUnitMultiplier = 0.5f;
-        btn.GetComponentInChildren<TMP_Text>().fontSize = 30;
-        btn.GetComponentInChildren<TMP_Text>().font = myQuizConfig.font;
-        btn.GetComponentInChildren<TMP_Text>().fontMaterial = myQuizConfig.font.material;
-        btn.GetComponentInChildren<TMP_Text>().text = answer;
+
+        TMP_Text btnText = btn.GetComponentInChildren<TMP_Text>();
+        btnText.fontSize = 30;
+        btnText.color = GameColors.defaultTextColor;
+        btnText.font = myQuizConfig.font;
+        btnText.fontMaterial = myQuizConfig.font.material;
+        btnText.fontStyle = FontStyles.SmallCaps;
+        btnText.text = answer;
 
         btnNbr++;
     }
@@ -104,13 +106,20 @@ public class QuizAnswerItem
     {
         if (!isCorrect)
         {
-            Color c = btn.GetComponent<Image>().color;
-            btn.GetComponent<Image>().color = myQuizConfig.incorrect;
+           btn.GetComponent<Image>().color = myQuizConfig.incorrect;
         }
         else
         {
             btn.GetComponent<Image>().color = myQuizConfig.correct;
         }
+
+        Debug.Log("llllllllllll + *" + btn.GetComponent<MouseInteractionElement>().IsSelected());
+        if (btn.GetComponent<MouseInteractionElement>().IsSelected())
+        {
+            Debug.Log("in Show Result üüüüüüüüüüüüüüüüüüüüüüüüü" + btn.GetComponent<MouseInteractionElement>().IsSelected());
+            //btn.GetComponentInChildren<TMP_Text>().fontWeight = FontWeight.Bold;
+        }
+        
     }
 
     public int GetPointForAnswer()

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
@@ -13,26 +11,44 @@ public enum MouseInteraction
     BtnQuizAnswer
 }
 
+//Bei mehrfachauswahl mit navigation mode select von none auf automatic setzen.
+
 public class MouseInteractionElement : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
     public MouseInteraction uiType = MouseInteraction.BtnDefaultInteraction;
     private TMP_Text answer;
+    [SerializeField] private bool isSelcted = false;
 
     private void Start()
     {
         answer = gameObject.GetComponentInChildren<TMP_Text>();
     }
 
+    public bool IsSelected()
+    {
+        return isSelcted;
+    }
+
     public void OnSelect(BaseEventData eventData)
     {
-        Debug.Log("selllllllllllllllllllllllll");
-        answer.color = Color.white;
+        if(eventData.selectedObject.name == "AnswerBtn")
+        {
+            Debug.Log("selllllllllllll " + eventData.selectedObject);
+            answer.color = Color.white;
+            Debug.Log("selected " + GetComponentInChildren<TMP_Text>().text);
+            isSelcted = true;
+
+        }
+        
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
-        Debug.Log("selllllllllllllllllllllllll");
-        answer.color = Color.black;
-        answer.fontStyle = FontStyles.Bold;
+        if (eventData.selectedObject.name == "AnswerBtn")
+        {
+            answer.color = GameColors.defaultTextColor;
+            Debug.Log("unselected " + GetComponentInChildren<TMP_Text>().text);
+            isSelcted = false;
+        }        
     }
 }

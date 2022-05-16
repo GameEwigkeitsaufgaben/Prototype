@@ -19,6 +19,8 @@ public static class GameColors
 
     public static Color showBackgroundInfoColor = new Color32(223, 202, 183, a);
 
+    public static Color defaultTextColor = new Color32(60,60,60,255);
+
     public static ColorBlock GetInteractionColorBlock() 
     {
         ColorBlock uiInteractionColors = ColorBlock.defaultColorBlock;

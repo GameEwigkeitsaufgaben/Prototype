@@ -42,7 +42,7 @@ public class QuizQuestionItem
     {
         string x = "";
 
-        if(questionItemData.questionType == QuizQuestionType.OneTrue || questionItemData.questionType == QuizQuestionType.TrueFalse)
+        if (questionItemData.questionType == QuizQuestionType.OneTrue || questionItemData.questionType == QuizQuestionType.TrueFalse)
         {
             x = eineAntwortRichtig;
         }
