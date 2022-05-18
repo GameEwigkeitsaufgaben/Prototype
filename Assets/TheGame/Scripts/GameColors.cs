@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +14,8 @@ public static class GameColors
     public static Color defaultInteractionColorPresses = new Color32(r - 55, g - 55, b - 55, a);
     public static Color defaultInteractionColorDisabled = new Color32(r - 55, g - 55, b - 55, a-128);
 
-    public static Color buzzerInteractionColor = new Color32(227, 86,60,255);
+    //public static Color buzzerInteractionColor = new Color32(227, 86,60,255);
+    public static Color buzzerInteractionColor = Color.white;
 
     public static Color discInteractonDoneColor = new Color32(0, 197, 26, a);
 
@@ -42,6 +44,18 @@ public static class GameColors
         //uiInteractionColors.selectedColor = new Color32(227, 86, 60, 255); rot
         uiInteractionColors.selectedColor = new Color32(59, 59, 59, 255);
         uiInteractionColors.disabledColor = new Color32(255,255,255,255);
+
+        return uiInteractionColors;
+    }
+
+    public static ColorBlock GetBuzzerColorBlockProve()
+    {
+        ColorBlock uiInteractionColors = ColorBlock.defaultColorBlock;
+        uiInteractionColors.normalColor = new Color32(227, 86, 60, 255);
+        uiInteractionColors.highlightedColor = new Color32(255,195,184,153);
+        uiInteractionColors.pressedColor = defaultInteractionColorPresses;
+        uiInteractionColors.selectedColor = new Color32(227, 86, 60, 255);
+        uiInteractionColors.disabledColor = new Color32(226, 89, 57, 255);
 
         return uiInteractionColors;
     }

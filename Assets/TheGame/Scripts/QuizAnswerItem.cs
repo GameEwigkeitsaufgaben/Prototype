@@ -93,7 +93,6 @@ public class QuizAnswerItem
 
     private void SelectThisAnswer()
     {
-        //btn.GetComponent<QuizAnswerUiBehaviour>().isSelected = true;
         if (runtimeData.singleSelectAwIdOld == null)
         {
             btn.GetComponent<QuizAnswerUiBehaviour>().isSelected = true;

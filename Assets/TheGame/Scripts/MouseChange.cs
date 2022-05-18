@@ -17,7 +17,6 @@ public class MouseChange : MonoBehaviour
 
     private void Start()
     {
-        
         if(gameObject.GetComponent<Button>() != null)
         {
             if (gameObject.GetComponent<Post>() != null)
@@ -38,6 +37,12 @@ public class MouseChange : MonoBehaviour
                     gameObject.GetComponent<Button>().colors = GameColors.GetQuizAnswerColorBlock();
                     return;
                 }
+            }
+
+            if (gameObject.tag == "Buzzer")
+            {
+                gameObject.GetComponent<Button>().colors = GameColors.GetBuzzerColorBlockProve();
+                return;
             }
 
             gameObject.GetComponent<Button>().colors = GameColors.GetInteractionColorBlock();

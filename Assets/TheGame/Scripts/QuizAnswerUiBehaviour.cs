@@ -59,6 +59,7 @@ public class QuizAnswerUiBehaviour : MonoBehaviour, ISelectHandler, IDeselectHan
     {
         Debug.Log("On deselect --------------------- " + eventData.selectedObject.name);
         Debug.Log("On deselect by click............... " + eventData.selectedObject.GetComponent<QuizAnswerUiBehaviour>().isSelected);
+        //runtimeData.singleSelectAwIdOld = null;
         uiAnswer.color = GameColors.defaultTextColor;
         uiAnswer.fontStyle = FontStyles.SmallCaps;
     }

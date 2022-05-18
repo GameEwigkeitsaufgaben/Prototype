@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+
 public enum MinerFeedback
 {
     Idle,
@@ -120,8 +121,10 @@ public class QuizManager : MonoBehaviour
             }
 
             questionItemListshuffled[currentProgressIndex].unProved = false;
-            buzzerTop.color = GameColors.defaultInteractionColorNormal;
+            buzzerTop.tag = "Untagged";
+            uiButtonNext.GetComponent<Button>().colors = GameColors.GetInteractionColorBlock();
             uiButtonNext.GetComponentInChildren<TMP_Text>().text = btnTextNextAnswer;
+
             return;   
         }
 
@@ -152,7 +155,8 @@ public class QuizManager : MonoBehaviour
         runtimeData.singleSelectAwIdOld = null;
         uiQuestion.text = questionItemListshuffled[progressIndex].GetQuestionText();
         uiPostImage.sprite = questionItemListshuffled[progressIndex].GetPostImage();
-        buzzerTop.color = GameColors.buzzerInteractionColor;
+        buzzerTop.tag = "Buzzer"; //braucht man evt. nicht
+        uiButtonNext.GetComponent<Button>().colors = GameColors.GetBuzzerColorBlockProve();
         uiButtonNext.GetComponentInChildren<TMP_Text>().text = btnTextCheckAnswers;
 
         uiQuestType.text = questionItemListshuffled[progressIndex].GetQuestionTypeString();
@@ -160,7 +164,6 @@ public class QuizManager : MonoBehaviour
         foreach (Transform child in answerButtonGroup.transform)
         {
             child.gameObject.GetComponent<Button>().interactable = true;
-            Debug.Log(child.gameObject.name + " selected color: " +child.gameObject.GetComponent<Button>().colors.selectedColor);
         }
 
         ActivateAnswerButtons(progressIndex);
@@ -172,7 +175,6 @@ public class QuizManager : MonoBehaviour
         foreach(var a in questionItemList[progressIndex].answerList)
         {
             a.btn.gameObject.SetActive(true);
-            Debug.Log(a.btn.name + " selected activate color: " + a.btn.gameObject.GetComponent<Button>().colors.selectedColor);
         }
     }
 
