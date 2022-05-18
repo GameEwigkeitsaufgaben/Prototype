@@ -21,12 +21,13 @@ public class QuizManager : MonoBehaviour
     public TMP_Text uiQuestion;
     public Text uiPoints;
     public Text uiQuestType;
-    public Slider uiProgressBar;
     public Text uiSimpleProgressView;
+    public Slider uiProgressBar;
+
     public Image uiPostImage;
-    public Button uiButtonNext;
     public Image buzzerTop;
     public Image imgMinerFeedback;
+    public Button uiButtonNext;
     public TMP_Text textMinerFeedback;
     public AudioSource audioAnswerCorrect, audioWrongAudio;
     public bool randomizeQuestions = false;
