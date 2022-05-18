@@ -10,7 +10,8 @@ public enum QuizQuestionType
 {
     TrueFalse,
     OneTrue,
-    AtLeastOneTrue
+    AtLeastOneTrue,
+    SingleSelect
 }
 
 [CreateAssetMenu(menuName = "QuizData")]

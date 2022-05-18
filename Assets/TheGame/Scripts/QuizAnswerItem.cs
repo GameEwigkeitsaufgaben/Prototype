@@ -4,20 +4,20 @@ using TMPro;
 
 public class QuizAnswerItem
 {
-    //Is not a Monobehavior script so so gameObject is available to ref sprite; 
-    private SoQuizConfig myQuizConfig; 
+    //Is not a Monobehavior script so gameObject is available to ref sprite; 
+    private SoQuizConfig myQuizConfig;
+    private SoChapOneRuntimeData runtimeData;
+    private VerticalLayoutGroup buttonGroup;
+
     public string questionIdentifier;
-    public string answer;
     public int answerIdentifier;
+    public QuizQuestionType questType;
+    public string answer;
+
     public bool isCorrect;
     public Button btn;
     public bool buttonSelected = false;
-    VerticalLayoutGroup buttonGroup;
     public bool longAnswer;
-    public int btnNbr = 0;
-
-    SoChapOneRuntimeData runtimeData;
-
     public int timeToAnswerInSec;
 
     public QuizAnswerItem() 
@@ -43,37 +43,37 @@ public class QuizAnswerItem
     
     //https://stackoverflow.com/questions/33431719/unity-9-slice-in-multiple-sprite-sheet
 
-    public void CreateButton(VerticalLayoutGroup parent)
+    public void CreateButton(VerticalLayoutGroup parent, int id)
     {
-        //var newButton = DefaultControls.CreateButton(new DefaultControls.Resources());
         var newButton = TMP_DefaultControls.CreateButton(new TMP_DefaultControls.Resources());
+        
         newButton.transform.SetParent(parent.transform);
         newButton.transform.localScale = Vector3.one;
         newButton.transform.localPosition = new Vector3(newButton.transform.localPosition.x,
-                                                            newButton.transform.localPosition.y,
-                                                            0);
+                                                        newButton.transform.localPosition.y,
+                                                        0);
 
         newButton.GetComponent<Image>().sprite = myQuizConfig.btnSprite;
-        btn = newButton.GetComponent<Button>();
-        btn.name = "AnswerBtn";
-        btn.gameObject.AddComponent<MouseInteractionElement>();
-        btn.gameObject.GetComponent<MouseInteractionElement>().uiType = MouseInteraction.BtnQuizAnswer;
-        btn.gameObject.AddComponent<MouseChange>();
-        btn.gameObject.AddComponent<ButtonHoverTriggers>();
-        btn.gameObject.AddComponent<ReactOnlyOnInTranspartentParts>();
-        btn.onClick.AddListener(ToogleSelected);
-        btn.gameObject.SetActive(false);
+
+        newButton.GetComponent<Button>().name = "AnswerBtn"+id;
+        newButton.GetComponent<Button>().gameObject.AddComponent<QuizAnswerUiBehaviour>();
+        newButton.GetComponent<Button>().gameObject.AddComponent<MouseChange>();
+        newButton.GetComponent<Button>().gameObject.AddComponent<ButtonHoverTriggers>();
+        newButton.GetComponent<Button>().gameObject.AddComponent<ReactOnlyOnInTranspartentParts>();
+        newButton.GetComponent<Button>().onClick.AddListener(delegate { SelectThisAnswer(); });
+        newButton.GetComponent<Button>().gameObject.SetActive(false);
 
         //https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/HOWTO-UIFitContentSize.html#fit-to-size-of-ui-element-with-child-text
-        btn.gameObject.AddComponent<HorizontalLayoutGroup>();
+        newButton.GetComponent<Button>().gameObject.AddComponent<HorizontalLayoutGroup>();
+        
         int myPadding = 50;
-        btn.gameObject.GetComponent<HorizontalLayoutGroup>().padding.left = myPadding;
-        btn.gameObject.GetComponent<HorizontalLayoutGroup>().padding.right = myPadding;
-        btn.gameObject.GetComponent<HorizontalLayoutGroup>().childAlignment = TextAnchor.MiddleCenter;
-        btn.gameObject.GetComponent<Image>().type = Image.Type.Sliced;
-        btn.gameObject.GetComponent<Image>().pixelsPerUnitMultiplier = 0.5f;
+        newButton.GetComponent<Button>().GetComponent<HorizontalLayoutGroup>().padding.left = myPadding;
+        newButton.GetComponent<Button>().GetComponent<HorizontalLayoutGroup>().padding.right = myPadding;
+        newButton.GetComponent<Button>().GetComponent<HorizontalLayoutGroup>().childAlignment = TextAnchor.MiddleCenter;
+        newButton.GetComponent<Button>().GetComponent<Image>().type = Image.Type.Sliced;
+        newButton.GetComponent<Button>().GetComponent<Image>().pixelsPerUnitMultiplier = 0.5f;
 
-        TMP_Text btnText = btn.GetComponentInChildren<TMP_Text>();
+        TMP_Text btnText = newButton.GetComponentInChildren<TMP_Text>();
         btnText.fontSize = 30;
         btnText.color = GameColors.defaultTextColor;
         btnText.font = myQuizConfig.font;
@@ -81,49 +81,35 @@ public class QuizAnswerItem
         btnText.fontStyle = FontStyles.SmallCaps;
         btnText.text = answer;
 
-        btnNbr++;
-    }
+        btn = newButton.GetComponent<Button>();
 
-    private void ToogleSelected()
-    {
-        buttonSelected = !buttonSelected;
-        
-        if (buttonSelected)
-        {
-            //selectColor = Color.cyan;
-            //btn.GetComponent<Image>().color = myQuizConfig.selected;
-            btn.Select();
-            
-        }
-        else
-        {
-            //selectColor = Color.white;
-            //btn.GetComponent<Image>().color = myQuizConfig.normal;
-        }
+        //btnNbr++;
     }
 
     public void ShowResult()
     {
-        if (!isCorrect)
+        btn.GetComponent<QuizAnswerUiBehaviour>().ShowResult();
+    }
+
+    private void SelectThisAnswer()
+    {
+        //btn.GetComponent<QuizAnswerUiBehaviour>().isSelected = true;
+        if (runtimeData.singleSelectAwIdOld == null)
         {
-           btn.GetComponent<Image>().color = myQuizConfig.incorrect;
-        }
-        else
-        {
-            btn.GetComponent<Image>().color = myQuizConfig.correct;
+            btn.GetComponent<QuizAnswerUiBehaviour>().isSelected = true;
+            runtimeData.singleSelectAwIdOld = btn;
         }
 
-        Debug.Log("llllllllllll + *" + btn.GetComponent<MouseInteractionElement>().IsSelected());
-        if (btn.GetComponent<MouseInteractionElement>().IsSelected())
+        else if (runtimeData.singleSelectAwIdOld.GetComponent<QuizAnswerUiBehaviour>().awId != btn.GetComponent<QuizAnswerUiBehaviour>().awId)
         {
-            Debug.Log("in Show Result üüüüüüüüüüüüüüüüüüüüüüüüü" + btn.GetComponent<MouseInteractionElement>().IsSelected());
-            //btn.GetComponentInChildren<TMP_Text>().fontWeight = FontWeight.Bold;
+            runtimeData.singleSelectAwIdOld.GetComponent<QuizAnswerUiBehaviour>().isSelected = false;
+            runtimeData.singleSelectAwIdOld = btn;
+            btn.GetComponent<QuizAnswerUiBehaviour>().isSelected = true;
         }
-        
     }
 
     public int GetPointForAnswer()
     {
-        return (buttonSelected && isCorrect) ^ (!buttonSelected && !isCorrect) ? 1 : 0;
+        return btn.GetComponent<QuizAnswerUiBehaviour>().IsCorrectlySelected() ? 1 : 0;
     }
 }

@@ -31,9 +31,9 @@ public class MouseChange : MonoBehaviour
                 return;
             }
 
-            if (gameObject.GetComponent<MouseInteractionElement>() != null)
+            if (gameObject.GetComponent<QuizAnswerUiBehaviour>() != null)
             {
-                if (gameObject.GetComponent<MouseInteractionElement>().uiType == MouseInteraction.BtnQuizAnswer)
+                if (gameObject.GetComponent<QuizAnswerUiBehaviour>().uiType == MouseInteraction.BtnQuizAnswer)
                 {
                     gameObject.GetComponent<Button>().colors = GameColors.GetQuizAnswerColorBlock();
                     return;

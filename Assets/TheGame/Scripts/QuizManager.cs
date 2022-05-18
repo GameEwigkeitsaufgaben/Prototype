@@ -59,6 +59,7 @@ public class QuizManager : MonoBehaviour
     void Start()
     {
         quizTimer = FindObjectOfType<QuizTimer>();
+        
         audioAnswerCorrect.clip = sfx.correctAnswer;
         audioWrongAudio.clip = sfx.incorrectAnswer;
         uiButtonNext.GetComponent<AudioSource>().clip = sfx.btnClick;
@@ -91,7 +92,7 @@ public class QuizManager : MonoBehaviour
         {
             int tmpPoints = 1;
 
-            foreach (QuizAnswerItem a in questionItemListshuffled[currentProgressIndex].answers)
+            foreach (QuizAnswerItem a in questionItemListshuffled[currentProgressIndex].answerList)
             {
                 a.ShowResult();
                 tmpPoints *= a.GetPointForAnswer();
@@ -131,11 +132,10 @@ public class QuizManager : MonoBehaviour
         currentProgressIndex++;
         uiProgressBar.value++;
 
-        uiSimpleProgressView.text = "FRAGE " + (currentProgressIndex+1) + " von " + questionItemListshuffled.Count;
-
         if (currentProgressIndex < questionItemListshuffled.Count)
         {
             SetupQuestion(currentProgressIndex);
+            uiSimpleProgressView.text = "FRAGE " + (currentProgressIndex + 1) + " von " + questionItemListshuffled.Count;
         }
         else
         {
@@ -148,6 +148,7 @@ public class QuizManager : MonoBehaviour
     void SetupQuestion(int progressIndex)
     {
         runtimeData.quizMinerFeedback = MinerFeedback.Idle;
+        runtimeData.singleSelectAwIdOld = null;
         uiQuestion.text = questionItemListshuffled[progressIndex].GetQuestionText();
         uiPostImage.sprite = questionItemListshuffled[progressIndex].GetPostImage();
         buzzerTop.color = GameColors.buzzerInteractionColor;
@@ -167,7 +168,7 @@ public class QuizManager : MonoBehaviour
 
     void ActivateAnswerButtons(int progressIndex)
     {
-        foreach(var a in questionItemList[progressIndex].answers)
+        foreach(var a in questionItemList[progressIndex].answerList)
         {
             a.btn.gameObject.SetActive(true);
             Debug.Log(a.btn.name + " selected activate color: " + a.btn.gameObject.GetComponent<Button>().colors.selectedColor);
