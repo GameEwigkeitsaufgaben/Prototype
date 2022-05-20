@@ -82,8 +82,6 @@ public class QuizAnswerItem
         btnText.text = answer;
 
         btn = newButton.GetComponent<Button>();
-
-        //btnNbr++;
     }
 
     public void ShowResult()
@@ -93,16 +91,17 @@ public class QuizAnswerItem
 
     private void SelectThisAnswer()
     {
+        
         if (runtimeData.singleSelectAwIdOld == null)
         {
             btn.GetComponent<QuizAnswerUiBehaviour>().isSelected = true;
-            runtimeData.singleSelectAwIdOld = btn;
+            runtimeData.singleSelectAwIdOld = btn.gameObject;
         }
 
         else if (runtimeData.singleSelectAwIdOld.GetComponent<QuizAnswerUiBehaviour>().awId != btn.GetComponent<QuizAnswerUiBehaviour>().awId)
         {
             runtimeData.singleSelectAwIdOld.GetComponent<QuizAnswerUiBehaviour>().isSelected = false;
-            runtimeData.singleSelectAwIdOld = btn;
+            runtimeData.singleSelectAwIdOld = btn.gameObject;
             btn.GetComponent<QuizAnswerUiBehaviour>().isSelected = true;
         }
     }

@@ -30,12 +30,11 @@ public class SoChapOneRuntimeData : ScriptableObject
 
     [Header("Quiz 119")]
     public MinerFeedback quizMinerFeedback;
-    public Button singleSelectAwIdOld = null;
+    public GameObject singleSelectAwIdOld = null;
+    public int monitorAnswerPressed = 0;
 
     [Header("GameProgress")]
     public bool video115Done, interaction116Done, interaction117Done, quiz119Done, progressCh1WithAdmin;
-
-
 
     [Header("General Settings")]
     public bool musicOn = true;
