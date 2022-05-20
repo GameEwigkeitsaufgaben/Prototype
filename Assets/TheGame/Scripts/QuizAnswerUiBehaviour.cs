@@ -48,13 +48,13 @@ public class QuizAnswerUiBehaviour : MonoBehaviour,ISelectHandler, IDeselectHand
     public void OnSelect(BaseEventData eventData)
     {
         uiAnswer.color = Color.white;
-        uiAnswer.fontStyle = FontStyles.Bold;
+        uiAnswer.fontStyle = FontStyles.Bold | FontStyles.SmallCaps;
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
         uiAnswer.color = GameColors.defaultTextColor;
-        uiAnswer.fontStyle = FontStyles.SmallCaps;
+        uiAnswer.fontStyle = FontStyles.Normal;
     }
 
     public void ShowResult()
@@ -64,8 +64,10 @@ public class QuizAnswerUiBehaviour : MonoBehaviour,ISelectHandler, IDeselectHand
         if (isCorrect || isSelected)
         {
             uiAnswer.color = Color.white;
-            uiAnswer.fontStyle = FontStyles.Bold;
-        }
+            
+            if (isCorrect) uiAnswer.fontStyle = FontStyles.SmallCaps | FontStyles.Bold;
+            if (isSelected) uiAnswer.fontStyle |= FontStyles.Bold;
+        } 
     }
 
     private void Update()

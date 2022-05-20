@@ -24,13 +24,12 @@ public class MouseChange : MonoBehaviour
                 gameObject.GetComponent<Button>().colors = GameColors.GetPostColorBlock();
                 return;
             }
-            if (gameObject.GetComponent<RawImage>() != null)
+            else if (gameObject.GetComponent<RawImage>() != null)
             {
                 gameObject.GetComponent<Button>().colors = GameColors.GetOverlayColorBlock();
                 return;
             }
-
-            if (gameObject.GetComponent<QuizAnswerUiBehaviour>() != null)
+            else if (gameObject.GetComponent<QuizAnswerUiBehaviour>() != null)
             {
                 if (gameObject.GetComponent<QuizAnswerUiBehaviour>().uiType == MouseInteraction.BtnQuizAnswer)
                 {
@@ -38,8 +37,7 @@ public class MouseChange : MonoBehaviour
                     return;
                 }
             }
-
-            if (gameObject.tag == "Buzzer")
+            else if (gameObject.tag == "Buzzer")
             {
                 gameObject.GetComponent<Button>().colors = GameColors.GetBuzzerColorBlockProve();
                 return;

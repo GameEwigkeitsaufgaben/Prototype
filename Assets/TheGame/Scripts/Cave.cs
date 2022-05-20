@@ -51,11 +51,14 @@ public class Cave : MonoBehaviour
 
     private SoChapOneRuntimeData runtimeData;
 
-    private void Start()
+    private void Awake()
     {
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+    }
 
+    private void Start()
+    {
         Debug.Log("Game Data " + GameData.currentStopSohle);
 
         if(GameData.currentStopSohle == (int)CoalmineStop.Unset)

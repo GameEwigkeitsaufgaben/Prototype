@@ -276,7 +276,7 @@ MonoBehaviour:
   audiosSole1: {fileID: 11400000, guid: 8a82036e76e1212418f25d76c2b11910, type: 2}
   audiosSole1Vp: {fileID: 0}
   audiosSole2: {fileID: 11400000, guid: 2faebea999a8ecf4ab4cf3f2a6a57f02, type: 2}
-  audiosSole2Badewannen: {fileID: 0}
+  audiosSole2Grubenwasser: {fileID: 0}
   audiosSole3WPBahnsteig: {fileID: 11400000, guid: e293681608c7a2640a14ba9e140abf33, type: 2}
   audiosSole3WPBewetterung: {fileID: 11400000, guid: 892465c2e6fa71f4db27633136469d29, type: 2}
   audiosSole3WPCave: {fileID: 11400000, guid: 215b2a6dbe108744eb895c0d3f3cbe28, type: 2}
@@ -8149,7 +8149,7 @@ MonoBehaviour:
   audiosSole1: {fileID: 11400000, guid: 8a82036e76e1212418f25d76c2b11910, type: 2}
   audiosSole1Vp: {fileID: 0}
   audiosSole2: {fileID: 11400000, guid: 2faebea999a8ecf4ab4cf3f2a6a57f02, type: 2}
-  audiosSole2Badewannen: {fileID: 0}
+  audiosSole2Grubenwasser: {fileID: 0}
   audiosSole3WPBahnsteig: {fileID: 11400000, guid: e293681608c7a2640a14ba9e140abf33, type: 2}
   audiosSole3WPBewetterung: {fileID: 11400000, guid: 892465c2e6fa71f4db27633136469d29, type: 2}
   audiosSole3WPCave: {fileID: 11400000, guid: 215b2a6dbe108744eb895c0d3f3cbe28, type: 2}
@@ -9227,6 +9227,7 @@ GameObject:
   - component: {fileID: 1223926020}
   - component: {fileID: 1223926019}
   - component: {fileID: 1223926022}
+  - component: {fileID: 1223926024}
   - component: {fileID: 1223926023}
   m_Layer: 0
   m_Name: BtnEinstieg
@@ -9383,9 +9384,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1119981094}
+        - m_Target: {fileID: 1223926024}
           m_TargetAssemblyTypeName: MouseChange, Assembly-CSharp
-          m_MethodName: OnMouseEnter
+          m_MethodName: MouseEnter
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -9399,9 +9400,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1119981094}
+        - m_Target: {fileID: 1223926024}
           m_TargetAssemblyTypeName: MouseChange, Assembly-CSharp
-          m_MethodName: OnMouseExit
+          m_MethodName: MouseExit
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -9411,6 +9412,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1223926024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223926017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b294cdbedabc9dd4fa7f122528806e07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorTexture: {fileID: 0}
+  caveCursourTexture: {fileID: 0}
+  cursorMode: 0
+  hotSpot: {x: 0, y: 0}
 --- !u!1 &1228932695
 GameObject:
   m_ObjectHideFlags: 0
@@ -9840,6 +9857,7 @@ GameObject:
   - component: {fileID: 1264847891}
   - component: {fileID: 1264847890}
   - component: {fileID: 1264847889}
+  - component: {fileID: 1264847894}
   - component: {fileID: 1264847892}
   - component: {fileID: 1264847893}
   m_Layer: 0
@@ -9997,9 +10015,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1119981094}
+        - m_Target: {fileID: 1264847894}
           m_TargetAssemblyTypeName: MouseChange, Assembly-CSharp
-          m_MethodName: OnMouseEnter
+          m_MethodName: MouseEnter
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -10013,9 +10031,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1119981094}
+        - m_Target: {fileID: 1264847894}
           m_TargetAssemblyTypeName: MouseChange, Assembly-CSharp
-          m_MethodName: OnMouseExit
+          m_MethodName: MouseExit
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -10025,6 +10043,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1264847894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264847887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b294cdbedabc9dd4fa7f122528806e07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorTexture: {fileID: 0}
+  caveCursourTexture: {fileID: 0}
+  cursorMode: 0
+  hotSpot: {x: 0, y: 0}
 --- !u!1 &1265952486
 GameObject:
   m_ObjectHideFlags: 0
@@ -10597,6 +10631,7 @@ GameObject:
   - component: {fileID: 1342910291}
   - component: {fileID: 1342910290}
   - component: {fileID: 1342910289}
+  - component: {fileID: 1342910294}
   - component: {fileID: 1342910292}
   - component: {fileID: 1342910293}
   m_Layer: 0
@@ -10754,9 +10789,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1119981094}
+        - m_Target: {fileID: 1342910294}
           m_TargetAssemblyTypeName: MouseChange, Assembly-CSharp
-          m_MethodName: OnMouseEnter
+          m_MethodName: MouseEnter
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -10770,9 +10805,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1119981094}
+        - m_Target: {fileID: 1342910294}
           m_TargetAssemblyTypeName: MouseChange, Assembly-CSharp
-          m_MethodName: OnMouseExit
+          m_MethodName: MouseExit
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -10782,6 +10817,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1342910294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342910287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b294cdbedabc9dd4fa7f122528806e07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorTexture: {fileID: 0}
+  caveCursourTexture: {fileID: 0}
+  cursorMode: 0
+  hotSpot: {x: 0, y: 0}
 --- !u!1 &1357478540
 GameObject:
   m_ObjectHideFlags: 0
@@ -11909,6 +11960,7 @@ GameObject:
   - component: {fileID: 1530691721}
   - component: {fileID: 1530691720}
   - component: {fileID: 1530691719}
+  - component: {fileID: 1530691724}
   - component: {fileID: 1530691722}
   - component: {fileID: 1530691723}
   m_Layer: 0
@@ -12066,9 +12118,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1119981094}
+        - m_Target: {fileID: 1530691724}
           m_TargetAssemblyTypeName: MouseChange, Assembly-CSharp
-          m_MethodName: OnMouseEnter
+          m_MethodName: MouseEnter
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -12082,9 +12134,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1119981094}
+        - m_Target: {fileID: 1530691724}
           m_TargetAssemblyTypeName: MouseChange, Assembly-CSharp
-          m_MethodName: OnMouseExit
+          m_MethodName: MouseExit
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -12094,6 +12146,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1530691724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530691717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b294cdbedabc9dd4fa7f122528806e07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorTexture: {fileID: 0}
+  caveCursourTexture: {fileID: 0}
+  cursorMode: 0
+  hotSpot: {x: 0, y: 0}
 --- !u!4 &1539345906 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e10a53e0a9590d2479f8671dd006447c, type: 3}
@@ -16356,6 +16424,30 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1119981090}
+    - target: {fileID: 5230956460089511735, guid: 4a88409e80a507c4a9f209621241e56c, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5230956460089511735, guid: 4a88409e80a507c4a9f209621241e56c, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5230956460089511735, guid: 4a88409e80a507c4a9f209621241e56c, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5230956462017978624, guid: 4a88409e80a507c4a9f209621241e56c, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5230956462017978624, guid: 4a88409e80a507c4a9f209621241e56c, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1280
+      objectReference: {fileID: 0}
+    - target: {fileID: 5230956462017978624, guid: 4a88409e80a507c4a9f209621241e56c, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 720
+      objectReference: {fileID: 0}
     - target: {fileID: 5230956462017978629, guid: 4a88409e80a507c4a9f209621241e56c, type: 3}
       propertyPath: m_Name
       value: CanvasExitAndSettings

@@ -81,7 +81,7 @@ public class QuizAnswerItem
         btnText.color = GameColors.defaultTextColor;
         btnText.font = myQuizConfig.font;
         btnText.fontMaterial = myQuizConfig.font.material;
-        btnText.fontStyle = FontStyles.SmallCaps;
+        btnText.fontStyle = FontStyles.Normal;
         btnText.text = answer;
 
         btn = newButton.GetComponent<Button>();
