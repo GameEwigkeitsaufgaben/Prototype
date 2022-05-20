@@ -72,6 +72,9 @@ public class QuizAnswerItem
         newButton.GetComponent<Button>().GetComponent<HorizontalLayoutGroup>().childAlignment = TextAnchor.MiddleCenter;
         newButton.GetComponent<Button>().GetComponent<Image>().type = Image.Type.Sliced;
         newButton.GetComponent<Button>().GetComponent<Image>().pixelsPerUnitMultiplier = 0.5f;
+        //Navigation customNav = new Navigation();
+        //customNav.mode = Navigation.Mode.None;
+        //newButton.GetComponent<Button>().navigation = customNav;
 
         TMP_Text btnText = newButton.GetComponentInChildren<TMP_Text>();
         btnText.fontSize = 30;

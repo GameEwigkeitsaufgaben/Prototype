@@ -12,7 +12,7 @@ public enum MouseInteraction
     BtnQuizAnswer
 }
 
-//Bei mehrfachauswahl mit navigation mode select von none auf automatic setzen.
+//navigation mode select von none auf automatic.
 
 public class QuizAnswerUiBehaviour : MonoBehaviour,ISelectHandler, IDeselectHandler
 {
@@ -33,7 +33,6 @@ public class QuizAnswerUiBehaviour : MonoBehaviour,ISelectHandler, IDeselectHand
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
         myQuizConfig = Resources.Load<SoQuizConfig>(GameData.NameConfigQuiz);
         uiAnswer = gameObject.GetComponentInChildren<TMP_Text>();
-        Debug.Log(gameObject.name + " id" +gameObject.GetInstanceID());
     }
 
     public bool IsCorrectlySelected()
@@ -48,17 +47,12 @@ public class QuizAnswerUiBehaviour : MonoBehaviour,ISelectHandler, IDeselectHand
 
     public void OnSelect(BaseEventData eventData)
     {
-        Debug.Log("On select ............... " + eventData.selectedObject.name);
-        Debug.Log("On select by click............... " + eventData.selectedObject.GetComponent<QuizAnswerUiBehaviour>().isSelected);
-
         uiAnswer.color = Color.white;
         uiAnswer.fontStyle = FontStyles.Bold;
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
-        Debug.Log("On deselect --------------------- " + eventData.selectedObject.name + EventSystem.current.GetComponent<EventSystem>().currentSelectedGameObject.name);
-
         uiAnswer.color = GameColors.defaultTextColor;
         uiAnswer.fontStyle = FontStyles.SmallCaps;
     }
@@ -76,21 +70,10 @@ public class QuizAnswerUiBehaviour : MonoBehaviour,ISelectHandler, IDeselectHand
 
     private void Update()
     {
-        // Debug.Log("AW Button should be selected: " + gameObject.name + " " + EventSystem.current.GetComponent<EventSystem>().currentSelectedGameObject.name);
-        if (EventSystem.current.GetComponent<EventSystem>().currentSelectedGameObject)
+        //delesect button when mouse clicked in background
+        if (EventSystem.current.GetComponent<EventSystem>().currentSelectedGameObject == null)
         {
             isSelected = false;
         }
-        //if (isSelected && uiAnswer.color != Color.white)
-        //{
-        //    uiAnswer.color = Color.white;
-        //    uiAnswer.fontStyle = FontStyles.Bold;
-        //    gameObject.GetComponent<Button>().Select();
-        //    Debug.Log("AW Button should be selected: " + gameObject.name + " "+ EventSystem.current.GetComponent<EventSystem>().currentSelectedGameObject.name);
-        //}else if (!isSelected && uiAnswer.color != GameColors.defaultTextColor)
-        //{
-        //    uiAnswer.color = GameColors.defaultTextColor;
-        //    uiAnswer.fontStyle = FontStyles.SmallCaps;
-        //}
     }
 }

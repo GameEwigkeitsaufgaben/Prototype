@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-
 public enum MinerFeedback
 {
     Idle,
@@ -57,7 +56,6 @@ public class QuizManager : MonoBehaviour
         quizConfig = Resources.Load<SoQuizConfig>(GameData.NameConfigQuiz);
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         quizTimer = FindObjectOfType<QuizTimer>();
@@ -195,19 +193,9 @@ public class QuizManager : MonoBehaviour
     //https://answers.unity.com/questions/486626/how-can-i-shuffle-alist.html
     public List<QuizQuestionItem> Swap(List<QuizQuestionItem> list, int indexA, int indexB)
     {
-        foreach (var i in list)
-        {
-            i.PrintQuestionIdenifier();
-        }
-        
         QuizQuestionItem temp = list[indexA];
         list[indexA] = list[indexB];
         list[indexB] = temp;
-
-        foreach (var i in list)
-        {
-            i.PrintQuestionIdenifier();
-        }
 
         return list;
     }
@@ -241,7 +229,7 @@ public class QuizManager : MonoBehaviour
                 break;
             case MinerFeedback.Incorrect:
                 imgMinerFeedback.sprite = quizConfig.minerFeedbackIncorrect;
-                textMinerFeedback.text = "+ " + pointsPerQuestion + " Punkte\nFalsch, die Antwort ist ... ";
+                textMinerFeedback.text = "+ " + pointsPerQuestion + " Punkte\nOjee, leider falsch!";
                 textMinerFeedback.transform.parent.gameObject.SetActive(true);
                 break;
         }

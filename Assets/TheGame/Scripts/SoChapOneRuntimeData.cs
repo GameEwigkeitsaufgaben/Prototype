@@ -31,7 +31,6 @@ public class SoChapOneRuntimeData : ScriptableObject
     [Header("Quiz 119")]
     public MinerFeedback quizMinerFeedback;
     public GameObject singleSelectAwIdOld = null;
-    public int monitorAnswerPressed = 0;
 
     [Header("GameProgress")]
     public bool video115Done, interaction116Done, interaction117Done, quiz119Done, progressCh1WithAdmin;
@@ -55,7 +54,6 @@ public class SoChapOneRuntimeData : ScriptableObject
         sole1Done = sole2Done = sole3BewetterungDone = sole3GebaeudeDone = trainRideInDone = trainRideOutDone = isLongwallCutterDone = false;
         interaction116Done = interaction117Done = quiz119Done = false;
         musicOn = true;
-        //Cursor.SetCursor(cursorInteract, Vector2.zero, CursorMode.Auto);
     }
 
     public void CheckInteraction117Done()
