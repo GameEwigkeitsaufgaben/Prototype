@@ -13,7 +13,7 @@ public class ManagerCarbonifactionPeriod : MonoBehaviour
     }
     private void Start()
     {
-        runtimeData.cursorDefault = null;
+        Cursor.SetCursor(runtimeData.cursorDefault, Vector2.zero, CursorMode.Auto);
     }
     
     //Called from Btn in Scene/Inspector
