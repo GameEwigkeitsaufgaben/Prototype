@@ -68,6 +68,10 @@ public class MouseChange : MonoBehaviour
         {
             Cursor.SetCursor(runtimeData.cursorInteract, hotSpot, cursorMode);
         }
+        else if (gameObject.GetComponent<MuseumCard>() != null)
+        {
+            Cursor.SetCursor(runtimeData.cursorInteract, hotSpot, cursorMode);
+        }
         else
         {
             Cursor.SetCursor(runtimeData.cursorNoInteract, hotSpot, cursorMode);
