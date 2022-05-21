@@ -32,6 +32,7 @@ public class LookaroundWithMouse : MonoBehaviour
             yaw += speedH * Input.GetAxis("Mouse X");
             pitch -= speedV * Input.GetAxis("Mouse Y");
 
+            pitch = Mathf.Clamp(pitch, -40f, +40f);
             transform.localEulerAngles = new Vector3(pitch, yaw, 0.0f);
         }
     }
