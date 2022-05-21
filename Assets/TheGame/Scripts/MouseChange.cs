@@ -50,9 +50,13 @@ public class MouseChange : MonoBehaviour
         {
             gameObject.GetComponent<Scrollbar>().colors = GameColors.GetInteractionColorBlock();
         }
-        
+        else if (gameObject.GetComponent<Slider>() != null)
+        {
+            gameObject.GetComponent<Slider>().colors = GameColors.GetInteractionColorBlock();
+        }
+
         //if (SceneManager.GetActiveScene().name != GameScenes.ch01Mine) return;
-        
+
         Cursor.SetCursor(runtimeData.cursorDefault, hotSpot, cursorMode);
     }
 
@@ -65,6 +69,10 @@ public class MouseChange : MonoBehaviour
             Cursor.SetCursor(runtimeData.cursorInteract, hotSpot, cursorMode);
         }
         else if (gameObject.GetComponent<Scrollbar>() != null)
+        {
+            Cursor.SetCursor(runtimeData.cursorInteract, hotSpot, cursorMode);
+        }
+        else if (gameObject.GetComponent<Slider>() != null)
         {
             Cursor.SetCursor(runtimeData.cursorInteract, hotSpot, cursorMode);
         }
