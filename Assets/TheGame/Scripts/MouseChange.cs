@@ -4,10 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class MouseChange : MonoBehaviour
 {
-    public Texture2D cursorTexture;
-    public Texture2D caveCursourTexture;
-    public CursorMode cursorMode = CursorMode.Auto;
-    public Vector2 hotSpot = Vector2.zero;
+    //public Texture2D cursorTexture;
+    //public Texture2D caveCursourTexture;
+    private CursorMode cursorMode = CursorMode.Auto;
+    private Vector2 hotSpot = Vector2.zero;
     private SoChapOneRuntimeData runtimeData;
 
     private void Awake()
@@ -58,6 +58,8 @@ public class MouseChange : MonoBehaviour
 
     public void MouseEnter()
     {
+        Debug.Log(gameObject.name);
+            //+ " btn ok " + (gameObject.GetComponent<Button>() != null) + " " + gameObject.GetComponent<Button>().interactable);
         if(gameObject.GetComponent<Button>() != null && gameObject.GetComponent<Button>().interactable)
         {
             Cursor.SetCursor(runtimeData.cursorInteract, hotSpot, cursorMode);
