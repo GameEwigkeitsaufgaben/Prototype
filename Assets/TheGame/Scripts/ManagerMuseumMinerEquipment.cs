@@ -41,7 +41,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
 
     private void Awake()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         //runtimeData.cursorDefault = null;
     }
 

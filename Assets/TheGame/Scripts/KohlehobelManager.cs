@@ -12,7 +12,7 @@ public class KohlehobelManager : MonoBehaviour
 
     private void Awake()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
     }
 
     // Start is called before the first frame update

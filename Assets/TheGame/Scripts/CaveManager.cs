@@ -34,7 +34,7 @@ public class CaveManager : MonoBehaviour
     private void Awake()
     {
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
     }
 
     private void Start()

@@ -25,7 +25,7 @@ public class MuseumOverlay : MonoBehaviour
     {
         parentMaskPanel = container.transform.parent.gameObject;
         configMuseum = Resources.Load<SoMuseumConfig>("ConfigMuseum");
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         gameObject.transform.localPosition = runtimeData.currentGroupPos;
         btnSkipIntro.GetComponent<Image>().color = GameColors.defaultInteractionColorNormal;
         btnClose.GetComponent<Image>().color = GameColors.defaultInteractionColorNormal;

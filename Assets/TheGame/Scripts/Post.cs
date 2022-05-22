@@ -18,7 +18,7 @@ public class Post : MonoBehaviour
     private void Awake()
     {
         icons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
     }
 
     void Start()

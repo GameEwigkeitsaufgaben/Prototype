@@ -31,7 +31,7 @@ public class Entry : MonoBehaviour
     void Start()
     {
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
 
         post.GetComponent<Post>().SetPostData(postData);
         overlay.GetComponent<Overlay>().SetOverlayData(postData);

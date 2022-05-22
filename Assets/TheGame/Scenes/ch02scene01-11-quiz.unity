@@ -716,7 +716,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 211478284}
-  - component: {fileID: 211478285}
   - component: {fileID: 211478286}
   - component: {fileID: 211478288}
   - component: {fileID: 211478287}
@@ -741,27 +740,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &211478285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 211478283}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c0f28424df54b64a916d236d6c8dc08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  quizData: {fileID: 11400000, guid: 8b60a2c1afd32794a8cd997d53c8c681, type: 2}
-  questionText: {fileID: 215301198}
-  answerA: {fileID: 0}
-  answerB: {fileID: 0}
-  answerC: {fileID: 0}
-  answerD: {fileID: 0}
-  timerText: {fileID: 1573452559}
-  btnNext: {fileID: 0}
-  maxTimeInSec: 5
 --- !u!114 &211478286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -884,34 +862,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7acaf64451c51f040a96f349674af2af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endCanvas: {fileID: 0}
   quizCanvas: {fileID: 144596097}
   answerButtonGroup: {fileID: 1742491379}
   uiQuestion: {fileID: 1349651449}
   uiPoints: {fileID: 2037283228}
   uiQuestType: {fileID: 424050351}
-  uiProgressBar: {fileID: 542934458}
   uiSimpleProgressView: {fileID: 1529308786}
+  uiProgressBar: {fileID: 542934458}
   uiPostImage: {fileID: 2097776779}
-  uiButtonNext: {fileID: 442140137}
   buzzerTop: {fileID: 1804407632}
   imgMinerFeedback: {fileID: 1009081521}
-  textMinerFeedback: {fileID: 840149358}
+  uiButtonNext: {fileID: 442140137}
+  textMinerFeedback: {fileID: 0}
   audioAnswerCorrect: {fileID: 1129979467}
   audioWrongAudio: {fileID: 813334161}
   randomizeQuestions: 1
   switchScene: {fileID: 211478286}
   quizDataItems:
-  - {fileID: 11400000, guid: 8b60a2c1afd32794a8cd997d53c8c681, type: 2}
-  - {fileID: 11400000, guid: a3556a3cd1f06e14f827a774f28701f5, type: 2}
-  - {fileID: 11400000, guid: efcb111a56227bc469686cbb4c522deb, type: 2}
-  - {fileID: 11400000, guid: 74e85c115ca4c194cb8e3f966d3cdb8d, type: 2}
-  - {fileID: 11400000, guid: fba7881ca38cfca46bd2fddee29dc5fa, type: 2}
-  - {fileID: 11400000, guid: 6fe5c8a9c16b21b408f309183710c3cb, type: 2}
-  - {fileID: 11400000, guid: d7ec008349779a34f8b63f31c699ea0e, type: 2}
+  - {fileID: 11400000, guid: fbdf4e0e95837ff4c939bae0d9759c9d, type: 2}
+  - {fileID: 11400000, guid: d5c5628d0e6a6d04e827ba3ff25bbc96, type: 2}
+  - {fileID: 11400000, guid: e58248c5c67b86c4397e6f669fd24576, type: 2}
+  - {fileID: 11400000, guid: b79734a7354162f4e89949d567c15be0, type: 2}
+  - {fileID: 11400000, guid: a968383fc21e11d4d8fe9151db80de01, type: 2}
+  - {fileID: 11400000, guid: e9f50f0c82b9a0843a271b67aa2951d3, type: 2}
+  - {fileID: 11400000, guid: 05047930522b0cc47a687d808f9f2197, type: 2}
   sfx: {fileID: 11400000, guid: 739ab3aa410a5154592f852096fc5f7c, type: 2}
   runtimeData: {fileID: 0}
-  quizConfig: {fileID: 0}
+  quizConfig: {fileID: 11400000, guid: 41b749e30621ad743abdcecf055f8446, type: 2}
 --- !u!1 &215301196
 GameObject:
   m_ObjectHideFlags: 0

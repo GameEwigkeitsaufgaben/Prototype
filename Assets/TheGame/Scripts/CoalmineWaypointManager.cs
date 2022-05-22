@@ -80,7 +80,7 @@ public class CoalmineWaypointManager : MonoBehaviour
         myPlayer = playerSplineMove.gameObject.GetComponent<Player>();
         
 
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         
         if (myPlayer.playerInCave)
         {

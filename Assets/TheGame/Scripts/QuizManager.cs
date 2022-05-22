@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public enum MinerFeedback
 {
@@ -51,7 +52,15 @@ public class QuizManager : MonoBehaviour
 
     private void Awake()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        if(SceneManager.GetActiveScene().name == GameData.NameRuntimeDataChap01)
+        {
+            runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        }
+        else if (SceneManager.GetActiveScene().name == GameData.NameRuntimeDataChap02)
+        {
+            runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap02);
+        }
+        
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
         quizConfig = Resources.Load<SoQuizConfig>(GameData.NameConfigQuiz);
     }

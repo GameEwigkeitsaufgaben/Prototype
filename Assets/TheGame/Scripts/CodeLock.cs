@@ -17,7 +17,7 @@ public class CodeLock : MonoBehaviour
     
     void Start()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
 
         if (runtimeData.ch1GeneralUnlocked && lockForChapter == Chapters.Ch01General)
         {

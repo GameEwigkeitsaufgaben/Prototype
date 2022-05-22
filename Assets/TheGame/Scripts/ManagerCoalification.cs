@@ -23,7 +23,7 @@ public class ManagerCoalification : MonoBehaviour
 
     private void Awake()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         configMuseum = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
     }
 
