@@ -18,7 +18,7 @@ public static class GameData
     public const string NameConfigMuseum = "ConfigMuseum";
     public const string NameGameIcons = "Icons";
     public const string NameGameColors = "ConfigGameColors";
-    public static string NameConfigQuiz = "QuizChapterOneConfig";
+    public static string NameConfigQuiz = "ConfigQuiz";
 
     public const string NamePost116 = "Post116";
     public const string NamePost117 = "Post117";

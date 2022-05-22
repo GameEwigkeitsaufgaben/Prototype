@@ -42,7 +42,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     private void Awake()
     {
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
-        runtimeData.cursorDefault = null;
+        //runtimeData.cursorDefault = null;
     }
 
     // Start is called before the first frame update
@@ -51,7 +51,9 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
         Debug.Log("go name " + uiNbrItemsEssential.name);
         Debug.Log("go name + val " + uiNbrItemsEssential.text);
 
-        foreach(MuseumMinerEquipmentItem i in items)
+        Cursor.SetCursor(runtimeData.cursorDefault, Vector2.zero, CursorMode.Auto);
+
+        foreach (MuseumMinerEquipmentItem i in items)
         {
             i.dragObjParent = dragParentBringItemToFront;
             i.orderTopParent = reorderParentTop;
@@ -68,6 +70,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
         audioSrc = gameObject.AddComponent<AudioSource>();
         audioSrc.playOnAwake = false;
         SetUiTooltip();
+        
     }
 
     public bool IsDragItemOk()

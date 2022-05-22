@@ -8,33 +8,34 @@ public class QuizQuestionItem
     private const string mehrereAntwortenRichtig = "#mehrereRichtig";
     private QuizData questionItemData;
     private QuizQuestionType questionType;
-    //private VerticalLayoutGroup buttonGroup;
 
 
-    public List<QuizAnswerItem> answers = new List<QuizAnswerItem>();
+    public List<QuizAnswerItem> answerList = new List<QuizAnswerItem>();
     public bool unProved = true;
 
     public QuizQuestionItem(QuizData cdata, VerticalLayoutGroup parent)
     {
         questionItemData = cdata;
-        //buttonGroup = parent;
 
         for (int i = 0; i < questionItemData.answers.Length; i++)
         {
             QuizAnswerItem aw = new QuizAnswerItem();
-            aw.questionIdentifier = questionItemData.name.Trim().ToLower();
             aw.answer = questionItemData.answers[i];
-            aw.answerIdentifier = i;
-            aw.isCorrect = false;
-            aw.CreateButton(parent);
             aw.timeToAnswerInSec = questionItemData.timeToAnswerInSec;
-            answers.Add(aw);
+
+            aw.CreateButton(parent, i);
+            aw.btn.GetComponent<QuizAnswerUiBehaviour>().questID = questionItemData.name.Trim().ToLower();
+            aw.btn.GetComponent<QuizAnswerUiBehaviour>().awId = i;
+            aw.btn.GetComponent<QuizAnswerUiBehaviour>().questType = questionItemData.questionType;
+            aw.btn.GetComponent<QuizAnswerUiBehaviour>().uiType = MouseInteraction.BtnQuizAnswer;
+            
+            answerList.Add(aw);
         }
 
         //set correct answers to true, marked in the the array correct answers in data
         for (int i = 0; i < questionItemData.correctAnswers.Length; i++)
         {
-            answers[(int)questionItemData.correctAnswers[i]].isCorrect = true;
+            answerList[(int)questionItemData.correctAnswers[i]].btn.GetComponent<QuizAnswerUiBehaviour>().isCorrect = true;
         }
     }
 
@@ -42,7 +43,7 @@ public class QuizQuestionItem
     {
         string x = "";
 
-        if(questionItemData.questionType == QuizQuestionType.OneTrue || questionItemData.questionType == QuizQuestionType.TrueFalse)
+        if (questionItemData.questionType == QuizQuestionType.OneTrue || questionItemData.questionType == QuizQuestionType.TrueFalse)
         {
             x = eineAntwortRichtig;
         }
@@ -66,11 +67,11 @@ public class QuizQuestionItem
 
     public void PrintCorrectAnswers()
     {
-        for(int i = 0; i < answers.Count; i++)
+        for(int i = 0; i < answerList.Count; i++)
         {
-            if (answers[i].isCorrect)
+            if (answerList[i].isCorrect)
             {
-                answers[i].PrintItemData();
+                answerList[i].PrintItemData();
             }
         }
     }

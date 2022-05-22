@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class MuseumCard : MonoBehaviour
 {
@@ -131,6 +132,21 @@ public class MuseumCard : MonoBehaviour
         FlipCard();
     }
 
+    private void OnMouseEnter()
+    {
+        Debug.Log("Mouse Enter in Card " + gameObject.name);
+        gameObject.GetComponent<MouseChange>().MouseEnter();
+        overallBgImg.color = GameColors.defaultInteractionColorHighlighted;
+    }
+
+
+    private void OnMouseExit()
+    {
+        Debug.Log("Mouse Exit in Card " + gameObject.name);
+        gameObject.GetComponent<MouseChange>().MouseExit();
+        overallBgImg.color = GameColors.defaultInteractionColorNormal;
+    }
+
     public void FlipCard()
     {
         cardFaceDown = !cardFaceDown;
@@ -153,4 +169,6 @@ public class MuseumCard : MonoBehaviour
         //myContentImg.sprite = ;
         myStatement.gameObject.SetActive(true);
     }
+
+
 }

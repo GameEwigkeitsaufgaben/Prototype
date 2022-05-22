@@ -34,6 +34,7 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
     private AudioSource myAudioSrc;
     public GameObject dragObjParent, dragObjDefaultParent, orderTopParent;
     public bool isDragable;
+    public bool isCurrentlyDragging;
 
     public TMP_Text uiTextTooltip; //set for every item in managermuseumminerequipment
 
@@ -174,6 +175,7 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
         if (!isDragable) return;
 
         if (!myManager.IsDragItemOk()) return;
+        isCurrentlyDragging = true;
         
         gameObject.transform.parent = dragObjParent.transform;
         myAudioSrc.clip = myConifg.beginDrag;
@@ -185,6 +187,7 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
         if (!isDragable) return;
         if (!myManager.IsDragItemOk()) return;
 
+        isCurrentlyDragging = false;
         gameObject.transform.parent = dragObjDefaultParent.transform;
 
         positionChanged = GetHasPositionChanged();

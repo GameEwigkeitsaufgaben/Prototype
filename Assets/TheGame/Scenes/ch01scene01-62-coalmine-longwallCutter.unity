@@ -759,9 +759,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1964985976}
+        - m_Target: {fileID: 202597299}
           m_TargetAssemblyTypeName: MouseChange, Assembly-CSharp
-          m_MethodName: OnMouseEnter
+          m_MethodName: MouseEnter
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -775,9 +775,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1964985976}
+        - m_Target: {fileID: 202597299}
           m_TargetAssemblyTypeName: MouseChange, Assembly-CSharp
-          m_MethodName: OnMouseExit
+          m_MethodName: MouseExit
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -787,6 +787,34 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 202597299}
+          m_TargetAssemblyTypeName: MouseChange, Assembly-CSharp
+          m_MethodName: MouseExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &202597299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202597293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b294cdbedabc9dd4fa7f122528806e07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &209050427
 GameObject:
   m_ObjectHideFlags: 0
@@ -1011,15 +1039,15 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: fddf487a05072da4d9a8e5335b8ecf97, type: 3}
     - target: {fileID: 5456735632948623235, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
       propertyPath: m_Color.b
-      value: 0.27450982
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5456735632948623235, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
       propertyPath: m_Color.g
-      value: 0.82745105
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5456735632948623235, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
       propertyPath: m_Color.r
-      value: 0.9725491
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5456735632948623238, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
       propertyPath: m_Name
@@ -1160,9 +1188,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1964985976}
+        - m_Target: {fileID: 352382317}
           m_TargetAssemblyTypeName: MouseChange, Assembly-CSharp
-          m_MethodName: OnMouseEnter
+          m_MethodName: MouseEnter
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1176,9 +1204,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1964985976}
+        - m_Target: {fileID: 352382317}
           m_TargetAssemblyTypeName: MouseChange, Assembly-CSharp
-          m_MethodName: OnMouseExit
+          m_MethodName: MouseExit
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1188,6 +1216,34 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 352382317}
+          m_TargetAssemblyTypeName: MouseChange, Assembly-CSharp
+          m_MethodName: MouseExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &352382317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352382311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b294cdbedabc9dd4fa7f122528806e07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &424454804
 GameObject:
   m_ObjectHideFlags: 0
@@ -1282,6 +1338,7 @@ GameObject:
   - component: {fileID: 493503269}
   - component: {fileID: 493503268}
   - component: {fileID: 493503267}
+  - component: {fileID: 493503271}
   - component: {fileID: 493503270}
   m_Layer: 5
   m_Name: BtnGetInTrain
@@ -1421,9 +1478,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1964985976}
+        - m_Target: {fileID: 493503271}
           m_TargetAssemblyTypeName: MouseChange, Assembly-CSharp
-          m_MethodName: OnMouseEnter
+          m_MethodName: MouseEnter
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1437,9 +1494,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1964985976}
+        - m_Target: {fileID: 493503271}
           m_TargetAssemblyTypeName: MouseChange, Assembly-CSharp
-          m_MethodName: OnMouseExit
+          m_MethodName: MouseExit
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1449,6 +1506,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &493503271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493503265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b294cdbedabc9dd4fa7f122528806e07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &496768505
 GameObject:
   m_ObjectHideFlags: 0
@@ -1791,6 +1860,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5456735632948623232, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5456735632948623232, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
@@ -1812,15 +1885,15 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: fddf487a05072da4d9a8e5335b8ecf97, type: 3}
     - target: {fileID: 5456735632948623235, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
       propertyPath: m_Color.b
-      value: 0.27450982
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5456735632948623235, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
       propertyPath: m_Color.g
-      value: 0.82745105
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5456735632948623235, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
       propertyPath: m_Color.r
-      value: 0.9725491
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5456735632948623238, guid: 7f38f8cee7bf20b4baad55e3b89838d8, type: 3}
       propertyPath: m_Name
@@ -2601,18 +2674,18 @@ PrefabInstance:
     - target: {fileID: 1655399599, guid: 4a88409e80a507c4a9f209621241e56c, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1964985976}
+      objectReference: {fileID: 2134457897}
     - target: {fileID: 1655399599, guid: 4a88409e80a507c4a9f209621241e56c, type: 3}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1964985976}
+      objectReference: {fileID: 2134457897}
     - target: {fileID: 1655399599, guid: 4a88409e80a507c4a9f209621241e56c, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnMouseEnter
+      value: MouseEnter
       objectReference: {fileID: 0}
     - target: {fileID: 1655399599, guid: 4a88409e80a507c4a9f209621241e56c, type: 3}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnMouseExit
+      value: MouseExit
       objectReference: {fileID: 0}
     - target: {fileID: 5230956460089511734, guid: 4a88409e80a507c4a9f209621241e56c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2621,6 +2694,18 @@ PrefabInstance:
     - target: {fileID: 5230956460089511734, guid: 4a88409e80a507c4a9f209621241e56c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SwitchToChapter1withOverlay
+      objectReference: {fileID: 0}
+    - target: {fileID: 5230956460089511735, guid: 4a88409e80a507c4a9f209621241e56c, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5230956460089511735, guid: 4a88409e80a507c4a9f209621241e56c, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5230956460089511735, guid: 4a88409e80a507c4a9f209621241e56c, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5230956462017978629, guid: 4a88409e80a507c4a9f209621241e56c, type: 3}
       propertyPath: m_Name
@@ -3034,10 +3119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b294cdbedabc9dd4fa7f122528806e07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorTexture: {fileID: 0}
-  caveCursourTexture: {fileID: 0}
-  cursorMode: 0
-  hotSpot: {x: 0, y: 0}
 --- !u!1 &2005756766
 GameObject:
   m_ObjectHideFlags: 0
@@ -3312,3 +3393,14 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2134457897 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 943620061613302147, guid: 4a88409e80a507c4a9f209621241e56c, type: 3}
+  m_PrefabInstance: {fileID: 1652686637}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b294cdbedabc9dd4fa7f122528806e07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

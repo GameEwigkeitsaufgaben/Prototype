@@ -31,10 +31,14 @@ public class CaveManager : MonoBehaviour
     public AudioSource baukipper, kran, water;
     public Texture2D cursorTexture;
 
-    private void Start()
+    private void Awake()
     {
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+    }
+
+    private void Start()
+    {
         runtimeData.cursorDefault = runtimeData.cursorTexture3DCave;
         Cursor.SetCursor(runtimeData.cursorDefault, Vector2.zero, CursorMode.Auto);
         speechManagerMine = characterDad.transform.parent.GetComponent<CoalmineSpeechManger>();

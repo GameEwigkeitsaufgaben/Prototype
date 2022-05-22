@@ -19,15 +19,19 @@ public class ManagerCards : MonoBehaviour
     SoMuseumConfig myConfig;
     private SoChapOneRuntimeData runtimeData;
 
+    private void Awake()
+    {
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        myConfig = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
+    }
+
     private void Start()
     {
-        myConfig = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
         rightSelect = falseSelect = 0;
         soResourcesCards = GetShuffeldResources();
         CreateCards();
         maxValTrueSolution = GetMaxRightSolutions();
         minerImg.sprite = myConfig.minerIdle;
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
     }
 
     int GetMaxRightSolutions()
@@ -69,6 +73,7 @@ public class ManagerCards : MonoBehaviour
 
             cards[i].GetComponent<MuseumCard>().myResource = soResourcesCards[i];
             cards[i].name = "Card" + i;
+            cards[i].AddComponent<MouseChange>();
             Debug.Log("create  " + cards[i].name);
         }
 

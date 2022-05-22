@@ -11,6 +11,9 @@ public class SoChapOneRuntimeData : ScriptableObject
     public Texture2D cursorInteract;
     public Texture2D cursorNoInteract;
     public Texture2D cursorDefault;
+    public Texture2D cursorDragTouch;
+    public Texture2D cursorDragDrag;
+    public Texture2D cursorNoDrag;
 
     public bool ch1GeneralUnlocked, ch2GrubenwasserUnlocked;
 
@@ -30,11 +33,10 @@ public class SoChapOneRuntimeData : ScriptableObject
 
     [Header("Quiz 119")]
     public MinerFeedback quizMinerFeedback;
+    public GameObject singleSelectAwIdOld = null;
 
     [Header("GameProgress")]
     public bool video115Done, interaction116Done, interaction117Done, quiz119Done, progressCh1WithAdmin;
-
-
 
     [Header("General Settings")]
     public bool musicOn = true;
@@ -55,7 +57,6 @@ public class SoChapOneRuntimeData : ScriptableObject
         sole1Done = sole2Done = sole3BewetterungDone = sole3GebaeudeDone = trainRideInDone = trainRideOutDone = isLongwallCutterDone = false;
         interaction116Done = interaction117Done = quiz119Done = false;
         musicOn = true;
-        //Cursor.SetCursor(cursorInteract, Vector2.zero, CursorMode.Auto);
     }
 
     public void CheckInteraction117Done()

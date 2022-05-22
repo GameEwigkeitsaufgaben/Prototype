@@ -16,19 +16,19 @@ public class QuizManager : MonoBehaviour
     private const string btnTextCheckAnswers = "Prüfen";
     private const string btnTextNextAnswer = "Weiter";
 
-    public Canvas endCanvas, quizCanvas;
+    public Canvas quizCanvas;
     public VerticalLayoutGroup answerButtonGroup;
-    //public Text uiQuestion;
-    public TextMeshProUGUI uiQuestion;
+    public TMP_Text uiQuestion;
     public Text uiPoints;
     public Text uiQuestType;
-    public Slider uiProgressBar;
     public Text uiSimpleProgressView;
+    public Slider uiProgressBar;
+
     public Image uiPostImage;
-    public Button uiButtonNext;
     public Image buzzerTop;
     public Image imgMinerFeedback;
-    public Text textMinerFeedback;
+    public Button uiButtonNext;
+    public TMP_Text textMinerFeedback;
     public AudioSource audioAnswerCorrect, audioWrongAudio;
     public bool randomizeQuestions = false;
     public SwitchSceneManager switchScene;
@@ -38,7 +38,8 @@ public class QuizManager : MonoBehaviour
     public List<QuizQuestionItem> questionItemListshuffled;
 
     private int currentProgressIndex = 0;
-    private int points = 0;
+    private int pointsSum = 0;
+    private int pointsPerQuestion = 0;
     
     private QuizTimer quizTimer;
 
@@ -55,10 +56,10 @@ public class QuizManager : MonoBehaviour
         quizConfig = Resources.Load<SoQuizConfig>(GameData.NameConfigQuiz);
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         quizTimer = FindObjectOfType<QuizTimer>();
+        
         audioAnswerCorrect.clip = sfx.correctAnswer;
         audioWrongAudio.clip = sfx.incorrectAnswer;
         uiButtonNext.GetComponent<AudioSource>().clip = sfx.btnClick;
@@ -68,14 +69,7 @@ public class QuizManager : MonoBehaviour
             questionItemList.Add(new QuizQuestionItem(i, answerButtonGroup));
         }
 
-        if (randomizeQuestions)
-        {
-            questionItemListshuffled = Shuffle(questionItemList);
-        }
-        else
-        {
-            questionItemListshuffled = questionItemList;
-        }
+        questionItemListshuffled = (randomizeQuestions) ? Shuffle(questionItemList) : questionItemList;
         
         if (questionItemListshuffled != null)
         {
@@ -86,7 +80,7 @@ public class QuizManager : MonoBehaviour
         uiProgressBar.maxValue = questionItemListshuffled.Count;
         uiProgressBar.value = 1;
 
-        uiPoints.text = points.ToString();
+        uiPoints.text = pointsSum.ToString();
         quizTimer.StartTimer();
     }
 
@@ -98,17 +92,18 @@ public class QuizManager : MonoBehaviour
         {
             int tmpPoints = 1;
 
-            foreach (QuizAnswerItem a in questionItemListshuffled[currentProgressIndex].answers)
+            foreach (QuizAnswerItem a in questionItemListshuffled[currentProgressIndex].answerList)
             {
                 a.ShowResult();
                 tmpPoints *= a.GetPointForAnswer();
             }
 
-            points += quizTimer.GetCompletionTime() * tmpPoints;
+            pointsPerQuestion = quizTimer.GetCompletionTime() * tmpPoints;
+            pointsSum += pointsPerQuestion;
             
             if (tmpPoints != 0)
             {
-                uiPoints.text = points.ToString();
+                uiPoints.text = pointsSum.ToString();
                 audioAnswerCorrect.Play();
                 runtimeData.quizMinerFeedback = MinerFeedback.Correct;
             }
@@ -124,8 +119,10 @@ public class QuizManager : MonoBehaviour
             }
 
             questionItemListshuffled[currentProgressIndex].unProved = false;
-            buzzerTop.color = GameColors.defaultInteractionColorNormal;
-            uiButtonNext.GetComponentInChildren<Text>().text = btnTextNextAnswer;
+            buzzerTop.tag = "Untagged";
+            uiButtonNext.GetComponent<Button>().colors = GameColors.GetInteractionColorBlock();
+            uiButtonNext.GetComponentInChildren<TMP_Text>().text = btnTextNextAnswer;
+
             return;   
         }
 
@@ -137,15 +134,14 @@ public class QuizManager : MonoBehaviour
         currentProgressIndex++;
         uiProgressBar.value++;
 
-        uiSimpleProgressView.text = "FRAGE " + (currentProgressIndex+1) + " von " + questionItemListshuffled.Count;
-
         if (currentProgressIndex < questionItemListshuffled.Count)
         {
             SetupQuestion(currentProgressIndex);
+            uiSimpleProgressView.text = "FRAGE " + (currentProgressIndex + 1) + " von " + questionItemListshuffled.Count;
         }
         else
         {
-            GameData.quizChapterOnePoints = points;
+            GameData.quizChapterOnePoints = pointsSum;
             runtimeData.quiz119Done = true;
             switchScene.SwitchToChapter1withOverlay(generalKeyOverlay);
         }    
@@ -154,10 +150,12 @@ public class QuizManager : MonoBehaviour
     void SetupQuestion(int progressIndex)
     {
         runtimeData.quizMinerFeedback = MinerFeedback.Idle;
+        runtimeData.singleSelectAwIdOld = null;
         uiQuestion.text = questionItemListshuffled[progressIndex].GetQuestionText();
         uiPostImage.sprite = questionItemListshuffled[progressIndex].GetPostImage();
-        buzzerTop.color = GameColors.buzzerInteractionColor;
-        uiButtonNext.GetComponentInChildren<Text>().text = btnTextCheckAnswers;
+        buzzerTop.tag = "Buzzer"; //braucht man evt. nicht
+        uiButtonNext.GetComponent<Button>().colors = GameColors.GetBuzzerColorBlockProve();
+        uiButtonNext.GetComponentInChildren<TMP_Text>().text = btnTextCheckAnswers;
 
         uiQuestType.text = questionItemListshuffled[progressIndex].GetQuestionTypeString();
 
@@ -172,7 +170,7 @@ public class QuizManager : MonoBehaviour
 
     void ActivateAnswerButtons(int progressIndex)
     {
-        foreach(var a in questionItemList[progressIndex].answers)
+        foreach(var a in questionItemList[progressIndex].answerList)
         {
             a.btn.gameObject.SetActive(true);
         }
@@ -195,19 +193,9 @@ public class QuizManager : MonoBehaviour
     //https://answers.unity.com/questions/486626/how-can-i-shuffle-alist.html
     public List<QuizQuestionItem> Swap(List<QuizQuestionItem> list, int indexA, int indexB)
     {
-        foreach (var i in list)
-        {
-            i.PrintQuestionIdenifier();
-        }
-        
         QuizQuestionItem temp = list[indexA];
         list[indexA] = list[indexB];
         list[indexB] = temp;
-
-        foreach (var i in list)
-        {
-            i.PrintQuestionIdenifier();
-        }
 
         return list;
     }
@@ -236,12 +224,12 @@ public class QuizManager : MonoBehaviour
                 break;
             case MinerFeedback.Correct:
                 imgMinerFeedback.sprite = quizConfig.minerFeedbackCorrect;
-                textMinerFeedback.text = "Richtig, \n echt super!";
+                textMinerFeedback.text = "+ " +pointsPerQuestion+ " Punkte\nSuper gemacht!";
                 textMinerFeedback.transform.parent.gameObject.SetActive(true);
                 break;
             case MinerFeedback.Incorrect:
                 imgMinerFeedback.sprite = quizConfig.minerFeedbackIncorrect;
-                textMinerFeedback.text = "Oh nein, \n richtig wäre ... ";
+                textMinerFeedback.text = "+ " + pointsPerQuestion + " Punkte\nOjee, leider falsch!";
                 textMinerFeedback.transform.parent.gameObject.SetActive(true);
                 break;
         }
