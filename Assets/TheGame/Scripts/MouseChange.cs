@@ -80,8 +80,15 @@ public class MouseChange : MonoBehaviour
         {
             Cursor.SetCursor(runtimeData.cursorInteract, hotSpot, cursorMode);
         }
+        else if (gameObject.tag == "DragItem")
+        {
+            if (!gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging) Cursor.SetCursor(runtimeData.cursorDragTouch, hotSpot, cursorMode);
+            Debug.Log("DragItem found + " + runtimeData.cursorNoDrag.name);
+        }
         else
         {
+            if (gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging) return;
+            
             Cursor.SetCursor(runtimeData.cursorNoInteract, hotSpot, cursorMode);
         }
 
@@ -89,6 +96,26 @@ public class MouseChange : MonoBehaviour
 
     public void MouseExit()
     {
-        Cursor.SetCursor(runtimeData.cursorDefault, Vector2.zero, cursorMode);
+        if(gameObject.GetComponent<MinerEquipmentItem>() != null) Cursor.SetCursor(runtimeData.cursorDefault, Vector2.zero, cursorMode);
+    }
+
+    public void MouseDown()
+    {
+        if (gameObject.tag == "DragItem")
+        {
+            Cursor.SetCursor(runtimeData.cursorDragDrag, hotSpot, cursorMode);
+            Debug.Log("DragItem down + ");
+
+        }
+    }
+
+    public void MouseUp()
+    {
+        if (gameObject.tag == "DragItem")
+        {
+            Cursor.SetCursor(runtimeData.cursorDragTouch, hotSpot, cursorMode);
+            Debug.Log("DragItem up + ");
+
+        }
     }
 }

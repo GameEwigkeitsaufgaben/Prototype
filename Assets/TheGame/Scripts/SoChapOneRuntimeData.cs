@@ -11,6 +11,9 @@ public class SoChapOneRuntimeData : ScriptableObject
     public Texture2D cursorInteract;
     public Texture2D cursorNoInteract;
     public Texture2D cursorDefault;
+    public Texture2D cursorDragTouch;
+    public Texture2D cursorDragDrag;
+    public Texture2D cursorNoDrag;
 
     public bool ch1GeneralUnlocked, ch2GrubenwasserUnlocked;
 
