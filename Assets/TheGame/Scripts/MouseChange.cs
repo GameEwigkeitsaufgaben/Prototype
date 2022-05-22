@@ -82,12 +82,25 @@ public class MouseChange : MonoBehaviour
         }
         else if (gameObject.tag == "DragItem")
         {
+            Debug.Log("DragItem found");
+            if (!gameObject.GetComponent<MuseumMinerEquipmentItem>().myManager.IsDragItemOk())
+            {
+                Debug.Log("set curser no drag");
+                Cursor.SetCursor(runtimeData.cursorNoDrag, hotSpot, cursorMode);
+                return;
+            }
+
             if (!gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging) Cursor.SetCursor(runtimeData.cursorDragTouch, hotSpot, cursorMode);
-            Debug.Log("DragItem found + " + runtimeData.cursorNoDrag.name);
+            //else if (!gameObject.GetComponent<MuseumMinerEquipmentItem>().myManager.IsDragItemOk())
+            //{
+            //    Debug.Log("set curser no drag");
+            //    Cursor.SetCursor(runtimeData.cursorNoDrag, hotSpot, cursorMode); 
+            //}
+            
         }
         else
         {
-            if (gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging) return;
+            if (gameObject.GetComponent<MuseumMinerEquipmentItem>() != null && gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging) return;
             
             Cursor.SetCursor(runtimeData.cursorNoInteract, hotSpot, cursorMode);
         }
@@ -96,13 +109,21 @@ public class MouseChange : MonoBehaviour
 
     public void MouseExit()
     {
-        if(gameObject.GetComponent<MinerEquipmentItem>() != null) Cursor.SetCursor(runtimeData.cursorDefault, Vector2.zero, cursorMode);
+        //if(gameObject.GetComponent<MuseumMinerEquipmentItem>() != null) 
+        
+        Cursor.SetCursor(runtimeData.cursorDefault, Vector2.zero, cursorMode);
     }
 
     public void MouseDown()
     {
         if (gameObject.tag == "DragItem")
         {
+            if (!gameObject.GetComponent<MuseumMinerEquipmentItem>().myManager.IsDragItemOk())
+            {
+                Debug.Log("set curser no drag");
+                Cursor.SetCursor(runtimeData.cursorNoDrag, hotSpot, cursorMode);
+                return;
+            }
             Cursor.SetCursor(runtimeData.cursorDragDrag, hotSpot, cursorMode);
             Debug.Log("DragItem down + ");
 

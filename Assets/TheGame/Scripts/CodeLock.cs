@@ -86,6 +86,9 @@ public class CodeLock : MonoBehaviour
                 case Chapters.Ch01General:
                     SetCodeDisplay("1", "2", "1", "2");
                     break;
+                case Chapters.Ch02Grubenwasser:
+                    SetCodeDisplay("2", "3", "2", "3");
+                    break;
             }
 
             return;
@@ -95,6 +98,9 @@ public class CodeLock : MonoBehaviour
         {
             case Chapters.Ch01General:
                 SetCodeDisplay("1", "1", "1", "1");
+                break;
+            case Chapters.Ch02Grubenwasser:
+                SetCodeDisplay("2","2","2","2");
                 break;
         }
     }

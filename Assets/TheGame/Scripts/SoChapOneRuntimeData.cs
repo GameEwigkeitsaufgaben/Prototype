@@ -2,18 +2,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [CreateAssetMenu(menuName = "SoChapOneRuntimeData")]
-public class SoChapOneRuntimeData : ScriptableObject
+public class SoChapOneRuntimeData : Runtime
 {
-    public string postOverlayToLoad = "";
     public bool videoPlaying = false;
-    public OverlaySoundState overlaySoundState;
-    public Texture2D cursorTexture3DCave;
-    public Texture2D cursorInteract;
-    public Texture2D cursorNoInteract;
-    public Texture2D cursorDefault;
-    public Texture2D cursorDragTouch;
-    public Texture2D cursorDragDrag;
-    public Texture2D cursorNoDrag;
+    //public OverlaySoundState overlaySoundState;
 
     public bool ch1GeneralUnlocked, ch2GrubenwasserUnlocked;
 
@@ -31,15 +23,9 @@ public class SoChapOneRuntimeData : ScriptableObject
     public bool isMinerDone, isMythDone, isCoalifiationDone, isCarbonificationPeriodDone;
     public SoundMuseum soundSettingMuseum;
 
-    [Header("Quiz 119")]
-    public MinerFeedback quizMinerFeedback;
-    public GameObject singleSelectAwIdOld = null;
-
     [Header("GameProgress")]
     public bool video115Done, interaction116Done, interaction117Done, quiz119Done, progressCh1WithAdmin;
 
-    [Header("General Settings")]
-    public bool musicOn = true;
 
     private void OnEnable()
     {

@@ -57,7 +57,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
         {
             i.dragObjParent = dragParentBringItemToFront;
             i.orderTopParent = reorderParentTop;
-            i.isDragable = true;
+            i.isDragableInRound = true;
         }
 
         currentRound = EquipmentRound.Essential;

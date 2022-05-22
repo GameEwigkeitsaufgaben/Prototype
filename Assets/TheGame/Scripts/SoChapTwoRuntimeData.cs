@@ -4,21 +4,7 @@ using UnityEngine;
 
 
 [CreateAssetMenu(menuName = "SoChapTwoRuntimeData")]
-public class SoChapTwoRuntimeData : ScriptableObject
+public class SoChapTwoRuntimeData : Runtime
 {
-    [Header("Quiz 119")]
-    public MinerFeedback quizMinerFeedback;
-    public GameObject singleSelectAwIdOld = null;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

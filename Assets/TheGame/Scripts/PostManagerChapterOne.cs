@@ -1,6 +1,7 @@
 //Class is resposible for post activation
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PostManagerChapterOne : MonoBehaviour
@@ -14,12 +15,20 @@ public class PostManagerChapterOne : MonoBehaviour
     private Dictionary<string, Overlay> dictOverlay= new Dictionary<string, Overlay>();
     
     private SoSfx sfx;
-    private SoChapOneRuntimeData runtimeData;
+    private Runtime runtimeData;
     private SoGameIcons gameIcons;
 
     private void Awake()
-    {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+    {   
+        if(SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain)
+        {
+            runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        }
+        else if (SceneManager.GetActiveScene().name == GameScenes.ch02InstaMain)
+        {
+            runtimeData = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
+        }
+        //runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         gameIcons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
 
@@ -96,9 +105,14 @@ public class PostManagerChapterOne : MonoBehaviour
 
     private void Update()
     {
-        
-        runtimeData.CheckInteraction116Done();
-        runtimeData.CheckInteraction117Done();
+
+        if (SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain)
+        {
+            var runtimetmp = runtimeData as SoChapOneRuntimeData;
+            runtimetmp.CheckInteraction116Done();
+            runtimetmp.CheckInteraction117Done();
+        }
+            
 
         //potential für verbesserung,nur anschauen wenn ötig
         if (runtimeData.overlaySoundState == OverlaySoundState.NoSound)
