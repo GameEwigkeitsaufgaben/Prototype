@@ -55,9 +55,17 @@ public class MouseChange : MonoBehaviour
             gameObject.GetComponent<Slider>().colors = GameColors.GetInteractionColorBlock();
         }
 
-        //if (SceneManager.GetActiveScene().name != GameScenes.ch01Mine) return;
+        Debug.Log("Scene:  " + SceneManager.GetActiveScene().name);
 
-        Cursor.SetCursor(runtimeData.cursorDefault, hotSpot, cursorMode);
+        if (SceneManager.GetActiveScene().name != GameScenes.ch01Mine)
+        {
+            Cursor.SetCursor(runtimeData.cursorTexture3DCave, hotSpot, cursorMode);
+        }
+        else
+        {
+            Cursor.SetCursor(runtimeData.cursorDefault, hotSpot, cursorMode);
+        }
+       
     }
 
     public void MouseEnter()

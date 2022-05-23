@@ -39,8 +39,8 @@ public class CaveManager : MonoBehaviour
 
     private void Start()
     {
-        runtimeData.cursorDefault = runtimeData.cursorTexture3DCave;
-        Cursor.SetCursor(runtimeData.cursorDefault, Vector2.zero, CursorMode.Auto);
+        //runtimeData.cursorDefault = runtimeData.cursorTexture3DCave;
+        Cursor.SetCursor(runtimeData.cursorTexture3DCave, Vector2.zero, CursorMode.Auto);
         speechManagerMine = characterDad.transform.parent.GetComponent<CoalmineSpeechManger>();
 
         //triggerEinstieg.SetActive(false);

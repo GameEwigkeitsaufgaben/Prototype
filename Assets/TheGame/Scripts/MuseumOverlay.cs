@@ -27,8 +27,8 @@ public class MuseumOverlay : MonoBehaviour
         configMuseum = Resources.Load<SoMuseumConfig>("ConfigMuseum");
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         gameObject.transform.localPosition = runtimeData.currentGroupPos;
-        btnSkipIntro.GetComponent<Image>().color = GameColors.defaultInteractionColorNormal;
-        btnClose.GetComponent<Image>().color = GameColors.defaultInteractionColorNormal;
+       // btnSkipIntro.GetComponent<Image>().color = GameColors.defaultInteractionColorNormal;
+       // btnClose.GetComponent<Image>().color = GameColors.defaultInteractionColorNormal;
         //Debug.Log("in start musum overlay " + runtimeData.currentGroupPos);
 
         openCarbonPeriodGame += gameObject.GetComponent<SwitchSceneManager>().GoToWorld;
