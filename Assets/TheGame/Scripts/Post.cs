@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Post : MonoBehaviour
 {
@@ -13,12 +14,14 @@ public class Post : MonoBehaviour
     private GameObject childIcon = null;
     private SpriteRenderer iconSpriteRenderer = null;
     private SoChapOneRuntimeData runtimeData;
+    private SoChaptersRuntimeData chaptersRuntimeData;
 
 
     private void Awake()
     {
         icons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        chaptersRuntimeData = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
     }
 
     void Start()
@@ -62,7 +65,11 @@ public class Post : MonoBehaviour
         gameObject.GetComponent<Button>().interactable = false;
 
         //If you entered the adminpin go futher to unlock post
-        if (runtimeData.progressCh1WithAdmin)
+        if (SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain && chaptersRuntimeData.progressWithAdminCh1)
+        {
+            postData.postUnLocked = true;
+        }
+        if (SceneManager.GetActiveScene().name == GameScenes.ch02InstaMain && chaptersRuntimeData.progressWithAdminCh2)
         {
             postData.postUnLocked = true;
         }

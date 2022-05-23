@@ -24,7 +24,8 @@ public class SoChapOneRuntimeData : Runtime
     public SoundMuseum soundSettingMuseum;
 
     [Header("GameProgress")]
-    public bool video115Done, interaction116Done, interaction117Done, quiz119Done, progressCh1WithAdmin;
+    public bool video115Done, interaction116Done, interaction117Done, quiz119Done;
+    //progressCh1WithAdmin;
 
 
     private void OnEnable()

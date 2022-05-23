@@ -16,11 +16,14 @@ public class PostManagerChapterOne : MonoBehaviour
     
     private SoSfx sfx;
     private Runtime runtimeData;
+    private SoChaptersRuntimeData runtimeDataChapters;
     private SoGameIcons gameIcons;
 
     private void Awake()
     {   
-        if(SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain)
+        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+
+        if (SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain)
         {
             runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         }
@@ -29,9 +32,8 @@ public class PostManagerChapterOne : MonoBehaviour
             runtimeData = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
         }
 
-        Cursor.SetCursor(runtimeData.cursorDefault, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(runtimeDataChapters.cursorDefault, Vector2.zero, CursorMode.Auto);
 
-        //runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         gameIcons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
 
@@ -108,7 +110,6 @@ public class PostManagerChapterOne : MonoBehaviour
 
     private void Update()
     {
-
         if (SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain)
         {
             var runtimetmp = runtimeData as SoChapOneRuntimeData;
@@ -116,8 +117,7 @@ public class PostManagerChapterOne : MonoBehaviour
             runtimetmp.CheckInteraction117Done();
         }
             
-
-        //potential für verbesserung,nur anschauen wenn ötig
+        //potential für verbesserung,nur anschauen wenn nötig
         if (runtimeData.overlaySoundState == OverlaySoundState.NoSound)
         {
             gameObject.GetComponent<AudioSource>().volume = 0f;
@@ -135,6 +135,5 @@ public class PostManagerChapterOne : MonoBehaviour
         {
             gameObject.GetComponent<AudioSource>().volume = GameData.overlayVolumeInsta;
         }
-
     }
 }
