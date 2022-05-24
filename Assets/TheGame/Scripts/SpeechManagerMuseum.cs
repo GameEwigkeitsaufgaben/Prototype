@@ -10,9 +10,15 @@ public class SpeechManagerMuseum : MonoBehaviour
     //private const string ListCarbonification = "Audios100160MuseumHistoryCarbonification";
     //private const string GameData.NameTLMuseumOutro = "Audios100170MuseumOutro";
 
+    //ch01
     public SoTalkingList audiosMuseumInfoArrival, audiosMuseumMinerEquipment, audiosMuseumHistoryCarbon, audiosMuseumHistoryMining, audiosMuseumCoalification, audiosMuseumOutro;
 
+    //ch02
+    public SoTalkingList audiosMuseumIntroGrundwasser, audiosMuseumTVGrundwasserIntro, audiosMuseumTVGrundwasserOutro, audiosMuseumFliessPfadIntro;
+
     public bool playMuseumInfoArrival, playMinerEquipment, playMuseumWorld, playMuseumCoalHistory, playMuseumCarbonification, playMuseumOutro;
+
+    public bool playMuseumGWIntro;
     
     private AudioSource mySrc;
 
@@ -20,6 +26,8 @@ public class SpeechManagerMuseum : MonoBehaviour
 
     private SpeechList
        speakMuseumInfoArrival, speakMinerEquipment, speakMuseumHistoryCarbon, speakMuseumHistoryMining, speakMuseumCoalification, speakMuseumOutro;
+
+    private SpeechList speakMuseumGWIntro;
    
 
     private Dictionary<string, SpeechList> mySpeechDict = new Dictionary<string, SpeechList>();
@@ -41,9 +49,12 @@ public class SpeechManagerMuseum : MonoBehaviour
         audiosMuseumHistoryMining = Resources.Load<SoTalkingList>(GameData.NameTLMuseumHistoryMining);
         audiosMuseumCoalification = Resources.Load<SoTalkingList>(GameData.NameTLMuseumCoalification);
         audiosMuseumOutro = Resources.Load<SoTalkingList>(GameData.NameTLMuseumOutro);
+        audiosMuseumIntroGrundwasser = Resources.Load<SoTalkingList>(GameData.NameTLMuseumGrundwasserIntro);
+        //audiosMuseumIntroGrundwasser;
+        //audiosMuseumTVGrundwasserIntro;audiosMuseumTVGrundwasserOutroEnya,audiosMuseumFliessPfadintro, MuseumOutroGuide;
     }
 
-        // Start is called before the first frame update
+    // Start is called before the first frame update
     void Start()
     {
         mySrc = gameObject.AddComponent<AudioSource>();
@@ -71,6 +82,10 @@ public class SpeechManagerMuseum : MonoBehaviour
         speakMuseumOutro = gameObject.AddComponent<SpeechList>();
         speakMuseumOutro.SetUpList(audiosMuseumOutro, mySrc);
         mySpeechDict.Add(speakMuseumOutro.listName, speakMuseumOutro);
+
+        speakMuseumGWIntro = gameObject.AddComponent<SpeechList>();
+        speakMuseumGWIntro.SetUpList(audiosMuseumIntroGrundwasser, mySrc);
+        mySpeechDict.Add(speakMuseumGWIntro.listName, speakMuseumGWIntro);
     }
 
     public void StopSpeaking()
@@ -153,9 +168,6 @@ public class SpeechManagerMuseum : MonoBehaviour
         mySpeechDict[GameData.NameTLMuseumHistoryMining].finishedToogle = false;
     }
 
-
-
-
     void DisableAllSpeechlists()
     {
         foreach(var slist in mySpeechDict)
@@ -209,6 +221,11 @@ public class SpeechManagerMuseum : MonoBehaviour
         {
             currentList = speakMuseumOutro;
             playMuseumOutro = false;
+        }
+        else if (playMuseumGWIntro)
+        {
+            currentList = speakMuseumGWIntro;
+            playMuseumGWIntro = false;
         }
 
         if (currentList != null)

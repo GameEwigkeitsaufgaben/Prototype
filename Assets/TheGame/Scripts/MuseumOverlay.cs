@@ -81,8 +81,22 @@ public class MuseumOverlay : MonoBehaviour
             btnSkipIntro.onClick.AddListener(openCoalification);
             if (runtimeData.isCoalifiationDone) showSkip = true;
         }
+        else if(wp == MuseumWaypoints.WPTV)
+        {
+            container.sprite = configMuseum.tv;
+            //speechManager.playMuseumCarbonification = true;
+            //btnSkipIntro.onClick.AddListener(openCoalification);
+            //if (runtimeData.isCoalifiationDone) showSkip = true;
+        }
+        else if (wp == MuseumWaypoints.WPFliesspfad)
+        {
+            container.sprite = configMuseum.fliesspfad;
+            //speechManager.playMuseumCarbonification = true;
+            //btnSkipIntro.onClick.AddListener(openCoalification);
+            //if (runtimeData.isCoalifiationDone) showSkip = true;
+        }
 
-        if(showSkip) btnSkipIntro.gameObject.SetActive(true);
+        if (showSkip) btnSkipIntro.gameObject.SetActive(true);
         
         btnClose.gameObject.SetActive(true);
         graying.gameObject.SetActive(true);
