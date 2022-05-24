@@ -52,7 +52,7 @@ public class PostManagerChapterOne : MonoBehaviour
         gameObject.GetComponent<AudioSource>().Play();
 
         EnableDisableMusic(runtimeData.musicOn);
-
+        
         if (runtimeData.postOverlayToLoad != "" && dictOverlay != null)
         {
             dictOverlay[runtimeData.postOverlayToLoad].gameObject.SetActive(true);

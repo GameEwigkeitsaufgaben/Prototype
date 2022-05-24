@@ -18,6 +18,8 @@ public class SoChaptersRuntimeData : ScriptableObject
     public Texture2D cursorDragDrag;
     public Texture2D cursorNoDrag;
 
+    
+
     private void OnEnable()
     {
         Debug.Log("Enable SoChaptersRuntimeData");
