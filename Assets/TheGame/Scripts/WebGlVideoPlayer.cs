@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Video;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class WebGlVideoPlayer : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class WebGlVideoPlayer : MonoBehaviour
 
     public void StartTheVideo(string videoPostName, string videoName, RawImage imgRaw)
     {
+        Debug.Log("in Start the video in wegl");
         if (!videoSetUpDone)
         {
             SetVideo(videoName, imgRaw);
@@ -38,15 +40,17 @@ public class WebGlVideoPlayer : MonoBehaviour
             Debug.Log("Setup Videooutput" + videoPostName);
         }
 
-        
-
         this.videoPostName = videoPostName;
 
         if (videoPlayer.isPlaying) return;
         
         if (!videoIsPlaying)
         {
-            sfx.StopClip(sfx.instaMenuBGmusicLoop);
+            if(sfx != null)
+            {
+                sfx.StopClip(sfx.instaMenuBGmusicLoop);
+            }
+            //sfx.StopClip(sfx.instaMenuBGmusicLoop);
 
             videoPlayer.Play();
 
@@ -72,6 +76,7 @@ public class WebGlVideoPlayer : MonoBehaviour
             runtimeData.overlaySoundState = OverlaySoundState.SoudAjusted;
         }
 
+        if (SceneManager.GetActiveScene().name == GameScenes.ch02Museum) return;
         rawImage.transform.parent.transform.parent.GetComponent<Overlay>().SetIconActive(!videoIsPlaying);
     }
 

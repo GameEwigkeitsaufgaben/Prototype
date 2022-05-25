@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class SpeechManagerMuseum : MonoBehaviour
 {
+
+    //https://www.youtube.com/watch?v=Wu46UAVlFL4 Subtitles?;
+
     //private const string InfoIntro = "Audios100160MuseumInfoArrival";
     //private const string ListAudioMinerEquipment = "Audios100160MuseumMinerEquipment";
     //private const string ListWorld = "Audios100160MuseumCarbonifictionPeriod";
@@ -18,7 +21,7 @@ public class SpeechManagerMuseum : MonoBehaviour
 
     public bool playMuseumInfoArrival, playMinerEquipment, playMuseumWorld, playMuseumCoalHistory, playMuseumCarbonification, playMuseumOutro;
 
-    public bool playMuseumGWIntro;
+    public bool playMuseumGWIntro, playMuseumGWTVIntro, playMuseumFliesspfadIntro;
     
     private AudioSource mySrc;
 
@@ -27,7 +30,7 @@ public class SpeechManagerMuseum : MonoBehaviour
     private SpeechList
        speakMuseumInfoArrival, speakMinerEquipment, speakMuseumHistoryCarbon, speakMuseumHistoryMining, speakMuseumCoalification, speakMuseumOutro;
 
-    private SpeechList speakMuseumGWIntro;
+    private SpeechList speakMuseumGWIntro, speakMuseumGWTVIntro, speakMuseumFliesspfadIntro;
    
 
     private Dictionary<string, SpeechList> mySpeechDict = new Dictionary<string, SpeechList>();
@@ -50,8 +53,9 @@ public class SpeechManagerMuseum : MonoBehaviour
         audiosMuseumCoalification = Resources.Load<SoTalkingList>(GameData.NameTLMuseumCoalification);
         audiosMuseumOutro = Resources.Load<SoTalkingList>(GameData.NameTLMuseumOutro);
         audiosMuseumIntroGrundwasser = Resources.Load<SoTalkingList>(GameData.NameTLMuseumGrundwasserIntro);
-        //audiosMuseumIntroGrundwasser;
-        //audiosMuseumTVGrundwasserIntro;audiosMuseumTVGrundwasserOutroEnya,audiosMuseumFliessPfadintro, MuseumOutroGuide;
+        audiosMuseumTVGrundwasserIntro = Resources.Load<SoTalkingList>(GameData.NameTLMuseumIntroTV);
+        audiosMuseumFliessPfadIntro = Resources.Load<SoTalkingList>(GameData.NameTLMuseumIntroFliesspfad);
+        //audiosMuseumTVGrundwasserOutroEnya, MuseumOutroGuide;
     }
 
     // Start is called before the first frame update
@@ -86,6 +90,14 @@ public class SpeechManagerMuseum : MonoBehaviour
         speakMuseumGWIntro = gameObject.AddComponent<SpeechList>();
         speakMuseumGWIntro.SetUpList(audiosMuseumIntroGrundwasser, mySrc);
         mySpeechDict.Add(speakMuseumGWIntro.listName, speakMuseumGWIntro);
+
+        speakMuseumGWTVIntro = gameObject.AddComponent<SpeechList>();
+        speakMuseumGWTVIntro.SetUpList(audiosMuseumTVGrundwasserIntro, mySrc);
+        mySpeechDict.Add(speakMuseumGWTVIntro.listName, speakMuseumGWTVIntro);
+
+        speakMuseumFliesspfadIntro = gameObject.AddComponent<SpeechList>();
+        speakMuseumFliesspfadIntro.SetUpList(audiosMuseumFliessPfadIntro, mySrc);
+        mySpeechDict.Add(speakMuseumFliesspfadIntro.listName, speakMuseumFliesspfadIntro);
     }
 
     public void StopSpeaking()
@@ -100,6 +112,27 @@ public class SpeechManagerMuseum : MonoBehaviour
             }
         }
 
+    }
+
+    //Generic Reset, Finished
+    public void ResetFinished(string talkingListName)
+    {
+        mySpeechDict[talkingListName].finishedToogle = false;
+    }
+
+    public bool IsTalkingListFinished(string talkingListName)
+    {
+        return mySpeechDict[talkingListName].finishedToogle;
+    }
+
+    public bool IsMusuemGWTVIntroFinished()
+    {
+        return mySpeechDict[GameData.NameTLMuseumIntroTV].finishedToogle;
+    }
+
+    public void ResetMusuemGWTVIntro()
+    {
+        mySpeechDict[GameData.NameTLMuseumIntroTV].finishedToogle = false;
     }
 
     //--------------Intro
@@ -226,6 +259,16 @@ public class SpeechManagerMuseum : MonoBehaviour
         {
             currentList = speakMuseumGWIntro;
             playMuseumGWIntro = false;
+        }
+        else if (playMuseumGWTVIntro)
+        {
+            currentList = speakMuseumGWTVIntro;
+            playMuseumGWTVIntro = false;
+        }
+        else if (playMuseumFliesspfadIntro)
+        {
+            currentList = speakMuseumFliesspfadIntro;
+            playMuseumFliesspfadIntro = false;
         }
 
         if (currentList != null)

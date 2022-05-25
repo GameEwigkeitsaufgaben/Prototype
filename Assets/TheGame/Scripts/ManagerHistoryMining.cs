@@ -12,8 +12,6 @@ public enum Century
     none
 }
 
-
-
 public class ManagerHistoryMining : MonoBehaviour
 {
     //https://forum.unity.com/threads/many-text-mesh-pro-elements-in-a-scene-what-is-a-possible-solution.665614/ TMP Performance

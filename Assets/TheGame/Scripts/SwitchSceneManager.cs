@@ -41,6 +41,16 @@ public class SwitchSceneManager : MonoBehaviour
         SceneManager.LoadScene(GameScenes.ch01MineCaveTunnelStatic, LoadSceneMode.Additive);
     }
 
+    public void GoToFliesspfade()
+    {
+        SceneManager.LoadScene(GameScenes.ch02Fliesspfade, LoadSceneMode.Single);
+    }
+
+    public void GoToCH2Museum()
+    {
+        SceneManager.LoadScene(GameScenes.ch02Museum, LoadSceneMode.Single); ;
+    }
+
     public void LoadEntryArea()
     {
         SceneManager.LoadScene(GameScenes.ch01MineEntryAreaStatic, LoadSceneMode.Additive);

@@ -33,5 +33,7 @@ public static class GameScenes
 
     //Chapter two Bergbau allgemein
     public const string ch02InstaMain = "ch02scene01-00-instaMenu";
+    public const string ch02Museum = "ch02scene01-21-museum";
+    public const string ch02Fliesspfade = "ch02scene01-22-fliesspfade";
     public const string ch02Quiz = "ch02scene01-11-quiz";
 }

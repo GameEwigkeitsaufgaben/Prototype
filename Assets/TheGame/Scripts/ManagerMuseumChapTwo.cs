@@ -14,6 +14,8 @@ public class ManagerMuseumChapTwo : MonoBehaviour
     public GameObject characterGuide;
     public MuseumOverlay overlay;
     public SpeechManagerMuseum speechManager;
+    public WebGlVideoPlayer webglVideoPlayer;
+    public RawImage rawImg;
 
     private SoChapTwoRuntimeData runtimeDataCh02;
     private SoChaptersRuntimeData runtimeDataChOverlap;
@@ -36,7 +38,17 @@ public class ManagerMuseumChapTwo : MonoBehaviour
         btnNextGrubenwasser.colors = GameColors.GetInteractionColorBlock();
         btnNextGrubenwasser.interactable = true;
         offsetGroupCam = cam.transform.position.x - group.transform.position.x;
-        speechManager.playMuseumGWIntro = true;
+
+        switch (runtimeDataCh02.lastWP)
+        {
+            case MuseumWaypoints.None:
+                speechManager.playMuseumGWIntro = true;
+                break;
+            case MuseumWaypoints.WPFliesspfad:
+                Debug.Log("Entry at FF");
+                break;
+        }
+       
     }
 
     public void MoveToMuseumStation(int id)
@@ -69,11 +81,12 @@ public class ManagerMuseumChapTwo : MonoBehaviour
         switch (currentMuseumStation)
         {
             case MuseumWaypoints.WPTV:
-                Debug.Log("readched TV");
                 overlay.ActivateOverlay(MuseumWaypoints.WPTV);
+                runtimeDataCh02.lastWP = MuseumWaypoints.WPTV;
                 break;
             case MuseumWaypoints.WPFliesspfad:
                 overlay.ActivateOverlay(MuseumWaypoints.WPFliesspfad);
+                runtimeDataCh02.lastWP = MuseumWaypoints.WPFliesspfad;
                 break;
         }
         characterGuide.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
@@ -96,6 +109,16 @@ public class ManagerMuseumChapTwo : MonoBehaviour
     private void Update()
     {
         cam.transform.position = new Vector3(group.transform.position.x + offsetGroupCam, cam.transform.position.y, cam.transform.position.z);
+
+        if (!btnNextGrubenwasser.interactable && speechManager.IsTalkingListFinished(GameData.NameTLMuseumGrundwasserIntro))
+        {
+            btnNextGrubenwasser.interactable = true;
+        }
+        else if (speechManager.IsTalkingListFinished(GameData.NameTLMuseumIntroTV))
+        {
+           // Debug.Log("webgl null " + (webglVideoPlayer == null));
+           webglVideoPlayer.StartTheVideo("none", "Watherdrop.mp4", rawImg);
+        }
     }
 
 }

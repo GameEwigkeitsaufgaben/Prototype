@@ -84,14 +84,14 @@ public class MuseumOverlay : MonoBehaviour
         else if(wp == MuseumWaypoints.WPTV)
         {
             container.sprite = configMuseum.tv;
-            //speechManager.playMuseumCarbonification = true;
+            speechManager.playMuseumGWTVIntro = true;
             //btnSkipIntro.onClick.AddListener(openCoalification);
             //if (runtimeData.isCoalifiationDone) showSkip = true;
         }
         else if (wp == MuseumWaypoints.WPFliesspfad)
         {
             container.sprite = configMuseum.fliesspfad;
-            //speechManager.playMuseumCarbonification = true;
+            speechManager.playMuseumFliesspfadIntro = true;
             //btnSkipIntro.onClick.AddListener(openCoalification);
             //if (runtimeData.isCoalifiationDone) showSkip = true;
         }
@@ -138,6 +138,10 @@ public class MuseumOverlay : MonoBehaviour
             {
                 gameObject.GetComponent<SwitchSceneManager>().GoToCoalification();
                 //playOverlay = false;
+            }
+            else if (speechManager.IsTalkingListFinished(GameData.NameTLMuseumIntroFliesspfad))
+            {
+                gameObject.GetComponent<SwitchSceneManager>().GoToFliesspfade();
             }
         }
 
