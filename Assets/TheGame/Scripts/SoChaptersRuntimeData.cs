@@ -18,7 +18,7 @@ public class SoChaptersRuntimeData : ScriptableObject
     public Texture2D cursorDragDrag;
     public Texture2D cursorNoDrag;
 
-    
+    public Texture2D sceneCursor;
 
     private void OnEnable()
     {

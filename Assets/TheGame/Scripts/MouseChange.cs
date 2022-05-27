@@ -116,7 +116,7 @@ public class MouseChange : MonoBehaviour
 
     public void MouseExit()
     {
-        Cursor.SetCursor(runtimeDataChapters.cursorDefault, Vector2.zero, cursorMode);
+        Cursor.SetCursor(runtimeDataChapters.sceneCursor, Vector2.zero, cursorMode);
     }
 
     public void MouseDown()
