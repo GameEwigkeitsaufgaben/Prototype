@@ -30,7 +30,7 @@ public class ManagerTrainRide : MonoBehaviour
 
     private void Start()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         runtimeData.cursorDefault = null;
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
     }

@@ -30,7 +30,7 @@ public class QuizAnswerUiBehaviour : MonoBehaviour,ISelectHandler, IDeselectHand
 
     private void Start()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         myQuizConfig = Resources.Load<SoQuizConfig>(GameData.NameConfigQuiz);
         uiAnswer = gameObject.GetComponentInChildren<TMP_Text>();
     }

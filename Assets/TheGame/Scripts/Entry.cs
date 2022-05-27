@@ -4,6 +4,7 @@
 
 using UnityEngine;
 using UnityEngine.Video;
+using UnityEngine.SceneManagement;
 
 public class Entry : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class Entry : MonoBehaviour
     void Start()
     {
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
 
         post.GetComponent<Post>().SetPostData(postData);
         overlay.GetComponent<Overlay>().SetOverlayData(postData);
@@ -87,38 +88,46 @@ public class Entry : MonoBehaviour
 
     private void Update()
     {
-        if (gameObject.name == GameData.NamePost117) Debug.Log("117");
-
-        if (post.GetComponent<Post>().isPostLocked())
+        if(SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain)
         {
-            if (gameObject.name == Entry116 && runtimeData.video115Done)
+            if (gameObject.name == GameData.NamePost117) Debug.Log("117");
+
+            if (post.GetComponent<Post>().isPostLocked())
             {
-                Debug.Log("Unlock 116 bergwerk");
-                GameData.PrintState();
-                post.GetComponent<Post>().UnlockPost();
-            }
-            
-            if (gameObject.name == GameData.NameEntry117 && runtimeData.interaction116Done)
-            {
-                Debug.Log("Unlock 117 Museum");
-                post.GetComponent<Post>().UnlockPost();
-            }
-            else if (gameObject.name == Entry118 && runtimeData.interaction117Done)
-            {
-                post.GetComponent<Post>().UnlockPost();
-            }
-            else if (gameObject.name == Entry119 && runtimeData.interaction117Done)
-            {
-                post.GetComponent<Post>().UnlockPost();
-                //runtimeData.interaction117Done = false;
-            }
-            else if (gameObject.name == Entry1110 && runtimeData.quiz119Done)
-            {
-                post.GetComponent<Post>().UnlockPost();
-                overlay.GetComponent<Overlay>().UpdateOverlayText();
-               // GameData.quizFinished = false;
-                GameData.chapterOneUnlocked = 1;
+                if (gameObject.name == Entry116 && runtimeData.video115Done)
+                {
+                    Debug.Log("Unlock 116 bergwerk");
+                    GameData.PrintState();
+                    post.GetComponent<Post>().UnlockPost();
+                }
+
+                if (gameObject.name == GameData.NameEntry117 && runtimeData.interaction116Done)
+                {
+                    Debug.Log("Unlock 117 Museum");
+                    post.GetComponent<Post>().UnlockPost();
+                }
+                else if (gameObject.name == Entry118 && runtimeData.interaction117Done)
+                {
+                    post.GetComponent<Post>().UnlockPost();
+                }
+                else if (gameObject.name == Entry119 && runtimeData.interaction117Done)
+                {
+                    post.GetComponent<Post>().UnlockPost();
+                    //runtimeData.interaction117Done = false;
+                }
+                else if (gameObject.name == Entry1110 && runtimeData.quiz119Done)
+                {
+                    post.GetComponent<Post>().UnlockPost();
+                    overlay.GetComponent<Overlay>().UpdateOverlayText();
+                    // GameData.quizFinished = false;
+                    GameData.chapterOneUnlocked = 1;
+                }
             }
         }
+        else if (SceneManager.GetActiveScene().name == GameScenes.ch02InstaMain)
+        {
+
+        }
+        
     }
 }

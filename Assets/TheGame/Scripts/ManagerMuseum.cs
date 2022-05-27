@@ -31,7 +31,9 @@ public class ManagerMuseum : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        Cursor.SetCursor(runtimeData.cursorDefault, Vector2.zero, CursorMode.Auto);
+
         walkingGroup.SetCharcters(characterDad, characterGuide, waitingGuide);
         audioSrcBGMusic = gameObject.GetComponent<AudioSource>();
         runtimeData.soundSettingMuseum = SoundMuseum.Showroom;

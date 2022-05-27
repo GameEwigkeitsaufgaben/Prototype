@@ -8,10 +8,12 @@ public class SwitchSceneManager : MonoBehaviour
     public Animator transition;
     public float transitionTime = 1f;
     SoChapOneRuntimeData runtimeData;
+    SoChapTwoRuntimeData runtimeDataChap02;
 
     private void Awake()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        runtimeDataChap02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
     }
 
     public void LoadMine()
@@ -37,6 +39,16 @@ public class SwitchSceneManager : MonoBehaviour
     internal void LoadCaveTunnel()
     {
         SceneManager.LoadScene(GameScenes.ch01MineCaveTunnelStatic, LoadSceneMode.Additive);
+    }
+
+    public void GoToFliesspfade()
+    {
+        SceneManager.LoadScene(GameScenes.ch02Fliesspfade, LoadSceneMode.Single);
+    }
+
+    public void GoToCH2Museum()
+    {
+        SceneManager.LoadScene(GameScenes.ch02Museum, LoadSceneMode.Single); ;
     }
 
     public void LoadEntryArea()
@@ -139,6 +151,12 @@ public class SwitchSceneManager : MonoBehaviour
     {
         runtimeData.postOverlayToLoad = overlayName;
         SwitchScene(GameScenes.ch01InstaMain); 
+    }
+    public void SwitchToChapter2withOverlay(string overlayName)
+    {
+        
+        runtimeDataChap02.postOverlayToLoad = overlayName;
+        SwitchScene(GameScenes.ch02InstaMain);
     }
 
     IEnumerator LoadSceneWithTransition(string name)

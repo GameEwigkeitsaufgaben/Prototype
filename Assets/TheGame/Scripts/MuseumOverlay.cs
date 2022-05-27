@@ -25,10 +25,10 @@ public class MuseumOverlay : MonoBehaviour
     {
         parentMaskPanel = container.transform.parent.gameObject;
         configMuseum = Resources.Load<SoMuseumConfig>("ConfigMuseum");
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         gameObject.transform.localPosition = runtimeData.currentGroupPos;
-        btnSkipIntro.GetComponent<Image>().color = GameColors.defaultInteractionColorNormal;
-        btnClose.GetComponent<Image>().color = GameColors.defaultInteractionColorNormal;
+       // btnSkipIntro.GetComponent<Image>().color = GameColors.defaultInteractionColorNormal;
+       // btnClose.GetComponent<Image>().color = GameColors.defaultInteractionColorNormal;
         //Debug.Log("in start musum overlay " + runtimeData.currentGroupPos);
 
         openCarbonPeriodGame += gameObject.GetComponent<SwitchSceneManager>().GoToWorld;
@@ -81,8 +81,22 @@ public class MuseumOverlay : MonoBehaviour
             btnSkipIntro.onClick.AddListener(openCoalification);
             if (runtimeData.isCoalifiationDone) showSkip = true;
         }
+        else if(wp == MuseumWaypoints.WPTV)
+        {
+            container.sprite = configMuseum.tv;
+            speechManager.playMuseumGWTVIntro = true;
+            //btnSkipIntro.onClick.AddListener(openCoalification);
+            //if (runtimeData.isCoalifiationDone) showSkip = true;
+        }
+        else if (wp == MuseumWaypoints.WPFliesspfad)
+        {
+            container.sprite = configMuseum.fliesspfad;
+            speechManager.playMuseumFliesspfadIntro = true;
+            //btnSkipIntro.onClick.AddListener(openCoalification);
+            //if (runtimeData.isCoalifiationDone) showSkip = true;
+        }
 
-        if(showSkip) btnSkipIntro.gameObject.SetActive(true);
+        if (showSkip) btnSkipIntro.gameObject.SetActive(true);
         
         btnClose.gameObject.SetActive(true);
         graying.gameObject.SetActive(true);
@@ -124,6 +138,10 @@ public class MuseumOverlay : MonoBehaviour
             {
                 gameObject.GetComponent<SwitchSceneManager>().GoToCoalification();
                 //playOverlay = false;
+            }
+            else if (speechManager.IsTalkingListFinished(GameData.NameTLMuseumIntroFliesspfad))
+            {
+                gameObject.GetComponent<SwitchSceneManager>().GoToFliesspfade();
             }
         }
 

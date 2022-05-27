@@ -30,10 +30,10 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
     private bool positionChanged = false;
     private SoMinerEquipment myConifg;
    
-    private ManagerMuseumMinerEquipment myManager;
+    public ManagerMuseumMinerEquipment myManager;
     private AudioSource myAudioSrc;
     public GameObject dragObjParent, dragObjDefaultParent, orderTopParent;
-    public bool isDragable;
+    public bool isDragableInRound;
     public bool isCurrentlyDragging;
 
     public TMP_Text uiTextTooltip; //set for every item in managermuseumminerequipment
@@ -53,7 +53,7 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
     {
         myManager = FindObjectOfType<ManagerMuseumMinerEquipment>();
         origPosOnTable = gameObject.transform.position; //every instance of class is reference type and any instance of structure is value type.
-        isDragable = true;
+        isDragableInRound = true;
         
         myConifg = Resources.Load<SoMinerEquipment>(GameData.NameConfigMinerEquiment);
         myDragRectTransform = GetComponent<RectTransform>();
@@ -172,7 +172,7 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (!isDragable) return;
+        if (!isDragableInRound) return;
 
         if (!myManager.IsDragItemOk()) return;
         isCurrentlyDragging = true;
@@ -184,7 +184,7 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (!isDragable) return;
+        if (!isDragableInRound) return;
         if (!myManager.IsDragItemOk()) return;
 
         isCurrentlyDragging = false;
@@ -224,7 +224,7 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (!isDragable) return;
+        if (!isDragableInRound) return;
         if (!myManager.IsDragItemOk()) return;
 
         myDragRectTransform.anchoredPosition += eventData.delta / myParentCanvas.scaleFactor; //important when using screen space
@@ -239,7 +239,8 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
             
             if (equipmentItem == MinerEquipmentItem.Handschuhe)
             {
-                gameObject.transform.parent.GetComponent<MuseumHandschuhe>().SetBothSnapedToMiner();
+                if(gameObject.transform.parent.GetComponent<MuseumHandschuhe>() != null)
+                    gameObject.transform.parent.GetComponent<MuseumHandschuhe>().SetBothSnapedToMiner();
             }
 
             if (miner == null)
@@ -256,7 +257,9 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
             snapedTo = SnapetTo.Table;
             if (equipmentItem == MinerEquipmentItem.Handschuhe)
             {
-                gameObject.transform.parent.GetComponent<MuseumHandschuhe>().SetBothSnapedToTable();
+
+                if (gameObject.transform.parent.GetComponent<MuseumHandschuhe>() != null) 
+                    gameObject.transform.parent.GetComponent<MuseumHandschuhe>().SetBothSnapedToTable();
             }
         }
     }
@@ -277,7 +280,7 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
         {
             if (solutionItemRound1)
             {
-                isDragable = false;
+                isDragableInRound = false;
                 gameObject.transform.parent = orderTopParent.transform;
             }
         }
@@ -285,7 +288,7 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
         {
             if (solutionItemRound2)
             {
-                isDragable = false;
+                isDragableInRound = false;
                 gameObject.transform.parent = orderTopParent.transform;
             }
         }

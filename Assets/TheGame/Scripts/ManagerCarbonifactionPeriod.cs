@@ -8,7 +8,7 @@ public class ManagerCarbonifactionPeriod : MonoBehaviour
 
     private void Awake()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         externalLink.colors = GameColors.GetInteractionColorBlock();
     }
     private void Start()

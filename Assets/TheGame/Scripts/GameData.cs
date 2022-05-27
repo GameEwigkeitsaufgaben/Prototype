@@ -13,7 +13,9 @@ public static class GameData
 
     //Name of objects in Folder "Resources" 
     public const string NameConfigSfx = "SfxConfig";
-    public const string NameRuntimeData = "RuntimeExchangeData";
+    public const string NameRuntimeDataChapters = "00RuntimeDataChapters";
+    public const string NameRuntimeDataChap01 = "RuntimeExchangeData";
+    public const string NameRuntimeDataChap02 = "RuntimeDataCh02";
     public const string NameConfigMinerEquiment = "ConfigMinerEquipment";
     public const string NameConfigMuseum = "ConfigMuseum";
     public const string NameGameIcons = "Icons";
@@ -60,7 +62,11 @@ public static class GameData
     public const string NameTLMuseumCoalification = "Audios100170MuseumCoalification";
     public const string NameTLMuseumHistoryMining = "Audios100170MuseumHistoryMining";
     public const string NameTLMuseumMinerEquipment = "Audios100170MuseumMinerEquipment";
-    
+    public const string NameTLMuseumGrundwasserIntro = "AudiosMuseumIntroGrundwasser";
+    public const string NameTLMuseumIntroTV = "AudiosMuseumIntroTVGrundwasserIntro";
+    public const string NameTLMuseumOutroTV = "AudiosMuseumIntroTVGrundwasserOutro";
+    public const string NameTLMuseumIntroFliesspfad= "AudiosMuseumIntroFliesspfad";
+
     public static bool progressWithAdmin = false; //if start chapter with admin pwd true, else false;
 
     //Unlock Posts data; is Introvideo played as a whole, than next post is to unlock

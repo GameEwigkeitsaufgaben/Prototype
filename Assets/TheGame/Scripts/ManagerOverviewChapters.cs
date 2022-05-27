@@ -13,12 +13,19 @@ public class ManagerOverviewChapters : MonoBehaviour
 {
     [SerializeField] Button credits;
     [SerializeField] TMP_Text lawNotice;
+    SoChapOneRuntimeData runtimeDataCh1;
+    SoChaptersRuntimeData runtimeDataChapters;
+
+    private void Awake()
+    {
+        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        runtimeDataCh1 = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+    }
 
     private void Start()
     {
-        ColorBlock interactiveButton = GameColors.GetInteractionColorBlock();
-        credits.colors = interactiveButton;
-
+        credits.colors = GameColors.GetInteractionColorBlock();
         lawNotice.text = GameData.lawNotiz;
+        Cursor.SetCursor(runtimeDataChapters.cursorDefault, Vector2.zero, CursorMode.Auto);
     }
 }

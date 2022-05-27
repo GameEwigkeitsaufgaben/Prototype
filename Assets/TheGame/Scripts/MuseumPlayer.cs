@@ -13,6 +13,8 @@ public enum MuseumWaypoints
     WPWelt = 5,
     WPExitMuseum0 = 6,
     WPExitMuseum1 = 7,
+    WPTV = 8,
+    WPFliesspfad = 9,
     None
 }
 
@@ -34,7 +36,7 @@ public class MuseumPlayer : MonoBehaviour
 
     private void Awake()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         configMuseum = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
     }
 

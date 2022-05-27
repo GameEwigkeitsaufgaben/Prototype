@@ -4,15 +4,15 @@ using UnityEngine.SceneManagement;
 
 public class MouseChange : MonoBehaviour
 {
-    //public Texture2D cursorTexture;
-    //public Texture2D caveCursourTexture;
     private CursorMode cursorMode = CursorMode.Auto;
     private Vector2 hotSpot = Vector2.zero;
     private SoChapOneRuntimeData runtimeData;
+    private SoChaptersRuntimeData runtimeDataChapters;
 
     private void Awake()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
     }
 
     private void Start()
@@ -55,57 +55,80 @@ public class MouseChange : MonoBehaviour
             gameObject.GetComponent<Slider>().colors = GameColors.GetInteractionColorBlock();
         }
 
-        //if (SceneManager.GetActiveScene().name != GameScenes.ch01Mine) return;
+        Debug.Log("Scene:  " + SceneManager.GetActiveScene().name);
 
-        Cursor.SetCursor(runtimeData.cursorDefault, hotSpot, cursorMode);
+        //if (SceneManager.GetActiveScene().name == GameScenes.ch01Mine)
+        //{
+        //    Cursor.SetCursor(runtimeData.cursorTexture3DCave, hotSpot, cursorMode);
+        //}
+        //else
+        //{
+        //    Cursor.SetCursor(runtimeData.cursorDefault, hotSpot, cursorMode);
+        //}
+       
     }
 
     public void MouseEnter()
     {
-        Debug.Log(gameObject.name);
-            //+ " btn ok " + (gameObject.GetComponent<Button>() != null) + " " + gameObject.GetComponent<Button>().interactable);
+        //Debug.Log("in Mouse enter " + gameObject.name + " btn ok " + (gameObject.GetComponent<Button>() != null) + " interctble " + gameObject.GetComponent<Button>().interactable);
         if(gameObject.GetComponent<Button>() != null && gameObject.GetComponent<Button>().interactable)
         {
-            Cursor.SetCursor(runtimeData.cursorInteract, hotSpot, cursorMode);
+            Cursor.SetCursor(runtimeDataChapters.cursorInteract, hotSpot, cursorMode);
         }
         else if (gameObject.GetComponent<Scrollbar>() != null)
         {
-            Cursor.SetCursor(runtimeData.cursorInteract, hotSpot, cursorMode);
+            Cursor.SetCursor(runtimeDataChapters.cursorInteract, hotSpot, cursorMode);
         }
         else if (gameObject.GetComponent<Slider>() != null)
         {
-            Cursor.SetCursor(runtimeData.cursorInteract, hotSpot, cursorMode);
+            Cursor.SetCursor(runtimeDataChapters.cursorInteract, hotSpot, cursorMode);
         }
         else if (gameObject.GetComponent<MuseumCard>() != null)
         {
-            Cursor.SetCursor(runtimeData.cursorInteract, hotSpot, cursorMode);
+            Cursor.SetCursor(runtimeDataChapters.cursorInteract, hotSpot, cursorMode);
         }
         else if (gameObject.tag == "DragItem")
         {
-            if (!gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging) Cursor.SetCursor(runtimeData.cursorDragTouch, hotSpot, cursorMode);
-            Debug.Log("DragItem found + " + runtimeData.cursorNoDrag.name);
+            Debug.Log("DragItem found");
+            if (!gameObject.GetComponent<MuseumMinerEquipmentItem>().myManager.IsDragItemOk())
+            {
+                Debug.Log("set curser no drag");
+                Cursor.SetCursor(runtimeDataChapters.cursorNoDrag, hotSpot, cursorMode);
+                return;
+            }
+
+            if (!gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging) Cursor.SetCursor(runtimeDataChapters.cursorDragTouch, hotSpot, cursorMode);
+            //else if (!gameObject.GetComponent<MuseumMinerEquipmentItem>().myManager.IsDragItemOk())
+            //{
+            //    Debug.Log("set curser no drag");
+            //    Cursor.SetCursor(runtimeData.cursorNoDrag, hotSpot, cursorMode); 
+            //}
+            
         }
         else
         {
-            if (gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging) return;
+            if (gameObject.GetComponent<MuseumMinerEquipmentItem>() != null && gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging) return;
             
-            Cursor.SetCursor(runtimeData.cursorNoInteract, hotSpot, cursorMode);
+            Cursor.SetCursor(runtimeDataChapters.cursorNoInteract, hotSpot, cursorMode);
         }
 
     }
 
     public void MouseExit()
     {
-        if(gameObject.GetComponent<MinerEquipmentItem>() != null) Cursor.SetCursor(runtimeData.cursorDefault, Vector2.zero, cursorMode);
+        Cursor.SetCursor(runtimeDataChapters.sceneCursor, Vector2.zero, cursorMode);
     }
 
     public void MouseDown()
     {
         if (gameObject.tag == "DragItem")
         {
-            Cursor.SetCursor(runtimeData.cursorDragDrag, hotSpot, cursorMode);
-            Debug.Log("DragItem down + ");
-
+            if (!gameObject.GetComponent<MuseumMinerEquipmentItem>().myManager.IsDragItemOk())
+            {
+                Cursor.SetCursor(runtimeDataChapters.cursorNoDrag, hotSpot, cursorMode);
+                return;
+            }
+            Cursor.SetCursor(runtimeDataChapters.cursorDragDrag, hotSpot, cursorMode);
         }
     }
 
@@ -113,9 +136,7 @@ public class MouseChange : MonoBehaviour
     {
         if (gameObject.tag == "DragItem")
         {
-            Cursor.SetCursor(runtimeData.cursorDragTouch, hotSpot, cursorMode);
-            Debug.Log("DragItem up + ");
-
+            Cursor.SetCursor(runtimeDataChapters.cursorDragTouch, hotSpot, cursorMode);
         }
     }
 }

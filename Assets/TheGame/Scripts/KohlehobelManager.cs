@@ -9,10 +9,12 @@ public class KohlehobelManager : MonoBehaviour
     public Character enya, georg, dad;
 
     private SoChapOneRuntimeData runtimeData;
+    private SoChaptersRuntimeData runtimeDataChapters;
 
     private void Awake()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
     }
 
     // Start is called before the first frame update
@@ -26,8 +28,8 @@ public class KohlehobelManager : MonoBehaviour
         lwcManager.RotateCharacters(-114.0f, -53.0f, -80.0f);
         myPlayer.SetPlayerRotation(0f,false);
 
-        runtimeData.cursorDefault = runtimeData.cursorTexture3DCave;
-        Cursor.SetCursor(runtimeData.cursorTexture3DCave, Vector2.zero, CursorMode.Auto);
+        runtimeDataChapters.sceneCursor = runtimeData.cursorTexture3DCave;
+        Cursor.SetCursor(runtimeDataChapters.sceneCursor, Vector2.zero, CursorMode.Auto);
 
     }
 

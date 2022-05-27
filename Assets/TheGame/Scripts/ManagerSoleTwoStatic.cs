@@ -9,7 +9,7 @@ public class ManagerSoleTwoStatic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);    
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);    
     }
 
     // Update is called once per frame

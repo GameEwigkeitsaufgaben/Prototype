@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public enum MinerFeedback
 {
@@ -12,9 +13,11 @@ public enum MinerFeedback
 
 public class QuizManager : MonoBehaviour
 {
-    private const string generalKeyOverlay = "Overlay1110";
     private const string btnTextCheckAnswers = "Prüfen";
     private const string btnTextNextAnswer = "Weiter";
+
+    private const string generalKeyOverlay = "Overlay1110";
+
 
     public Canvas quizCanvas;
     public VerticalLayoutGroup answerButtonGroup;
@@ -45,13 +48,21 @@ public class QuizManager : MonoBehaviour
 
     [Header("Assigned at runtime")]
     [SerializeField] private SoSfx sfx;
-    [SerializeField] private SoChapOneRuntimeData runtimeData;
+    [SerializeField] private Runtime runtimeData;
     [SerializeField] private SoQuizConfig quizConfig;
 
 
     private void Awake()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        if(SceneManager.GetActiveScene().name == GameScenes.ch01Quiz)
+        { 
+            runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        }
+        else if (SceneManager.GetActiveScene().name == GameScenes.ch02Quiz)
+        {
+            runtimeData = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
+        }
+        
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
         quizConfig = Resources.Load<SoQuizConfig>(GameData.NameConfigQuiz);
     }
@@ -142,7 +153,7 @@ public class QuizManager : MonoBehaviour
         else
         {
             GameData.quizChapterOnePoints = pointsSum;
-            runtimeData.quiz119Done = true;
+           // if (SceneManager.GetActiveScene().name == GameData.NameRuntimeDataChap01) runtimeData.quiz119Done = true;
             switchScene.SwitchToChapter1withOverlay(generalKeyOverlay);
         }    
     }

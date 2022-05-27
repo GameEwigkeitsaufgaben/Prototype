@@ -12,8 +12,6 @@ public enum Century
     none
 }
 
-
-
 public class ManagerHistoryMining : MonoBehaviour
 {
     //https://forum.unity.com/threads/many-text-mesh-pro-elements-in-a-scene-what-is-a-possible-solution.665614/ TMP Performance
@@ -38,7 +36,7 @@ public class ManagerHistoryMining : MonoBehaviour
 
     private void Start()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         museumConfig = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
         sliderCentury = Century.none;
         btnBackToMuseum.interactable = false;

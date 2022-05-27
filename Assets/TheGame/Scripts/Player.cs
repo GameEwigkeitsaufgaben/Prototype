@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData); 
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01); 
     }
 
     private void Start()

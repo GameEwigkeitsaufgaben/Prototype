@@ -21,7 +21,7 @@ public class ManagerCards : MonoBehaviour
 
     private void Awake()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         myConfig = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
     }
 

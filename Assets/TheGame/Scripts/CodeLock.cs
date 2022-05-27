@@ -13,13 +13,13 @@ public class CodeLock : MonoBehaviour
     public TMP_Text nbr1, nbr2, nbr3, nbr4;
     public Chapters lockForChapter;
     
-    private SoChapOneRuntimeData runtimeData;
+    private SoChaptersRuntimeData chaptersRuntimeData;
     
     void Start()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        chaptersRuntimeData = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
 
-        if (runtimeData.ch1GeneralUnlocked && lockForChapter == Chapters.Ch01General)
+        if (chaptersRuntimeData.ch1GeneralUnlocked && lockForChapter == Chapters.Ch01General)
         {
             LoadCodeInDisplay(Chapters.Ch01General);
             return;
@@ -49,10 +49,10 @@ public class CodeLock : MonoBehaviour
 
                 if(code == GameData.pwdAdminChapterOne)
                 {
-                    runtimeData.progressCh1WithAdmin = true;
+                    chaptersRuntimeData.progressWithAdminCh1 = true;
                 }
           
-                runtimeData.ch1GeneralUnlocked = true;
+                chaptersRuntimeData.ch1GeneralUnlocked = true;
                 SceneManager.LoadScene(GameScenes.ch01InstaMain);
                 break;
             case Chapters.Ch02Grubenwasser:
@@ -62,7 +62,12 @@ public class CodeLock : MonoBehaviour
                     return;
                 }
 
-                runtimeData.ch2GrubenwasserUnlocked = true;
+                if (code == GameData.pwdAdminChapterTwo)
+                {
+                    chaptersRuntimeData.progressWithAdminCh2 = true;
+                }
+
+                chaptersRuntimeData.ch2GrubenwasserUnlocked = true;
                 SceneManager.LoadScene(GameScenes.ch02InstaMain);
                 break;
         }
@@ -79,12 +84,15 @@ public class CodeLock : MonoBehaviour
 
     public void LoadCodeInDisplay(Chapters chapter)
     {
-        if (runtimeData.progressCh1WithAdmin)
+        if (chaptersRuntimeData.progressWithAdminCh1)
         {
             switch (chapter)
             {
                 case Chapters.Ch01General:
                     SetCodeDisplay("1", "2", "1", "2");
+                    break;
+                case Chapters.Ch02Grubenwasser:
+                    SetCodeDisplay("2", "3", "2", "3");
                     break;
             }
 
@@ -95,6 +103,9 @@ public class CodeLock : MonoBehaviour
         {
             case Chapters.Ch01General:
                 SetCodeDisplay("1", "1", "1", "1");
+                break;
+            case Chapters.Ch02Grubenwasser:
+                SetCodeDisplay("2", "2", "2", "2");
                 break;
         }
     }

@@ -34,7 +34,7 @@ public class Overlay : MonoBehaviour
     private void Start()
     {
         icons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeData);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         webglVideoPlayer = GameObject.FindObjectOfType<WebGlVideoPlayer>();
         menuManager = FindObjectOfType<PostManagerChapterOne>();
     }
