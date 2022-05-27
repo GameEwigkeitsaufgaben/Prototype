@@ -6,11 +6,18 @@ public class KohleHobelTriggerEinsturz : MonoBehaviour
 {
     public GameObject prefab;
     public Transform position;
-    public float delayDestruction;
+    private GameObject verbruch;
 
     public void Einsturz()
     {
-        GameObject clone = Instantiate(prefab, position.position,Quaternion.identity);
-        Destroy(clone, delayDestruction);
+        verbruch = Instantiate(prefab, position.position,Quaternion.identity);
+    }
+
+    public void DestroyVerbruch()
+    {
+        if (verbruch != null)
+        {
+            Destroy(verbruch);
+        }
     }
 }
