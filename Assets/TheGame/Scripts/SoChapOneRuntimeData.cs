@@ -16,6 +16,7 @@ public class SoChapOneRuntimeData : Runtime
     public bool viewPointS3passed;
     public bool entryAreaDone;
     public bool sole1Done, sole2Done, sole3BewetterungDone, sole3GebaeudeDone, trainRideInDone, trainRideOutDone, isLongwallCutterDone;
+    public Animator kohlenhobelAnimator;
 
     [Header("Museum 117")]
     public Vector3 currentGroupPos = Vector3.zero; //-13.44922, 2.4, -2.670441
@@ -27,7 +28,19 @@ public class SoChapOneRuntimeData : Runtime
     public bool video115Done, interaction116Done, interaction117Done, quiz119Done;
     //progressCh1WithAdmin;
 
-
+    public Animator GetKohlenhobelAnimator()
+    {
+        if(kohlenhobelAnimator == null)
+        {
+            Debug.Log("Kohlenhobel Animator is null");
+            return null;
+        }
+        else
+        {
+            Debug.Log("Kohlenhobel Animator: " + kohlenhobelAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle"));
+            return kohlenhobelAnimator;
+        }
+    }
     private void OnEnable()
     {
         ch1GeneralUnlocked = false;

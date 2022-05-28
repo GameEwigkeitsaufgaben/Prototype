@@ -30,7 +30,20 @@ public class KohlehobelManager : MonoBehaviour
 
         runtimeDataChapters.sceneCursor = runtimeData.cursorTexture3DCave;
         Cursor.SetCursor(runtimeDataChapters.sceneCursor, Vector2.zero, CursorMode.Auto);
+    }
 
+    public void StartAnimKohlenhobel()
+    {
+
+        if (runtimeData.GetKohlenhobelAnimator().GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        {
+            runtimeData.GetKohlenhobelAnimator().SetTrigger("play");
+        }
+        else if (runtimeData.GetKohlenhobelAnimator().GetCurrentAnimatorStateInfo(0).IsName("Animation"))
+        {
+            runtimeData.GetKohlenhobelAnimator().SetTrigger("reset");
+        }
+        Debug.Log("Trigger is set to Play!!");
     }
 
     //Positionieren und Ausrichten in LongwallCutterWaypointManager
@@ -59,5 +72,9 @@ public class KohlehobelManager : MonoBehaviour
         speechManager.playLongwallCutterBahnsteig = true;
     }
 
-    
+    private void Update()
+    {
+        Debug.Log("int update: " + runtimeData.GetKohlenhobelAnimator());
+    }
+
 }
