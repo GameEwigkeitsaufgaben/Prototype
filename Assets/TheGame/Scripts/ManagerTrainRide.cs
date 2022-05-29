@@ -50,9 +50,9 @@ public class ManagerTrainRide : MonoBehaviour
         switchScene.GoToLongwallCutter();
     }
 
-    private void GoToMine()
+    private void GoToOverlay()
     {
-        switchScene.LoadMine();
+        switchScene.SwitchToChapter1withOverlay("Overlay116");
     }
 
     private void Update()
@@ -79,7 +79,7 @@ public class ManagerTrainRide : MonoBehaviour
                 {
                     speechManger.ToggleTrainRideOutTalkingFinished();
                     runtimeData.trainRideOutDone = true;
-                    Invoke("GoToMine", 3f);
+                    Invoke("GoToOverlay", 3f);
                     isNextSceneLoaded = true;
                 }
             }

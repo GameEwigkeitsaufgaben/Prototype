@@ -210,7 +210,12 @@ public class CoalmineSpeechManger : MonoBehaviour
 
     public bool IsLWCBahnsteigFinished()
     {
-        return mySpeechLists[10].finishedToogle;
+        return mySpeechDict["Audios100160CaveLongwallCutterWpBahnsteig"].finishedToogle;
+    }
+
+    public bool IsLWCLWCFinished()
+    {
+        return mySpeechDict["Audios100160CaveLongwallCutterWpLongwallCutter"].finishedToogle;
     }
 
     public void ToggleTrainRideOutTalkingFinished()

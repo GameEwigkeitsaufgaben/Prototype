@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class KohlehobelManager : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class KohlehobelManager : MonoBehaviour
     public CoalmineSpeechManger speechManager;
     public LongwallCutterWaypointManager lwcManager;
     public Character enya, georg, dad;
+    public Button btnLwcViewpoint, btnLwcExit;
 
     private SoChapOneRuntimeData runtimeData;
     private SoChaptersRuntimeData runtimeDataChapters;
@@ -23,7 +25,10 @@ public class KohlehobelManager : MonoBehaviour
         switchScene.LoadLongwallCutterStatic();
         switchScene.LoadLongwallCutterAnim();
 
-        Invoke("StartViewpointBahnsteig", 3.0f);
+        btnLwcViewpoint.interactable = false;
+        btnLwcExit.interactable = false;
+
+        Invoke("StartViewpointBahnsteig", 2.0f);
 
         lwcManager.RotateCharacters(-114.0f, -53.0f, -80.0f);
         myPlayer.SetPlayerRotation(0f,false);
@@ -68,4 +73,16 @@ public class KohlehobelManager : MonoBehaviour
         speechManager.playLongwallCutterBahnsteig = true;
     }
 
+
+    private void Update()
+    {
+        if (!btnLwcViewpoint.interactable && speechManager.IsLWCBahnsteigFinished())
+        {
+            btnLwcViewpoint.interactable = true;
+        }
+        else if (!btnLwcExit.interactable && speechManager.IsLWCLWCFinished())
+        {
+            btnLwcExit.interactable = true;
+        }
+    }
 }
