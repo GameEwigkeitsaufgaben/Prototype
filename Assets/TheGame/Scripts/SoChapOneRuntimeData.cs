@@ -11,6 +11,7 @@ public class SoChapOneRuntimeData : Runtime
 
     [Header("Coalmine 116")]
     public float playerRotation; //needed for lookaroundMouse
+    public CoalmineStop currentCoalmineStop;
     public bool playerInsideCave;
     public bool trainArrived;
     public bool viewPointS3passed;
@@ -43,6 +44,7 @@ public class SoChapOneRuntimeData : Runtime
     }
     private void OnEnable()
     {
+        currentCoalmineStop = CoalmineStop.Unset;
         ch1GeneralUnlocked = false;
         ch2GrubenwasserUnlocked = false;
         Debug.Log("RELOAD RUNTIME DATA");

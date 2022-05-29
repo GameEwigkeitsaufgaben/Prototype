@@ -39,11 +39,8 @@ public class CaveManager : MonoBehaviour
 
     private void Start()
     {
-        //runtimeData.cursorDefault = runtimeData.cursorTexture3DCave;
         Cursor.SetCursor(runtimeData.cursorTexture3DCave, Vector2.zero, CursorMode.Auto);
         speechManagerMine = characterDad.transform.parent.GetComponent<CoalmineSpeechManger>();
-
-        //triggerEinstieg.SetActive(false);
 
         switchScene = gameObject.GetComponent<SwitchSceneManager>();
 
@@ -64,9 +61,6 @@ public class CaveManager : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("In On Enable");
-        Debug.Log("sohle to reload " + GameData.sohleToReload);
-        
         //At first load
         if(GameData.currentStopSohle == (int)CoalmineStop.Unset)
         {
