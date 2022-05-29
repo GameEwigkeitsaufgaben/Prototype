@@ -7,7 +7,7 @@ public class AnimationOffset : MonoBehaviour
 {
     private Animator anim;
     [Range(0f,1f)]
-    public float animStart = 0.2f;
+    public float animStart = 0.0f;
     private SoChapOneRuntimeData runtimeDataCh01;
 
     private void Awake()
@@ -20,8 +20,13 @@ public class AnimationOffset : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         var name =  anim.GetCurrentAnimatorStateInfo(0).shortNameHash;
-        Debug.Log("in Anim Offset: " + anim.GetCurrentAnimatorStateInfo(0).ToString());
         runtimeDataCh01.kohlenhobelAnimator = anim;
+        StartKohlenhobelAnim();
+    }
+
+    public void StartKohlenhobelAnim()
+    {
+        Debug.Log("in Anim Offset: " + anim.GetCurrentAnimatorStateInfo(0).ToString() + " animStart " + animStart);
         anim.Play(name, 0, animStart);
     }
 }
