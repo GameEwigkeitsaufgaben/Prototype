@@ -15,7 +15,7 @@ MonoBehaviour:
   cursorTexture3DCave: {fileID: 2800000, guid: ceeb783f6402d6f48bdbac0ce307da77, type: 3}
   cursorInteract: {fileID: 2800000, guid: 83bd82f044ff939489cb7169366b327a, type: 3}
   cursorNoInteract: {fileID: 2800000, guid: 9754c467e9ddfaf4dadf0f2281e47e63, type: 3}
-  cursorDefault: {fileID: 2800000, guid: 73965038f13b1a448bafe479b3931afd, type: 3}
+  cursorDefault: {fileID: 0}
   cursorDragTouch: {fileID: 2800000, guid: 6e93da66b0f02de4eb4f8e0b5e05b823, type: 3}
   cursorDragDrag: {fileID: 2800000, guid: 4e79cb6e82df3ce49a36f4ffb0e2d852, type: 3}
   cursorNoDrag: {fileID: 2800000, guid: 58ced61c6969c7941ab315280b5a23bb, type: 3}
@@ -27,11 +27,14 @@ MonoBehaviour:
   videoPlaying: 0
   ch1GeneralUnlocked: 0
   ch2GrubenwasserUnlocked: 0
+  liftBtnsAllEnabled: 0
   playerRotation: 0
-  playerInsideCave: 0
+  revisitEntryArea: 1
+  currentCoalmineStop: 1
+  playerInsideCave: 1
   trainArrived: 0
   viewPointS3passed: 0
-  entryAreaDone: 0
+  entryAreaDone: 1
   sole1Done: 0
   sole2Done: 0
   sole3BewetterungDone: 0
@@ -39,6 +42,7 @@ MonoBehaviour:
   trainRideInDone: 0
   trainRideOutDone: 0
   isLongwallCutterDone: 0
+  kohlenhobelAnimator: {fileID: 0}
   currentGroupPos: {x: 0, y: 0, z: 0}
   currentMuseumWaypoint: 0
   isMinerDone: 0
@@ -50,4 +54,3 @@ MonoBehaviour:
   interaction116Done: 0
   interaction117Done: 0
   quiz119Done: 0
-  progressCh1WithAdmin: 0

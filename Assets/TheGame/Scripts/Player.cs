@@ -43,7 +43,6 @@ public class Player : MonoBehaviour
         GameData.playerPositonXatS3Bahnsteig = transform.position.x;
         GameData.playerPositonYatS3Bahnsteig = transform.position.y;
         GameData.playerPositonZatS3Bahnsteig = transform.position.z;
-        Debug.Log("Write to gamedata players bahnsteig position: " + transform.position);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -144,8 +143,9 @@ public class Player : MonoBehaviour
         //Hinders the player to move the cave without the player being inside.
         if (playerInCave)
         {
-            GameData.liftBtnsEnabled = true;
-            if(GameData.currentStopSohle == (int)CoalmineStop.Sole3 && GameData.sohleToReload == (int)CoalmineStop.Sole3)
+            runtimeData.liftBtnsAllEnabled = true;
+            //GameData.liftBtnsEnabled = true;
+            if(runtimeData.currentCoalmineStop == CoalmineStop.Sole3 && GameData.sohleToReload == (int)CoalmineStop.Sole3)
             {
                 GameData.sohleToReload = (int)CoalmineStop.Unset;
             }

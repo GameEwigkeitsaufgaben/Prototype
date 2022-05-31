@@ -10,7 +10,9 @@ public class SoChapOneRuntimeData : Runtime
     public bool ch1GeneralUnlocked, ch2GrubenwasserUnlocked;
 
     [Header("Coalmine 116")]
+    public bool liftBtnsAllEnabled;
     public float playerRotation; //needed for lookaroundMouse
+    public bool revisitEntryArea;
     public CoalmineStop currentCoalmineStop;
     public bool playerInsideCave;
     public bool trainArrived;
@@ -44,6 +46,9 @@ public class SoChapOneRuntimeData : Runtime
     }
     private void OnEnable()
     {
+        liftBtnsAllEnabled = false;
+        entryAreaDone = false;
+        revisitEntryArea = false;
         currentCoalmineStop = CoalmineStop.Unset;
         ch1GeneralUnlocked = false;
         ch2GrubenwasserUnlocked = false;

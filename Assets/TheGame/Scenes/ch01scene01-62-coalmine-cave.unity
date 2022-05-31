@@ -254,6 +254,8 @@ MonoBehaviour:
   spDad: {fileID: 1357478544}
   spGeorg: {fileID: 1565534980}
   playCaveIntro: 0
+  playCaveIntroAllDone: 0
+  playCaveIntroNotAllDone: 0
   playEntryArea: 0
   playSchachtS1: 0
   playSchacht: 0
@@ -270,6 +272,8 @@ MonoBehaviour:
   playLongwallCutterBahnsteig: 0
   playLongwallCutterLongwallCutter: 0
   audiosCaveIntro: {fileID: 11400000, guid: 0b60167e101ecb845b840fccfd2d89d0, type: 2}
+  audiosCaveIntroAllDone: {fileID: 0}
+  audiosCaveIntroNotAllDone: {fileID: 0}
   audiosEntryArea: {fileID: 11400000, guid: 139b6e1bad73fe2418d03c4686441eaa, type: 2}
   audiosEntryAreaTriggerSchacht: {fileID: 11400000, guid: 42aac5037418e734f95807b1b03c6deb, type: 2}
   audiosTriggerSchachtS1: {fileID: 0}
@@ -654,7 +658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedbackObject: {fileID: 858749000}
-  myStop: 0
+  relatedStop: 0
   isSelected: 0
   hasChanged: 0
 --- !u!114 &55500735
@@ -4057,7 +4061,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedbackObject: {fileID: 1725051234}
-  myStop: 0
+  relatedStop: 0
   isSelected: 0
   hasChanged: 0
 --- !u!114 &537043734
@@ -6089,6 +6093,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterConfigSO: {fileID: 0}
+  characterImage: {fileID: 0}
   sole1ImgUpdated: 0
   s2ImgUpdated: 0
   s3ImgUpdated: 0
@@ -7144,7 +7149,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cave: {fileID: 919132147999869086}
   speechManger: {fileID: 28434980}
-  revisitEntryArea: 0
 --- !u!65 &966452286
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7554,6 +7558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterConfigSO: {fileID: 11400000, guid: 82fcf07e22a103f4a89b4c8922d93b03, type: 2}
+  characterImage: {fileID: 0}
   sole1ImgUpdated: 0
   s2ImgUpdated: 0
   s3ImgUpdated: 0
@@ -7642,7 +7647,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cave: {fileID: 653222970}
   speechManger: {fileID: 1118120251}
-  revisitEntryArea: 0
 --- !u!65 &1052803937
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8159,6 +8163,8 @@ MonoBehaviour:
   spDad: {fileID: 672310652}
   spGeorg: {fileID: 443497845}
   playCaveIntro: 0
+  playCaveIntroAllDone: 0
+  playCaveIntroNotAllDone: 0
   playEntryArea: 0
   playSchachtS1: 0
   playSchacht: 0
@@ -8175,6 +8181,8 @@ MonoBehaviour:
   playLongwallCutterBahnsteig: 0
   playLongwallCutterLongwallCutter: 0
   audiosCaveIntro: {fileID: 0}
+  audiosCaveIntroAllDone: {fileID: 0}
+  audiosCaveIntroNotAllDone: {fileID: 0}
   audiosEntryArea: {fileID: 11400000, guid: 139b6e1bad73fe2418d03c4686441eaa, type: 2}
   audiosEntryAreaTriggerSchacht: {fileID: 11400000, guid: 42aac5037418e734f95807b1b03c6deb, type: 2}
   audiosTriggerSchachtS1: {fileID: 0}
@@ -8327,7 +8335,6 @@ MonoBehaviour:
   baukipper: {fileID: 479410600}
   kran: {fileID: 878227499}
   water: {fileID: 774339395}
-  cursorTexture: {fileID: 2800000, guid: cb9699980f7cc9741bc1eab0fe1e9ae2, type: 3}
 --- !u!114 &1119981093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8491,7 +8498,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedbackObject: {fileID: 1674873240}
-  myStop: 0
+  relatedStop: 0
   isSelected: 0
   hasChanged: 0
 --- !u!222 &1129489448
@@ -9408,7 +9415,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedbackObject: {fileID: 263212377}
-  myStop: 1
+  relatedStop: 1
   isSelected: 0
   hasChanged: 0
 --- !u!114 &1223926023
@@ -10035,7 +10042,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedbackObject: {fileID: 340072200}
-  myStop: 3
+  relatedStop: 3
   isSelected: 0
   hasChanged: 0
 --- !u!114 &1264847893
@@ -10433,6 +10440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterConfigSO: {fileID: 11400000, guid: 6dc0f1cf0cbf3cb4587f1fcf45214089, type: 2}
+  characterImage: {fileID: 0}
   sole1ImgUpdated: 0
   s2ImgUpdated: 0
   s3ImgUpdated: 0
@@ -10805,7 +10813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedbackObject: {fileID: 10497630}
-  myStop: 4
+  relatedStop: 4
   isSelected: 0
   hasChanged: 0
 --- !u!114 &1342910293
@@ -12167,7 +12175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedbackObject: {fileID: 1214877152}
-  myStop: 2
+  relatedStop: 2
   isSelected: 0
   hasChanged: 0
 --- !u!114 &1530691723
@@ -13457,7 +13465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedbackObject: {fileID: 1336024764}
-  myStop: 0
+  relatedStop: 0
   isSelected: 0
   hasChanged: 0
 --- !u!114 &1691370367
@@ -15024,6 +15032,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterConfigSO: {fileID: 11400000, guid: d8fe53f684c35c64bb938f1ec7ce42fb, type: 2}
+  characterImage: {fileID: 0}
   sole1ImgUpdated: 0
   s2ImgUpdated: 0
   s3ImgUpdated: 0

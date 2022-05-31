@@ -38,10 +38,13 @@ public static class GameData
     public static float overlayVolumeInsta = 0.5f;
 
     //Talkinglist Mine: TL-TalkingList, EA-EntryArea, LWC-Longwallcutter
+    public const string NameTLMineIntro = "Audios100160CaveIntro";
+    public const string NameTLMineIntroAllDone = "Audios100160CaveIntroRevisitAllDone";
+    public const string NameTLMineIntroNotAllDone = "Audios100160CaveIntroRevisitNotAllDone";
     public const string NameTLMineEACave = "Audios100160CaveEntryArea";
+    public const string NameTLMineEARevisit = "Audios100160CaveEntryAreaRevisit";
     public const string NameTLMineEATriggerSchacht = "Audios100160CaveEntryAreaTriggerSchacht";
     public const string NameTLMineTriggerSchachtS1 = "Audios100160CaveTriggerSchachtNextS1";
-    public const string NameTLMineIntro = "Audios100160CaveIntro";
     public const string NameTLMineLWCBahnsteig= "Audios100160CaveLongwallCutterWpBahnsteig";
     public const string NameTLMineLWCCutter = "Audios100160CaveLongwallCutterWpLongwallCutter";
     public const string NameTLMineS1Cave = "Audios100160MineSole1Cave";

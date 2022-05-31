@@ -29,11 +29,13 @@ public class CaveMoveUpDownController : MonoBehaviour
     public bool CheckNextStopInvalid()
     {
         //next stop is invalid if the cave is moving, or an ohter sole is already chosen.
+        Debug.Log(GameData.moveCave + " cstop " + cave.currentStop + " tstop " +cave.targetStop) ;
         return GameData.moveCave || (cave.currentStop != cave.targetStop);
     }
 
     public void GoToStop(CoalmineStop nextStop)
     {
+        
         ////CoalmineStop nextStop = nextStopInt;
         //Debug.Log("cave current +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         //Debug.Log("cave current " + cave.currentStop);

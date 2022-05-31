@@ -11,37 +11,40 @@ using UnityEngine.UI;
 
 public class CaveManager : MonoBehaviour
 {
-    private const float defaultYawInCave = 0f;
     public Cave cave;
     public Player player;
-    private SwitchSceneManager switchScene;
     public Character characterEnya, characterDad, characterGeorg;
 
+    private const float defaultYawInCave = 0f;
+    private SwitchSceneManager switchScene;
+    
     private SoChapOneRuntimeData runtimeData;
+    private SoChaptersRuntimeData runtimeDataChapters;
     private CoalmineSpeechManger speechManagerMine;
     
     public Button exitSceneBtn, sole1WPViewpointBtn, sole2WPViewpointBtn, sole1caveWPBtn, sole3EnterTrainBtn;
-   // public SprechblaseController sprechblaseController;
-
-    //public GameObject triggerEinstieg;
 
     private bool introPlayedOneTime = false;
     private SoSfx sfx;
 
     public AudioSource baukipper, kran, water;
-    public Texture2D cursorTexture;
 
     private void Awake()
     {
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
     }
 
     private void Start()
     {
-        Cursor.SetCursor(runtimeData.cursorTexture3DCave, Vector2.zero, CursorMode.Auto);
+        runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorTexture3DCave);
+        
+        //load speechmanager at runtime
         speechManagerMine = characterDad.transform.parent.GetComponent<CoalmineSpeechManger>();
 
+
+        //load all needed scenes additive
         switchScene = gameObject.GetComponent<SwitchSceneManager>();
 
         switchScene.LoadEntryArea();
@@ -56,24 +59,25 @@ public class CaveManager : MonoBehaviour
         sfx.SetClipByAddToDict(water, sfx.caolmineSplashingWater);
 
         sole3EnterTrainBtn.gameObject.SetActive(false);
-       
+
+
     }
 
     private void OnEnable()
     {
         //At first load
-        if(GameData.currentStopSohle == (int)CoalmineStop.Unset)
+        if (!runtimeData.revisitEntryArea)
         {
             player.SetPlayerRotation(defaultYawInCave, false); //Default 90 degree for cave orientation
             cave.SetAllButtonsInteractable(false);
             cave.liftBtns[0].gameObject.GetComponent<Button>().interactable = true;
         }
-        
-        //at Reload
-        if ((CoalmineStop)GameData.sohleToReload == CoalmineStop.Sole3)
+        else
         {
-            GameData.currentStopSohle = (int)CoalmineStop.Sole3;
-            cave.ReloadCaveAtSohle3();
+            runtimeData.currentCoalmineStop = CoalmineStop.EntryArea;
+            cave.currentStop = cave.targetStop = runtimeData.currentCoalmineStop;
+            player.SetPlayerRotation(defaultYawInCave, false); //Default 90 degree for cave orientation
+            cave.SetAllButtonsInteractable(true);
         }
     }
 
@@ -87,16 +91,17 @@ public class CaveManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameData.liftBtnsEnabled = false;
+        runtimeData.liftBtnsAllEnabled = false;
+       // GameData.liftBtnsEnabled = false;
     }
 
     private void Update()
     {
-        if(GameData.currentStopSohle == (int)CoalmineStop.Sole1)
+        if(runtimeData.currentCoalmineStop == CoalmineStop.Sole1)
         {
             sfx.PlayClipsInSole1Sfx();
         }
-        if (GameData.currentStopSohle == (int)CoalmineStop.Sole2)
+        if (runtimeData.currentCoalmineStop == CoalmineStop.Sole2)
         {
             sfx.PlaySfxSole2();
         }
@@ -114,6 +119,7 @@ public class CaveManager : MonoBehaviour
 
         if(!introPlayedOneTime && speechManagerMine.IsMineEATalkingFinished())
         {
+            Debug.Log("set done ea");
             cave.SetAllButtonsInteractable(true);
             introPlayedOneTime = true;
             runtimeData.entryAreaDone = true;

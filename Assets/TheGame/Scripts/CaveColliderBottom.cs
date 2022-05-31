@@ -1,7 +1,6 @@
 //This script is responsible for to trigger at a coalmine stop depending on the stop and the direction the cave is reaching the stop.
 
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CaveColliderBottom : MonoBehaviour
 {
@@ -14,24 +13,31 @@ public class CaveColliderBottom : MonoBehaviour
 
     public Cave cave;
     public CoalmineSpeechManger speechManger;
-    public bool revisitEntryArea;
+
+    private SoChapOneRuntimeData runtimeData;
+
+    private void Awake()
+    {
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == TriggerEntryArea && !revisitEntryArea)
+        if (other.name == TriggerEntryArea)
         {
-            //cave.InitReachedStop(CoalmineStop.EntryArea);
-            speechManger.playEntryArea = true;
-            revisitEntryArea = true;
-
-            //cave.liftBtns[0].gameObject.GetComponent<Button>().interactable = true;
-        }
-        else if (other.name == TriggerEntryArea && revisitEntryArea)
-             {
-                cave.InitReachedStop(CoalmineStop.EntryArea);
-                //es fehlt noch ein Audio bitte den Ausgang nehmen! wenn wir wieder da sind. 
+            cave.InitReachedStop(CoalmineStop.EntryArea);
+            if (runtimeData.revisitEntryArea)
+            {
+                //es fehlt noch ein Audio noch nicht alle Stationen besucht, bitte wieder runterfahren. 
                 //Es kann gleich weitergeschalten werden, noch keine Prüfung ob text fertig geprochen.
-             }
+                speechManger.playEntryAreaRevisit = true;
+            }
+            else
+            {
+                speechManger.playEntryArea = true;
+                runtimeData.revisitEntryArea = true;
+            }
+        }
         else if (other.name == TriggerSole1 && cave.targetStop == CoalmineStop.Sole1)
              {
                 cave.InitReachedStop(CoalmineStop.Sole1);
@@ -54,7 +60,7 @@ public class CaveColliderBottom : MonoBehaviour
              {
                 cave.InitReachedStop(CoalmineStop.Sole3);
 
-                speechManger.playSole3WPCave = (GameData.currentStopSohle == (int)CoalmineStop.Sole3) ? true : false;
+                speechManger.playSole3WPCave = (runtimeData.currentCoalmineStop == CoalmineStop.Sole3) ? true : false;
              }
     }
 }

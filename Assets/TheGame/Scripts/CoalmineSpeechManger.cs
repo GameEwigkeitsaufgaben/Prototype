@@ -7,8 +7,8 @@ public class CoalmineSpeechManger : MonoBehaviour
 
     //fortesting
     public bool
-        playCaveIntro,
-        playEntryArea,
+        playCaveIntro, playCaveIntroAllDone, playCaveIntroNotAllDone,
+        playEntryArea, playEntryAreaRevisit,
         playSchachtS1,
         playSchacht,
         playSole1, playSole1Vp,
@@ -18,8 +18,8 @@ public class CoalmineSpeechManger : MonoBehaviour
         playLongwallCutterBahnsteig, playLongwallCutterLongwallCutter;
 
     private SpeechList
-        speakCaveIntro,
-        speakEntryArea,
+        speakCaveIntro, speakCaveIntroAllDone,speakCaveIntroNotAllDone,
+        speakEntryArea, speakEntryAreaRevisit,
         speakSchacht,
         speakSchachtS1,
         speakSole1, speakSole1Vp,
@@ -38,8 +38,8 @@ public class CoalmineSpeechManger : MonoBehaviour
     [Header("Assigned at Runtime")]
     [SerializeField]
     private SoTalkingList
-        audiosCaveIntro,
-        audiosEntryArea,
+        audiosCaveIntro, audiosCaveIntroAllDone, audiosCaveIntroNotAllDone,
+        audiosEntryArea, audiosEntryAreaRevisit,
         audiosEntryAreaTriggerSchacht, audiosTriggerSchachtS1,
         audiosSole1, audiosSole1Vp, 
         audiosSole2, audiosSole2Grubenwasser,
@@ -51,7 +51,10 @@ public class CoalmineSpeechManger : MonoBehaviour
     public void LoadTalkingListsMine()
     {
         audiosCaveIntro = Resources.Load<SoTalkingList>(GameData.NameTLMineIntro);
+        audiosCaveIntroAllDone = Resources.Load<SoTalkingList>(GameData.NameTLMineIntroAllDone);
+        audiosCaveIntroNotAllDone = Resources.Load<SoTalkingList>(GameData.NameTLMineIntroNotAllDone);
         audiosEntryArea = Resources.Load<SoTalkingList>(GameData.NameTLMineEACave);
+        audiosEntryAreaRevisit = Resources.Load<SoTalkingList>(GameData.NameTLMineEARevisit);
         audiosTriggerSchachtS1 = Resources.Load<SoTalkingList>(GameData.NameTLMineTriggerSchachtS1);
         audiosEntryAreaTriggerSchacht = Resources.Load<SoTalkingList>(GameData.NameTLMineEATriggerSchacht);
         audiosSole1 = Resources.Load<SoTalkingList>(GameData.NameTLMineS1Cave);
@@ -82,9 +85,21 @@ public class CoalmineSpeechManger : MonoBehaviour
         speakCaveIntro.SetUpList(audiosCaveIntro, mySrc);
         mySpeechLists.Add(speakCaveIntro);
 
+        speakCaveIntroAllDone = gameObject.AddComponent<SpeechList>();
+        speakCaveIntroAllDone.SetUpList(audiosCaveIntroAllDone, mySrc);
+        mySpeechLists.Add(speakCaveIntroAllDone);
+
+        speakCaveIntroNotAllDone = gameObject.AddComponent<SpeechList>();
+        speakCaveIntroNotAllDone.SetUpList(audiosCaveIntroNotAllDone, mySrc);
+        mySpeechLists.Add(speakCaveIntroNotAllDone);
+
         speakEntryArea = gameObject.AddComponent<SpeechList>();
         speakEntryArea.SetUpList(audiosEntryArea, mySrc);
         mySpeechLists.Add(speakEntryArea);
+
+        speakEntryAreaRevisit = gameObject.AddComponent<SpeechList>();
+        speakEntryAreaRevisit.SetUpList(audiosEntryAreaRevisit, mySrc);
+        mySpeechLists.Add(speakEntryAreaRevisit);
 
         speakSchachtS1 = gameObject.AddComponent<SpeechList>();
         speakSchachtS1.SetUpList(audiosTriggerSchachtS1, mySrc);
@@ -172,6 +187,11 @@ public class CoalmineSpeechManger : MonoBehaviour
     }
 
 
+    public bool IsTalkingFinished(string audioTalkingListName)
+    {
+        return mySpeechDict[audioTalkingListName].finishedToogle;
+    }
+
     public bool IsMineS2VpTalkingFinished()
     {
         return mySpeechDict[GameData.NameTLMineS2VpGrubenwasser].finishedToogle;
@@ -235,10 +255,25 @@ public class CoalmineSpeechManger : MonoBehaviour
             currentList = speakCaveIntro;
             playCaveIntro = false;
         }
+        else if (playCaveIntroAllDone)
+        {
+            currentList = speakCaveIntroAllDone;
+            playCaveIntroAllDone = false;
+        }
+        else if (playCaveIntroNotAllDone)
+        {
+            currentList = speakCaveIntroNotAllDone;
+            playCaveIntroNotAllDone = false;
+        }
         else if (playEntryArea)
         {
             currentList = speakEntryArea;
             playEntryArea = false;
+        }
+        else if (playEntryAreaRevisit)
+        {
+            currentList = speakEntryAreaRevisit;
+            playEntryAreaRevisit = false;
         }
         else if (playSchacht)
         {

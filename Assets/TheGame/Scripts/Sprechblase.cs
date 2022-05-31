@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,12 +5,11 @@ public class Sprechblase : MonoBehaviour
 {
     public Button btnInteraction;
     public Sprite play, reload, talking;
-
     public bool isInteractable;
+    public bool PlayedOnceMode = false;
 
     private AudioSource audioSrc;
     private bool audioStarted = false;
-    public bool PlayedOnceMode = false;
 
     public float GetClipLength()
     {

@@ -53,24 +53,22 @@ public class Cave : MonoBehaviour
 
     private void Awake()
     {
-        sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
+        Debug.Log("CAVE AWAKE");
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
     }
 
     private void Start()
     {
-        Debug.Log("Game Data " + GameData.currentStopSohle);
-
-        if(GameData.currentStopSohle == (int)CoalmineStop.Unset)
+       
+        if(runtimeData.currentCoalmineStop == CoalmineStop.Unset)
         {
-            Debug.Log("**********************************");
             //Default setting: current Sole is Entry Area;
-            GameData.currentStopSohle = (int)CoalmineStop.EntryArea;
-            currentStop = targetStop = (CoalmineStop)GameData.currentStopSohle;
+            runtimeData.currentCoalmineStop = CoalmineStop.EntryArea;
+            currentStop = targetStop = runtimeData.currentCoalmineStop;
             liftBtns[0].GetComponent<CaveButton>().isSelected = true;
 
-            //EnableButtons(false);
-
+            //move to manager?!
             sfx.PlayClip(wind, sfx.coalmineWindInTunnel);
             sfx.ReduceVolume(sfx.coalmineWindInTunnel, 0.7f);
 
@@ -84,12 +82,12 @@ public class Cave : MonoBehaviour
     public void InitReachedStop(CoalmineStop reachedStop)
     {
         StopCave();
-        currentStop = reachedStop;
+        
         moveDirection = CaveMovement.OnHold;
         OpenDoors();
-        GameData.currentStopSohle = (int)currentStop;
+        runtimeData.currentCoalmineStop = currentStop = reachedStop;
 
-        if(currentStop == CoalmineStop.Sole2)
+        if (runtimeData.currentCoalmineStop == CoalmineStop.Sole2)
         {
             hideS2Top.SetActive(true);
         }
@@ -178,7 +176,8 @@ public class Cave : MonoBehaviour
             y.interactable = enableButtons;
         }
 
-        GameData.liftBtnsEnabled = enableButtons;
+        if(runtimeData != null) runtimeData.liftBtnsAllEnabled = enableButtons;
+        
     }
 
     public void StopCave()
@@ -201,18 +200,16 @@ public class Cave : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         runtimeData.CheckInteraction116Done();
 
         if (GameData.moveCave)
         {
-            //Debug.Log((int)moveDirection + " movedir");
             GameData.moveDirection = (int)moveDirection;
             transform.position += new Vector3(0, (int)moveDirection * caveSpeed * Time.deltaTime, 0);
             return;
         }
-
 
         if (!runtimeData.entryAreaDone) return;
 
@@ -222,6 +219,7 @@ public class Cave : MonoBehaviour
         }
         else
         {
+            
             SetAllButtonsInteractable(true);
         }
     }

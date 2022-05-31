@@ -7,7 +7,7 @@ public class Character : MonoBehaviour
     public SoCharacter characterConfigSO;
 
     SpeechBubble speechBubble;
-    Image characterImage;
+    public Image characterImage;
 
     int previousStop = -1;
     public bool sole1ImgUpdated = false, s2ImgUpdated = false, s3ImgUpdated = false;
@@ -15,33 +15,27 @@ public class Character : MonoBehaviour
 
     [Header("Assigned in Runtime")]
     [SerializeField] private SoGameIcons iconConfigSo;
+    private SoChapOneRuntimeData runtimeData;
+
+    private void Awake()
+    {
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        iconConfigSo = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
+    }
 
     void Start()
     {
         //Aufbau: Name des Characters (Canvas, CanvasScaler Spline Move, this Script)
         //Über dieses Script ist alles andere erreichbar
-        
+
         // Im Canvas die main cam setzen.
         Camera mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         gameObject.GetComponent<Canvas>().renderMode = RenderMode.WorldSpace;
         gameObject.GetComponent<Canvas>().worldCamera = mainCam;
 
         //Die Kinderholen und GOs speechBubble und Img von Character holen. 
-        Component[] character = GetComponentsInChildren<Transform>(true);
-        
-        for (int i = 0; i < character.Length; i++)
-        {
-            if (i == 1)
-            {   //speechbubble
-                speechBubble = character[i].GetComponent<SpeechBubble>();
-            }
-            if (i == 4)
-            {   //Image von Character
-                characterImage = character[i].GetComponent<Image>();
-            }
-        }
 
-        iconConfigSo = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
+        SetupElements();
 
         //setze speechbubble sprite
         speechBubble.PopulateBubbleSprites();
@@ -49,7 +43,7 @@ public class Character : MonoBehaviour
         //setzte default sprite für character
         if (SwitchSceneManager.GetCurrentSceneName() == GameScenes.ch01LongwallCutter)
         {
-            characterImage.GetComponent<Image>().sprite = characterConfigSO.longwallCutterStandingTalking;
+            characterImage.sprite = characterConfigSO.longwallCutterStandingTalking;
         }
         else if (SwitchSceneManager.GetCurrentSceneName() == GameScenes.ch01Mine)
         {
@@ -61,6 +55,26 @@ public class Character : MonoBehaviour
         }
     }
 
+    public void SetupElements()
+    {
+        Component[] character = GetComponentsInChildren<Transform>(true);
+
+        if (characterImage != null && speechBubble != null) return;
+
+        for (int i = 0; i < character.Length; i++)
+        {
+            if (i == 1)
+            {   //speechbubble
+                speechBubble = character[i].GetComponent<SpeechBubble>();
+                speechBubble.gameObject.SetActive(false);
+            }
+            if (i == 4)
+            {   //Image von Character
+                characterImage = character[i].GetComponent<Image>();
+            }
+        }
+    }
+
     public void RotateCharacter(float yRotation)
     {
         gameObject.transform.localRotation = Quaternion.Euler(0f, yRotation, 0f);
@@ -68,6 +82,8 @@ public class Character : MonoBehaviour
 
     public void ChangeCharacterImage(CoalmineStop stop)
     {
+        Debug.Log("is null: " + (characterImage == null));
+        Debug.Log("comp is null " + characterImage.GetComponent<Image>().sprite.name);
         switch (stop)
         {
             case CoalmineStop.Outside:
@@ -107,18 +123,18 @@ public class Character : MonoBehaviour
         //updates only happen if the cave is moving down.
         if (s3ImgUpdated) return;
 
-        bool stopChanged = previousStop != GameData.currentStopSohle;
+        bool stopChanged = previousStop != (int)runtimeData.currentCoalmineStop;
         bool caveDirectionIsDown = (int)CaveMovement.MoveDown == GameData.moveDirection;
 
         if (!entryAreaUpdated)
         {
-            if (GameData.currentStopSohle == (int)CoalmineStop.EntryArea)
+            if (runtimeData.currentCoalmineStop == CoalmineStop.EntryArea)
             {
                 ChangeCharacterImage(CoalmineStop.EntryArea);
                 previousStop = (int)CoalmineStop.EntryArea;
             }
         }
-        else if (!sole1ImgUpdated && (GameData.currentStopSohle == (int)CoalmineStop.Sole1))
+        else if (!sole1ImgUpdated && (runtimeData.currentCoalmineStop == CoalmineStop.Sole1))
         {
             if (stopChanged && caveDirectionIsDown)
             {
@@ -126,7 +142,7 @@ public class Character : MonoBehaviour
                 previousStop = (int)CoalmineStop.Sole1;
             }
         }
-        else if (!s2ImgUpdated && (GameData.currentStopSohle == (int)CoalmineStop.Sole2))
+        else if (!s2ImgUpdated && (runtimeData.currentCoalmineStop == CoalmineStop.Sole2))
         {
             if (stopChanged && caveDirectionIsDown)
             {
@@ -134,7 +150,7 @@ public class Character : MonoBehaviour
                 previousStop = (int)CoalmineStop.Sole2;
             }
         }
-        else if (!s3ImgUpdated && (GameData.currentStopSohle == (int)CoalmineStop.Sole3))
+        else if (!s3ImgUpdated && (runtimeData.currentCoalmineStop == CoalmineStop.Sole3))
         {
             if (stopChanged && caveDirectionIsDown)
             {

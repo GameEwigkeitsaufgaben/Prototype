@@ -26,4 +26,10 @@ public class SoChaptersRuntimeData : ScriptableObject
         ch1GeneralUnlocked = ch2GrubenwasserUnlocked = ch3GrubenwasserUnlocked = false;
         progressWithAdminCh1 = progressWithAdminCh2 = false;
     }
+
+    public void SetSceneCursor(Texture2D defaultSceneCursor)
+    {
+        sceneCursor = defaultSceneCursor;
+        Cursor.SetCursor(defaultSceneCursor, Vector2.zero, CursorMode.Auto);
+    }
 }

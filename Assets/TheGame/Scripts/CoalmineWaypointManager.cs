@@ -64,6 +64,7 @@ public class CoalmineWaypointManager : MonoBehaviour
     private void Awake()
     {
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
 
         //The order has to be Canvas (parent), first child ist btn, second child is text; 
         wps1ViewpointBtn = wpS1ViewpointSign.GetComponentsInChildren<Transform>()[1].GetComponent<Button>();
@@ -260,8 +261,8 @@ public class CoalmineWaypointManager : MonoBehaviour
         switch (currentWP)
         {
             case MineWayPoints.viewpoint:
-                if (GameData.currentStopSohle == (int)CoalmineStop.Sole1) speechManager.playSole1Vp = true;
-                if (GameData.currentStopSohle == (int)CoalmineStop.Sole2) speechManager.playSole2Badewannen = true;
+                if (runtimeData.currentCoalmineStop == CoalmineStop.Sole1) speechManager.playSole1Vp = true;
+                if (runtimeData.currentCoalmineStop == CoalmineStop.Sole2) speechManager.playSole2Badewannen = true;
                 break;
             case MineWayPoints.viewpointBewetterung:
                 speechManager.playSole3WPBewetterung = true;
@@ -305,7 +306,7 @@ public class CoalmineWaypointManager : MonoBehaviour
             //}
         }
 
-        if (GameData.currentStopSohle != (int)CoalmineStop.Sole3) return;
+        if (runtimeData.currentCoalmineStop != CoalmineStop.Sole3) return;
 
         SetAllWPBtnActive(true);
 
@@ -383,9 +384,10 @@ public class CoalmineWaypointManager : MonoBehaviour
     //Methods Called from Inspector
     public void MoveOut()
     {
-        GameData.liftBtnsEnabled = false;
+        runtimeData.liftBtnsAllEnabled = false;
+       // GameData.liftBtnsEnabled = false;
 
-        if (GameData.currentStopSohle == (int)CoalmineStop.Sole3) return;
+        if (runtimeData.currentCoalmineStop == CoalmineStop.Sole3) return;
 
         playerSplineMove.reverse = false;
         playerSplineMove.StartMove();
@@ -397,7 +399,7 @@ public class CoalmineWaypointManager : MonoBehaviour
     public void MoveIn()
     {
         //needed because more than one path uses the viewpoint waypoint
-        if (GameData.currentStopSohle == (int)CoalmineStop.Sole3)
+        if (runtimeData.currentCoalmineStop == CoalmineStop.Sole3)
         {
             playerSplineMove.pathContainer = pathS3CaveToViewpoint;
         }
@@ -432,7 +434,7 @@ public class CoalmineWaypointManager : MonoBehaviour
 
     public void MoveToViewpoint()
     {
-        if (GameData.currentStopSohle != (int)CoalmineStop.Sole3) return;
+        if (runtimeData.currentCoalmineStop != CoalmineStop.Sole3) return;
         DetectAndSetPath(MineWayPoints.viewpoint);
         playerSplineMove.StartMove();
         Cursor.SetCursor(runtimeData.cursorDefault, Vector2.zero, CursorMode.Auto);
@@ -449,9 +451,9 @@ public class CoalmineWaypointManager : MonoBehaviour
 
         myPlayer.followAnker = false;
 
-        if (GameData.currentStopSohle == (int)CoalmineStop.EntryArea) return;
+        if (runtimeData.currentCoalmineStop == CoalmineStop.EntryArea) return;
 
-        if(GameData.currentStopSohle == (int)CoalmineStop.Sole1 && !runtimeData.sole1Done)
+        if(runtimeData.currentCoalmineStop == CoalmineStop.Sole1 && !runtimeData.sole1Done)
         {
             if (speechManager.IsMineS1CaveTalkingFinished() && !wps1ViewpointBtn.GetComponent<Button>().interactable)
             {
@@ -465,7 +467,7 @@ public class CoalmineWaypointManager : MonoBehaviour
             }
         }
 
-        if (GameData.currentStopSohle == (int)CoalmineStop.Sole2 && !runtimeData.sole2Done)
+        if (runtimeData.currentCoalmineStop == CoalmineStop.Sole2 && !runtimeData.sole2Done)
         {
             if (speechManager.IsMineS2CaveTalkingFinished() && !wps2ViewpointBtn.GetComponent<Button>().interactable)
             {
@@ -479,7 +481,7 @@ public class CoalmineWaypointManager : MonoBehaviour
             }
         }
 
-        if (GameData.currentStopSohle == (int)CoalmineStop.Sole3 && !helperSetPath)
+        if (runtimeData.currentCoalmineStop == CoalmineStop.Sole3 && !helperSetPath)
         {
             playerSplineMove.pathContainer = pathS3CaveToViewpoint;
 
@@ -502,10 +504,8 @@ public class CoalmineWaypointManager : MonoBehaviour
 
             SetAllWPBtnActive(false);
             wps3ViewpointBtn.gameObject.SetActive(true);
-
-
         }
-        else if (GameData.currentStopSohle == (int)CoalmineStop.Sole2 && !helperSetPath)
+        else if (runtimeData.currentCoalmineStop == CoalmineStop.Sole2 && !helperSetPath)
         {
             playerSplineMove.pathContainer = pathS2CaveToViewpoint;
             pathS2CaveToViewpoint.transform.position = new Vector3(0f, myPlayer.transform.position.y, 0f);
@@ -515,7 +515,7 @@ public class CoalmineWaypointManager : MonoBehaviour
 
             helperSetPath = true;
         }
-        else if (GameData.currentStopSohle == (int)CoalmineStop.Sole1 && !helperSetPath)
+        else if (runtimeData.currentCoalmineStop == CoalmineStop.Sole1 && !helperSetPath)
         {
             playerSplineMove.pathContainer = pathS1CaveToViewpoint;
             pathS1CaveToViewpoint.transform.position = new Vector3(0f, myPlayer.transform.position.y, 0f);

@@ -6,12 +6,12 @@ public class MouseChange : MonoBehaviour
 {
     private CursorMode cursorMode = CursorMode.Auto;
     private Vector2 hotSpot = Vector2.zero;
-    private SoChapOneRuntimeData runtimeData;
+    private SoChapOneRuntimeData runtimeDataCh01;
     private SoChaptersRuntimeData runtimeDataChapters;
 
     private void Awake()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        runtimeDataCh01 = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
     }
 
@@ -54,23 +54,10 @@ public class MouseChange : MonoBehaviour
         {
             gameObject.GetComponent<Slider>().colors = GameColors.GetInteractionColorBlock();
         }
-
-        Debug.Log("Scene:  " + SceneManager.GetActiveScene().name);
-
-        //if (SceneManager.GetActiveScene().name == GameScenes.ch01Mine)
-        //{
-        //    Cursor.SetCursor(runtimeData.cursorTexture3DCave, hotSpot, cursorMode);
-        //}
-        //else
-        //{
-        //    Cursor.SetCursor(runtimeData.cursorDefault, hotSpot, cursorMode);
-        //}
-       
     }
 
     public void MouseEnter()
     {
-        //Debug.Log("in Mouse enter " + gameObject.name + " btn ok " + (gameObject.GetComponent<Button>() != null) + " interctble " + gameObject.GetComponent<Button>().interactable);
         if(gameObject.GetComponent<Button>() != null && gameObject.GetComponent<Button>().interactable)
         {
             Cursor.SetCursor(runtimeDataChapters.cursorInteract, hotSpot, cursorMode);
@@ -98,11 +85,6 @@ public class MouseChange : MonoBehaviour
             }
 
             if (!gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging) Cursor.SetCursor(runtimeDataChapters.cursorDragTouch, hotSpot, cursorMode);
-            //else if (!gameObject.GetComponent<MuseumMinerEquipmentItem>().myManager.IsDragItemOk())
-            //{
-            //    Debug.Log("set curser no drag");
-            //    Cursor.SetCursor(runtimeData.cursorNoDrag, hotSpot, cursorMode); 
-            //}
             
         }
         else
