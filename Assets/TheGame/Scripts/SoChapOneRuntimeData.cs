@@ -9,6 +9,8 @@ public class SoChapOneRuntimeData : Runtime
 
     public bool ch1GeneralUnlocked, ch2GrubenwasserUnlocked;
 
+    public string hintPostUnlock;
+
     [Header("Coalmine 116")]
     public bool liftBtnsAllEnabled;
     public float playerRotation; //needed for lookaroundMouse
@@ -28,7 +30,7 @@ public class SoChapOneRuntimeData : Runtime
     public SoundMuseum soundSettingMuseum;
 
     [Header("GameProgress")]
-    public bool video115Done, interaction116Done, interaction117Done, quiz119Done;
+    public bool post111Done, post112Done, post113Done, post114Done, video115Done, interaction116Done, interaction117Done, quiz119Done;
     //progressCh1WithAdmin;
 
     public Animator GetKohlenhobelAnimator()
@@ -46,6 +48,8 @@ public class SoChapOneRuntimeData : Runtime
     }
     private void OnEnable()
     {
+        hintPostUnlock = "";
+        post111Done = post112Done = post113Done = post114Done = false;
         liftBtnsAllEnabled = false;
         entryAreaDone = false;
         revisitEntryArea = false;

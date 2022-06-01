@@ -12,6 +12,7 @@ public class SoPostData : ScriptableObject
     public string postTags;
 
     public bool postUnLocked;
+    public string hintToUnlock;
 
     public string interactionScene;
     public string videoName;
@@ -49,7 +50,10 @@ public class SoPostData : ScriptableObject
 
     private void OnEnable()
     {
-        if(this.name == GameData.NamePost116 ||
+        if(this.name == GameData.NamePost113 ||
+            this.name == GameData.NamePost114 ||
+            this.name == GameData.NamePost115 ||
+            this.name == GameData.NamePost116 ||
             this.name == GameData.NamePost117 ||
             this.name == GameData.NamePost118 ||
             this.name == GameData.NamePost119 ||
@@ -57,7 +61,5 @@ public class SoPostData : ScriptableObject
         {
             postUnLocked = false;
         }
-
-        
     }
 }

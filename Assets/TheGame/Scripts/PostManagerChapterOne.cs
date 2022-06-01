@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class PostManagerChapterOne : MonoBehaviour
 {
     public GameObject overlayParent;
     public Button musicOnOff, chaptersHome;
     public Scrollbar scrollbar;
+    public TMP_Text hints;
     
     private List <Overlay> overlayList = new List<Overlay>();
     private Overlay[] overlayArray;
@@ -22,6 +24,7 @@ public class PostManagerChapterOne : MonoBehaviour
     private void Awake()
     {   
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
 
         if (SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain)
         {
@@ -31,8 +34,6 @@ public class PostManagerChapterOne : MonoBehaviour
         {
             runtimeData = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
         }
-
-        Cursor.SetCursor(runtimeDataChapters.cursorDefault, Vector2.zero, CursorMode.Auto);
 
         gameIcons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
@@ -110,9 +111,12 @@ public class PostManagerChapterOne : MonoBehaviour
 
     private void Update()
     {
+        var runtimetmp = runtimeData as SoChapOneRuntimeData;
+        hints.text = runtimetmp.hintPostUnlock;
+
         if (SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain)
         {
-            var runtimetmp = runtimeData as SoChapOneRuntimeData;
+            runtimetmp = runtimeData as SoChapOneRuntimeData;
             runtimetmp.CheckInteraction116Done();
             runtimetmp.CheckInteraction117Done();
         }

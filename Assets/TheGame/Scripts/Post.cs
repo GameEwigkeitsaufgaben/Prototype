@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class Post : MonoBehaviour
 {
-    private const string codePost = "Post1110";
+    //private const string codePost = "Post1110";
     private SoPostData postData;
     private SoGameIcons icons;
     public GameObject prefabImgLocked;
@@ -28,6 +28,11 @@ public class Post : MonoBehaviour
     {
         webglVideoPlayer = GameObject.FindObjectOfType<WebGlVideoPlayer>();
         //icons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
+    }
+
+    public string GetUnlockHint()
+    {
+        return postData.hintToUnlock;
     }
 
     public bool isPostLocked()

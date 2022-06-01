@@ -8,13 +8,13 @@ using UnityEngine.SceneManagement;
 
 public class Entry : MonoBehaviour
 {
-    private const string Entry115 = "Entry115";
+   // private const string Entry115 = "Entry115";
     private const string Entry116 = "Entry116";
     private const string Entry1110 = "Entry1110";
-    private const string Entry117 = "Entry117";
+   // private const string Entry117 = "Entry117";
     private const string Entry118 = "Entry118";
     private const string Entry119 = "Entry119";
-    private const float changeVolumeAmount = 0.15f;
+   // private const float changeVolumeAmount = 0.15f;
     public GameObject post;
     public GameObject overlay;
     public SoPostData postData;
@@ -66,6 +66,24 @@ public class Entry : MonoBehaviour
     public void OpenOverlay()
     {
         overlay.SetActive(true);
+
+        if(overlay.name == GameData.NameOverlay111)
+        {
+            runtimeData.post111Done = true;
+        }
+        else if (overlay.name == GameData.NameOverlay112)
+        {
+            runtimeData.post112Done = true;
+        }
+        else if (overlay.name == GameData.NameOverlay113)
+        {
+            runtimeData.post113Done = true;
+        }
+        else if (overlay.name == GameData.NameOverlay114)
+        {
+            runtimeData.post114Done = true;
+        }
+
         if (runtimeData.musicOn)
         {
             runtimeData.overlaySoundState = OverlaySoundState.Opened;
@@ -94,16 +112,24 @@ public class Entry : MonoBehaviour
 
             if (post.GetComponent<Post>().isPostLocked())
             {
-                if (gameObject.name == Entry116 && runtimeData.video115Done)
+                if(gameObject.name == GameData.NameEntry113 && runtimeData.post111Done && runtimeData.post112Done)
                 {
-                    Debug.Log("Unlock 116 bergwerk");
-                    GameData.PrintState();
                     post.GetComponent<Post>().UnlockPost();
                 }
-
-                if (gameObject.name == GameData.NameEntry117 && runtimeData.interaction116Done)
+                else if (gameObject.name == GameData.NameEntry114 && runtimeData.post111Done && runtimeData.post112Done)
                 {
-                    Debug.Log("Unlock 117 Museum");
+                    post.GetComponent<Post>().UnlockPost();
+                }
+                else if (gameObject.name == GameData.NameEntry115 && runtimeData.post113Done && runtimeData.post114Done)
+                {
+                    post.GetComponent<Post>().UnlockPost();
+                }
+                else if (gameObject.name == GameData.NameEntry116 && runtimeData.video115Done)
+                {
+                    post.GetComponent<Post>().UnlockPost();
+                }
+                else if (gameObject.name == GameData.NameEntry117 && runtimeData.interaction116Done)
+                {
                     post.GetComponent<Post>().UnlockPost();
                 }
                 else if (gameObject.name == Entry118 && runtimeData.interaction117Done)
@@ -113,13 +139,11 @@ public class Entry : MonoBehaviour
                 else if (gameObject.name == Entry119 && runtimeData.interaction117Done)
                 {
                     post.GetComponent<Post>().UnlockPost();
-                    //runtimeData.interaction117Done = false;
                 }
                 else if (gameObject.name == Entry1110 && runtimeData.quiz119Done)
                 {
                     post.GetComponent<Post>().UnlockPost();
                     overlay.GetComponent<Overlay>().UpdateOverlayText();
-                    // GameData.quizFinished = false;
                     GameData.chapterOneUnlocked = 1;
                 }
             }

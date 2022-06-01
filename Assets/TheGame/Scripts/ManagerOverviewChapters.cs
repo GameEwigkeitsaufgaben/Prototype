@@ -20,12 +20,12 @@ public class ManagerOverviewChapters : MonoBehaviour
     {
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataCh1 = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
     }
 
     private void Start()
     {
         credits.colors = GameColors.GetInteractionColorBlock();
         lawNotice.text = GameData.lawNotiz;
-        Cursor.SetCursor(runtimeDataChapters.cursorDefault, Vector2.zero, CursorMode.Auto);
     }
 }

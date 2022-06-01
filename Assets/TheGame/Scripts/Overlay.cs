@@ -27,21 +27,23 @@ public class Overlay : MonoBehaviour
 
     private SoPostData postData;
     private SoGameIcons icons;
-    //private bool videoFinished = false;
     private PostManagerChapterOne menuManager;
     private SoChapOneRuntimeData runtimeData;
 
-    private void Start()
+    private void Awake()
     {
         icons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         webglVideoPlayer = GameObject.FindObjectOfType<WebGlVideoPlayer>();
+    }
+
+    private void Start()
+    {
         menuManager = FindObjectOfType<PostManagerChapterOne>();
     }
 
     public void SetReplayIcon()
     {
-        //videoFinished = true;
         allOverlayChildren[OVERLAYTYPEICON].gameObject.GetComponent<Image>().sprite = postData.GetReplayIcon();
         SetIconActive(true);
     }
@@ -55,8 +57,6 @@ public class Overlay : MonoBehaviour
     {
         allOverlayChildren[OVERLAYTYPEICON].gameObject.SetActive(false);
         allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().colors = GameColors.GetOverlayColorBlock();
-        //ColorBlock ab = allOverlayChildren[OVERLAYIMAGE].GetComponent<Button>().colors;
-        //ab.disabledColor = Color.white;
         
         if (webglVideoPlayer != null)
         {

@@ -22,12 +22,34 @@ public static class GameData
     public const string NameGameColors = "ConfigGameColors";
     public static string NameConfigQuiz = "ConfigQuiz";
 
+    public const string NamePost111 = "Post111";
+    public const string NamePost112 = "Post112";
+    public const string NamePost113 = "Post113";
+    public const string NamePost114 = "Post114";
+    public const string NamePost115 = "Post115";
     public const string NamePost116 = "Post116";
     public const string NamePost117 = "Post117";
     public const string NamePost118 = "Post118";
     public const string NamePost119 = "Post119";
     public const string NamePost1110 = "Post1110";
 
+    public const string NameOverlay111 = "Overlay111";
+    public const string NameOverlay112 = "Overlay112";
+    public const string NameOverlay113 = "Overlay113";
+    public const string NameOverlay114 = "Overlay114";
+    public const string NameOverlay115 = "Overlay115";
+    public const string NameOverlay116 = "Overlay116";
+    public const string NameOverlay117 = "Overlay117";
+    public const string NameOverlay118 = "Overlay118";
+    public const string NameOverlay119 = "Overlay119";
+    public const string NameOverlay1110 = "Overlay1110";
+
+    public const string NameEntry111 = "Entry111";
+    public const string NameEntry112 = "Entry112";
+    public const string NameEntry113 = "Entry113";
+    public const string NameEntry114 = "Entry114";
+    public const string NameEntry115 = "Entry115";
+    public const string NameEntry116 = "Entry116";
     public static string NameEntry117 = "Entry117";
 
     public static int chapterOneUnlocked = 0;

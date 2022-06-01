@@ -58,6 +58,13 @@ public class MouseChange : MonoBehaviour
 
     public void MouseEnter()
     {
+        Debug.Log("ENTERRRRRR" + gameObject.name);
+
+        if (gameObject.GetComponent<Post>())
+        {
+            runtimeDataCh01.hintPostUnlock = (gameObject.GetComponent<Button>().interactable) ? "": gameObject.GetComponent<Post>().GetUnlockHint();
+        }
+        
         if(gameObject.GetComponent<Button>() != null && gameObject.GetComponent<Button>().interactable)
         {
             Cursor.SetCursor(runtimeDataChapters.cursorInteract, hotSpot, cursorMode);
@@ -99,6 +106,7 @@ public class MouseChange : MonoBehaviour
     public void MouseExit()
     {
         Cursor.SetCursor(runtimeDataChapters.sceneCursor, Vector2.zero, cursorMode);
+        runtimeDataCh01.hintPostUnlock = "";
     }
 
     public void MouseDown()
