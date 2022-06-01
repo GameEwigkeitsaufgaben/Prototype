@@ -20,6 +20,7 @@ public class ManagerHistoryMining : MonoBehaviour
     public Slider slider;
     public Button btnBackToMuseum, btnUrlToSage;
     public TextMeshProUGUI centuryText;
+    public Image imgSanduhr;
     
     [Header("Assigned at Runtime")]
     public SoMuseumConfig museumConfig;
@@ -78,19 +79,24 @@ public class ManagerHistoryMining : MonoBehaviour
         switch (sliderCentury)
         {
             case Century.myth:
+                imgSanduhr.gameObject.SetActive(false);
                 centuryText.text = museumConfig.textmyth;
                 btnUrlToSage.gameObject.SetActive(true);
                 break;
             case Century.century13:
+                imgSanduhr.gameObject.SetActive(false);
                 centuryText.text = museumConfig.textCentury13;
                 break;
             case Century.century16:
+                imgSanduhr.gameObject.SetActive(false);
                 centuryText.text = museumConfig.textCentury16;
                 break;
             case Century.century19:
+                imgSanduhr.gameObject.SetActive(false);
                 centuryText.text = museumConfig.textCentury19;
                 break;
             case Century.century21:
+                imgSanduhr.gameObject.SetActive(false);
                 centuryText.text = museumConfig.textCentury21;
                 runtimeData.isMythDone = true;
                 btnBackToMuseum.GetComponent<Image>().color = GameColors.defaultInteractionColorNormal;
@@ -98,6 +104,7 @@ public class ManagerHistoryMining : MonoBehaviour
                 break;
             default:
                 centuryText.text = GameData.EmptyString;
+                imgSanduhr.gameObject.SetActive(true);
                 break;
         }
     }
