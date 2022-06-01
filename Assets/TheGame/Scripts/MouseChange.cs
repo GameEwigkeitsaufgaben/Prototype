@@ -58,8 +58,6 @@ public class MouseChange : MonoBehaviour
 
     public void MouseEnter()
     {
-        Debug.Log("ENTERRRRRR" + gameObject.name);
-
         if (gameObject.GetComponent<Post>())
         {
             runtimeDataCh01.hintPostUnlock = (gameObject.GetComponent<Button>().interactable) ? "": gameObject.GetComponent<Post>().GetUnlockHint();
