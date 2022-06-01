@@ -82,8 +82,6 @@ public class Character : MonoBehaviour
 
     public void ChangeCharacterImage(CoalmineStop stop)
     {
-        Debug.Log("is null: " + (characterImage == null));
-        Debug.Log("comp is null " + characterImage.GetComponent<Image>().sprite.name);
         switch (stop)
         {
             case CoalmineStop.Outside:
