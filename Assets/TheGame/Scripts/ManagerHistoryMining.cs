@@ -24,6 +24,7 @@ public class ManagerHistoryMining : MonoBehaviour
     [Header("Assigned at Runtime")]
     public SoMuseumConfig museumConfig;
     private SoChapOneRuntimeData runtimeData;
+    private SoChaptersRuntimeData runtimeDataChapters;
 
     public Century sliderCentury;
 
@@ -34,10 +35,17 @@ public class ManagerHistoryMining : MonoBehaviour
     public Vector2 nineteenthRange;
     public Vector2 twentyfirstRange;
 
-    private void Start()
+    private void Awake()
     {
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         museumConfig = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
+        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
+    }
+
+    private void Start()
+    {
+        
         sliderCentury = Century.none;
         btnBackToMuseum.interactable = false;
 

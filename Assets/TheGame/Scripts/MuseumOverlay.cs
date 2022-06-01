@@ -18,25 +18,28 @@ public class MuseumOverlay : MonoBehaviour
     private SoMuseumConfig configMuseum;
 
     private SoChapOneRuntimeData runtimeData;
+    private SoChaptersRuntimeData runtimeDataChapters;
 
     private UnityAction openCarbonPeriodGame, openMinerEquipment, openCoalification, openHistoryMining;
+
+    private void Awake()
+    {
+        configMuseum = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
+    }
 
     private void Start()
     {
         parentMaskPanel = container.transform.parent.gameObject;
-        configMuseum = Resources.Load<SoMuseumConfig>("ConfigMuseum");
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        
         gameObject.transform.localPosition = runtimeData.currentGroupPos;
-       // btnSkipIntro.GetComponent<Image>().color = GameColors.defaultInteractionColorNormal;
-       // btnClose.GetComponent<Image>().color = GameColors.defaultInteractionColorNormal;
-        //Debug.Log("in start musum overlay " + runtimeData.currentGroupPos);
 
         openCarbonPeriodGame += gameObject.GetComponent<SwitchSceneManager>().GoToWorld;
         openCoalification += gameObject.GetComponent<SwitchSceneManager>().GoToCoalification;
         openMinerEquipment += gameObject.GetComponent<SwitchSceneManager>().GoToMinerEquipment;
         openHistoryMining += gameObject.GetComponent<SwitchSceneManager>().GoToMythos;
-
-
     }
 
     public void ActivateOverlay(MuseumWaypoints wp)
@@ -50,7 +53,6 @@ public class MuseumOverlay : MonoBehaviour
         {
             container.sprite = configMuseum.info;
             speechManager.playMuseumInfoArrival = true;
-           
         }
         else if (wp == MuseumWaypoints.WPBergmann)
         {
@@ -58,7 +60,6 @@ public class MuseumOverlay : MonoBehaviour
             speechManager.playMinerEquipment = true;
             btnSkipIntro.onClick.AddListener(openMinerEquipment);
             if (runtimeData.isMinerDone) showSkip = true;
-            //btnSkipIntro.onClick.AddListener(gameObject.GetComponent<SwitchSceneManager>().GoToMinerEquipment());
         }
         else if (wp == MuseumWaypoints.WPWelt)
         {
@@ -85,15 +86,11 @@ public class MuseumOverlay : MonoBehaviour
         {
             container.sprite = configMuseum.tv;
             speechManager.playMuseumGWTVIntro = true;
-            //btnSkipIntro.onClick.AddListener(openCoalification);
-            //if (runtimeData.isCoalifiationDone) showSkip = true;
         }
         else if (wp == MuseumWaypoints.WPFliesspfad)
         {
             container.sprite = configMuseum.fliesspfad;
             speechManager.playMuseumFliesspfadIntro = true;
-            //btnSkipIntro.onClick.AddListener(openCoalification);
-            //if (runtimeData.isCoalifiationDone) showSkip = true;
         }
 
         if (showSkip) btnSkipIntro.gameObject.SetActive(true);
@@ -122,29 +119,24 @@ public class MuseumOverlay : MonoBehaviour
             if (speechManager.IsMusuemMinerEquipmentFinished())
             {
                 gameObject.GetComponent<SwitchSceneManager>().GoToMinerEquipment();
-                //playOverlay = false;
             }
             else if (speechManager.IsMusuemHistroyCarbonFinished())
             {
                 gameObject.GetComponent<SwitchSceneManager>().GoToWorld();
-                //playOverlay = false;
             }
             else if (speechManager.IsMusuemHistoryMiningFinished())
             {
                 gameObject.GetComponent<SwitchSceneManager>().GoToMythos();
-                //playOverlay = false;
             }
             else if (speechManager.IsMusuemCoalifictionFinished())
             {
                 gameObject.GetComponent<SwitchSceneManager>().GoToCoalification();
-                //playOverlay = false;
             }
             else if (speechManager.IsTalkingListFinished(GameData.NameTLMuseumIntroFliesspfad))
             {
                 gameObject.GetComponent<SwitchSceneManager>().GoToFliesspfade();
             }
         }
-
         
         if (!playOverlay && parentMaskPanel.activeSelf)
         {
