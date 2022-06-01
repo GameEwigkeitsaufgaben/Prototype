@@ -41,10 +41,10 @@ public class ManagerArriveTrain : MonoBehaviour
 
     private void Update()
     {
-        if (!trainComesStarted && runtimeData.viewPointS3passed)
+        if (!trainComesStarted && runtimeData.sole3GebaeudeDone && runtimeData.sole3BewetterungDone)
         {
             trainComesStarted = true;
-            Invoke("StartTrain" , 4);
+            Invoke("StartTrain" , 2.0f);
         }
     }
 }

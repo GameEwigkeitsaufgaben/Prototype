@@ -8,7 +8,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class CaveManager : MonoBehaviour
 {
     public Cave cave;
@@ -59,8 +58,6 @@ public class CaveManager : MonoBehaviour
         sfx.SetClipByAddToDict(water, sfx.caolmineSplashingWater);
 
         sole3EnterTrainBtn.gameObject.SetActive(false);
-
-
     }
 
     private void OnEnable()
@@ -92,7 +89,6 @@ public class CaveManager : MonoBehaviour
     private void OnDestroy()
     {
         runtimeData.liftBtnsAllEnabled = false;
-       // GameData.liftBtnsEnabled = false;
     }
 
     private void Update()
@@ -124,17 +120,5 @@ public class CaveManager : MonoBehaviour
             introPlayedOneTime = true;
             runtimeData.entryAreaDone = true;
         }
-          
-        //if (cave.caveDoorsClosed && exitScene.interactable)
-        //{
-        //    exitScene.interactable = false;
-        //    //sole1WPViewpointBtn.interactable = false;
-        //}
-
-        //if (!cave.caveDoorsClosed && !exitScene.interactable)
-        //{
-        //    exitScene.interactable = true;
-        //    //sole1WPViewpointBtn.interactable = true;
-        //}
     }
 }
