@@ -48,6 +48,7 @@ public class Viewpoint : MonoBehaviour
 
         myViewpointImg.sprite = gameIcons.viewpointArrow;
         myViewpointImg.color = gameColors.defaultInteractionColor;
+        myDisc.Color = new Color32(100,100,100,100);
     }
 
     void AssignLocalElements()

@@ -7,11 +7,17 @@ public class ManagerTrainRide : MonoBehaviour
     public CoalmineSpeechManger speechManger;
     public SwitchSceneManager switchScene;
     public bool isNextSceneLoaded = false;
-    private SoChapOneRuntimeData runtimeData;
     public AudioClip trainride;
+
+    private SoChapOneRuntimeData runtimeData;
+    private SoChaptersRuntimeData runtimeDataChapters;
 
     private void Awake()
     {
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+
+        runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
         gameObject.GetComponent<AudioSource>().clip = trainride;
         gameObject.GetComponent<AudioSource>().Play();
 
@@ -30,9 +36,7 @@ public class ManagerTrainRide : MonoBehaviour
 
     private void Start()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
-        runtimeData.cursorDefault = null;
-        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+       
     }
 
     private void StartTalkingIn()
