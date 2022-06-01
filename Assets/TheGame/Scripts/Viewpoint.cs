@@ -40,11 +40,14 @@ public class Viewpoint : MonoBehaviour
         gameColors = Resources.Load<SoGameColors>(GameData.NameGameColors);
         gameIcons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        btnOpenInPlaceOverlay = null;
+
         AssignLocalElements();
 
         myViewpointImg.sprite = gameIcons.viewpointArrow;
@@ -85,12 +88,16 @@ public class Viewpoint : MonoBehaviour
 
     void Update()
     {
-        if(btnOpenInPlaceOverlay.gameObject.activeSelf == myViewpointImg.gameObject.activeSelf)
+        if (btnOpenInPlaceOverlay != null)
         {
-            if (btnOpenInPlaceOverlay.name == "BtnOverlayInfo") return;
+            if (btnOpenInPlaceOverlay.gameObject.activeSelf == myViewpointImg.gameObject.activeSelf)
+            {
+                if (btnOpenInPlaceOverlay.name == "BtnOverlayInfo") return;
 
-            btnOpenInPlaceOverlay.GetComponent<OverlayInPlace>().ActivateOverlay(!myViewpointImg.gameObject.activeSelf);
+                btnOpenInPlaceOverlay.GetComponent<OverlayInPlace>().ActivateOverlay(!myViewpointImg.gameObject.activeSelf);
+            }
         }
+        
        
 
         if (!discSetToDone)

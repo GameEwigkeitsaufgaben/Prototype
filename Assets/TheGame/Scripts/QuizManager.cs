@@ -49,12 +49,15 @@ public class QuizManager : MonoBehaviour
     [Header("Assigned at runtime")]
     [SerializeField] private SoSfx sfx;
     [SerializeField] private Runtime runtimeData;
+    SoChapOneRuntimeData runtimeDataCh01;
     [SerializeField] private SoQuizConfig quizConfig;
 
 
     private void Awake()
     {
-        if(SceneManager.GetActiveScene().name == GameScenes.ch01Quiz)
+        runtimeDataCh01 = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+
+        if (SceneManager.GetActiveScene().name == GameScenes.ch01Quiz)
         { 
             runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         }
@@ -153,7 +156,11 @@ public class QuizManager : MonoBehaviour
         else
         {
             GameData.quizChapterOnePoints = pointsSum;
-           // if (SceneManager.GetActiveScene().name == GameData.NameRuntimeDataChap01) runtimeData.quiz119Done = true;
+            runtimeDataCh01.quiz119Done = true;
+            if (SceneManager.GetActiveScene().name == GameData.NameRuntimeDataChap01)
+            {
+                runtimeDataCh01.quiz119Done = true;
+            }
             switchScene.SwitchToChapter1withOverlay(generalKeyOverlay);
         }    
     }
