@@ -43,7 +43,7 @@ public class MuseumPlayer : MonoBehaviour
     void Start()
     {
         mySplineMove = gameObject.GetComponent<splineMove>();
-        mySplineMove.ChangeSpeed(5.0f);
+        mySplineMove.ChangeSpeed(50.0f);
 
         if (runtimeData.currentMuseumWaypoint == MuseumWaypoints.WP0) 
             ShowOnlyInfo();
@@ -102,10 +102,10 @@ public class MuseumPlayer : MonoBehaviour
     public void ShowOnlyInfo()
     {
         btnWPInfo.gameObject.SetActive(true);
-        btnWPInkohlung.gameObject.SetActive(false);
-        btnWPBergmann.gameObject.SetActive(false);
-        btnWPSchwein.gameObject.SetActive(false);
-        btnWPWelt.gameObject.SetActive(false);
+        btnWPInkohlung.gameObject.GetComponent<Button>().interactable = false;
+        btnWPBergmann.gameObject.GetComponent<Button>().interactable = false;
+        btnWPSchwein.gameObject.GetComponent<Button>().interactable = false;
+        btnWPWelt.gameObject.GetComponent<Button>().interactable = false;
     }
 
     public void ShowStations()
@@ -119,6 +119,10 @@ public class MuseumPlayer : MonoBehaviour
 
     public void ShowOtherStations(MuseumWaypoints currntWp)
     {
+        btnWPInkohlung.gameObject.GetComponent<Button>().interactable = true;
+        btnWPBergmann.gameObject.GetComponent<Button>().interactable = true;
+        btnWPSchwein.gameObject.GetComponent<Button>().interactable = true;
+        btnWPWelt.gameObject.GetComponent<Button>().interactable = true;
 
         btnWPInfo.gameObject.SetActive(true);
         btnWPInkohlung.gameObject.SetActive(true);
@@ -216,7 +220,7 @@ public class MuseumPlayer : MonoBehaviour
         
         mySplineMove.pathContainer = GetPath(currentWP, targetWP);
         mySplineMove.StartMove();
-        ShowNoStation();
+        //ShowNoStation();
         characterGuide.GetComponent<Image>().sprite = configMuseum.guideWalking;
         characterGuide.transform.rotation = Quaternion.Euler(0f,-180f,0f);
 

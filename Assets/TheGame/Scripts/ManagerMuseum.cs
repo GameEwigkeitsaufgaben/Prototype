@@ -23,17 +23,22 @@ public class ManagerMuseum : MonoBehaviour
     private bool startOutro;
     private Image btnExitImage;
     private SoChapOneRuntimeData runtimeData;
+    private SoChaptersRuntimeData runtimeDataChapters;
     private bool museumDoneSet;
     public GameObject characterDad, characterGuide, waitingGuide;
 
     private AudioSource audioSrcBGMusic;
 
+    private void Awake()
+    {
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
-        Cursor.SetCursor(runtimeData.cursorDefault, Vector2.zero, CursorMode.Auto);
-
         walkingGroup.SetCharcters(characterDad, characterGuide, waitingGuide);
         audioSrcBGMusic = gameObject.GetComponent<AudioSource>();
         runtimeData.soundSettingMuseum = SoundMuseum.Showroom;

@@ -38,21 +38,17 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     public TMP_Text uiTooltipText;
     bool runningCorouine = false;
     private SoChapOneRuntimeData runtimeData;
+    private SoChaptersRuntimeData runtimeDataChapters;
 
     private void Awake()
     {
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
-        //runtimeData.cursorDefault = null;
+        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("go name " + uiNbrItemsEssential.name);
-        Debug.Log("go name + val " + uiNbrItemsEssential.text);
-
-        Cursor.SetCursor(runtimeData.cursorDefault, Vector2.zero, CursorMode.Auto);
-
         foreach (MuseumMinerEquipmentItem i in items)
         {
             i.dragObjParent = dragParentBringItemToFront;
@@ -75,9 +71,6 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
 
     public bool IsDragItemOk()
     {
-        Debug.Log("items on miner " + itemsOnMiner + " current raound: " + currentRound  );
-        //itemsOnMiner start value is 0;
-
         switch (currentRound)
         {
             case EquipmentRound.Essential:
@@ -107,7 +100,6 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         bool maxItemsReached = false;

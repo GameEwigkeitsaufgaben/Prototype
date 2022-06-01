@@ -59,15 +59,35 @@ public class QuizAnswerUiBehaviour : MonoBehaviour,ISelectHandler, IDeselectHand
 
     public void ShowResult()
     {
-        GetComponent<Image>().color = (isCorrect) ? myQuizConfig.correct : myQuizConfig.incorrect;
-        
+        if (IsCorrectlySelected())
+        {
+            GetComponent<Image>().color = myQuizConfig.correctSelect;
+            uiAnswer.color = GameColors.defaultTextColor;
+        }
+
+        GetComponent<Image>().color = (isCorrect) ? myQuizConfig.correctSelect : myQuizConfig.incorrect;
+
+        if (!isCorrect && isSelected)
+        {
+            GetComponent<Image>().color = myQuizConfig.incorrectSelect;
+            uiAnswer.fontSize = uiAnswer.fontSize - uiAnswer.fontSize * 0.2f;
+        }
+
         if (isCorrect || isSelected)
         {
             uiAnswer.color = Color.white;
-            
-            if (isCorrect) uiAnswer.fontStyle = FontStyles.SmallCaps | FontStyles.Bold;
-            if (isSelected) uiAnswer.fontStyle |= FontStyles.Bold;
-        } 
+
+            if (isCorrect)
+            {
+                uiAnswer.fontStyle = FontStyles.SmallCaps | FontStyles.Bold;
+            }
+            if (isSelected)
+            {
+                uiAnswer.fontStyle |= FontStyles.Bold;
+            }
+        }
+
+
     }
 
     private void Update()

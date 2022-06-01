@@ -31,6 +31,7 @@ public class Viewpoint : MonoBehaviour
     SoChapOneRuntimeData runtimeData;
 
     Image myViewpointImg;
+    Button btnOpenInPlaceOverlay;
     Disc myDisc;
     bool discSetToDone = false;
 
@@ -59,7 +60,15 @@ public class Viewpoint : MonoBehaviour
         {
             if(elements[i].GetComponent<Image>() != null)
             {
-                myViewpointImg = elements[i].GetComponent<Image>();
+                if (elements[i].GetComponent<OverlayInPlace>())
+                {
+                    btnOpenInPlaceOverlay = elements[i].GetComponent<Button>();
+                }
+                else
+                {
+                    myViewpointImg = elements[i].GetComponent<Image>();
+                }
+                
             }
             else if (elements[i].GetComponent<Disc>() != null)
             {
@@ -74,9 +83,16 @@ public class Viewpoint : MonoBehaviour
         discSetToDone = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if(btnOpenInPlaceOverlay.gameObject.activeSelf == myViewpointImg.gameObject.activeSelf)
+        {
+            if (btnOpenInPlaceOverlay.name == "BtnOverlayInfo") return;
+
+            btnOpenInPlaceOverlay.GetComponent<OverlayInPlace>().ActivateOverlay(!myViewpointImg.gameObject.activeSelf);
+        }
+       
+
         if (!discSetToDone)
         {
             if(runtimeData.interaction116Done && vpLocation == ViewpointLocation.Mine) SetInteractionDone();
