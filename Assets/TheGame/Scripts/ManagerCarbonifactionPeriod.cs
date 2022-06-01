@@ -4,16 +4,19 @@ using UnityEngine.UI;
 public class ManagerCarbonifactionPeriod : MonoBehaviour
 {
     private SoChapOneRuntimeData runtimeData;
+    private SoChaptersRuntimeData runtimeDataChapters;
+
     public Button externalLink;
 
     private void Awake()
     {
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         externalLink.colors = GameColors.GetInteractionColorBlock();
+        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
     }
     private void Start()
     {
-        Cursor.SetCursor(runtimeData.cursorDefault, Vector2.zero, CursorMode.Auto);
     }
     
     //Called from Btn in Scene/Inspector
