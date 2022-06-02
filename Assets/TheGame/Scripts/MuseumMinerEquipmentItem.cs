@@ -204,16 +204,12 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
         {
             transform.position = correspondingItemOnMiner.transform.position;
 
-            //if (positionChanged) myManager.itemsOnMiner++;
-
             //if item is one handschuh, also make changes for the other handschuh
             if (equipmentItem == MinerEquipmentItem.Handschuhe) gameObject.transform.parent.GetComponent<MuseumHandschuhe>().ResetBothToMiner();
         }
         else if (snapedTo == SnapetTo.Table)
         {
             transform.position = origPosOnTable;
-
-            //if (positionChanged) myManager.itemsOnMiner--;
 
             if (equipmentItem == MinerEquipmentItem.Handschuhe) gameObject.transform.parent.GetComponent<MuseumHandschuhe>().ResetBothToTable();
         }
@@ -246,7 +242,6 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
                     myManager.itemsOnMiner++;
                 }
             }
-            //myManager.itemsOnMiner++;
 
             if (equipmentItem == MinerEquipmentItem.Handschuhe)
             {
