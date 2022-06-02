@@ -42,7 +42,6 @@ public class CaveManager : MonoBehaviour
         //load speechmanager at runtime
         speechManagerMine = characterDad.transform.parent.GetComponent<CoalmineSpeechManger>();
 
-
         //load all needed scenes additive
         switchScene = gameObject.GetComponent<SwitchSceneManager>();
 

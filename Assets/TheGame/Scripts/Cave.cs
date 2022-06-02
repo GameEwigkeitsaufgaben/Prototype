@@ -84,7 +84,9 @@ public class Cave : MonoBehaviour
         StopCave();
         
         moveDirection = CaveMovement.OnHold;
-        OpenDoors();
+
+        if (caveDoorsClosed) OpenDoors();
+        
         runtimeData.currentCoalmineStop = currentStop = reachedStop;
 
         if (runtimeData.currentCoalmineStop == CoalmineStop.Sole2)
