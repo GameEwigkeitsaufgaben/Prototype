@@ -8,6 +8,7 @@ public class SoMuseumConfig : ScriptableObject
     public Sprite tv, fliesspfad;
     public Sprite memoryBackside;
     public Sprite minerIdle, minerThumpUp, minerThumpDown;
+    public AudioClip sfxFlipCard;
 
     [Header("History Mining")]
     [TextArea(10,100)]

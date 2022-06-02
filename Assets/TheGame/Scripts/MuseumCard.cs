@@ -15,10 +15,11 @@ public class MuseumCard : MonoBehaviour
     private SoMuseumConfig myConfig;
     public SoMuseumCard myResource;
 
+    private AudioSource cardAudio;
+
     private void Awake()
     {
         myConfig = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
-        //myResource = Resources.Load<SoMuseumConfig>(GameData.NameMuseumCard);
     }
 
     public void PopulateElements()
@@ -32,7 +33,6 @@ public class MuseumCard : MonoBehaviour
         PopulateElements();
         cardFaceDown = myResource.cardFaceDown;
 
-        Debug.Log("cdf " + cardFaceDown + " "+ gameObject.name);
         myContentImg.sprite = myResource.mySprite;
 
         if (cardFaceDown)
@@ -47,6 +47,21 @@ public class MuseumCard : MonoBehaviour
         mySolutionImg.gameObject.SetActive(false);
     }
 
+    //public void TurnCard()
+    //{
+    //    cardFaceDown = myResource.cardFaceDown;
+
+    //    if (cardFaceDown)
+    //    {
+    //        SetCardFaceDown();
+    //    }
+    //    else
+    //    {
+    //        SetCardFaceUp();
+    //    }
+    //}
+
+
     public bool IsStatementTrue()
     {
         return myResource.statementTrue;
@@ -54,18 +69,11 @@ public class MuseumCard : MonoBehaviour
 
     public void SetCardFaceDown()
     {
-        //Debug.Log()
-        //myImage.sprite = myConfig.memoryBackside;
-        Debug.Log("Content img is assigned " + (myContentImg != null));
-        Debug.Log("Content img is assigned " + (myStatement != null));
-        Debug.Log("Content img is assigned " + (overallBgImg != null));
-        Debug.Log("myResource is assigned " + (myResource != null));
-
         myContentImg.gameObject.SetActive(false);
         myStatement.gameObject.SetActive(false);
         overallBgImg.color = GameColors.defaultInteractionColorNormal;
         overallBgImg.sprite = myConfig.memoryBackside;
-        //myContentImg.sprite = myConfig.memoryBackside;
+        cardAudio.Play();
     }
 
     private void AssignChildElements()
@@ -75,50 +83,33 @@ public class MuseumCard : MonoBehaviour
         if (myParentCanvas == null)
         {
             myParentCanvas = gameObject.transform.parent.transform.parent.GetComponent<Canvas>();
-            Debug.Log("MyCanvas " +myParentCanvas.name);
         }
 
         foreach (Transform i in tmpObjs)
         {
-            Debug.Log(i.name);
             if (i.GetComponent<TMP_Text>() != null)
             {
                 myStatement = i.GetComponent<TMP_Text>();
-                Debug.Log(i.name + " set statatement component");
             }
             if (i.GetComponent<Image>() != null)
             {
                 if (i.GetComponent<Image>().name == "MarkSolution")
                 {
                     mySolutionImg = i.GetComponent<Image>();
-                    Debug.Log(i.name + " set imgSolution component");
                 }
                 else if (i.GetComponent<Image>().name == "ContentImage")
                 {
                     myContentImg = i.GetComponent<Image>();
-                    Debug.Log(i.name + " set imgContentImage component");
                 }
                 else if (i.GetComponent<Image>().name == "FaceUpBgImage")
                 {
                     overallBgImg = i.GetComponent<Image>();
-                    Debug.Log(i.name + " set faceupimg component");
                 }
             }
         }
-    }
 
-    public void TurnCard()
-    {
-        cardFaceDown = myResource.cardFaceDown;
-
-        if (cardFaceDown)
-        {
-            SetCardFaceDown();
-        }
-        else
-        {
-            SetCardFaceUp();
-        }
+        cardAudio = myParentCanvas.GetComponent<AudioSource>();
+        cardAudio.clip = myConfig.sfxFlipCard;
     }
 
     public void MarkRightSolution()
@@ -128,13 +119,11 @@ public class MuseumCard : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("on down!!!");
         FlipCard();
     }
 
     private void OnMouseEnter()
     {
-        Debug.Log("Mouse Enter in Card " + gameObject.name);
         gameObject.GetComponent<MouseChange>().MouseEnter();
         overallBgImg.color = GameColors.defaultInteractionColorHighlighted;
     }
@@ -142,7 +131,6 @@ public class MuseumCard : MonoBehaviour
 
     private void OnMouseExit()
     {
-        Debug.Log("Mouse Exit in Card " + gameObject.name);
         gameObject.GetComponent<MouseChange>().MouseExit();
         overallBgImg.color = GameColors.defaultInteractionColorNormal;
     }
@@ -150,6 +138,7 @@ public class MuseumCard : MonoBehaviour
     public void FlipCard()
     {
         cardFaceDown = !cardFaceDown;
+        //cardAudio.Play();
 
         if (cardFaceDown)
         {
@@ -168,6 +157,7 @@ public class MuseumCard : MonoBehaviour
         overallBgImg.sprite = null;
         //myContentImg.sprite = ;
         myStatement.gameObject.SetActive(true);
+        cardAudio.Play();
     }
 
 
