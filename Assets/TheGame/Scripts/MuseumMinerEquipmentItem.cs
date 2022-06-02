@@ -160,7 +160,7 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
         transform.position = correspondingItemOnMiner.transform.position;
     }
 
-    public bool GetHasPositionChanged()
+    public bool GetHasLocationChanged()
     {
         return (previous != snapedTo) ? true : false; //Check if there is any change in positioning of the item. 
     }
@@ -174,7 +174,9 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
     {
         if (!isDragableInRound) return;
 
-        if (!myManager.IsDragItemOk()) return;
+        if (myManager.IsMaxItemsOnMinerReached() && snapedTo == SnapetTo.Table) return;
+
+        Debug.Log(gameObject.name + " : " + snapedTo + " ; dd max reached "+ myManager.IsMaxItemsOnMinerReached() + " "+ myManager.itemsOnMiner );
         isCurrentlyDragging = true;
         
         gameObject.transform.parent = dragObjParent.transform;
@@ -185,12 +187,12 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
     public void OnEndDrag(PointerEventData eventData)
     {
         if (!isDragableInRound) return;
-        if (!myManager.IsDragItemOk()) return;
+        if (myManager.IsMaxItemsOnMinerReached() && snapedTo == SnapetTo.Table) return;
 
         isCurrentlyDragging = false;
         gameObject.transform.parent = dragObjDefaultParent.transform;
 
-        positionChanged = GetHasPositionChanged();
+        positionChanged = GetHasLocationChanged();
         myAudioSrc.clip = myConifg.endDrag;
         myAudioSrc.Play();
 
@@ -202,7 +204,7 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
         {
             transform.position = correspondingItemOnMiner.transform.position;
 
-            if (positionChanged) myManager.itemsOnMiner++;
+            //if (positionChanged) myManager.itemsOnMiner++;
 
             //if item is one handschuh, also make changes for the other handschuh
             if (equipmentItem == MinerEquipmentItem.Handschuhe) gameObject.transform.parent.GetComponent<MuseumHandschuhe>().ResetBothToMiner();
@@ -211,7 +213,7 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
         {
             transform.position = origPosOnTable;
 
-            if (positionChanged) myManager.itemsOnMiner--;
+            //if (positionChanged) myManager.itemsOnMiner--;
 
             if (equipmentItem == MinerEquipmentItem.Handschuhe) gameObject.transform.parent.GetComponent<MuseumHandschuhe>().ResetBothToTable();
         }
@@ -225,7 +227,7 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
     public void OnDrag(PointerEventData eventData)
     {
         if (!isDragableInRound) return;
-        if (!myManager.IsDragItemOk()) return;
+        if (myManager.IsMaxItemsOnMinerReached() && snapedTo == SnapetTo.Table) return;
 
         myDragRectTransform.anchoredPosition += eventData.delta / myParentCanvas.scaleFactor; //important when using screen space
     }
@@ -236,7 +238,16 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
         if (collision.name == COMiner)
         {
             snapedTo = SnapetTo.Miner;
-            
+            if (equipmentItem != MinerEquipmentItem.Handschuhe) myManager.itemsOnMiner++;
+            else
+            {
+                if (gameObject.name.Contains("Links"))
+                {
+                    myManager.itemsOnMiner++;
+                }
+            }
+            //myManager.itemsOnMiner++;
+
             if (equipmentItem == MinerEquipmentItem.Handschuhe)
             {
                 if(gameObject.transform.parent.GetComponent<MuseumHandschuhe>() != null)
@@ -255,6 +266,14 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
         if (collision.name == COMiner)
         {
             snapedTo = SnapetTo.Table;
+            if(equipmentItem != MinerEquipmentItem.Handschuhe) myManager.itemsOnMiner--;
+            else
+            {
+                if (gameObject.name.Contains("Links"))
+                {
+                    myManager.itemsOnMiner--;
+                }
+            }
             if (equipmentItem == MinerEquipmentItem.Handschuhe)
             {
 

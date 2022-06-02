@@ -9,9 +9,9 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     private const int MaxItemsOnMinerRoundEssential = 3;
     private const int MaxItemsOnMinerRoundProtection = 6;
     private const int MaxItemsOnMinerRoundSpectialTask = 10;
-    private const string plainTextMine = "Zur Grube!";
+    private const string plainTextMine = "Grube";
 
-    //3 rounds with different question
+    //3 rounds with different question, not acive rounds will be hidden with a transparent overlay, (altern. set font visibility)
     public MinerEquipmentRound roundEssential, roundProtection, roundSpecialTask;
     public EquipmentRound currentRound;
 
@@ -25,18 +25,19 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     //single items hold in lists
     public MuseumMinerEquipmentItem[] items;
     public int itemsOnMiner;
-    private Dictionary<MinerEquipmentItem, MuseumMinerEquipmentItem> listItemsOnMiner  = new Dictionary<MinerEquipmentItem, MuseumMinerEquipmentItem>();
-    private List<MinerEquipmentItem> plainList = new List<MinerEquipmentItem>();
     public GameObject dragParentBringItemToFront, reorderParentTop;
+
+    private Dictionary<MinerEquipmentItem, MuseumMinerEquipmentItem> listItemsOnMiner = new Dictionary<MinerEquipmentItem, MuseumMinerEquipmentItem>();
+    private List<MinerEquipmentItem> plainList = new List<MinerEquipmentItem>();
 
     public Button btnCheckEquipment;
 
     public AudioClip autsch, lichtaus, husten, badJobClip, goodJobClip;
-    //public TextMeshProUGUI headingRound, textRound;
     public TMP_Text uiNbrItemsEssential, uiNbrItemProtection, uiNbrItemsSpecialTask, btnText;
-    private AudioSource audioSrc;
     public TMP_Text uiTooltipText;
     bool runningCorouine = false;
+
+    private AudioSource audioSrc;
     private SoChapOneRuntimeData runtimeData;
     private SoChaptersRuntimeData runtimeDataChapters;
 
@@ -44,6 +45,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     {
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
     }
 
@@ -69,19 +71,31 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
         
     }
 
-    public bool IsDragItemOk()
+
+
+    public bool IsMaxItemsOnMinerReached()
     {
+        bool maxReached = false;
+
         switch (currentRound)
         {
             case EquipmentRound.Essential:
-                return itemsOnMiner < MaxItemsOnMinerRoundEssential;
+                maxReached = itemsOnMiner >= MaxItemsOnMinerRoundEssential;
+                break;
             case EquipmentRound.Protection:
-                return itemsOnMiner < MaxItemsOnMinerRoundProtection;
+                maxReached = itemsOnMiner >= MaxItemsOnMinerRoundProtection;
+                break;
             case EquipmentRound.SpecialTask:
-                return itemsOnMiner < MaxItemsOnMinerRoundSpectialTask;
+                maxReached = itemsOnMiner >= MaxItemsOnMinerRoundSpectialTask;
+                break;
             default:
-                return false;
+                maxReached = false;
+                break;
         }
+
+        Debug.Log("Drag and rob allowd: " + maxReached + " items on miner" + itemsOnMiner);
+
+        return maxReached;
     }
 
     private void SetUiTooltip()
@@ -199,7 +213,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     private void ResetToSpecialTaskItems()
     {
         //the items form protesction are on miner = 6
-        itemsOnMiner = MaxItemsOnMinerRoundProtection;
+        //itemsOnMiner = MaxItemsOnMinerRoundProtection;
         currentRound = EquipmentRound.SpecialTask;
         btnText.text = plainTextMine;
         //btnConfirmText.text = "Ab in die Mine!";
@@ -306,7 +320,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
 
     private void ResetAllMinerItems()
     {
-        itemsOnMiner = 0;
+        //itemsOnMiner = 0;
 
         foreach (MuseumMinerEquipmentItem i in items)
         {
@@ -316,7 +330,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
 
     private void ResetToMostImportantItems()
     {
-        itemsOnMiner = MaxItemsOnMinerRoundEssential;
+        //itemsOnMiner = MaxItemsOnMinerRoundEssential;
         currentRound = EquipmentRound.Protection;
 
         foreach (MuseumMinerEquipmentItem i in items)

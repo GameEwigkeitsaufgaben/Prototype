@@ -1,15 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine;
 
 public class MinerEquipmentRound : MonoBehaviour
 {
-    public Image imgHideRound;
+    public Image hideRoundwithOverlayImg;
     public TextMeshProUGUI tmpNbrItemsToDropOnMiner;
-    //public int nbrItemsOnMiner;
-    public bool roundActive; //only one round can be active to one time;
+    public bool roundActive; //only one round can be active at one time;
     public bool change;
 
     // Start is called before the first frame update
@@ -28,19 +25,17 @@ public class MinerEquipmentRound : MonoBehaviour
 
             change = roundActive;
         }
-
-      //  tmpNbrItemsToDropOnMiner.text = nbrItemsOnMiner.ToString(); 
     }
 
     private void ShowRound()
     {
         if (roundActive)
         {
-            imgHideRound.gameObject.SetActive(false);
+            hideRoundwithOverlayImg.gameObject.SetActive(false);
         }
         else
         {
-            imgHideRound.gameObject.SetActive(true);
+            hideRoundwithOverlayImg.gameObject.SetActive(true);
         }
     }
 }

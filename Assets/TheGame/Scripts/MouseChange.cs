@@ -81,10 +81,10 @@ public class MouseChange : MonoBehaviour
         }
         else if (gameObject.tag == "DragItem")
         {
-            Debug.Log("DragItem found");
-            if (!gameObject.GetComponent<MuseumMinerEquipmentItem>().myManager.IsDragItemOk())
+            if (gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging) return;
+
+            if (gameObject.GetComponent<MuseumMinerEquipmentItem>().myManager.IsMaxItemsOnMinerReached() && gameObject.GetComponent<MuseumMinerEquipmentItem>().snapedTo == SnapetTo.Table)
             {
-                Debug.Log("set curser no drag");
                 Cursor.SetCursor(runtimeDataChapters.cursorNoDrag, hotSpot, cursorMode);
                 return;
             }
@@ -103,6 +103,8 @@ public class MouseChange : MonoBehaviour
 
     public void MouseExit()
     {
+        if (gameObject.tag == "DragItem" && gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging) return;
+        
         Cursor.SetCursor(runtimeDataChapters.sceneCursor, Vector2.zero, cursorMode);
         runtimeDataCh01.hintPostUnlock = "";
     }
@@ -111,20 +113,28 @@ public class MouseChange : MonoBehaviour
     {
         if (gameObject.tag == "DragItem")
         {
-            if (!gameObject.GetComponent<MuseumMinerEquipmentItem>().myManager.IsDragItemOk())
+            if (gameObject.GetComponent<MuseumMinerEquipmentItem>().myManager.IsMaxItemsOnMinerReached())
             {
+                
+                if(SnapetTo.Miner == gameObject.GetComponent<MuseumMinerEquipmentItem>().snapedTo)
+                {
+                    Cursor.SetCursor(runtimeDataChapters.cursorDragDrag, hotSpot, cursorMode);
+                    return;
+                }
+
                 Cursor.SetCursor(runtimeDataChapters.cursorNoDrag, hotSpot, cursorMode);
                 return;
             }
+
             Cursor.SetCursor(runtimeDataChapters.cursorDragDrag, hotSpot, cursorMode);
         }
     }
 
     public void MouseUp()
     {
-        if (gameObject.tag == "DragItem")
-        {
-            Cursor.SetCursor(runtimeDataChapters.cursorDragTouch, hotSpot, cursorMode);
-        }
+        //if (gameObject.tag == "DragItem")
+        //{
+        //    Cursor.SetCursor(runtimeDataChapters.cursorDragTouch, hotSpot, cursorMode);
+        //}
     }
 }
