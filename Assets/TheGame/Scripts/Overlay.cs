@@ -130,7 +130,7 @@ public class Overlay : MonoBehaviour
 
     public void UpdateOverlayText()
     {
-        string points = GameData.quizChapterOnePoints.ToString();
+        string points = runtimeData.quizPointsCh01;
         Debug.Log(allOverlayChildren[OVERLAYDESCRIPTION].gameObject.name);
         allOverlayChildren[OVERLAYDESCRIPTION].gameObject.GetComponent<TMP_Text>().text = $"Punkte: {points}\n" + postData.postDescription;
     }

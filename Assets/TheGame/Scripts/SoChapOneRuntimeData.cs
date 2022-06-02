@@ -28,6 +28,7 @@ public class SoChapOneRuntimeData : Runtime
     public MuseumWaypoints currentMuseumWaypoint = MuseumWaypoints.WP0;
     public bool isMinerDone, isMythDone, isCoalifiationDone, isCarbonificationPeriodDone;
     public SoundMuseum soundSettingMuseum;
+    public string quizPointsCh01;
 
     [Header("GameProgress")]
     public bool post111Done, post112Done, post113Done, post114Done, video115Done, interaction116Done, interaction117Done, quiz119Done;

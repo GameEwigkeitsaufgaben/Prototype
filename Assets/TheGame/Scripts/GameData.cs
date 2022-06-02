@@ -119,7 +119,7 @@ public static class GameData
     public static bool rideIn = true;
     internal static bool sohle3IntroPlayedOnce = false;
 
-    public static int quizChapterOnePoints = 0;
+   // public static int quizChapterOnePoints = 0;
 
     internal static bool bubbleOnEnvy = false;
     internal static bool bubbleOnDad = false;

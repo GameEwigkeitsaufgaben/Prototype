@@ -155,7 +155,7 @@ public class QuizManager : MonoBehaviour
         }
         else
         {
-            GameData.quizChapterOnePoints = pointsSum;
+            runtimeDataCh01.quizPointsCh01 = pointsSum.ToString();
             runtimeDataCh01.quiz119Done = true;
             if (SceneManager.GetActiveScene().name == GameData.NameRuntimeDataChap01)
             {
