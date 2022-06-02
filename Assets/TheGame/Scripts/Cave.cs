@@ -109,7 +109,7 @@ public class Cave : MonoBehaviour
         GameData.moveCave = true;
         targetStop = tStop;
         moveDirection = GetMoveDirection();
-        //gameObject.GetComponent<CaveShake>().StartShake();
+        gameObject.GetComponent<CaveShake>().StartShake();
         liftMovingSrc.Play();
     }
 
@@ -183,7 +183,7 @@ public class Cave : MonoBehaviour
     public void StopCave()
     {
         GameData.moveCave = false;
-        //gameObject.GetComponent<CaveShake>().StopShake();
+        gameObject.GetComponent<CaveShake>().StopShake();
         liftMovingSrc.Stop();
     }
 
@@ -207,9 +207,8 @@ public class Cave : MonoBehaviour
         if (GameData.moveCave)
         {
             GameData.moveDirection = (int)moveDirection;
+            // No shake! transform.position += new Vector3(0, (int)moveDirection * caveSpeed*0.01f, 0);
             transform.position += new Vector3(0, (int)moveDirection * caveSpeed * Mathf.Clamp(Time.deltaTime, -0.006f, 0.006f), 0);
-            Debug.Log("time delta" + Time.deltaTime);
-            // transform.position += new Vector3(0, (int)moveDirection * caveSpeed*0.01f, 0);
             return;
         }
 
