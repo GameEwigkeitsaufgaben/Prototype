@@ -179,7 +179,6 @@ public class Cave : MonoBehaviour
         }
 
         if(runtimeData != null) runtimeData.liftBtnsAllEnabled = enableButtons;
-        
     }
 
     public void StopCave()
@@ -189,18 +188,18 @@ public class Cave : MonoBehaviour
         liftMovingSrc.Stop();
     }
 
-    public void ReloadCaveAtSohle3()
-    {
-        currentStop = targetStop = CoalmineStop.Sole3;
-        var tempPosCavePos = new Vector3(GameData.cavePosX, GameData.cavePosY, GameData.cavePosZ);
+    //public void ReloadCaveAtSohle3()
+    //{
+    //    currentStop = targetStop = CoalmineStop.Sole3;
+    //    var tempPosCavePos = new Vector3(GameData.cavePosX, GameData.cavePosY, GameData.cavePosZ);
         
-        gameObject.transform.position = tempPosCavePos;
-        StopCave();
-        if (caveDoorsClosed)
-        {
-            OpenDoors();
-        }
-    }
+    //    gameObject.transform.position = tempPosCavePos;
+    //    StopCave();
+    //    if (caveDoorsClosed)
+    //    {
+    //        OpenDoors();
+    //    }
+    //}
 
     private void Update()
     {
