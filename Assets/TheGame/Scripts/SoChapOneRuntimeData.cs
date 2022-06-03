@@ -49,6 +49,7 @@ public class SoChapOneRuntimeData : Runtime
     }
     private void OnEnable()
     {
+        quizPointsCh01 = "";
         hintPostUnlock = "";
         post111Done = post112Done = post113Done = post114Done = false;
         liftBtnsAllEnabled = false;

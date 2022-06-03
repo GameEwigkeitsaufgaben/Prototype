@@ -22,7 +22,7 @@ public class ManagerCarbonifactionPeriod : MonoBehaviour
     //Called from Btn in Scene/Inspector
     public void OpenTheUrl()
     {
-        Application.OpenURL("https://dinosaurpictures.org/ancient-earth/#240");
+        Application.OpenURL("https://dinosaurpictures.org/ancient-earth/");
     }
 
     public void GoBackToMuseum()

@@ -152,31 +152,23 @@ public class SoSfx : ScriptableObject
         if (playingSourcesLoop.ContainsKey(clip.name))
         {
             playingSourcesLoop[clip.name].Pause();
-            //playingSourcesLoop.Remove(clip.name);
-            Debug.Log(clip.name + "in loop list");
         }
         else if (playingSourcesOneShot.ContainsKey(clip.name))
         {
             playingSourcesOneShot[clip.name].Pause();
-            //playingSourcesOneShot.Remove(clip.name);
-            Debug.Log(clip.name + "in oneshot list");
         }
         else
         {
-            Debug.Log(clip.name + "not in loop or oneshot list");
+            Debug.LogError(clip.name + " not in loop or oneshot list");
         }
     }
 
     public void ReduceVolume(AudioClip clip, float value)
     {
-        Debug.Log("playing sources loop is null" + (playingSourcesLoop == null)) ;
-        Debug.Log("clipname " + (clip.name));
         if (playingSourcesLoop.ContainsKey(clip.name))
         {
-            if(playingSourcesLoop[clip.name] == null)
-            {
-
-            }
+            //if(playingSourcesLoop[clip.name] == null)
+            //{}
 
             playingSourcesLoop[clip.name].volume -= value;
         }
