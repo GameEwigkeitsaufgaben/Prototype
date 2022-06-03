@@ -155,13 +155,13 @@ public class QuizManager : MonoBehaviour
         }
         else
         {
-            runtimeDataCh01.quizPointsCh01 = pointsSum.ToString();
-            runtimeDataCh01.quiz119Done = true;
-            if (SceneManager.GetActiveScene().name == GameData.NameRuntimeDataChap01)
+            if (SceneManager.GetActiveScene().name == GameScenes.ch01Quiz)
             {
+                runtimeDataCh01.quizPointsCh01 = pointsSum.ToString();
                 runtimeDataCh01.quiz119Done = true;
+                switchScene.SwitchToChapter1withOverlay(generalKeyOverlay);
+               
             }
-            switchScene.SwitchToChapter1withOverlay(generalKeyOverlay);
         }    
     }
 
