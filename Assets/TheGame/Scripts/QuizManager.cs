@@ -160,7 +160,6 @@ public class QuizManager : MonoBehaviour
                 runtimeDataCh01.quizPointsCh01 = pointsSum.ToString();
                 runtimeDataCh01.quiz119Done = true;
                 switchScene.SwitchToChapter1withOverlay(generalKeyOverlay);
-               
             }
         }    
     }
