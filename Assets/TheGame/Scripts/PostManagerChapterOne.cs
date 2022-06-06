@@ -18,11 +18,13 @@ public class PostManagerChapterOne : MonoBehaviour
     
     private SoSfx sfx;
     private Runtime runtimeData;
+    private SoChapOneRuntimeData runtimeDataChap01;
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoGameIcons gameIcons;
 
     private void Awake()
-    {   
+    {
+        runtimeDataChap01 = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
 
@@ -111,14 +113,11 @@ public class PostManagerChapterOne : MonoBehaviour
 
     private void Update()
     {
-        var runtimetmp = runtimeData as SoChapOneRuntimeData;
-        hints.text = runtimetmp.hintPostUnlock;
-
         if (SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain)
         {
-            runtimetmp = runtimeData as SoChapOneRuntimeData;
-            runtimetmp.CheckInteraction116Done();
-            runtimetmp.CheckInteraction117Done();
+            hints.text = runtimeDataChap01.hintPostUnlock;
+            runtimeDataChap01.CheckInteraction116Done();
+            runtimeDataChap01.CheckInteraction117Done();
         }
             
         //potential für verbesserung,nur anschauen wenn nötig

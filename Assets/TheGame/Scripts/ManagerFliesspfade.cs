@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ManagerFliesspfade : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Animator animator;
+
     void Start()
     {
         
@@ -14,5 +15,10 @@ public class ManagerFliesspfade : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void PlayAnimation(string triggerName)
+    {
+        animator.SetTrigger(triggerName);
     }
 }
