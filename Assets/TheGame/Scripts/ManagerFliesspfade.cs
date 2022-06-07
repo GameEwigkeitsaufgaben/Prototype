@@ -22,13 +22,16 @@ public class ManagerFliesspfade : MonoBehaviour
     private const string StateNameFP1 = "fliesspfad1";
     private const string StateNameFP2 = "fliesspfad2";
     private const string StateNameFP3 = "fliesspfad3";
+    private const string HeadingInfoIdle = "Regenwasser wird zu Grundwasser";
     private const string HeadingInfoFP1 = "Flieﬂpfad 1";
     private const string HeadingInfoFP2 = "Flieﬂpfad 2";
     private const string HeadingInfoFP3 = "Flieﬂpfad 3";
+
     public GameObject eventsystem;
     public Animator animator;
     public TMP_Text textinfoFP, headingInfoFp;
-    public Button backToMuseum, btnFp1, btnFp2, btnFp3; 
+    public Button backToMuseum;
+    public Toggle btnFp1, btnFp2, btnFp3;
     bool allWatched = false, consumedFp1, consumedFp2, consumedFp3;
     bool btn1selected;
     FliesspfadState currentFp, previousFp;
@@ -47,6 +50,7 @@ public class ManagerFliesspfade : MonoBehaviour
     void Start()
     {
         backToMuseum.interactable = false;
+        headingInfoFp.text = HeadingInfoIdle;
         textinfoFP.text = textIntro;
         currentFp = previousFp = FliesspfadState.idle;
     }
@@ -67,15 +71,26 @@ public class ManagerFliesspfade : MonoBehaviour
         {
             currentFp = FliesspfadState.fp1;
         }
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("fliesspfad1 0"))
+        {
+            currentFp = FliesspfadState.fp2;
+        }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName(StateNameFP2))
         {
             currentFp = FliesspfadState.fp2;
+        }
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("fliesspfad1 1"))
+        {
+            currentFp = FliesspfadState.fp3;
+        }
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("fliesspfad2 0"))
+        {
+            currentFp = FliesspfadState.fp3;
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName(StateNameFP3))
         {
             currentFp = FliesspfadState.fp3;
         }
-
 
         if (currentFp != previousFp)
         {
@@ -85,6 +100,8 @@ public class ManagerFliesspfade : MonoBehaviour
             {
                 case FliesspfadState.idle:
                     btnFp1.interactable = btnFp2.interactable = btnFp3.interactable = true;
+                    Debug.Log("SET -------------------------------" + HeadingInfoIdle);
+                    headingInfoFp.text = HeadingInfoIdle;
                     break;
                 case FliesspfadState.fp1:
                     btnFp2.interactable = false;
@@ -100,23 +117,28 @@ public class ManagerFliesspfade : MonoBehaviour
                     btnFp2.interactable = false;
                     //btnFp3.interactable = false;
                     break;
-
-
             }
 
             if (currentFp != FliesspfadState.idle) return;
 
-            EventSystem.current.SetSelectedGameObject(null);
+            headingInfoFp.text = HeadingInfoIdle;
+            
+            btnFp1.isOn = false;
+            btnFp2.isOn = false;
+            btnFp3.isOn = false;
         }
 
     }
 
     public void PlayAnimation(string triggerName)
     {
+
         if (currentFp != FliesspfadState.idle) return;
 
-        animator.SetTrigger(triggerName);
+        bool valOn = btnFp1.isOn || btnFp2.isOn || btnFp3.isOn;
 
+        if (!valOn) return;
+       
         if (triggerName == TriggerNameFP1)
         {
             textinfoFP.text = textFp1;
@@ -136,5 +158,7 @@ public class ManagerFliesspfade : MonoBehaviour
             headingInfoFp.text = HeadingInfoFP3;
             consumedFp3 = true;
         }
+
+       animator.SetTrigger(triggerName);
     }
 }
