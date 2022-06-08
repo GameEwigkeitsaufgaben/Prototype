@@ -14,11 +14,13 @@ public class WebGlVideoPlayer : MonoBehaviour
     private bool videoSetUpDone = false;
     private SoSfx sfx; //will be assigned from Entry;
     private SoChapOneRuntimeData runtimeData;
+    private SoChapTwoRuntimeData runtimeDataCh02;
 
 
     private void Awake()
     {
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        runtimeDataCh02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
     }
     private void Start()
     {
@@ -28,6 +30,35 @@ public class WebGlVideoPlayer : MonoBehaviour
     public void SetSFX(SoSfx tmpSFX)
     {
         sfx = tmpSFX;
+    }
+
+    public bool IsVideoPaused()
+    {
+        return videoPlayer.isPaused;
+    }
+
+    public bool IsVideoPlaying()
+    {
+        return videoPlayer.isPlaying;
+    }
+
+    public void StartVid(string videoPostName, string videoName, RawImage imgRaw)
+    {
+        Debug.Log("vp is playing: " + videoPlayer.isPlaying);
+        if (videoPlayer.isPlaying)
+        {
+            videoPlayer.Pause();
+            return;
+        }
+
+        if (!videoSetUpDone)
+        {
+            SetVideo(videoName, imgRaw);
+            videoSetUpDone = true;
+        }
+
+        videoPlayer.Play();
+        videoPlayer.loopPointReached += SetTVStationDone;
     }
 
     public void StartTheVideo(string videoPostName, string videoName, RawImage imgRaw)
@@ -50,7 +81,6 @@ public class WebGlVideoPlayer : MonoBehaviour
             {
                 sfx.StopClip(sfx.instaMenuBGmusicLoop);
             }
-            //sfx.StopClip(sfx.instaMenuBGmusicLoop);
 
             videoPlayer.Play();
 
@@ -77,6 +107,7 @@ public class WebGlVideoPlayer : MonoBehaviour
         }
 
         if (SceneManager.GetActiveScene().name == GameScenes.ch02Museum) return;
+        if (SceneManager.GetActiveScene().name == GameScenes.ch02MuseumTV) return;
         rawImage.transform.parent.transform.parent.GetComponent<Overlay>().SetIconActive(!videoIsPlaying);
     }
 
@@ -108,6 +139,11 @@ public class WebGlVideoPlayer : MonoBehaviour
         runtimeData.videoPlaying = false;
     }
 
+    public void SetTVStationDone(VideoPlayer vp)
+    {
+        runtimeDataCh02.interactTVDone = true;
+    }
+  
     //Method called (from local method StartTheVideo) if event player finished is fired
     public void SetVideopostToRead(VideoPlayer vp)
     {

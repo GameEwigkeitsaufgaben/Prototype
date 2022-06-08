@@ -14,4 +14,6 @@ public class SoGameIcons : ScriptableObject
     public Sprite viewpointArrow;
 
     public Color lockedColor;
+
+    public Sprite tvPlayIcon, tvPauseIcon;
 }

@@ -97,7 +97,6 @@ public class MouseChange : MonoBehaviour
             
             Cursor.SetCursor(runtimeDataChapters.cursorNoInteract, hotSpot, cursorMode);
         }
-
     }
 
     public void MouseExit()
@@ -131,9 +130,6 @@ public class MouseChange : MonoBehaviour
 
     public void MouseUp()
     {
-        //if (gameObject.tag == "DragItem")
-        //{
-        //    Cursor.SetCursor(runtimeDataChapters.cursorDragTouch, hotSpot, cursorMode);
-        //}
+
     }
 }

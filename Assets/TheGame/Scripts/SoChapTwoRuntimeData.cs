@@ -7,5 +7,11 @@ using UnityEngine;
 public class SoChapTwoRuntimeData : Runtime
 {
     public MuseumWaypoints lastWP = MuseumWaypoints.None;
+    public bool interactTVDone = false;
+
+    private void OnEnable()
+    {
+        interactTVDone = false;
+    }
 
 }
