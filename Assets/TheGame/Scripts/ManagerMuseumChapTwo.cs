@@ -10,7 +10,7 @@ public class ManagerMuseumChapTwo : MonoBehaviour
     public GameObject group;
 
     public splineMove mySplineMove;
-    public PathManager pGroupToTV, pathGroupToFliesspfad;
+    public PathManager pGroupToTV, pathGroupToFliesspfad, pathGroupToExitZeche;
     public GameObject characterGuide;
     public MuseumOverlay overlay;
     public SpeechManagerMuseum speechManager;
@@ -29,23 +29,29 @@ public class ManagerMuseumChapTwo : MonoBehaviour
     {
         runtimeDataCh02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
         runtimeDataChOverlap = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
-        Cursor.SetCursor(runtimeDataChOverlap.cursorDefault, Vector2.zero, CursorMode.Auto);
+        runtimeDataChOverlap.SetSceneCursor(runtimeDataChOverlap.cursorDefault);
     }
 
     // Start is called before the first frame update
     void Start()
     {
         btnNextGrubenwasser.colors = GameColors.GetInteractionColorBlock();
-        btnNextGrubenwasser.interactable = true;
+        btnNextGrubenwasser.interactable = false;
         offsetGroupCam = cam.transform.position.x - group.transform.position.x;
 
         switch (runtimeDataCh02.lastWP)
         {
             case MuseumWaypoints.None:
                 speechManager.playMuseumGWIntro = true;
+                group.transform.position = new Vector3(12.03f, 2.61f, -4.28f);
+                break;
+            case MuseumWaypoints.WPTV:
+                Debug.Log("Entry at TV");
+                group.transform.position =  runtimeDataCh02.groupPosition;
                 break;
             case MuseumWaypoints.WPFliesspfad:
                 Debug.Log("Entry at FF");
+                group.transform.position = runtimeDataCh02.groupPosition;
                 break;
         }
        
@@ -66,6 +72,11 @@ public class ManagerMuseumChapTwo : MonoBehaviour
                 mySplineMove.pathContainer = pathGroupToFliesspfad;
                 targetMuseumStation = MuseumWaypoints.WPFliesspfad;
                 break;
+            case (int)MuseumWaypoints.WPExitZeche:
+                mySplineMove.pathContainer = pathGroupToExitZeche;
+                targetMuseumStation = MuseumWaypoints.WPExitZeche;
+                speechManager.playMuseumExitZeche = true;
+                break;
         }
 
         mySplineMove.StartMove();
@@ -83,10 +94,16 @@ public class ManagerMuseumChapTwo : MonoBehaviour
             case MuseumWaypoints.WPTV:
                 overlay.ActivateOverlay(MuseumWaypoints.WPTV);
                 runtimeDataCh02.lastWP = MuseumWaypoints.WPTV;
+                runtimeDataCh02.groupPosition = group.transform.position;
                 break;
             case MuseumWaypoints.WPFliesspfad:
                 overlay.ActivateOverlay(MuseumWaypoints.WPFliesspfad);
                 runtimeDataCh02.lastWP = MuseumWaypoints.WPFliesspfad;
+                runtimeDataCh02.groupPosition = group.transform.position;
+                break;
+            case MuseumWaypoints.WPExitZeche:
+                runtimeDataCh02.lastWP = MuseumWaypoints.WPExitZeche;
+                runtimeDataCh02.groupPosition = group.transform.position;
                 break;
         }
         characterGuide.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
@@ -97,7 +114,6 @@ public class ManagerMuseumChapTwo : MonoBehaviour
         {
             character.transform.rotation = Quaternion.Euler(0.0f, -180.0f, 0.0f);
         }
-       
     }
 
     //Start Dialog
@@ -114,11 +130,16 @@ public class ManagerMuseumChapTwo : MonoBehaviour
         {
             btnNextGrubenwasser.interactable = true;
         }
-        else if (speechManager.IsTalkingListFinished(GameData.NameTLMuseumIntroTV))
+        if (speechManager.IsTalkingListFinished(GameData.NameTLMuseumOutroExitZeche))
         {
-           // Debug.Log("webgl null " + (webglVideoPlayer == null));
-           webglVideoPlayer.StartTheVideo("none", "Watherdrop.mp4", rawImg);
+            runtimeDataCh02.grundwasser212Done = true;
+            gameObject.GetComponent<SwitchSceneManager>().SwitchToChapter2withOverlay("Overlay212");
         }
+        //else if (speechManager.IsTalkingListFinished(GameData.NameTLMuseumIntroTV))
+        //{
+        //    Debug.Log("Finished TV audio intro");
+        //    gameObject.GetComponent<SwitchSceneManager>().SwitchScene(GameScenes.ch02MuseumTV);
+        //}
     }
 
 }

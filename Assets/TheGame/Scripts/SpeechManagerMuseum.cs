@@ -17,11 +17,11 @@ public class SpeechManagerMuseum : MonoBehaviour
     public SoTalkingList audiosMuseumInfoArrival, audiosMuseumMinerEquipment, audiosMuseumHistoryCarbon, audiosMuseumHistoryMining, audiosMuseumCoalification, audiosMuseumOutro;
 
     //ch02
-    public SoTalkingList audiosMuseumIntroGrundwasser, audiosMuseumTVGrundwasserIntro, audiosMuseumTVGrundwasserOutro, audiosMuseumFliessPfadIntro;
+    public SoTalkingList audiosMuseumIntroGrundwasser, audiosMuseumTVGrundwasserIntro, audiosMuseumTVGrundwasserOutro, audiosMuseumFliessPfadIntro, audiosMuseumExitZeche;
 
     public bool playMuseumInfoArrival, playMinerEquipment, playMuseumWorld, playMuseumCoalHistory, playMuseumCarbonification, playMuseumOutro;
 
-    public bool playMuseumGWIntro, playMuseumGWTVIntro, playMuseumFliesspfadIntro;
+    public bool playMuseumGWIntro, playMuseumGWTVIntro, playMuseumFliesspfadIntro, playMuseumExitZeche;
     
     private AudioSource mySrc;
 
@@ -30,7 +30,7 @@ public class SpeechManagerMuseum : MonoBehaviour
     private SpeechList
        speakMuseumInfoArrival, speakMinerEquipment, speakMuseumHistoryCarbon, speakMuseumHistoryMining, speakMuseumCoalification, speakMuseumOutro;
 
-    private SpeechList speakMuseumGWIntro, speakMuseumGWTVIntro, speakMuseumFliesspfadIntro;
+    private SpeechList speakMuseumGWIntro, speakMuseumGWTVIntro, speakMuseumFliesspfadIntro, speakMuseumExitZeche;
    
 
     private Dictionary<string, SpeechList> mySpeechDict = new Dictionary<string, SpeechList>();
@@ -55,6 +55,7 @@ public class SpeechManagerMuseum : MonoBehaviour
         audiosMuseumIntroGrundwasser = Resources.Load<SoTalkingList>(GameData.NameTLMuseumGrundwasserIntro);
         audiosMuseumTVGrundwasserIntro = Resources.Load<SoTalkingList>(GameData.NameTLMuseumIntroTV);
         audiosMuseumFliessPfadIntro = Resources.Load<SoTalkingList>(GameData.NameTLMuseumIntroFliesspfad);
+        audiosMuseumExitZeche = Resources.Load<SoTalkingList>(GameData.NameTLMuseumOutroExitZeche);
         //audiosMuseumTVGrundwasserOutroEnya, MuseumOutroGuide;
     }
 
@@ -98,6 +99,10 @@ public class SpeechManagerMuseum : MonoBehaviour
         speakMuseumFliesspfadIntro = gameObject.AddComponent<SpeechList>();
         speakMuseumFliesspfadIntro.SetUpList(audiosMuseumFliessPfadIntro, mySrc);
         mySpeechDict.Add(speakMuseumFliesspfadIntro.listName, speakMuseumFliesspfadIntro);
+
+        speakMuseumExitZeche = gameObject.AddComponent<SpeechList>();
+        speakMuseumExitZeche.SetUpList(audiosMuseumExitZeche, mySrc);
+        mySpeechDict.Add(speakMuseumExitZeche.listName, speakMuseumExitZeche);
     }
 
     public void StopSpeaking()
@@ -269,6 +274,11 @@ public class SpeechManagerMuseum : MonoBehaviour
         {
             currentList = speakMuseumFliesspfadIntro;
             playMuseumFliesspfadIntro = false;
+        }
+        else if (playMuseumExitZeche)
+        {
+            currentList = speakMuseumExitZeche;
+            playMuseumExitZeche = false;
         }
 
         if (currentList != null)

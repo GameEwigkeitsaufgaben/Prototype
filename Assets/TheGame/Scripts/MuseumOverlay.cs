@@ -132,9 +132,17 @@ public class MuseumOverlay : MonoBehaviour
             {
                 gameObject.GetComponent<SwitchSceneManager>().GoToCoalification();
             }
+            else if (speechManager.IsTalkingListFinished(GameData.NameTLMuseumIntroTV))
+            {
+                gameObject.GetComponent<SwitchSceneManager>().SwitchScene(GameScenes.ch02MuseumTV);
+            }
             else if (speechManager.IsTalkingListFinished(GameData.NameTLMuseumIntroFliesspfad))
             {
                 gameObject.GetComponent<SwitchSceneManager>().GoToFliesspfade();
+            }
+            else if (speechManager.IsTalkingListFinished(GameData.NameTLMuseumOutroExitZeche))
+            {
+                gameObject.GetComponent<SwitchSceneManager>().SwitchToChapter2withOverlay("Overlay212");
             }
         }
         

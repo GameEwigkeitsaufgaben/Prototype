@@ -15,6 +15,7 @@ public enum MuseumWaypoints
     WPExitMuseum1 = 7,
     WPTV = 8,
     WPFliesspfad = 9,
+    WPExitZeche = 10,
     None
 }
 

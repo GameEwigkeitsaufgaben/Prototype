@@ -91,6 +91,7 @@ public static class GameData
     public const string NameTLMuseumIntroTV = "AudiosMuseumIntroTVGrundwasserIntro";
     public const string NameTLMuseumOutroTV = "AudiosMuseumIntroTVGrundwasserOutro";
     public const string NameTLMuseumIntroFliesspfad= "AudiosMuseumIntroFliesspfad";
+    public const string NameTLMuseumOutroExitZeche = "AudiosMuseumOutroExitZeche";
 
     public static bool progressWithAdmin = false; //if start chapter with admin pwd true, else false;
 
