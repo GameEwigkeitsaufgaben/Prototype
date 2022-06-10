@@ -12,6 +12,8 @@ public class SoChapTwoRuntimeData : Runtime
 
     public bool grundwasser212Done = false;
 
+    public bool h2oFound, fes2Found, o2Found, h2So4Found;
+
     private void OnEnable()
     {
         grundwasser212Done = false;
