@@ -13,7 +13,7 @@ public class Lupe : MonoBehaviour, IDragHandler
 
     public GameObject LupeCirc, LupeHandle;
     public Canvas myParentCanvas;
-    public GameObject h2oAnimObj;
+    public GameObject h2oAnimObj, fes2AnimObj;
     
     int origSize;
     float scaleFactor = 4f;
@@ -42,7 +42,8 @@ public class Lupe : MonoBehaviour, IDragHandler
     public void EnlargeLupe(float factor)
     {
         float newSize = origSize * factor;
-        LupeCirc.GetComponent<RectTransform>().sizeDelta = new Vector2(newSize, newSize);
+        //LupeCirc.GetComponent<RectTransform>().sizeDelta = new Vector2(newSize, newSize);
+        
         LupeHandle.GetComponent<RectTransform>().sizeDelta = new Vector2(newSize, newSize);
         LupeHandle.GetComponent<RectTransform>().localPosition = new Vector3(
             LupeCirc.GetComponent<RectTransform>().localPosition.x + (newSize*0.68f),
@@ -64,23 +65,24 @@ public class Lupe : MonoBehaviour, IDragHandler
         {
             EnlargeLupe(4f);
             manager.SetTextToTrigger(SauresWasserTrigger.Wasser);
-            Debug.Log("Set trigger rain");
             manager.SetMolekuelFound(SauresWasserTrigger.Wasser);
             animator.SetTrigger("rain");
-           
             runtimeDataCh02.h2oFound = true;
         }
         else if (collision.name == fe)
         {
             EnlargeLupe(4f);
-            manager.SetTextToTrigger(SauresWasserTrigger.Austritt);
+            // manager.SetTextToTrigger(SauresWasserTrigger.Austritt);
             runtimeDataCh02.feFound = true;
         }
         else if (collision.name == fes2)
         {
             EnlargeLupe(4f);
             manager.SetTextToTrigger(SauresWasserTrigger.Pyrit);
+            manager.SetMolekuelFound(SauresWasserTrigger.Pyrit);
             runtimeDataCh02.fes2Found = true;
+            fes2AnimObj.SetActive(true);
+            animator.SetTrigger("oxi1");
         }
         else if(collision.name == o2)
         {
@@ -113,7 +115,6 @@ public class Lupe : MonoBehaviour, IDragHandler
         if (collision.name == h2o)
         {
             ShrinkToOrigLupe();
-            Debug.Log("set animmmmmmmmmmmmmmmmmmmmmm");
             animator.SetTrigger("idle");
         }
         else if (collision.name == o2)
@@ -123,6 +124,8 @@ public class Lupe : MonoBehaviour, IDragHandler
         else if (collision.name == fes2)
         {
             ShrinkToOrigLupe();
+            fes2AnimObj.SetActive(false);
+            animator.SetTrigger("idle");
         }
         else if (collision.name == h2so4)
         {

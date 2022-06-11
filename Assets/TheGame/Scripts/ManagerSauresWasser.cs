@@ -24,12 +24,6 @@ public class ManagerSauresWasser : MonoBehaviour
 
     private SoChaptersRuntimeData runtimeDataChapters;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     private void Awake()
     {
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
@@ -42,21 +36,18 @@ public class ManagerSauresWasser : MonoBehaviour
         {
             case SauresWasserTrigger.Wasser:
                 infoZoneText.text = triggerWasser;
-                infoZoneHeading.text = "H2o";
                 h2o.color = Color.green;
                 break;
             case SauresWasserTrigger.Schacht:
                 infoZoneText.text = triggerSchacht;
-                infoZoneHeading.text = "O2";
                 o2.color = Color.green;
                 break;
             case SauresWasserTrigger.Pyrit:
+                infoZoneText.text = triggerPyrit;
                 fes2.color = Color.green;
                 h.color = Color.green;
                 fe.color = Color.green;
                 so4.color = Color.green;
-                infoZoneText.text = triggerPyrit;
-                infoZoneHeading.text = "FeS2";
                 break;
             case SauresWasserTrigger.Austritt:
                 infoZoneText.text = triggerAustritt;
@@ -73,24 +64,21 @@ public class ManagerSauresWasser : MonoBehaviour
         {
             case SauresWasserTrigger.Wasser:
                 infoZoneText.text = triggerWasser;
+                infoZoneHeading.text = "H2o";
                 break;
             case SauresWasserTrigger.Schacht:
                 infoZoneText.text = triggerSchacht;
+                infoZoneHeading.text = "O2";
                 break;
             case SauresWasserTrigger.Pyrit:
                 infoZoneText.text = triggerPyrit;
+                infoZoneHeading.text = "FeS2";
                 break;
             case SauresWasserTrigger.Austritt:
                 infoZoneText.text = triggerAustritt;
+                infoZoneHeading.text = "H2oS4";
                 break;
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 
 }
