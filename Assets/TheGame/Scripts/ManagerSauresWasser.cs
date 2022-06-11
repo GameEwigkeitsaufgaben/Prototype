@@ -19,7 +19,7 @@ public class ManagerSauresWasser : MonoBehaviour
     public const string triggerPyrit = "Trifft Wasser auf Pyrit, welches oft vorkommt in der Kohle und im Nebengestein, wird die Blockstruktur von Pyrit aufgelöst - zerstört! Es kommt zur ersten Oxidationsstufe. Die Schwefelmoleküle verbinden sich mit dem Sauserstoff. Eisen bleibt über.";
     public const string triggerAustritt = "Mit dem raufpumpen des Grubenwassers kommen die glösten Elemente an die Oberfläche. Da kommt es zur 2ten Oxidationsstufe. Das Eisen fällt aus. Es beginnt sofort zu rosten. Und es bildet sich Schwefelsäure. Darum wird das Wasser rot. ";
 
-    public TMP_Text infoText;
+    public TMP_Text infoZoneText,infoZoneHeading;
     public TMP_Text fes2, h2o, o2, so4, h, h2so4, fe;
 
     private SoChaptersRuntimeData runtimeDataChapters;
@@ -41,11 +41,13 @@ public class ManagerSauresWasser : MonoBehaviour
         switch (trigger)
         {
             case SauresWasserTrigger.Wasser:
-                infoText.text = triggerWasser;
+                infoZoneText.text = triggerWasser;
+                infoZoneHeading.text = "H2o";
                 h2o.color = Color.green;
                 break;
             case SauresWasserTrigger.Schacht:
-                infoText.text = triggerSchacht;
+                infoZoneText.text = triggerSchacht;
+                infoZoneHeading.text = "O2";
                 o2.color = Color.green;
                 break;
             case SauresWasserTrigger.Pyrit:
@@ -53,10 +55,11 @@ public class ManagerSauresWasser : MonoBehaviour
                 h.color = Color.green;
                 fe.color = Color.green;
                 so4.color = Color.green;
-                infoText.text = triggerPyrit;
+                infoZoneText.text = triggerPyrit;
+                infoZoneHeading.text = "FeS2";
                 break;
             case SauresWasserTrigger.Austritt:
-                infoText.text = triggerAustritt;
+                infoZoneText.text = triggerAustritt;
                 h.color = Color.green;
                 fe.color = Color.green;
                 h2so4.color = Color.green;
@@ -69,16 +72,16 @@ public class ManagerSauresWasser : MonoBehaviour
         switch (trigger)
         {
             case SauresWasserTrigger.Wasser:
-                infoText.text = triggerWasser;
+                infoZoneText.text = triggerWasser;
                 break;
             case SauresWasserTrigger.Schacht:
-                infoText.text = triggerSchacht;
+                infoZoneText.text = triggerSchacht;
                 break;
             case SauresWasserTrigger.Pyrit:
-                infoText.text = triggerPyrit;
+                infoZoneText.text = triggerPyrit;
                 break;
             case SauresWasserTrigger.Austritt:
-                infoText.text = triggerAustritt;
+                infoZoneText.text = triggerAustritt;
                 break;
         }
     }
