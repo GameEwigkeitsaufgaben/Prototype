@@ -80,15 +80,24 @@ public class MouseChange : MonoBehaviour
         }
         else if (gameObject.tag == "DragItem")
         {
-            if (gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging) return;
-
-            if (gameObject.GetComponent<MuseumMinerEquipmentItem>().myManager.IsMaxItemsOnMinerReached() && gameObject.GetComponent<MuseumMinerEquipmentItem>().snapedTo == SnapetTo.Table)
+            if(gameObject.GetComponent<MuseumMinerEquipmentItem>() != null)
             {
-                Cursor.SetCursor(runtimeDataChapters.cursorNoDrag, hotSpot, cursorMode);
-                return;
+                if (gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging) return;
+
+                if (gameObject.GetComponent<MuseumMinerEquipmentItem>().myManager.IsMaxItemsOnMinerReached() && gameObject.GetComponent<MuseumMinerEquipmentItem>().snapedTo == SnapetTo.Table)
+                {
+                    Cursor.SetCursor(runtimeDataChapters.cursorNoDrag, hotSpot, cursorMode);
+                    return;
+                }
+
+                if (!gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging) Cursor.SetCursor(runtimeDataChapters.cursorDragTouch, hotSpot, cursorMode);
             }
 
-            if (!gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging) Cursor.SetCursor(runtimeDataChapters.cursorDragTouch, hotSpot, cursorMode);
+            else
+            {
+                Cursor.SetCursor(runtimeDataChapters.cursorDragDrag, hotSpot, cursorMode);
+            }
+
             
         }
         else
@@ -101,7 +110,10 @@ public class MouseChange : MonoBehaviour
 
     public void MouseExit()
     {
-        if (gameObject.tag == "DragItem" && gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging) return;
+        if(gameObject.GetComponent<MuseumMinerEquipmentItem>() != null)
+        {
+            if (gameObject.tag == "DragItem" && gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging) return;
+        }
         
         Cursor.SetCursor(runtimeDataChapters.sceneCursor, Vector2.zero, cursorMode);
         runtimeDataCh01.hintPostUnlock = "";

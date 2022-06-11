@@ -12,11 +12,13 @@ public class SoChapTwoRuntimeData : Runtime
 
     public bool grundwasser212Done = false;
 
-    public bool h2oFound, fes2Found, o2Found, h2So4Found;
+    public bool h2oFound, fes2Found, o2Found, so4Found, hFound, h2So4Found, feFound;
 
     private void OnEnable()
     {
         grundwasser212Done = false;
+        h2oFound = fes2Found = o2Found = so4Found = hFound = h2oFound = feFound = false;
+
         groupPosition = new Vector3(12.03f, 2.61f, -4.28f);
         lastWP = MuseumWaypoints.None;
         interactTVDone = false;

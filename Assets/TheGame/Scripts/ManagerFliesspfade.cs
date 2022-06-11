@@ -35,6 +35,7 @@ public class ManagerFliesspfade : MonoBehaviour
     bool allWatched = false, consumedFp1, consumedFp2, consumedFp3;
     bool btn1selected;
     FliesspfadState currentFp, previousFp;
+    private SoChaptersRuntimeData runtimeDataChapters;
 
     private string textIntro = "Wasser versickert und fließt in Hohlräumen im Untergrund. Die Hohlräume können kleine Poren zwischen einzelnen Sand und Kieskörnern sein, " +
         "Klüfte im Fels oder auch große Gänge, wie im Bergwerk. " +
@@ -46,6 +47,12 @@ public class ManagerFliesspfade : MonoBehaviour
     private string textFp2 = "Wenn der Fels in der Tiefe Risse hat, die Geologen nennen das Klüfte, dann kann das Wasser in den Klüften schon sehr viel schneller fließen. " +
         "Da können es schon einige Meter pro Tag sein.";
     private string textFp3 = "Sehr schnelles Fließen in den Schächten und Stollen.";
+
+    private void Awake()
+    {
+        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
+    }
 
     void Start()
     {
