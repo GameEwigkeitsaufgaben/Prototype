@@ -58,10 +58,18 @@ public class ManagerPumpen : MonoBehaviour
 
     public void TurnOnPumpe(int pumpenid)
     {
+        //if()
         switch (pumpenid)
         {
             case 1:
-                animator.SetTrigger(Pumpen.pumpe1.ToString());
+                if (!toggleP1.isOn)
+                {
+                    animator.SetTrigger(Pumpen.pumpe1.ToString());
+                }
+                else
+                {
+
+                }
                 break;
             case 2:
                 animator.SetTrigger(Pumpen.pumpe2.ToString());
