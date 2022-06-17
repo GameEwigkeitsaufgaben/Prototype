@@ -37,4 +37,9 @@ public static class GameScenes
     public const string ch02MuseumTV = "ch02scene01-23-tv";
     public const string ch02Fliesspfade = "ch02scene01-22-fliesspfade";
     public const string ch02Quiz = "ch02scene01-11-quiz";
+
+
+
+    //Chapter three Ewigkeitsaufgaben
+    public const string ch03Demo = "ch03scene01-02-demo";
 }
