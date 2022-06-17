@@ -11,18 +11,13 @@ public class ManagerDemo : MonoBehaviour
     public List<GameObject> mob;
     public Canvas mobCanvas;
 
+
     void Start()
     {
-        CreateDemoPeopleAroundPoint(20, player.transform.position, 43f);
-        CreateDemoPeopleAroundPoint(10, player.transform.position, 40f);
-        CreateDemoPeopleAroundPoint(7, player.transform.position, 35f);
-        CreateDemoPeopleAroundPoint(5, player.transform.position, 30f);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //CreateDemoPeopleAroundPoint(20, player.transform.position, 43f);
+        //CreateDemoPeopleAroundPoint(10, player.transform.position, 40f);
+        //CreateDemoPeopleAroundPoint(7, player.transform.position, 35f);
+        //CreateDemoPeopleAroundPoint(5, player.transform.position, 30f);
     }
 
     public void CreateDemoPeopleAroundPoint(int num, Vector3 point, float radius)
@@ -34,7 +29,6 @@ public class ManagerDemo : MonoBehaviour
 
         for (int i = 0; i < num; i++)
         {
-
             /* Distance around the circle */
             var radians = 2 * Mathf.PI / num * i;
 
@@ -59,6 +53,6 @@ public class ManagerDemo : MonoBehaviour
             enemy.transform.SetParent(tmpObj.transform);
         }
 
-
+        //tmpObj.transform.rotation = Quaternion.Euler(0,Random.Range(0f,360f),0);
     }
 }

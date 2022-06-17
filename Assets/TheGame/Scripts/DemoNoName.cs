@@ -1,24 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DemoNoName : MonoBehaviour
 {
-    public Sprite[] demoNonameSprites;
-    // Start is called before the first frame update
-    void Start()
+    private SoConfigChapter3 configChap3;
+    Sprite[] noNames = new Sprite[4];
+
+    private void Awake()
     {
-        
-        gameObject.GetComponent<Image>().sprite = demoNonameSprites[Random.Range(0, demoNonameSprites.Length)];
-        Quaternion goRotation = gameObject.transform.rotation;
-        int sign = Random.Range(0, 2) == 0 ? -1 : 1;
-        gameObject.transform.rotation = Quaternion.Euler(goRotation.x, goRotation.y * sign , goRotation.z);
+        configChap3 = Resources.Load<SoConfigChapter3>("ConfigCh3");
+        noNames[0] = configChap3.demoNoNameFemale1;
+        noNames[1] = configChap3.demoNoNameFemale2;
+        noNames[2] = configChap3.demoNoNameMale1; 
+        noNames[3] = configChap3.demoNoNameMale2;
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        
+        gameObject.GetComponent<Image>().sprite = noNames[Random.Range(0, noNames.Length)];
+        int sign = Random.Range(0, 2) == 0 ? -1 : 1;
+        gameObject.transform.localScale = new Vector3(sign, 1, 1);
     }
+
 }

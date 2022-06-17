@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LookaroundWithMouse : MonoBehaviour
 {
@@ -32,7 +33,15 @@ public class LookaroundWithMouse : MonoBehaviour
             yaw += speedH * Input.GetAxis("Mouse X");
             pitch -= speedV * Input.GetAxis("Mouse Y");
 
-            pitch = Mathf.Clamp(pitch, -40f, +55f);
+            if(SceneManager.GetActiveScene().name == GameScenes.ch03Demo)
+            {
+                pitch = Mathf.Clamp(pitch, -12f, +55f);
+            }
+            else
+            {
+                pitch = Mathf.Clamp(pitch, -40f, +55f);
+            }
+            
             transform.localEulerAngles = new Vector3(pitch, yaw, 0.0f);
         }
     }
