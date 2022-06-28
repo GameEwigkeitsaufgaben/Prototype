@@ -37,6 +37,7 @@ public static class GameScenes
     public const string ch02MuseumTV = "ch02scene01-02-02-tv";
     public const string ch02Fliesspfade = "ch02scene01-02-01-fliesspfade";
     public const string ch02Quiz = "ch02scene01-11-quiz";
+    public const string ch02GWActive = "ch02scene01-10-01-gw-active";
 
 
 
