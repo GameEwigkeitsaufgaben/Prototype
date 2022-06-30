@@ -16,6 +16,12 @@ public enum MuseumWaypoints
     WPTV = 8,
     WPFliesspfad = 9,
     WPExitZeche = 10,
+    WPBeluft = 11,
+    WPAbsetzBecken = 12,
+    WPKalkmilch = 13,
+    WPSulfat = 14,
+    WPOsmose = 15,
+    WPCleanWater = 16,
     None
 }
 

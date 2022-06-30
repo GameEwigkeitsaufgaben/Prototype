@@ -19,12 +19,14 @@ public class PostManagerChapterOne : MonoBehaviour
     private SoSfx sfx;
     private Runtime runtimeData;
     private SoChapOneRuntimeData runtimeDataChap01;
+    private SoChapTwoRuntimeData runtimeDataChap02;
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoGameIcons gameIcons;
 
     private void Awake()
     {
         runtimeDataChap01 = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        runtimeDataChap02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
 
@@ -35,6 +37,12 @@ public class PostManagerChapterOne : MonoBehaviour
         else if (SceneManager.GetActiveScene().name == GameScenes.ch02InstaMain)
         {
             runtimeData = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
+            runtimeDataChap02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
+
+            if (runtimeDataChapters.progressWithAdminCh2)
+            {
+                runtimeDataChap02.SetAllDone();
+            }
         }
 
         gameIcons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
@@ -119,7 +127,11 @@ public class PostManagerChapterOne : MonoBehaviour
             runtimeDataChap01.CheckInteraction116Done();
             runtimeDataChap01.CheckInteraction117Done();
         }
-            
+        else if (SceneManager.GetActiveScene().name == GameScenes.ch02InstaMain)
+        {
+            hints.text = runtimeDataChap02.hintPostUnlock;
+        }
+
         //potential für verbesserung,nur anschauen wenn nötig
         if (runtimeData.overlaySoundState == OverlaySoundState.NoSound)
         {

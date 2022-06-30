@@ -11,6 +11,7 @@ public class ManagerMuseumChapTwo : MonoBehaviour
 
     public splineMove mySplineMove;
     public PathManager pGroupToTV, pathGroupToFliesspfad, pathGroupToExitZeche;
+    public PathManager pBeluftToB1;
     public GameObject characterGuide;
     public MuseumOverlay overlay;
     public SpeechManagerMuseum speechManager;
@@ -77,6 +78,11 @@ public class ManagerMuseumChapTwo : MonoBehaviour
                 targetMuseumStation = MuseumWaypoints.WPExitZeche;
                 speechManager.playMuseumExitZeche = true;
                 break;
+            case (int)MuseumWaypoints.WPBeluft:
+                mySplineMove.pathContainer = pBeluftToB1;
+                targetMuseumStation = MuseumWaypoints.WPAbsetzBecken;
+                break;
+
         }
 
         mySplineMove.StartMove();
@@ -105,9 +111,16 @@ public class ManagerMuseumChapTwo : MonoBehaviour
                 runtimeDataCh02.lastWP = MuseumWaypoints.WPExitZeche;
                 runtimeDataCh02.groupPosition = group.transform.position;
                 break;
+            case MuseumWaypoints.WPAbsetzBecken:
+                runtimeDataCh02.lastWP = MuseumWaypoints.WPAbsetzBecken;
+                //runtimeDataCh02.groupPosition = group.transform.position;
+                break;
         }
         characterGuide.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
     }
+
+
+
     public void RotateCharacter(GameObject character)
     {
         if (locomotionInMuseum)
@@ -132,7 +145,7 @@ public class ManagerMuseumChapTwo : MonoBehaviour
         }
         if (speechManager.IsTalkingListFinished(GameData.NameTLMuseumOutroExitZeche))
         {
-            runtimeDataCh02.grundwasser212Done = true;
+            runtimeDataCh02.progressPost2110GWReinigungDone = true;
             gameObject.GetComponent<SwitchSceneManager>().SwitchToChapter2withOverlay("Overlay212");
         }
         //else if (speechManager.IsTalkingListFinished(GameData.NameTLMuseumIntroTV))

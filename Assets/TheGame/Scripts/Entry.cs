@@ -27,12 +27,14 @@ public class Entry : MonoBehaviour
     private OverlayType overlayType; // Enum
     private SoSfx sfx;
     private SoChapOneRuntimeData runtimeData;
+    private SoChapTwoRuntimeData runtimeDataCh02;
 
     // Start is called before the first frame update
     void Start()
     {
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        runtimeDataCh02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
 
         post.GetComponent<Post>().SetPostData(postData);
         overlay.GetComponent<Overlay>().SetOverlayData(postData);
@@ -82,6 +84,22 @@ public class Entry : MonoBehaviour
         else if (overlay.name == GameData.NameOverlay114)
         {
             runtimeData.post114Done = true;
+        }
+        else if (overlay.name == GameData.NameOverlay213)
+        {
+            runtimeDataCh02.progressPost213Done = true;
+        }
+        else if (overlay.name == GameData.NameOverlay214)
+        {
+            runtimeDataCh02.progressPost214Done = true;
+        }
+        else if (overlay.name == GameData.NameOverlay216)
+        {
+            runtimeDataCh02.progressPost216Done = true;
+        }
+        else if (overlay.name == GameData.NameOverlay217)
+        {
+            runtimeDataCh02.progressPost217Done = true;
         }
 
         if (runtimeData.musicOn)
@@ -150,6 +168,47 @@ public class Entry : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == GameScenes.ch02InstaMain)
         {
+            if (!post.GetComponent<Post>().isPostLocked()) return;
+            if(gameObject.name == GameData.NameEntry213 && runtimeDataCh02.progress212MuseumDone)
+            {
+                post.GetComponent<Post>().UnlockPost();
+            }
+            else if (gameObject.name == GameData.NameEntry214 && runtimeDataCh02.progress212MuseumDone)
+            {
+                post.GetComponent<Post>().UnlockPost();
+            }
+            else if (gameObject.name == GameData.NameEntry215 && runtimeDataCh02.progressPost213Done && runtimeDataCh02.progressPost214Done)
+            {
+                post.GetComponent<Post>().UnlockPost();
+            }
+            else if (gameObject.name == GameData.NameEntry216 && runtimeDataCh02.progressPost215Pumpen)
+            {
+                post.GetComponent<Post>().UnlockPost();
+            }
+            else if (gameObject.name == GameData.NameEntry217 && runtimeDataCh02.progressPost215Pumpen)
+            {
+                post.GetComponent<Post>().UnlockPost();
+            }
+            else if (gameObject.name == GameData.NameEntry218 && runtimeDataCh02.progressPost216Done && runtimeDataCh02.progressPost217Done)
+            {
+                post.GetComponent<Post>().UnlockPost();
+            }
+            else if (gameObject.name == GameData.NameEntry219 && runtimeDataCh02.progressPost218PyritDone)
+            {
+                post.GetComponent<Post>().UnlockPost();
+            }
+            else if (gameObject.name == GameData.NameEntry2110 && runtimeDataCh02.progressPost219VideoDone)
+            {
+                post.GetComponent<Post>().UnlockPost();
+            }
+            else if (gameObject.name == GameData.NameEntry2111 && runtimeDataCh02.progressPost2110GWReinigungDone)
+            {
+                post.GetComponent<Post>().UnlockPost();
+            }
+            else if (gameObject.name == GameData.NameEntry2112 && runtimeDataCh02.progressPost2111QuizDone)
+            {
+                post.GetComponent<Post>().UnlockPost();
+            }
 
         }
         

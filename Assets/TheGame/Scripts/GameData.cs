@@ -33,6 +33,19 @@ public static class GameData
     public const string NamePost119 = "Post119";
     public const string NamePost1110 = "Post1110";
 
+    public const string NamePost211 = "Post211";
+    public const string NamePost212 = "Post212";
+    public const string NamePost213 = "Post213";
+    public const string NamePost214 = "Post214";
+    public const string NamePost215 = "Post215";
+    public const string NamePost216 = "Post216";
+    public const string NamePost217 = "Post217";
+    public const string NamePost218 = "Post218";
+    public const string NamePost219 = "Post219";
+    public const string NamePost2110 = "Post2110";
+    public const string NamePost2111 = "Post2111";
+    public const string NamePost2112 = "Post2112";
+
     public const string NameOverlay111 = "Overlay111";
     public const string NameOverlay112 = "Overlay112";
     public const string NameOverlay113 = "Overlay113";
@@ -44,6 +57,18 @@ public static class GameData
     public const string NameOverlay119 = "Overlay119";
     public const string NameOverlay1110 = "Overlay1110";
 
+    public const string NameOverlay211 = "Overlay211";
+    public const string NameOverlay212 = "Overlay212";
+    public const string NameOverlay213 = "Overlay213";
+    public const string NameOverlay214 = "Overlay214";
+    public const string NameOverlay215 = "Overlay215";
+    public const string NameOverlay216 = "Overlay216";
+    public const string NameOverlay217 = "Overlay217";
+    public const string NameOverlay218 = "Overlay218";
+    public const string NameOverlay219 = "Overlay219";
+    public const string NameOverlay2110 = "Overlay2110";
+    public const string NameOverlay2111 = "Overlay2111";
+
     public const string NameEntry111 = "Entry111";
     public const string NameEntry112 = "Entry112";
     public const string NameEntry113 = "Entry113";
@@ -51,6 +76,19 @@ public static class GameData
     public const string NameEntry115 = "Entry115";
     public const string NameEntry116 = "Entry116";
     public static string NameEntry117 = "Entry117";
+
+    public const string NameEntry213 = "Entry213";
+    public const string NameEntry214 = "Entry214";
+    public const string NameEntry215 = "Entry215";
+    public const string NameEntry216 = "Entry216";
+    public const string NameEntry217 = "Entry217";
+    public const string NameEntry218 = "Entry218";
+    public const string NameEntry219 = "Entry219";
+    public const string NameEntry2110 = "Entry2110";
+    public const string NameEntry2111 = "Entry2111";
+    public const string NameEntry2112 = "Entry2112";
+
+
 
     public static int chapterOneUnlocked = 0;
     public static int chapterTwoUnlocked = 0;
