@@ -7,6 +7,8 @@ using UnityEngine;
 public class SoChapTwoRuntimeData : Runtime
 {
     public string hintPostUnlock;
+    public string quizPointsCh02 = "***";
+    public string singleSelectAwObjName = "--";
 
     //progress in game
     public bool progressPost211Done, progress212MuseumDone, progressPost213Done, progressPost214Done, progressPost215Pumpen;
@@ -40,7 +42,8 @@ public class SoChapTwoRuntimeData : Runtime
         groupPosition = new Vector3(12.03f, 2.61f, -4.28f);
         lastWP = MuseumWaypoints.None;
         interactTVDone = false;
+        singleSelectAwObjName = "--";
 
-    }
+}
 
 }

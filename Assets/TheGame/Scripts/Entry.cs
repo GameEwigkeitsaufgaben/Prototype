@@ -168,7 +168,13 @@ public class Entry : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == GameScenes.ch02InstaMain)
         {
+            if (gameObject.name == GameData.NameEntry2112 && runtimeDataCh02.progressPost2111QuizDone)
+            {
+                overlay.GetComponent<Overlay>().UpdateOverlayText();
+            }
+
             if (!post.GetComponent<Post>().isPostLocked()) return;
+
             if(gameObject.name == GameData.NameEntry213 && runtimeDataCh02.progress212MuseumDone)
             {
                 post.GetComponent<Post>().UnlockPost();
@@ -207,7 +213,10 @@ public class Entry : MonoBehaviour
             }
             else if (gameObject.name == GameData.NameEntry2112 && runtimeDataCh02.progressPost2111QuizDone)
             {
+                Debug.Log("Quiz solved: ");
                 post.GetComponent<Post>().UnlockPost();
+                overlay.GetComponent<Overlay>().UpdateOverlayText();
+                GameData.chapterTwoUnlocked = 1;
             }
 
         }

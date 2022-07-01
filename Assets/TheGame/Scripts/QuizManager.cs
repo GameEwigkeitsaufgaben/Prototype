@@ -16,8 +16,7 @@ public class QuizManager : MonoBehaviour
     private const string btnTextCheckAnswers = "Prüfen";
     private const string btnTextNextAnswer = "Weiter";
 
-    private const string generalKeyOverlay = "Overlay1110";
-
+    private string generalKeyOverlay; // = "Overlay1110";
 
     public Canvas quizCanvas;
     public VerticalLayoutGroup answerButtonGroup;
@@ -50,20 +49,24 @@ public class QuizManager : MonoBehaviour
     [SerializeField] private SoSfx sfx;
     [SerializeField] private Runtime runtimeData;
     SoChapOneRuntimeData runtimeDataCh01;
+    SoChapTwoRuntimeData runtimeDataCh02;
     [SerializeField] private SoQuizConfig quizConfig;
 
 
     private void Awake()
     {
         runtimeDataCh01 = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        runtimeDataCh02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
 
         if (SceneManager.GetActiveScene().name == GameScenes.ch01Quiz)
-        { 
-            runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        {
+            runtimeData = runtimeDataCh01;
+            generalKeyOverlay = GameData.NameOverlay1110;
         }
         else if (SceneManager.GetActiveScene().name == GameScenes.ch02Quiz)
         {
-            runtimeData = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
+            runtimeData = runtimeDataCh02;
+            generalKeyOverlay = GameData.NameOverlay2112;
         }
         
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
@@ -108,8 +111,9 @@ public class QuizManager : MonoBehaviour
 
             foreach (QuizAnswerItem a in questionItemListshuffled[currentProgressIndex].answerList)
             {
-                a.ShowResult();
-                tmpPoints *= a.GetPointForAnswer();
+                //a.ShowResult();
+                //tmpPoints *= a.GetPointsPerAnswer();
+                tmpPoints *= a.GetPointPerAnswerAndShowUIResult();
             }
 
             pointsPerQuestion = quizTimer.GetCompletionTime() * tmpPoints;
@@ -160,6 +164,12 @@ public class QuizManager : MonoBehaviour
                 runtimeDataCh01.quizPointsCh01 = pointsSum.ToString();
                 runtimeDataCh01.quiz119Done = true;
                 switchScene.SwitchToChapter1withOverlay(generalKeyOverlay);
+            } 
+            else if (SceneManager.GetActiveScene().name == GameScenes.ch02Quiz)
+            {
+                runtimeDataCh02.quizPointsCh02 = pointsSum.ToString();
+                runtimeDataCh02.progressPost2111QuizDone = true;
+                switchScene.SwitchToChapter2withOverlay(generalKeyOverlay);
             }
         }    
     }
@@ -168,6 +178,7 @@ public class QuizManager : MonoBehaviour
     {
         runtimeData.quizMinerFeedback = MinerFeedback.Idle;
         runtimeData.singleSelectAwIdOld = null;
+        runtimeDataCh02.singleSelectAwObjName = "--";
         uiQuestion.text = questionItemListshuffled[progressIndex].GetQuestionText();
         uiPostImage.sprite = questionItemListshuffled[progressIndex].GetPostImage();
         buzzerTop.tag = "Buzzer"; //braucht man evt. nicht

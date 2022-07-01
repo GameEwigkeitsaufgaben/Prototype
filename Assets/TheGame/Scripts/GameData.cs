@@ -68,6 +68,7 @@ public static class GameData
     public const string NameOverlay219 = "Overlay219";
     public const string NameOverlay2110 = "Overlay2110";
     public const string NameOverlay2111 = "Overlay2111";
+    public const string NameOverlay2112 = "Overlay2112";
 
     public const string NameEntry111 = "Entry111";
     public const string NameEntry112 = "Entry112";

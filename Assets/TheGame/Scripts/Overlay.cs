@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
+
 
 public enum OverlayChildType
 {
@@ -29,11 +31,13 @@ public class Overlay : MonoBehaviour
     private SoGameIcons icons;
     private PostManagerChapterOne menuManager;
     private SoChapOneRuntimeData runtimeData;
+    private SoChapTwoRuntimeData runtimeDataChap02;
 
     private void Awake()
     {
         icons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        runtimeDataChap02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
         webglVideoPlayer = GameObject.FindObjectOfType<WebGlVideoPlayer>();
     }
 
@@ -130,8 +134,26 @@ public class Overlay : MonoBehaviour
 
     public void UpdateOverlayText()
     {
-        string points = runtimeData.quizPointsCh01;
-        Debug.Log(allOverlayChildren[OVERLAYDESCRIPTION].gameObject.name);
+        // verbessern!
+        string points = "---";
+
+        if (SceneManager.GetActiveScene().name == GameScenes.ch01Quiz)
+        {
+            points = runtimeData.quizPointsCh01;
+        }
+        else if (SceneManager.GetActiveScene().name == GameScenes.ch02InstaMain)
+        {
+            if (runtimeDataChap02 != null)
+            {
+                points = runtimeDataChap02.quizPointsCh02;
+            }
+        }
+        else
+        {
+            points = "error";
+        }
+
+        Debug.Log(points);
         allOverlayChildren[OVERLAYDESCRIPTION].gameObject.GetComponent<TMP_Text>().text = $"Punkte: {points}\n" + postData.postDescription;
     }
 
