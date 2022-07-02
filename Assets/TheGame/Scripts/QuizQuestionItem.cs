@@ -9,7 +9,6 @@ public class QuizQuestionItem
     private QuizData questionItemData;
     private QuizQuestionType questionType;
 
-
     public List<QuizAnswerItem> answerList = new List<QuizAnswerItem>();
     public bool unProved = true;
 

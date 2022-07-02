@@ -270,33 +270,43 @@ public class Entry : MonoBehaviour
                 else if (gameObject.name == GameData.NameEntry38) post.GetComponent<Post>().UnlockPost();
             }
 
-            if((gameObject.name == GameData.NameEntry39 || gameObject.name == GameData.NameEntry310) &&
+            if ((gameObject.name == GameData.NameEntry39 || gameObject.name == GameData.NameEntry310) &&
                 runtimeDataCh03.IsPostDone(ProgressChap3enum.Post33) &&
                 runtimeDataCh03.IsPostDone(ProgressChap3enum.Post34) &&
                 runtimeDataCh03.IsPostDone(ProgressChap3enum.Post35) &&
                 runtimeDataCh03.IsPostDone(ProgressChap3enum.Post36) &&
                 runtimeDataCh03.IsPostDone(ProgressChap3enum.Post37) &&
                 runtimeDataCh03.IsPostDone(ProgressChap3enum.Post38))
-                {
-                    post.GetComponent<Post>().UnlockPost();
-                }
+            {
+                post.GetComponent<Post>().UnlockPost();
+            }
 
             else if (gameObject.name == GameData.NameEntry311 && runtimeDataCh03.IsPostDone(ProgressChap3enum.Post310)) post.GetComponent<Post>().UnlockPost();
             else if (gameObject.name == GameData.NameEntry312 && runtimeDataCh03.IsPostDone(ProgressChap3enum.Post311)) post.GetComponent<Post>().UnlockPost();
 
             else if (gameObject.name == GameData.NameEntry313 || gameObject.name == GameData.NameEntry314)
             {
-                if(runtimeDataCh03.IsPostDone(ProgressChap3enum.Post312)) post.GetComponent<Post>().UnlockPost();
+                if (runtimeDataCh03.IsPostDone(ProgressChap3enum.Post312)) post.GetComponent<Post>().UnlockPost();
             }
 
             else if (gameObject.name == GameData.NameEntry316)
             {
-                if (runtimeDataCh03.IsPostDone(ProgressChap3enum.Post315)) post.GetComponent<Post>().UnlockPost();
+                if (runtimeDataCh03.IsPostDone(ProgressChap3enum.Post315))
+                {
+                    post.GetComponent<Post>().UnlockPost();
+                }
             }
 
             else if (gameObject.name == GameData.NameEntry317)
             {
-                if (runtimeDataCh03.IsPostDone(ProgressChap3enum.Post316)) post.GetComponent<Post>().UnlockPost();
+                if (runtimeDataCh03.IsPostDone(ProgressChap3enum.Post316))
+                {
+                    Debug.Log("Quiz solved: ");
+                    post.GetComponent<Post>().UnlockPost();
+                    overlay.GetComponent<Overlay>().UpdateOverlayText();
+                    GameData.chapterThreeUnlocked = 1;
+
+                }
             }
         }
     }

@@ -32,6 +32,8 @@ public class SoChapThreeRuntimeData : Runtime
 
     public string[] namesEnum = System.Enum.GetNames(typeof(ProgressChap3enum));
     public ProgressChap3[] progressDone;
+    public string quizPointsCh03 = "***";
+    public string singleSelectAwObjName = "--";
 
 
     //Called in Entry
@@ -55,6 +57,16 @@ public class SoChapThreeRuntimeData : Runtime
         {
             progressDone[i] = new ProgressChap3(namesEnum[i]);
             progressDone[i].done = false;
+        }
+    }
+
+    public void SetAllDone()
+    {
+
+        for (int i = 0; i < progressDone.Length; i++)
+        {
+            progressDone[i] = new ProgressChap3(namesEnum[i]);
+            progressDone[i].done = true;
         }
     }
 }

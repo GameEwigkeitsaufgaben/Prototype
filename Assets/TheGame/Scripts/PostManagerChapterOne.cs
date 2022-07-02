@@ -20,6 +20,7 @@ public class PostManagerChapterOne : MonoBehaviour
     private Runtime runtimeData;
     private SoChapOneRuntimeData runtimeDataChap01;
     private SoChapTwoRuntimeData runtimeDataChap02;
+    private SoChapThreeRuntimeData runtimeDataChap03;
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoGameIcons gameIcons;
 
@@ -27,6 +28,7 @@ public class PostManagerChapterOne : MonoBehaviour
     {
         runtimeDataChap01 = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         runtimeDataChap02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
+        runtimeDataChap03 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
 
@@ -46,7 +48,11 @@ public class PostManagerChapterOne : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == GameScenes.ch03InstaMain)
         {
-            runtimeData = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
+            runtimeData = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
+            if (runtimeDataChapters.progressWithAdminCh3)
+            {
+                runtimeDataChap03.SetAllDone();
+            }
         }
 
         gameIcons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);

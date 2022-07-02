@@ -50,6 +50,7 @@ public class QuizManager : MonoBehaviour
     [SerializeField] private Runtime runtimeData;
     SoChapOneRuntimeData runtimeDataCh01;
     SoChapTwoRuntimeData runtimeDataCh02;
+    SoChapThreeRuntimeData runtimeDataCh03;
     [SerializeField] private SoQuizConfig quizConfig;
 
 
@@ -57,6 +58,7 @@ public class QuizManager : MonoBehaviour
     {
         runtimeDataCh01 = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         runtimeDataCh02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
+        runtimeDataCh03 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
 
         if (SceneManager.GetActiveScene().name == GameScenes.ch01Quiz)
         {
@@ -68,7 +70,12 @@ public class QuizManager : MonoBehaviour
             runtimeData = runtimeDataCh02;
             generalKeyOverlay = GameData.NameOverlay2112;
         }
-        
+        else if (SceneManager.GetActiveScene().name == GameScenes.ch03Quiz)
+        {
+            runtimeData = runtimeDataCh03;
+            generalKeyOverlay = GameData.NameOverlay317;
+        }
+
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
         quizConfig = Resources.Load<SoQuizConfig>(GameData.NameConfigQuiz);
     }
@@ -170,6 +177,12 @@ public class QuizManager : MonoBehaviour
                 runtimeDataCh02.quizPointsCh02 = pointsSum.ToString();
                 runtimeDataCh02.progressPost2111QuizDone = true;
                 switchScene.SwitchToChapter2withOverlay(generalKeyOverlay);
+            }
+            else if (SceneManager.GetActiveScene().name == GameScenes.ch03Quiz)
+            {
+                runtimeDataCh03.quizPointsCh03 = pointsSum.ToString();
+                runtimeDataCh03.SetPostDone(ProgressChap3enum.Post316);
+                switchScene.SwitchToChapter3withOverlay(generalKeyOverlay);
             }
         }    
     }

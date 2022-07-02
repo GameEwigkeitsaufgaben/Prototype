@@ -78,7 +78,10 @@ public class Post : MonoBehaviour
         {
             postData.postUnLocked = true;
         }
-        
+        if (SceneManager.GetActiveScene().name == GameScenes.ch03InstaMain && chaptersRuntimeData.progressWithAdminCh3)
+        {
+            postData.postUnLocked = true;
+        }
         //if post unlocked go further to unlock post in instamenu
         if (!postData.postUnLocked) return;
 

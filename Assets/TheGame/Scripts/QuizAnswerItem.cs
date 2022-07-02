@@ -10,6 +10,7 @@ public class QuizAnswerItem
     private SoQuizConfig myQuizConfig;
     private SoChapOneRuntimeData runtimeData;
     private SoChapTwoRuntimeData runtimeDataChap02;
+    private SoChapThreeRuntimeData runtimeDataChap03;
     private VerticalLayoutGroup buttonGroup;
 
     public string questionIdentifier;
@@ -28,6 +29,7 @@ public class QuizAnswerItem
         myQuizConfig = Resources.Load<SoQuizConfig>(GameData.NameConfigQuiz);
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         runtimeDataChap02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
+        runtimeDataChap03 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
     }
 
     public QuizAnswerItem(VerticalLayoutGroup parent) 
@@ -131,6 +133,22 @@ public class QuizAnswerItem
             else if (EventSystem.current.GetComponent<EventSystem>().currentSelectedGameObject.name != runtimeDataChap02.singleSelectAwObjName)
             {
                 runtimeDataChap02.singleSelectAwObjName = btn.gameObject.name;
+                btn.GetComponent<QuizAnswerUiBehaviour>().isSelected = true;
+            }
+        }
+        else if (SceneManager.GetActiveScene().name == GameScenes.ch03Quiz)
+        {
+            Debug.Log("event system name obj " + EventSystem.current.GetComponent<EventSystem>().currentSelectedGameObject.name);
+            Debug.Log("btn name obj " + runtimeDataChap02.singleSelectAwObjName);
+
+            if (EventSystem.current.GetComponent<EventSystem>().currentSelectedGameObject == null)
+            {
+                btn.GetComponent<QuizAnswerUiBehaviour>().isSelected = true;
+                runtimeDataChap03.singleSelectAwObjName = btn.gameObject.name;
+            }
+            else if (EventSystem.current.GetComponent<EventSystem>().currentSelectedGameObject.name != runtimeDataChap03.singleSelectAwObjName)
+            {
+                runtimeDataChap03.singleSelectAwObjName = btn.gameObject.name;
                 btn.GetComponent<QuizAnswerUiBehaviour>().isSelected = true;
             }
         }
