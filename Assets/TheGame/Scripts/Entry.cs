@@ -28,6 +28,7 @@ public class Entry : MonoBehaviour
     private SoSfx sfx;
     private SoChapOneRuntimeData runtimeData;
     private SoChapTwoRuntimeData runtimeDataCh02;
+    private SoChapThreeRuntimeData runtimeDataCh03;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,7 @@ public class Entry : MonoBehaviour
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         runtimeDataCh02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
+        runtimeDataCh03 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
 
         post.GetComponent<Post>().SetPostData(postData);
         overlay.GetComponent<Overlay>().SetOverlayData(postData);
@@ -126,8 +128,6 @@ public class Entry : MonoBehaviour
     {
         if(SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain)
         {
-            if (gameObject.name == GameData.NamePost117) Debug.Log("117");
-
             if (post.GetComponent<Post>().isPostLocked())
             {
                 if(gameObject.name == GameData.NameEntry113 && runtimeData.post111Done && runtimeData.post112Done)
@@ -220,6 +220,48 @@ public class Entry : MonoBehaviour
             }
 
         }
-        
+        else if (SceneManager.GetActiveScene().name == GameScenes.ch03InstaMain)
+        {
+            if (!post.GetComponent<Post>().isPostLocked()) return;
+
+            if (runtimeDataCh03.IsPostDone(ProgressChap3enum.Post32))
+            {
+                if(gameObject.name == GameData.NameEntry33) post.GetComponent<Post>().UnlockPost();
+                else if (gameObject.name == GameData.NameEntry34) post.GetComponent<Post>().UnlockPost();
+                else if (gameObject.name == GameData.NameEntry35) post.GetComponent<Post>().UnlockPost();
+                else if (gameObject.name == GameData.NameEntry36) post.GetComponent<Post>().UnlockPost();
+                else if (gameObject.name == GameData.NameEntry37) post.GetComponent<Post>().UnlockPost();
+                else if (gameObject.name == GameData.NameEntry38) post.GetComponent<Post>().UnlockPost();
+            }
+
+            if((gameObject.name == GameData.NameEntry39 || gameObject.name == GameData.NameEntry310) &&
+                runtimeDataCh03.IsPostDone(ProgressChap3enum.Post33) &&
+                runtimeDataCh03.IsPostDone(ProgressChap3enum.Post34) &&
+                runtimeDataCh03.IsPostDone(ProgressChap3enum.Post35) &&
+                runtimeDataCh03.IsPostDone(ProgressChap3enum.Post36) &&
+                runtimeDataCh03.IsPostDone(ProgressChap3enum.Post37) &&
+                runtimeDataCh03.IsPostDone(ProgressChap3enum.Post38))
+                {
+                    post.GetComponent<Post>().UnlockPost();
+                }
+
+            else if (gameObject.name == GameData.NameEntry311 && runtimeDataCh03.IsPostDone(ProgressChap3enum.Post310)) post.GetComponent<Post>().UnlockPost();
+            else if (gameObject.name == GameData.NameEntry312 && runtimeDataCh03.IsPostDone(ProgressChap3enum.Post311)) post.GetComponent<Post>().UnlockPost();
+
+            else if (gameObject.name == GameData.NameEntry313 || gameObject.name == GameData.NameEntry314)
+            {
+                if(runtimeDataCh03.IsPostDone(ProgressChap3enum.Post312)) post.GetComponent<Post>().UnlockPost();
+            }
+
+            else if (gameObject.name == GameData.NameEntry316)
+            {
+                if (runtimeDataCh03.IsPostDone(ProgressChap3enum.Post315)) post.GetComponent<Post>().UnlockPost();
+            }
+
+            else if (gameObject.name == GameData.NameEntry317)
+            {
+                if (runtimeDataCh03.IsPostDone(ProgressChap3enum.Post316)) post.GetComponent<Post>().UnlockPost();
+            }
+        }
     }
 }

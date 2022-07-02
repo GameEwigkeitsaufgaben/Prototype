@@ -77,5 +77,23 @@ public class SoPostData : ScriptableObject
         {
             postUnLocked = false;
         }
+
+        if (this.name == GameData.NamePost33 ||
+            this.name == GameData.NamePost34 ||
+            this.name == GameData.NamePost35 ||
+            this.name == GameData.NamePost36 ||
+            this.name == GameData.NamePost37 ||
+            this.name == GameData.NamePost38 ||
+            this.name == GameData.NamePost39 ||
+            this.name == GameData.NamePost310 ||
+            this.name == GameData.NamePost311 ||
+            this.name == GameData.NamePost312 ||
+            this.name == GameData.NamePost313 ||
+            this.name == GameData.NamePost314 ||
+            this.name == GameData.NamePost316 ||
+            this.name == GameData.NamePost317)
+        {
+            postUnLocked = false;
+        }
     }
 }

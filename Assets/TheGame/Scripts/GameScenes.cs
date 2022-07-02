@@ -43,5 +43,5 @@ public static class GameScenes
 
     //Chapter three Ewigkeitsaufgaben
     public const string ch03InstaMain = "ch03scene01-00-instaMenu";
-    public const string ch03Demo = "ch03scene01-02-demo";
+    public const string ch03Demo = "ch03scene02-00-demo";
 }

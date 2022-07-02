@@ -47,6 +47,23 @@ public static class GameData
     public const string NamePost2111 = "Post2111";
     public const string NamePost2112 = "Post2112";
 
+    public const string NamePost32 = "Post3.2";
+    public const string NamePost33 = "Post3.3";
+    public const string NamePost34 = "Post3.4";
+    public const string NamePost35 = "Post3.5";
+    public const string NamePost36 = "Post3.6";
+    public const string NamePost37 = "Post3.7";
+    public const string NamePost38 = "Post3.8";
+    public const string NamePost39 = "Post3.9";
+    public const string NamePost310 = "Post3.10";
+    public const string NamePost311 = "Post3.11";
+    public const string NamePost312 = "Post3.12";
+    public const string NamePost313 = "Post3.13";
+    public const string NamePost314 = "Post3.14";
+    public const string NamePost315 = "Post3.15";
+    public const string NamePost316 = "Post3.16";
+    public const string NamePost317 = "Post3.17";
+
     public const string NameOverlay111 = "Overlay111";
     public const string NameOverlay112 = "Overlay112";
     public const string NameOverlay113 = "Overlay113";
@@ -90,6 +107,22 @@ public static class GameData
     public const string NameEntry2111 = "Entry2111";
     public const string NameEntry2112 = "Entry2112";
 
+    public const string NameEntry32 = "Entry32";
+    public const string NameEntry33 = "Entry33";
+    public const string NameEntry34 = "Entry34";
+    public const string NameEntry35 = "Entry35";
+    public const string NameEntry36 = "Entry36";
+    public const string NameEntry37 = "Entry37";
+    public const string NameEntry38 = "Entry38";
+    public const string NameEntry39 = "Entry39";
+    public const string NameEntry310 = "Entry310";
+    public const string NameEntry311 = "Entry311";
+    public const string NameEntry312 = "Entry312";
+    public const string NameEntry313 = "Entry313";
+    public const string NameEntry314 = "Entry314";
+    public const string NameEntry315 = "Entry315";
+    public const string NameEntry316 = "Entry316";
+    public const string NameEntry317 = "Entry317";
 
 
     public static int chapterOneUnlocked = 0;

@@ -143,6 +143,10 @@ public class PostManagerChapterOne : MonoBehaviour
         {
             hints.text = runtimeDataChap02.hintPostUnlock;
         }
+        else if(SceneManager.GetActiveScene().name == GameScenes.ch03InstaMain)
+        {
+            hints.text = runtimeDataChap02.hintPostUnlock;
+        }
 
         //potential für verbesserung,nur anschauen wenn nötig
         if (runtimeData.overlaySoundState == OverlaySoundState.NoSound)
