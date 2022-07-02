@@ -16,6 +16,7 @@ public static class GameData
     public const string NameRuntimeDataChapters = "00RuntimeDataChapters";
     public const string NameRuntimeDataChap01 = "RuntimeExchangeData";
     public const string NameRuntimeDataChap02 = "RuntimeDataCh02";
+    public const string NameRuntimeDataChap03 = "RuntimeDataCh03";
     public const string NameConfigMinerEquiment = "ConfigMinerEquipment";
     public const string NameConfigMuseum = "ConfigMuseum";
     public const string NameGameIcons = "Icons";

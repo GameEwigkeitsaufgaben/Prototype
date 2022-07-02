@@ -50,7 +50,9 @@ public class SoPostData : ScriptableObject
 
     private void OnEnable()
     {
-        if(this.name == GameData.NamePost113 ||
+        icons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
+
+        if (this.name == GameData.NamePost113 ||
             this.name == GameData.NamePost114 ||
             this.name == GameData.NamePost115 ||
             this.name == GameData.NamePost116 ||

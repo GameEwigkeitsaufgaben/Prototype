@@ -44,6 +44,10 @@ public class PostManagerChapterOne : MonoBehaviour
                 runtimeDataChap02.SetAllDone();
             }
         }
+        else if (SceneManager.GetActiveScene().name == GameScenes.ch03InstaMain)
+        {
+            runtimeData = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
+        }
 
         gameIcons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
@@ -62,7 +66,15 @@ public class PostManagerChapterOne : MonoBehaviour
         gameObject.GetComponent<AudioSource>().volume = GameData.maxBGVolumeInsta;
         gameObject.GetComponent<AudioSource>().Play();
 
-        EnableDisableMusic(runtimeData.musicOn);
+        if(runtimeData != null)
+        {
+            EnableDisableMusic(runtimeData.musicOn);
+        }
+        else
+        {
+            Debug.Log("no runtime data");
+        }
+        
         
         if (runtimeData.postOverlayToLoad != "" && dictOverlay != null)
         {
