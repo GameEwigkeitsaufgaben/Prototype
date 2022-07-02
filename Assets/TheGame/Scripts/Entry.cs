@@ -103,6 +103,42 @@ public class Entry : MonoBehaviour
         {
             runtimeDataCh02.progressPost217Done = true;
         }
+        else if (overlay.name == GameData.NameOverlay33)
+        {
+            runtimeDataCh03.SetPostDone(ProgressChap3enum.Post33);
+        }
+        else if (overlay.name == GameData.NameOverlay34)
+        {
+            runtimeDataCh03.SetPostDone(ProgressChap3enum.Post34);
+        }
+        else if (overlay.name == GameData.NameOverlay35)
+        {
+            runtimeDataCh03.SetPostDone(ProgressChap3enum.Post35);
+        }
+        else if (overlay.name == GameData.NameOverlay36)
+        {
+            runtimeDataCh03.SetPostDone(ProgressChap3enum.Post36);
+        }
+        else if (overlay.name == GameData.NameOverlay37)
+        {
+            runtimeDataCh03.SetPostDone(ProgressChap3enum.Post37);
+        }
+        else if (overlay.name == GameData.NameOverlay38)
+        {
+            runtimeDataCh03.SetPostDone(ProgressChap3enum.Post38);
+        }
+        else if (overlay.name == GameData.NameOverlay39)
+        {
+            runtimeDataCh03.SetPostDone(ProgressChap3enum.Post39);
+        }
+        else if (overlay.name == GameData.NameOverlay313)
+        {
+            runtimeDataCh03.SetPostDone(ProgressChap3enum.Post313);
+        }
+        else if (overlay.name == GameData.NameOverlay315)
+        {
+            runtimeDataCh03.SetPostDone(ProgressChap3enum.Post315);
+        }
 
         if (runtimeData.musicOn)
         {

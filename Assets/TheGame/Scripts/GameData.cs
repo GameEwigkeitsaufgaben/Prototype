@@ -88,6 +88,23 @@ public static class GameData
     public const string NameOverlay2111 = "Overlay2111";
     public const string NameOverlay2112 = "Overlay2112";
 
+    public const string NameOverlay32 = "Overlay32";
+    public const string NameOverlay33 = "Overlay33";
+    public const string NameOverlay34 = "Overlay34";
+    public const string NameOverlay35 = "Overlay35";
+    public const string NameOverlay36 = "Overlay36";
+    public const string NameOverlay37 = "Overlay37";
+    public const string NameOverlay38 = "Overlay38";
+    public const string NameOverlay39 = "Overlay39";
+    public const string NameOverlay310 = "Overlay310";
+    public const string NameOverlay311 = "Overlay311";
+    public const string NameOverlay312 = "Overlay312";
+    public const string NameOverlay313 = "Overlay313";
+    public const string NameOverlay314 = "Overlay314";
+    public const string NameOverlay315 = "Overlay315";
+    public const string NameOverlay316 = "Overlay316";
+    public const string NameOverlay317 = "Overlay317";
+
     public const string NameEntry111 = "Entry111";
     public const string NameEntry112 = "Entry112";
     public const string NameEntry113 = "Entry113";
