@@ -7,7 +7,7 @@ public class SoChaptersRuntimeData : ScriptableObject
     public bool ch2GrubenwasserUnlocked;
     public bool ch3GrubenwasserUnlocked;
 
-    public bool progressWithAdminCh1, progressWithAdminCh2;
+    public bool progressWithAdminCh1, progressWithAdminCh2, progressWithAdminCh3;
 
     [Header("Cursor")]
     public Texture2D cursorTexture3DCave;
@@ -24,7 +24,7 @@ public class SoChaptersRuntimeData : ScriptableObject
     {
         Debug.Log("Enable SoChaptersRuntimeData");
         ch1GeneralUnlocked = ch2GrubenwasserUnlocked = ch3GrubenwasserUnlocked = false;
-        progressWithAdminCh1 = progressWithAdminCh2 = false;
+        progressWithAdminCh1 = progressWithAdminCh2 = progressWithAdminCh3 = false;
     }
 
     public void SetSceneCursor(Texture2D defaultSceneCursor)

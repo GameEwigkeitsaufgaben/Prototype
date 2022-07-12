@@ -9,11 +9,13 @@ public class SwitchSceneManager : MonoBehaviour
     public float transitionTime = 1f;
     SoChapOneRuntimeData runtimeData;
     SoChapTwoRuntimeData runtimeDataChap02;
+    SoChapThreeRuntimeData runtimeDataChap03;
 
     private void Awake()
     {
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         runtimeDataChap02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
+        runtimeDataChap03 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
     }
 
     public void LoadMine()
@@ -162,6 +164,12 @@ public class SwitchSceneManager : MonoBehaviour
         
         runtimeDataChap02.postOverlayToLoad = overlayName;
         SwitchScene(GameScenes.ch02InstaMain);
+    }
+
+    public void SwitchToChapter3withOverlay(string overlayName)
+    {
+        runtimeDataChap03.postOverlayToLoad = overlayName;
+        SwitchScene(GameScenes.ch03InstaMain);
     }
 
     IEnumerator LoadSceneWithTransition(string name)

@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Shapes;
+using UnityEngine.SceneManagement;
 
 public enum ViewpointLocation
 {
     Mine,
-    Museum
+    Museum,
+    OutdoorGW
 }
 
 public class Viewpoint : MonoBehaviour
@@ -24,6 +26,15 @@ public class Viewpoint : MonoBehaviour
     public static string viewpointMuseumMyth = "ViewpointMuseumMyth";
     public static string viewpointMuseumInkohlung = "ViewpointMuseumInkohlung";
     public static string viewpointMuseumWorld = "ViewpointMuseumWorld";
+
+    //Interactive viewpoints in GW Chap02
+    public static string viewpointBeluftung = "ViewpointGWBeluftung";
+    public static string viewpointAbsetzbecken = "ViewpointAbsetzbecken";
+    public static string viewpointKalkmilch = "ViewpointKalkmilch";
+    public static string viewpointSulfat = "ViewpointSulfat";
+    public static string viewpointOsmose = "ViewpointOsmose";
+    public static string viewpointCleanWater = "ViewpointCleanWater";
+
 
 
     SoGameColors gameColors; //SoGAmeColors
@@ -98,8 +109,6 @@ public class Viewpoint : MonoBehaviour
             }
         }
         
-       
-
         if (!discSetToDone)
         {
             if(runtimeData.interaction116Done && vpLocation == ViewpointLocation.Mine) SetInteractionDone();

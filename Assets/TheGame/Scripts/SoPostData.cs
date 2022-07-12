@@ -50,7 +50,9 @@ public class SoPostData : ScriptableObject
 
     private void OnEnable()
     {
-        if(this.name == GameData.NamePost113 ||
+        icons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
+
+        if (this.name == GameData.NamePost113 ||
             this.name == GameData.NamePost114 ||
             this.name == GameData.NamePost115 ||
             this.name == GameData.NamePost116 ||
@@ -58,6 +60,38 @@ public class SoPostData : ScriptableObject
             this.name == GameData.NamePost118 ||
             this.name == GameData.NamePost119 ||
             this.name == GameData.NamePost1110)
+        {
+            postUnLocked = false;
+        }
+
+        if(this.name == GameData.NamePost213 ||
+            this.name == GameData.NamePost214 ||
+            this.name == GameData.NamePost215 ||
+            this.name == GameData.NamePost216 ||
+            this.name == GameData.NamePost217 ||
+            this.name == GameData.NamePost218 ||
+            this.name == GameData.NamePost219 ||
+            this.name == GameData.NamePost2110 ||
+            this.name == GameData.NamePost2111 ||
+            this.name == GameData.NamePost2112 )
+        {
+            postUnLocked = false;
+        }
+
+        if (this.name == GameData.NamePost33 ||
+            this.name == GameData.NamePost34 ||
+            this.name == GameData.NamePost35 ||
+            this.name == GameData.NamePost36 ||
+            this.name == GameData.NamePost37 ||
+            this.name == GameData.NamePost38 ||
+            this.name == GameData.NamePost39 ||
+            this.name == GameData.NamePost310 ||
+            this.name == GameData.NamePost311 ||
+            this.name == GameData.NamePost312 ||
+            this.name == GameData.NamePost313 ||
+            this.name == GameData.NamePost314 ||
+            this.name == GameData.NamePost316 ||
+            this.name == GameData.NamePost317)
         {
             postUnLocked = false;
         }

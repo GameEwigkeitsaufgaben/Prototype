@@ -6,11 +6,13 @@ public class MouseChange : MonoBehaviour
     private CursorMode cursorMode = CursorMode.Auto;
     private Vector2 hotSpot = Vector2.zero;
     private SoChapOneRuntimeData runtimeDataCh01;
+    private SoChapTwoRuntimeData runtimeDataCh02;
     private SoChaptersRuntimeData runtimeDataChapters;
 
     private void Awake()
     {
         runtimeDataCh01 = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        runtimeDataCh02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
     }
 
@@ -60,6 +62,8 @@ public class MouseChange : MonoBehaviour
         if (gameObject.GetComponent<Post>())
         {
             runtimeDataCh01.hintPostUnlock = (gameObject.GetComponent<Button>().interactable) ? "": gameObject.GetComponent<Post>().GetUnlockHint();
+            Debug.Log("rtch02 is null: " + (runtimeDataCh02 == null));
+            runtimeDataCh02.hintPostUnlock = (gameObject.GetComponent<Button>().interactable) ? "" : gameObject.GetComponent<Post>().GetUnlockHint();
         }
         
         if(gameObject.GetComponent<Button>() != null && gameObject.GetComponent<Button>().interactable)
@@ -117,6 +121,7 @@ public class MouseChange : MonoBehaviour
         
         Cursor.SetCursor(runtimeDataChapters.sceneCursor, Vector2.zero, cursorMode);
         runtimeDataCh01.hintPostUnlock = "";
+        runtimeDataCh02.hintPostUnlock = "";
     }
 
     public void MouseDown()

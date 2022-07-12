@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 using TMPro;
 
 public class QuizAnswerItem
@@ -7,6 +9,8 @@ public class QuizAnswerItem
     //Is not a Monobehavior script so gameObject is available to ref sprite; 
     private SoQuizConfig myQuizConfig;
     private SoChapOneRuntimeData runtimeData;
+    private SoChapTwoRuntimeData runtimeDataChap02;
+    private SoChapThreeRuntimeData runtimeDataChap03;
     private VerticalLayoutGroup buttonGroup;
 
     public string questionIdentifier;
@@ -24,6 +28,8 @@ public class QuizAnswerItem
     {
         myQuizConfig = Resources.Load<SoQuizConfig>(GameData.NameConfigQuiz);
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        runtimeDataChap02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
+        runtimeDataChap03 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
     }
 
     public QuizAnswerItem(VerticalLayoutGroup parent) 
@@ -92,24 +98,63 @@ public class QuizAnswerItem
         btn.GetComponent<QuizAnswerUiBehaviour>().ShowResult();
     }
 
+    public int GetPointPerAnswerAndShowUIResult()
+    {
+        return btn.GetComponent<QuizAnswerUiBehaviour>().GetAndShowResultPerAnswer();
+    }
+
     private void SelectThisAnswer()
     {
-        
-        if (runtimeData.singleSelectAwIdOld == null)
+        if(SceneManager.GetActiveScene().name == GameScenes.ch01Quiz)
         {
-            btn.GetComponent<QuizAnswerUiBehaviour>().isSelected = true;
-            runtimeData.singleSelectAwIdOld = btn.gameObject;
-        }
+            if (runtimeData.singleSelectAwIdOld == null)
+            {
+                btn.GetComponent<QuizAnswerUiBehaviour>().isSelected = true;
+                runtimeData.singleSelectAwIdOld = btn.gameObject;
+            }
 
-        else if (runtimeData.singleSelectAwIdOld.GetComponent<QuizAnswerUiBehaviour>().awId != btn.GetComponent<QuizAnswerUiBehaviour>().awId)
+            else if (runtimeData.singleSelectAwIdOld.GetComponent<QuizAnswerUiBehaviour>().awId != btn.GetComponent<QuizAnswerUiBehaviour>().awId)
+            {
+                runtimeData.singleSelectAwIdOld.GetComponent<QuizAnswerUiBehaviour>().isSelected = false;
+                runtimeData.singleSelectAwIdOld = btn.gameObject;
+                btn.GetComponent<QuizAnswerUiBehaviour>().isSelected = true;
+            }
+        }
+        else if (SceneManager.GetActiveScene().name == GameScenes.ch02Quiz)
         {
-            runtimeData.singleSelectAwIdOld.GetComponent<QuizAnswerUiBehaviour>().isSelected = false;
-            runtimeData.singleSelectAwIdOld = btn.gameObject;
-            btn.GetComponent<QuizAnswerUiBehaviour>().isSelected = true;
+            Debug.Log("event system name obj " + EventSystem.current.GetComponent<EventSystem>().currentSelectedGameObject.name);
+            Debug.Log("btn name obj " + runtimeDataChap02.singleSelectAwObjName);
+
+            if(EventSystem.current.GetComponent<EventSystem>().currentSelectedGameObject == null)
+            {
+                btn.GetComponent<QuizAnswerUiBehaviour>().isSelected = true;
+                runtimeDataChap02.singleSelectAwObjName = btn.gameObject.name;
+            }
+            else if (EventSystem.current.GetComponent<EventSystem>().currentSelectedGameObject.name != runtimeDataChap02.singleSelectAwObjName)
+            {
+                runtimeDataChap02.singleSelectAwObjName = btn.gameObject.name;
+                btn.GetComponent<QuizAnswerUiBehaviour>().isSelected = true;
+            }
+        }
+        else if (SceneManager.GetActiveScene().name == GameScenes.ch03Quiz)
+        {
+            Debug.Log("event system name obj " + EventSystem.current.GetComponent<EventSystem>().currentSelectedGameObject.name);
+            Debug.Log("btn name obj " + runtimeDataChap02.singleSelectAwObjName);
+
+            if (EventSystem.current.GetComponent<EventSystem>().currentSelectedGameObject == null)
+            {
+                btn.GetComponent<QuizAnswerUiBehaviour>().isSelected = true;
+                runtimeDataChap03.singleSelectAwObjName = btn.gameObject.name;
+            }
+            else if (EventSystem.current.GetComponent<EventSystem>().currentSelectedGameObject.name != runtimeDataChap03.singleSelectAwObjName)
+            {
+                runtimeDataChap03.singleSelectAwObjName = btn.gameObject.name;
+                btn.GetComponent<QuizAnswerUiBehaviour>().isSelected = true;
+            }
         }
     }
 
-    public int GetPointForAnswer()
+    public int GetPointsPerAnswer()
     {
         return btn.GetComponent<QuizAnswerUiBehaviour>().IsCorrectlySelected() ? 1 : 0;
     }

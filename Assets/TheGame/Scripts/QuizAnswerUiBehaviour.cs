@@ -12,6 +12,15 @@ public enum MouseInteraction
     BtnQuizAnswer
 }
 
+public enum UIAnswerState
+{
+    CorrectlyUnselected, 
+    CorrectlySelected,
+    IncorrectlyUnselectd,
+    IncorrectlySelected,
+    None
+}
+
 //navigation mode select von none auf automatic.
 
 public class QuizAnswerUiBehaviour : MonoBehaviour,ISelectHandler, IDeselectHandler
@@ -49,12 +58,52 @@ public class QuizAnswerUiBehaviour : MonoBehaviour,ISelectHandler, IDeselectHand
     {
         uiAnswer.color = Color.white;
         uiAnswer.fontStyle = FontStyles.Bold | FontStyles.SmallCaps;
+        
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
         uiAnswer.color = GameColors.defaultTextColor;
         uiAnswer.fontStyle = FontStyles.Normal;
+       
+    }
+
+    public int GetAndShowResultPerAnswer()
+    {
+        UIAnswerState answerSate = UIAnswerState.None;
+
+        if (isCorrect && isSelected) answerSate = UIAnswerState.CorrectlySelected;
+        else if (isCorrect && !isSelected) answerSate = UIAnswerState.IncorrectlyUnselectd;
+        else if (!isCorrect && isSelected) answerSate = UIAnswerState.IncorrectlySelected;
+        else if (!isCorrect && !isSelected) answerSate = UIAnswerState.CorrectlyUnselected;
+
+        switch (answerSate)
+        {
+            case UIAnswerState.CorrectlySelected:
+                GetComponent<Image>().color = myQuizConfig.correctSelect;
+                uiAnswer.color = GameColors.defaultTextColor;
+                uiAnswer.fontStyle = FontStyles.SmallCaps | FontStyles.Bold;
+                uiAnswer.fontStyle |= FontStyles.Bold;
+                return 1;
+            case UIAnswerState.CorrectlyUnselected:
+                GetComponent<Image>().color = myQuizConfig.incorrect;
+                uiAnswer.color = GameColors.defaultTextColor;
+                uiAnswer.fontStyle = FontStyles.SmallCaps | FontStyles.Bold;
+                return 1;
+            case UIAnswerState.IncorrectlySelected:
+                GetComponent<Image>().color = myQuizConfig.incorrectSelect;
+                uiAnswer.fontSize = uiAnswer.fontSize - uiAnswer.fontSize * 0.2f;
+                uiAnswer.fontStyle |= FontStyles.Bold;
+                return 0;
+            case UIAnswerState.IncorrectlyUnselectd:
+                GetComponent<Image>().color = myQuizConfig.correctSelect;
+                uiAnswer.color = GameColors.defaultTextColor;
+                uiAnswer.fontStyle = FontStyles.SmallCaps | FontStyles.Bold;
+                uiAnswer.fontStyle |= FontStyles.Bold;
+                return 0;
+            default:
+                return 0;
+        }
     }
 
     public void ShowResult()
@@ -86,8 +135,6 @@ public class QuizAnswerUiBehaviour : MonoBehaviour,ISelectHandler, IDeselectHand
                 uiAnswer.fontStyle |= FontStyles.Bold;
             }
         }
-
-
     }
 
     private void Update()

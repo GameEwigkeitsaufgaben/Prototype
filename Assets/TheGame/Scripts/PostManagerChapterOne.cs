@@ -19,12 +19,16 @@ public class PostManagerChapterOne : MonoBehaviour
     private SoSfx sfx;
     private Runtime runtimeData;
     private SoChapOneRuntimeData runtimeDataChap01;
+    private SoChapTwoRuntimeData runtimeDataChap02;
+    private SoChapThreeRuntimeData runtimeDataChap03;
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoGameIcons gameIcons;
 
     private void Awake()
     {
         runtimeDataChap01 = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        runtimeDataChap02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
+        runtimeDataChap03 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
 
@@ -35,6 +39,20 @@ public class PostManagerChapterOne : MonoBehaviour
         else if (SceneManager.GetActiveScene().name == GameScenes.ch02InstaMain)
         {
             runtimeData = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
+            runtimeDataChap02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
+
+            if (runtimeDataChapters.progressWithAdminCh2)
+            {
+                runtimeDataChap02.SetAllDone();
+            }
+        }
+        else if (SceneManager.GetActiveScene().name == GameScenes.ch03InstaMain)
+        {
+            runtimeData = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
+            if (runtimeDataChapters.progressWithAdminCh3)
+            {
+                runtimeDataChap03.SetAllDone();
+            }
         }
 
         gameIcons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
@@ -54,7 +72,15 @@ public class PostManagerChapterOne : MonoBehaviour
         gameObject.GetComponent<AudioSource>().volume = GameData.maxBGVolumeInsta;
         gameObject.GetComponent<AudioSource>().Play();
 
-        EnableDisableMusic(runtimeData.musicOn);
+        if(runtimeData != null)
+        {
+            EnableDisableMusic(runtimeData.musicOn);
+        }
+        else
+        {
+            Debug.Log("no runtime data");
+        }
+        
         
         if (runtimeData.postOverlayToLoad != "" && dictOverlay != null)
         {
@@ -119,7 +145,15 @@ public class PostManagerChapterOne : MonoBehaviour
             runtimeDataChap01.CheckInteraction116Done();
             runtimeDataChap01.CheckInteraction117Done();
         }
-            
+        else if (SceneManager.GetActiveScene().name == GameScenes.ch02InstaMain)
+        {
+            hints.text = runtimeDataChap02.hintPostUnlock;
+        }
+        else if(SceneManager.GetActiveScene().name == GameScenes.ch03InstaMain)
+        {
+            hints.text = runtimeDataChap02.hintPostUnlock;
+        }
+
         //potential für verbesserung,nur anschauen wenn nötig
         if (runtimeData.overlaySoundState == OverlaySoundState.NoSound)
         {
