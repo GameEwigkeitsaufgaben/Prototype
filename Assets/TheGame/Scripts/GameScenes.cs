@@ -45,4 +45,10 @@ public static class GameScenes
     public const string ch03InstaMain = "ch03scene01-00-instaMenu";
     public const string ch03Demo = "ch03scene02-00-demo";
     public const string ch03Quiz = "ch03scene03-00-quiz";
+    public const string ch03EmscherWeg = "ch03scene03-10-01-emscherWeg";
+    public const string ch03Poldern = "ch03scene06-00-poldern";
+    public const string ch03Schautafel = "ch03scene03-10-02-schautafel";
+    public const string ch03turm = "ch03scene03-10-03-grubenwasseraltung";
+    public const string ch03Monitoring = "ch03scene04-01-monitoring";
+    public const string ch03ChancenGWAnstieg = "ch03scene05-01-chancenGWAnstieg";
 }

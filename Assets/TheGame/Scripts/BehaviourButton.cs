@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class BehaviourButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
@@ -11,6 +12,9 @@ public class BehaviourButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
     {
         gameObject.AddComponent<MouseChange>();
         mouse = gameObject.GetComponent<MouseChange>();
+
+        if (gameObject.GetComponent<Image>().sprite.name == "UISprite") return;
+        
         gameObject.AddComponent<ReactOnlyOnInTranspartentParts>();
     }
 
