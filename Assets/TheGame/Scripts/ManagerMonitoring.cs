@@ -35,9 +35,9 @@ public class ManagerMonitoring : MonoBehaviour
     {
         foreach (KeyValuePair<string, Canvas> c in canvasGraphs)
         {
-            c.Value.enabled = false;
+            c.Value.gameObject.SetActive(false);
         }
 
-        canvasGraphs[graph.ToString()].enabled = true;
+        canvasGraphs[graph.ToString()].gameObject.SetActive(true);
     }
 }
