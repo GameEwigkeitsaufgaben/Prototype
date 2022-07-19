@@ -72,7 +72,9 @@ public class Lupe : MonoBehaviour, IDragHandler
         else if (collision.name == fe)
         {
             EnlargeLupe(4f);
-            // manager.SetTextToTrigger(SauresWasserTrigger.Austritt);
+            manager.SetTextToTrigger(SauresWasserTrigger.Austritt);
+            manager.SetMolekuelFound(SauresWasserTrigger.Austritt);
+            animator.SetTrigger("oxi2");
             runtimeDataCh02.feFound = true;
         }
         else if (collision.name == fes2)
@@ -88,7 +90,9 @@ public class Lupe : MonoBehaviour, IDragHandler
         {
             EnlargeLupe(4f);
             manager.SetTextToTrigger(SauresWasserTrigger.Schacht);
+            manager.SetMolekuelFound(SauresWasserTrigger.Schacht);
             runtimeDataCh02.o2Found = true;
+            animator.SetTrigger("o2");
         }
         else if (collision.name == so4)
         {
@@ -120,11 +124,17 @@ public class Lupe : MonoBehaviour, IDragHandler
         else if (collision.name == o2)
         {
             ShrinkToOrigLupe();
+            animator.SetTrigger("idle");
         }
         else if (collision.name == fes2)
         {
             ShrinkToOrigLupe();
             fes2AnimObj.SetActive(false);
+            animator.SetTrigger("idle");
+        }
+        else if (collision.name == fe)
+        {
+            ShrinkToOrigLupe();
             animator.SetTrigger("idle");
         }
         else if (collision.name == h2so4)
