@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ManagerDemo : MonoBehaviour
 {
@@ -10,6 +11,21 @@ public class ManagerDemo : MonoBehaviour
     public GameObject player;
     public List<GameObject> mob;
     public Canvas mobCanvas;
+
+    public Image umweltschutz, wissenschaft, polder, grubenwasser, buerger, wasserversorger;
+
+    private SoConfigChapter3 configCh3; 
+
+    private void Awake()
+    {
+        configCh3 = Resources.Load<SoConfigChapter3>(GameData.NameConfigCH3Demo);
+        umweltschutz.GetComponent<Image>().sprite = configCh3.umweltschuetz;
+        wissenschaft.GetComponent<Image>().sprite = configCh3.wissenschaft;
+        polder.GetComponent<Image>().sprite = configCh3.poldervertretung;
+        grubenwasser.GetComponent<Image>().sprite = configCh3.grubenwasservertretung;
+        buerger.GetComponent<Image>().sprite = configCh3.familie;
+        wasserversorger.GetComponent<Image>().sprite = configCh3.wasserversorgung;
+    }
 
 
     void Start()

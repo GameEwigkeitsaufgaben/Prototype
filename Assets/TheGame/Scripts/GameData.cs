@@ -19,6 +19,7 @@ public static class GameData
     public const string NameRuntimeDataChap03 = "RuntimeDataCh03";
     public const string NameConfigMinerEquiment = "ConfigMinerEquipment";
     public const string NameConfigMuseum = "ConfigMuseum";
+    public const string NameConfigCH3Demo = "ConfigCh3";
     public const string NameGameIcons = "Icons";
     public const string NameGameColors = "ConfigGameColors";
     public static string NameConfigQuiz = "ConfigQuiz";
