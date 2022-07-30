@@ -184,6 +184,8 @@ public static class GameData
     public const string NameTLMuseumIntroFliesspfad= "AudiosMuseumIntroFliesspfad";
     public const string NameTLMuseumOutroExitZeche = "AudiosMuseumOutroExitZeche";
 
+    public const string NameTLDemo = "AudiosCh03Demo";
+
     public static bool progressWithAdmin = false; //if start chapter with admin pwd true, else false;
 
     //Unlock Posts data; is Introvideo played as a whole, than next post is to unlock

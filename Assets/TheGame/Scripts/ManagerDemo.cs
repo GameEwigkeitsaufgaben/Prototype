@@ -14,17 +14,55 @@ public class ManagerDemo : MonoBehaviour
 
     public Image umweltschutz, wissenschaft, polder, grubenwasser, buerger, wasserversorger;
 
-    private SoConfigChapter3 configCh3; 
+    private SoConfigChapter3 configCh3;
+    private SoTalkingList demoAudios;
+    private List<Demonstrant> demonstranten = new List<Demonstrant>();
+    private AudioSource audioSrc;
 
+    public bool buergerDone, umweltDone, scienceDone, polderVertreterDone, gwVertreterDone, wasserversorgerDone;
+
+    int finishedCount = 0;
+
+    string currentClip = "";
+
+    
     private void Awake()
     {
         configCh3 = Resources.Load<SoConfigChapter3>(GameData.NameConfigCH3Demo);
-        umweltschutz.GetComponent<Image>().sprite = configCh3.umweltschuetz;
-        wissenschaft.GetComponent<Image>().sprite = configCh3.wissenschaft;
-        polder.GetComponent<Image>().sprite = configCh3.poldervertretung;
-        grubenwasser.GetComponent<Image>().sprite = configCh3.grubenwasservertretung;
+        demoAudios = Resources.Load<SoTalkingList>(GameData.NameTLDemo);
+        
+
+        audioSrc = GetComponent<AudioSource>();
+
+        //0 buerger, 1 umwelt, 2 science, 3 poldervertreter, 4 grubenwasservertreter, 5 wasserversorger
         buerger.GetComponent<Image>().sprite = configCh3.familie;
+        buerger.GetComponent<Demonstrant>().audioClip = demoAudios.orderedListOfAudioClips[0];
+        demonstranten.Add(buerger.GetComponent<Demonstrant>());
+
+        umweltschutz.GetComponent<Image>().sprite = configCh3.umweltschuetz;
+        umweltschutz.GetComponent<Demonstrant>().audioClip = demoAudios.orderedListOfAudioClips[1];
+        demonstranten.Add(umweltschutz.GetComponent<Demonstrant>());
+
+        wissenschaft.GetComponent<Image>().sprite = configCh3.wissenschaft;
+        wissenschaft.GetComponent<Demonstrant>().audioClip = demoAudios.orderedListOfAudioClips[2];
+        demonstranten.Add(wissenschaft.GetComponent<Demonstrant>());
+
+        polder.GetComponent<Image>().sprite = configCh3.poldervertretung;
+        polder.GetComponent<Demonstrant>().audioClip = demoAudios.orderedListOfAudioClips[3];
+        demonstranten.Add(polder.GetComponent<Demonstrant>());
+
+        grubenwasser.GetComponent<Image>().sprite = configCh3.grubenwasservertretung;
+        grubenwasser.GetComponent<Demonstrant>().audioClip = demoAudios.orderedListOfAudioClips[4];
+        demonstranten.Add(grubenwasser.GetComponent<Demonstrant>());
+
         wasserversorger.GetComponent<Image>().sprite = configCh3.wasserversorgung;
+        wasserversorger.GetComponent<Demonstrant>().audioClip = demoAudios.orderedListOfAudioClips[5];
+        demonstranten.Add(wasserversorger.GetComponent<Demonstrant>());
+
+        foreach(Demonstrant d in demonstranten)
+        {
+            d.gameObject.GetComponent<Image>().color = new Color32(99,99,99,255);
+        }
     }
 
 
@@ -34,6 +72,19 @@ public class ManagerDemo : MonoBehaviour
         //CreateDemoPeopleAroundPoint(10, player.transform.position, 40f);
         //CreateDemoPeopleAroundPoint(7, player.transform.position, 35f);
         //CreateDemoPeopleAroundPoint(5, player.transform.position, 30f);
+    }
+
+    public void PlayAudio(int protagonist)
+    {
+        //0 buerger, 1 umwelt, 2 science, 3 poldervertreter, 4 grubenwasservertreter, 5 wasserversorger
+        if (audioSrc.isPlaying)
+        {
+            audioSrc.Stop();
+        }
+
+        audioSrc.clip = demonstranten[protagonist].audioClip;
+        currentClip = audioSrc.clip.name;
+        audioSrc.Play();
     }
 
     public void CreateDemoPeopleAroundPoint(int num, Vector3 point, float radius)
@@ -70,5 +121,38 @@ public class ManagerDemo : MonoBehaviour
         }
 
         //tmpObj.transform.rotation = Quaternion.Euler(0,Random.Range(0f,360f),0);
+    }
+
+    private void AudioFinished()
+    {
+        if(currentClip == "ch03demo0-buerger")
+        {
+            buerger.GetComponent<Demonstrant>().gehoert = true;
+            buerger.GetComponent<Image>().color = Color.white;
+        }
+
+        currentClip = "";
+    }
+
+    private void Update()
+    {
+        if (audioSrc == null) return;
+       // if (audioSrc.clip == null) return;
+
+
+        if (!audioSrc.isPlaying)
+        {
+            finishedCount++;
+            if(finishedCount > 1)
+            {
+                AudioFinished();
+            }
+            else
+            {
+                finishedCount = 0;
+            }
+        }
+
+
     }
 }
