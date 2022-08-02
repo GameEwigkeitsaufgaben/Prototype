@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,5 +11,10 @@ public class Demonstrant : MonoBehaviour
     void Start()
     {
         gehoert = false;
+    }
+
+    public void SpeechBubbleOn(bool turnOn)
+    {
+        speechBubble.gameObject.SetActive(turnOn);
     }
 }

@@ -16,6 +16,14 @@ public class LookaroundWithMouse : MonoBehaviour
 
     bool mouseDown = false;
 
+    private void Start()
+    {
+        if (SceneManager.GetActiveScene().name == GameScenes.ch03Demo)
+        {
+            SetPlayerBodyRotation(0f, false);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
