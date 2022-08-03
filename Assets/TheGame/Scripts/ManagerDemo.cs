@@ -11,15 +11,18 @@ public class ManagerDemo : MonoBehaviour
     public GameObject player;
     public List<GameObject> mob;
     public Canvas mobCanvas;
+    public Button btnBackToInsta;
 
     public Image umweltschutz, wissenschaft, polder, grubenwasser, buerger, wasserversorger;
 
     private SoConfigChapter3 configCh3;
+    private SoChapThreeRuntimeData runtimeCh03;
     private SoTalkingList demoAudios;
     private List<Demonstrant> demonstranten = new List<Demonstrant>();
     private AudioSource audioSrc;
 
     public bool buergerDone, umweltDone, scienceDone, polderVertreterDone, gwVertreterDone, wasserversorgerDone;
+    
 
     private int finishedCount = 0;
 
@@ -30,6 +33,7 @@ public class ManagerDemo : MonoBehaviour
     private void Awake()
     {
         configCh3 = Resources.Load<SoConfigChapter3>(GameData.NameConfigCH3Demo);
+        runtimeCh03 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
         demoAudios = Resources.Load<SoTalkingList>(GameData.NameTLDemo);
         
         audioSrc = GetComponent<AudioSource>();
@@ -148,44 +152,56 @@ public class ManagerDemo : MonoBehaviour
 
     private void AudioFinished()
     {
+        if (currentClip == "") return;
+
+        Image demonstrant = null;
+        
         if (currentClip == "ch03demo0-buerger")
         {
-            buerger.GetComponent<Demonstrant>().gehoert = true;
+            buerger.GetComponent<Demonstrant>().gehoert = buergerDone = true;
             buerger.GetComponent<Image>().color = feedbackGehoert;
-            buerger.GetComponent<Demonstrant>().SpeechBubbleOn(false);
+            demonstrant = buerger;
+            //buerger.GetComponent<Demonstrant>().SpeechBubbleOn(false);
         }
         else if (currentClip == "ch03demo1-umwelt") 
         {
-            umweltschutz.GetComponent<Demonstrant>().gehoert = true;
+            umweltschutz.GetComponent<Demonstrant>().gehoert = umweltDone = true;
             umweltschutz.GetComponent<Image>().color = feedbackGehoert;
-            umweltschutz.GetComponent<Demonstrant>().SpeechBubbleOn(false);
+            demonstrant = umweltschutz;
+            //umweltschutz.GetComponent<Demonstrant>().SpeechBubbleOn(false);
         }
         else if (currentClip == "ch03demo2-science")
         {
-            wissenschaft.GetComponent<Demonstrant>().gehoert = true;
+            wissenschaft.GetComponent<Demonstrant>().gehoert = scienceDone = true;
             wissenschaft.GetComponent<Image>().color = feedbackGehoert;
-            wissenschaft.GetComponent<Demonstrant>().SpeechBubbleOn(false);
+            demonstrant = wissenschaft;
+            //wissenschaft.GetComponent<Demonstrant>().SpeechBubbleOn(false);
         }
         else if (currentClip == "ch03demo3-poldervertreter")
         {
-            polder.GetComponent<Demonstrant>().gehoert = true;
+            polder.GetComponent<Demonstrant>().gehoert = polderVertreterDone =  true;
             polder.GetComponent<Image>().color = feedbackGehoert;
-            polder.GetComponent<Demonstrant>().SpeechBubbleOn(false);
+            demonstrant = polder;
+            //polder.GetComponent<Demonstrant>().SpeechBubbleOn(false);
         }
         else if (currentClip == "ch03demo4-grubenwasservertreter")
         {
-            grubenwasser.GetComponent<Demonstrant>().gehoert = true;
+            grubenwasser.GetComponent<Demonstrant>().gehoert = gwVertreterDone = true;
             grubenwasser.GetComponent<Image>().color = feedbackGehoert;
-            grubenwasser.GetComponent<Demonstrant>().SpeechBubbleOn(false);
+            demonstrant = grubenwasser;
+            //grubenwasser.GetComponent<Demonstrant>().SpeechBubbleOn(false);
         }
         else if (currentClip == "ch03demo5-wasserversorger")
         {
-            wasserversorger.GetComponent<Demonstrant>().gehoert = true;
+            wasserversorger.GetComponent<Demonstrant>().gehoert = wasserversorgerDone = true;
             wasserversorger.GetComponent<Image>().color = feedbackGehoert;
-            wasserversorger.GetComponent<Demonstrant>().SpeechBubbleOn(false);
+            demonstrant = wasserversorger;
+            //wasserversorger.GetComponent<Demonstrant>().SpeechBubbleOn(false);
         }
 
+        demonstrant.GetComponent<Demonstrant>().SpeechBubbleOn(false);
         currentClip = "";
+        audioSrc.clip = null;
     }
 
     private void Update()
@@ -206,6 +222,20 @@ public class ManagerDemo : MonoBehaviour
             }
         }
 
+        if (!runtimeCh03.IsPostDone(ProgressChap3enum.Post32))
+        {
+            if(buergerDone && umweltDone && scienceDone && polderVertreterDone && gwVertreterDone && wasserversorgerDone)
+            {
+                runtimeCh03.SetPostDone(ProgressChap3enum.Post32);
+            }
+        }
+                
+        else
+        {
+           if (btnBackToInsta.interactable) return;
 
+            btnBackToInsta.interactable = true;
+        }
+        
     }
 }

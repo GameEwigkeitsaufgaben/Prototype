@@ -55,6 +55,10 @@ public class MouseChange : MonoBehaviour
         {
             gameObject.GetComponent<Slider>().colors = GameColors.GetInteractionColorBlock();
         }
+        else if (gameObject.GetComponent<Toggle>() !=null)
+        {
+            gameObject.GetComponent<Toggle>().colors = GameColors.GetInteractionColorBlock();
+        }
     }
 
     public void MouseEnter()
@@ -67,6 +71,10 @@ public class MouseChange : MonoBehaviour
         }
         
         if(gameObject.GetComponent<Button>() != null && gameObject.GetComponent<Button>().interactable)
+        {
+            Cursor.SetCursor(runtimeDataChapters.cursorInteract, hotSpot, cursorMode);
+        }
+        else if (gameObject.GetComponent<Toggle>() != null)
         {
             Cursor.SetCursor(runtimeDataChapters.cursorInteract, hotSpot, cursorMode);
         }
