@@ -61,6 +61,8 @@ public class ManagerGrubenwasserhaltung : MonoBehaviour
         btnPumpwerke.gameObject.GetComponent<ToogleWasserhaltung>().btnTextInBetrieb.color = gameColors.gameGray;
         btnPumpwerke.gameObject.GetComponent<ToogleWasserhaltung>().btnTextAlleBetrieb.color = gameColors.gameRed;
         lightReducedBetrieb.color = gameColors.gameGray;
+        pegelHigh.gameObject.SetActive(false);
+        pegelLow.gameObject.SetActive(true);
         lightAllBetrieb.color = gameColors.gameRed;
         textWHBisher.SetActive(true);
         textWHNeu.SetActive(false);
@@ -77,6 +79,7 @@ public class ManagerGrubenwasserhaltung : MonoBehaviour
             lightAllBetrieb.color = gameColors.gameGray;
             pegelHigh.gameObject.SetActive(true);
             pegelLow.gameObject.SetActive(false);
+            
             if (!btnNext.interactable)
             {
                 btnNext.interactable = true;
