@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum CanvasGraphs
 {   Intro,
@@ -19,6 +20,8 @@ public class ManagerMonitoring : MonoBehaviour
 
     [SerializeReference] private CanvasGraphs selectedMonitor;
 
+    public Material[] mats;
+
     private void Awake()
     {
         canvasGraphs.Add(CanvasGraphs.Intro.ToString(), canvasIntro);
@@ -36,6 +39,11 @@ public class ManagerMonitoring : MonoBehaviour
         foreach (KeyValuePair<string, Canvas> c in canvasGraphs)
         {
             c.Value.gameObject.SetActive(false);
+        }
+
+        foreach (var item in mats)
+        {
+            item.SetFloat("_ClipThreshold", 1f);
         }
 
         canvasGraphs[graph.ToString()].gameObject.SetActive(true);
