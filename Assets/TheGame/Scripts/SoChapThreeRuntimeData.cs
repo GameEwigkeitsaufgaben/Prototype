@@ -20,7 +20,8 @@ public enum ProgressChap3enum
     Post34, Post35,
     Post36, Post37,
     Post38, Post39,
-    Post310, Post311,
+    Post310, Post3101, Post3102, Post3103,
+    Post311,
     Post312, Post313,
     Post314, Post315,
     Post316, Post317
