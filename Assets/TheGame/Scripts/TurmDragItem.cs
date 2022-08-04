@@ -8,9 +8,11 @@ public class TurmDragItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
 {
     private RectTransform myDragRectTransform;
     private Canvas myParentCanvas;
+    public Vector3 origPos;
 
     public GameObject mySnapObj;
     public bool snaped = false;
+    public bool dragging = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +26,7 @@ public class TurmDragItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
             tempCanvasItem = tempCanvasItem.transform.parent.gameObject;
         }
         myParentCanvas = tempCanvasItem.GetComponent<Canvas>();
+        origPos = gameObject.transform.position;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -33,16 +36,24 @@ public class TurmDragItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
 
     public void OnDrag(PointerEventData eventData)
     {
-
         if (snaped) return;
 
         Debug.Log("Drag");
         myDragRectTransform.anchoredPosition += eventData.delta / myParentCanvas.scaleFactor; //important when using screen space
+        dragging = true;
+    }
+
+    private void OnMouseUp()
+    {
+        if (snaped) return;
+        
+        gameObject.transform.position = gameObject.GetComponent<TurmDragItem>().origPos;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         Debug.Log("End Drag");
+        dragging = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

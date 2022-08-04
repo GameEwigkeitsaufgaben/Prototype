@@ -63,6 +63,7 @@ public class MouseChange : MonoBehaviour
 
     public void MouseEnter()
     {
+        Debug.Log("Mouse Ener");
         if (gameObject.GetComponent<Post>())
         {
             runtimeDataCh01.hintPostUnlock = (gameObject.GetComponent<Button>().interactable) ? "": gameObject.GetComponent<Post>().GetUnlockHint();
@@ -92,6 +93,27 @@ public class MouseChange : MonoBehaviour
         }
         else if (gameObject.tag == "DragItem")
         {
+            if(gameObject.GetComponent<TurmDragItem>() != null)
+            {
+                if (gameObject.GetComponent<TurmDragItem>().snaped)
+                {
+                    Cursor.SetCursor(runtimeDataChapters.cursorNoDrag, hotSpot, cursorMode);
+                    return;
+                }
+                else
+                {
+                    if(gameObject.GetComponent<TurmDragItem>().dragging)
+                    {
+                        Cursor.SetCursor(runtimeDataChapters.cursorDragDrag, hotSpot, cursorMode);
+                    }
+                    else
+                    {
+                        Cursor.SetCursor(runtimeDataChapters.cursorDragTouch, hotSpot, cursorMode);
+                    }
+                    return;
+                }
+            }
+
             if(gameObject.GetComponent<MuseumMinerEquipmentItem>() != null)
             {
                 if (gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging) return;
@@ -109,8 +131,6 @@ public class MouseChange : MonoBehaviour
             {
                 Cursor.SetCursor(runtimeDataChapters.cursorDragDrag, hotSpot, cursorMode);
             }
-
-            
         }
         else
         {
@@ -155,6 +175,19 @@ public class MouseChange : MonoBehaviour
 
     public void MouseUp()
     {
-
+        Debug.Log("Back to orig");
+        if (gameObject.tag == "DragItem")
+        {
+            if (gameObject.GetComponent<TurmDragItem>() != null)
+            {
+                Debug.Log("Back to orig");
+                if (!gameObject.GetComponent<TurmDragItem>().snaped)
+                {
+                    gameObject.transform.position = gameObject.GetComponent<TurmDragItem>().origPos;
+                    Debug.Log("Back to orig");
+                }
+                //Cursor.SetCursor(runtimeDataChapters.cursorDragTouch, hotSpot, cursorMode);
+            }
+        }
     }
 }
