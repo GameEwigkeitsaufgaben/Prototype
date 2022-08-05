@@ -57,6 +57,7 @@ public class SpeechList : MonoBehaviour
         GameData.bubbleOnDad = false;
         GameData.bubbleOnGeorg = false;
         GameData.bubbleOnMuseumGuide = false;
+        GameData.bubbleOnBergbauvertreter = false;
     }
 
     void SetSpeechBubbleFlagCharcters()
@@ -65,6 +66,7 @@ public class SpeechList : MonoBehaviour
         GameData.bubbleOnDad = false;
         GameData.bubbleOnGeorg = false;
         GameData.bubbleOnMuseumGuide = false;
+        GameData.bubbleOnBergbauvertreter = false;
 
         if (audioSrc.clip.name.Contains("e"))
         {
@@ -81,6 +83,10 @@ public class SpeechList : MonoBehaviour
         else if (audioSrc.clip.name.Contains("m"))
         {
             GameData.bubbleOnMuseumGuide = true;
+        }
+        else if (audioSrc.clip.name.Contains("b"))
+        {
+            GameData.bubbleOnBergbauvertreter = true;
         }
     }
 

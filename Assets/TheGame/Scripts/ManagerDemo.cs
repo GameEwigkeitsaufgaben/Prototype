@@ -34,7 +34,7 @@ public class ManagerDemo : MonoBehaviour
     {
         configCh3 = Resources.Load<SoConfigChapter3>(GameData.NameConfigCH3Demo);
         runtimeCh03 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
-        demoAudios = Resources.Load<SoTalkingList>(GameData.NameTLDemo);
+        demoAudios = Resources.Load<SoTalkingList>(GameData.NameCH3TLDemo);
         
         audioSrc = GetComponent<AudioSource>();
 

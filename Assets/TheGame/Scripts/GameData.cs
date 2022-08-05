@@ -142,7 +142,6 @@ public static class GameData
     public const string NameEntry316 = "Entry316";
     public const string NameEntry317 = "Entry317";
 
-
     public static int chapterOneUnlocked = 0;
     public static int chapterTwoUnlocked = 0;
     public static int chapterThreeUnlocked = 0;
@@ -184,7 +183,15 @@ public static class GameData
     public const string NameTLMuseumIntroFliesspfad= "AudiosMuseumIntroFliesspfad";
     public const string NameTLMuseumOutroExitZeche = "AudiosMuseumOutroExitZeche";
 
-    public const string NameTLDemo = "AudiosCh03Demo";
+    //Talkinglist ch3: TL-TalkingList
+    public const string NameCH3TLDemo = "AudioTalkingList-3.2.1-Demo";
+    public const string NameCH3TLGrubenwasser = "AudioTalkingList-3.10.1-Wasser";
+    public const string NameCH3TLPumpenstandorte= "AudioTalkingList-3.10.2-PumpenStandorte";
+    public const string NameCH3TLPumpenAufbau= "AudioTalkingList-3.10.3-PumpenAufbau";
+    public const string NameCH3TLMonitoring= "AudioTalkingList-3.11.1-Monitoring";
+    public const string NameCH3TLChancenAnstieg= "AudioTalkingList-3.12.1-ChancenAnstieg";
+    public const string NameCH3TLPolder= "AudioTalkingList-3.14.1-Polder";
+
 
     public static bool progressWithAdmin = false; //if start chapter with admin pwd true, else false;
 
@@ -214,11 +221,13 @@ public static class GameData
     internal static bool sohle3IntroPlayedOnce = false;
 
    // public static int quizChapterOnePoints = 0;
-
+    //ToDo in Scriptable object die veränderbaren bubble werte.
     internal static bool bubbleOnEnvy = false;
     internal static bool bubbleOnDad = false;
     internal static bool bubbleOnGeorg = false;
     internal static bool bubbleOnMuseumGuide = false;
+    internal static bool bubbleOnBergbauvertreter = false;
+
     internal static bool quizFinished = false; //changed in QuizManager.LoadNextQuestion();
 
     public static string lawNotiz = "Hinweis: Alle Inhalte dieses Internetangebotes sind urheberrechtlich geschützt. Das Urheberrecht liegt, " +
