@@ -9,6 +9,7 @@ public class ManagerGrubenwasserhaltungAufbau : MonoBehaviour
     public bool allItemsSnaped = false;
     public bool audioFinised = false;
     public GameObject btnBackTo3101;
+    public Button btnReplayTalkingList;
 
 
     private SoChapThreeRuntimeData runtimeDataCh3;
@@ -18,9 +19,17 @@ public class ManagerGrubenwasserhaltungAufbau : MonoBehaviour
     void Start()
     {
         runtimeDataCh3 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
-        
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+       
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
+        btnReplayTalkingList.gameObject.SetActive(runtimeDataCh3.replayTL3103);
+        gameObject.GetComponent<SpeechManagerChapThree>().playPumpAufbau = !runtimeDataCh3.replayTL3103;
+        audioFinised = runtimeDataCh3.replayTL3103;
+        allItemsSnaped = false;
+    }
+
+    public void ReplayTalkingList()
+    {
         gameObject.GetComponent<SpeechManagerChapThree>().playPumpAufbau = true;
     }
 
@@ -29,17 +38,6 @@ public class ManagerGrubenwasserhaltungAufbau : MonoBehaviour
     {
         if (!btnBackTo3101.GetComponent<Button>().interactable)
         {
-            if (!audioFinised)
-            {
-                audioFinised = gameObject.GetComponent<SpeechManagerChapThree>().IsTalkingListFinished(GameData.NameCH3TLPumpenAufbau);
-            }
-
-            if (audioFinised && allItemsSnaped)
-            {
-                runtimeDataCh3.SetPostDone(ProgressChap3enum.Post3103);
-                btnBackTo3101.GetComponent<Button>().interactable = true;
-            }
-
             if (!allItemsSnaped)
             {
                 int index = dragItems.FindIndex(item => item.snaped == false);
@@ -47,6 +45,24 @@ public class ManagerGrubenwasserhaltungAufbau : MonoBehaviour
                 {
                     allItemsSnaped = true;
                 }
+            }
+
+            if (!audioFinised)
+            {
+                audioFinised = gameObject.GetComponent<SpeechManagerChapThree>().IsTalkingListFinished(GameData.NameCH3TLPumpenAufbau);
+            }
+            else
+            {
+                if (allItemsSnaped)
+                {
+                    runtimeDataCh3.SetPostDone(ProgressChap3enum.Post3103);
+                    btnBackTo3101.GetComponent<Button>().interactable = true;
+                }
+
+                if (runtimeDataCh3.replayTL3103) return;
+                
+                runtimeDataCh3.replayTL3103 = audioFinised;
+                btnReplayTalkingList.gameObject.SetActive(audioFinised);
             }
         }
     }

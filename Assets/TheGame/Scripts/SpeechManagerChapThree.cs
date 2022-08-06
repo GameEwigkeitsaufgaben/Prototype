@@ -16,7 +16,7 @@ public class SpeechManagerChapThree : MonoBehaviour
 
     private AudioSource audioSrc;
     private SpeechList currentList = null;
-    private SpeechBubble spBerbauvertreter, spDad, spEnya;
+    private SpeechBubble spBerbauvertreter = null, spDad = null, spEnya = null;
     public ManagerGrubenwasserhaltungAufbau manager;
 
     private void Awake()
@@ -47,9 +47,9 @@ public class SpeechManagerChapThree : MonoBehaviour
         AddToDict(speakChancenAnstieg, tlChancenAnstieg);
         AddToDict(speakPolder, tlPolder);
 
-        spBerbauvertreter = bergbauvertreter.GetComponentInChildren<SpeechBubble>(true);
-        spDad = dad.GetComponentInChildren<SpeechBubble>(true);
-        spEnya = enya.GetComponentInChildren<SpeechBubble>(true);
+        if (bergbauvertreter != null) spBerbauvertreter = bergbauvertreter.GetComponentInChildren<SpeechBubble>(true);
+        if (dad != null) spDad = dad.GetComponentInChildren<SpeechBubble>(true);
+        if (enya != null) spEnya = enya.GetComponentInChildren<SpeechBubble>(true);
     }
 
     private void AddToDict(SpeechList speechList, SoTalkingList tl)
@@ -91,6 +91,11 @@ public class SpeechManagerChapThree : MonoBehaviour
         {
             currentList = speechDict[GameData.NameCH3TLPumpenAufbau];
             playPumpAufbau = false;
+        }
+        else if (playPumpstandorte)
+        {
+            currentList = speechDict[GameData.NameCH3TLPumpenstandorte];
+            playPumpstandorte = false;
         }
 
         if (currentList != null)

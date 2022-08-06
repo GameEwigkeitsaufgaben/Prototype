@@ -11,20 +11,25 @@ public enum PumpenwerkStatus
     showAll
 }
 
-public class ManagerGrubenwasserhaltung : MonoBehaviour
+public class ManagerPumpStandorte : MonoBehaviour
 {
-    public Button btnActive, btnOff, btnNext; 
-    public Toggle btnPumpwerke;
+    public Button btnNext, btnReplayTalkingList;
+    public Toggle togglePumpwerke;
+
     public GameObject textWHBisher, textWHNeu;
     public Image lohberg, fuerstleopold, augusteVictoria, hausAden, walsum, prosterHaniel, concordia, amalie, zollverein, carolinenglueck, friedlicherNachbar, heinrich, roberMueser;
     public Dictionary<string, Image> pumpwerke;
     public Image pegelHigh, pegelLow;
     public Image lightReducedBetrieb, lightAllBetrieb;
+
+    
     public bool isDone = false;
+    public bool audioFinished = false;
 
     private SoGameColors gameColors;
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoChapThreeRuntimeData runtimeDataCh03;
+    private SpeechManagerChapThree speechManager;
     Color32 colorInactive = new Color32(255, 255, 255, 50);
 
     private void Awake()
@@ -32,12 +37,15 @@ public class ManagerGrubenwasserhaltung : MonoBehaviour
         gameColors = Resources.Load<SoGameColors>(GameData.NameGameColors);
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
-
         runtimeDataCh03 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
-        if (runtimeDataCh03.IsPostDone(ProgressChap3enum.Post3102))
-            {
-                btnNext.interactable = true;
-            }
+        speechManager = GetComponent<SpeechManagerChapThree>();
+
+        speechManager.playPumpstandorte = !runtimeDataCh03.replayTL3102;
+
+        btnReplayTalkingList.gameObject.SetActive(runtimeDataCh03.replayTL3102);
+        togglePumpwerke.interactable = runtimeDataCh03.replayTL3102;
+        btnNext.interactable = runtimeDataCh03.IsPostDone(ProgressChap3enum.Post3102);
+
 
         pumpwerke = new Dictionary<string, Image>();
 
@@ -58,8 +66,8 @@ public class ManagerGrubenwasserhaltung : MonoBehaviour
 
         //MarkInactive();
         MarkAll();
-        btnPumpwerke.gameObject.GetComponent<ToogleWasserhaltung>().btnTextInBetrieb.color = gameColors.gameGray;
-        btnPumpwerke.gameObject.GetComponent<ToogleWasserhaltung>().btnTextAlleBetrieb.color = gameColors.gameRed;
+        togglePumpwerke.gameObject.GetComponent<ToogleWasserhaltung>().btnTextInBetrieb.color = gameColors.gameGray;
+        togglePumpwerke.gameObject.GetComponent<ToogleWasserhaltung>().btnTextAlleBetrieb.color = gameColors.gameRed;
         lightReducedBetrieb.color = gameColors.gameGray;
         pegelHigh.gameObject.SetActive(false);
         pegelLow.gameObject.SetActive(true);
@@ -70,11 +78,11 @@ public class ManagerGrubenwasserhaltung : MonoBehaviour
 
     public void TooglePumpwerke()
     {
-        if (btnPumpwerke.GetComponent<Toggle>().isOn)
+        if (togglePumpwerke.GetComponent<Toggle>().isOn)
         {
             MarkActive();
-            btnPumpwerke.gameObject.GetComponent<ToogleWasserhaltung>().btnTextInBetrieb.color = gameColors.gameRed;
-            btnPumpwerke.gameObject.GetComponent<ToogleWasserhaltung>().btnTextAlleBetrieb.color = gameColors.gameGray;
+            togglePumpwerke.gameObject.GetComponent<ToogleWasserhaltung>().btnTextInBetrieb.color = gameColors.gameRed;
+            togglePumpwerke.gameObject.GetComponent<ToogleWasserhaltung>().btnTextAlleBetrieb.color = gameColors.gameGray;
             lightReducedBetrieb.color = gameColors.gameRed;
             lightAllBetrieb.color = gameColors.gameGray;
             pegelHigh.gameObject.SetActive(true);
@@ -90,8 +98,8 @@ public class ManagerGrubenwasserhaltung : MonoBehaviour
         {
             MarkAll();
             //MarkInactive();
-            btnPumpwerke.gameObject.GetComponent<ToogleWasserhaltung>().btnTextInBetrieb.color = gameColors.gameGray;
-            btnPumpwerke.gameObject.GetComponent<ToogleWasserhaltung>().btnTextAlleBetrieb.color = gameColors.gameRed;
+            togglePumpwerke.gameObject.GetComponent<ToogleWasserhaltung>().btnTextInBetrieb.color = gameColors.gameGray;
+            togglePumpwerke.gameObject.GetComponent<ToogleWasserhaltung>().btnTextAlleBetrieb.color = gameColors.gameRed;
             lightReducedBetrieb.color = gameColors.gameGray;
             lightAllBetrieb.color = gameColors.gameRed;
             pegelHigh.gameObject.SetActive(false);
@@ -191,11 +199,31 @@ public class ManagerGrubenwasserhaltung : MonoBehaviour
         textWHNeu.SetActive(false);
     }
 
+    public void PlayTalkingList()
+    {
+        speechManager.playPumpstandorte = true;
+    }
+
     public void MarkAll(Color color)
     {
         foreach(Image value in pumpwerke.Values)
         {
             value.color = color;
+        }
+    }
+
+    public void Update()
+    {
+        if (!audioFinished)
+        {
+            audioFinished = speechManager.IsTalkingListFinished(GameData.NameCH3TLPumpenstandorte);
+            runtimeDataCh03.replayTL3102 = audioFinished;
+
+        }
+        else
+        {
+            if (!btnReplayTalkingList.IsActive()) btnReplayTalkingList.gameObject.SetActive(runtimeDataCh03.replayTL3102);
+            if (!togglePumpwerke.interactable) togglePumpwerke.interactable = true;
         }
     }
 }

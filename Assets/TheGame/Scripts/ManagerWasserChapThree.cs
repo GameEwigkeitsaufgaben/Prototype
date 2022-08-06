@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ManagerWasserChapThree : MonoBehaviour
 {
     public Button btnSchautafel3102, btnSchautafel3103;
+    public Button btnReplayTalkingList;
 
     private SoChapThreeRuntimeData runtimeDataCh3;
     private SoChaptersRuntimeData runtimeDataChapters;
@@ -18,35 +17,44 @@ public class ManagerWasserChapThree : MonoBehaviour
         runtimeDataCh3 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
         speechManager = GetComponent<SpeechManagerChapThree>();
     }
-    // Start is called before the first frame update
     void Start()
     {
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
 
-        btnSchautafel3102.interactable = false;
-        btnSchautafel3103.interactable = false;
+        audioFinished = runtimeDataCh3.replayTL3101;
+        btnReplayTalkingList.gameObject.SetActive(audioFinished);
 
+        btnSchautafel3102.interactable = audioFinished;
+        btnSchautafel3103.interactable = audioFinished;
+        
+
+        speechManager.playGrubenwasser = !audioFinished;
+    }
+
+    public void ReplayTalkingList()
+    {
         speechManager.playGrubenwasser = true;
-
-        if (runtimeDataCh3.IsPostDone(ProgressChap3enum.Post3101))
-        {
-            btnSchautafel3102.interactable = true;
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (runtimeDataCh3.IsPostDone(ProgressChap3enum.Post310)) return;
+
         if (!audioFinished)
         {
             audioFinished = speechManager.IsTalkingListFinished(GameData.NameCH3TLGrubenwasser);
+            runtimeDataCh3.replayTL3101 = audioFinished;
         }
-
-        if(audioFinished && !btnSchautafel3102.interactable)
+        else
         {
-            btnSchautafel3102.interactable = true;
-            btnSchautafel3103.interactable = true;
+            if(!btnSchautafel3102.interactable || !btnSchautafel3103.interactable)
+            {
+                runtimeDataCh3.replayTL3101 = audioFinished;
+                btnReplayTalkingList.gameObject.SetActive(true);
+                btnSchautafel3102.interactable = btnSchautafel3103.interactable = true;
+            }
         }
     }
 }
