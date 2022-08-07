@@ -7,16 +7,25 @@ using UnityEngine;
 [RequireComponent(typeof(PeopleInScene))]
 public class SpeechManagerChapThree : MonoBehaviour
 {
-    public SoTalkingList tlDemo, tlGrubenwasser, tlPumpstandorte, tlPumpAufbau,  tlMonitoring, tlChancenAnstieg, tlPolder;
-    public bool playDemo, playGrubenwasser, playPumpstandorte, playPumpAufbau, playMonitoring, playChancenAnstieg, playPolder;
-    private GameObject dad, enya, bergbauvertreter;
+    public SoTalkingList tlDemo, tlGrubenwasser, tlPumpstandorte, tlPumpAufbau, tlMonitoring, 
+        tlEntlastungFluesse, tlGeothermie, tlLagerstaette, 
+        tlPumpspeicherkraftwerke, tlRohstoffquelle, tlSauberesGW, tlWenigerGW, 
+        tlPolder;
+    public bool playDemo, playGrubenwasser, playPumpstandorte, playPumpAufbau, playMonitoring,
+        playEntlastungFluesse, playGeothermie, playLagerstaette,
+        playPumpspeicherkraftwerke, playRohstoffquelle, playSauberesGW, playWenigerGW,
+        playPolder;
+    private GameObject dad, enya, bergbauvertreter1, bergbauvertreter2;
 
-    private SpeechList speakDemo, speakGrubenwasser, speakPumpstandorte, speakPumpAufbau, speakMonitoring, speakChancenAnstieg, speakPolder;
+    private SpeechList speakDemo, speakGrubenwasser, speakPumpstandorte, speakPumpAufbau, speakMonitoring,
+        speakEntlastungFluesse, speakGeothermie, speakLagerstaette,
+        speakPumpspeicherkraftwerke, speakRohstoffquelle, speakSauberesGW, speakWenigerGW,
+        speakPolder;
     private Dictionary<string, SpeechList> speechDict = new Dictionary<string, SpeechList>();
 
     private AudioSource audioSrc;
     private SpeechList currentList = null;
-    private SpeechBubble spBerbauvertreter = null, spDad = null, spEnya = null;
+    private SpeechBubble spBerbauvertreter1 = null, spBerbauvertreter2 = null, spDad = null, spEnya = null;
     public ManagerGrubenwasserhaltungAufbau manager;
 
     private void Awake()
@@ -26,10 +35,21 @@ public class SpeechManagerChapThree : MonoBehaviour
         tlPumpstandorte = Resources.Load<SoTalkingList>(GameData.NameCH3TLPumpenstandorte);
         tlPumpAufbau = Resources.Load<SoTalkingList>(GameData.NameCH3TLPumpenAufbau);
         tlMonitoring = Resources.Load<SoTalkingList>(GameData.NameCH3TLMonitoring);
-        tlChancenAnstieg = Resources.Load<SoTalkingList>(GameData.NameCH3TLChancenAnstieg);
+        tlEntlastungFluesse = Resources.Load<SoTalkingList>(GameData.NameCH3TLEntlastungFluesse);
+        tlGeothermie = Resources.Load<SoTalkingList>(GameData.NameCH3TLGeothermie);
+        tlLagerstaette = Resources.Load<SoTalkingList>(GameData.NameCH3TLLagerstaette);
+        tlPumpspeicherkraftwerke = Resources.Load<SoTalkingList>(GameData.NameCH3TLPumpspeicherkraftwerke);
+        tlRohstoffquelle = Resources.Load<SoTalkingList>(GameData.NameCH3TLRohstoffquelle);
+        tlSauberesGW = Resources.Load<SoTalkingList>(GameData.NameCH3TLSauberesGW);
+        tlWenigerGW = Resources.Load<SoTalkingList>(GameData.NameCH3TLWenigerGW);
+
+        //tlChancenAnstieg = Resources.Load<SoTalkingList>(GameData.NameCH3TLChancenAnstieg);
         tlPolder = Resources.Load<SoTalkingList>(GameData.NameCH3TLPolder);
 
-        bergbauvertreter = GetComponent<PeopleInScene>().bergbauvertreter;
+        bergbauvertreter1 = GetComponent<PeopleInScene>().bergbauvertreter1;
+        bergbauvertreter2 = GetComponent<PeopleInScene>().bergbauvertreter2;
+
+
         dad = GetComponent<PeopleInScene>().dad;
         enya = GetComponent<PeopleInScene>().enya;
     }
@@ -44,10 +64,17 @@ public class SpeechManagerChapThree : MonoBehaviour
         AddToDict(speakPumpstandorte, tlPumpstandorte);
         AddToDict(speakPumpAufbau, tlPumpAufbau);
         AddToDict(speakMonitoring, tlMonitoring);
-        AddToDict(speakChancenAnstieg, tlChancenAnstieg);
+        AddToDict(speakEntlastungFluesse, tlEntlastungFluesse);
+        AddToDict(speakGeothermie, tlGeothermie);
+        AddToDict(speakLagerstaette, tlLagerstaette);
+        AddToDict(speakPumpspeicherkraftwerke, tlPumpspeicherkraftwerke);
+        AddToDict(speakRohstoffquelle, tlRohstoffquelle);
+        AddToDict(speakSauberesGW, tlSauberesGW);
+        AddToDict(speakWenigerGW, tlWenigerGW);
         AddToDict(speakPolder, tlPolder);
 
-        if (bergbauvertreter != null) spBerbauvertreter = bergbauvertreter.GetComponentInChildren<SpeechBubble>(true);
+        if (bergbauvertreter1 != null) spBerbauvertreter1 = bergbauvertreter1.GetComponentInChildren<SpeechBubble>(true);
+        if (bergbauvertreter2 != null) spBerbauvertreter2 = bergbauvertreter2.GetComponentInChildren<SpeechBubble>(true);
         if (dad != null) spDad = dad.GetComponentInChildren<SpeechBubble>(true);
         if (enya != null) spEnya = enya.GetComponentInChildren<SpeechBubble>(true);
     }
@@ -97,6 +124,41 @@ public class SpeechManagerChapThree : MonoBehaviour
             currentList = speechDict[GameData.NameCH3TLPumpenstandorte];
             playPumpstandorte = false;
         }
+        else if (playEntlastungFluesse)
+        {
+            currentList = speechDict[GameData.NameCH3TLEntlastungFluesse];
+            playEntlastungFluesse = false;
+        }
+        else if (playGeothermie)
+        {
+            currentList = speechDict[GameData.NameCH3TLGeothermie];
+            playGeothermie = false;
+        }
+        else if (playLagerstaette)
+        {
+            currentList = speechDict[GameData.NameCH3TLLagerstaette];
+            playLagerstaette = false;
+        }
+        else if (playPumpspeicherkraftwerke)
+        {
+            currentList = speechDict[GameData.NameCH3TLPumpspeicherkraftwerke];
+            playPumpspeicherkraftwerke = false;
+        }        
+        else if (playSauberesGW)
+        {
+            currentList = speechDict[GameData.NameCH3TLSauberesGW];
+            playSauberesGW = false;
+        }
+        else if (playWenigerGW)
+        {
+            currentList = speechDict[GameData.NameCH3TLWenigerGW];
+            playWenigerGW = false;
+        }
+        else if (playRohstoffquelle)
+        {
+            currentList = speechDict[GameData.NameCH3TLRohstoffquelle];
+            playRohstoffquelle = false;
+        }
 
         if (currentList != null)
         {
@@ -108,7 +170,8 @@ public class SpeechManagerChapThree : MonoBehaviour
             currentList = null;
         }
 
-        if(spBerbauvertreter != null) spBerbauvertreter.gameObject.SetActive(GameData.bubbleOnBergbauvertreter);
+        if(spBerbauvertreter1 != null) spBerbauvertreter1.gameObject.SetActive(GameData.bubbleOnBergbauvertreter);
+        if(spBerbauvertreter2 != null) spBerbauvertreter2.gameObject.SetActive(GameData.bubbleOnBergbauvertreter);
         if(spDad != null) spDad.gameObject.SetActive(GameData.bubbleOnDad);
         if(spEnya != null) spEnya.gameObject.SetActive(GameData.bubbleOnEnvy);
     }

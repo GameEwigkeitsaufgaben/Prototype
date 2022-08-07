@@ -50,6 +50,17 @@ public class SoChapThreeRuntimeData : Runtime
         return progressDone[(int)post].done;
     }
 
+    public bool DropTargetsAllItemsSnaped(List <DragItemThoughts> dragItems)
+    {
+        int index = dragItems.FindIndex(item => item.snaped == false);
+        if (index == -1)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     private void OnEnable()
     {
         //Init Progress;

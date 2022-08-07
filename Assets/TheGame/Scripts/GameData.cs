@@ -189,7 +189,15 @@ public static class GameData
     public const string NameCH3TLPumpenstandorte= "AudioTalkingList-3.10.2-PumpenStandorte";
     public const string NameCH3TLPumpenAufbau= "AudioTalkingList-3.10.3-PumpenAufbau";
     public const string NameCH3TLMonitoring= "AudioTalkingList-3.11.1-Monitoring";
-    public const string NameCH3TLChancenAnstieg= "AudioTalkingList-3.12.1-ChancenAnstieg";
+
+    public const string NameCH3TLEntlastungFluesse = "AudioTalkingList-3.12.1-EntlastungFluesse";
+    public const string NameCH3TLGeothermie = "AudioTalkingList-3.12.1-Geothermie";
+    public const string NameCH3TLLagerstaette = "AudioTalkingList-3.12.1-Lagerstaette";
+    public const string NameCH3TLPumpspeicherkraftwerke = "AudioTalkingList-3.12.1-Pumpspeicherkraftwerke";
+    public const string NameCH3TLRohstoffquelle = "AudioTalkingList-3.12.1-Rohstoffquelle";
+    public const string NameCH3TLSauberesGW = "AudioTalkingList-3.12.1-SauberesGW";
+    public const string NameCH3TLWenigerGW = "AudioTalkingList-3.12.1-WenigerGW";
+
     public const string NameCH3TLPolder= "AudioTalkingList-3.14.1-Polder";
 
 

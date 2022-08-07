@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class TurmDragItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class DragTurmItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     private RectTransform myDragRectTransform;
     private Canvas myParentCanvas;
@@ -47,7 +47,7 @@ public class TurmDragItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
     {
         if (snaped) return;
         
-        gameObject.transform.position = gameObject.GetComponent<TurmDragItem>().origPos;
+        gameObject.transform.position = gameObject.GetComponent<DragTurmItem>().origPos;
     }
 
     public void OnEndDrag(PointerEventData eventData)

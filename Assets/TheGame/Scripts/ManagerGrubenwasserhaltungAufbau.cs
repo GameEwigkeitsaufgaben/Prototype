@@ -4,18 +4,15 @@ using UnityEngine.UI;
 
 public class ManagerGrubenwasserhaltungAufbau : MonoBehaviour
 {
-    public List<TurmDragItem> dragItems = new List<TurmDragItem>();
-    //public GameObject personDad, personEnya, personBergauvertreter;
+    public List<DragTurmItem> dragItems;
     public bool allItemsSnaped = false;
     public bool audioFinised = false;
     public GameObject btnBackTo3101;
     public Button btnReplayTalkingList;
 
-
     private SoChapThreeRuntimeData runtimeDataCh3;
     private SoChaptersRuntimeData runtimeDataChapters;
 
-    // Start is called before the first frame update
     void Start()
     {
         runtimeDataCh3 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
