@@ -92,6 +92,7 @@ public class ManagerPumpStandorte : MonoBehaviour
             {
                 btnNext.interactable = true;
                 runtimeDataCh03.SetPostDone(ProgressChap3enum.Post3102);
+                if (runtimeDataCh03.IsPostDone(ProgressChap3enum.Post3103)) runtimeDataCh03.SetPostDone(ProgressChap3enum.Post310);
             }
         }
         else
@@ -104,6 +105,18 @@ public class ManagerPumpStandorte : MonoBehaviour
             lightAllBetrieb.color = gameColors.gameRed;
             pegelHigh.gameObject.SetActive(false);
             pegelLow.gameObject.SetActive(true);
+        }
+    }
+
+    public void SwitchTheScene()
+    {
+        if (runtimeDataCh03.IsPostDone(ProgressChap3enum.Post310))
+        {
+            GetComponent<SwitchSceneManager>().SwitchToChapter3withOverlay(GameData.NameOverlay310);
+        }
+        else
+        {
+            GetComponent<SwitchSceneManager>().SwitchScene(GameScenes.ch03EmscherWeg);
         }
     }
 

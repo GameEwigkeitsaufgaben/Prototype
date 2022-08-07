@@ -291,6 +291,7 @@ public class Entry : MonoBehaviour
 
             else if (gameObject.name == GameData.NameEntry316)
             {
+                Debug.Log("in entry: " + GameData.NamePost316 + " " + gameObject.name + " " + ProgressChap3enum.Post315.ToString());
                 if (runtimeDataCh03.IsPostDone(ProgressChap3enum.Post315))
                 {
                     post.GetComponent<Post>().UnlockPost();

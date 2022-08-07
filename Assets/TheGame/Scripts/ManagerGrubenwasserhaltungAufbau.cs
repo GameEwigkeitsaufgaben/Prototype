@@ -30,6 +30,18 @@ public class ManagerGrubenwasserhaltungAufbau : MonoBehaviour
         gameObject.GetComponent<SpeechManagerChapThree>().playPumpAufbau = true;
     }
 
+    public void SwitchTheScene()
+    {
+        if (runtimeDataCh3.IsPostDone(ProgressChap3enum.Post310))
+        {
+            GetComponent<SwitchSceneManager>().SwitchToChapter3withOverlay(GameData.NameOverlay310);
+        }
+        else
+        {
+            GetComponent<SwitchSceneManager>().SwitchScene(GameScenes.ch03EmscherWeg);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -52,8 +64,12 @@ public class ManagerGrubenwasserhaltungAufbau : MonoBehaviour
             {
                 if (allItemsSnaped)
                 {
-                    runtimeDataCh3.SetPostDone(ProgressChap3enum.Post3103);
+                    runtimeDataCh3.replayTL3103 = true;
                     btnBackTo3101.GetComponent<Button>().interactable = true;
+                    if (runtimeDataCh3.IsPostDone(ProgressChap3enum.Post3102))
+                    {
+                        runtimeDataCh3.SetPostDone(ProgressChap3enum.Post310);
+                    }
                 }
 
                 if (runtimeDataCh3.replayTL3103) return;

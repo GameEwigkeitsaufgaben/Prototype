@@ -14,17 +14,19 @@ public class ProgressChap3
     }
 }
 
+//size relevant in Inspector!! change it in the inspector when add or remove values!
 public enum ProgressChap3enum
 {
     Post32, Post33,
     Post34, Post35,
     Post36, Post37,
     Post38, Post39,
-    Post310, Post3101, Post3102, Post3103,
+    Post310,
     Post311,
     Post312, Post313,
     Post314, Post315,
-    Post316, Post317
+    Post316, Post317,
+    Post3101, Post3102, Post3103
 }
 
 [CreateAssetMenu(menuName = "SoChapThreeRuntimeData")]
@@ -47,6 +49,8 @@ public class SoChapThreeRuntimeData : Runtime
     //Called in Entry
     public bool IsPostDone(ProgressChap3enum post)
     {
+        Debug.Log("--------------------------" + post.ToString()+ " " + (int)post + " Length "+ progressDone.Length);
+        
         return progressDone[(int)post].done;
     }
 
@@ -65,6 +69,7 @@ public class SoChapThreeRuntimeData : Runtime
     {
         //Init Progress;
         progressDone = new ProgressChap3[namesEnum.Length];
+        Debug.Log("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm" +namesEnum.Length);
         replayTL3101 = replayTL3102 = replayTL3103 = false;
 
         for (int i = 0; i < progressDone.Length; i++)
