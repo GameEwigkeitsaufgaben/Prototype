@@ -37,7 +37,7 @@ public class SoChapThreeRuntimeData : Runtime
     public ProgressChap3[] progressDone;
     public string quizPointsCh03 = "***";
     public string singleSelectAwObjName = "--";
-    public bool replayTL3101, replayTL3102, replayTL3103;
+    public bool replayTL3101, replayTL3102, replayTL3103, replayTL3141;
 
 
     //Called in Entry
@@ -65,12 +65,23 @@ public class SoChapThreeRuntimeData : Runtime
         return false;
     }
 
+    public bool DropTargetsAllItemsSnaped(List<DragItemRiver> dragItems)
+    {
+        int index = dragItems.FindIndex(item => item.snaped == false);
+        if (index == -1)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     private void OnEnable()
     {
         //Init Progress;
         progressDone = new ProgressChap3[namesEnum.Length];
         Debug.Log("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm" +namesEnum.Length);
-        replayTL3101 = replayTL3102 = replayTL3103 = false;
+        replayTL3101 = replayTL3102 = replayTL3103 = replayTL3141 = false;
 
         for (int i = 0; i < progressDone.Length; i++)
         {

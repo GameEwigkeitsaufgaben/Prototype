@@ -15,7 +15,7 @@ public class SpeechManagerChapThree : MonoBehaviour
         playEntlastungFluesse, playGeothermie, playLagerstaette,
         playPumpspeicherkraftwerke, playRohstoffquelle, playSauberesGW, playWenigerGW,
         playPolder;
-    private GameObject dad, enya, bergbauvertreter1, bergbauvertreter2;
+    private GameObject dad, georg, enya, bergbauvertreter1, bergbauvertreter2;
 
     private SpeechList speakDemo, speakGrubenwasser, speakPumpstandorte, speakPumpAufbau, speakMonitoring,
         speakEntlastungFluesse, speakGeothermie, speakLagerstaette,
@@ -25,7 +25,7 @@ public class SpeechManagerChapThree : MonoBehaviour
 
     private AudioSource audioSrc;
     private SpeechList currentList = null;
-    private SpeechBubble spBerbauvertreter1 = null, spBerbauvertreter2 = null, spDad = null, spEnya = null;
+    private SpeechBubble spBerbauvertreter1 = null, spBerbauvertreter2 = null, spDad = null, spEnya = null, spGeorg = null;
     public ManagerGrubenwasserhaltungAufbau manager;
 
     private void Awake()
@@ -52,6 +52,7 @@ public class SpeechManagerChapThree : MonoBehaviour
 
         dad = GetComponent<PeopleInScene>().dad;
         enya = GetComponent<PeopleInScene>().enya;
+        georg = GetComponent<PeopleInScene>().georg;
     }
 
     // Start is called before the first frame update
@@ -77,6 +78,7 @@ public class SpeechManagerChapThree : MonoBehaviour
         if (bergbauvertreter2 != null) spBerbauvertreter2 = bergbauvertreter2.GetComponentInChildren<SpeechBubble>(true);
         if (dad != null) spDad = dad.GetComponentInChildren<SpeechBubble>(true);
         if (enya != null) spEnya = enya.GetComponentInChildren<SpeechBubble>(true);
+        if (georg != null) spGeorg = georg.GetComponentInChildren<SpeechBubble>(true);
     }
 
     private void AddToDict(SpeechList speechList, SoTalkingList tl)
@@ -159,6 +161,11 @@ public class SpeechManagerChapThree : MonoBehaviour
             currentList = speechDict[GameData.NameCH3TLRohstoffquelle];
             playRohstoffquelle = false;
         }
+        else if (playPolder)
+        {
+            currentList = speechDict[GameData.NameCH3TLPolder];
+            playPolder = false;
+        }
 
         if (currentList != null)
         {
@@ -174,5 +181,6 @@ public class SpeechManagerChapThree : MonoBehaviour
         if(spBerbauvertreter2 != null) spBerbauvertreter2.gameObject.SetActive(GameData.bubbleOnBergbauvertreter);
         if(spDad != null) spDad.gameObject.SetActive(GameData.bubbleOnDad);
         if(spEnya != null) spEnya.gameObject.SetActive(GameData.bubbleOnEnvy);
+        if (spGeorg != null) spGeorg.gameObject.SetActive(GameData.bubbleOnGeorg);
     }
 }
