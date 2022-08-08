@@ -75,6 +75,11 @@ public class ManagerDemo : MonoBehaviour
         //0 buerger, 1 umwelt, 2 science, 3 poldervertreter, 4 grubenwasservertreter, 5 wasserversorger
         if (audioSrc.isPlaying)
         {
+            foreach(Demonstrant e in demonstranten)
+            {
+                e.SpeechBubbleOn(false);
+                if(!e.gehoert) e.GetComponent<Image>().color = new Color32(99, 99, 99, 255);
+            }
             audioSrc.Stop();
         }
 
@@ -108,6 +113,7 @@ public class ManagerDemo : MonoBehaviour
         }
 
         if (demo != null) demo.SpeechBubbleOn(true);
+        demo.GetComponent<Image>().color = feedbackGehoert;
 
         currentClip = audioSrc.clip.name;
         audioSrc.Play();
