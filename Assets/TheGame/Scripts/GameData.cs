@@ -10,6 +10,7 @@ public static class GameData
     public const string pwdChapterTwo = "2222";
     public const string pwdAdminChapterTwo = "2323";
     public const string pwdChapterThree = "3333";
+    public const string pwdAdminChapterThree = "3434";
 
     //Name of objects in Folder "Resources" 
     public const string NameConfigSfx = "SfxConfig";

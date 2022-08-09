@@ -13,13 +13,11 @@ public class ManagerOverviewChapters : MonoBehaviour
 {
     [SerializeField] Button credits;
     [SerializeField] TMP_Text lawNotice;
-    SoChapOneRuntimeData runtimeDataCh1;
     SoChaptersRuntimeData runtimeDataChapters;
 
     private void Awake()
     {
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
-        runtimeDataCh1 = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
     }
 
