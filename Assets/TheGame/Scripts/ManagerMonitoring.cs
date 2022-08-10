@@ -14,14 +14,15 @@ public enum CanvasGraphs
 
 public class ManagerMonitoring : MonoBehaviour
 {
-    public Button btnReplayAudio;
+    public Button btnReplayAudio, btnBackToOverlay;
     public Canvas canvasIntro, canvasPh, canvasWasserstand, canvasLeitfaehigkeit, canvasPcb, canvasWassertemperatur;
+    public List<Monitor> stations = new List<Monitor>();
+    public bool newsDone, stationsDone;
+
 
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoChapThreeRuntimeData runtimeDataChap3;
     private SpeechManagerChapThree speechManager;
-
-   
 
     Dictionary<string, Canvas> canvasGraphs = new Dictionary<string, Canvas>();
 
@@ -49,13 +50,20 @@ public class ManagerMonitoring : MonoBehaviour
     {
         speechManager = GetComponent<SpeechManagerChapThree>();
 
-
         //Audio Talkinglist
         btnReplayAudio.gameObject.SetActive(runtimeDataChap3.replayTL3111);
 
         if (runtimeDataChap3.replayTL3111) return;
 
         PlayMonitoringTL();
+
+        if (runtimeDataChap3.IsPostDone(ProgressChap3enum.Post311))
+        {
+            btnBackToOverlay.interactable = true;
+            return;
+        }
+
+        btnBackToOverlay.interactable = false;
     }
 
     public void DisableAllBut(CanvasGraphs graph)
@@ -84,6 +92,20 @@ public class ManagerMonitoring : MonoBehaviour
         {
             runtimeDataChap3.replayTL3111 = true;
             btnReplayAudio.gameObject.SetActive(true);
-        }   
+        }
+
+        if (runtimeDataChap3.IsPostDone(ProgressChap3enum.Post311)) return;
+
+        Debug.Log("Post not done");
+
+        if(!stationsDone) stationsDone = runtimeDataChap3.monitorsDone = runtimeDataChap3.AllDone(stations);
+
+        if(runtimeDataChap3.newsDone && runtimeDataChap3.monitorsDone)
+        {
+            runtimeDataChap3.SetPostDone(ProgressChap3enum.Post311);
+            btnBackToOverlay.interactable = true;
+        }
+
+
     }
 }

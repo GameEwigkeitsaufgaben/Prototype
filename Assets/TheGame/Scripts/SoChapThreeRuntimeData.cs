@@ -38,6 +38,7 @@ public class SoChapThreeRuntimeData : Runtime
     public string quizPointsCh03 = "***";
     public string singleSelectAwObjName = "--";
     public bool replayTL3101, replayTL3102, replayTL3103, replayTL3141, replayTL3111;
+    public bool newsDone, monitorsDone;
 
 
     //Called in Entry
@@ -76,11 +77,25 @@ public class SoChapThreeRuntimeData : Runtime
         return false;
     }
 
+    public bool AllDone (List<Monitor> itemList)
+    {
+        int index = itemList.FindIndex(item => item.viewed == false);
+        if (index == -1)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     private void OnEnable()
     {
         //Init Progress;
         progressDone = new ProgressChap3[namesEnum.Length];
         replayTL3101 = replayTL3102 = replayTL3103 = replayTL3111 = replayTL3141 = false;
+        
+        //311 betweenprogress
+        newsDone = monitorsDone =  false;
 
         for (int i = 0; i < progressDone.Length; i++)
         {

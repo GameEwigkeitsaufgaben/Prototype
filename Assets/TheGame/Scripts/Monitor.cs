@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Monitor : MonoBehaviour
@@ -7,6 +5,7 @@ public class Monitor : MonoBehaviour
     [SerializeReference] private CanvasGraphs monitorType;
 
     private ManagerMonitoring manager;
+    public bool viewed = false;
 
     private void Awake()
     {
@@ -16,5 +15,6 @@ public class Monitor : MonoBehaviour
     public void TurnOn()
     {
         manager.DisableAllBut(monitorType);
+        viewed = true;
     }
 }
