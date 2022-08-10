@@ -42,6 +42,7 @@ public class ManagerMonitoring : MonoBehaviour
         DisableAllBut(CanvasGraphs.Intro);
 
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
         runtimeDataChap3 = runtimeDataChapters.LoadChap3RuntimeData();
     }
@@ -105,7 +106,5 @@ public class ManagerMonitoring : MonoBehaviour
             runtimeDataChap3.SetPostDone(ProgressChap3enum.Post311);
             btnBackToOverlay.interactable = true;
         }
-
-
     }
 }

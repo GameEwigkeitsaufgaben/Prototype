@@ -45,7 +45,6 @@ public class ManagerGrubenwasserhaltungAufbau : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!btnBackTo3101.GetComponent<Button>().interactable)
