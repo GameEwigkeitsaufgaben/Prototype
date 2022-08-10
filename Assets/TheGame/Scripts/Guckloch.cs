@@ -10,40 +10,18 @@ public class Guckloch : MonoBehaviour
     private static extern void ImageDownloader(string str, string fn);
 
     public static byte[] ssData = null;
-    public static string imageFilename = "TestImage";
+    public string imageFilename = "TestImage";
 
-    public RawImage image;
-    public WebCamTexture tex;
-    public Texture2D testTex;
-    public RectTransform rect;
-    public Vector2 pos;
+    public RawImage webcamDisplay;
+    private WebCamTexture tex;
+    public Texture2D debugtexture;
+    public RectTransform frame;
     public Canvas canvas;
-    public float scaleFactor;
-    public void DownloadScreenshot()
-    {
-        StartCoroutine(RecordFrame());
-    }
+    private float scaleFactor;
 
     public void DownloadSpecificFrame()
     {
         StartCoroutine(RecordSpecificFrame());
-    }
-
-    public byte[] Test()
-    {
-        int width = Screen.width;
-        int height = Screen.height;
-        Texture2D tex = new Texture2D(width, height, TextureFormat.RGB24, false);
-
-        // Read screen contents into the texture
-        tex.ReadPixels(new Rect(0, 0, width, height), 0, 0);
-
-        tex.Apply();
-
-        // Encode texture into PNG
-        byte[] bytes = tex.EncodeToPNG();
-
-        return bytes;
     }
 
     void Start()
@@ -60,27 +38,8 @@ public class Guckloch : MonoBehaviour
 
         //// assuming the first available WebCam is desired
         tex = new WebCamTexture(devices[0].name);
-        image.texture = tex;
+        webcamDisplay.texture = tex;
         tex.Play();
-    }
-
-    IEnumerator RecordFrame()
-    {
-        yield return new WaitForEndOfFrame();
-        var texture = ScreenCapture.CaptureScreenshotAsTexture(4);
-        // do something with texture
-
-        ssData = texture.EncodeToPNG();
-
-        if (ssData != null)
-        {
-            Debug.Log("Downloading..." + imageFilename);
-            ImageDownloader(System.Convert.ToBase64String(ssData), imageFilename);
-        }
-
-        // cleanup
-        Object.Destroy(texture);
-
     }
 
     IEnumerator RecordSpecificFrame()
@@ -90,16 +49,16 @@ public class Guckloch : MonoBehaviour
         scaleFactor = canvas.scaleFactor;
         int width = Screen.width;
         int height = Screen.height;
-        Texture2D tex = new Texture2D((int)(rect.rect.width * scaleFactor), (int)(rect.rect.height * scaleFactor), TextureFormat.RGB24, false);
+        Texture2D tex = new Texture2D((int)(frame.rect.width * scaleFactor), (int)(frame.rect.height * scaleFactor), TextureFormat.RGB24, false);
 
         // Read screen contents into the texture
-        int posX = (width/2) + (int)(rect.anchoredPosition.x * scaleFactor);
-        int posY = (height/2) + (int)(rect.anchoredPosition.y * scaleFactor);
+        int posX = (width/2) + (int)(frame.anchoredPosition.x * scaleFactor);
+        int posY = (height/2) + (int)(frame.anchoredPosition.y * scaleFactor);
 
 
-        tex.ReadPixels(new Rect(posX, posY, rect.sizeDelta.x * scaleFactor, rect.sizeDelta.y * scaleFactor), 0, 0);
+        tex.ReadPixels(new Rect(posX, posY, frame.sizeDelta.x * scaleFactor, frame.sizeDelta.y * scaleFactor), 0, 0);
         tex.Apply();
-        testTex = tex;
+        debugtexture = tex;
 
 
         ssData = tex.EncodeToPNG();
