@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.Events;
 
 public class Guckloch : MonoBehaviour
 {
@@ -12,12 +14,21 @@ public class Guckloch : MonoBehaviour
     public static byte[] ssData = null;
     public string imageFilename = "TestImage";
 
+    [Header("Setup")]
     public RawImage webcamDisplay;
     private WebCamTexture tex;
     public Texture2D debugtexture;
     public RectTransform frame;
     public Canvas canvas;
     private float scaleFactor;
+    public int cameraActive = 0;
+    private WebCamDevice[] devices;
+
+    [Header("Error Handling")]
+    public GameObject errorNoCamera;
+    public GameObject errorMultipleCameras;
+
+
 
     public void DownloadSpecificFrame()
     {
@@ -26,20 +37,19 @@ public class Guckloch : MonoBehaviour
 
     void Start()
     {
+        devices = WebCamTexture.devices;
 
-
-        WebCamDevice[] devices = WebCamTexture.devices;
-
-        // for debugging purposes, prints available devices to the console
-        for (int i = 0; i < devices.Length; i++)
+        if (devices.Length == 0)
         {
-            print("Webcam available: " + devices[i].name);
+            errorNoCamera.SetActive(true);
+            return;
+        }
+        else if (devices.Length > 1)
+        {
+            errorMultipleCameras.SetActive(true);
         }
 
-        //// assuming the first available WebCam is desired
-        tex = new WebCamTexture(devices[0].name);
-        webcamDisplay.texture = tex;
-        tex.Play();
+        SetWebCam(0);
     }
 
     IEnumerator RecordSpecificFrame()
@@ -72,5 +82,14 @@ public class Guckloch : MonoBehaviour
         // cleanup
         Object.Destroy(tex);
 
+    }
+
+    public void SetWebCam(int index)
+    {
+        print("SetWEbCam" + index);
+
+        tex = new WebCamTexture(devices[index].name);
+        webcamDisplay.texture = tex;
+        tex.Play();
     }
 }
