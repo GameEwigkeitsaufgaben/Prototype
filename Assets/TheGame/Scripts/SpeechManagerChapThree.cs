@@ -166,7 +166,11 @@ public class SpeechManagerChapThree : MonoBehaviour
             currentList = speechDict[GameData.NameCH3TLPolder];
             playPolder = false;
         }
-
+        else if (playMonitoring)
+        {
+            currentList = speechDict[GameData.NameCH3TLMonitoring];
+            playMonitoring = false;
+        }
         if (currentList != null)
         {
             if (audioSrc.isPlaying) audioSrc.Stop();

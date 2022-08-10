@@ -14,7 +14,14 @@ public enum CanvasGraphs
 
 public class ManagerMonitoring : MonoBehaviour
 {
+    public Button btnReplayAudio;
     public Canvas canvasIntro, canvasPh, canvasWasserstand, canvasLeitfaehigkeit, canvasPcb, canvasWassertemperatur;
+
+    private SoChaptersRuntimeData runtimeDataChapters;
+    private SoChapThreeRuntimeData runtimeDataChap3;
+    private SpeechManagerChapThree speechManager;
+
+   
 
     Dictionary<string, Canvas> canvasGraphs = new Dictionary<string, Canvas>();
 
@@ -32,6 +39,23 @@ public class ManagerMonitoring : MonoBehaviour
         canvasGraphs.Add(CanvasGraphs.Wassertemperatur.ToString(), canvasWassertemperatur);
 
         DisableAllBut(CanvasGraphs.Intro);
+
+        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
+        runtimeDataChap3 = runtimeDataChapters.LoadChap3RuntimeData();
+    }
+
+    private void Start()
+    {
+        speechManager = GetComponent<SpeechManagerChapThree>();
+
+
+        //Audio Talkinglist
+        btnReplayAudio.gameObject.SetActive(runtimeDataChap3.replayTL3111);
+
+        if (runtimeDataChap3.replayTL3111) return;
+
+        PlayMonitoringTL();
     }
 
     public void DisableAllBut(CanvasGraphs graph)
@@ -47,5 +71,19 @@ public class ManagerMonitoring : MonoBehaviour
         }
 
         canvasGraphs[graph.ToString()].gameObject.SetActive(true);
+    }
+
+    public void PlayMonitoringTL()
+    {
+        speechManager.playMonitoring = true;
+    }
+
+    private void Update()
+    {
+        if (!runtimeDataChap3.replayTL3111 && speechManager.IsTalkingListFinished(GameData.NameCH3TLMonitoring))
+        {
+            runtimeDataChap3.replayTL3111 = true;
+            btnReplayAudio.gameObject.SetActive(true);
+        }   
     }
 }

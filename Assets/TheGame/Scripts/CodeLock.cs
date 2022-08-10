@@ -28,6 +28,7 @@ public class CodeLock : MonoBehaviour
         ResetCode();
     }
 
+    //called from Inspector in Button BtnKey, Keys are stored in static Class GameData;
     public void CheckCode()
     {
         string code = nbr1.text + nbr2.text + nbr3.text + nbr4.text;
@@ -79,7 +80,7 @@ public class CodeLock : MonoBehaviour
 
                 if (code == GameData.pwdAdminChapterThree)
                 {
-                    chaptersRuntimeData.progressWithAdminCh2 = true;
+                    chaptersRuntimeData.progressWithAdminCh3= true;
                 }
 
                 chaptersRuntimeData.ch3GrubenwasserUnlocked= true;

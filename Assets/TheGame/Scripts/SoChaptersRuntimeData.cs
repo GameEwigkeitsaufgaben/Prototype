@@ -27,6 +27,21 @@ public class SoChaptersRuntimeData : ScriptableObject
         progressWithAdminCh1 = progressWithAdminCh2 = progressWithAdminCh3 = false;
     }
 
+    public SoChapOneRuntimeData LoadChap1RuntimeData()
+    {
+        return Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+    }
+
+    public SoChapTwoRuntimeData LoadChap2RuntimeData()
+    {
+        return Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
+    }    
+    
+    public SoChapThreeRuntimeData LoadChap3RuntimeData()
+    {
+        return Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
+    }
+
     public void SetSceneCursor(Texture2D defaultSceneCursor)
     {
         sceneCursor = defaultSceneCursor;

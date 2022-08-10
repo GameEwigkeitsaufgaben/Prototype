@@ -37,7 +37,7 @@ public class SoChapThreeRuntimeData : Runtime
     public ProgressChap3[] progressDone;
     public string quizPointsCh03 = "***";
     public string singleSelectAwObjName = "--";
-    public bool replayTL3101, replayTL3102, replayTL3103, replayTL3141;
+    public bool replayTL3101, replayTL3102, replayTL3103, replayTL3141, replayTL3111;
 
 
     //Called in Entry
@@ -80,8 +80,7 @@ public class SoChapThreeRuntimeData : Runtime
     {
         //Init Progress;
         progressDone = new ProgressChap3[namesEnum.Length];
-        Debug.Log("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm" +namesEnum.Length);
-        replayTL3101 = replayTL3102 = replayTL3103 = replayTL3141 = false;
+        replayTL3101 = replayTL3102 = replayTL3103 = replayTL3111 = replayTL3141 = false;
 
         for (int i = 0; i < progressDone.Length; i++)
         {
