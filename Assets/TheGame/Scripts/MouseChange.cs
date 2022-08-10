@@ -63,6 +63,7 @@ public class MouseChange : MonoBehaviour
 
     public void MouseEnter()
     {
+        Debug.Log("Mouse Ener");
         if (gameObject.GetComponent<Post>())
         {
             runtimeDataCh01.hintPostUnlock = (gameObject.GetComponent<Button>().interactable) ? "": gameObject.GetComponent<Post>().GetUnlockHint();
@@ -92,7 +93,35 @@ public class MouseChange : MonoBehaviour
         }
         else if (gameObject.tag == "DragItem")
         {
-            if(gameObject.GetComponent<MuseumMinerEquipmentItem>() != null)
+            if(gameObject.GetComponent<DragTurmItem>() != null)
+            {
+                if (gameObject.GetComponent<DragTurmItem>().snaped)
+                {
+                    Cursor.SetCursor(runtimeDataChapters.cursorNoDrag, hotSpot, cursorMode);
+                    return;
+                }
+                else
+                {
+                    if(gameObject.GetComponent<DragTurmItem>().dragging)
+                    {
+                        Cursor.SetCursor(runtimeDataChapters.cursorDragDrag, hotSpot, cursorMode);
+                    }
+                    else
+                    {
+                        Cursor.SetCursor(runtimeDataChapters.cursorDragTouch, hotSpot, cursorMode);
+                    }
+                    return;
+                }
+            }
+
+            else if(gameObject.GetComponent<DragItemThoughts>() != null)
+            {
+                if(gameObject.GetComponent<DragItemThoughts>().dragable) Cursor.SetCursor(runtimeDataChapters.cursorDragTouch, hotSpot, cursorMode);
+                else Cursor.SetCursor(runtimeDataChapters.cursorNoDrag, hotSpot, cursorMode);
+                return;
+            }
+
+            else if(gameObject.GetComponent<MuseumMinerEquipmentItem>() != null)
             {
                 if (gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging) return;
 
@@ -107,10 +136,9 @@ public class MouseChange : MonoBehaviour
 
             else
             {
+                Debug.Log("EEEEEEEEEEEEEEEEELSEEEEEEEEEEEE drag drag");
                 Cursor.SetCursor(runtimeDataChapters.cursorDragDrag, hotSpot, cursorMode);
             }
-
-            
         }
         else
         {
@@ -136,25 +164,55 @@ public class MouseChange : MonoBehaviour
     {
         if (gameObject.tag == "DragItem")
         {
-            if (gameObject.GetComponent<MuseumMinerEquipmentItem>().myManager.IsMaxItemsOnMinerReached())
+            if(gameObject.GetComponent<MuseumMinerEquipmentItem>() != null)
             {
-                
-                if(SnapetTo.Miner == gameObject.GetComponent<MuseumMinerEquipmentItem>().snapedTo)
+                if (gameObject.GetComponent<MuseumMinerEquipmentItem>().myManager.IsMaxItemsOnMinerReached())
                 {
-                    Cursor.SetCursor(runtimeDataChapters.cursorDragDrag, hotSpot, cursorMode);
+
+                    if (SnapetTo.Miner == gameObject.GetComponent<MuseumMinerEquipmentItem>().snapedTo)
+                    {
+                        Cursor.SetCursor(runtimeDataChapters.cursorDragDrag, hotSpot, cursorMode);
+                        return;
+                    }
+
+                    Cursor.SetCursor(runtimeDataChapters.cursorNoDrag, hotSpot, cursorMode);
                     return;
                 }
-
-                Cursor.SetCursor(runtimeDataChapters.cursorNoDrag, hotSpot, cursorMode);
-                return;
             }
 
-            Cursor.SetCursor(runtimeDataChapters.cursorDragDrag, hotSpot, cursorMode);
+            else if(gameObject.GetComponent<DragItemThoughts>() != null)
+            {
+                if (!gameObject.GetComponent<DragItemThoughts>().dragable)
+                {
+                    Cursor.SetCursor(runtimeDataChapters.cursorNoDrag, hotSpot, cursorMode);
+                    return;
+                }
+            }
+            
+            else Cursor.SetCursor(runtimeDataChapters.cursorDragDrag, hotSpot, cursorMode);
         }
     }
 
     public void MouseUp()
     {
+        Debug.Log("Back to orig");
+        if (gameObject.tag == "DragItem")
+        {
+            if (gameObject.GetComponent<DragTurmItem>() != null)
+            {
+                Debug.Log("Back to orig");
+                if (!gameObject.GetComponent<DragTurmItem>().snaped)
+                {
+                    gameObject.transform.position = gameObject.GetComponent<DragTurmItem>().origPos;
+                    Debug.Log("Back to orig");
+                }
+                //Cursor.SetCursor(runtimeDataChapters.cursorDragTouch, hotSpot, cursorMode);
+            }
 
+            if (gameObject.GetComponent<DragItemThoughts>() != null)
+            {
+                Cursor.SetCursor(runtimeDataChapters.cursorDragTouch, hotSpot, cursorMode);
+            }
+        }
     }
 }

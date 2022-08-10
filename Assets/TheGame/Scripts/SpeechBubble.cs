@@ -7,7 +7,8 @@ public enum CharactersInGame
     Enya = 0,
     Dad = 1,
     Georg = 2,
-    Museumguide = 3
+    Museumguide = 3,
+    Bergbauvertreter = 4
 }
 
 public class SpeechBubble : MonoBehaviour
@@ -18,20 +19,19 @@ public class SpeechBubble : MonoBehaviour
 
     [SerializeField] private SoGameIcons gameIcons;
 
-
     bool isOn = false;
 
     private void Awake()
     {
         gameIcons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
         AssignSpeechBubbleElements();
+        PopulateBubbleSprites();
     }
 
     void Start()
     {
-
         gameObject.SetActive(false);
-        if (CharactersInGame.Dad == myCharacter && SwitchSceneManager.GetCurrentSceneName() == GameScenes.ch01LongwallCutter)
+        if (SwitchSceneManager.GetCurrentSceneName() == GameScenes.ch01LongwallCutter && CharactersInGame.Dad == myCharacter)
         {
             RotateSpeechBubble(180f);
         }
@@ -40,6 +40,8 @@ public class SpeechBubble : MonoBehaviour
     private void AssignSpeechBubbleElements()
     {
         Transform[] myElements = GetComponentsInChildren<Transform>(true);
+        Debug.Log("Size Elementes Characters " + myElements.Length);
+
         for (int i = 0; i < myElements.Length; i++)
         {
             bubbleImage = myElements[1].GetComponent<Image>();

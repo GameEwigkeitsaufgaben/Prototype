@@ -28,6 +28,7 @@ public class CodeLock : MonoBehaviour
         ResetCode();
     }
 
+    //called from Inspector in Button BtnKey, Keys are stored in static Class GameData;
     public void CheckCode()
     {
         string code = nbr1.text + nbr2.text + nbr3.text + nbr4.text;
@@ -70,6 +71,21 @@ public class CodeLock : MonoBehaviour
                 chaptersRuntimeData.ch2GrubenwasserUnlocked = true;
                 SceneManager.LoadScene(GameScenes.ch02InstaMain);
                 break;
+            case Chapters.Ch03Ewigkeitsaufgabe:
+                if (!(code == GameData.pwdChapterThree || code == GameData.pwdAdminChapterThree))
+                {
+                    ResetCode();
+                    return;
+                }
+
+                if (code == GameData.pwdAdminChapterThree)
+                {
+                    chaptersRuntimeData.progressWithAdminCh3= true;
+                }
+
+                chaptersRuntimeData.ch3GrubenwasserUnlocked= true;
+                SceneManager.LoadScene(GameScenes.ch03InstaMain);
+                break;
         }
     }
     public void EnterNumber(int nbr)
@@ -94,6 +110,9 @@ public class CodeLock : MonoBehaviour
                 case Chapters.Ch02Grubenwasser:
                     SetCodeDisplay("2", "3", "2", "3");
                     break;
+                case Chapters.Ch03Ewigkeitsaufgabe:
+                    SetCodeDisplay("3", "4", "3", "4");
+                    break;
             }
 
             return;
@@ -106,6 +125,9 @@ public class CodeLock : MonoBehaviour
                 break;
             case Chapters.Ch02Grubenwasser:
                 SetCodeDisplay("2", "2", "2", "2");
+                break;
+            case Chapters.Ch03Ewigkeitsaufgabe:
+                SetCodeDisplay("3", "3", "3", "3");
                 break;
         }
     }
