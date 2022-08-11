@@ -26,9 +26,12 @@ public class ManagerGWChancen : MonoBehaviour
         MirrorBergbauvertreter(false);
         btnNext.interactable = false;
 
+        float x = -300f, y = 150f;
         foreach (DragItemThoughts d in dragitems)
         {
-            d.gameObject.transform.localPosition = new Vector3(-166f, 77f, 0f);
+            d.gameObject.transform.localPosition = new Vector3(x, y, 0f);
+            y -= 10f;
+            x += 10f;
         }
 
         speechManager = GetComponent<SpeechManagerChapThree>();
