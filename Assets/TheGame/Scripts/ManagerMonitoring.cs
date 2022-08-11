@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public enum CanvasGraphs
 {   Intro,
@@ -16,13 +17,15 @@ public class ManagerMonitoring : MonoBehaviour
 {
     public Button btnReplayAudio, btnBackToOverlay;
     public Canvas canvasIntro, canvasPh, canvasWasserstand, canvasLeitfaehigkeit, canvasPcb, canvasWassertemperatur;
-    public List<Monitor> stations = new List<Monitor>();
+    public List<Monitor> stations;
     public bool newsDone, stationsDone;
+    public TMP_Text introText;
 
 
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoChapThreeRuntimeData runtimeDataChap3;
     private SpeechManagerChapThree speechManager;
+    private TMP_Text activeDesc;
 
     Dictionary<string, Canvas> canvasGraphs = new Dictionary<string, Canvas>();
 
@@ -39,8 +42,6 @@ public class ManagerMonitoring : MonoBehaviour
         canvasGraphs.Add(CanvasGraphs.PCB.ToString(), canvasPcb);
         canvasGraphs.Add(CanvasGraphs.Wassertemperatur.ToString(), canvasWassertemperatur);
 
-        DisableAllBut(CanvasGraphs.Intro);
-
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
 
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
@@ -54,6 +55,9 @@ public class ManagerMonitoring : MonoBehaviour
         //Audio Talkinglist
         btnReplayAudio.gameObject.SetActive(runtimeDataChap3.replayTL3111);
 
+        DisableAllBut(CanvasGraphs.Intro);
+        activeDesc = introText;
+
         if (runtimeDataChap3.replayTL3111) return;
 
         PlayMonitoringTL();
@@ -66,6 +70,14 @@ public class ManagerMonitoring : MonoBehaviour
 
         btnBackToOverlay.interactable = false;
     }
+
+    public void SetDescription(TMP_Text desc)
+    {
+        activeDesc.gameObject.SetActive(false);
+        desc.gameObject.SetActive(true);
+        activeDesc = desc;
+    }
+
 
     public void DisableAllBut(CanvasGraphs graph)
     {
@@ -96,8 +108,6 @@ public class ManagerMonitoring : MonoBehaviour
         }
 
         if (runtimeDataChap3.IsPostDone(ProgressChap3enum.Post311)) return;
-
-        Debug.Log("Post not done");
 
         if(!stationsDone) stationsDone = runtimeDataChap3.monitorsDone = runtimeDataChap3.AllDone(stations);
 

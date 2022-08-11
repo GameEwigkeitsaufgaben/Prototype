@@ -58,7 +58,6 @@ public class SoChapOneRuntimeData : Runtime
         currentCoalmineStop = CoalmineStop.Unset;
         ch1GeneralUnlocked = false;
         ch2GrubenwasserUnlocked = false;
-        Debug.Log("RELOAD RUNTIME DATA");
         trainArrived = viewPointS3passed = false;
         postOverlayToLoad = "";
         playerInsideCave = false;

@@ -19,7 +19,6 @@ public class SpeechList : MonoBehaviour
         audioSrc = src;
         audioSrc.playOnAwake = false;
         clips = list.orderedListOfAudioClips;
-        Debug.Log("set audio src " + audioSrc.name);
     }
 
     public bool isPlaying()

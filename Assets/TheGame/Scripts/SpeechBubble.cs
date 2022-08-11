@@ -40,7 +40,6 @@ public class SpeechBubble : MonoBehaviour
     private void AssignSpeechBubbleElements()
     {
         Transform[] myElements = GetComponentsInChildren<Transform>(true);
-        Debug.Log("Size Elementes Characters " + myElements.Length);
 
         for (int i = 0; i < myElements.Length; i++)
         {

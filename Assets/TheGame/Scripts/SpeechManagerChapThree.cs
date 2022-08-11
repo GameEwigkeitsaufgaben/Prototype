@@ -84,7 +84,6 @@ public class SpeechManagerChapThree : MonoBehaviour
     private void AddToDict(SpeechList speechList, SoTalkingList tl)
     {
         speechList = gameObject.AddComponent<SpeechList>();
-        Debug.Log(tl.listName);
         speechList.SetUpList(tl, audioSrc);
         speechDict.Add(speechList.listName, speechList);
     }

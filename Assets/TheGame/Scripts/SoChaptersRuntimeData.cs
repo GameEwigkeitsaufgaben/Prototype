@@ -22,7 +22,6 @@ public class SoChaptersRuntimeData : ScriptableObject
 
     private void OnEnable()
     {
-        Debug.Log("Enable SoChaptersRuntimeData");
         ch1GeneralUnlocked = ch2GrubenwasserUnlocked = ch3GrubenwasserUnlocked = false;
         progressWithAdminCh1 = progressWithAdminCh2 = progressWithAdminCh3 = false;
     }

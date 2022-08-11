@@ -1,11 +1,13 @@
 using UnityEngine;
+using TMPro;
 
 public class Monitor : MonoBehaviour
 {
-    [SerializeReference] private CanvasGraphs monitorType;
+    public CanvasGraphs monitorType;
 
     private ManagerMonitoring manager;
     public bool viewed = false;
+    public TMP_Text description;
 
     private void Awake()
     {
@@ -15,6 +17,7 @@ public class Monitor : MonoBehaviour
     public void TurnOn()
     {
         manager.DisableAllBut(monitorType);
+        manager.SetDescription(description);
         viewed = true;
     }
 }

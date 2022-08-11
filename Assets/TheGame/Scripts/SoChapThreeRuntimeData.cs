@@ -50,8 +50,6 @@ public class SoChapThreeRuntimeData : Runtime
     //Called in Entry
     public bool IsPostDone(ProgressChap3enum post)
     {
-        Debug.Log("--------------------------" + post.ToString()+ " " + (int)post + " Length "+ progressDone.Length);
-        
         return progressDone[(int)post].done;
     }
 
