@@ -29,14 +29,14 @@ public class Overlay : MonoBehaviour
     private SoPostData postData;
     private SoGameIcons icons;
     private PostManagerChapterOne menuManager;
-    private SoChapOneRuntimeData runtimeData;
+    private SoChapOneRuntimeData runtimeDataChap01;
     private SoChapTwoRuntimeData runtimeDataChap02;
     private SoChapThreeRuntimeData runtimeDataChap03;
 
     private void Awake()
     {
         icons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        runtimeDataChap01 = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         runtimeDataChap02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
         runtimeDataChap03 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
         webglVideoPlayer = GameObject.FindObjectOfType<WebGlVideoPlayer>();
@@ -135,20 +135,23 @@ public class Overlay : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain)
         {
-            points = runtimeData.quizPointsCh01;
+            //points = runtimeData.quizPointsCh01;
+            points = runtimeDataChap01.quizPointsOverall.ToString();
         }
         else if (SceneManager.GetActiveScene().name == GameScenes.ch02InstaMain)
         {
             if (runtimeDataChap02 != null)
             {
-                points = runtimeDataChap02.quizPointsCh02;
+                //points = runtimeDataChap02.quizPointsCh02;
+                points = runtimeDataChap02.quizPointsOverall.ToString();
             }
         }
         else if (SceneManager.GetActiveScene().name == GameScenes.ch03InstaMain)
         {
             if (runtimeDataChap03 != null)
             {
-                points = runtimeDataChap03.quizPointsCh03;
+                //points = runtimeDataChap03.quizPointsCh03;
+                points = runtimeDataChap03.quizPointsOverall.ToString();
             }
         }
         else
@@ -163,7 +166,7 @@ public class Overlay : MonoBehaviour
     public void CloseOverlay()
     {
         gameObject.SetActive(false);
-        runtimeData.overlaySoundState = OverlaySoundState.Closed;
+        runtimeDataChap01.overlaySoundState = OverlaySoundState.Closed;
         webglVideoPlayer.StopTheVideo();
     }
 

@@ -1786,7 +1786,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: DragSourcePumpspeicher
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 206144952, guid: 4643cd9c6f4e2e84e8e343728accc170, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4643cd9c6f4e2e84e8e343728accc170, type: 3}
 --- !u!1001 &842425151
 PrefabInstance:
@@ -1915,7 +1916,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: DragSourceSauberesGrubenwasser
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 206144952, guid: 4643cd9c6f4e2e84e8e343728accc170, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4643cd9c6f4e2e84e8e343728accc170, type: 3}
 --- !u!1 &934905443
 GameObject:
@@ -2191,7 +2193,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: DragSourceEntlastungFluss
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 206144952, guid: 4643cd9c6f4e2e84e8e343728accc170, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4643cd9c6f4e2e84e8e343728accc170, type: 3}
 --- !u!224 &1111548566 stripped
 RectTransform:
@@ -2429,7 +2432,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: DragSourceRohstoffquelle
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 206144952, guid: 4643cd9c6f4e2e84e8e343728accc170, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4643cd9c6f4e2e84e8e343728accc170, type: 3}
 --- !u!1 &1276957838
 GameObject:
@@ -3094,6 +3098,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 707788902}
     m_Modifications:
+    - target: {fileID: 2091569452751877362, guid: 4643cd9c6f4e2e84e8e343728accc170, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6680774332798995322, guid: 4643cd9c6f4e2e84e8e343728accc170, type: 3}
       propertyPath: m_text
       value: Wenig Grubenwasser
@@ -3210,7 +3218,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: DragSourceWenigGrubenwasser
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 206144952, guid: 4643cd9c6f4e2e84e8e343728accc170, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4643cd9c6f4e2e84e8e343728accc170, type: 3}
 --- !u!1 &1442547927
 GameObject:
@@ -4307,7 +4316,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: DragSourceLagerstaette
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 206144952, guid: 4643cd9c6f4e2e84e8e343728accc170, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4643cd9c6f4e2e84e8e343728accc170, type: 3}
 --- !u!224 &1885518216 stripped
 RectTransform:
@@ -4522,20 +4532,8 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 707788902}
     m_Modifications:
-    - target: {fileID: 6680774332798995322, guid: 4643cd9c6f4e2e84e8e343728accc170, type: 3}
-      propertyPath: m_text
-      value: Geothermie
-      objectReference: {fileID: 0}
-    - target: {fileID: 6680774333197092675, guid: 4643cd9c6f4e2e84e8e343728accc170, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6680774333197092675, guid: 4643cd9c6f4e2e84e8e343728accc170, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6680774333197092675, guid: 4643cd9c6f4e2e84e8e343728accc170, type: 3}
-      propertyPath: m_Color.r
+    - target: {fileID: 2091569452751877362, guid: 4643cd9c6f4e2e84e8e343728accc170, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6680774333376518224, guid: 4643cd9c6f4e2e84e8e343728accc170, type: 3}
@@ -4621,18 +4619,6 @@ PrefabInstance:
     - target: {fileID: 6680774333376518224, guid: 4643cd9c6f4e2e84e8e343728accc170, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6680774333376518225, guid: 4643cd9c6f4e2e84e8e343728accc170, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6680774333376518225, guid: 4643cd9c6f4e2e84e8e343728accc170, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6680774333376518225, guid: 4643cd9c6f4e2e84e8e343728accc170, type: 3}
-      propertyPath: m_Color.r
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6680774333376518319, guid: 4643cd9c6f4e2e84e8e343728accc170, type: 3}
       propertyPath: m_Name

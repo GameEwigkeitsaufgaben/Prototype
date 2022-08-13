@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public enum GWChanceType
 {
@@ -11,6 +10,7 @@ public enum GWChanceType
     neitherNor
 }
 
+[RequireComponent(typeof(MouseChange))]
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BehaviourButton))]
@@ -21,6 +21,9 @@ public class DragItemThoughts : MonoBehaviour, IBeginDragHandler, IEndDragHandle
     private ManagerGWChancen manager;
     private string myTag;
     public Vector3 origPos;
+    public TMP_Text buzzword;
+    public Image bubble, rahmen;
+    public Button btnRahmen;
 
     public GameObject mySnapObj;
     public bool snaped = false;
@@ -29,11 +32,17 @@ public class DragItemThoughts : MonoBehaviour, IBeginDragHandler, IEndDragHandle
 
     public GWChanceType type;
 
-    // Start is called before the first frame update
     void Start()
     {
         myDragRectTransform = GetComponent<RectTransform>();
         manager = FindObjectOfType<ManagerGWChancen>();
+        btnRahmen = rahmen.gameObject.GetComponent<Button>();
+        rahmen.enabled = false;
+        bubble.enabled = true;
+        btnRahmen.enabled = false;
+        buzzword = GetComponentInChildren<TMP_Text>();
+        buzzword.gameObject.SetActive(true);
+
         //Get the parent Canvas Obj, for dragging mechanics - needed for scalefactor in differenct screen spaces! 
         GameObject tempCanvasItem = gameObject; //start with gameobject
         while (tempCanvasItem.GetComponent<Canvas>() == null)
@@ -77,59 +86,82 @@ public class DragItemThoughts : MonoBehaviour, IBeginDragHandler, IEndDragHandle
         GetComponent<MouseChange>().MouseUp();
     }
 
+    public void ReplayTalkingList()
+    {
+        PlayChance();
+        PlayNoChance();
+        PlayNeitherNor();
+    }
+ 
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.name == "DropTargetImgChance" && type == GWChanceType.chance)
         {
             ChangeSceneBehaviour(collision);
 
-            if (gameObject.name == "DragSourceGeothermie")
-            {
-                manager.speechManager.playGeothermie = true;
-                manager.currentTL = GameData.NameCH3TLGeothermie;
-            }
-            else if (gameObject.name == "DragSourceRohstoffquelle")
-            {
-                manager.speechManager.playRohstoffquelle = true;
-                manager.currentTL = GameData.NameCH3TLRohstoffquelle;
-            }
-            else if (gameObject.name == "DragSourceEntlastungFluss")
-            {
-                manager.speechManager.playEntlastungFluesse = true;
-                manager.currentTL = GameData.NameCH3TLEntlastungFluesse;
-            }
-            else if (gameObject.name == "DragSourceWenigGrubenwasser")
-            {
-                manager.speechManager.playWenigerGW = true;
-                manager.currentTL = GameData.NameCH3TLWenigerGW;
-            }
+            PlayChance();
         }
         else if (collision.name == "DropTargetImgNoChance" && type == GWChanceType.nochance)
         {
             ChangeSceneBehaviour(collision);
 
-            if (gameObject.name == "DragSourcePumpspeicher")
-            {
-                manager.speechManager.playPumpspeicherkraftwerke = true;
-                manager.currentTL = GameData.NameCH3TLPumpspeicherkraftwerke;
-            }
-            else if (gameObject.name == "DragSourceLagerstaette")
-            {
-                manager.speechManager.playLagerstaette = true;
-                manager.currentTL = GameData.NameCH3TLLagerstaette;
-            }
+            PlayNoChance();
         }
         else if (collision.name == "DropTargetImgNeitherNor" && type == GWChanceType.neitherNor)
         {
             ChangeSceneBehaviour(collision);
 
-            if (gameObject.name == "DragSourceSauberesGrubenwasser")
-            {
-                manager.speechManager.playSauberesGW = true;
-                manager.currentTL = GameData.NameCH3TLSauberesGW;
-            }
+            PlayNeitherNor();
         }
 
+    }
+
+    private void PlayNeitherNor()
+    {
+        if (gameObject.name == "DragSourceSauberesGrubenwasser")
+        {
+            manager.speechManager.playSauberesGW = true;
+            manager.currentTL = GameData.NameCH3TLSauberesGW;
+        }
+    }
+
+    private void PlayNoChance()
+    {
+        if (gameObject.name == "DragSourcePumpspeicher")
+        {
+            manager.speechManager.playPumpspeicherkraftwerke = true;
+            manager.currentTL = GameData.NameCH3TLPumpspeicherkraftwerke;
+        }
+        else if (gameObject.name == "DragSourceLagerstaette")
+        {
+            manager.speechManager.playLagerstaette = true;
+            manager.currentTL = GameData.NameCH3TLLagerstaette;
+        }
+    }
+
+    private void PlayChance()
+    {
+        if (gameObject.name == "DragSourceGeothermie")
+        {
+            manager.speechManager.playGeothermie = true;
+            manager.currentTL = GameData.NameCH3TLGeothermie;
+        }
+        else if (gameObject.name == "DragSourceRohstoffquelle")
+        {
+            manager.speechManager.playRohstoffquelle = true;
+            manager.currentTL = GameData.NameCH3TLRohstoffquelle;
+        }
+        else if (gameObject.name == "DragSourceEntlastungFluss")
+        {
+            manager.speechManager.playEntlastungFluesse = true;
+            manager.currentTL = GameData.NameCH3TLEntlastungFluesse;
+        }
+        else if (gameObject.name == "DragSourceWenigGrubenwasser")
+        {
+            manager.speechManager.playWenigerGW = true;
+            manager.currentTL = GameData.NameCH3TLWenigerGW;
+        }
     }
 
     private void ChangeSceneBehaviour(Collider2D collision)
@@ -138,6 +170,10 @@ public class DragItemThoughts : MonoBehaviour, IBeginDragHandler, IEndDragHandle
         gameObject.transform.SetParent(collision.transform);
         gameObject.GetComponent<Image>().enabled = false;
         snaped = true;
+        btnRahmen.enabled = true;
+        rahmen.enabled = true;
+        bubble.enabled = false;
+        gameObject.tag = "Untagged";
         manager.animator.enabled = false;
         manager.MirrorBergbauvertreter(true);
         manager.PauseDragAllDragItems(true);

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -49,7 +48,14 @@ public class ManagerGWChancen : MonoBehaviour
         foreach (DragItemThoughts d in dragitems)
         {
             d.dragable = !pause;
-            
+            if (d.snaped)
+            {
+                d.btnRahmen.enabled = !pause;
+            }
+            else
+            {
+                d.buzzword.gameObject.SetActive(!pause);
+            }
         }
     }
 
@@ -69,7 +75,6 @@ public class ManagerGWChancen : MonoBehaviour
             btnNext.interactable = true;
             animator.enabled = false;
         }
-       
 
         if (currentTL != "" && speechManager.IsTalkingListFinished(currentTL))
         {
