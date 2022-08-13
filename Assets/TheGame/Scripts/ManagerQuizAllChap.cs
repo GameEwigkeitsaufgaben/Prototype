@@ -238,7 +238,7 @@ public class ManagerQuizAllChap : MonoBehaviour
         {
             case 1:
                 runtimeDataCh1.quizPointsOverall += pointsPerAnswer;
-                scoreOverall.text = runtimeDataCh3.quizPointsOverall.ToString();
+                scoreOverall.text = runtimeDataCh1.quizPointsOverall.ToString();
                 break;
             case 2:
                 runtimeDataCh2.quizPointsOverall += pointsPerAnswer;
