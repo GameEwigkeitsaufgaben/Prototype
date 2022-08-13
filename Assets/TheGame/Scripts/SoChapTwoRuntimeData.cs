@@ -8,7 +8,9 @@ public class SoChapTwoRuntimeData : Runtime
 {
     public string hintPostUnlock;
     public string quizPointsCh02 = "***";
+    public float quizPointsOverall = 0;
     public string singleSelectAwObjName = "--";
+    public string generalKeyOverlay = GameData.NameOverlay2112;
 
     //progress in game
     public bool progressPost211Done, progress212MuseumDone, progressPost213Done, progressPost214Done, progressPost215Pumpen;
@@ -43,7 +45,7 @@ public class SoChapTwoRuntimeData : Runtime
         lastWP = MuseumWaypoints.None;
         interactTVDone = false;
         singleSelectAwObjName = "--";
-
-}
+        quizPointsOverall = 0;
+    }
 
 }

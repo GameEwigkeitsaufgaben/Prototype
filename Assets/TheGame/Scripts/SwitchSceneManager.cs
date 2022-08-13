@@ -172,6 +172,18 @@ public class SwitchSceneManager : MonoBehaviour
         SwitchScene(GameScenes.ch03InstaMain);
     }
 
+    public int GetActiveQuizScene()
+    {
+        if (SceneManager.GetActiveScene().name == GameScenes.ch01Quiz)
+            return 1;
+        else if (SceneManager.GetActiveScene().name == GameScenes.ch02Quiz)
+            return 2;
+        else if (SceneManager.GetActiveScene().name == GameScenes.ch03Quiz)
+            return 3;
+
+        return -1;
+    }
+
     IEnumerator LoadSceneWithTransition(string name)
     {
         transition.SetTrigger("Start");

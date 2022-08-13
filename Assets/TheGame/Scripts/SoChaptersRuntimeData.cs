@@ -41,6 +41,11 @@ public class SoChaptersRuntimeData : ScriptableObject
         return Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
     }
 
+    public SoQuizConfig LoadConfigQuiz()
+    {
+        return Resources.Load<SoQuizConfig>(GameData.NameConfigQuiz);
+    }
+
     public void SetSceneCursor(Texture2D defaultSceneCursor)
     {
         sceneCursor = defaultSceneCursor;

@@ -18,6 +18,7 @@ public enum QuizQuestionType
 public class QuizData : ScriptableObject
 {
     public QuizQuestionType questionType;
+    public QuestionType qType;
     public Sprite postImage;
 
     public int timeToAnswerInSec;

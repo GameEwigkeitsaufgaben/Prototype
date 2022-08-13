@@ -29,6 +29,10 @@ public class SoChapOneRuntimeData : Runtime
     public bool isMinerDone, isMythDone, isCoalifiationDone, isCarbonificationPeriodDone;
     public SoundMuseum soundSettingMuseum;
     public string quizPointsCh01 = "";
+    public float quizPointsOverall = 0;
+
+    public string generalKeyOverlay = GameData.NameOverlay1110;
+
 
     [Header("GameProgress")]
     public bool post111Done, post112Done, post113Done, post114Done, video115Done, interaction116Done, interaction117Done, quiz119Done;
@@ -50,6 +54,7 @@ public class SoChapOneRuntimeData : Runtime
     private void OnEnable()
     {
         quizPointsCh01 = "";
+        quizPointsOverall = 0;
         hintPostUnlock = "";
         post111Done = post112Done = post113Done = post114Done = false;
         liftBtnsAllEnabled = false;

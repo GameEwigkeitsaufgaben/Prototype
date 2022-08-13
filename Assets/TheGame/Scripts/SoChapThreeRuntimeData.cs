@@ -36,9 +36,11 @@ public class SoChapThreeRuntimeData : Runtime
     public string[] namesEnum = System.Enum.GetNames(typeof(ProgressChap3enum));
     public ProgressChap3[] progressDone;
     public string quizPointsCh03 = "***";
+    public float quizPointsOverall = 0;
     public string singleSelectAwObjName = "--";
     public bool replayTL3101, replayTL3102, replayTL3103, replayTL3141, replayTL3111;
     public bool newsDone, monitorsDone;
+    public string generalKeyOverlay = GameData.NameOverlay317;
 
 
     //Called in Entry
@@ -91,6 +93,7 @@ public class SoChapThreeRuntimeData : Runtime
         //Init Progress;
         progressDone = new ProgressChap3[namesEnum.Length];
         replayTL3101 = replayTL3102 = replayTL3103 = replayTL3111 = replayTL3141 = false;
+        quizPointsOverall = 0;
         
         //311 betweenprogress
         newsDone = monitorsDone =  false;

@@ -58,14 +58,12 @@ public class QuizAnswerUiBehaviour : MonoBehaviour,ISelectHandler, IDeselectHand
     {
         uiAnswer.color = Color.white;
         uiAnswer.fontStyle = FontStyles.Bold | FontStyles.SmallCaps;
-        
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
         uiAnswer.color = GameColors.defaultTextColor;
         uiAnswer.fontStyle = FontStyles.Normal;
-       
     }
 
     public int GetAndShowResultPerAnswer()

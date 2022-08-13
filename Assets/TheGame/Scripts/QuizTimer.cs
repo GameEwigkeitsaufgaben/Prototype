@@ -9,38 +9,45 @@ public class QuizTimer : MonoBehaviour
     public Image uiTimer;
     public Text uiTimerText;
     
-    public float timeToCompleteQuestion;
-    public float timeToShowCorrectAnswer;
+    //public float timeToCompleteQuestion2;
+
+    public float timerTime = 5f;
+
+    //public float timeToShowCorrectAnswer;
 
     public bool loadNextQuestion;
     public float fillFraction;
-    float timerValue;
     public bool isAnsweringQuestion = false;
     float maxTime;
-    bool timeRunout;
+    private bool timeOut;
+
+
+    [SerializeField]float timerValue;
 
     private void Start()
     {
-        timerValue = timeToCompleteQuestion;
-        maxTime = timeToCompleteQuestion;
-        timeRunout = false;
+        //timerValue = timeToCompleteQuestion2;
+        timerValue = timerTime;
+        timeOut = false;
     }
 
     void UpdateTimer()
     {
+        if (!isAnsweringQuestion) return;
+
         timerValue -= Time.deltaTime;
         
         if (isAnsweringQuestion)
         {
-            if(timerValue > 0)
+            if (timerValue > 0)
             {
-                fillFraction = timerValue / timeToCompleteQuestion;
+                fillFraction = timerValue / timerTime;
                 uiTimer.fillAmount = fillFraction;
             }
             else
             {
                 isAnsweringQuestion = false;
-                timeRunout = true;
+                timeOut = true;
             }
         }
     }
@@ -48,10 +55,6 @@ public class QuizTimer : MonoBehaviour
     public int GetCompletionTime()
     {
         return Mathf.FloorToInt(fillFraction*100);
-    }
-    void Update()
-    {
-        UpdateTimer();
     }
 
     public void StopTimer()
@@ -61,29 +64,30 @@ public class QuizTimer : MonoBehaviour
 
     public void StartTimer()
     {
+        timerValue = timerTime;
         isAnsweringQuestion = true;
-        timeToCompleteQuestion = maxTime;
-        timerValue = timeToCompleteQuestion;
-        timeRunout = false;
+        timeOut = false;
     }
 
     public void StartTimer(int time)
     {
         isAnsweringQuestion = true;
-        timeToCompleteQuestion = time;
-        timerValue = timeToCompleteQuestion;
-        maxTime = timeToCompleteQuestion;
-        timeRunout = false;
+        timeOut = false;
     }
 
     public bool IsTimeRunOut()
     {
         //Gamer did not answered the question in time
-        return timeRunout;
+        return timeOut;
     }
 
     public void ResetTimeRunOut()
     {
-        timeRunout = false;
+        timeOut = false;
+    }
+    
+    private void Update()
+    {
+        UpdateTimer();
     }
 }

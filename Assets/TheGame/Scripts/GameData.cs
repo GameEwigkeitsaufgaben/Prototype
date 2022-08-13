@@ -13,12 +13,14 @@ public static class GameData
     public const string pwdAdminChapterThree = "3434";
 
     //Name of objects in Folder "Resources" 
-    public const string NameConfigSfx = "SfxConfig";
     public const string NameRuntimeDataChapters = "00RuntimeDataChapters";
     public const string NameRuntimeDataChap01 = "RuntimeExchangeData";
     public const string NameRuntimeDataChap02 = "RuntimeDataCh02";
     public const string NameRuntimeDataChap03 = "RuntimeDataCh03";
+
+    //Config Files
     public const string NameConfigMinerEquiment = "ConfigMinerEquipment";
+    public const string NameConfigSfx = "ConfigSfx";
     public const string NameConfigMuseum = "ConfigMuseum";
     public const string NameConfigCH3Demo = "ConfigCh3";
     public const string NameGameIcons = "Icons";
