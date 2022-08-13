@@ -255,7 +255,6 @@ public class ManagerQuizAllChap : MonoBehaviour
 
     private void ShowNextQuestion()
     {
-
         currentQuestionIndex++;
         UpdateProgressUI();
 

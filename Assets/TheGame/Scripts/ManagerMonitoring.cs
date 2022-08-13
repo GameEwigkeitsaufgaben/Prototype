@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,10 +16,9 @@ public class ManagerMonitoring : MonoBehaviour
 {
     public Button btnReplayAudio, btnBackToOverlay;
     public Canvas canvasIntro, canvasPh, canvasWasserstand, canvasLeitfaehigkeit, canvasPcb, canvasWassertemperatur;
-    public List<Monitor> stations;
-    public bool newsDone, stationsDone;
+    public List<Monitor> monitors;
+   // public bool stationsDone;
     public TMP_Text introText;
-
 
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoChapThreeRuntimeData runtimeDataChap3;
@@ -78,7 +76,6 @@ public class ManagerMonitoring : MonoBehaviour
         activeDesc = desc;
     }
 
-
     public void DisableAllBut(CanvasGraphs graph)
     {
         foreach (KeyValuePair<string, Canvas> c in canvasGraphs)
@@ -109,7 +106,7 @@ public class ManagerMonitoring : MonoBehaviour
 
         if (runtimeDataChap3.IsPostDone(ProgressChap3enum.Post311)) return;
 
-        if(!stationsDone) stationsDone = runtimeDataChap3.monitorsDone = runtimeDataChap3.AllDone(stations);
+        if (!runtimeDataChap3.monitorsDone) runtimeDataChap3.monitorsDone = runtimeDataChap3.AllDone(monitors);
 
         if(runtimeDataChap3.newsDone && runtimeDataChap3.monitorsDone)
         {

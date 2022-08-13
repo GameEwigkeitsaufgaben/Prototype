@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -79,7 +78,10 @@ public class SoChapThreeRuntimeData : Runtime
 
     public bool AllDone (List<Monitor> itemList)
     {
+        if (itemList.Count == 0) return false;
+
         int index = itemList.FindIndex(item => item.viewed == false);
+        
         if (index == -1)
         {
             return true;
@@ -96,7 +98,7 @@ public class SoChapThreeRuntimeData : Runtime
         quizPointsOverall = 0;
         
         //311 betweenprogress
-        newsDone = monitorsDone =  false;
+        newsDone = monitorsDone = false;
 
         for (int i = 0; i < progressDone.Length; i++)
         {
@@ -107,7 +109,6 @@ public class SoChapThreeRuntimeData : Runtime
 
     public void SetAllDone()
     {
-
         for (int i = 0; i < progressDone.Length; i++)
         {
             progressDone[i] = new ProgressChap3(namesEnum[i]);
