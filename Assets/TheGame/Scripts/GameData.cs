@@ -173,17 +173,19 @@ public static class GameData
     public const string NameTLMineS3TrainrideIn = "Audios100160CaveTrainRideIn";
     public const string NameTLMineS3TrainrideOut = "Audios100160CaveTrainRideOut";
 
-    //Talkinglist Museum: TL-TalkingList
+    //Talkinglist Museum ch1: TL-TalkingList
     public const string NameTLMuseumInfoArrival = "Audios100170MuseumInfoArrival";
     public const string NameTLMuseumOutro = "Audios100170MuseumOutro";
     public const string NameTLMuseumCarbonificationPeriod = "Audios100170MuseumCarbonifictionPeriod";
     public const string NameTLMuseumCoalification = "Audios100170MuseumCoalification";
     public const string NameTLMuseumHistoryMining = "Audios100170MuseumHistoryMining";
     public const string NameTLMuseumMinerEquipment = "Audios100170MuseumMinerEquipment";
-    public const string NameTLMuseumGrundwasserIntro = "AudiosMuseumIntroGrundwasser";
-    public const string NameTLMuseumIntroTV = "AudiosMuseumIntroTVGrundwasserIntro";
-    public const string NameTLMuseumOutroTV = "AudiosMuseumIntroTVGrundwasserOutro";
-    public const string NameTLMuseumIntroFliesspfad= "AudiosMuseumIntroFliesspfad";
+
+    //Talkinglist Museum ch2: TL-TalkingList
+    public const string NameTLMuseumGrundwasserIntro = "AudioTalkingList-2.1.2.0-IntroMuseumGrundwasser";
+    public const string NameTLMuseumIntroTV = "AudioTalkingList-2.1.2.1-IntroTVGrundwasser";
+    public const string NameTLMuseumOutroTV = "AudioTalkingList-2.1.2.1-OutroTVGrundwasser";
+    public const string NameTLMuseumIntroFliesspfad= "AudioTalkingList-2.1.2.2-Fliesspfad";
     public const string NameTLMuseumOutroExitZeche = "AudiosMuseumOutroExitZeche";
 
     //Talkinglist ch3: TL-TalkingList

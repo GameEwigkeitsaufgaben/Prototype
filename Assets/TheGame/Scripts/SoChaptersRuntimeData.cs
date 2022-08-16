@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "SoChaptersRuntimeData")]
@@ -50,5 +51,26 @@ public class SoChaptersRuntimeData : ScriptableObject
     {
         sceneCursor = defaultSceneCursor;
         Cursor.SetCursor(defaultSceneCursor, Vector2.zero, CursorMode.Auto);
+    }
+
+    void DisableAllSpeechlists(Dictionary<string, SpeechList> speechListDict)
+    {
+        foreach (var slist in speechListDict)
+        {
+            slist.Value.finishedToogle = false;
+        }
+    }
+
+    public void XX(SpeechList currentList, AudioSource audioSrc, Dictionary<string,SpeechList> list)
+    {
+        if (currentList != null)
+        {
+            if (audioSrc.isPlaying) audioSrc.Stop();
+
+            DisableAllSpeechlists(list);
+            currentList.enabled = true;
+            currentList.PlayAll();
+            currentList = null;
+        }
     }
 }

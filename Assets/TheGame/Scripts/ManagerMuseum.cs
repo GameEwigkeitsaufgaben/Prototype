@@ -16,13 +16,13 @@ public class ManagerMuseum : MonoBehaviour
     //public bool isEarthHistroyDone;
 
     public Button btnExitMuseum;
-    public SpeechManagerMuseum speechManager;
+    public SpeechManagerMuseumChapOne speechManagerCh1;
     public MuseumPlayer walkingGroup;
     public SwitchSceneManager switchScene;
 
     private bool startOutro;
     private Image btnExitImage;
-    private SoChapOneRuntimeData runtimeData;
+    private SoChapOneRuntimeData runtimeDataCh1;
     private SoChaptersRuntimeData runtimeDataChapters;
     private bool museumDoneSet;
     public GameObject characterDad, characterGuide, waitingGuide;
@@ -31,7 +31,7 @@ public class ManagerMuseum : MonoBehaviour
 
     private void Awake()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        runtimeDataCh1 = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
     }
@@ -41,9 +41,9 @@ public class ManagerMuseum : MonoBehaviour
     {
         walkingGroup.SetCharcters(characterDad, characterGuide, waitingGuide);
         audioSrcBGMusic = gameObject.GetComponent<AudioSource>();
-        runtimeData.soundSettingMuseum = SoundMuseum.Showroom;
+        runtimeDataCh1.soundSettingMuseum = SoundMuseum.Showroom;
 
-        if(runtimeData.currentMuseumWaypoint != MuseumWaypoints.WP0)
+        if(runtimeDataCh1.currentMuseumWaypoint != MuseumWaypoints.WP0)
         {
             SetInMuseumGroup();
         }
@@ -56,23 +56,23 @@ public class ManagerMuseum : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        runtimeData.CheckInteraction117Done();
+        runtimeDataCh1.CheckInteraction117Done();
         
-        if (!museumDoneSet && runtimeData.interaction117Done)
+        if (!museumDoneSet && runtimeDataCh1.interaction117Done)
         {
-            speechManager.playMuseumOutro = true;
+            speechManagerCh1.playMuseumOutro = true;
             museumDoneSet = true;
             walkingGroup.MoveToWaypoint((int)MuseumWaypoints.WPExitMuseum0);
         }
 
-        if (speechManager.IsMusuemInfoIntroFinished())
+        if (speechManagerCh1.IsTalkingListFinished(GameData.NameTLMuseumInfoArrival))
         {
             SetInMuseumGroup();
         }
 
-        if (speechManager.IsMuseumOutroFinished())
+        if (speechManagerCh1.IsTalkingListFinished(GameData.NameTLMuseumOutro))
         {
-            switchScene.SwitchToChapter1withOverlay("Overlay117"); 
+            switchScene.SwitchToChapter1withOverlay(GameData.NameOverlay117); 
         }
 
         if (startOutro)
@@ -80,7 +80,7 @@ public class ManagerMuseum : MonoBehaviour
             startOutro = false;
         }
 
-        switch (runtimeData.soundSettingMuseum)
+        switch (runtimeDataCh1.soundSettingMuseum)
         {
             case SoundMuseum.Showroom:
                 PlayAdjustedBGMusic(0.5f);

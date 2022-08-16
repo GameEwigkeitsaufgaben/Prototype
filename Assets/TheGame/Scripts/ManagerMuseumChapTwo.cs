@@ -14,7 +14,7 @@ public class ManagerMuseumChapTwo : MonoBehaviour
     public PathManager pBeluftToB1;
     public GameObject characterGuide;
     public MuseumOverlay overlay;
-    public SpeechManagerMuseum speechManager;
+    public SpeechManagerMuseumChapTwo speechManager;
     public WebGlVideoPlayer webglVideoPlayer;
     public RawImage rawImg;
 

@@ -7,7 +7,7 @@ public class ManagerGWActive : MonoBehaviour
 {
     public splineMove mySplineMove;
     public PathManager pBeluftToB1, pB1ToB2, pB2ToSulfat, pSulfatToOsmose, pOsmoseToCleanWater;
-    public SpeechManagerMuseum speechManager;
+    public SpeechManagerMuseumChapTwo speechManager;
     public Viewpoint[] viewpoints;
 
     private SoChapTwoRuntimeData runtimeDataCh02;
