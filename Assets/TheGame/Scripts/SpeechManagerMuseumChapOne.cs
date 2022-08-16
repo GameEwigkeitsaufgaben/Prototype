@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,7 +21,7 @@ public class SpeechManagerMuseumChapOne : MonoBehaviour
 
     public bool resetFin;
 
-    private AudioSource mySrc;
+    private AudioSource audioSrc;
 
     private SpeechList
         speakMuseumInfoArrival, 
@@ -47,30 +46,30 @@ public class SpeechManagerMuseumChapOne : MonoBehaviour
 
     void Start()
     {
-        mySrc = gameObject.AddComponent<AudioSource>();
+        audioSrc = gameObject.AddComponent<AudioSource>();
 
         speakMuseumInfoArrival = gameObject.AddComponent<SpeechList>();
-        speakMuseumInfoArrival.SetUpList(audiosMuseumInfoArrival, mySrc);
+        speakMuseumInfoArrival.SetUpList(audiosMuseumInfoArrival, audioSrc);
         mySpeechDict.Add(speakMuseumInfoArrival.listName, speakMuseumInfoArrival);
 
         speakMinerEquipment = gameObject.AddComponent<SpeechList>();
-        speakMinerEquipment.SetUpList(audiosMuseumMinerEquipment, mySrc);
+        speakMinerEquipment.SetUpList(audiosMuseumMinerEquipment, audioSrc);
         mySpeechDict.Add(speakMinerEquipment.listName, speakMinerEquipment);
 
         speakMuseumHistoryCarbon = gameObject.AddComponent<SpeechList>();
-        speakMuseumHistoryCarbon.SetUpList(audiosMuseumHistoryCarbon, mySrc);
+        speakMuseumHistoryCarbon.SetUpList(audiosMuseumHistoryCarbon, audioSrc);
         mySpeechDict.Add(speakMuseumHistoryCarbon.listName, speakMuseumHistoryCarbon);
 
         speakMuseumHistoryMining = gameObject.AddComponent<SpeechList>();
-        speakMuseumHistoryMining.SetUpList(audiosMuseumHistoryMining, mySrc);
+        speakMuseumHistoryMining.SetUpList(audiosMuseumHistoryMining, audioSrc);
         mySpeechDict.Add(speakMuseumHistoryMining.listName, speakMuseumHistoryMining);
 
         speakMuseumCoalification = gameObject.AddComponent<SpeechList>();
-        speakMuseumCoalification.SetUpList(audiosMuseumCoalification, mySrc);
+        speakMuseumCoalification.SetUpList(audiosMuseumCoalification, audioSrc);
         mySpeechDict.Add(speakMuseumCoalification.listName, speakMuseumCoalification);
 
         speakMuseumOutro = gameObject.AddComponent<SpeechList>();
-        speakMuseumOutro.SetUpList(audiosMuseumOutro, mySrc);
+        speakMuseumOutro.SetUpList(audiosMuseumOutro, audioSrc);
         mySpeechDict.Add(speakMuseumOutro.listName, speakMuseumOutro);
     }
 
@@ -86,7 +85,7 @@ public class SpeechManagerMuseumChapOne : MonoBehaviour
 
     public void StopSpeaking()
     {
-        mySrc.Stop();
+        audioSrc.Stop();
 
         foreach (var i in mySpeechDict)
         {
@@ -95,7 +94,6 @@ public class SpeechManagerMuseumChapOne : MonoBehaviour
                 i.Value.StopList();
             }
         }
-
     }
 
     //Generic Reset, Finished
@@ -109,8 +107,6 @@ public class SpeechManagerMuseumChapOne : MonoBehaviour
         return mySpeechDict[talkingListName].finishedToogle;
     }
 
-
-    // Update is called once per frame
     void Update()
     {
         if (showDictEntries)
@@ -133,7 +129,7 @@ public class SpeechManagerMuseumChapOne : MonoBehaviour
         }
         else if (playMinerEquipment)
         {
-            currentList = speakMinerEquipment;
+            currentList = mySpeechDict[GameData.NameTLMuseumMinerEquipment];
             playMinerEquipment = false;
         }
         else if (playMuseumWorld)
@@ -157,6 +153,14 @@ public class SpeechManagerMuseumChapOne : MonoBehaviour
             playMuseumOutro = false;
         }
 
-        runtimeDataChapters.XX(currentList, mySrc, mySpeechDict);
+        if (currentList != null)
+        {
+            if (audioSrc.isPlaying) audioSrc.Stop();
+
+            runtimeDataChapters.DisableAllSpeechlists(mySpeechDict);
+            currentList.enabled = true;
+            currentList.PlayAll();
+            currentList = null;
+        }
     }
 }

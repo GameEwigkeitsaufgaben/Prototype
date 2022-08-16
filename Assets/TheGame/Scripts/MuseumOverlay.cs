@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MuseumOverlay : MonoBehaviour
 {
@@ -23,8 +24,19 @@ public class MuseumOverlay : MonoBehaviour
 
     private UnityAction openCarbonPeriodGame, openMinerEquipment, openCoalification, openHistoryMining;
 
+    private int chapter;
+
     private void Awake()
     {
+        if (SceneManager.GetActiveScene().name == GameScenes.ch01Museum)
+        {
+            chapter = 1;
+        }
+        else if (SceneManager.GetActiveScene().name == GameScenes.ch02Museum)
+        {
+            chapter = 2;
+        }
+            
         configMuseum = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
@@ -50,48 +62,56 @@ public class MuseumOverlay : MonoBehaviour
         runtimeData.soundSettingMuseum = SoundMuseum.Overlay;
         bool showSkip = false;
 
-        if (wp == MuseumWaypoints.WPInfo)
+        switch (chapter)
         {
-            container.sprite = configMuseum.info;
-            speechManagerChapOne.playMuseumInfoArrival = true;
-        }
-        else if (wp == MuseumWaypoints.WPBergmann)
-        {
-            container.sprite = configMuseum.miner;
-            speechManagerChapOne.playMinerEquipment = true;
-            btnSkipIntro.onClick.AddListener(openMinerEquipment);
-            if (runtimeData.isMinerDone) showSkip = true;
-        }
-        else if (wp == MuseumWaypoints.WPWelt)
-        {
-            container.sprite = configMuseum.world;
-            speechManagerChapOne.playMuseumWorld = true;
-            btnSkipIntro.onClick.AddListener(openCarbonPeriodGame);
-            if (runtimeData.isCarbonificationPeriodDone) showSkip = true;
-        }
-        else if (wp == MuseumWaypoints.WPMythos)
-        {
-            container.sprite = configMuseum.myth;
-            speechManagerChapOne.playMuseumCoalHistory = true;
-            btnSkipIntro.onClick.AddListener(openHistoryMining);
-            if (runtimeData.isMythDone) showSkip = true;
-        }
-        else if (wp == MuseumWaypoints.WPInkohlung)
-        {
-            container.sprite = configMuseum.carbonification;
-            speechManagerChapOne.playMuseumCarbonification = true;
-            btnSkipIntro.onClick.AddListener(openCoalification);
-            if (runtimeData.isCoalifiationDone) showSkip = true;
-        }
-        else if(wp == MuseumWaypoints.WPTV)
-        {
-            container.sprite = configMuseum.tv;
-            speechManagerChapTwo.playMuseumGWTVIntro = true;
-        }
-        else if (wp == MuseumWaypoints.WPFliesspfad)
-        {
-            container.sprite = configMuseum.fliesspfad;
-            speechManagerChapTwo.playMuseumFliesspfadIntro = true;
+            case 1:
+                if (wp == MuseumWaypoints.WPInfo)
+                {
+                    container.sprite = configMuseum.info;
+                    speechManagerChapOne.playMuseumInfoArrival = true;
+                    Debug.Log("Info should be played!");
+                }
+                else if (wp == MuseumWaypoints.WPBergmann)
+                {
+                    container.sprite = configMuseum.miner;
+                    speechManagerChapOne.playMinerEquipment = true;
+                    btnSkipIntro.onClick.AddListener(openMinerEquipment);
+                    if (runtimeData.isMinerDone) showSkip = true;
+                }
+                else if (wp == MuseumWaypoints.WPWelt)
+                {
+                    container.sprite = configMuseum.world;
+                    speechManagerChapOne.playMuseumWorld = true;
+                    btnSkipIntro.onClick.AddListener(openCarbonPeriodGame);
+                    if (runtimeData.isCarbonificationPeriodDone) showSkip = true;
+                }
+                else if (wp == MuseumWaypoints.WPMythos)
+                {
+                    container.sprite = configMuseum.myth;
+                    speechManagerChapOne.playMuseumCoalHistory = true;
+                    btnSkipIntro.onClick.AddListener(openHistoryMining);
+                    if (runtimeData.isMythDone) showSkip = true;
+                }
+                else if (wp == MuseumWaypoints.WPInkohlung)
+                {
+                    container.sprite = configMuseum.carbonification;
+                    speechManagerChapOne.playMuseumCarbonification = true;
+                    btnSkipIntro.onClick.AddListener(openCoalification);
+                    if (runtimeData.isCoalifiationDone) showSkip = true;
+                }
+                break;
+            case 2:
+                if (wp == MuseumWaypoints.WPTV)
+                {
+                    container.sprite = configMuseum.tv;
+                    speechManagerChapTwo.playMuseumGWTVIntro = true;
+                }
+                else if (wp == MuseumWaypoints.WPFliesspfad)
+                {
+                    container.sprite = configMuseum.fliesspfad;
+                    speechManagerChapTwo.playMuseumFliesspfadIntro = true;
+                }
+                break;
         }
 
         if (showSkip) btnSkipIntro.gameObject.SetActive(true);
@@ -109,7 +129,7 @@ public class MuseumOverlay : MonoBehaviour
     private void Update()
     {
         //playOverlay with will be set to true in ActivateOverlay(), speechmanager starts the audio, here is proved if audio is finished.
-        if (speechManagerChapOne.IsTalkingListFinished(GameData.NameTLMuseumInfoArrival) && playOverlay)
+        if ((chapter == 1) && speechManagerChapOne.IsTalkingListFinished(GameData.NameTLMuseumInfoArrival) && playOverlay)
         {
             playOverlay = false;
             //https://forum.unity.com/threads/solved-scenemanager-loadscene-make-the-scene-darker-a-bug.542440/
@@ -117,34 +137,42 @@ public class MuseumOverlay : MonoBehaviour
 
         if (playOverlay)
         {
-            if (speechManagerChapOne.IsTalkingListFinished(GameData.NameTLMuseumMinerEquipment))
+            switch (chapter)
             {
-                gameObject.GetComponent<SwitchSceneManager>().GoToMinerEquipment();
+                case 1:
+                    if (speechManagerChapOne.IsTalkingListFinished(GameData.NameTLMuseumMinerEquipment))
+                    {
+                        gameObject.GetComponent<SwitchSceneManager>().GoToMinerEquipment();
+                    }
+                    else if (speechManagerChapOne.IsTalkingListFinished(GameData.NameTLMuseumCarbonificationPeriod))
+                    {
+                        gameObject.GetComponent<SwitchSceneManager>().GoToWorld();
+                    }
+                    else if (speechManagerChapOne.IsTalkingListFinished(GameData.NameTLMuseumHistoryMining))
+                    {
+                        gameObject.GetComponent<SwitchSceneManager>().GoToMythos();
+                    }
+                    else if (speechManagerChapOne.IsTalkingListFinished(GameData.NameTLMuseumCoalification))
+                    {
+                        gameObject.GetComponent<SwitchSceneManager>().GoToCoalification();
+                    }
+                    break;
+                case 2:
+                    if (speechManagerChapTwo.IsTalkingListFinished(GameData.NameTLMuseumIntroTV))
+                    {
+                        gameObject.GetComponent<SwitchSceneManager>().SwitchScene(GameScenes.ch02MuseumTV);
+                    }
+                    else if (speechManagerChapTwo.IsTalkingListFinished(GameData.NameTLMuseumIntroFliesspfad))
+                    {
+                        gameObject.GetComponent<SwitchSceneManager>().GoToFliesspfade();
+                    }
+                    else if (speechManagerChapTwo.IsTalkingListFinished(GameData.NameTLMuseumOutroExitZeche))
+                    {
+                        gameObject.GetComponent<SwitchSceneManager>().SwitchToChapter2withOverlay("Overlay212");
+                    }
+                    break;
             }
-            else if (speechManagerChapOne.IsTalkingListFinished(GameData.NameTLMuseumCarbonificationPeriod))
-            {
-                gameObject.GetComponent<SwitchSceneManager>().GoToWorld();
-            }
-            else if (speechManagerChapOne.IsTalkingListFinished(GameData.NameTLMuseumHistoryMining))
-            {
-                gameObject.GetComponent<SwitchSceneManager>().GoToMythos();
-            }
-            else if (speechManagerChapOne.IsTalkingListFinished(GameData.NameTLMuseumCoalification))
-            {
-                gameObject.GetComponent<SwitchSceneManager>().GoToCoalification();
-            }
-            else if (speechManagerChapTwo.IsTalkingListFinished(GameData.NameTLMuseumIntroTV))
-            {
-                gameObject.GetComponent<SwitchSceneManager>().SwitchScene(GameScenes.ch02MuseumTV);
-            }
-            else if (speechManagerChapTwo.IsTalkingListFinished(GameData.NameTLMuseumIntroFliesspfad))
-            {
-                gameObject.GetComponent<SwitchSceneManager>().GoToFliesspfade();
-            }
-            else if (speechManagerChapTwo.IsTalkingListFinished(GameData.NameTLMuseumOutroExitZeche))
-            {
-                gameObject.GetComponent<SwitchSceneManager>().SwitchToChapter2withOverlay("Overlay212");
-            }
+           
         }
         
         if (!playOverlay && parentMaskPanel.activeSelf)
@@ -153,7 +181,15 @@ public class MuseumOverlay : MonoBehaviour
             graying.gameObject.SetActive(false);
             btnClose.gameObject.SetActive(false);
             btnSkipIntro.gameObject.SetActive(false);
-            speechManagerChapTwo.StopSpeaking();
+            switch (chapter)
+            {
+                case 1:
+                    speechManagerChapOne.StopSpeaking();
+                    break;
+                case 2:
+                    speechManagerChapTwo.StopSpeaking();
+                    break;
+            }
         }
     }
 }

@@ -53,7 +53,7 @@ public class SoChaptersRuntimeData : ScriptableObject
         Cursor.SetCursor(defaultSceneCursor, Vector2.zero, CursorMode.Auto);
     }
 
-    void DisableAllSpeechlists(Dictionary<string, SpeechList> speechListDict)
+    public void DisableAllSpeechlists(Dictionary<string, SpeechList> speechListDict)
     {
         foreach (var slist in speechListDict)
         {

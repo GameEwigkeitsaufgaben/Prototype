@@ -867,8 +867,8 @@ GameObject:
   - component: {fileID: 98634161}
   - component: {fileID: 98634160}
   - component: {fileID: 98634159}
-  - component: {fileID: 98634163}
   - component: {fileID: 98634164}
+  - component: {fileID: 98634163}
   - component: {fileID: 98634165}
   m_Layer: 5
   m_Name: OverlayCanvas
@@ -976,7 +976,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   container: {fileID: 73356795}
   graying: {fileID: 263163990}
-  speechManager: {fileID: 98634164}
+  speechManagerChapOne: {fileID: 98634164}
+  speechManagerChapTwo: {fileID: 0}
   btnClose: {fileID: 2022327355}
   btnSkipIntro: {fileID: 1234970414}
 --- !u!114 &98634164
@@ -988,28 +989,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 98634158}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1342a39d72b415b46a6a7384edf3ca58, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a3de740c797f8c4fbc95d628b46ccea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audiosMuseumInfoArrival: {fileID: 11400000, guid: 320ec25843d9f7b459d9d9f12336493e, type: 2}
-  audiosMuseumMinerEquipment: {fileID: 11400000, guid: 696851a9c5e05dc4b969852f9a4f807a, type: 2}
+  audiosMuseumInfoArrival: {fileID: 0}
+  audiosMuseumMinerEquipment: {fileID: 0}
   audiosMuseumHistoryCarbon: {fileID: 0}
   audiosMuseumHistoryMining: {fileID: 0}
   audiosMuseumCoalification: {fileID: 0}
-  audiosMuseumOutro: {fileID: 11400000, guid: a1ca50305879c254397ffcb029d56bc4, type: 2}
-  audiosMuseumIntroGrundwasser: {fileID: 0}
-  audiosMuseumTVGrundwasserIntro: {fileID: 0}
-  audiosMuseumTVGrundwasserOutro: {fileID: 0}
-  audiosMuseumFliessPfadIntro: {fileID: 0}
+  audiosMuseumOutro: {fileID: 0}
   playMuseumInfoArrival: 0
   playMinerEquipment: 0
   playMuseumWorld: 0
   playMuseumCoalHistory: 0
   playMuseumCarbonification: 0
   playMuseumOutro: 0
-  playMuseumGWIntro: 0
-  playMuseumGWTVIntro: 0
-  playMuseumFliesspfadIntro: 0
   resetFin: 0
   showDictEntries: 0
 --- !u!114 &98634165
@@ -6530,7 +6524,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   btnExitMuseum: {fileID: 4241237783513075516}
-  speechManager: {fileID: 98634164}
+  speechManagerCh1: {fileID: 98634164}
   walkingGroup: {fileID: 518400732}
   switchScene: {fileID: 1096251803}
   characterDad: {fileID: 1456108093}
