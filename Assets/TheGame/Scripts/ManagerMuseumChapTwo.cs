@@ -5,7 +5,10 @@ using SWS;
 
 public class ManagerMuseumChapTwo : MonoBehaviour
 {
-    public Button btnNextGrubenwasser;
+    public Button 
+        btnNextGrubenwasser, 
+        btnFliessPfade,
+        btnReplayTalkingList;
     public Camera cam;
     public GameObject group;
 
@@ -38,6 +41,10 @@ public class ManagerMuseumChapTwo : MonoBehaviour
     {
         btnNextGrubenwasser.colors = GameColors.GetInteractionColorBlock();
         btnNextGrubenwasser.interactable = false;
+        btnFliessPfade.colors = GameColors.GetInteractionColorBlock();
+        btnFliessPfade.interactable = false;
+        btnReplayTalkingList.gameObject.SetActive(false);
+
         offsetGroupCam = cam.transform.position.x - group.transform.position.x;
 
         switch (runtimeDataCh02.lastWP)
@@ -69,10 +76,12 @@ public class ManagerMuseumChapTwo : MonoBehaviour
             case (int)MuseumWaypoints.WPTV:
                 mySplineMove.pathContainer = pGroupToTV;
                 targetMuseumStation = MuseumWaypoints.WPTV;
+                btnReplayTalkingList.gameObject.SetActive(false);
                 break;
             case (int)MuseumWaypoints.WPFliesspfad:
                 mySplineMove.pathContainer = pathGroupToFliesspfad;
                 targetMuseumStation = MuseumWaypoints.WPFliesspfad;
+                btnReplayTalkingList.gameObject.SetActive(false);
                 break;
             case (int)MuseumWaypoints.WPExitZeche:
                 mySplineMove.pathContainer = pathGroupToExitZeche;
@@ -134,13 +143,38 @@ public class ManagerMuseumChapTwo : MonoBehaviour
     // Button Next Fliesspfade, Group und Cam wandert
     //Stop bei Fiesspfade: overlay mit Dialog, Wechle in Interaktion. bei zurück, überleitung zu Zeche und Vater.
 
+    public void ReplayTalkingList()
+    {
+        if(MuseumWaypoints.None == currentMuseumStation)
+        {
+            speechManagerch2.playMuseumGWIntro = true;
+        }
+    }
+
+    public void GoToTVScene()
+    {
+        gameObject.GetComponent<SwitchSceneManager>().SwitchScene(GameScenes.ch02MuseumTV);
+    }
+
+
     private void Update()
     {
         cam.transform.position = new Vector3(group.transform.position.x + offsetGroupCam, cam.transform.position.y, cam.transform.position.z);
 
-        if (!btnNextGrubenwasser.interactable && speechManagerch2.IsTalkingListFinished(GameData.NameTLMuseumGrundwasserIntro))
+        if (!runtimeDataCh02.replayTL2120intro && speechManagerch2.IsTalkingListFinished(GameData.NameTLMuseumGrundwasserIntro))
+        {
+            runtimeDataCh02.replayTL2120intro = true;
+            btnReplayTalkingList.gameObject.SetActive(true);
+        }
+
+        if (!btnNextGrubenwasser.interactable && runtimeDataCh02.replayTL2120intro)
         {
             btnNextGrubenwasser.interactable = true;
+        }
+
+        if (!btnFliessPfade.interactable && speechManagerch2.IsTalkingListFinished(GameData.NameTLMuseumIntroTV))
+        {
+            runtimeDataCh02.replay2121TVoutro = true;
         }
         if (speechManagerch2.IsTalkingListFinished(GameData.NameTLMuseumOutroExitZeche))
         {
