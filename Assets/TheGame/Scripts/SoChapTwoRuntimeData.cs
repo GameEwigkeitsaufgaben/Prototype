@@ -17,10 +17,11 @@ public class SoChapTwoRuntimeData : Runtime
     public bool progressPost216Done, progressPost217Done, progressPost218PyritDone, progressPost219VideoDone, progressPost2110GWReinigungDone, progressPost2111QuizDone;
 
     public MuseumWaypoints lastWP = MuseumWaypoints.None;
+    
     public bool interactTVDone = false;
     public Vector3 groupPosition;
 
-    public bool replayTL2120intro, replayTL2120outro, replay2121TVoutro;
+    public bool replayTL2120intro, replayTL2120outro, replay2121TVoutro, replayOverlay2121;
 
 
     public bool h2oFound, fes2Found, o2Found, so4Found, hFound, h2So4Found, feFound;
@@ -41,7 +42,7 @@ public class SoChapTwoRuntimeData : Runtime
         progressPost213Done = progressPost214Done = progressPost215Pumpen = false;
         progressPost216Done = progressPost217Done = progressPost218PyritDone = false;
         progressPost219VideoDone = progressPost2110GWReinigungDone = progressPost2111QuizDone = false;
-        replayTL2120intro = replayTL2120outro = replay2121TVoutro = false;
+        replayTL2120intro = replayTL2120outro = replay2121TVoutro =  replayOverlay2121 = false;
         h2oFound = fes2Found = o2Found = so4Found = hFound = h2oFound = feFound = false;
 
         groupPosition = new Vector3(12.03f, 2.61f, -4.28f);

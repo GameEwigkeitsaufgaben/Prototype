@@ -153,6 +153,8 @@ public static class GameData
     public static float overlayVolumeInsta = 0.5f;
 
     //Talkinglist Mine: TL-TalkingList, EA-EntryArea, LWC-Longwallcutter
+    public const string NameTLSecSilent = "AudioTalkingList-Silent";
+
     public const string NameTLMineIntro = "Audios100160CaveIntro";
     public const string NameTLMineIntroAllDone = "Audios100160CaveIntroRevisitAllDone";
     public const string NameTLMineIntroNotAllDone = "Audios100160CaveIntroRevisitNotAllDone";
@@ -235,7 +237,7 @@ public static class GameData
 
    // public static int quizChapterOnePoints = 0;
     //ToDo in Scriptable object die veränderbaren bubble werte.
-    internal static bool bubbleOnEnvy = false;
+    internal static bool bubbleOnEnya = false;
     internal static bool bubbleOnDad = false;
     internal static bool bubbleOnGeorg = false;
     internal static bool bubbleOnMuseumGuide = false;
@@ -249,6 +251,7 @@ public static class GameData
         "Das Herunterladen der in diesem Internetangebot enthaltenen Informationen ist grundsätzlich nicht gestattet, sofern dies nicht ausdrücklich abweichend kenntlich gemacht wird.";
 
     public const string EmptyString = "";
+
 
     public static Navigation GetNoneNavigation()
     {//for mouse interaction only, highlight, press, select, btn do not stay in select state as in automatic mode.

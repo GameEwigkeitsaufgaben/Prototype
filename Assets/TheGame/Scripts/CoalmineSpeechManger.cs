@@ -359,7 +359,7 @@ public class CoalmineSpeechManger : MonoBehaviour
         }
 
         spDad.gameObject.SetActive(GameData.bubbleOnDad);
-        spEnya.gameObject.SetActive(GameData.bubbleOnEnvy);
+        spEnya.gameObject.SetActive(GameData.bubbleOnEnya);
         spGeorg.gameObject.SetActive(GameData.bubbleOnGeorg);
     }
 }

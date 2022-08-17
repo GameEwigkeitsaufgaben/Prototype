@@ -52,7 +52,7 @@ public class SpeechList : MonoBehaviour
 
     void ResetSpeechBubbles()
     {
-        GameData.bubbleOnEnvy = false;
+        GameData.bubbleOnEnya = false;
         GameData.bubbleOnDad = false;
         GameData.bubbleOnGeorg = false;
         GameData.bubbleOnMuseumGuide = false;
@@ -61,7 +61,7 @@ public class SpeechList : MonoBehaviour
 
     void SetSpeechBubbleFlagCharcters()
     {
-        GameData.bubbleOnEnvy = false;
+        GameData.bubbleOnEnya = false;
         GameData.bubbleOnDad = false;
         GameData.bubbleOnGeorg = false;
         GameData.bubbleOnMuseumGuide = false;
@@ -69,7 +69,7 @@ public class SpeechList : MonoBehaviour
 
         if (audioSrc.clip.name.Contains("e"))
         {
-            GameData.bubbleOnEnvy = true;
+            GameData.bubbleOnEnya = true;
         }
         else if (audioSrc.clip.name.Contains("v"))
         {

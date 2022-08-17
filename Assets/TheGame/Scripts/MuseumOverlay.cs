@@ -14,12 +14,14 @@ public class MuseumOverlay : MonoBehaviour
     public Button btnClose;
     public Button btnSkipIntro;
 
+
     private GameObject parentMaskPanel;
 
     bool playOverlay;
     private SoMuseumConfig configMuseum;
 
     private SoChapOneRuntimeData runtimeData;
+    private SoChapTwoRuntimeData runtimeDataCh2;
     private SoChaptersRuntimeData runtimeDataChapters;
 
     private UnityAction openCarbonPeriodGame, openMinerEquipment, openCoalification, openHistoryMining;
@@ -41,10 +43,12 @@ public class MuseumOverlay : MonoBehaviour
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
+        runtimeDataCh2 = runtimeDataChapters.LoadChap2RuntimeData();
     }
 
     private void Start()
     {
+        
         parentMaskPanel = container.transform.parent.gameObject;
         
         gameObject.transform.localPosition = runtimeData.currentGroupPos;
@@ -161,6 +165,7 @@ public class MuseumOverlay : MonoBehaviour
                     if (speechManagerChapTwo.IsTalkingListFinished(GameData.NameTLMuseumIntroTV))
                     {
                         gameObject.GetComponent<SwitchSceneManager>().SwitchScene(GameScenes.ch02MuseumTV);
+                        runtimeDataCh2.replayOverlay2121 = true; 
                     }
                     else if (speechManagerChapTwo.IsTalkingListFinished(GameData.NameTLMuseumIntroFliesspfad))
                     {

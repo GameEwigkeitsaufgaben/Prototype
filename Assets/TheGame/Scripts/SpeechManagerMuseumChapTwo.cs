@@ -4,10 +4,10 @@ using UnityEngine;
 [RequireComponent(typeof(PeopleInScene))]
 public class SpeechManagerMuseumChapTwo : MonoBehaviour
 {
-
     //https://www.youtube.com/watch?v=Wu46UAVlFL4 Subtitles?;
 
-    public SoTalkingList 
+    public SoTalkingList
+        tlSecSilent,
         tlMuseumIntroGrundwasser, 
         tlMuseumTVGrundwasserIntro, 
         tlMuseumTVGrundwasserOutro, 
@@ -15,6 +15,7 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
         tlMuseumExitZeche;
 
     public bool 
+        playSecSilent,
         playMuseumGWIntro, 
         playMuseumGWTVIntro,
         playMuseumGWTVOutro,
@@ -26,6 +27,7 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
     public bool resetFin;
 
     private SpeechList 
+        speakSilent,
         speakMuseumGWIntro, 
         speakMuseumGWTVIntro, 
         speakMuseumGWTVOutro, 
@@ -59,6 +61,7 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
 
     public void LoadTalkingListsMuseum()
     {
+        tlSecSilent = Resources.Load<SoTalkingList>(GameData.NameTLSecSilent);
         tlMuseumIntroGrundwasser = Resources.Load<SoTalkingList>(GameData.NameTLMuseumGrundwasserIntro);
         tlMuseumTVGrundwasserIntro = Resources.Load<SoTalkingList>(GameData.NameTLMuseumIntroTV);
         tlMuseumTVGrundwasserOutro = Resources.Load<SoTalkingList>(GameData.NameTLMuseumOutroTV);
@@ -71,6 +74,7 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
     {
         audioSrc = gameObject.AddComponent<AudioSource>();
 
+        AddToDict(speakSilent, tlSecSilent);
         AddToDict(speakMuseumGWIntro, tlMuseumIntroGrundwasser);
         AddToDict(speakMuseumGWTVIntro, tlMuseumTVGrundwasserIntro);
         AddToDict(speakMuseumGWTVOutro, tlMuseumTVGrundwasserOutro);
@@ -104,7 +108,6 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
                 i.Value.StopList();
             }
         }
-
     }
 
     //Generic Reset, Finished
@@ -146,11 +149,16 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
         {
             foreach(var slist in speechDict)
             {
-                Debug.Log(slist.Key+ " "+ slist.Value.finishedToogle);
+                Debug.Log(slist.Key+ " " + slist.Value.finishedToogle);
             }
         }
-        
-        if (playMuseumGWIntro)
+
+        if (playSecSilent)
+        {
+            currentList = speechDict[GameData.NameTLSecSilent];
+            playSecSilent = false;
+        }
+        else if (playMuseumGWIntro)
         {
             currentList = speechDict[GameData.NameTLMuseumGrundwasserIntro];
             playMuseumGWIntro = false;
@@ -176,7 +184,6 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
             playMuseumExitZeche = false;
         }
 
-
         if (currentList != null)
         {
             if (audioSrc.isPlaying) audioSrc.Stop();
@@ -187,7 +194,7 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
             currentList = null;
         }
 
-        if (spGuide != null) spGuide.gameObject.SetActive(GameData.bubbleOnMuseumGuide);
-        
+        if (spGuide != null) spGuide.gameObject.SetActive(GameData.bubbleOnMuseumGuide); 
+        if (spEnya != null) spEnya.gameObject.SetActive(GameData.bubbleOnEnya);
     }
 }

@@ -20,6 +20,7 @@ public class ManagerMuseumChapTwo : MonoBehaviour
     public SpeechManagerMuseumChapTwo speechManagerch2;
     public WebGlVideoPlayer webglVideoPlayer;
     public RawImage rawImg;
+    public GameObject denkBubble;
 
     private SoChapTwoRuntimeData runtimeDataCh02;
     private SoChaptersRuntimeData runtimeDataChapters;
@@ -39,6 +40,7 @@ public class ManagerMuseumChapTwo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        denkBubble.SetActive(false);
         btnNextGrubenwasser.colors = GameColors.GetInteractionColorBlock();
         btnNextGrubenwasser.interactable = false;
         btnFliessPfade.colors = GameColors.GetInteractionColorBlock();
@@ -55,8 +57,18 @@ public class ManagerMuseumChapTwo : MonoBehaviour
                 break;
             case MuseumWaypoints.WPTV:
                 Debug.Log("Entry at TV");
-                speechManagerch2.playMuseumGWTVOutro = true;
-                group.transform.position =  runtimeDataCh02.groupPosition;
+                group.transform.position = runtimeDataCh02.groupPosition;
+
+                currentMuseumStation = runtimeDataCh02.lastWP;
+                if (runtimeDataCh02.replay2121TVoutro)
+                {
+                    btnReplayTalkingList.gameObject.SetActive(true);
+                }
+                else
+                {
+                    speechManagerch2.playSecSilent = true;
+                }
+                
                 break;
             case MuseumWaypoints.WPFliesspfad:
                 Debug.Log("Entry at FF");
@@ -73,8 +85,15 @@ public class ManagerMuseumChapTwo : MonoBehaviour
         
         switch (id)
         {
+            case (int)MuseumWaypoints.None:
+                mySplineMove.pathContainer = pGroupToTV;
+                mySplineMove.reverse = true;
+                targetMuseumStation = MuseumWaypoints.None;
+                
+                break;
             case (int)MuseumWaypoints.WPTV:
                 mySplineMove.pathContainer = pGroupToTV;
+                mySplineMove.reverse = false;
                 targetMuseumStation = MuseumWaypoints.WPTV;
                 btnReplayTalkingList.gameObject.SetActive(false);
                 break;
@@ -92,7 +111,6 @@ public class ManagerMuseumChapTwo : MonoBehaviour
                 mySplineMove.pathContainer = pBeluftToB1;
                 targetMuseumStation = MuseumWaypoints.WPAbsetzBecken;
                 break;
-
         }
 
         mySplineMove.StartMove();
@@ -107,6 +125,11 @@ public class ManagerMuseumChapTwo : MonoBehaviour
 
         switch (currentMuseumStation)
         {
+            case MuseumWaypoints.None:
+                btnReplayTalkingList.gameObject.SetActive(runtimeDataCh02.replayTL2120intro);
+                runtimeDataCh02.lastWP = MuseumWaypoints.None;
+                runtimeDataCh02.groupPosition = group.transform.position;
+                break;
             case MuseumWaypoints.WPTV:
                 overlay.ActivateOverlay(MuseumWaypoints.WPTV);
                 runtimeDataCh02.lastWP = MuseumWaypoints.WPTV;
@@ -149,6 +172,17 @@ public class ManagerMuseumChapTwo : MonoBehaviour
         {
             speechManagerch2.playMuseumGWIntro = true;
         }
+        else if (MuseumWaypoints.WPTV == currentMuseumStation)
+        {
+            if(currentMuseumStation == runtimeDataCh02.lastWP)
+            {
+                speechManagerch2.playSecSilent = true;
+            }
+            else
+            {
+                overlay.ActivateOverlay(MuseumWaypoints.WPTV);
+            }
+        }
     }
 
     public void GoToTVScene()
@@ -172,9 +206,29 @@ public class ManagerMuseumChapTwo : MonoBehaviour
             btnNextGrubenwasser.interactable = true;
         }
 
-        if (!btnFliessPfade.interactable && speechManagerch2.IsTalkingListFinished(GameData.NameTLMuseumIntroTV))
+        if (speechManagerch2.IsTalkingListFinished(GameData.NameTLSecSilent))
         {
+            speechManagerch2.playMuseumGWTVOutro = true;
+            denkBubble.SetActive(true);
+        }
+
+        if (speechManagerch2.IsTalkingListFinished(GameData.NameTLMuseumOutroTV))
+        {
+            denkBubble.SetActive(false);
             runtimeDataCh02.replay2121TVoutro = true;
+        }
+
+        if (!runtimeDataCh02.replayOverlay2121)
+        {
+
+        }
+        if (!btnFliessPfade.interactable) 
+        {
+            if(runtimeDataCh02.replayOverlay2121 && runtimeDataCh02.replay2121TVoutro && runtimeDataCh02.interactTVDone)
+            {
+                btnFliessPfade.interactable = true;
+            }
+           
         }
         if (speechManagerch2.IsTalkingListFinished(GameData.NameTLMuseumOutroExitZeche))
         {

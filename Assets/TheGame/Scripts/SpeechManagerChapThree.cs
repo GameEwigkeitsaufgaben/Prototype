@@ -182,7 +182,7 @@ public class SpeechManagerChapThree : MonoBehaviour
         if(spBerbauvertreter1 != null) spBerbauvertreter1.gameObject.SetActive(GameData.bubbleOnBergbauvertreter);
         if(spBerbauvertreter2 != null) spBerbauvertreter2.gameObject.SetActive(GameData.bubbleOnBergbauvertreter);
         if(spDad != null) spDad.gameObject.SetActive(GameData.bubbleOnDad);
-        if(spEnya != null) spEnya.gameObject.SetActive(GameData.bubbleOnEnvy);
+        if(spEnya != null) spEnya.gameObject.SetActive(GameData.bubbleOnEnya);
         if (spGeorg != null) spGeorg.gameObject.SetActive(GameData.bubbleOnGeorg);
     }
 }
