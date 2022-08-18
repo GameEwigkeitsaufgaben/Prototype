@@ -1,27 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.EventSystems;
 
 public class Answer : MonoBehaviour
 {
-    SoQuizConfig myQuizConfig;
-
     public Transform origParent;
     public string answer;
     public bool isCorrect;
     public bool isSelected;
     public Button btn;
-    TMP_Text btnText;
     public Image btnImage;
     public ManagerQuizAllChap manager;
-
-    public VerticalLayoutGroup vlayoutGroup;
-    private ColorBlock quizAnswerCB = GameColors.GetQuizAnswerColorBlock();
     public bool mouseDown;
-
+    public VerticalLayoutGroup vlayoutGroup;
+    
+    private TMP_Text btnText;
+    private ColorBlock quizAnswerCB = GameColors.GetQuizAnswerColorBlock();
+    private SoQuizConfig myQuizConfig;
 
     private void OnEnable()
     {
@@ -43,8 +38,6 @@ public class Answer : MonoBehaviour
         SetupDesignAnswerText();
         SetupBtnDesign();
 
-
-        //if (gameObject.GetComponent<QuizAnswerUiBehaviour>() == null) gameObject.AddComponent<QuizAnswerUiBehaviour>();
         if (gameObject.GetComponent<MouseChange>() == null) gameObject.AddComponent<MouseChange>();
         if (gameObject.GetComponent<ButtonHoverTriggers>() == null) gameObject.AddComponent<ButtonHoverTriggers>();
         if (gameObject.GetComponent<ReactOnlyOnInTranspartentParts>() == null) gameObject.AddComponent<ReactOnlyOnInTranspartentParts>();
@@ -52,7 +45,6 @@ public class Answer : MonoBehaviour
         btn.onClick.AddListener(delegate { SelectThisAnswer(); });
         manager = FindObjectOfType<ManagerQuizAllChap>();
     }
-
 
     public void SelectThisAnswer()
     {
@@ -67,7 +59,6 @@ public class Answer : MonoBehaviour
 
     public void Show()
     {
-
         btnText.text = answer;
         btn.gameObject.SetActive(true);
     }
@@ -147,7 +138,7 @@ public class Answer : MonoBehaviour
         btnText.fontStyle = FontStyles.Normal;
     }
 
-    public void TingWhite()
+    public void TintWhite()
     {
         btnImage.GetComponent<Button>().colors = ColorBlock.defaultColorBlock;
         btnImage.color = Color.grey;
@@ -174,12 +165,9 @@ public class Answer : MonoBehaviour
         }
         else if(!isCorrect && !isSelected)
         {
-            TingWhite();
+            TintWhite();
         }
 
         btn.interactable = false;
     }
-
-
-
 }

@@ -138,11 +138,11 @@ public class ManagerQuizAllChap : MonoBehaviour
 
                 if (b.mouseDown) return;
 
-                if (b.isSelected)
-                {
-                    b.SetUnselected();
-                    return;
-                }
+                //if (b.isSelected)
+                //{
+                //    b.SetUnselected();
+                //    return;
+                //}
 
                 b.SetSelected();
                 break;
