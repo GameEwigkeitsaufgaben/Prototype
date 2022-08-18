@@ -20,7 +20,9 @@ public class ManagerSauresWasser : MonoBehaviour
     public const string triggerAustritt = "Mit dem raufpumpen des Grubenwassers kommen die glösten Elemente an die Oberfläche. Da kommt es zur 2ten Oxidationsstufe. Das Eisen fällt aus. Es beginnt sofort zu rosten. Und es bildet sich Schwefelsäure. Darum wird das Wasser rot. ";
 
     public TMP_Text infoZoneText,infoZoneHeading;
-    public TMP_Text fes2, h2o, o2, so4, h, h2so4, fe;
+    public Molecule molfes2, molh2o, molo2, molso4, molh, molfe2, molfe3;
+
+    private Color foundColor = Color.green;
 
     private SoChaptersRuntimeData runtimeDataChapters;
 
@@ -36,24 +38,24 @@ public class ManagerSauresWasser : MonoBehaviour
         {
             case SauresWasserTrigger.Wasser:
                 infoZoneText.text = triggerWasser;
-                h2o.color = Color.green;
+                molh2o.SetColor(foundColor);
+                
                 break;
             case SauresWasserTrigger.Schacht:
                 infoZoneText.text = triggerSchacht;
-                o2.color = Color.green;
+                molo2.SetColor(foundColor);
                 break;
             case SauresWasserTrigger.Pyrit:
                 infoZoneText.text = triggerPyrit;
-                fes2.color = Color.green;
-                h.color = Color.green;
-                fe.color = Color.green;
-                so4.color = Color.green;
+                molfes2.SetColor(foundColor);
+                molh.SetColor(foundColor);
+                molfe2.SetColor(foundColor);
+                molso4.SetColor(foundColor);
                 break;
             case SauresWasserTrigger.Austritt:
                 infoZoneText.text = triggerAustritt;
-                h.color = Color.green;
-                fe.color = Color.green;
-                h2so4.color = Color.green;
+                molh.SetColor(foundColor);
+                molfe3.SetColor(foundColor);
                 break;
         }
     }

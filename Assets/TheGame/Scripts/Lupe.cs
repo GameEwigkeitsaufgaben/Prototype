@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class Lupe : MonoBehaviour, IDragHandler
@@ -12,8 +13,9 @@ public class Lupe : MonoBehaviour, IDragHandler
     private const string fe = "TriggerFe";
 
     public GameObject LupeCirc, LupeHandle;
+    public Image lupeBg;
     public Canvas myParentCanvas;
-    public GameObject h2oAnimObj, fes2AnimObj;
+    //public GameObject h2oAnimObj, fes2AnimObj;
     
     int origSize;
     float scaleFactor = 4f;
@@ -23,11 +25,14 @@ public class Lupe : MonoBehaviour, IDragHandler
     ManagerSauresWasser manager;
     public Animator animator;
 
+    private SoConfigChapter2 configCh2;
 
     private void Awake()
     {
         runtimeDataCh02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
         manager = FindObjectOfType<ManagerSauresWasser>();
+        configCh2 = Resources.Load<SoConfigChapter2>(GameData.NameConfigCh2);
+        
     }
 
     private void Start()
@@ -39,7 +44,7 @@ public class Lupe : MonoBehaviour, IDragHandler
     }
 
 
-    public void EnlargeLupe(float factor)
+    public void EnlargeLupeHandle(float factor)
     {
         float newSize = origSize * factor;
         //LupeCirc.GetComponent<RectTransform>().sizeDelta = new Vector2(newSize, newSize);
@@ -54,7 +59,7 @@ public class Lupe : MonoBehaviour, IDragHandler
     public void ShrinkToOrigLupe()
     {
         float newSize = origSize;
-        LupeCirc.GetComponent<RectTransform>().sizeDelta = new Vector2(origSize, origSize);
+        //LupeCirc.GetComponent<RectTransform>().sizeDelta = new Vector2(origSize, origSize);
         LupeHandle.GetComponent<RectTransform>().sizeDelta = new Vector2(origSize, origSize);
         LupeHandle.GetComponent<RectTransform>().localPosition = origPosLupeHandle;
     }
@@ -63,52 +68,60 @@ public class Lupe : MonoBehaviour, IDragHandler
     {
         if(collision.name == h2o)
         {
-            EnlargeLupe(4f);
+            EnlargeLupeHandle(4f);
             manager.SetTextToTrigger(SauresWasserTrigger.Wasser);
             manager.SetMolekuelFound(SauresWasserTrigger.Wasser);
+            lupeBg.sprite = configCh2.lupeBgH2O;
+            lupeBg.color = configCh2.lupeBGH2oColor;
             animator.SetTrigger("rain");
             runtimeDataCh02.h2oFound = true;
         }
         else if (collision.name == fe)
         {
-            EnlargeLupe(4f);
+            EnlargeLupeHandle(4f);
             manager.SetTextToTrigger(SauresWasserTrigger.Austritt);
             manager.SetMolekuelFound(SauresWasserTrigger.Austritt);
             animator.SetTrigger("oxi2");
+            lupeBg.sprite = configCh2.lupeBGOxi2;
+            lupeBg.color = configCh2.lupeBGOxi2Color;
             runtimeDataCh02.feFound = true;
         }
         else if (collision.name == fes2)
         {
-            EnlargeLupe(4f);
+            EnlargeLupeHandle(4f);
             manager.SetTextToTrigger(SauresWasserTrigger.Pyrit);
             manager.SetMolekuelFound(SauresWasserTrigger.Pyrit);
             runtimeDataCh02.fes2Found = true;
-            fes2AnimObj.SetActive(true);
+            lupeBg.sprite = configCh2.lupeBGOxi1;
+            lupeBg.color = configCh2.lupeBGOxi1Color;
+            //fes2AnimObj.SetActive(true);
             animator.SetTrigger("oxi1");
         }
         else if(collision.name == o2)
         {
-            EnlargeLupe(4f);
+            EnlargeLupeHandle(4f);
             manager.SetTextToTrigger(SauresWasserTrigger.Schacht);
             manager.SetMolekuelFound(SauresWasserTrigger.Schacht);
             runtimeDataCh02.o2Found = true;
+            lupeBg.sprite = configCh2.lupeBGO2;
+            lupeBg.color = configCh2.lupeBGO2Color;
             animator.SetTrigger("o2");
         }
         else if (collision.name == so4)
         {
-            EnlargeLupe(4f);
+            EnlargeLupeHandle(4f);
             manager.SetTextToTrigger(SauresWasserTrigger.Pyrit);
             runtimeDataCh02.so4Found = true;
         }
         else if (collision.name == h)
         {
-            EnlargeLupe(4f);
+            EnlargeLupeHandle(4f);
             runtimeDataCh02.hFound = true;
             manager.SetTextToTrigger(SauresWasserTrigger.Pyrit);
         }
         else if (collision.name == h2so4)
         {
-            EnlargeLupe(4f);
+            EnlargeLupeHandle(4f);
             runtimeDataCh02.h2So4Found = true;
             manager.SetTextToTrigger(SauresWasserTrigger.Austritt);
         }
@@ -129,7 +142,7 @@ public class Lupe : MonoBehaviour, IDragHandler
         else if (collision.name == fes2)
         {
             ShrinkToOrigLupe();
-            fes2AnimObj.SetActive(false);
+            //fes2AnimObj.SetActive(false);
             animator.SetTrigger("idle");
         }
         else if (collision.name == fe)
