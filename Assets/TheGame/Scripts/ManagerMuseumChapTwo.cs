@@ -2,6 +2,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using SWS;
 
+public enum TVStation
+{
+    IntroOverlay,
+    OutroTalking
+}
 
 public class ManagerMuseumChapTwo : MonoBehaviour
 {
@@ -53,6 +58,7 @@ public class ManagerMuseumChapTwo : MonoBehaviour
         {
             case MuseumWaypoints.None:
                 speechManagerch2.playMuseumGWIntro = true;
+                runtimeDataCh02.state = TVStation.IntroOverlay;
                 group.transform.position = new Vector3(12.03f, 2.61f, -4.28f);
                 break;
             case MuseumWaypoints.WPTV:
@@ -66,6 +72,7 @@ public class ManagerMuseumChapTwo : MonoBehaviour
                 }
                 else
                 {
+                    runtimeDataCh02.state = TVStation.OutroTalking;
                     speechManagerch2.playSecSilent = true;
                 }
                 
@@ -174,14 +181,23 @@ public class ManagerMuseumChapTwo : MonoBehaviour
         }
         else if (MuseumWaypoints.WPTV == currentMuseumStation)
         {
-            if(currentMuseumStation == runtimeDataCh02.lastWP)
+            switch (runtimeDataCh02.state)
             {
-                speechManagerch2.playSecSilent = true;
+                case TVStation.IntroOverlay:
+                    overlay.ActivateOverlay(MuseumWaypoints.WPTV);
+                    break;
+                case TVStation.OutroTalking:
+                    speechManagerch2.playSecSilent = true;
+                    break;
             }
-            else
-            {
-                overlay.ActivateOverlay(MuseumWaypoints.WPTV);
-            }
+            //if(currentMuseumStation == runtimeDataCh02.lastWP)
+            //{
+            //    speechManagerch2.playSecSilent = true;
+            //}
+            //else
+            //{
+            //    overlay.ActivateOverlay(MuseumWaypoints.WPTV);
+            //}
         }
     }
 
@@ -208,6 +224,7 @@ public class ManagerMuseumChapTwo : MonoBehaviour
 
         if (speechManagerch2.IsTalkingListFinished(GameData.NameTLSecSilent))
         {
+            runtimeDataCh02.state = TVStation.OutroTalking;
             speechManagerch2.playMuseumGWTVOutro = true;
             denkBubble.SetActive(true);
         }
@@ -216,6 +233,7 @@ public class ManagerMuseumChapTwo : MonoBehaviour
         {
             denkBubble.SetActive(false);
             runtimeDataCh02.replay2121TVoutro = true;
+            btnReplayTalkingList.gameObject.SetActive(true);
         }
 
         if (!runtimeDataCh02.replayOverlay2121)

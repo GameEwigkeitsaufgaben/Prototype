@@ -142,7 +142,6 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
         speechDict[GameData.NameTLMuseumOutro].finishedToogle = false;
     }
 
-
     void Update()
     {
         if (showDictEntries)

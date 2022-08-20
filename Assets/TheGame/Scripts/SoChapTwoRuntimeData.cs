@@ -22,6 +22,7 @@ public class SoChapTwoRuntimeData : Runtime
     public Vector3 groupPosition;
 
     public bool replayTL2120intro, replayTL2120outro, replay2121TVoutro, replayOverlay2121;
+    public TVStation state;
 
 
     public bool h2oFound, fes2Found, o2Found, so4Found, hFound, h2So4Found, feFound;

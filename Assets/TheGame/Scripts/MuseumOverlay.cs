@@ -20,7 +20,7 @@ public class MuseumOverlay : MonoBehaviour
     bool playOverlay;
     private SoMuseumConfig configMuseum;
 
-    private SoChapOneRuntimeData runtimeData;
+    private SoChapOneRuntimeData runtimeDataCh1;
     private SoChapTwoRuntimeData runtimeDataCh2;
     private SoChaptersRuntimeData runtimeDataChapters;
 
@@ -40,9 +40,10 @@ public class MuseumOverlay : MonoBehaviour
         }
             
         configMuseum = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
+        runtimeDataCh1 = runtimeDataChapters.LoadChap1RuntimeData();
         runtimeDataCh2 = runtimeDataChapters.LoadChap2RuntimeData();
     }
 
@@ -51,7 +52,7 @@ public class MuseumOverlay : MonoBehaviour
         
         parentMaskPanel = container.transform.parent.gameObject;
         
-        gameObject.transform.localPosition = runtimeData.currentGroupPos;
+        gameObject.transform.localPosition = runtimeDataCh1.currentGroupPos;
 
         openCarbonPeriodGame += gameObject.GetComponent<SwitchSceneManager>().GoToWorld;
         openCoalification += gameObject.GetComponent<SwitchSceneManager>().GoToCoalification;
@@ -63,7 +64,7 @@ public class MuseumOverlay : MonoBehaviour
     {
         parentMaskPanel.SetActive(true);
         playOverlay = true;
-        runtimeData.soundSettingMuseum = SoundMuseum.Overlay;
+        runtimeDataCh1.soundSettingMuseum = SoundMuseum.Overlay;
         bool showSkip = false;
 
         switch (chapter)
@@ -80,28 +81,28 @@ public class MuseumOverlay : MonoBehaviour
                     container.sprite = configMuseum.miner;
                     speechManagerChapOne.playMinerEquipment = true;
                     btnSkipIntro.onClick.AddListener(openMinerEquipment);
-                    if (runtimeData.isMinerDone) showSkip = true;
+                    if (runtimeDataCh1.isMinerDone) showSkip = true;
                 }
                 else if (wp == MuseumWaypoints.WPWelt)
                 {
                     container.sprite = configMuseum.world;
                     speechManagerChapOne.playMuseumWorld = true;
                     btnSkipIntro.onClick.AddListener(openCarbonPeriodGame);
-                    if (runtimeData.isCarbonificationPeriodDone) showSkip = true;
+                    if (runtimeDataCh1.isCarbonificationPeriodDone) showSkip = true;
                 }
                 else if (wp == MuseumWaypoints.WPMythos)
                 {
                     container.sprite = configMuseum.myth;
                     speechManagerChapOne.playMuseumCoalHistory = true;
                     btnSkipIntro.onClick.AddListener(openHistoryMining);
-                    if (runtimeData.isMythDone) showSkip = true;
+                    if (runtimeDataCh1.isMythDone) showSkip = true;
                 }
                 else if (wp == MuseumWaypoints.WPInkohlung)
                 {
                     container.sprite = configMuseum.carbonification;
                     speechManagerChapOne.playMuseumCarbonification = true;
                     btnSkipIntro.onClick.AddListener(openCoalification);
-                    if (runtimeData.isCoalifiationDone) showSkip = true;
+                    if (runtimeDataCh1.isCoalifiationDone) showSkip = true;
                 }
                 break;
             case 2:
@@ -127,7 +128,7 @@ public class MuseumOverlay : MonoBehaviour
     public void StopOverlay()
     {
         playOverlay = false;
-        runtimeData.soundSettingMuseum = SoundMuseum.Showroom;
+        runtimeDataCh1.soundSettingMuseum = SoundMuseum.Showroom;
     }
 
     private void Update()
