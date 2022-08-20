@@ -211,7 +211,7 @@ public class ManagerMuseumChapTwo : MonoBehaviour
     {
         cam.transform.position = new Vector3(group.transform.position.x + offsetGroupCam, cam.transform.position.y, cam.transform.position.z);
 
-        if (!runtimeDataCh02.replayTL2120intro && speechManagerch2.IsTalkingListFinished(GameData.NameTLMuseumGrundwasserIntro))
+        if (!runtimeDataCh02.replayTL2120intro && speechManagerch2.IsTalkingListFinished(GameData.NameCH2TLMuseumGrundwasserIntro))
         {
             runtimeDataCh02.replayTL2120intro = true;
             btnReplayTalkingList.gameObject.SetActive(true);
@@ -229,7 +229,7 @@ public class ManagerMuseumChapTwo : MonoBehaviour
             denkBubble.SetActive(true);
         }
 
-        if (speechManagerch2.IsTalkingListFinished(GameData.NameTLMuseumOutroTV))
+        if (speechManagerch2.IsTalkingListFinished(GameData.NameCH2TLMuseumOutroTV))
         {
             denkBubble.SetActive(false);
             runtimeDataCh02.replay2121TVoutro = true;
@@ -248,7 +248,7 @@ public class ManagerMuseumChapTwo : MonoBehaviour
             }
            
         }
-        if (speechManagerch2.IsTalkingListFinished(GameData.NameTLMuseumOutroExitZeche))
+        if (speechManagerch2.IsTalkingListFinished(GameData.NameCH2TLMuseumOutroExitZeche))
         {
             runtimeDataCh02.progressPost2110GWReinigungDone = true;
             gameObject.GetComponent<SwitchSceneManager>().SwitchToChapter2withOverlay(GameData.NameOverlay212);

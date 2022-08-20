@@ -8,12 +8,12 @@ public class MuseumOverlay : MonoBehaviour
     //public Canvas panel;
     public Image container;
     public Image graying;
+    public Image audioProgress, audioProgressBG;
 
     public SpeechManagerMuseumChapOne speechManagerChapOne;
     public SpeechManagerMuseumChapTwo speechManagerChapTwo;
     public Button btnClose;
     public Button btnSkipIntro;
-
 
     private GameObject parentMaskPanel;
 
@@ -25,8 +25,10 @@ public class MuseumOverlay : MonoBehaviour
     private SoChaptersRuntimeData runtimeDataChapters;
 
     private UnityAction openCarbonPeriodGame, openMinerEquipment, openCoalification, openHistoryMining;
+    private UnityAction openTV; 
 
     private int chapter;
+    AudioProgress audioP;
 
     private void Awake()
     {
@@ -49,7 +51,7 @@ public class MuseumOverlay : MonoBehaviour
 
     private void Start()
     {
-        
+        audioP = GetComponent<AudioProgress>();
         parentMaskPanel = container.transform.parent.gameObject;
         
         gameObject.transform.localPosition = runtimeDataCh1.currentGroupPos;
@@ -58,13 +60,28 @@ public class MuseumOverlay : MonoBehaviour
         openCoalification += gameObject.GetComponent<SwitchSceneManager>().GoToCoalification;
         openMinerEquipment += gameObject.GetComponent<SwitchSceneManager>().GoToMinerEquipment;
         openHistoryMining += gameObject.GetComponent<SwitchSceneManager>().GoToMythos;
+        openTV += gameObject.GetComponent<SwitchSceneManager>().GoToCh2MuseumTV;
+        btnClose.gameObject.SetActive(false);
+        btnSkipIntro.gameObject.SetActive(false);
+        btnSkipIntro.interactable = false;
+        
+
+        ActivateAudioProgress(false);
+    }
+
+    public void ActivateAudioProgress(bool activate)
+    {
+        audioProgress.gameObject.SetActive(activate);
+        audioProgressBG.gameObject.SetActive(activate);
     }
 
     public void ActivateOverlay(MuseumWaypoints wp)
     {
         parentMaskPanel.SetActive(true);
+        btnSkipIntro.gameObject.SetActive(true);
         playOverlay = true;
         runtimeDataCh1.soundSettingMuseum = SoundMuseum.Overlay;
+
         bool showSkip = false;
 
         switch (chapter)
@@ -74,6 +91,7 @@ public class MuseumOverlay : MonoBehaviour
                 {
                     container.sprite = configMuseum.info;
                     speechManagerChapOne.playMuseumInfoArrival = true;
+
                     Debug.Log("Info should be played!");
                 }
                 else if (wp == MuseumWaypoints.WPBergmann)
@@ -109,7 +127,11 @@ public class MuseumOverlay : MonoBehaviour
                 if (wp == MuseumWaypoints.WPTV)
                 {
                     container.sprite = configMuseum.tv;
+                    if (runtimeDataCh2.replayOverlay2121) showSkip = true;
                     speechManagerChapTwo.playMuseumGWTVIntro = true;
+                    btnSkipIntro.onClick.AddListener(openTV);
+                    audioP.StartTimer(speechManagerChapTwo.GetTalkingListOverallTimeInSec(GameData.NameCH2TLMuseumIntroTV));
+                    audioProgressBG.gameObject.SetActive(true);
                 }
                 else if (wp == MuseumWaypoints.WPFliesspfad)
                 {
@@ -119,9 +141,11 @@ public class MuseumOverlay : MonoBehaviour
                 break;
         }
 
-        if (showSkip) btnSkipIntro.gameObject.SetActive(true);
+
+        if (showSkip) btnSkipIntro.interactable = true; 
+            //btnSkipIntro.gameObject.SetActive(true);
         
-        btnClose.gameObject.SetActive(true);
+        //btnClose.gameObject.SetActive(true);
         graying.gameObject.SetActive(true);
     }
 
@@ -129,6 +153,7 @@ public class MuseumOverlay : MonoBehaviour
     {
         playOverlay = false;
         runtimeDataCh1.soundSettingMuseum = SoundMuseum.Showroom;
+        ActivateAudioProgress(false);
     }
 
     private void Update()
@@ -163,16 +188,16 @@ public class MuseumOverlay : MonoBehaviour
                     }
                     break;
                 case 2:
-                    if (speechManagerChapTwo.IsTalkingListFinished(GameData.NameTLMuseumIntroTV))
+                    if (speechManagerChapTwo.IsTalkingListFinished(GameData.NameCH2TLMuseumIntroTV))
                     {
                         gameObject.GetComponent<SwitchSceneManager>().SwitchScene(GameScenes.ch02MuseumTV);
                         runtimeDataCh2.replayOverlay2121 = true; 
                     }
-                    else if (speechManagerChapTwo.IsTalkingListFinished(GameData.NameTLMuseumIntroFliesspfad))
+                    else if (speechManagerChapTwo.IsTalkingListFinished(GameData.NameCH2TLMuseumIntroFliesspfad))
                     {
                         gameObject.GetComponent<SwitchSceneManager>().GoToFliesspfade();
                     }
-                    else if (speechManagerChapTwo.IsTalkingListFinished(GameData.NameTLMuseumOutroExitZeche))
+                    else if (speechManagerChapTwo.IsTalkingListFinished(GameData.NameCH2TLMuseumOutroExitZeche))
                     {
                         gameObject.GetComponent<SwitchSceneManager>().SwitchToChapter2withOverlay("Overlay212");
                     }

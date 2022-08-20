@@ -31,6 +31,16 @@ public class SpeechList : MonoBehaviour
         return audioSrc.clip.length;
     }
 
+    public float GetTalkingListLentghSec()
+    {
+        float seconds = 0f;
+        foreach (AudioClip ac in clips)
+        {
+            seconds += ac.length;
+        }
+        return seconds;
+    }
+
     public void StopList()
     {
         currentIndex = clips.Length;

@@ -185,11 +185,11 @@ public static class GameData
     public const string NameTLMuseumMinerEquipment = "Audios100170MuseumMinerEquipment";
 
     //Talkinglist Museum ch2: TL-TalkingList
-    public const string NameTLMuseumGrundwasserIntro = "AudioTalkingList-2.1.2.0-IntroMuseumGrundwasser";
-    public const string NameTLMuseumIntroTV = "AudioTalkingList-2.1.2.1-IntroTVGrundwasser";
-    public const string NameTLMuseumOutroTV = "AudioTalkingList-2.1.2.1-OutroTVGrundwasser";
-    public const string NameTLMuseumIntroFliesspfad= "AudioTalkingList-2.1.2.2-Fliesspfad";
-    public const string NameTLMuseumOutroExitZeche = "AudioTalkingList-2.1.2.0-OutroExitMuseum";
+    public const string NameCH2TLMuseumGrundwasserIntro = "AudioTalkingList-2.1.2.0-IntroMuseumGrundwasser";
+    public const string NameCH2TLMuseumIntroTV = "AudioTalkingList-2.1.2.1-IntroTVGrundwasser";
+    public const string NameCH2TLMuseumOutroTV = "AudioTalkingList-2.1.2.1-OutroTVGrundwasser";
+    public const string NameCH2TLMuseumIntroFliesspfad= "AudioTalkingList-2.1.2.2-Fliesspfad";
+    public const string NameCH2TLMuseumOutroExitZeche = "AudioTalkingList-2.1.2.0-OutroExitMuseum";
 
     //Talkinglist ch3: TL-TalkingList
     public const string NameCH3TLDemo = "AudioTalkingList-3.2.1-Demo";

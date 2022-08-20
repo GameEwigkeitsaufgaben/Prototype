@@ -62,11 +62,11 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
     public void LoadTalkingListsMuseum()
     {
         tlSecSilent = Resources.Load<SoTalkingList>(GameData.NameTLSecSilent);
-        tlMuseumIntroGrundwasser = Resources.Load<SoTalkingList>(GameData.NameTLMuseumGrundwasserIntro);
-        tlMuseumTVGrundwasserIntro = Resources.Load<SoTalkingList>(GameData.NameTLMuseumIntroTV);
-        tlMuseumTVGrundwasserOutro = Resources.Load<SoTalkingList>(GameData.NameTLMuseumOutroTV);
-        tlMuseumFliessPfadIntro = Resources.Load<SoTalkingList>(GameData.NameTLMuseumIntroFliesspfad);
-        tlMuseumExitZeche = Resources.Load<SoTalkingList>(GameData.NameTLMuseumOutroExitZeche);
+        tlMuseumIntroGrundwasser = Resources.Load<SoTalkingList>(GameData.NameCH2TLMuseumGrundwasserIntro);
+        tlMuseumTVGrundwasserIntro = Resources.Load<SoTalkingList>(GameData.NameCH2TLMuseumIntroTV);
+        tlMuseumTVGrundwasserOutro = Resources.Load<SoTalkingList>(GameData.NameCH2TLMuseumOutroTV);
+        tlMuseumFliessPfadIntro = Resources.Load<SoTalkingList>(GameData.NameCH2TLMuseumIntroFliesspfad);
+        tlMuseumExitZeche = Resources.Load<SoTalkingList>(GameData.NameCH2TLMuseumOutroExitZeche);
     }
 
     // Start is called before the first frame update
@@ -121,14 +121,19 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
         return speechDict[talkingListName].finishedToogle;
     }
 
+    public float GetTalkingListOverallTimeInSec(string talkingListName)
+    {
+        return speechDict[talkingListName].GetTalkingListLentghSec();
+    }
+
     public bool IsMusuemGWTVIntroFinished()
     {
-        return speechDict[GameData.NameTLMuseumIntroTV].finishedToogle;
+        return speechDict[GameData.NameCH2TLMuseumIntroTV].finishedToogle;
     }
 
     public void ResetMusuemGWTVIntro()
     {
-        speechDict[GameData.NameTLMuseumIntroTV].finishedToogle = false;
+        speechDict[GameData.NameCH2TLMuseumIntroTV].finishedToogle = false;
     }
 
     //--------------Outro
@@ -159,27 +164,27 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
         }
         else if (playMuseumGWIntro)
         {
-            currentList = speechDict[GameData.NameTLMuseumGrundwasserIntro];
+            currentList = speechDict[GameData.NameCH2TLMuseumGrundwasserIntro];
             playMuseumGWIntro = false;
         }
         else if (playMuseumGWTVIntro)
         {
-            currentList = speechDict[GameData.NameTLMuseumIntroTV];
+            currentList = speechDict[GameData.NameCH2TLMuseumIntroTV];
             playMuseumGWTVIntro = false;
         }
         else if (playMuseumGWTVOutro)
         {
-            currentList = speechDict[GameData.NameTLMuseumOutroTV];
+            currentList = speechDict[GameData.NameCH2TLMuseumOutroTV];
             playMuseumGWTVOutro = false;
         }
         else if (playMuseumFliesspfadIntro)
         {
-            currentList = speechDict[GameData.NameTLMuseumIntroFliesspfad];
+            currentList = speechDict[GameData.NameCH2TLMuseumIntroFliesspfad];
             playMuseumFliesspfadIntro = false;
         }
         else if (playMuseumExitZeche)
         {
-            currentList = speechDict[GameData.NameTLMuseumOutroExitZeche];
+            currentList = speechDict[GameData.NameCH2TLMuseumOutroExitZeche];
             playMuseumExitZeche = false;
         }
 

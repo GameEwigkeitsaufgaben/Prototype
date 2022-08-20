@@ -132,6 +132,16 @@ public class SwitchSceneManager : MonoBehaviour
         SceneManager.LoadScene(GameScenes.ch01MuseumHistoryMining, LoadSceneMode.Single);
     }
 
+    public void GoToCh2MuseumTV()
+    {
+        SwitchScene(GameScenes.ch02MuseumTV, LoadSceneMode.Single);
+    }
+
+    public void SwitchScene(string sceneName, LoadSceneMode sceneMode)
+    {
+        SceneManager.LoadScene(sceneName, sceneMode);
+    }
+
     public void SwitchScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
