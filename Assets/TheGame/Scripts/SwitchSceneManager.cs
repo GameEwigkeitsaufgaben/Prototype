@@ -184,6 +184,7 @@ public class SwitchSceneManager : MonoBehaviour
 
     public int GetActiveQuizScene()
     {
+        Debug.Log("++++++++++++++++++ " + SceneManager.GetActiveScene().name);
         if (SceneManager.GetActiveScene().name == GameScenes.ch01Quiz)
             return 1;
         else if (SceneManager.GetActiveScene().name == GameScenes.ch02Quiz)

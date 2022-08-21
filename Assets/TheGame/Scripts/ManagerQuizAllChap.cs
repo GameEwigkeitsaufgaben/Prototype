@@ -260,6 +260,7 @@ public class ManagerQuizAllChap : MonoBehaviour
 
         if (currentQuestionIndex == questions.Count)
         {
+            Debug.Log("Zeit auzusteigen " + activeScene);
             switch (activeScene)
             {
                 case 1:

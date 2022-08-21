@@ -41,7 +41,7 @@ public static class GameScenes
     public const string ch02gwReinigung = "ch02scene07-gwReinigung";
     public const string ch02gwReinigungAktiv = "ch02scene08-gwReinigungAktiv";
     public const string ch02gwReinigungPassiv = "ch02scene09-gwReinigungPassiv";
-    public const string ch02Quiz = "ch02scene10-quizv";
+    public const string ch02Quiz = "ch02scene10-quiz";
 
     //Chapter three Ewigkeitsaufgaben
     public const string ch03InstaMain = "ch03scene01-00-instaMenu";
