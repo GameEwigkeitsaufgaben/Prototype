@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+
 public class LookaroundWithMouse : MonoBehaviour
 {
     //Follow player
@@ -16,9 +18,18 @@ public class LookaroundWithMouse : MonoBehaviour
 
     bool mouseDown = false;
 
+    string activeScene = "";
+    
+
     private void Start()
     {
-        if (SceneManager.GetActiveScene().name == GameScenes.ch03Demo)
+        activeScene = SceneManager.GetActiveScene().name;
+        if (activeScene == GameScenes.ch03Demo)
+        {
+            SetPlayerBodyRotation(0f, false);
+        }
+
+        if (activeScene == GameScenes.ch02gwReinigungAktiv)
         {
             SetPlayerBodyRotation(0f, false);
         }
@@ -41,9 +52,14 @@ public class LookaroundWithMouse : MonoBehaviour
             yaw += speedH * Input.GetAxis("Mouse X");
             pitch -= speedV * Input.GetAxis("Mouse Y");
 
-            if(SceneManager.GetActiveScene().name == GameScenes.ch03Demo)
+            if(activeScene == GameScenes.ch03Demo)
             {
                 pitch = Mathf.Clamp(pitch, -12f, +55f);
+            }
+            else if (activeScene == GameScenes.ch02gwReinigungAktiv)
+            {
+                pitch = Mathf.Clamp(pitch, -12f, +55f);
+                yaw = Mathf.Clamp(yaw, -40f, 55f);
             }
             else
             {

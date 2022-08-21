@@ -14,13 +14,17 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
         tlMuseumFliessPfadIntro, 
         tlMuseumExitZeche;
 
+    public SoTalkingList
+        tlZecheIntroReinigung;
+
     public bool 
         playSecSilent,
         playMuseumGWIntro, 
         playMuseumGWTVIntro,
         playMuseumGWTVOutro,
         playMuseumFliesspfadIntro, 
-        playMuseumExitZeche;
+        playMuseumExitZeche,
+        playZecheIntroReinigung;
     
     private AudioSource audioSrc;
 
@@ -32,7 +36,8 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
         speakMuseumGWTVIntro, 
         speakMuseumGWTVOutro, 
         speakMuseumFliesspfadIntro, 
-        speakMuseumExitZeche;
+        speakMuseumExitZeche,
+        speakZecheIntroReinigung;
    
     private Dictionary<string, SpeechList> speechDict = new Dictionary<string, SpeechList>();
 
@@ -72,9 +77,9 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
         tlMuseumTVGrundwasserOutro = Resources.Load<SoTalkingList>(GameData.NameCH2TLMuseumOutroTV);
         tlMuseumFliessPfadIntro = Resources.Load<SoTalkingList>(GameData.NameCH2TLMuseumIntroFliesspfad);
         tlMuseumExitZeche = Resources.Load<SoTalkingList>(GameData.NameCH2TLMuseumOutroExitZeche);
+        tlZecheIntroReinigung = Resources.Load<SoTalkingList>(GameData.NameCH2TLZecheIntroReiniung);
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         audioSrc = gameObject.AddComponent<AudioSource>();
@@ -85,14 +90,18 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
         AddToDict(speakMuseumGWTVOutro, tlMuseumTVGrundwasserOutro);
         AddToDict(speakMuseumFliesspfadIntro, tlMuseumFliessPfadIntro);
         AddToDict(speakMuseumExitZeche, tlMuseumExitZeche);
+        AddToDict(speakZecheIntroReinigung, tlZecheIntroReinigung);
 
-        //dad = GetComponent<PeopleInScene>().dad;
+
         enya = GetComponent<PeopleInScene>().enya;
         georg = GetComponent<PeopleInScene>().georg;
         guide = GetComponent<PeopleInScene>().guide;
+        dad = GetComponent<PeopleInScene>().dad;
+
         if (guide != null) spGuide = guide.GetComponentInChildren<SpeechBubble>(true);
         if (enya != null) spEnya = enya.GetComponentInChildren<SpeechBubble>(true);
         if (georg != null) spGeorg = georg.GetComponentInChildren<SpeechBubble>(true);
+        if (dad != null) spDad = dad.GetComponentInChildren<SpeechBubble>(true);
     }
 
     private void AddToDict(SpeechList speechList, SoTalkingList tl)
@@ -192,6 +201,11 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
             currentList = speechDict[GameData.NameCH2TLMuseumOutroExitZeche];
             playMuseumExitZeche = false;
         }
+        else if (playZecheIntroReinigung)
+        {
+            currentList = speechDict[GameData.NameCH2TLZecheIntroReiniung];
+            playZecheIntroReinigung = false;
+        }
 
         if (currentList != null)
         {
@@ -205,5 +219,6 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
 
         if (spGuide != null) spGuide.gameObject.SetActive(GameData.bubbleOnMuseumGuide); 
         if (spEnya != null) spEnya.gameObject.SetActive(GameData.bubbleOnEnya);
+        if (spDad != null) spDad.gameObject.SetActive(GameData.bubbleOnDad);
     }
 }

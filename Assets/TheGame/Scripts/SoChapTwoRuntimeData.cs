@@ -19,9 +19,10 @@ public class SoChapTwoRuntimeData : Runtime
     public MuseumWaypoints lastWP = MuseumWaypoints.None;
     
     public bool interactTVDone, fliesspfadeDone = false;
+    public bool reinAktivDone, reinPassivDone;
     public Vector3 groupPosition;
 
-    public bool replayTL2121intro, replayTL2121outro, replay2122TVoutro, replayOverlay2122, replayOverlay2123;
+    public bool replayTL2121intro, replayTL2121outro, replay2122TVoutro, replayOverlay2122, replayOverlay2123, replayTL21101Reinigung;
     public TVStation state;
 
 
@@ -43,8 +44,9 @@ public class SoChapTwoRuntimeData : Runtime
         progressPost213Done = progressPost214Done = progressPost215Pumpen = false;
         progressPost216Done = progressPost217Done = progressPost218PyritDone = false;
         progressPost219VideoDone = progressPost2110GWReinigungDone = progressPost2111QuizDone = false;
-        replayTL2121intro = replayTL2121outro = replay2122TVoutro =  replayOverlay2122 = replayOverlay2123 = false;
+        replayTL2121intro = replayTL2121outro = replay2122TVoutro =  replayOverlay2122 = replayOverlay2123 = replayTL21101Reinigung = false;
         h2oFound = fes2Found = o2Found = so4Found = hFound = h2oFound = feFound = false;
+        reinAktivDone = reinPassivDone = false;
 
         groupPosition = new Vector3(12.03f, 2.61f, -4.28f);
         lastWP = MuseumWaypoints.None;

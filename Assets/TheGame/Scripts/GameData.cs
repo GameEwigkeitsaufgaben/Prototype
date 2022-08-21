@@ -190,6 +190,7 @@ public static class GameData
     public const string NameCH2TLMuseumOutroTV = "AudioTalkingList-2.1.2.1-OutroTVGrundwasser";
     public const string NameCH2TLMuseumIntroFliesspfad= "AudioTalkingList-2.1.2.2-Fliesspfad";
     public const string NameCH2TLMuseumOutroExitZeche = "AudioTalkingList-2.1.2.0-OutroExitMuseum";
+    public const string NameCH2TLZecheIntroReiniung = "AudioTalkingList-2.1.10.1-GWReinigung";
 
     //Talkinglist ch3: TL-TalkingList
     public const string NameCH3TLDemo = "AudioTalkingList-3.2.1-Demo";
