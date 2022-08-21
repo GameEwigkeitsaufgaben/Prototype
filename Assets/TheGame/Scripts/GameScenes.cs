@@ -32,14 +32,16 @@ public static class GameScenes
 
 
     //Chapter two Bergbau allgemein
-    public const string ch02InstaMain = "ch02scene01-00-instaMenu";
-    public const string ch02Museum = "ch02scene01-02-museum";
-    public const string ch02MuseumTV = "ch02scene01-02-02-tv";
-    public const string ch02Fliesspfade = "ch02scene01-02-01-fliesspfade";
-    public const string ch02Quiz = "ch02scene01-11-quiz";
-    public const string ch02GWActive = "ch02scene01-10-01-gw-active";
-
-
+    public const string ch02InstaMain = "ch02scene01-instaMenu";
+    public const string ch02Museum = "ch02scene02-museum";
+    public const string ch02MuseumTV = "ch02scene03-tv";
+    public const string ch02Fliesspfade = "ch02scene04-fliesspfade";
+    public const string ch02Pumpen = "ch02scene05-pumpen";
+    public const string ch02OxiPyrit = "ch02scene06-oxipyrit";
+    public const string ch02gwReinigung = "ch02scene07-gwReinigung";
+    public const string ch02gwReinigungAktiv = "ch02scene08-gwReinigungAktiv";
+    public const string ch02gwReinigungPassiv = "ch02scene09-gwReinigungPassiv";
+    public const string ch02Quiz = "ch02scene10-quizv";
 
     //Chapter three Ewigkeitsaufgaben
     public const string ch03InstaMain = "ch03scene01-00-instaMenu";

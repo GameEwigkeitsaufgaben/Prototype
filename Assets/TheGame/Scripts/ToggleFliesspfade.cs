@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class ToggleFliesspfade : MonoBehaviour
 {
     public Image normal, pressed;

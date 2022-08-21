@@ -57,17 +57,16 @@ public class MouseChange : MonoBehaviour
         }
         else if (gameObject.GetComponent<Toggle>() !=null)
         {
-            gameObject.GetComponent<Toggle>().colors = GameColors.GetInteractionColorBlock();
+            gameObject.GetComponent<Toggle>().colors = GameColors.GetToogleColorBlock();
         }
     }
 
     public void MouseEnter()
     {
-        Debug.Log("Mouse Ener");
+        Debug.Log("Mouse Enter");
         if (gameObject.GetComponent<Post>())
         {
             runtimeDataCh01.hintPostUnlock = (gameObject.GetComponent<Button>().interactable) ? "": gameObject.GetComponent<Post>().GetUnlockHint();
-            Debug.Log("rtch02 is null: " + (runtimeDataCh02 == null));
             runtimeDataCh02.hintPostUnlock = (gameObject.GetComponent<Button>().interactable) ? "" : gameObject.GetComponent<Post>().GetUnlockHint();
         }
         
@@ -77,7 +76,19 @@ public class MouseChange : MonoBehaviour
         }
         else if (gameObject.GetComponent<Toggle>() != null)
         {
-            Cursor.SetCursor(runtimeDataChapters.cursorInteract, hotSpot, cursorMode);
+            Debug.Log("in Toggle");
+            if (gameObject.GetComponent<Toggle>().isOn)
+            {
+                Debug.Log("in Toggle is on, set cursur" + runtimeDataChapters.cursorNoInteract.name);
+                Cursor.SetCursor(runtimeDataChapters.cursorNoInteract, hotSpot, cursorMode);
+            }
+            else
+            {
+                Debug.Log("in Toggle is off ");
+                if(gameObject.GetComponent<Toggle>().interactable) Cursor.SetCursor(runtimeDataChapters.cursorInteract, hotSpot, cursorMode);
+                else { Cursor.SetCursor(runtimeDataChapters.cursorNoInteract, hotSpot, cursorMode); }
+
+            }
         }
         else if (gameObject.GetComponent<Scrollbar>() != null)
         {

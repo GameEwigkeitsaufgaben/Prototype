@@ -13,6 +13,7 @@ public static class GameColors
     public static Color defaultInteractionColorHighlighted = new Color32(255, 255, 195, 255);
     public static Color defaultInteractionColorPresses = new Color32(r - 55, g - 55, b - 55, a);
     public static Color defaultInteractionColorDisabled = new Color32(r - 55, g - 55, b - 55, a-128);
+    public static Color toogleInteractionColorDisabled = new Color32(r - 55, g - 55, b - 55, 255);
 
     //public static Color buzzerInteractionColor = new Color32(227, 86,60,255);
     public static Color buzzerInteractionColor = Color.white;
@@ -56,6 +57,18 @@ public static class GameColors
         uiInteractionColors.pressedColor = defaultInteractionColorPresses;
         uiInteractionColors.selectedColor = new Color32(227, 86, 60, 255);
         uiInteractionColors.disabledColor = new Color32(226, 89, 57, 255);
+
+        return uiInteractionColors;
+    }
+
+    public static ColorBlock GetToogleColorBlock()
+    {
+        ColorBlock uiInteractionColors = ColorBlock.defaultColorBlock;
+        uiInteractionColors.normalColor = defaultInteractionColorNormal;
+        uiInteractionColors.highlightedColor = defaultInteractionColorHighlighted;
+        uiInteractionColors.pressedColor = defaultInteractionColorPresses;
+        uiInteractionColors.selectedColor = uiInteractionColors.normalColor;
+        uiInteractionColors.disabledColor = toogleInteractionColorDisabled;
 
         return uiInteractionColors;
     }

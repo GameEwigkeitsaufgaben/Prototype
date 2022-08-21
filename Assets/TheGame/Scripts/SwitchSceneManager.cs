@@ -50,12 +50,12 @@ public class SwitchSceneManager : MonoBehaviour
 
     public void GoToCH2Museum()
     {
-        SceneManager.LoadScene(GameScenes.ch02Museum, LoadSceneMode.Single); ;
+        SceneManager.LoadScene(GameScenes.ch02Museum, LoadSceneMode.Single);
     }
 
     public void GoToGWCleanActive()
     {
-        SceneManager.LoadScene(GameScenes.ch02GWActive, LoadSceneMode.Single);
+        SceneManager.LoadScene(GameScenes.ch02gwReinigungAktiv, LoadSceneMode.Single);
     }
 
     public void LoadEntryArea()

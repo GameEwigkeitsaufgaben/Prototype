@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using TMPro;
 
 public enum FliesspfadState
@@ -32,10 +29,14 @@ public class ManagerFliesspfade : MonoBehaviour
     public TMP_Text textinfoFP, headingInfoFp;
     public Button backToMuseum;
     public Toggle btnFp1, btnFp2, btnFp3;
+    public Image solidBg; 
     bool allWatched = false, consumedFp1, consumedFp2, consumedFp3;
     bool btn1selected;
     FliesspfadState currentFp, previousFp;
     private SoChaptersRuntimeData runtimeDataChapters;
+    private SoChapTwoRuntimeData runtimeDataCh2;
+
+    Color rain = new Color32(152,152,152,255);
 
     private string textIntro = "Wasser versickert und fließt in Hohlräumen im Untergrund. Die Hohlräume können kleine Poren zwischen einzelnen Sand und Kieskörnern sein, " +
         "Klüfte im Fels oder auch große Gänge, wie im Bergwerk. " +
@@ -52,6 +53,8 @@ public class ManagerFliesspfade : MonoBehaviour
     {
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
+
+        runtimeDataCh2 = runtimeDataChapters.LoadChap2RuntimeData();
     }
 
     void Start()
@@ -60,9 +63,10 @@ public class ManagerFliesspfade : MonoBehaviour
         headingInfoFp.text = HeadingInfoIdle;
         textinfoFP.text = textIntro;
         currentFp = previousFp = FliesspfadState.idle;
+        solidBg.color = Color.white;
+
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (consumedFp1 && consumedFp2 && consumedFp3)
@@ -107,22 +111,24 @@ public class ManagerFliesspfade : MonoBehaviour
             {
                 case FliesspfadState.idle:
                     btnFp1.interactable = btnFp2.interactable = btnFp3.interactable = true;
-                    Debug.Log("SET -------------------------------" + HeadingInfoIdle);
                     headingInfoFp.text = HeadingInfoIdle;
+                    textinfoFP.text = textIntro;
+                    solidBg.color = Color.white;
                     break;
                 case FliesspfadState.fp1:
                     btnFp2.interactable = false;
                     btnFp3.interactable = false;
+                    solidBg.color = rain;
                     break;
                 case FliesspfadState.fp2:
                     btnFp1.interactable = false;
-                    //btnFp2.interactable = false;
                     btnFp3.interactable = false;
+                    solidBg.color = rain;
                     break;
                 case FliesspfadState.fp3:
                     btnFp1.interactable = false;
                     btnFp2.interactable = false;
-                    //btnFp3.interactable = false;
+                    solidBg.color = rain;
                     break;
             }
 
@@ -135,6 +141,12 @@ public class ManagerFliesspfade : MonoBehaviour
             btnFp3.isOn = false;
         }
 
+    }
+
+    public void SwitchToMuseum()
+    {
+        GetComponent<SwitchSceneManager>().SwitchScene(GameScenes.ch02Museum);
+        runtimeDataCh2.lastWP = MuseumWaypoints.WPFliesspfad;
     }
 
     public void PlayAnimation(string triggerName)

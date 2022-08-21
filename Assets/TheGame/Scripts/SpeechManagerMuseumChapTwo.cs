@@ -59,6 +59,11 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
     }
 
+    public bool IsAudioSRCPlaying()
+    {
+        return audioSrc.isPlaying;
+    }
+
     public void LoadTalkingListsMuseum()
     {
         tlSecSilent = Resources.Load<SoTalkingList>(GameData.NameTLSecSilent);

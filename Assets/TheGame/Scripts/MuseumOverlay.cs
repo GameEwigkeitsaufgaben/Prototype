@@ -25,7 +25,7 @@ public class MuseumOverlay : MonoBehaviour
     private SoChaptersRuntimeData runtimeDataChapters;
 
     private UnityAction openCarbonPeriodGame, openMinerEquipment, openCoalification, openHistoryMining;
-    private UnityAction openTV; 
+    private UnityAction openTV, openFliesspfade; 
 
     private int chapter;
     AudioProgress audioP;
@@ -61,6 +61,7 @@ public class MuseumOverlay : MonoBehaviour
         openMinerEquipment += gameObject.GetComponent<SwitchSceneManager>().GoToMinerEquipment;
         openHistoryMining += gameObject.GetComponent<SwitchSceneManager>().GoToMythos;
         openTV += gameObject.GetComponent<SwitchSceneManager>().GoToCh2MuseumTV;
+        openFliesspfade += gameObject.GetComponent<SwitchSceneManager>().GoToFliesspfade;
         btnClose.gameObject.SetActive(false);
         btnSkipIntro.gameObject.SetActive(false);
         btnSkipIntro.interactable = false;
@@ -127,7 +128,7 @@ public class MuseumOverlay : MonoBehaviour
                 if (wp == MuseumWaypoints.WPTV)
                 {
                     container.sprite = configMuseum.tv;
-                    if (runtimeDataCh2.replayOverlay2121) showSkip = true;
+                    if (runtimeDataCh2.replayOverlay2122) showSkip = true;
                     speechManagerChapTwo.playMuseumGWTVIntro = true;
                     btnSkipIntro.onClick.AddListener(openTV);
                     audioP.StartTimer(speechManagerChapTwo.GetTalkingListOverallTimeInSec(GameData.NameCH2TLMuseumIntroTV));
@@ -136,7 +137,11 @@ public class MuseumOverlay : MonoBehaviour
                 else if (wp == MuseumWaypoints.WPFliesspfad)
                 {
                     container.sprite = configMuseum.fliesspfad;
+                    if (runtimeDataCh2.replayOverlay2123) showSkip = true;
                     speechManagerChapTwo.playMuseumFliesspfadIntro = true;
+                    btnSkipIntro.onClick.AddListener(openFliesspfade);
+                    audioP.StartTimer(speechManagerChapTwo.GetTalkingListOverallTimeInSec(GameData.NameCH2TLMuseumIntroTV));
+                    audioProgressBG.gameObject.SetActive(true);
                 }
                 break;
         }
@@ -191,11 +196,12 @@ public class MuseumOverlay : MonoBehaviour
                     if (speechManagerChapTwo.IsTalkingListFinished(GameData.NameCH2TLMuseumIntroTV))
                     {
                         gameObject.GetComponent<SwitchSceneManager>().SwitchScene(GameScenes.ch02MuseumTV);
-                        runtimeDataCh2.replayOverlay2121 = true; 
+                        runtimeDataCh2.replayOverlay2122 = true; 
                     }
                     else if (speechManagerChapTwo.IsTalkingListFinished(GameData.NameCH2TLMuseumIntroFliesspfad))
                     {
                         gameObject.GetComponent<SwitchSceneManager>().GoToFliesspfade();
+                        runtimeDataCh2.replayOverlay2123 = true;
                     }
                     else if (speechManagerChapTwo.IsTalkingListFinished(GameData.NameCH2TLMuseumOutroExitZeche))
                     {
