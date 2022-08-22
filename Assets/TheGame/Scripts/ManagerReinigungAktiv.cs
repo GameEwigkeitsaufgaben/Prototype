@@ -172,9 +172,11 @@ public class ManagerReinigungAktiv : MonoBehaviour
 
     public void SwitchToPassiv()
     {
+        runtimeDatatCh2.reinAktivDone = true;
         if(runtimeDatatCh2.reinAktivDone && runtimeDatatCh2.reinPassivDone)
         {
             GetComponent<SwitchSceneManager>().SwitchToChapter2withOverlay(GameData.NameOverlay2110);
+            runtimeDatatCh2.progressPost2110GWReinigungDone = true;
             return;
         }
         

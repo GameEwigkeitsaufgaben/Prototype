@@ -20,6 +20,10 @@ public class ManagerPumpen : MonoBehaviour
 
     private SoChapTwoRuntimeData runtimeDataChap02;
     private SoChaptersRuntimeData runtimeDataChapters;
+    public AudioSource audioSrc;
+    public AudioClip failPumpe1, failPumpe3;
+
+    SpeechManagerMuseumChapTwo speechManagerCh2;
 
     void Start()
     {
@@ -28,10 +32,17 @@ public class ManagerPumpen : MonoBehaviour
 
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
 
+        speechManagerCh2 = GetComponent<SpeechManagerMuseumChapTwo>();
+        speechManagerCh2.playZechePumpeIntro = true;
+
         for(int i = 0; i < textInScene.Length; i++)
         {
             textInScene[i].color = GameColors.defaultTextColor;
         }
+
+        toggleP1.interactable = false;
+        toggleP2.interactable = false;
+        toggleP3.interactable = false;
     }
 
     public void CheckPumpOutSole2(Pumpen pumpe)
@@ -58,29 +69,43 @@ public class ManagerPumpen : MonoBehaviour
 
     public void TurnOnPumpe(int pumpenid)
     {
-        //if()
         switch (pumpenid)
         {
             case 1:
-                if (!toggleP1.isOn)
-                {
+                
                     animator.SetTrigger(Pumpen.pumpe1.ToString());
-                }
-                else
-                {
-
-                }
+                    audioSrc.clip = failPumpe1;
+                    audioSrc.Play();
+                   
                 break;
             case 2:
                 animator.SetTrigger(Pumpen.pumpe2.ToString());
                 break;
             case 3:
                 animator.SetTrigger(Pumpen.pumpe2.ToString());
+                audioSrc.clip = failPumpe3;
+                audioSrc.Play();
                 break;
             case 0:
                 animator.SetTrigger(Pumpen.pumpeOff.ToString());
                 break;
         }
-       
+
+        runtimeDataChap02.progressPost215Done = true;
+        btnBackToOverlay.interactable = true;
+        toggleP1.interactable = false;
+        toggleP2.interactable = false;
+        toggleP3.interactable = false;
+
+    }
+
+    private void Update()
+    {
+        if (speechManagerCh2.IsTalkingListFinished(GameData.NameCH2TLZechePumpeIntro))
+        {
+            toggleP1.interactable = true;
+            toggleP2.interactable = true;
+            toggleP3.interactable = true;
+        }
     }
 }

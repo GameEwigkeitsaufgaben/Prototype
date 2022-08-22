@@ -15,7 +15,9 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
         tlMuseumExitZeche;
 
     public SoTalkingList
-        tlZecheIntroReinigung;
+        tlZecheIntroReinigung,
+        tlZechePumpeIntro,
+        tlZechePumpeOutro;
 
     public bool 
         playSecSilent,
@@ -24,7 +26,9 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
         playMuseumGWTVOutro,
         playMuseumFliesspfadIntro, 
         playMuseumExitZeche,
-        playZecheIntroReinigung;
+        playZecheIntroReinigung,
+        playZechePumpeIntro,
+        playZechePumpeOutro;
     
     private AudioSource audioSrc;
 
@@ -37,7 +41,10 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
         speakMuseumGWTVOutro, 
         speakMuseumFliesspfadIntro, 
         speakMuseumExitZeche,
-        speakZecheIntroReinigung;
+        speakZecheIntroReinigung,
+        speakZechePumpeIntro,
+        speakZechePumpeOutro;
+
    
     private Dictionary<string, SpeechList> speechDict = new Dictionary<string, SpeechList>();
 
@@ -78,6 +85,8 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
         tlMuseumFliessPfadIntro = Resources.Load<SoTalkingList>(GameData.NameCH2TLMuseumIntroFliesspfad);
         tlMuseumExitZeche = Resources.Load<SoTalkingList>(GameData.NameCH2TLMuseumOutroExitZeche);
         tlZecheIntroReinigung = Resources.Load<SoTalkingList>(GameData.NameCH2TLZecheIntroReiniung);
+        tlZechePumpeIntro = Resources.Load<SoTalkingList>(GameData.NameCH2TLZechePumpeIntro);
+        tlZechePumpeOutro = Resources.Load<SoTalkingList>(GameData.NameCH2TLZechePumpeOutro);
     }
 
     void Start()
@@ -91,6 +100,8 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
         AddToDict(speakMuseumFliesspfadIntro, tlMuseumFliessPfadIntro);
         AddToDict(speakMuseumExitZeche, tlMuseumExitZeche);
         AddToDict(speakZecheIntroReinigung, tlZecheIntroReinigung);
+        AddToDict(speakZechePumpeIntro, tlZechePumpeIntro);
+        AddToDict(speakZechePumpeOutro, tlZechePumpeOutro);
 
 
         enya = GetComponent<PeopleInScene>().enya;
@@ -206,7 +217,16 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
             currentList = speechDict[GameData.NameCH2TLZecheIntroReiniung];
             playZecheIntroReinigung = false;
         }
-
+        else if (playZechePumpeIntro)
+        {
+            currentList = speechDict[GameData.NameCH2TLZechePumpeIntro];
+            playZechePumpeIntro = false;
+        }
+        else if (playZechePumpeOutro)
+        {
+            currentList = speechDict[GameData.NameCH2TLZechePumpeOutro];
+            playZechePumpeOutro = false;
+        }
         if (currentList != null)
         {
             if (audioSrc.isPlaying) audioSrc.Stop();

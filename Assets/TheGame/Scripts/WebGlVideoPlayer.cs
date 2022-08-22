@@ -89,6 +89,11 @@ public class WebGlVideoPlayer : MonoBehaviour
                 videoPlayer.loopPointReached += SetVideopostToRead;
             }
 
+            if (videoPostName == GameData.NameOverlay219)
+            {
+                videoPlayer.loopPointReached += SetVideoDone;
+            }
+
             videoIsPlaying = true;
             //runtimeData.videoPlaying = true;
             runtimeData.overlaySoundState = OverlaySoundState.NoSound;
@@ -142,6 +147,12 @@ public class WebGlVideoPlayer : MonoBehaviour
     public void SetTVStationDone(VideoPlayer vp)
     {
         runtimeDataCh02.interactTVDone = true;
+    }
+
+    public void SetVideoDone(VideoPlayer vp)
+    {
+        videoIsPlaying = false;
+        runtimeDataCh02.progressPost219VideoDone = true;
     }
   
     //Method called (from local method StartTheVideo) if event player finished is fired

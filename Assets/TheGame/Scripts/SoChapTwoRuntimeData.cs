@@ -13,7 +13,7 @@ public class SoChapTwoRuntimeData : Runtime
     public string generalKeyOverlay = GameData.NameOverlay2112;
 
     //progress in game
-    public bool progressPost211Done, progress212MuseumDone, progressPost213Done, progressPost214Done, progressPost215Pumpen;
+    public bool progressPost211Done, progress212MuseumDone, progressPost213Done, progressPost214Done, progressPost215Done;
     public bool progressPost216Done, progressPost217Done, progressPost218PyritDone, progressPost219VideoDone, progressPost2110GWReinigungDone, progressPost2111QuizDone;
 
     public MuseumWaypoints lastWP = MuseumWaypoints.None;
@@ -32,7 +32,7 @@ public class SoChapTwoRuntimeData : Runtime
     {
         progressPost211Done = true;
         progress212MuseumDone = true;
-        progressPost213Done = progressPost214Done = progressPost215Pumpen = true;
+        progressPost213Done = progressPost214Done = progressPost215Done = true;
         progressPost216Done = progressPost217Done = progressPost218PyritDone = true;
         progressPost219VideoDone = progressPost2110GWReinigungDone = progressPost2111QuizDone = true;
     }
@@ -41,7 +41,7 @@ public class SoChapTwoRuntimeData : Runtime
     {
         progressPost211Done = true;
         progress212MuseumDone = false;
-        progressPost213Done = progressPost214Done = progressPost215Pumpen = false;
+        progressPost213Done = progressPost214Done = progressPost215Done = false;
         progressPost216Done = progressPost217Done = progressPost218PyritDone = false;
         progressPost219VideoDone = progressPost2110GWReinigungDone = progressPost2111QuizDone = false;
         replayTL2121intro = replayTL2121outro = replay2122TVoutro =  replayOverlay2122 = replayOverlay2123 = replayTL21101Reinigung = false;

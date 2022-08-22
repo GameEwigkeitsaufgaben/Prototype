@@ -23,6 +23,7 @@ public class ManagerGWPassiv : MonoBehaviour
         if(runtimeDatatCh2.reinPassivDone && runtimeDatatCh2.reinAktivDone)
         {
             GetComponent<SwitchSceneManager>().SwitchToChapter2withOverlay(GameData.NameOverlay2110);
+            runtimeDatatCh2.progressPost2110GWReinigungDone = true;
         }
         else
         {

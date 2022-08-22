@@ -223,11 +223,11 @@ public class Entry : MonoBehaviour
             {
                 post.GetComponent<Post>().UnlockPost();
             }
-            else if (gameObject.name == GameData.NameEntry216 && runtimeDataCh02.progressPost215Pumpen)
+            else if (gameObject.name == GameData.NameEntry216 && runtimeDataCh02.progressPost215Done)
             {
                 post.GetComponent<Post>().UnlockPost();
             }
-            else if (gameObject.name == GameData.NameEntry217 && runtimeDataCh02.progressPost215Pumpen)
+            else if (gameObject.name == GameData.NameEntry217 && runtimeDataCh02.progressPost215Done)
             {
                 post.GetComponent<Post>().UnlockPost();
             }
