@@ -172,7 +172,13 @@ public class ManagerReinigungAktiv : MonoBehaviour
 
     public void SwitchToPassiv()
     {
-        GetComponent<SwitchSceneManager>().SwitchScene(GameScenes.ch02gwReinigungPassiv);
+        if(runtimeDatatCh2.reinAktivDone && runtimeDatatCh2.reinPassivDone)
+        {
+            GetComponent<SwitchSceneManager>().SwitchToChapter2withOverlay(GameData.NameOverlay2110);
+            return;
+        }
+        
+        GetComponent<SwitchSceneManager>().SwitchScene(GameScenes.ch02gwReinigung);
     }
 
     // Update is called once per frame

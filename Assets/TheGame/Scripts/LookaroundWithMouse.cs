@@ -33,6 +33,11 @@ public class LookaroundWithMouse : MonoBehaviour
         {
             SetPlayerBodyRotation(0f, false);
         }
+
+        if (activeScene == GameScenes.ch02gwReinigungPassiv)
+        {
+            SetPlayerBodyRotation(0f, false);
+        }
     }
 
     // Update is called once per frame
@@ -60,6 +65,11 @@ public class LookaroundWithMouse : MonoBehaviour
             {
                 pitch = Mathf.Clamp(pitch, -12f, +55f);
                 yaw = Mathf.Clamp(yaw, -40f, 55f);
+            }
+            else if (activeScene == GameScenes.ch02gwReinigungPassiv)
+            {
+                pitch = Mathf.Clamp(pitch, -12f, +55f);
+                yaw = Mathf.Clamp(yaw, -40f, 7f);
             }
             else
             {

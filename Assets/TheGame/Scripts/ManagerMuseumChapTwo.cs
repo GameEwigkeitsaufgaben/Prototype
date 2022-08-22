@@ -134,8 +134,6 @@ public class ManagerMuseumChapTwo : MonoBehaviour
                     return;
                 }
 
-
-
                 break;
         }
        
@@ -349,7 +347,7 @@ public class ManagerMuseumChapTwo : MonoBehaviour
         }
         if (speechManagerch2.IsTalkingListFinished(GameData.NameCH2TLMuseumOutroExitZeche))
         {
-            runtimeDataCh02.progressPost2110GWReinigungDone = true;
+            runtimeDataCh02.progress212MuseumDone = true;
             gameObject.GetComponent<SwitchSceneManager>().SwitchToChapter2withOverlay(GameData.NameOverlay212);
         }
         //else if (speechManager.IsTalkingListFinished(GameData.NameTLMuseumIntroTV))
