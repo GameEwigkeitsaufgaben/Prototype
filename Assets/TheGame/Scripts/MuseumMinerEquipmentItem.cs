@@ -8,33 +8,36 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
     private const string COMiner = "MinerImg";
     private const string plainTextEmptyString = "";
     private const string plainTextNoDescription = "Keine Beschreibung vorhanden";
-    public MinerEquipmentItem equipmentItem; //Enum
-    public SnapetTo snapedTo; //Enum
-    public SnapetTo previous;
     private GameObject miner = null; //set in onTrigger
-    
-    //private GameObject itemOnTable; //this object where this script is attached to
-    private Vector3 origPosOnTable;
-    public GameObject correspondingItemOnMiner;
-    
-    public string individualDesc;
-    
-    public bool solutionItemRound1 = false;
-    public bool solutionItemRound2 = false;
-    public bool solutionItemRound3 = false;
-    
     private Canvas myParentCanvas;
     private RectTransform myDragRectTransform;
     //private Text uiDescItems;
 
     private bool positionChanged = false;
     private SoMinerEquipment myConifg;
-   
-    public ManagerMuseumMinerEquipment myManager;
+
+
     private AudioSource myAudioSrc;
+
+    //private GameObject itemOnTable; //this object where this script is attached to
+    private Vector3 origPosOnTable;
+    
+    public GameObject correspondingItemOnMiner;
+    
+    public string individualDesc;
+    public bool solutionItemRound1 = false;
+    public bool solutionItemRound2 = false;
+    public bool solutionItemRound3 = false;
     public GameObject dragObjParent, dragObjDefaultParent, orderTopParent, parentTable;
+    public ManagerMuseumMinerEquipment myManager;
     public bool isDragableInRound;
     public bool isCurrentlyDragging;
+    public MinerEquipmentItem equipmentItem; //Enum
+    public SnapetTo snapedTo; //Enum
+    public SnapetTo previous;
+
+
+
 
     public TMP_Text uiTextTooltip; //set for every item in managermuseumminerequipment
 

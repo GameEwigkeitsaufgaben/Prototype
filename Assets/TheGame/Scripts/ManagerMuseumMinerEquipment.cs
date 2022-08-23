@@ -7,8 +7,8 @@ using TMPro;
 public class ManagerMuseumMinerEquipment : MonoBehaviour
 {
     private const int MaxItemsOnMinerRoundEssential = 3;
-    private const int MaxItemsOnMinerRoundProtection = 6;
-    private const int MaxItemsOnMinerRoundSpectialTask = 10;
+    private const int MaxItemsOnMinerRoundProtection = MaxItemsOnMinerRoundEssential + 3;
+    private const int MaxItemsOnMinerRoundSpectialTask = MaxItemsOnMinerRoundProtection + 4;
     private const string checkBtnRichtig = "Richtig?";
     private const string checkBtnNochmal = "Nochmal!";
 
@@ -138,13 +138,15 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
             ResetAllMinerItems();
             currentRound = EquipmentRound.Essential;
             SetRoundsVisible(true, false, false);
-            itemsOnMiner = 0;
+
             foreach (MuseumMinerEquipmentItem i in items)
             {
                 i.ResetToTable();
                 i.GetComponent<Image>().raycastTarget = true;
                 i.isDragableInRound = true;
             }
+
+            //itemsOnMiner = 0;
             return;
         }
         //Create List which items are snaped to the miner
@@ -367,6 +369,8 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
         }
 
         bool maxItemsReached = false;
+
+        Debug.Log("Items on Miner " + itemsOnMiner);
 
         switch (currentRound)
         {
