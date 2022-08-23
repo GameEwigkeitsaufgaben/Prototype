@@ -32,7 +32,7 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
    
     public ManagerMuseumMinerEquipment myManager;
     private AudioSource myAudioSrc;
-    public GameObject dragObjParent, dragObjDefaultParent, orderTopParent;
+    public GameObject dragObjParent, dragObjDefaultParent, orderTopParent, parentTable;
     public bool isDragableInRound;
     public bool isCurrentlyDragging;
 
@@ -151,6 +151,8 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
         snapedTo = previous = SnapetTo.Table;
         ChooseSprite();
         transform.position = origPosOnTable;
+        gameObject.transform.SetParent(parentTable.transform);
+
     }
 
     public void ResetToMiner()
