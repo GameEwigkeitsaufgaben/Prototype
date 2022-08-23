@@ -71,8 +71,6 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
         
     }
 
-
-
     public bool IsMaxItemsOnMinerReached()
     {
         bool maxReached = false;
