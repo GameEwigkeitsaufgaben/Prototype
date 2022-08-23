@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 [CreateAssetMenu(menuName = "SoChapOneRuntimeData")]
 public class SoChapOneRuntimeData : Runtime
@@ -27,6 +26,7 @@ public class SoChapOneRuntimeData : Runtime
     public Vector3 currentGroupPos = Vector3.zero; //-13.44922, 2.4, -2.670441
     public MuseumWaypoints currentMuseumWaypoint = MuseumWaypoints.WP0;
     public bool isMinerDone, isMythDone, isCoalifiationDone, isCarbonificationPeriodDone;
+    public bool currDragItemExists = false;
     public SoundMuseum soundSettingMuseum;
     public string quizPointsCh01 = "";
     public float quizPointsOverall = 0;
@@ -74,7 +74,8 @@ public class SoChapOneRuntimeData : Runtime
         sole1Done = sole2Done = sole3BewetterungDone = sole3GebaeudeDone = trainRideInDone = trainRideOutDone = isLongwallCutterDone = false;
         interaction116Done = interaction117Done = quiz119Done = false;
         musicOn = true;
-    }
+        currDragItemExists = false;
+}
 
     public void CheckInteraction117Done()
     {

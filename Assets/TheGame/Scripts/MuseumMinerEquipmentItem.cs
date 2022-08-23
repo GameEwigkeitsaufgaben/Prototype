@@ -11,6 +11,7 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
     private GameObject miner = null; //set in onTrigger
     private Canvas myParentCanvas;
     private RectTransform myDragRectTransform;
+    
     //private Text uiDescItems;
 
     private bool positionChanged = false;
@@ -35,9 +36,7 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
     public MinerEquipmentItem equipmentItem; //Enum
     public SnapetTo snapedTo; //Enum
     public SnapetTo previous;
-
-
-
+    public GameObject particles;
 
     public TMP_Text uiTextTooltip; //set for every item in managermuseumminerequipment
 
@@ -77,8 +76,16 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
         myAudioSrc = gameObject.AddComponent<AudioSource>();
     }
 
+    public void EnableParticles(bool enable)
+    {
+        particles.gameObject.SetActive(enable);
+        Debug.Log("particles enable " + enable);
+    }
+
     private void SetupDescription()
     {
+        Debug.Log("eitem....................." + equipmentItem);
+
         switch (equipmentItem)
         {
             case MinerEquipmentItem.Anzug:
@@ -181,7 +188,6 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
 
         if (myManager.IsMaxItemsOnMinerReached() && snapedTo == SnapetTo.Table) return;
 
-        Debug.Log(gameObject.name + " : " + snapedTo + " ; dd max reached "+ myManager.IsMaxItemsOnMinerReached() + " "+ myManager.itemsOnMiner );
         isCurrentlyDragging = true;
         
         gameObject.transform.parent = dragObjParent.transform;

@@ -4,16 +4,16 @@ using TMPro;
 
 public enum MinerEquipmentItem
 {
-    Helm = 1,
-    Lampe = 3,
-    Atemmaske = 5,
-    Sicherheitsschuhe = 11,
-    Stechkarte = 13,
-    Schutzbrille = 15,
-    Schienbeinschuetzer = 101,
-    Anzug = 103,
-    Halstuch = 105,
-    Handschuhe = 107
+    Helm = 4,
+    Lampe = 8,
+    Atemmaske = 1,
+    Sicherheitsschuhe = 2,
+    Stechkarte = 5,
+    Schutzbrille = 3,
+    Schienbeinschuetzer = 6,
+    Anzug = 0,
+    Halstuch = 7,
+    Handschuhe = 9
 }
 
 //essential-lebensnotwendig, protection-schutz schwere verletzung, specialTask - sonstig wichtig

@@ -134,25 +134,35 @@ public class MouseChange : MonoBehaviour
 
             else if(gameObject.GetComponent<MuseumMinerEquipmentItem>() != null)
             {
-                if (gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging) return;
+                Debug.Log("DRAG DRAG" + gameObject.name);
 
-                if (gameObject.GetComponent<MuseumMinerEquipmentItem>().myManager.IsMaxItemsOnMinerReached() && gameObject.GetComponent<MuseumMinerEquipmentItem>().snapedTo == SnapetTo.Table)
+                if (runtimeDataCh01.currDragItemExists) return;
+
+                MuseumMinerEquipmentItem item = gameObject.GetComponent<MuseumMinerEquipmentItem>();
+
+                if (item == null) return;
+                if (item.isCurrentlyDragging) return;
+
+                Debug.Log("OverrideDrag " + gameObject.name);
+ 
+                if (MaxReachedSnaptToTable(item))
                 {
                     Cursor.SetCursor(runtimeDataChapters.cursorNoDrag, hotSpot, cursorMode);
                     return;
                 }
 
-                if (!gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging) Cursor.SetCursor(runtimeDataChapters.cursorDragTouch, hotSpot, cursorMode);
+                //if (!gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging)
+                Cursor.SetCursor(runtimeDataChapters.cursorDragTouch, hotSpot, cursorMode);
             }
 
             else
             {
-                Debug.Log("EEEEEEEEEEEEEEEEELSEEEEEEEEEEEE drag drag");
                 Cursor.SetCursor(runtimeDataChapters.cursorDragDrag, hotSpot, cursorMode);
             }
         }
         else
         {
+            Cursor.SetCursor(runtimeDataChapters.cursorDragDrag, hotSpot, cursorMode);
             if (gameObject.GetComponent<MuseumMinerEquipmentItem>() != null && gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging) return;
             
             Cursor.SetCursor(runtimeDataChapters.cursorNoInteract, hotSpot, cursorMode);
@@ -161,34 +171,57 @@ public class MouseChange : MonoBehaviour
 
     public void MouseExit()
     {
-        if(gameObject.GetComponent<MuseumMinerEquipmentItem>() != null)
+        if (gameObject.tag == "DragItem")
         {
-            if (gameObject.tag == "DragItem" && gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging) return;
+            if (gameObject.GetComponent<MuseumMinerEquipmentItem>() != null)
+            {
+                if (gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging) return;
+                if (runtimeDataCh01.currDragItemExists) return;
+            }
         }
-        
+        Debug.Log("Mouse EXIT---------------");
         Cursor.SetCursor(runtimeDataChapters.sceneCursor, Vector2.zero, cursorMode);
         runtimeDataCh01.hintPostUnlock = "";
         runtimeDataCh02.hintPostUnlock = "";
+    }
+
+    private bool MaxReachedSnaptToTable(MuseumMinerEquipmentItem item)
+    {
+        //Debug.Log("Max reached");
+
+        //if (item.myManager.IsMaxItemsOnMinerReached())
+        //{
+        //    if (item.snapedTo == SnapetTo.Table)
+        //    {
+        //        Cursor.SetCursor(runtimeDataChapters.cursorNoDrag, hotSpot, cursorMode);
+        //        Debug.Log("Max reached, set no drag");
+        //        return;
+        //    }
+        //}
+
+        return item.myManager.IsMaxItemsOnMinerReached() && (item.snapedTo == SnapetTo.Table);
     }
 
     public void MouseDown()
     {
         if (gameObject.tag == "DragItem")
         {
+            //ToDo: Working but, dirty Mechanic Mouse up/down, enter/exit!
             if(gameObject.GetComponent<MuseumMinerEquipmentItem>() != null)
             {
-                if (gameObject.GetComponent<MuseumMinerEquipmentItem>().myManager.IsMaxItemsOnMinerReached())
+                MuseumMinerEquipmentItem item = gameObject.GetComponent<MuseumMinerEquipmentItem>();
+                if (item == null) return;
+
+                if (MaxReachedSnaptToTable(item))
                 {
-
-                    if (SnapetTo.Miner == gameObject.GetComponent<MuseumMinerEquipmentItem>().snapedTo)
-                    {
-                        Cursor.SetCursor(runtimeDataChapters.cursorDragDrag, hotSpot, cursorMode);
-                        return;
-                    }
-
                     Cursor.SetCursor(runtimeDataChapters.cursorNoDrag, hotSpot, cursorMode);
                     return;
                 }
+                Debug.Log("geht weiter ------------------------- ");
+
+                Cursor.SetCursor(runtimeDataChapters.cursorDragDrag, hotSpot, cursorMode);
+                runtimeDataCh01.currDragItemExists = true;
+
             }
 
             else if(gameObject.GetComponent<DragItemThoughts>() != null)
@@ -206,7 +239,6 @@ public class MouseChange : MonoBehaviour
 
     public void MouseUp()
     {
-        Debug.Log("Back to orig");
         if (gameObject.tag == "DragItem")
         {
             if (gameObject.GetComponent<DragTurmItem>() != null)
@@ -220,9 +252,25 @@ public class MouseChange : MonoBehaviour
                 //Cursor.SetCursor(runtimeDataChapters.cursorDragTouch, hotSpot, cursorMode);
             }
 
-            if (gameObject.GetComponent<DragItemThoughts>() != null)
+            else if (gameObject.GetComponent<DragItemThoughts>() != null)
             {
                 Cursor.SetCursor(runtimeDataChapters.cursorDragTouch, hotSpot, cursorMode);
+            }
+
+            else if (gameObject.GetComponent<MuseumMinerEquipmentItem>() != null)
+            {
+
+                MuseumMinerEquipmentItem item = gameObject.GetComponent<MuseumMinerEquipmentItem>();
+                if (item == null) return;
+
+                if (MaxReachedSnaptToTable(item))
+                {
+                    Cursor.SetCursor(runtimeDataChapters.cursorNoDrag, hotSpot, cursorMode);
+                    return;
+                }
+
+                Cursor.SetCursor(runtimeDataChapters.cursorDragTouch, hotSpot, cursorMode);
+                runtimeDataCh01.currDragItemExists = false;
             }
         }
     }
