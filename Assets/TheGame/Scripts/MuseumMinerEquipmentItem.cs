@@ -46,7 +46,7 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
     string descFootware = "Die Sicherheitsschuhe, verhindern Fußverletzungen durch herabfallende Gegenstände.";
     string descCard = "Die Stechkarte, sorgt dafür, dass man weiß, wer im Bergwerk unterwegs ist und die Grubenwehr helfen kann, wenn jemand vermisst wird.";
     string descGlasses = "Die Schutzbrille, schützt die Augen vor allem vor Staub, aber auch vor Augenverletzungen durch Gegenstände im Stollen.";
-    string descShinGuard = "Die Schienbeinschoner, schützen vor allem in Engstellen und niederen Stollenstrecken, die man nicht aufrecht durchlaufen kann.";
+    string descShinGuard = "Die Schienbeinschoner schützen vor allem in Engstellen und niederen Stollenstrecken, die man nicht aufrecht durchlaufen kann.";
     string descSuit = "Der weiße Bergmannsanzug, aus Baumwolle kann nicht elektrostatisch aufgeladen werden und ist bequem.";
     string descScarf = "Das Halstuch kann zur Not als Mundschutz dienen und ist angenehm zu tragen.";
     string descGloves = "Die Handschuhe schützen die Hände bei schweren Arbeiten vor Blasen und Schwielen.";
