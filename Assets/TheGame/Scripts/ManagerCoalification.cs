@@ -13,6 +13,7 @@ public enum StatesInkohlung
 
 public class ManagerCoalification : MonoBehaviour
 {
+    private SoChaptersRuntimeData runtimeDataChapters;
     private SoChapOneRuntimeData runtimeData;
     private SoMuseumConfig configMuseum;
     public Slider slider;
@@ -23,14 +24,16 @@ public class ManagerCoalification : MonoBehaviour
 
     private void Awake()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        runtimeData = runtimeDataChapters.LoadChap1RuntimeData();
+        runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
+
         configMuseum = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
     }
 
     private void Start()
     {
         statesInkohlung = StatesInkohlung.None;
-        Cursor.SetCursor(runtimeData.cursorDefault, Vector2.zero, CursorMode.Auto);
     }
 
     public void SetStateAndText()
@@ -48,7 +51,7 @@ public class ManagerCoalification : MonoBehaviour
                 infoText.text = configMuseum.pflanzenSterben;
                 break;
             case StatesInkohlung.PeatIsFormed:
-                infoText.text = configMuseum.TorfEntsteht;
+                infoText.text = configMuseum.torfEntsteht;
                 break;
             case StatesInkohlung.Repetition:
                 infoText.text = configMuseum.Wiederholung;
@@ -67,10 +70,8 @@ public class ManagerCoalification : MonoBehaviour
         
     }
 
-
     public void GoBackToMuseum()
     {
-        //runtimeData.isCoalifiationDone = true;
         gameObject.GetComponent<SwitchSceneManager>().GoToMuseum();
     }
 }

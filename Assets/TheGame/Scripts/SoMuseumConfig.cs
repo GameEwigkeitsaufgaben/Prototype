@@ -16,5 +16,5 @@ public class SoMuseumConfig : ScriptableObject
 
     [Header("Coalification")]
     [TextArea(10, 100)]
-    public string pflanzenSterben, TorfEntsteht, Wiederholung, tektonischeKraefte;
+    public string pflanzenSterben, torfEntsteht, Wiederholung, tektonischeKraefte;
 }
