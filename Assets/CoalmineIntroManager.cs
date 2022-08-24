@@ -7,6 +7,8 @@ public class CoalmineIntroManager : MonoBehaviour
     public CoalmineSpeechManger mySpeechManger;
     public Button nextSceneBtn;
 
+    public Image imgEAStation, imgS1Station, imgS2Station, imgS3Station, imgTrainInStation, imgTrainOutStation, imgLwcStation;
+
     public Disc eaDone, s1Done, s2Done, s3wetterDone, s3GebaudeDone, trainInDone, lwcDone, trainOutDone;
 
     public Character georg, dad, enya;
@@ -22,6 +24,11 @@ public class CoalmineIntroManager : MonoBehaviour
         runtimeDataChapers = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
     }
 
+    private bool IsSole3Done()
+    {
+        return runtimeDataCh01.sole3BewetterungDone && runtimeDataCh01.sole3GebaeudeDone;
+    }
+
     void Start()
     {
         runtimeDataChapers.SetSceneCursor(runtimeDataChapers.cursorDefault);
@@ -30,15 +37,23 @@ public class CoalmineIntroManager : MonoBehaviour
         nextSceneBtn.GetComponent<Button>().colors = GameColors.GetInteractionColorBlock();
 
         Color fbColor = Color.green;
-      
-        if (runtimeDataCh01.entryAreaDone) eaDone.Color = fbColor;
-        if (runtimeDataCh01.sole1Done) s1Done.Color = fbColor;
-        if (runtimeDataCh01.sole2Done) s2Done.Color = fbColor;
-        if (runtimeDataCh01.sole3BewetterungDone) s3GebaudeDone.Color = fbColor;
-        if (runtimeDataCh01.sole3GebaeudeDone) s3wetterDone.Color = fbColor;
-        if (runtimeDataCh01.trainRideInDone) trainInDone.Color = fbColor;
-        if (runtimeDataCh01.isLongwallCutterDone) lwcDone.Color = fbColor;
-        if (runtimeDataCh01.trainRideInDone) trainOutDone.Color = fbColor;
+        
+        if (runtimeDataCh01.entryAreaDone) imgEAStation.color = fbColor;
+        if (runtimeDataCh01.sole1Done) imgS1Station.color = fbColor;
+        if (runtimeDataCh01.sole2Done) imgS2Station.color = fbColor;
+        if (IsSole3Done()) imgS3Station.color = fbColor;
+        if (runtimeDataCh01.trainRideInDone) imgTrainInStation.color =  fbColor;
+        if (runtimeDataCh01.trainRideOutDone) imgTrainOutStation.color = fbColor;
+        if (runtimeDataCh01.isLongwallCutterDone) imgLwcStation.color = fbColor;
+
+        //if (runtimeDataCh01.entryAreaDone) eaDone.Color = fbColor;
+        //if (runtimeDataCh01.sole1Done) s1Done.Color = fbColor;
+        //if (runtimeDataCh01.sole2Done) s2Done.Color = fbColor;
+        //if (runtimeDataCh01.sole3BewetterungDone) s3GebaudeDone.Color = fbColor;
+        //if (runtimeDataCh01.sole3GebaeudeDone) s3wetterDone.Color = fbColor;
+        //if (runtimeDataCh01.trainRideInDone) trainInDone.Color = fbColor;
+        //if (runtimeDataCh01.isLongwallCutterDone) lwcDone.Color = fbColor;
+        //if (runtimeDataCh01.trainRideInDone) trainOutDone.Color = fbColor;
     }
 
     private void Update()
