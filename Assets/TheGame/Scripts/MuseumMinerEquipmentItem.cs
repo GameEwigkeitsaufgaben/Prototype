@@ -41,12 +41,12 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
     public TMP_Text uiTextTooltip; //set for every item in managermuseumminerequipment
 
     string descHelmet = "Der Helm, schützt vor Kopfverletzungen durch herabfallenden Einbauten oder in Stollen mit geringer Höhe.";
-    string descLamp = "Die Lampe, dient zum Ausleuchten der Stollen, um nicht mit Gegenständen oder Einbauten zusammenzustoßen.";
+    string descLamp = "Das Geleucht, dient zum Ausleuchten der Stollen, um nicht mit Gegenständen oder Einbauten zusammenzustoßen.";
     string descMask = "Die Atemschutzmaske, verhindert, dass krankmachender Kohlenstaub in großen Mengen eingeatmet wird.";
     string descFootware = "Die Sicherheitsschuhe, verhindern Fußverletzungen durch herabfallende Gegenstände.";
     string descCard = "Die Stechkarte, sorgt dafür, dass man weiß, wer im Bergwerk unterwegs ist und die Grubenwehr helfen kann, wenn jemand vermisst wird.";
     string descGlasses = "Die Schutzbrille, schützt die Augen vor allem vor Staub, aber auch vor Augenverletzungen durch Gegenstände im Stollen.";
-    string descShinGuard = "Die Schienbeinschützer, schützen vor allem in Engstellen und niederen Stollenstrecken, die man nicht aufrecht durchlaufen kann.";
+    string descShinGuard = "Die Schienbeinschoner, schützen vor allem in Engstellen und niederen Stollenstrecken, die man nicht aufrecht durchlaufen kann.";
     string descSuit = "Der weiße Bergmannsanzug, aus Baumwolle kann nicht elektrostatisch aufgeladen werden und ist bequem.";
     string descScarf = "Das Halstuch kann zur Not als Mundschutz dienen und ist angenehm zu tragen.";
     string descGloves = "Die Handschuhe schützen die Hände bei schweren Arbeiten vor Blasen und Schwielen.";
