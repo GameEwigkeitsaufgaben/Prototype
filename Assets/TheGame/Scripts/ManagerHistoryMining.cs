@@ -20,7 +20,7 @@ public class ManagerHistoryMining : MonoBehaviour
     public Slider slider;
     public Button btnBackToMuseum, btnUrlToSage;
     public TextMeshProUGUI centuryText;
-    public Image imgSanduhr;
+    public GameObject imgSanduhr;
     
     [Header("Assigned at Runtime")]
     public SoMuseumConfig museumConfig;
