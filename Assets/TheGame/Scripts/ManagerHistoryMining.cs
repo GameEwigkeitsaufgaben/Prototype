@@ -99,7 +99,7 @@ public class ManagerHistoryMining : MonoBehaviour
                 imgSanduhr.gameObject.SetActive(false);
                 centuryText.text = museumConfig.textCentury21;
                 runtimeData.isMythDone = true;
-                btnBackToMuseum.GetComponent<Image>().color = GameColors.defaultInteractionColorNormal;
+                //btnBackToMuseum.GetComponent<Image>().color = GameColors.defaultInteractionColorNormal;
                 btnBackToMuseum.interactable = true;
                 break;
             default:
