@@ -10,12 +10,7 @@ public enum SoundMuseum
 
 public class ManagerMuseum : MonoBehaviour
 {
-    //public bool isMinerDone;
-    //public bool isMythDone;
-    //public bool isCoalifictionDone;
-    //public bool isEarthHistroyDone;
-
-    public Button btnExitMuseum;
+    public Button btnExitMuseum, btnReplayTalkingList;
     public SpeechManagerMuseumChapOne speechManagerCh1;
     public MuseumPlayer walkingGroup;
     public SwitchSceneManager switchScene;
@@ -28,6 +23,8 @@ public class ManagerMuseum : MonoBehaviour
     public GameObject characterDad, characterGuide, waitingGuide;
 
     private AudioSource audioSrcBGMusic;
+   
+    public MuseumOverlay overlay;
 
     private void Awake()
     {
@@ -50,12 +47,26 @@ public class ManagerMuseum : MonoBehaviour
        
         btnExitImage = btnExitMuseum.GetComponent<Image>();
         btnExitImage.gameObject.GetComponent<Button>().interactable = false;
+        btnReplayTalkingList.gameObject.SetActive(false);
         museumDoneSet = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!btnReplayTalkingList.gameObject.activeSelf)
+        {
+            switch (walkingGroup.currentWP)
+            {
+                case MuseumWaypoints.WPInfo:
+                    if (runtimeDataCh1.replayInfoPointMuseum) btnReplayTalkingList.gameObject.SetActive(true);
+                    break;
+                case MuseumWaypoints.WPBergmann:
+                    if (runtimeDataCh1.replayMinerEquipment) btnReplayTalkingList.gameObject.SetActive(true);
+                    break;
+            }
+        }
+
         runtimeDataCh1.CheckInteraction117Done();
         
         if (!museumDoneSet && runtimeDataCh1.interaction117Done)
@@ -65,12 +76,12 @@ public class ManagerMuseum : MonoBehaviour
             walkingGroup.MoveToWaypoint((int)MuseumWaypoints.WPExitMuseum0);
         }
 
-        if (speechManagerCh1.IsTalkingListFinished(GameData.NameTLMuseumInfoArrival))
+        if (speechManagerCh1.IsTalkingListFinished(GameData.NameCH1TLMuseumInfoArrival))
         {
             SetInMuseumGroup();
         }
 
-        if (speechManagerCh1.IsTalkingListFinished(GameData.NameTLMuseumOutro))
+        if (speechManagerCh1.IsTalkingListFinished(GameData.NameCH1TLMuseumOutro))
         {
             switchScene.SwitchToChapter1withOverlay(GameData.NameOverlay117); 
         }
@@ -105,5 +116,30 @@ public class ManagerMuseum : MonoBehaviour
     {
         if (!audioSrcBGMusic.isPlaying) audioSrcBGMusic.Play();
         if (audioSrcBGMusic.volume != volume) audioSrcBGMusic.volume = volume;
+    }
+
+    public void ReplayTalkingList()
+    {
+        if (MuseumWaypoints.WPInfo == walkingGroup.currentWP)
+        {
+            overlay.ActivateOverlay(walkingGroup.currentWP);
+        }
+        //else if (MuseumWaypoints.WPTV == currentMuseumStation)
+        //{
+        //    switch (runtimeDataCh02.state)
+        //    {
+        //        case TVStation.IntroOverlay:
+        //            overlay.ActivateOverlay(MuseumWaypoints.WPTV);
+        //            break;
+        //        case TVStation.OutroTalking:
+        //            speechManagerch2.playSecSilent = true;
+        //            break;
+        //    }
+
+        //}
+        //else if (MuseumWaypoints.WPFliesspfad == currentMuseumStation)
+        //{
+        //    overlay.ActivateOverlay(MuseumWaypoints.WPFliesspfad);
+        //}
     }
 }

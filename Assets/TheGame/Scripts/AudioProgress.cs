@@ -12,10 +12,11 @@ public class AudioProgress : MonoBehaviour
 
     public void StartTimer(float overallTlTimeInSec)
     {
+        Debug.Log("STAAAAAAAAAAAAAAAAAAAAAAAART TIMER ++++++++++++++++++++++++++++++");
+        timeImage.gameObject.SetActive(true);
         overallTime = overallTlTimeInSec;
         timerTime = overallTlTimeInSec;
         timerStarted = true;
-        timeImage.gameObject.SetActive(true);
     }
 
     void Update()

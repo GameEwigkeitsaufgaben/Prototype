@@ -163,8 +163,11 @@ public class MuseumPlayer : MonoBehaviour
         characterGuide.GetComponent<Image>().sprite = configMuseum.guideStanding;
         characterGuide.transform.rotation = Quaternion.Euler(Vector3.zero);
 
+        Debug.Log("wp reached -------------------  " + currentWP);
+
         if (currentWP == MuseumWaypoints.WPInfo)
         {
+            Debug.Log("wp reached ------------------- INFOOOOOOOOOOOOOOOO");
             btnWPInfo.gameObject.SetActive(false);
             overlay.ActivateOverlay(MuseumWaypoints.WPInfo);
             
@@ -227,10 +230,8 @@ public class MuseumPlayer : MonoBehaviour
         
         mySplineMove.pathContainer = GetPath(currentWP, targetWP);
         mySplineMove.StartMove();
-        //ShowNoStation();
         characterGuide.GetComponent<Image>().sprite = configMuseum.guideWalking;
         characterGuide.transform.rotation = Quaternion.Euler(0f,-180f,0f);
-
     }
 
     private PathManager GetPath(MuseumWaypoints cwp, MuseumWaypoints twp)

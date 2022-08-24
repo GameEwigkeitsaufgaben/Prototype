@@ -36,7 +36,7 @@ public class SpeechList : MonoBehaviour
         float seconds = 0f;
         foreach (AudioClip ac in clips)
         {
-            seconds += ac.length;
+            if(ac != null) seconds += ac.length;
         }
         return seconds;
     }

@@ -24,7 +24,7 @@ public class MuseumOverlay : MonoBehaviour
     private SoChapTwoRuntimeData runtimeDataCh2;
     private SoChaptersRuntimeData runtimeDataChapters;
 
-    private UnityAction openCarbonPeriodGame, openMinerEquipment, openCoalification, openHistoryMining;
+    private UnityAction stopIntroInfoPoint, openCarbonPeriodGame, openMinerEquipment, openCoalification, openHistoryMining;
     private UnityAction openTV, openFliesspfade; 
 
     private int chapter;
@@ -56,6 +56,7 @@ public class MuseumOverlay : MonoBehaviour
         
         gameObject.transform.localPosition = runtimeDataCh1.currentGroupPos;
 
+        stopIntroInfoPoint += StopOverlay;
         openCarbonPeriodGame += gameObject.GetComponent<SwitchSceneManager>().GoToWorld;
         openCoalification += gameObject.GetComponent<SwitchSceneManager>().GoToCoalification;
         openMinerEquipment += gameObject.GetComponent<SwitchSceneManager>().GoToMinerEquipment;
@@ -70,6 +71,8 @@ public class MuseumOverlay : MonoBehaviour
         ActivateAudioProgress(false);
     }
 
+    
+
     public void ActivateAudioProgress(bool activate)
     {
         audioProgress.gameObject.SetActive(activate);
@@ -80,27 +83,44 @@ public class MuseumOverlay : MonoBehaviour
     {
         parentMaskPanel.SetActive(true);
         btnSkipIntro.gameObject.SetActive(true);
+        btnSkipIntro.interactable = false;
+        graying.gameObject.SetActive(true);
         playOverlay = true;
-        runtimeDataCh1.soundSettingMuseum = SoundMuseum.Overlay;
+        btnSkipIntro.onClick.RemoveAllListeners();
 
         bool showSkip = false;
 
         switch (chapter)
         {
             case 1:
+                runtimeDataCh1.soundSettingMuseum = SoundMuseum.Overlay;
+
                 if (wp == MuseumWaypoints.WPInfo)
                 {
+                    Debug.Log("Info should be played!");
+                    audioProgressBG.gameObject.SetActive(true);
+                    showSkip = runtimeDataCh1.replayInfoPointMuseum;
+                    
                     container.sprite = configMuseum.info;
                     speechManagerChapOne.playMuseumInfoArrival = true;
+                    btnSkipIntro.onClick.AddListener(stopIntroInfoPoint);
+                    audioP.StartTimer(speechManagerChapOne.GetTalkingListOverallTimeInSec(GameData.NameCH1TLMuseumInfoArrival));
+                    Debug.Log("---------------------END Info should be played!");
 
-                    Debug.Log("Info should be played!");
                 }
                 else if (wp == MuseumWaypoints.WPBergmann)
                 {
+                    Debug.Log("WPBEEEEEEEEEEEEEEERGMANN");
+                    audioProgressBG.gameObject.SetActive(true);
+                    Debug.Log("show skip " + runtimeDataCh1.replayMinerEquipment);
+                    showSkip = runtimeDataCh1.replayMinerEquipment;
+                    Debug.Log("show skip " + showSkip);
+
                     container.sprite = configMuseum.miner;
                     speechManagerChapOne.playMinerEquipment = true;
                     btnSkipIntro.onClick.AddListener(openMinerEquipment);
-                    if (runtimeDataCh1.isMinerDone) showSkip = true;
+                    audioP.StartTimer(speechManagerChapOne.GetTalkingListOverallTimeInSec(GameData.NameCH1TLMuseumMinerEquipment));
+                    //if (runtimeDataCh1.isMinerDone) showSkip = true;
                 }
                 else if (wp == MuseumWaypoints.WPWelt)
                 {
@@ -146,12 +166,7 @@ public class MuseumOverlay : MonoBehaviour
                 break;
         }
 
-
-        if (showSkip) btnSkipIntro.interactable = true; 
-            //btnSkipIntro.gameObject.SetActive(true);
-        
-        //btnClose.gameObject.SetActive(true);
-        graying.gameObject.SetActive(true);
+        if (showSkip) btnSkipIntro.interactable = true;
     }
 
     public void StopOverlay()
@@ -164,9 +179,11 @@ public class MuseumOverlay : MonoBehaviour
     private void Update()
     {
         //playOverlay with will be set to true in ActivateOverlay(), speechmanager starts the audio, here is proved if audio is finished.
-        if ((chapter == 1) && speechManagerChapOne.IsTalkingListFinished(GameData.NameTLMuseumInfoArrival) && playOverlay)
+        if ((chapter == 1) && speechManagerChapOne.IsTalkingListFinished(GameData.NameCH1TLMuseumInfoArrival) && playOverlay)
         {
             playOverlay = false;
+            ActivateAudioProgress(false);
+            runtimeDataCh1.replayInfoPointMuseum = true;
             //https://forum.unity.com/threads/solved-scenemanager-loadscene-make-the-scene-darker-a-bug.542440/
         }
 
@@ -175,19 +192,20 @@ public class MuseumOverlay : MonoBehaviour
             switch (chapter)
             {
                 case 1:
-                    if (speechManagerChapOne.IsTalkingListFinished(GameData.NameTLMuseumMinerEquipment))
+                    if (speechManagerChapOne.IsTalkingListFinished(GameData.NameCH1TLMuseumMinerEquipment))
                     {
                         gameObject.GetComponent<SwitchSceneManager>().GoToMinerEquipment();
+                        runtimeDataCh1.replayMinerEquipment = true;
                     }
-                    else if (speechManagerChapOne.IsTalkingListFinished(GameData.NameTLMuseumCarbonificationPeriod))
+                    else if (speechManagerChapOne.IsTalkingListFinished(GameData.NameCH1TLMuseumCarbonificationPeriod))
                     {
                         gameObject.GetComponent<SwitchSceneManager>().GoToWorld();
                     }
-                    else if (speechManagerChapOne.IsTalkingListFinished(GameData.NameTLMuseumHistoryMining))
+                    else if (speechManagerChapOne.IsTalkingListFinished(GameData.NameCH1TLMuseumHistoryMining))
                     {
                         gameObject.GetComponent<SwitchSceneManager>().GoToMythos();
                     }
-                    else if (speechManagerChapOne.IsTalkingListFinished(GameData.NameTLMuseumCoalification))
+                    else if (speechManagerChapOne.IsTalkingListFinished(GameData.NameCH1TLMuseumCoalification))
                     {
                         gameObject.GetComponent<SwitchSceneManager>().GoToCoalification();
                     }

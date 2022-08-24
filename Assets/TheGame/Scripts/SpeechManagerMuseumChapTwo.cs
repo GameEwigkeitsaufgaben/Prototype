@@ -164,12 +164,12 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
     //--------------Outro
     public bool IsMuseumOutroFinished()
     {
-        return speechDict[GameData.NameTLMuseumOutro].finishedToogle;
+        return speechDict[GameData.NameCH1TLMuseumOutro].finishedToogle;
     }
 
     public void ResetMuseumOutro()
     {
-        speechDict[GameData.NameTLMuseumOutro].finishedToogle = false;
+        speechDict[GameData.NameCH1TLMuseumOutro].finishedToogle = false;
     }
 
     void Update()

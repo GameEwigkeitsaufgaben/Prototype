@@ -75,14 +75,18 @@ public class SpeechManagerMuseumChapOne : MonoBehaviour
 
     public void LoadTalkingListsMuseum()
     {
-        audiosMuseumInfoArrival = Resources.Load<SoTalkingList>(GameData.NameTLMuseumInfoArrival);
-        audiosMuseumMinerEquipment = Resources.Load<SoTalkingList>(GameData.NameTLMuseumMinerEquipment);
-        audiosMuseumHistoryCarbon = Resources.Load<SoTalkingList>(GameData.NameTLMuseumCarbonificationPeriod);
-        audiosMuseumHistoryMining = Resources.Load<SoTalkingList>(GameData.NameTLMuseumHistoryMining);
-        audiosMuseumCoalification = Resources.Load<SoTalkingList>(GameData.NameTLMuseumCoalification);
-        audiosMuseumOutro = Resources.Load<SoTalkingList>(GameData.NameTLMuseumOutro);
+        audiosMuseumInfoArrival = Resources.Load<SoTalkingList>(GameData.NameCH1TLMuseumInfoArrival);
+        audiosMuseumMinerEquipment = Resources.Load<SoTalkingList>(GameData.NameCH1TLMuseumMinerEquipment);
+        audiosMuseumHistoryCarbon = Resources.Load<SoTalkingList>(GameData.NameCH1TLMuseumCarbonificationPeriod);
+        audiosMuseumHistoryMining = Resources.Load<SoTalkingList>(GameData.NameCH1TLMuseumHistoryMining);
+        audiosMuseumCoalification = Resources.Load<SoTalkingList>(GameData.NameCH1TLMuseumCoalification);
+        audiosMuseumOutro = Resources.Load<SoTalkingList>(GameData.NameCH1TLMuseumOutro);
     }
 
+    public float GetTalkingListOverallTimeInSec(string talkingListName)
+    {
+        return mySpeechDict[talkingListName].GetTalkingListLentghSec();
+    }
     public void StopSpeaking()
     {
         audioSrc.Stop();
@@ -119,17 +123,17 @@ public class SpeechManagerMuseumChapOne : MonoBehaviour
 
         if (resetFin)
         {
-            mySpeechDict[GameData.NameTLMuseumInfoArrival].finishedToogle = false;
+            mySpeechDict[GameData.NameCH1TLMuseumInfoArrival].finishedToogle = false;
         }
 
         if (playMuseumInfoArrival)
         {
             playMuseumInfoArrival = false;
-            currentList = mySpeechDict[GameData.NameTLMuseumInfoArrival];
+            currentList = mySpeechDict[GameData.NameCH1TLMuseumInfoArrival];
         }
         else if (playMinerEquipment)
         {
-            currentList = mySpeechDict[GameData.NameTLMuseumMinerEquipment];
+            currentList = mySpeechDict[GameData.NameCH1TLMuseumMinerEquipment];
             playMinerEquipment = false;
         }
         else if (playMuseumWorld)

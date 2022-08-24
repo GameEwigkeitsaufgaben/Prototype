@@ -177,12 +177,12 @@ public static class GameData
     public const string NameTLMineS3TrainrideOut = "Audios100160CaveTrainRideOut";
 
     //Talkinglist Museum ch1: TL-TalkingList
-    public const string NameTLMuseumInfoArrival = "Audios100170MuseumInfoArrival";
-    public const string NameTLMuseumOutro = "Audios100170MuseumOutro";
-    public const string NameTLMuseumCarbonificationPeriod = "Audios100170MuseumCarbonifictionPeriod";
-    public const string NameTLMuseumCoalification = "Audios100170MuseumCoalification";
-    public const string NameTLMuseumHistoryMining = "Audios100170MuseumHistoryMining";
-    public const string NameTLMuseumMinerEquipment = "Audios100170MuseumMinerEquipment";
+    public const string NameCH1TLMuseumInfoArrival = "Audios100170MuseumInfoArrival";
+    public const string NameCH1TLMuseumOutro = "Audios100170MuseumOutro";
+    public const string NameCH1TLMuseumCarbonificationPeriod = "Audios100170MuseumCarbonifictionPeriod";
+    public const string NameCH1TLMuseumCoalification = "Audios100170MuseumCoalification";
+    public const string NameCH1TLMuseumHistoryMining = "Audios100170MuseumHistoryMining";
+    public const string NameCH1TLMuseumMinerEquipment = "Audios100170MuseumMinerEquipment";
 
     //Talkinglist Museum ch2: TL-TalkingList
     public const string NameCH2TLMuseumGrundwasserIntro = "AudioTalkingList-2.1.2.0-IntroMuseumGrundwasser";
