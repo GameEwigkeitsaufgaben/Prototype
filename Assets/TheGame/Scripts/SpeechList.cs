@@ -112,7 +112,9 @@ public class SpeechList : MonoBehaviour
         {
             ResetFlags();
         }
-
+        
+        
+        //bug when clip is null!!
         if (playAll && !audioSrc.isPlaying)
         {
             finishedToogle = true;

@@ -54,16 +54,43 @@ public class ManagerMuseum : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!btnReplayTalkingList.gameObject.activeSelf)
+        if (!overlay.OverlayActive())
         {
-            switch (walkingGroup.currentWP)
+            if(!btnReplayTalkingList.gameObject.activeSelf)
             {
-                case MuseumWaypoints.WPInfo:
-                    if (runtimeDataCh1.replayInfoPointMuseum) btnReplayTalkingList.gameObject.SetActive(true);
-                    break;
-                case MuseumWaypoints.WPBergmann:
-                    if (runtimeDataCh1.replayMinerEquipment) btnReplayTalkingList.gameObject.SetActive(true);
-                    break;
+                switch (walkingGroup.currentWP)
+                {
+                    case MuseumWaypoints.WPInfo:
+                        if (runtimeDataCh1.replayInfoPointMuseum) btnReplayTalkingList.gameObject.SetActive(true);
+                        break;
+                    case MuseumWaypoints.WPBergmann:
+                        if (runtimeDataCh1.replayMinerEquipment) btnReplayTalkingList.gameObject.SetActive(true);
+                        break;
+                    case MuseumWaypoints.WPInkohlung:
+                        if (runtimeDataCh1.replayCoalification) btnReplayTalkingList.gameObject.SetActive(true);
+                        break;
+                    case MuseumWaypoints.WPMythos:
+                        if (runtimeDataCh1.replayHistoryMining) btnReplayTalkingList.gameObject.SetActive(true);
+                        break;
+                    case MuseumWaypoints.WPWelt:
+                        if (runtimeDataCh1.replayWorld) btnReplayTalkingList.gameObject.SetActive(true);
+                        break;
+                }
+            }
+
+        }
+        else
+        {
+            if(btnReplayTalkingList.gameObject.activeSelf) btnReplayTalkingList.gameObject.SetActive(false);
+
+            if (speechManagerCh1.IsTalkingListFinished(GameData.NameCH1TLMuseumInfoArrival))
+            {
+                SetInMuseumGroup();
+            }
+
+            if (speechManagerCh1.IsTalkingListFinished(GameData.NameCH1TLMuseumOutro))
+            {
+                switchScene.SwitchToChapter1withOverlay(GameData.NameOverlay117);
             }
         }
 
@@ -76,15 +103,7 @@ public class ManagerMuseum : MonoBehaviour
             walkingGroup.MoveToWaypoint((int)MuseumWaypoints.WPExitMuseum0);
         }
 
-        if (speechManagerCh1.IsTalkingListFinished(GameData.NameCH1TLMuseumInfoArrival))
-        {
-            SetInMuseumGroup();
-        }
 
-        if (speechManagerCh1.IsTalkingListFinished(GameData.NameCH1TLMuseumOutro))
-        {
-            switchScene.SwitchToChapter1withOverlay(GameData.NameOverlay117); 
-        }
 
         if (startOutro)
         {
@@ -120,26 +139,7 @@ public class ManagerMuseum : MonoBehaviour
 
     public void ReplayTalkingList()
     {
-        if (MuseumWaypoints.WPInfo == walkingGroup.currentWP)
-        {
-            overlay.ActivateOverlay(walkingGroup.currentWP);
-        }
-        //else if (MuseumWaypoints.WPTV == currentMuseumStation)
-        //{
-        //    switch (runtimeDataCh02.state)
-        //    {
-        //        case TVStation.IntroOverlay:
-        //            overlay.ActivateOverlay(MuseumWaypoints.WPTV);
-        //            break;
-        //        case TVStation.OutroTalking:
-        //            speechManagerch2.playSecSilent = true;
-        //            break;
-        //    }
-
-        //}
-        //else if (MuseumWaypoints.WPFliesspfad == currentMuseumStation)
-        //{
-        //    overlay.ActivateOverlay(MuseumWaypoints.WPFliesspfad);
-        //}
+        btnReplayTalkingList.gameObject.SetActive(false);
+        overlay.ActivateOverlay(walkingGroup.currentWP);
     }
 }

@@ -30,7 +30,7 @@ public class SoChapOneRuntimeData : Runtime
     public SoundMuseum soundSettingMuseum;
     public string quizPointsCh01 = "";
     public float quizPointsOverall = 0;
-    public bool replayInfoPointMuseum, replayMinerEquipment;
+    public bool replayInfoPointMuseum, replayMinerEquipment, replayWorld, replayHistoryMining, replayCoalification;
 
     public string generalKeyOverlay = GameData.NameOverlay1110;
 
@@ -76,7 +76,7 @@ public class SoChapOneRuntimeData : Runtime
         interaction116Done = interaction117Done = quiz119Done = false;
         musicOn = true;
         currDragItemExists = false;
-        replayInfoPointMuseum = replayMinerEquipment = false;
+        replayInfoPointMuseum = replayMinerEquipment = replayWorld = replayHistoryMining = replayCoalification =  false;
     }
 
     public void CheckInteraction117Done()

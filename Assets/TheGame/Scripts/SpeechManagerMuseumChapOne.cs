@@ -16,7 +16,7 @@ public class SpeechManagerMuseumChapOne : MonoBehaviour
         playMinerEquipment, 
         playMuseumWorld, 
         playMuseumCoalHistory, 
-        playMuseumCarbonification, 
+        playMuseumCoalification, 
         playMuseumOutro;
 
     public bool resetFin;
@@ -108,6 +108,7 @@ public class SpeechManagerMuseumChapOne : MonoBehaviour
 
     public bool IsTalkingListFinished(string talkingListName)
     {
+        Debug.Log("..................................." + mySpeechDict[talkingListName].listName);
         return mySpeechDict[talkingListName].finishedToogle;
     }
 
@@ -146,10 +147,10 @@ public class SpeechManagerMuseumChapOne : MonoBehaviour
             currentList = speakMuseumHistoryMining;
             playMuseumCoalHistory = false;
         }
-        else if (playMuseumCarbonification)
+        else if (playMuseumCoalification)
         {
             currentList = speakMuseumCoalification;
-            playMuseumCarbonification = false;
+            playMuseumCoalification = false;
         }
         else if (playMuseumOutro)
         {

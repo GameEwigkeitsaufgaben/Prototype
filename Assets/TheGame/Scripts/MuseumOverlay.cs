@@ -29,6 +29,7 @@ public class MuseumOverlay : MonoBehaviour
 
     private int chapter;
     AudioProgress audioP;
+    private MuseumWaypoints currentOverlayWP;
 
     private void Awake()
     {
@@ -66,12 +67,14 @@ public class MuseumOverlay : MonoBehaviour
         btnClose.gameObject.SetActive(false);
         btnSkipIntro.gameObject.SetActive(false);
         btnSkipIntro.interactable = false;
-        
 
         ActivateAudioProgress(false);
     }
 
-    
+    public bool OverlayActive()
+    {
+        return graying.gameObject.activeSelf;
+    }
 
     public void ActivateAudioProgress(bool activate)
     {
@@ -87,6 +90,7 @@ public class MuseumOverlay : MonoBehaviour
         graying.gameObject.SetActive(true);
         playOverlay = true;
         btnSkipIntro.onClick.RemoveAllListeners();
+        currentOverlayWP = wp;
 
         bool showSkip = false;
 
@@ -110,38 +114,44 @@ public class MuseumOverlay : MonoBehaviour
                 }
                 else if (wp == MuseumWaypoints.WPBergmann)
                 {
-                    Debug.Log("WPBEEEEEEEEEEEEEEERGMANN");
                     audioProgressBG.gameObject.SetActive(true);
-                    Debug.Log("show skip " + runtimeDataCh1.replayMinerEquipment);
                     showSkip = runtimeDataCh1.replayMinerEquipment;
-                    Debug.Log("show skip " + showSkip);
 
                     container.sprite = configMuseum.miner;
                     speechManagerChapOne.playMinerEquipment = true;
                     btnSkipIntro.onClick.AddListener(openMinerEquipment);
                     audioP.StartTimer(speechManagerChapOne.GetTalkingListOverallTimeInSec(GameData.NameCH1TLMuseumMinerEquipment));
-                    //if (runtimeDataCh1.isMinerDone) showSkip = true;
                 }
                 else if (wp == MuseumWaypoints.WPWelt)
                 {
+                    audioProgressBG.gameObject.SetActive(true);
+                    showSkip = runtimeDataCh1.replayWorld;
+
                     container.sprite = configMuseum.world;
                     speechManagerChapOne.playMuseumWorld = true;
                     btnSkipIntro.onClick.AddListener(openCarbonPeriodGame);
-                    if (runtimeDataCh1.isCarbonificationPeriodDone) showSkip = true;
+                    audioP.StartTimer(speechManagerChapOne.GetTalkingListOverallTimeInSec(GameData.NameCH1TLMuseumCarbonificationPeriod));
                 }
                 else if (wp == MuseumWaypoints.WPMythos)
                 {
+                    audioProgressBG.gameObject.SetActive(true);
+                    showSkip = runtimeDataCh1.replayHistoryMining;
+
                     container.sprite = configMuseum.myth;
                     speechManagerChapOne.playMuseumCoalHistory = true;
                     btnSkipIntro.onClick.AddListener(openHistoryMining);
-                    if (runtimeDataCh1.isMythDone) showSkip = true;
+                    audioP.StartTimer(speechManagerChapOne.GetTalkingListOverallTimeInSec(GameData.NameCH1TLMuseumHistoryMining));
                 }
                 else if (wp == MuseumWaypoints.WPInkohlung)
                 {
+                    audioProgressBG.gameObject.SetActive(true);
+                    showSkip = runtimeDataCh1.replayCoalification;
+
                     container.sprite = configMuseum.carbonification;
-                    speechManagerChapOne.playMuseumCarbonification = true;
+                    speechManagerChapOne.playMuseumCoalification = true;
                     btnSkipIntro.onClick.AddListener(openCoalification);
-                    if (runtimeDataCh1.isCoalifiationDone) showSkip = true;
+                    audioP.StartTimer(speechManagerChapOne.GetTalkingListOverallTimeInSec(GameData.NameCH1TLMuseumCoalification));
+                    Debug.Log("INKOHUNG");
                 }
                 break;
             case 2:
@@ -189,25 +199,30 @@ public class MuseumOverlay : MonoBehaviour
 
         if (playOverlay)
         {
+            Debug.Log("Plllllllllllllllllllllllllllllllllllllay overlaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
             switch (chapter)
             {
                 case 1:
-                    if (speechManagerChapOne.IsTalkingListFinished(GameData.NameCH1TLMuseumMinerEquipment))
+                    if (currentOverlayWP == MuseumWaypoints.WPBergmann && speechManagerChapOne.IsTalkingListFinished(GameData.NameCH1TLMuseumMinerEquipment))
                     {
                         gameObject.GetComponent<SwitchSceneManager>().GoToMinerEquipment();
                         runtimeDataCh1.replayMinerEquipment = true;
                     }
-                    else if (speechManagerChapOne.IsTalkingListFinished(GameData.NameCH1TLMuseumCarbonificationPeriod))
+                    else if (currentOverlayWP == MuseumWaypoints.WPWelt && speechManagerChapOne.IsTalkingListFinished(GameData.NameCH1TLMuseumCarbonificationPeriod))
                     {
                         gameObject.GetComponent<SwitchSceneManager>().GoToWorld();
+                        runtimeDataCh1.replayWorld = true;
                     }
-                    else if (speechManagerChapOne.IsTalkingListFinished(GameData.NameCH1TLMuseumHistoryMining))
+                    else if (currentOverlayWP == MuseumWaypoints.WPMythos && speechManagerChapOne.IsTalkingListFinished(GameData.NameCH1TLMuseumHistoryMining))
                     {
                         gameObject.GetComponent<SwitchSceneManager>().GoToMythos();
+                        runtimeDataCh1.replayHistoryMining = true;
                     }
-                    else if (speechManagerChapOne.IsTalkingListFinished(GameData.NameCH1TLMuseumCoalification))
+                    else if (currentOverlayWP == MuseumWaypoints.WPInkohlung && speechManagerChapOne.IsTalkingListFinished(GameData.NameCH1TLMuseumCoalification))
                     {
+                        Debug.Log("COALLLLLLLLLLLLLLLLLLLLLLLLLLLL");
                         gameObject.GetComponent<SwitchSceneManager>().GoToCoalification();
+                        runtimeDataCh1.replayCoalification = true;
                     }
                     break;
                 case 2:
