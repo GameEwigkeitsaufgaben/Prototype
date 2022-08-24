@@ -19,7 +19,12 @@ public class ManagerCoalification : MonoBehaviour
     public Slider slider;
     public TMP_Text infoText;
     [SerializeField] private StatesInkohlung statesInkohlung;
-    public Button btnGoToMuseum; 
+    public Button btnGoToMuseum;
+
+    public bool sliderMoving = false;
+    public bool enableAnim = false;
+    public Animator anim;
+    public float oldSliderVAl = 0f;
 
 
     private void Awake()
@@ -33,12 +38,18 @@ public class ManagerCoalification : MonoBehaviour
 
     private void Start()
     {
-        statesInkohlung = StatesInkohlung.None;
+        //statesInkohlung = StatesInkohlung.None;
+        //infoText.text = configMuseum.pflanzenSterben;
+        SetStateAndText();
+        anim.enabled = false;
     }
 
     public void SetStateAndText()
     {
-        Debug.Log("val slider: " + slider.value);
+        sliderMoving = true;
+        
+        
+        //Debug.Log("val slider: " + slider.value);
         if (slider.value <= 0.048) statesInkohlung = StatesInkohlung.PlantDeath;
         else if (slider.value > 0.048 && slider.value <= 0.116) statesInkohlung = StatesInkohlung.PeatIsFormed;
         else if (slider.value > 0.116 && slider.value <= 0.183) statesInkohlung = StatesInkohlung.Repetition;
@@ -73,5 +84,19 @@ public class ManagerCoalification : MonoBehaviour
     public void GoBackToMuseum()
     {
         gameObject.GetComponent<SwitchSceneManager>().GoToMuseum();
+    }
+
+    private void Update()
+    {
+        if (sliderMoving)
+        {
+            if (!anim.enabled) anim.enabled = true;
+        }
+        else
+        {
+            if (anim.enabled) anim.enabled = false;
+        }
+
+        sliderMoving = false;
     }
 }
