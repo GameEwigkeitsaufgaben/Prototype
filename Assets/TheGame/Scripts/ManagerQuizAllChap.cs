@@ -72,13 +72,14 @@ public class ManagerQuizAllChap : MonoBehaviour
 
         //Init and Start Timer
         quizTimer = FindObjectOfType<QuizTimer>();
-        quizTimer.StartTimer();
+
 
         //progress
         currentQuestionIndex = 0;
         questions[currentQuestionIndex].ShowData();
         UpdateProgressUI();
         SetMinerFeedback(MinerFeedback.Idle, 0f);
+        quizTimer.StartTimer(questions[currentQuestionIndex].data.timeToAnswerInSec);
     }
 
     public void UpdateProgressUI()
@@ -174,7 +175,9 @@ public class ManagerQuizAllChap : MonoBehaviour
         if (btnNextIdentifier.text == weiter)
         {
             ShowNextQuestion();
-            quizTimer.StartTimer();
+            Debug.Log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" + questions[currentQuestionIndex].data.name);
+            quizTimer.StartTimer(questions[currentQuestionIndex].data.timeToAnswerInSec);
+            //quizTimer.StartTimer();
             SetMinerFeedback(MinerFeedback.Idle, 0f);
             btnNextIdentifier.text = pruefen;
             return;

@@ -189,6 +189,7 @@ public class QuizManager : MonoBehaviour
 
     void SetupQuestion(int progressIndex)
     {
+        Debug.Log("#############################################################");
         runtimeData.quizMinerFeedback = MinerFeedback.Idle;
         runtimeData.singleSelectAwIdOld = null;
         runtimeDataCh02.singleSelectAwObjName = "--";

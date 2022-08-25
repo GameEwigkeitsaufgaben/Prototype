@@ -78,6 +78,11 @@ public class ManagerMuseum : MonoBehaviour
                 }
             }
 
+            if (speechManagerCh1.IsTalkingListFinished(GameData.NameCH1TLMuseumOutro))
+            {
+                switchScene.SwitchToChapter1withOverlay(GameData.NameOverlay117);
+            }
+
         }
         else
         {
@@ -86,11 +91,6 @@ public class ManagerMuseum : MonoBehaviour
             if (speechManagerCh1.IsTalkingListFinished(GameData.NameCH1TLMuseumInfoArrival))
             {
                 SetInMuseumGroup();
-            }
-
-            if (speechManagerCh1.IsTalkingListFinished(GameData.NameCH1TLMuseumOutro))
-            {
-                switchScene.SwitchToChapter1withOverlay(GameData.NameOverlay117);
             }
         }
 
@@ -102,8 +102,6 @@ public class ManagerMuseum : MonoBehaviour
             museumDoneSet = true;
             walkingGroup.MoveToWaypoint((int)MuseumWaypoints.WPExitMuseum0);
         }
-
-
 
         if (startOutro)
         {

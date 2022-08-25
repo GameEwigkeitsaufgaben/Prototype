@@ -71,6 +71,9 @@ public class QuizTimer : MonoBehaviour
 
     public void StartTimer(int time)
     {
+        Debug.Log("..........................................SET TIME" + time);
+        timerTime = (float)time;
+        timerValue = timerTime;
         isAnsweringQuestion = true;
         timeOut = false;
     }
