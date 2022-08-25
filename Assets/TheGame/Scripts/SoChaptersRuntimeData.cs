@@ -27,6 +27,11 @@ public class SoChaptersRuntimeData : ScriptableObject
         progressWithAdminCh1 = progressWithAdminCh2 = progressWithAdminCh3 = false;
     }
 
+    public SoSfx LoadSfx()
+    {
+        return Resources.Load<SoSfx>(GameData.NameConfigSfx);
+    }
+
     public SoChapOneRuntimeData LoadChap1RuntimeData()
     {
         return Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);

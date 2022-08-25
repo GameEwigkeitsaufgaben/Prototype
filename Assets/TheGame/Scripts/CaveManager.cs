@@ -20,19 +20,26 @@ public class CaveManager : MonoBehaviour
     private SoChapOneRuntimeData runtimeData;
     private SoChaptersRuntimeData runtimeDataChapters;
     private CoalmineSpeechManger speechManagerMine;
+    private CoalmineWaypointManager waypointManagerMine;
     
-    public Button exitSceneBtn, sole1WPViewpointBtn, sole2WPViewpointBtn, sole1caveWPBtn, sole3EnterTrainBtn;
+    public Button exitSceneBtn, sole1WPViewpointBtn, sole2WPViewpointBtn, sole1caveWPBtn, sole3EnterTrainBtn, btnReplayTalkingList;
 
     private bool introPlayedOneTime = false;
+
+    public AudioSource[] sfxS1;
+
     private SoSfx sfx;
 
-    public AudioSource baukipper, kran, water;
+    public AudioSource baukipper, kran, water, bewetterung;
 
     private void Awake()
     {
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        waypointManagerMine = GetComponent<CoalmineWaypointManager>();
+
+        btnReplayTalkingList.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -52,6 +59,9 @@ public class CaveManager : MonoBehaviour
         switchScene.LoadSole3();
         switchScene.LoadMineAnimation();
 
+
+        //SetupAudio;
+        sfx.SetClipByAddToDict(bewetterung, sfx.coalmineWindInTunnel);
         sfx.SetClipByAddToDict(baukipper, sfx.caolmineLader);
         sfx.SetClipByAddToDict(kran, sfx.coalmineWorkingMachinesMetal);
         sfx.SetClipByAddToDict(water, sfx.caolmineSplashingWater);
@@ -90,11 +100,123 @@ public class CaveManager : MonoBehaviour
         runtimeData.liftBtnsAllEnabled = false;
     }
 
+    public void ReplayTalkingList()
+    {
+        switch (runtimeData.currentCoalmineStop)
+        {
+            case CoalmineStop.EntryArea:
+                speechManagerMine.playEntryArea = true;
+                break;
+            case CoalmineStop.Sole1:
+                switch (waypointManagerMine.currentWP)
+                {
+                    case MineWayPoints.insideCave:
+                        speechManagerMine.playSole1 = true;
+                        break;
+                    case MineWayPoints.viewpoint:
+                        speechManagerMine.playSole1Vp = true;
+                        break;
+                }
+               
+                break;
+            case CoalmineStop.Sole2:
+                switch (waypointManagerMine.currentWP)
+                {
+                    case MineWayPoints.insideCave:
+                        speechManagerMine.playSole2 = true;
+                        break;
+                    case MineWayPoints.viewpoint:
+                        speechManagerMine.playSole2Badewannen= true;
+                        break;
+                }
+
+                break;
+            case CoalmineStop.Sole3:
+                switch (waypointManagerMine.currentWP)
+                {
+                    case MineWayPoints.viewpointBewetterung:
+                        btnReplayTalkingList.gameObject.SetActive(true);
+                        speechManagerMine.playSole3WPBewetterung = true;
+                        break;
+                    case MineWayPoints.viewpointOVMine:
+                        btnReplayTalkingList.gameObject.SetActive(true);
+                        speechManagerMine.playSole3WPOVMine = true;
+                        break;
+                    case MineWayPoints.insideCave:
+                        btnReplayTalkingList.gameObject.SetActive(true);
+                        speechManagerMine.playSole3WPCave = true;
+                        break;
+                    case MineWayPoints.viewpointBahnsteig:
+                        btnReplayTalkingList.gameObject.SetActive(false);
+                        break;
+                    case MineWayPoints.viewpoint:
+                        btnReplayTalkingList.gameObject.SetActive(false);
+                        break;
+                }
+
+                break;
+        }
+    }
+
     private void Update()
     {
-        if(runtimeData.currentCoalmineStop == CoalmineStop.Sole1)
+        //set in false in update, set in true in tl finished;
+        if (!introPlayedOneTime && speechManagerMine.IsMineEATalkingFinished())
+        {
+            Debug.Log("set done ea");
+            cave.SetAllButtonsInteractable(true);
+            introPlayedOneTime = true;
+            runtimeData.replayEntryArea = true;
+            btnReplayTalkingList.gameObject.SetActive(true);
+        }
+
+        switch (runtimeData.currentCoalmineStop)
+        {
+            case CoalmineStop.Sole1:
+                if (runtimeData.replayS1Cave && !btnReplayTalkingList.gameObject.activeSelf)
+                {
+                    btnReplayTalkingList.gameObject.SetActive(true);
+                }
+                break;
+            case CoalmineStop.Sole2:
+                if (runtimeData.replayS2Cave && !btnReplayTalkingList.gameObject.activeSelf)
+                {
+                    btnReplayTalkingList.gameObject.SetActive(true);
+                }
+                break;
+            case CoalmineStop.Sole3:
+                if (runtimeData.replayS3Cave && !btnReplayTalkingList.gameObject.activeSelf)
+                {
+                    btnReplayTalkingList.gameObject.SetActive(true);
+                }
+
+                //kann ich da rausfinden ob ich auf current wp viewpoint Bahnsteig bin.
+                if(waypointManagerMine.currentWP == MineWayPoints.viewpointBahnsteig && btnReplayTalkingList.gameObject.activeSelf)
+                {
+                    btnReplayTalkingList.gameObject.SetActive(false);
+                }
+
+                if (waypointManagerMine.currentWP == MineWayPoints.viewpoint && btnReplayTalkingList.gameObject.activeSelf)
+                {
+                    btnReplayTalkingList.gameObject.SetActive(false);
+                }
+
+                break;
+        }
+
+        //if(runtimeData.replayS1Cave && !btnReplayTalkingList.gameObject.activeSelf)
+        //{
+        //    btnReplayTalkingList.gameObject.SetActive(true);
+        //}
+        //if (runtimeData.replayS2Cave && !btnReplayTalkingList.gameObject.activeSelf)
+        //{
+        //    btnReplayTalkingList.gameObject.SetActive(true);
+        //}
+
+        if (runtimeData.currentCoalmineStop == CoalmineStop.Sole1)
         {
             sfx.PlayClipsInSole1Sfx();
+            //sfx.StartSfxS1(sfxS1);
         }
         if (runtimeData.currentCoalmineStop == CoalmineStop.Sole2)
         {
@@ -112,12 +234,11 @@ public class CaveManager : MonoBehaviour
                 sole3EnterTrainBtn.gameObject.SetActive(false);
         }
 
-        if(!introPlayedOneTime && speechManagerMine.IsMineEATalkingFinished())
+        if (btnReplayTalkingList.gameObject.activeSelf && cave.moveDirection != CaveMovement.OnHold)
         {
-            Debug.Log("set done ea");
-            cave.SetAllButtonsInteractable(true);
-            introPlayedOneTime = true;
-            runtimeData.entryAreaDone = true;
+            btnReplayTalkingList.gameObject.SetActive(false);
         }
+
+
     }
 }

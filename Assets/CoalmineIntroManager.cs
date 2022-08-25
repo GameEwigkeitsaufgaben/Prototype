@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class CoalmineIntroManager : MonoBehaviour
 {
     public CoalmineSpeechManger mySpeechManger;
-    public Button nextSceneBtn;
+    public Button nextSceneBtn, btnReplayTalkingList;
 
     public Image imgEAStation, imgS1Station, imgS2Station, imgS3Station, imgTrainInStation, imgTrainOutStation, imgLwcStation;
 
@@ -15,45 +15,41 @@ public class CoalmineIntroManager : MonoBehaviour
 
     private bool audioStarted = false;
 
-    private SoChapOneRuntimeData runtimeDataCh01;
+    private SoChapOneRuntimeData runtimeDataCh1;
     private SoChaptersRuntimeData runtimeDataChapers;
 
     private void Awake()
     {
-        runtimeDataCh01 = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        runtimeDataCh1 = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         runtimeDataChapers = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
     }
 
     private bool IsSole3Done()
     {
-        return runtimeDataCh01.sole3BewetterungDone && runtimeDataCh01.sole3GebaeudeDone;
+        return runtimeDataCh1.sole3BewetterungDone && runtimeDataCh1.sole3GebaeudeDone;
     }
 
     void Start()
     {
         runtimeDataChapers.SetSceneCursor(runtimeDataChapers.cursorDefault);
 
-        nextSceneBtn.interactable = runtimeDataCh01.revisitEntryArea;
-        nextSceneBtn.GetComponent<Button>().colors = GameColors.GetInteractionColorBlock();
+        nextSceneBtn.interactable = runtimeDataCh1.replayCoalmineIntro;
+        btnReplayTalkingList.gameObject.SetActive(runtimeDataCh1.replayCoalmineIntro);
 
         Color fbColor = Color.green;
         
-        if (runtimeDataCh01.entryAreaDone) imgEAStation.color = fbColor;
-        if (runtimeDataCh01.sole1Done) imgS1Station.color = fbColor;
-        if (runtimeDataCh01.sole2Done) imgS2Station.color = fbColor;
+        if (runtimeDataCh1.replayEntryArea) imgEAStation.color = fbColor;
+        if (runtimeDataCh1.sole1Done) imgS1Station.color = fbColor;
+        if (runtimeDataCh1.sole2Done) imgS2Station.color = fbColor;
         if (IsSole3Done()) imgS3Station.color = fbColor;
-        if (runtimeDataCh01.trainRideInDone) imgTrainInStation.color =  fbColor;
-        if (runtimeDataCh01.trainRideOutDone) imgTrainOutStation.color = fbColor;
-        if (runtimeDataCh01.isLongwallCutterDone) imgLwcStation.color = fbColor;
+        if (runtimeDataCh1.trainRideInDone) imgTrainInStation.color =  fbColor;
+        if (runtimeDataCh1.trainRideOutDone) imgTrainOutStation.color = fbColor;
+        if (runtimeDataCh1.isLongwallCutterDone) imgLwcStation.color = fbColor;
+    }
 
-        //if (runtimeDataCh01.entryAreaDone) eaDone.Color = fbColor;
-        //if (runtimeDataCh01.sole1Done) s1Done.Color = fbColor;
-        //if (runtimeDataCh01.sole2Done) s2Done.Color = fbColor;
-        //if (runtimeDataCh01.sole3BewetterungDone) s3GebaudeDone.Color = fbColor;
-        //if (runtimeDataCh01.sole3GebaeudeDone) s3wetterDone.Color = fbColor;
-        //if (runtimeDataCh01.trainRideInDone) trainInDone.Color = fbColor;
-        //if (runtimeDataCh01.isLongwallCutterDone) lwcDone.Color = fbColor;
-        //if (runtimeDataCh01.trainRideInDone) trainOutDone.Color = fbColor;
+    public void ReplayTalkingList()
+    {
+        mySpeechManger.playCaveIntro = true;
     }
 
     private void Update()
@@ -63,7 +59,7 @@ public class CoalmineIntroManager : MonoBehaviour
             if (!audioStarted)
             {
                 mySpeechManger.playCaveIntro = true;
-                dad.GetComponent<Character>().characterImage.sprite = dad.GetComponent<Character>().characterConfigSO.outsideMineStandingTalking;
+                //dad.GetComponent<Character>().characterImage.sprite = dad.GetComponent<Character>().characterConfigSO.outsideMineStandingTalking;
                 audioStarted = true;
             }
             else
@@ -71,30 +67,33 @@ public class CoalmineIntroManager : MonoBehaviour
                 if (mySpeechManger.IsTalkingFinished(GameData.NameTLMineIntro))
                 {
                     nextSceneBtn.interactable = true;
-                    dad.GetComponent<Character>().characterImage.sprite = dad.GetComponent<Character>().characterConfigSO.outsideMineStandingSilient;
+                    runtimeDataCh1.replayCoalmineIntro = true;
+                    btnReplayTalkingList.gameObject.SetActive(true);
+                    //dad.GetComponent<Character>().characterImage.sprite = dad.GetComponent<Character>().characterConfigSO.outsideMineStandingSilient;
                 }
             }
         }
         else
         {
-            if (!audioStarted && runtimeDataCh01.revisitEntryArea)
+            //change sprite based on last visited sole 
+            if (!audioStarted && runtimeDataCh1.revisitEntryArea)
             {
                 CoalmineStop stop = CoalmineStop.Unset;
                 georg.SetupElements();
                 dad.SetupElements();
                 enya.SetupElements();
 
-                if (runtimeDataCh01.interaction116Done)
+                if (runtimeDataCh1.interaction116Done)
                 {
                     stop = CoalmineStop.Sole3;
                     mySpeechManger.playCaveIntroAllDone = true;
                 }
                 else
                 {
-                    if (runtimeDataCh01.isLongwallCutterDone) stop = CoalmineStop.Sole3;
-                    else if (runtimeDataCh01.sole3BewetterungDone || runtimeDataCh01.sole3GebaeudeDone) stop = CoalmineStop.Sole3;
-                    else if (runtimeDataCh01.sole2Done) stop = CoalmineStop.Sole2;
-                    else if (runtimeDataCh01.sole1Done) stop = CoalmineStop.Sole1;
+                    if (runtimeDataCh1.isLongwallCutterDone) stop = CoalmineStop.Sole3;
+                    else if (runtimeDataCh1.sole3BewetterungDone || runtimeDataCh1.sole3GebaeudeDone) stop = CoalmineStop.Sole3;
+                    else if (runtimeDataCh1.sole2Done) stop = CoalmineStop.Sole2;
+                    else if (runtimeDataCh1.sole1Done) stop = CoalmineStop.Sole1;
                     else stop = CoalmineStop.EntryArea;
                     mySpeechManger.playCaveIntroNotAllDone = true;
                 }

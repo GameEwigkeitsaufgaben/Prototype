@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Cave move audiosrc is on GameObject Cave
+
 [CreateAssetMenu(menuName = "SfxConfig")]
 public class SoSfx : ScriptableObject
 {
@@ -52,15 +54,22 @@ public class SoSfx : ScriptableObject
         StopClip(coalmineWorkingMachinesMetal);
 
         PlayClip(caolmineSplashingWater);
-        Debug.Log("Water is playing  " +playingSourcesLoop[caolmineSplashingWater.name].isPlaying);
+        //Debug.Log("Water is playing  " +playingSourcesLoop[caolmineSplashingWater.name].isPlaying);
     }
+
+    //public void StartSfxS1(AudioSource[] s1sfx)
+    //{
+    //    foreach(AudioSource a in s1sfx)
+    //    {
+    //        a.Play();
+    //    }
+    //}
 
     public void PlayClipsInSole1Sfx()
     {
         Debug.Log("++++++++++++++++++++++ " + sole1SfxStarted);
         if (sole1SfxStarted) return;
         
-        Debug.Log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         sole1SfxStarted = true;
 
         //wind

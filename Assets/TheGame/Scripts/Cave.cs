@@ -44,8 +44,8 @@ public class Cave : MonoBehaviour
 
     public GameObject hideS2Top;
 
-    public AudioSource wind;
-    public AudioSource cbelt;
+    //public AudioSource wind;
+    //public AudioSource cbelt;
     public AudioSource liftMovingSrc;
     private SoSfx sfx;
 
@@ -69,11 +69,11 @@ public class Cave : MonoBehaviour
             liftBtns[0].GetComponent<CaveButton>().isSelected = true;
 
             //move to manager?!
-            sfx.PlayClip(wind, sfx.coalmineWindInTunnel);
-            sfx.ReduceVolume(sfx.coalmineWindInTunnel, 0.7f);
+            //sfx.PlayClip(wind, sfx.coalmineWindInTunnel);
+            //sfx.ReduceVolume(sfx.coalmineWindInTunnel, 0.7f);
 
-            sfx.PlayClip(cbelt, sfx.coalmineConveyorBelt);
-            sfx.ReduceVolume(sfx.coalmineConveyorBelt, 0.8f);
+            //sfx.PlayClip(cbelt, sfx.coalmineConveyorBelt);
+            //Ssfx.ReduceVolume(sfx.coalmineConveyorBelt, 0.8f);
 
             liftMovingSrc.clip = sfx.coalmineMoveCave;
         }
@@ -213,7 +213,7 @@ public class Cave : MonoBehaviour
             return;
         }
 
-        if (!runtimeData.entryAreaDone) return;
+        if (!runtimeData.replayEntryArea) return;
 
         if (!runtimeData.playerInsideCave)
         {

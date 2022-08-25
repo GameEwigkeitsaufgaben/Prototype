@@ -7,18 +7,21 @@ public class ManagerTrainRide : MonoBehaviour
     public CoalmineSpeechManger speechManger;
     public SwitchSceneManager switchScene;
     public bool isNextSceneLoaded = false;
-    public AudioClip trainride;
+    //public AudioClip trainride;
 
-    private SoChapOneRuntimeData runtimeData;
+    private SoChapOneRuntimeData runtimeDataCh1;
     private SoChaptersRuntimeData runtimeDataChapters;
+    private SoSfx sfx;
 
     private void Awake()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        runtimeDataCh1 = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
 
+        sfx = runtimeDataChapters.LoadSfx();
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
-        gameObject.GetComponent<AudioSource>().clip = trainride;
+        
+        gameObject.GetComponent<AudioSource>().clip = sfx.coalmineMovingTrain;
         gameObject.GetComponent<AudioSource>().Play();
 
         isNextSceneLoaded = false;
@@ -32,11 +35,6 @@ public class ManagerTrainRide : MonoBehaviour
         {
             Invoke("StartTalkingOut", 3f);
         }
-    }
-
-    private void Start()
-    {
-       
     }
 
     private void StartTalkingIn()
@@ -61,7 +59,6 @@ public class ManagerTrainRide : MonoBehaviour
 
     private void Update()
     {
-        
         if (speechManger.IsTrainRideInTalkingFinished())
         {
             if (SwitchSceneManager.GetCurrentSceneName() == GameScenes.ch01MineSoleThreeTrainRideIn)
@@ -69,7 +66,7 @@ public class ManagerTrainRide : MonoBehaviour
                 if (!isNextSceneLoaded)
                 {
                     speechManger.ToggleTrainRideInTalkingFinished();
-                    runtimeData.trainRideInDone = true;
+                    runtimeDataCh1.trainRideInDone = true;
                     Invoke("GoToLongwallcutter", 3f);
                     isNextSceneLoaded = true;
                 }
@@ -82,7 +79,7 @@ public class ManagerTrainRide : MonoBehaviour
                 if (!isNextSceneLoaded)
                 {
                     speechManger.ToggleTrainRideOutTalkingFinished();
-                    runtimeData.trainRideOutDone = true;
+                    runtimeDataCh1.trainRideOutDone = true;
                     Invoke("GoToOverlay", 3f);
                     isNextSceneLoaded = true;
                 }

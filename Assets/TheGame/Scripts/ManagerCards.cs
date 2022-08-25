@@ -15,14 +15,20 @@ public class ManagerCards : MonoBehaviour
     
     private int rightSelect, falseSelect;
     [SerializeField] int maxValTrueSolution = 0;
-    public Button btnCheck, btnExit;
+    public Button btnCheck, btnProceed;
     SoMuseumConfig myConfig;
-    private SoChapOneRuntimeData runtimeData;
+    private SoChapOneRuntimeData runtimeDataCh1;
+    private SoChaptersRuntimeData runtimeDataChapters;
 
     private void Awake()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        runtimeDataCh1 = runtimeDataChapters.LoadChap1RuntimeData();
+
+        runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
+
         myConfig = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
+        btnProceed.interactable = false;
     }
 
     private void Start()
@@ -39,7 +45,6 @@ public class ManagerCards : MonoBehaviour
         int tmpMaxVal = 0;
         foreach (var i in cards)
         {
-            //Debug.Log(i.name + " ...... " + i.GetComponent<MuseumCard>().IsStatementTrue());
             if (i.GetComponent<MuseumCard>().IsStatementTrue()) tmpMaxVal++;
         }
         return tmpMaxVal;
@@ -97,7 +102,6 @@ public class ManagerCards : MonoBehaviour
             {
                 falseSelect += 1;
             }
-           
         }
 
         minerMsg.transform.parent.gameObject.SetActive(true);
@@ -133,8 +137,10 @@ public class ManagerCards : MonoBehaviour
             }
         }
 
-        btnCheck.gameObject.SetActive(false);
-        btnExit.gameObject.SetActive(true);
+        btnProceed.interactable = true;
+        runtimeDataCh1.isCarbonificationPeriodDone = true;
+        btnCheck.interactable = false;
+        //btnExit.gameObject.SetActive(true);
     }
 
 }

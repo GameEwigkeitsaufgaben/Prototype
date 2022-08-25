@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using SWS;
 
+
+
 public class ManagerArriveTrain : MonoBehaviour
 {
     public PathManager pathArrivingTrain;
@@ -10,10 +12,12 @@ public class ManagerArriveTrain : MonoBehaviour
 
     private SoChapOneRuntimeData runtimeData;
     private bool trainComesStarted;
+    private SoSfx sfx;
 
     private void Awake()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);    
+        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
     }
 
     // Start is called before the first frame update
@@ -21,6 +25,7 @@ public class ManagerArriveTrain : MonoBehaviour
     {
         runtimeData.trainArrived = false;
         trainComesStarted = false;
+        audioSrcTrain.clip = sfx.coalmineIncomingTrain;
     }
 
     public void StartTrain()

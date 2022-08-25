@@ -5,6 +5,13 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
+public enum chapter
+{
+    ch1,
+    ch2,
+    ch3
+}
+
 public class PostManagerChapterOne : MonoBehaviour
 {
     public GameObject overlayParent;
@@ -17,41 +24,69 @@ public class PostManagerChapterOne : MonoBehaviour
     private Dictionary<string, Overlay> dictOverlay= new Dictionary<string, Overlay>();
     
     private SoSfx sfx;
-    private Runtime runtimeData;
-    private SoChapOneRuntimeData runtimeDataChap01;
-    private SoChapTwoRuntimeData runtimeDataChap02;
-    private SoChapThreeRuntimeData runtimeDataChap03;
+    //private Runtime runtimeDataCh1;
+    private SoChapOneRuntimeData runtimeDataCh1;
+    private SoChapTwoRuntimeData runtimeDataCh2;
+    private SoChapThreeRuntimeData runtimeDataCh3;
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoGameIcons gameIcons;
 
+    private chapter currentCH;
+
     private void Awake()
     {
-        runtimeDataChap01 = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
-        runtimeDataChap02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
-        runtimeDataChap03 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
 
         if (SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain)
         {
-            runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+            currentCH = chapter.ch1;
+        } 
+        else if (SceneManager.GetActiveScene().name == GameScenes.ch02InstaMain)
+        {
+            currentCH = chapter.ch2;
+        }
+        else if (SceneManager.GetActiveScene().name == GameScenes.ch03InstaMain)
+        {
+            currentCH = chapter.ch3;
+        }
+
+        switch (currentCH)
+        {
+            case chapter.ch1:
+                runtimeDataCh1 = runtimeDataChapters.LoadChap1RuntimeData();
+                if (runtimeDataChapters.progressWithAdminCh1) runtimeDataCh1.SetAllDone();
+                break;
+            case chapter.ch2:
+                runtimeDataCh2 = runtimeDataChapters.LoadChap2RuntimeData();
+                break;
+            case chapter.ch3:
+                runtimeDataCh3 = runtimeDataChapters.LoadChap3RuntimeData();
+                break;
+        }
+
+        if (SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain)
+        {
+            currentCH = chapter.ch1;
+            runtimeDataCh1 = runtimeDataChapters.LoadChap1RuntimeData();
         }
         else if (SceneManager.GetActiveScene().name == GameScenes.ch02InstaMain)
         {
-            runtimeData = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
-            runtimeDataChap02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
+            currentCH = chapter.ch2;
+            //runtimeDataCh1 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
+            runtimeDataCh2 = runtimeDataChapters.LoadChap2RuntimeData();
 
             if (runtimeDataChapters.progressWithAdminCh2)
             {
-                runtimeDataChap02.SetAllDone();
+                runtimeDataCh2.SetAllDone();
             }
         }
         else if (SceneManager.GetActiveScene().name == GameScenes.ch03InstaMain)
         {
-            runtimeData = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
+            runtimeDataCh3 = runtimeDataChapters.LoadChap3RuntimeData();
             if (runtimeDataChapters.progressWithAdminCh3)
             {
-                runtimeDataChap03.SetAllDone();
+                runtimeDataCh3.SetAllDone();
             }
         }
 
@@ -72,9 +107,9 @@ public class PostManagerChapterOne : MonoBehaviour
         gameObject.GetComponent<AudioSource>().volume = GameData.maxBGVolumeInsta;
         gameObject.GetComponent<AudioSource>().Play();
 
-        if(runtimeData != null)
+        if(runtimeDataCh1 != null)
         {
-            EnableDisableMusic(runtimeData.musicOn);
+            EnableDisableMusic(runtimeDataCh1.musicOn);
         }
         else
         {
@@ -82,17 +117,17 @@ public class PostManagerChapterOne : MonoBehaviour
         }
         
         
-        if (runtimeData.postOverlayToLoad != "" && dictOverlay != null)
+        if (runtimeDataCh1.postOverlayToLoad != "" && dictOverlay != null)
         {
-            dictOverlay[runtimeData.postOverlayToLoad].gameObject.SetActive(true);
+            dictOverlay[runtimeDataCh1.postOverlayToLoad].gameObject.SetActive(true);
             
-            if (runtimeData.musicOn)
+            if (runtimeDataCh1.musicOn)
             {
                 Debug.Log("svx is null: " + (sfx == null));
                 ReduceVolumeBGMusic(GameData.overlayVolumeInsta);
             }
             
-            runtimeData.postOverlayToLoad = "";
+            runtimeDataCh1.postOverlayToLoad = "";
         }
     }
 
@@ -124,9 +159,9 @@ public class PostManagerChapterOne : MonoBehaviour
     //Called from Inspector BtnMusicOnOff OnClick()
     public void ToggleMusicOnOff()
     {
-        runtimeData.musicOn = !runtimeData.musicOn;
+        runtimeDataCh1.musicOn = !runtimeDataCh1.musicOn;
 
-        EnableDisableMusic(runtimeData.musicOn);
+        EnableDisableMusic(runtimeDataCh1.musicOn);
     }
 
     private void PrintAllDictKeys(string calledFrom)
@@ -141,34 +176,34 @@ public class PostManagerChapterOne : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain)
         {
-            hints.text = runtimeDataChap01.hintPostUnlock;
-            runtimeDataChap01.CheckInteraction116Done();
-            runtimeDataChap01.CheckInteraction117Done();
+            hints.text = runtimeDataCh1.hintPostUnlock;
+            runtimeDataCh1.CheckInteraction116Done();
+            runtimeDataCh1.CheckInteraction117Done();
         }
         else if (SceneManager.GetActiveScene().name == GameScenes.ch02InstaMain)
         {
-            hints.text = runtimeDataChap02.hintPostUnlock;
+            hints.text = runtimeDataCh2.hintPostUnlock;
         }
         else if(SceneManager.GetActiveScene().name == GameScenes.ch03InstaMain)
         {
-            hints.text = runtimeDataChap02.hintPostUnlock;
+            hints.text = runtimeDataCh2.hintPostUnlock;
         }
 
         //potential für verbesserung,nur anschauen wenn nötig
-        if (runtimeData.overlaySoundState == OverlaySoundState.NoSound)
+        if (runtimeDataCh1.overlaySoundState == OverlaySoundState.NoSound)
         {
             gameObject.GetComponent<AudioSource>().volume = 0f;
         } 
-        else if (runtimeData.overlaySoundState == OverlaySoundState.Opened)
+        else if (runtimeDataCh1.overlaySoundState == OverlaySoundState.Opened)
         {
             ReduceVolumeBGMusic(GameData.overlayVolumeInsta);
-            runtimeData.overlaySoundState = OverlaySoundState.SoudAjusted;
+            runtimeDataCh1.overlaySoundState = OverlaySoundState.SoudAjusted;
         }
-        else if (runtimeData.overlaySoundState == OverlaySoundState.Closed)
+        else if (runtimeDataCh1.overlaySoundState == OverlaySoundState.Closed)
         {
             gameObject.GetComponent<AudioSource>().volume = GameData.maxBGVolumeInsta;
         }
-        else if (runtimeData.overlaySoundState == OverlaySoundState.SoudAjusted)
+        else if (runtimeDataCh1.overlaySoundState == OverlaySoundState.SoudAjusted)
         {
             gameObject.GetComponent<AudioSource>().volume = GameData.overlayVolumeInsta;
         }

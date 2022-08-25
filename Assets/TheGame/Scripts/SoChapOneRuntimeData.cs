@@ -18,7 +18,7 @@ public class SoChapOneRuntimeData : Runtime
     public bool playerInsideCave;
     public bool trainArrived;
     public bool viewPointS3passed;
-    public bool entryAreaDone;
+    public bool replayEntryArea;
     public bool sole1Done, sole2Done, sole3BewetterungDone, sole3GebaeudeDone, trainRideInDone, trainRideOutDone, isLongwallCutterDone;
     public Animator kohlenhobelAnimator;
 
@@ -30,7 +30,9 @@ public class SoChapOneRuntimeData : Runtime
     public SoundMuseum soundSettingMuseum;
     public string quizPointsCh01 = "";
     public float quizPointsOverall = 0;
+    public bool replayCoalmineIntro;
     public bool replayInfoPointMuseum, replayMinerEquipment, replayWorld, replayHistoryMining, replayCoalification;
+    public bool replayS1Cave, replayS2Cave, replayS3Cave;
 
     public string generalKeyOverlay = GameData.NameOverlay1110;
 
@@ -59,7 +61,7 @@ public class SoChapOneRuntimeData : Runtime
         hintPostUnlock = "";
         post111Done = post112Done = post113Done = post114Done = false;
         liftBtnsAllEnabled = false;
-        entryAreaDone = false;
+        replayEntryArea = false;
         revisitEntryArea = false;
         currentCoalmineStop = CoalmineStop.Unset;
         ch1GeneralUnlocked = false;
@@ -77,6 +79,24 @@ public class SoChapOneRuntimeData : Runtime
         musicOn = true;
         currDragItemExists = false;
         replayInfoPointMuseum = replayMinerEquipment = replayWorld = replayHistoryMining = replayCoalification =  false;
+        replayCoalmineIntro = false;
+        replayS1Cave = false;
+        replayS2Cave = false;
+        replayS3Cave = false;
+    }
+
+    public void SetAllDone()
+    {
+        //Posts Done incl. Video finished;
+        post111Done = post112Done = post113Done = post114Done = video115Done = interaction116Done = interaction117Done = quiz119Done = true;
+
+        //Coalmine all stations done;
+        replayCoalmineIntro = true; 
+        replayEntryArea = true;
+        replayS1Cave = true;
+        replayS2Cave = true;
+        replayS3Cave = true;
+        sole1Done = sole2Done = sole3BewetterungDone = sole3GebaeudeDone = trainRideInDone = trainRideOutDone = isLongwallCutterDone = true;
     }
 
     public void CheckInteraction117Done()

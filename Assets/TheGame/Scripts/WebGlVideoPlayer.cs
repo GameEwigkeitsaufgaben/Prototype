@@ -13,14 +13,17 @@ public class WebGlVideoPlayer : MonoBehaviour
     private bool videoIsPlaying = false;
     private bool videoSetUpDone = false;
     private SoSfx sfx; //will be assigned from Entry;
-    private SoChapOneRuntimeData runtimeData;
-    private SoChapTwoRuntimeData runtimeDataCh02;
+    private SoChaptersRuntimeData runtimeDataChapters;
+    private SoChapOneRuntimeData runtimeDataCh1;
+    private SoChapTwoRuntimeData runtimeDataCh2;
 
 
     private void Awake()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
-        runtimeDataCh02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
+        //ToDo: null check
+        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        runtimeDataCh1 = runtimeDataChapters.LoadChap1RuntimeData();
+        runtimeDataCh2 = runtimeDataChapters.LoadChap2RuntimeData();
     }
     private void Start()
     {
@@ -84,7 +87,7 @@ public class WebGlVideoPlayer : MonoBehaviour
 
             videoPlayer.Play();
 
-            if(videoPostName == "Overlay115")
+            if(videoPostName == GameData.NameOverlay115) 
             {
                 videoPlayer.loopPointReached += SetVideopostToRead;
             }
@@ -96,7 +99,7 @@ public class WebGlVideoPlayer : MonoBehaviour
 
             videoIsPlaying = true;
             //runtimeData.videoPlaying = true;
-            runtimeData.overlaySoundState = OverlaySoundState.NoSound;
+            runtimeDataCh1.overlaySoundState = OverlaySoundState.NoSound;
         }
         else
         {
@@ -107,8 +110,8 @@ public class WebGlVideoPlayer : MonoBehaviour
             }
 
             videoIsPlaying = false;
-            runtimeData.videoPlaying = false;
-            runtimeData.overlaySoundState = OverlaySoundState.SoudAjusted;
+            runtimeDataCh1.videoPlaying = false;
+            runtimeDataCh1.overlaySoundState = OverlaySoundState.SoudAjusted;
         }
 
         if (SceneManager.GetActiveScene().name == GameScenes.ch02Museum) return;
@@ -141,18 +144,18 @@ public class WebGlVideoPlayer : MonoBehaviour
         }
 
         videoIsPlaying = false;
-        runtimeData.videoPlaying = false;
+        runtimeDataCh1.videoPlaying = false;
     }
 
     public void SetTVStationDone(VideoPlayer vp)
     {
-        runtimeDataCh02.interactTVDone = true;
+        runtimeDataCh2.interactTVDone = true;
     }
 
     public void SetVideoDone(VideoPlayer vp)
     {
         videoIsPlaying = false;
-        runtimeDataCh02.progressPost219VideoDone = true;
+        runtimeDataCh2.progressPost219VideoDone = true;
     }
   
     //Method called (from local method StartTheVideo) if event player finished is fired
@@ -160,10 +163,10 @@ public class WebGlVideoPlayer : MonoBehaviour
     {
         videoIsPlaying = false;
         //runtimeData.videoPlaying = false;
-        runtimeData.overlaySoundState = OverlaySoundState.SoudAjusted;
+        runtimeDataCh1.overlaySoundState = OverlaySoundState.SoudAjusted;
 
         //GameData.introVideoPlayedOnce = true;
-        runtimeData.video115Done = true;
+        runtimeDataCh1.video115Done = true;
     }
 
 }

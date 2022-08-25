@@ -1,9 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PeopleInScene))]
 public class CoalmineSpeechManger : MonoBehaviour
 {
-    public SpeechBubble spEnya, spDad, spGeorg;
+    private GameObject
+    dad,
+    georg,
+    enya,
+    guide;
+
+    private SpeechBubble
+        spDad = null,
+        spEnya = null,
+        spGeorg = null,
+        spGuide = null;
+
 
     //fortesting
     public bool
@@ -163,6 +175,16 @@ public class CoalmineSpeechManger : MonoBehaviour
         }
 
         DisableAllSpeechlists();
+
+        enya = GetComponent<PeopleInScene>().enya;
+        georg = GetComponent<PeopleInScene>().georg;
+        guide = GetComponent<PeopleInScene>().guide;
+        dad = GetComponent<PeopleInScene>().dad;
+
+        if (guide != null) spGuide = guide.GetComponentInChildren<SpeechBubble>(true);
+        if (enya != null) spEnya = enya.GetComponentInChildren<SpeechBubble>(true);
+        if (georg != null) spGeorg = georg.GetComponentInChildren<SpeechBubble>(true);
+        if (dad != null) spDad = dad.GetComponentInChildren<SpeechBubble>(true);
     }
 
     void DisableAllSpeechlists()
@@ -358,8 +380,13 @@ public class CoalmineSpeechManger : MonoBehaviour
             currentList = null;
         }
 
-        spDad.gameObject.SetActive(GameData.bubbleOnDad);
-        spEnya.gameObject.SetActive(GameData.bubbleOnEnya);
-        spGeorg.gameObject.SetActive(GameData.bubbleOnGeorg);
+        if (spGuide != null) spGuide.gameObject.SetActive(GameData.bubbleOnMuseumGuide);
+        if (spEnya != null) spEnya.gameObject.SetActive(GameData.bubbleOnEnya);
+        if (spDad != null) spDad.gameObject.SetActive(GameData.bubbleOnDad);
+        if (spGeorg != null) spGeorg.gameObject.SetActive(GameData.bubbleOnGeorg);
+
+        //spDad.gameObject.SetActive(GameData.bubbleOnDad);
+        //spEnya.gameObject.SetActive(GameData.bubbleOnEnya);
+        //spGeorg.gameObject.SetActive(GameData.bubbleOnGeorg);
     }
 }

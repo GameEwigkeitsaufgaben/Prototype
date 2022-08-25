@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 8336510798325787911}
   - component: {fileID: 8336510798325787904}
   - component: {fileID: 8336510798325787905}
+  - component: {fileID: 4492551412957476666}
   m_Layer: 0
   m_Name: Characters
   m_TagString: Untagged
@@ -122,32 +123,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96f9a404e126ed64583bdbada8372a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audiosEntryArea: {fileID: 11400000, guid: 139b6e1bad73fe2418d03c4686441eaa, type: 2}
-  audiosEntryAreaTriggerSchacht: {fileID: 11400000, guid: 42aac5037418e734f95807b1b03c6deb, type: 2}
-  audiosSole1: {fileID: 11400000, guid: 8a82036e76e1212418f25d76c2b11910, type: 2}
-  audiosSole2: {fileID: 11400000, guid: 2faebea999a8ecf4ab4cf3f2a6a57f02, type: 2}
-  audiosSole3WPBahnsteig: {fileID: 11400000, guid: e293681608c7a2640a14ba9e140abf33, type: 2}
-  audiosSole3WPBewetterung: {fileID: 11400000, guid: 892465c2e6fa71f4db27633136469d29, type: 2}
-  audiosSole3WPCave: {fileID: 11400000, guid: 215b2a6dbe108744eb895c0d3f3cbe28, type: 2}
-  audiosSole3WPOVMine: {fileID: 11400000, guid: 51e12c5353063194ea95dd033187122c, type: 2}
-  audiosTrainRide: {fileID: 11400000, guid: fb6c85bbdeb9ba048975efa039696be0, type: 2}
-  audiosLongwallCutterBahnsteig: {fileID: 11400000, guid: 281c2c0765c65534ea6ff815d2326cb8, type: 2}
-  audioLongwallCutterLongwallCutter: {fileID: 11400000, guid: a6349f0514eabff4ba74825f5dd7fe10, type: 2}
-  spEnya: {fileID: 8336510798528293803}
-  spDad: {fileID: 8336510799681041844}
-  spGeorg: {fileID: 8336510799871435808}
-  spMuseumGuide: {fileID: 0}
+  playCaveIntro: 0
+  playCaveIntroAllDone: 0
+  playCaveIntroNotAllDone: 0
   playEntryArea: 0
+  playEntryAreaRevisit: 0
+  playSchachtS1: 0
   playSchacht: 0
   playSole1: 0
+  playSole1Vp: 0
   playSole2: 0
+  playSole2Badewannen: 0
   playSole3WPBahnsteig: 0
   playSole3WPBewetterung: 0
   playSole3WPCave: 0
   playSole3WPOVMine: 0
-  playTrainRide: 0
+  playTrainRideIn: 0
+  playTrainRideOut: 0
   playLongwallCutterBahnsteig: 0
   playLongwallCutterLongwallCutter: 0
+  audiosCaveIntro: {fileID: 0}
+  audiosCaveIntroAllDone: {fileID: 0}
+  audiosCaveIntroNotAllDone: {fileID: 0}
+  audiosEntryArea: {fileID: 11400000, guid: 139b6e1bad73fe2418d03c4686441eaa, type: 2}
+  audiosEntryAreaRevisit: {fileID: 0}
+  audiosEntryAreaTriggerSchacht: {fileID: 11400000, guid: 42aac5037418e734f95807b1b03c6deb, type: 2}
+  audiosTriggerSchachtS1: {fileID: 0}
+  audiosSole1: {fileID: 11400000, guid: 8a82036e76e1212418f25d76c2b11910, type: 2}
+  audiosSole1Vp: {fileID: 0}
+  audiosSole2: {fileID: 11400000, guid: 2faebea999a8ecf4ab4cf3f2a6a57f02, type: 2}
+  audiosSole2Grubenwasser: {fileID: 0}
+  audiosSole3WPBahnsteig: {fileID: 11400000, guid: e293681608c7a2640a14ba9e140abf33, type: 2}
+  audiosSole3WPBewetterung: {fileID: 11400000, guid: 892465c2e6fa71f4db27633136469d29, type: 2}
+  audiosSole3WPCave: {fileID: 11400000, guid: 215b2a6dbe108744eb895c0d3f3cbe28, type: 2}
+  audiosSole3WPOVMine: {fileID: 11400000, guid: 51e12c5353063194ea95dd033187122c, type: 2}
+  audiosTrainRideIn: {fileID: 0}
+  audiosTrainRideOut: {fileID: 0}
+  audiosLongwallCutterBahnsteig: {fileID: 11400000, guid: 281c2c0765c65534ea6ff815d2326cb8, type: 2}
+  audioLongwallCutterLongwallCutter: {fileID: 11400000, guid: a6349f0514eabff4ba74825f5dd7fe10, type: 2}
 --- !u!114 &8336510798325787905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,6 +209,24 @@ MonoBehaviour:
   movementEnd:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4492551412957476666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8336510798325787910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93de8e8b55bf60e47972780b8110171f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enya: {fileID: 0}
+  dad: {fileID: 0}
+  georg: {fileID: 0}
+  guide: {fileID: 0}
+  bergbauvertreter1: {fileID: 0}
+  bergbauvertreter2: {fileID: 0}
 --- !u!1 &8336510798528293807
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,6 +388,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCharacter: 0
+  bubbleImage: {fileID: 0}
+  bubbleButton: {fileID: 0}
+  gameIcons: {fileID: 0}
 --- !u!1 &8336510798668196134
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,7 +589,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5926212496513436057, guid: 23579092070498e4d913d9cc1c991b75, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4e9875b1ff5ae1b44b9c89901b22cb42, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -943,6 +977,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6573e5d25012ee441a998117efead92c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterConfigSO: {fileID: 0}
+  characterImage: {fileID: 0}
+  sole1ImgUpdated: 0
+  s2ImgUpdated: 0
+  s3ImgUpdated: 0
+  entryAreaUpdated: 0
+  iconConfigSo: {fileID: 0}
 --- !u!1 &8336510799365711422
 GameObject:
   m_ObjectHideFlags: 0
@@ -1356,6 +1397,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCharacter: 0
+  bubbleImage: {fileID: 0}
+  bubbleButton: {fileID: 0}
+  gameIcons: {fileID: 0}
 --- !u!1 &8336510799871435812
 GameObject:
   m_ObjectHideFlags: 0
@@ -1517,6 +1561,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCharacter: 2
+  bubbleImage: {fileID: 0}
+  bubbleButton: {fileID: 0}
+  gameIcons: {fileID: 0}
 --- !u!1 &8336510800210366540
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,18 +10,23 @@ public class KohlehobelManager : MonoBehaviour
     public Character enya, georg, dad;
     public Button btnLwcViewpoint, btnLwcExit;
 
-    private SoChapOneRuntimeData runtimeData;
+    private SoChapOneRuntimeData runtimeData01;
     private SoChaptersRuntimeData runtimeDataChapters;
+    private SoSfx sfx;
+    public AudioSource audioSrcBewetterung, audioSrcLwc;
 
     private void Awake()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        runtimeData01 = runtimeDataChapters.LoadChap1RuntimeData();
+        sfx = runtimeDataChapters.LoadSfx();
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        audioSrcBewetterung.clip = sfx.coalmineZecheWind;
+        audioSrcBewetterung.playOnAwake = true;
         switchScene.LoadLongwallCutterStatic();
         switchScene.LoadLongwallCutterAnim();
 
@@ -33,18 +38,20 @@ public class KohlehobelManager : MonoBehaviour
         lwcManager.RotateCharacters(-114.0f, -53.0f, -80.0f);
         myPlayer.SetPlayerRotation(0f,false);
 
-        runtimeDataChapters.sceneCursor = runtimeData.cursorTexture3DCave;
-        Cursor.SetCursor(runtimeDataChapters.sceneCursor, Vector2.zero, CursorMode.Auto);
+        runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorTexture3DCave);
+        //runtimeDataChapters.sceneCursor = runtimeData01.cursorTexture3DCave;
+        //Cursor.SetCursor(runtimeDataChapters.sceneCursor, Vector2.zero, CursorMode.Auto);
     }
 
     public void StartAnimKohlenhobel()
     {
-        if (!runtimeData.GetKohlenhobelAnimator().GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        if (!runtimeData01.GetKohlenhobelAnimator().GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
-            runtimeData.GetKohlenhobelAnimator().SetTrigger("backToIdle");
+            runtimeData01.GetKohlenhobelAnimator().SetTrigger("backToIdle");
         }
 
-        runtimeData.GetKohlenhobelAnimator().SetTrigger("play");
+        runtimeData01.GetKohlenhobelAnimator().SetTrigger("play");
+        audioSrcLwc.Play();
     }
 
     //Positionieren und Ausrichten in LongwallCutterWaypointManager

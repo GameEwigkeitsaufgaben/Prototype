@@ -14,11 +14,13 @@ public class MuseumCard : MonoBehaviour
     [SerializeField] private Canvas myParentCanvas;
     private SoMuseumConfig myConfig;
     public SoMuseumCard myResource;
+    bool setup;
 
     private AudioSource cardAudio;
 
     private void Awake()
     {
+        setup = true;
         myConfig = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
     }
 
@@ -71,8 +73,9 @@ public class MuseumCard : MonoBehaviour
     {
         myContentImg.gameObject.SetActive(false);
         myStatement.gameObject.SetActive(false);
-        overallBgImg.color = GameColors.defaultInteractionColorNormal;
+        //overallBgImg.color = GameColors.defaultInteractionColorNormal;
         overallBgImg.sprite = myConfig.memoryBackside;
+        if (setup) return;
         cardAudio.Play();
     }
 
@@ -109,6 +112,7 @@ public class MuseumCard : MonoBehaviour
         }
 
         cardAudio = myParentCanvas.GetComponent<AudioSource>();
+        cardAudio.playOnAwake = false;
         cardAudio.clip = myConfig.sfxFlipCard;
     }
 
@@ -125,20 +129,21 @@ public class MuseumCard : MonoBehaviour
     private void OnMouseEnter()
     {
         gameObject.GetComponent<MouseChange>().MouseEnter();
-        overallBgImg.color = GameColors.defaultInteractionColorHighlighted;
+        //overallBgImg.color = GameColors.defaultInteractionColorHighlighted;
     }
 
 
     private void OnMouseExit()
     {
         gameObject.GetComponent<MouseChange>().MouseExit();
-        overallBgImg.color = GameColors.defaultInteractionColorNormal;
+        //overallBgImg.color = GameColors.defaultInteractionColorNormal;
     }
 
     public void FlipCard()
     {
+        setup = false;
         cardFaceDown = !cardFaceDown;
-        //cardAudio.Play();
+        
 
         if (cardFaceDown)
         {
@@ -153,12 +158,11 @@ public class MuseumCard : MonoBehaviour
     public void SetCardFaceUp()
     {
         myContentImg.gameObject.SetActive(true);
-        overallBgImg.color = GameColors.defaultInteractionColorNormal;
+        //overallBgImg.color = GameColors.defaultInteractionColorNormal;
         overallBgImg.sprite = null;
         //myContentImg.sprite = ;
         myStatement.gameObject.SetActive(true);
+        if (setup) return;
         cardAudio.Play();
     }
-
-
 }

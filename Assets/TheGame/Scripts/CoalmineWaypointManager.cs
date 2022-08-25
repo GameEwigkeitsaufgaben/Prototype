@@ -58,8 +58,7 @@ public class CoalmineWaypointManager : MonoBehaviour
     [SerializeField] 
     private Button runtimeViewpointBtn, caveBtn, bahnsteigBtn, bewetterungBtn, ovmineBtn;
     
-    [SerializeField]
-    private MineWayPoints currentWP;
+    public MineWayPoints currentWP;
 
     //public bool trainArrived = false;
 
@@ -82,7 +81,6 @@ public class CoalmineWaypointManager : MonoBehaviour
     private void Start()
     {
         myPlayer = playerSplineMove.gameObject.GetComponent<Player>();
-        
 
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         
@@ -316,10 +314,11 @@ public class CoalmineWaypointManager : MonoBehaviour
 
             runtimeData.sole3BewetterungDone = true;
 
-            Debug.Log(currentWP + "sould be set " + transform.localPosition);
+            //Debug.Log(currentWP + "sould be set " + transform.localPosition);
         }
         else if (currentWP == MineWayPoints.viewpoint)
         {
+            wps3ViewpointBtn.gameObject.SetActive(false);
             ChangeS3WPRotations(0.0f, 90.0f, 90.0f, 150.0f);
             runtimeData.viewPointS3passed = true;
         }
@@ -347,7 +346,7 @@ public class CoalmineWaypointManager : MonoBehaviour
             ChangeS3WPRotations(102.0f, 0.0f, 0.0f, 0.0f);
             //myPlayer.SetPlayerToAnkerPosition();
             //myPlayer.ReloadPlayerAtS3Cave();
-            Debug.Log("------------------SetInsideCave");
+            //Debug.Log("------------------SetInsideCave");
         }
     }
 
@@ -449,97 +448,208 @@ public class CoalmineWaypointManager : MonoBehaviour
 
         if (runtimeData.currentCoalmineStop == CoalmineStop.EntryArea) return;
 
-        //audios in Cave Collider started!
-        if(runtimeData.currentCoalmineStop == CoalmineStop.Sole1 && !runtimeData.sole1Done)
+        switch (runtimeData.currentCoalmineStop)
         {
-            if (speechManager.IsMineS1CaveTalkingFinished() && !wps1ViewpointBtn.GetComponent<Button>().interactable)
-            {
-                wps1ViewpointBtn.GetComponent<Button>().interactable = true;
-                return;
-            }
+            case CoalmineStop.Sole1:
 
-            if (speechManager.IsMineS1VpTalkingFinished())
-            {
-                runtimeData.sole1Done = true;
-            }
-        }
+                //setPath
+                if (!helperSetPath)
+                {
+                    playerSplineMove.pathContainer = pathS1CaveToViewpoint;
+                    pathS1CaveToViewpoint.transform.position = new Vector3(0f, myPlayer.transform.position.y, 0f);
 
-        if (runtimeData.currentCoalmineStop == CoalmineStop.Sole2 && !runtimeData.sole2Done)
-        {
-            if (speechManager.IsMineS2CaveTalkingFinished() && !wps2ViewpointBtn.GetComponent<Button>().interactable)
-            {
-                wps2ViewpointBtn.GetComponent<Button>().interactable = true;
-                return;
-            }
+                    SetAllWPBtnActive(true);
+                    caveBtn.gameObject.SetActive(false);
 
-            if (speechManager.IsMineS2VpTalkingFinished())
-            {
-                runtimeData.sole2Done = true;
-            }
-        }
+                    helperSetPath = true;
+                }
 
-        if (runtimeData.currentCoalmineStop == CoalmineStop.Sole3)
-        {
-            if (runtimeData.sole3BewetterungDone || runtimeData.sole3GebaeudeDone)
-            {
-                wps3ViewpointBtn.GetComponent<Button>().interactable = true;
-                return;
-            }
-            else
-            {
-                if (speechManager.IsTalkingFinished(GameData.NameTLMineS3Cave) && !wps3ViewpointBtn.GetComponent<Button>().interactable)
+                if (runtimeData.sole1Done) return;
+
+
+                if (speechManager.IsMineS1CaveTalkingFinished() && !runtimeData.replayS1Cave)
+                {
+                    runtimeData.replayS1Cave = true;
+                    wps1ViewpointBtn.GetComponent<Button>().interactable = true;
+                    return;
+                }
+
+                if (speechManager.IsMineS1VpTalkingFinished())
+                {
+                    runtimeData.sole1Done = true;
+                }
+
+                break;
+            case CoalmineStop.Sole2:
+
+                //setPath
+                if (!helperSetPath)
+                {
+                    playerSplineMove.pathContainer = pathS2CaveToViewpoint;
+                    pathS2CaveToViewpoint.transform.position = new Vector3(0f, myPlayer.transform.position.y, 0f);
+
+                    SetAllWPBtnActive(true);
+                    caveBtn.gameObject.SetActive(false);
+
+                    helperSetPath = true;
+                }
+
+                if (runtimeData.sole2Done) return;
+
+                if (speechManager.IsMineS2CaveTalkingFinished() && !runtimeData.replayS2Cave)
+                {
+                    runtimeData.replayS2Cave = true;
+                    wps2ViewpointBtn.GetComponent<Button>().interactable = true;
+                    return;
+                }
+
+                if (speechManager.IsMineS2VpTalkingFinished())
+                {
+                    runtimeData.sole2Done = true;
+                }
+
+                break;
+            case CoalmineStop.Sole3:
+
+                //SetPath
+                if (!helperSetPath)
+                {
+                    playerSplineMove.pathContainer = pathS3CaveToViewpoint;
+
+                    //AdjustWpHightToPlayerHight
+                    pathS3CaveToViewpoint.transform.position = pathS3ViewpointToBewetterung.transform.position =
+                        pathS3ViewpointToBahnsteig.transform.position = pathS3ViewpointToOVMine.transform.position =
+                        pathS3BewetterungToBahnsteig.transform.position = pathS3BewetterungToOVMine.transform.position =
+                        pathS3BahnsteigToOVMine.transform.position =
+                        new Vector3(0f, myPlayer.transform.position.y, 0f);
+
+                    helperSetPath = true;
+
+                    if (GameData.sohleToReload == (int)CoalmineStop.Sole3)
+                    {
+                        ReloadWPBahnsteig();
+                        myPlayer.RealoadPlayerAtS3Bahnsteig();
+                        return;
+                    }
+
+                    SetAllWPBtnActive(false);
+                    wps3ViewpointBtn.gameObject.SetActive(true);
+                }
+
+                //Move in sole
+                if (runtimeData.sole3BewetterungDone && runtimeData.sole3GebaeudeDone) return;
+
+                if (runtimeData.sole3BewetterungDone || runtimeData.sole3GebaeudeDone)
                 {
                     wps3ViewpointBtn.GetComponent<Button>().interactable = true;
                     return;
                 }
-            }
+                else
+                {
+                    if (speechManager.IsTalkingFinished(GameData.NameTLMineS3Cave) && !runtimeData.replayS3Cave)
+                    {
+                        runtimeData.replayS3Cave = true;
+                        wps3ViewpointBtn.GetComponent<Button>().interactable = true;
+                        return;
+                    }
+                }
+
+                break;
         }
+
+        //audios in Cave Collider started!
+        //if(runtimeData.currentCoalmineStop == CoalmineStop.Sole1 && !runtimeData.sole1Done)
+        //{
+        //    if (speechManager.IsMineS1CaveTalkingFinished() && !runtimeData.replayS1Cave)
+        //    {
+        //        runtimeData.replayS1Cave = true;
+        //        wps1ViewpointBtn.GetComponent<Button>().interactable = true;
+        //        return;
+        //    }
+
+        //    if (speechManager.IsMineS1VpTalkingFinished())
+        //    {
+        //        runtimeData.sole1Done = true;
+        //    }
+        //}
+
+        //if (runtimeData.currentCoalmineStop == CoalmineStop.Sole2 && !runtimeData.sole2Done)
+        //{
+        //    if (speechManager.IsMineS2CaveTalkingFinished() && !runtimeData.replayS2Cave)
+        //    {
+        //        runtimeData.replayS2Cave = true;
+        //        wps2ViewpointBtn.GetComponent<Button>().interactable = true;
+        //        return;
+        //    }
+
+        //    if (speechManager.IsMineS2VpTalkingFinished())
+        //    {
+        //        runtimeData.sole2Done = true;
+        //    }
+        //}
+
+        //if (runtimeData.currentCoalmineStop == CoalmineStop.Sole3)
+        //{
+        //    if (runtimeData.sole3BewetterungDone || runtimeData.sole3GebaeudeDone)
+        //    {
+        //        wps3ViewpointBtn.GetComponent<Button>().interactable = true;
+        //        return;
+        //    }
+        //    else
+        //    {
+        //        if (speechManager.IsTalkingFinished(GameData.NameTLMineS3Cave) && !wps3ViewpointBtn.GetComponent<Button>().interactable)
+        //        {
+        //            wps3ViewpointBtn.GetComponent<Button>().interactable = true;
+        //            return;
+        //        }
+        //    }
+        //}
 
        
 
-        if (runtimeData.currentCoalmineStop == CoalmineStop.Sole3 && !helperSetPath)
-        {
-            playerSplineMove.pathContainer = pathS3CaveToViewpoint;
+        //if (runtimeData.currentCoalmineStop == CoalmineStop.Sole3 && !helperSetPath)
+        //{
+        //    //playerSplineMove.pathContainer = pathS3CaveToViewpoint;
 
-            //AdjustWpHightToPlayerHight
-            pathS3CaveToViewpoint.transform.position = pathS3ViewpointToBewetterung.transform.position = 
-                pathS3ViewpointToBahnsteig.transform.position = pathS3ViewpointToOVMine.transform.position = 
-                pathS3BewetterungToBahnsteig.transform.position = pathS3BewetterungToOVMine.transform.position = 
-                pathS3BahnsteigToOVMine.transform.position = 
-                new Vector3(0f, myPlayer.transform.position.y, 0f);
+        //    ////AdjustWpHightToPlayerHight
+        //    //pathS3CaveToViewpoint.transform.position = pathS3ViewpointToBewetterung.transform.position = 
+        //    //    pathS3ViewpointToBahnsteig.transform.position = pathS3ViewpointToOVMine.transform.position = 
+        //    //    pathS3BewetterungToBahnsteig.transform.position = pathS3BewetterungToOVMine.transform.position = 
+        //    //    pathS3BahnsteigToOVMine.transform.position = 
+        //    //    new Vector3(0f, myPlayer.transform.position.y, 0f);
 
-            helperSetPath = true;
+        //    //helperSetPath = true;
 
             
-            if (GameData.sohleToReload == (int)CoalmineStop.Sole3)
-            {
-                ReloadWPBahnsteig();
-                myPlayer.RealoadPlayerAtS3Bahnsteig();
-                return;
-            }
+        //    //if (GameData.sohleToReload == (int)CoalmineStop.Sole3)
+        //    //{
+        //    //    ReloadWPBahnsteig();
+        //    //    myPlayer.RealoadPlayerAtS3Bahnsteig();
+        //    //    return;
+        //    //}
 
-            SetAllWPBtnActive(false);
-            wps3ViewpointBtn.gameObject.SetActive(true);
-        }
-        else if (runtimeData.currentCoalmineStop == CoalmineStop.Sole2 && !helperSetPath)
-        {
-            playerSplineMove.pathContainer = pathS2CaveToViewpoint;
-            pathS2CaveToViewpoint.transform.position = new Vector3(0f, myPlayer.transform.position.y, 0f);
+        //    //SetAllWPBtnActive(false);
+        //    //wps3ViewpointBtn.gameObject.SetActive(true);
+        //}
+        //else if (runtimeData.currentCoalmineStop == CoalmineStop.Sole2 && !helperSetPath)
+        //{
+        //    //playerSplineMove.pathContainer = pathS2CaveToViewpoint;
+        //    //pathS2CaveToViewpoint.transform.position = new Vector3(0f, myPlayer.transform.position.y, 0f);
             
-            SetAllWPBtnActive(true);
-            caveBtn.gameObject.SetActive(false);
+        //    //SetAllWPBtnActive(true);
+        //    //caveBtn.gameObject.SetActive(false);
 
-            helperSetPath = true;
-        }
-        else if (runtimeData.currentCoalmineStop == CoalmineStop.Sole1 && !helperSetPath)
-        {
-            playerSplineMove.pathContainer = pathS1CaveToViewpoint;
-            pathS1CaveToViewpoint.transform.position = new Vector3(0f, myPlayer.transform.position.y, 0f);
+        //    //helperSetPath = true;
+        //}
+        //else if (runtimeData.currentCoalmineStop == CoalmineStop.Sole1 && !helperSetPath)
+        //{
+        //    playerSplineMove.pathContainer = pathS1CaveToViewpoint;
+        //    pathS1CaveToViewpoint.transform.position = new Vector3(0f, myPlayer.transform.position.y, 0f);
 
-            SetAllWPBtnActive(true);
-            caveBtn.gameObject.SetActive(false);
+        //    SetAllWPBtnActive(true);
+        //    caveBtn.gameObject.SetActive(false);
 
-            helperSetPath = true;
-        }
+        //    helperSetPath = true;
+        //}
     }
 }
