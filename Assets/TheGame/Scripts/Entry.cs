@@ -9,11 +9,11 @@ using UnityEngine.SceneManagement;
 public class Entry : MonoBehaviour
 {
    // private const string Entry115 = "Entry115";
-    private const string Entry116 = "Entry116";
-    private const string Entry1110 = "Entry1110";
+   // private const string Entry116 = "Entry116";
+   // private const string Entry1110 = "Entry1110";
    // private const string Entry117 = "Entry117";
-    private const string Entry118 = "Entry118";
-    private const string Entry119 = "Entry119";
+   // private const string Entry118 = "Entry118";
+   // private const string Entry119 = "Entry119";
    // private const float changeVolumeAmount = 0.15f;
     public GameObject post;
     public GameObject overlay;
@@ -186,15 +186,15 @@ public class Entry : MonoBehaviour
                 {
                     post.GetComponent<Post>().UnlockPost();
                 }
-                else if (gameObject.name == Entry118 && runtimeData.interaction117Done)
+                else if (gameObject.name == GameData.NameEntry118 && runtimeData.interaction117Done)
                 {
                     post.GetComponent<Post>().UnlockPost();
                 }
-                else if (gameObject.name == Entry119 && runtimeData.interaction117Done)
+                else if (gameObject.name == GameData.NameEntry119 && runtimeData.interaction117Done)
                 {
                     post.GetComponent<Post>().UnlockPost();
                 }
-                else if (gameObject.name == Entry1110 && runtimeData.quiz119Done)
+                else if (gameObject.name == GameData.NameEntry1110 && runtimeData.quiz119Done)
                 {
                     post.GetComponent<Post>().UnlockPost();
                     overlay.GetComponent<Overlay>().UpdateOverlayText();

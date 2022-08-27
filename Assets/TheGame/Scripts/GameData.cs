@@ -117,6 +117,9 @@ public static class GameData
     public const string NameEntry115 = "Entry115";
     public const string NameEntry116 = "Entry116";
     public static string NameEntry117 = "Entry117";
+    public static string NameEntry118 = "Entry118";
+    public static string NameEntry119 = "Entry119";
+    public static string NameEntry1110 = "Entry1110";
 
     public const string NameEntry213 = "Entry213";
     public const string NameEntry214 = "Entry214";
