@@ -3,8 +3,9 @@
 public static class GameScenes
 {
     //General
-    public const string ch00ChapterOverview = "ch00scene00-00-chapterOV";
-    public const string ch00GameCredits = "ch00scene00-01-credits";
+    public const string ch00ChapterOverview = "ch00scene00-chapterOV";
+    public const string ch00GameCredits = "ch00scene01-credits";
+    public const string ch00Fotoplatz = "ch00scene02-fotoplatz";
 
     //Chapter one Bergbau allgemein
     public const string ch01InstaMain = "ch01scene01-00-instaMenu";

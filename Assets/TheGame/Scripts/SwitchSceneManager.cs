@@ -24,6 +24,11 @@ public class SwitchSceneManager : MonoBehaviour
         Debug.Log("LoadScene Mine");
     }
 
+    public void LoadFotoplatz()
+    {
+        SceneManager.LoadScene(GameScenes.ch00Fotoplatz, LoadSceneMode.Single);
+    }
+
     public void LoadSole1()
     {
         SceneManager.LoadScene(GameScenes.ch01MineSoleOneStatic, LoadSceneMode.Additive);
