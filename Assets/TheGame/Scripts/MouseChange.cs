@@ -5,15 +5,18 @@ public class MouseChange : MonoBehaviour
 {
     private CursorMode cursorMode = CursorMode.Auto;
     private Vector2 hotSpot = Vector2.zero;
-    private SoChapOneRuntimeData runtimeDataCh01;
-    private SoChapTwoRuntimeData runtimeDataCh02;
+    private SoChapOneRuntimeData runtimeDataCh1;
+    private SoChapTwoRuntimeData runtimeDataCh2;
+    private SoChapThreeRuntimeData runtimeDataCh3;
     private SoChaptersRuntimeData runtimeDataChapters;
 
     private void Awake()
     {
-        runtimeDataCh01 = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
-        runtimeDataCh02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        runtimeDataCh1 = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        runtimeDataCh2 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
+        runtimeDataCh3 = runtimeDataChapters.LoadChap3RuntimeData();
+
     }
 
     private void Start()
@@ -66,8 +69,9 @@ public class MouseChange : MonoBehaviour
         Debug.Log("Mouse Enter");
         if (gameObject.GetComponent<Post>())
         {
-            runtimeDataCh01.hintPostUnlock = (gameObject.GetComponent<Button>().interactable) ? "": gameObject.GetComponent<Post>().GetUnlockHint();
-            runtimeDataCh02.hintPostUnlock = (gameObject.GetComponent<Button>().interactable) ? "" : gameObject.GetComponent<Post>().GetUnlockHint();
+            runtimeDataCh1.hintPostUnlock = (gameObject.GetComponent<Button>().interactable) ? "": gameObject.GetComponent<Post>().GetUnlockHint();
+            runtimeDataCh2.hintPostUnlock = (gameObject.GetComponent<Button>().interactable) ? "" : gameObject.GetComponent<Post>().GetUnlockHint();
+            runtimeDataCh3.hintPostUnlock = (gameObject.GetComponent<Button>().interactable) ? "" : gameObject.GetComponent<Post>().GetUnlockHint();
         }
         
         if(gameObject.GetComponent<Button>() != null && gameObject.GetComponent<Button>().interactable)
@@ -136,7 +140,7 @@ public class MouseChange : MonoBehaviour
             {
                 Debug.Log("DRAG DRAG" + gameObject.name);
 
-                if (runtimeDataCh01.currDragItemExists) return;
+                if (runtimeDataCh1.currDragItemExists) return;
 
                 MuseumMinerEquipmentItem item = gameObject.GetComponent<MuseumMinerEquipmentItem>();
 
@@ -176,13 +180,14 @@ public class MouseChange : MonoBehaviour
             if (gameObject.GetComponent<MuseumMinerEquipmentItem>() != null)
             {
                 if (gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging) return;
-                if (runtimeDataCh01.currDragItemExists) return;
+                if (runtimeDataCh1.currDragItemExists) return;
             }
         }
         Debug.Log("Mouse EXIT---------------");
         Cursor.SetCursor(runtimeDataChapters.sceneCursor, Vector2.zero, cursorMode);
-        runtimeDataCh01.hintPostUnlock = "";
-        runtimeDataCh02.hintPostUnlock = "";
+        runtimeDataCh1.hintPostUnlock = "";
+        runtimeDataCh2.hintPostUnlock = "";
+        runtimeDataCh3.hintPostUnlock = "";
     }
 
     private bool MaxReachedSnaptToTable(MuseumMinerEquipmentItem item)
@@ -220,7 +225,7 @@ public class MouseChange : MonoBehaviour
                 Debug.Log("geht weiter ------------------------- ");
 
                 Cursor.SetCursor(runtimeDataChapters.cursorDragDrag, hotSpot, cursorMode);
-                runtimeDataCh01.currDragItemExists = true;
+                runtimeDataCh1.currDragItemExists = true;
 
             }
 
@@ -270,7 +275,7 @@ public class MouseChange : MonoBehaviour
                 }
 
                 Cursor.SetCursor(runtimeDataChapters.cursorDragTouch, hotSpot, cursorMode);
-                runtimeDataCh01.currDragItemExists = false;
+                runtimeDataCh1.currDragItemExists = false;
             }
         }
     }

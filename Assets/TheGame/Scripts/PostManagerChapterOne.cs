@@ -12,12 +12,19 @@ public enum chapter
     ch3
 }
 
+public enum volume
+{
+    increase = 1,
+    decrease = -1
+}
+
 public class PostManagerChapterOne : MonoBehaviour
 {
     public GameObject overlayParent;
-    public Button musicOnOff, chaptersHome;
+    public Button musicOnOff, chaptersHome, btnVolMinus, btnVolPlus;
     public Scrollbar scrollbar;
     public TMP_Text hints;
+    public float volReduceSteps = 0.1f;
     
     private List <Overlay> overlayList = new List<Overlay>();
     private Overlay[] overlayArray;
@@ -32,9 +39,13 @@ public class PostManagerChapterOne : MonoBehaviour
     private SoGameIcons gameIcons;
 
     private chapter currentCH;
+    private AudioSource audioSrcBGInsta;
+
+    public int logAufrufe = 0;
 
     private void Awake()
     {
+        audioSrcBGInsta = GetComponent<AudioSource>();
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
 
@@ -115,53 +126,130 @@ public class PostManagerChapterOne : MonoBehaviour
         {
             Debug.Log("no runtime data");
         }
-        
-        
-        if (runtimeDataCh1.postOverlayToLoad != "" && dictOverlay != null)
+
+        switch (currentCH)
         {
-            dictOverlay[runtimeDataCh1.postOverlayToLoad].gameObject.SetActive(true);
+            case chapter.ch1:
+
+                if (runtimeDataCh1.postOverlayToLoad != "" && dictOverlay != null)
+                {
+                    dictOverlay[runtimeDataCh1.postOverlayToLoad].gameObject.SetActive(true);
+
+                    if (runtimeDataCh1.musicOn)
+                    {
+                        ReduceVolumeBGMusic(GameData.overlayVolumeInsta);
+                    }
+
+                    runtimeDataCh1.postOverlayToLoad = "";
+                }
+
+                break;
+            case chapter.ch2:
+                if (runtimeDataCh2.postOverlayToLoad != "" && dictOverlay != null)
+                {
+                    dictOverlay[runtimeDataCh2.postOverlayToLoad].gameObject.SetActive(true);
+
+                    if (runtimeDataCh2.musicOn)
+                    {
+                        ReduceVolumeBGMusic(GameData.overlayVolumeInsta);
+                    }
+
+                    runtimeDataCh1.postOverlayToLoad = "";
+                }
+
+                break;
             
-            if (runtimeDataCh1.musicOn)
-            {
-                Debug.Log("svx is null: " + (sfx == null));
-                ReduceVolumeBGMusic(GameData.overlayVolumeInsta);
-            }
-            
-            runtimeDataCh1.postOverlayToLoad = "";
         }
+        
     }
 
     void ReduceVolumeBGMusic(float value)
     {
-        gameObject.GetComponent<AudioSource>().volume -= value;
+        audioSrcBGInsta.volume -= value;
+        Debug.Log("minus");
+    }
+
+    void IncreaseVolumeMusic(float value)
+    {
+        audioSrcBGInsta.volume += value;
+        Debug.Log("plus");
     }
 
     private void EnableDisableMusic(bool enable)
     {
         if (enable)
         {
-            if (!gameObject.GetComponent<AudioSource>().isPlaying)
+            if (audioSrcBGInsta.volume == 0f) IncreaseVolumeMusic(volReduceSteps);
+            btnVolMinus.interactable = true;
+            if (audioSrcBGInsta.volume != 1.0f) btnVolPlus.interactable = true;
+            if (!audioSrcBGInsta.isPlaying)
             {
-                gameObject.GetComponent<AudioSource>().Play();
+                audioSrcBGInsta.Play();
             }
             musicOnOff.GetComponent<Image>().sprite = gameIcons.musicOn;
         }
         else
         {
-            if (gameObject.GetComponent<AudioSource>().isPlaying)
+            if (audioSrcBGInsta.isPlaying)
             {
-                gameObject.GetComponent<AudioSource>().Stop();
+                audioSrcBGInsta.Stop();
             }
             musicOnOff.GetComponent<Image>().sprite = gameIcons.musicOff;
+            btnVolPlus.interactable = btnVolMinus.interactable = false;
         }
+    }
+
+    public void ChangeVolume(int vol)
+    {
+        float oldVol = audioSrcBGInsta.volume;
+
+        switch((volume)vol)
+        {
+            case volume.increase:
+                if(audioSrcBGInsta.volume <= 1.0f) IncreaseVolumeMusic(volReduceSteps);
+            break;
+            case volume.decrease:
+                if(audioSrcBGInsta.volume >= 0.0f) ReduceVolumeBGMusic(volReduceSteps);
+            break;
+        }
+
+        if(oldVol != audioSrcBGInsta.volume)
+        {
+            if (audioSrcBGInsta.volume == 0f) ToggleMusicOnOff();
+            else
+            {
+                if (oldVol == 0) ToggleMusicOnOff();
+            }
+        }
+
+        btnVolPlus.interactable = (audioSrcBGInsta.volume != 1f) ? true : false;
+        btnVolMinus.interactable = (audioSrcBGInsta.volume != 0f) ? true : false;
+       
+        //else runtimeDataCh1.overlaySoundState = OverlaySoundState.Opened;
     }
 
     //Called from Inspector BtnMusicOnOff OnClick()
     public void ToggleMusicOnOff()
     {
-        runtimeDataCh1.musicOn = !runtimeDataCh1.musicOn;
+        switch (currentCH)
+        {
+            case chapter.ch1: runtimeDataCh1.musicOn = !runtimeDataCh1.musicOn;
+                break;
+            case chapter.ch2: runtimeDataCh2.musicOn = !runtimeDataCh2.musicOn;
+                break;
 
-        EnableDisableMusic(runtimeDataCh1.musicOn);
+        }
+        
+        switch (currentCH)
+        {
+            case chapter.ch1:
+                EnableDisableMusic(runtimeDataCh1.musicOn);
+                break;
+            case chapter.ch2:
+                EnableDisableMusic(runtimeDataCh2.musicOn);
+                break;
+        }
+       
     }
 
     private void PrintAllDictKeys(string calledFrom)
@@ -186,26 +274,35 @@ public class PostManagerChapterOne : MonoBehaviour
         }
         else if(SceneManager.GetActiveScene().name == GameScenes.ch03InstaMain)
         {
-            hints.text = runtimeDataCh2.hintPostUnlock;
+            hints.text = runtimeDataCh3.hintPostUnlock;
         }
 
-        //potential für verbesserung,nur anschauen wenn nötig
-        if (runtimeDataCh1.overlaySoundState == OverlaySoundState.NoSound)
-        {
-            gameObject.GetComponent<AudioSource>().volume = 0f;
-        } 
-        else if (runtimeDataCh1.overlaySoundState == OverlaySoundState.Opened)
-        {
-            ReduceVolumeBGMusic(GameData.overlayVolumeInsta);
-            runtimeDataCh1.overlaySoundState = OverlaySoundState.SoudAjusted;
+        switch(currentCH)
+            {
+            case chapter.ch1:
+                if (runtimeDataCh1.overlaySoundState == OverlaySoundState.NoSound && (audioSrcBGInsta.volume != 0f))
+                {
+                    audioSrcBGInsta.volume = 0f;
+                }
+                else if (runtimeDataCh1.overlaySoundState == OverlaySoundState.Opened)
+                {
+                    ReduceVolumeBGMusic(GameData.overlayVolumeInsta);
+                    runtimeDataCh1.overlaySoundState = OverlaySoundState.SoudAjusted;
+                }
+                break;
+            case chapter.ch2:
+                if (runtimeDataCh2.overlaySoundState == OverlaySoundState.NoSound && (audioSrcBGInsta.volume != 0f))
+                {
+                    audioSrcBGInsta.volume = 0f;
+                }
+                else if (runtimeDataCh2.overlaySoundState == OverlaySoundState.Opened)
+                {
+                    ReduceVolumeBGMusic(GameData.overlayVolumeInsta);
+                    runtimeDataCh1.overlaySoundState = OverlaySoundState.SoudAjusted;
+                }
+                break;
+
         }
-        else if (runtimeDataCh1.overlaySoundState == OverlaySoundState.Closed)
-        {
-            gameObject.GetComponent<AudioSource>().volume = GameData.maxBGVolumeInsta;
-        }
-        else if (runtimeDataCh1.overlaySoundState == OverlaySoundState.SoudAjusted)
-        {
-            gameObject.GetComponent<AudioSource>().volume = GameData.overlayVolumeInsta;
-        }
+
     }
 }

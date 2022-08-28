@@ -31,7 +31,7 @@ public enum ProgressChap3enum
 [CreateAssetMenu(menuName = "SoChapThreeRuntimeData")]
 public class SoChapThreeRuntimeData : Runtime
 {
-
+    public string hintPostUnlock;
     public string[] namesEnum = System.Enum.GetNames(typeof(ProgressChap3enum));
     public ProgressChap3[] progressDone;
     public string quizPointsCh03 = "***";
