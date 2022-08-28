@@ -79,9 +79,9 @@ public class CoalmineIntroManager : MonoBehaviour
             if (!audioStarted && runtimeDataCh1.revisitEntryArea)
             {
                 CoalmineStop stop = CoalmineStop.Unset;
-                georg.SetupElements();
-                dad.SetupElements();
-                enya.SetupElements();
+                if (georg != null) georg.SetupElements();
+                if (dad != null) dad.SetupElements();
+                if (enya != null) enya.SetupElements();
 
                 if (runtimeDataCh1.interaction116Done)
                 {

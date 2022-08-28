@@ -24,6 +24,8 @@ public static class GameColors
 
     public static Color defaultTextColor = new Color32(60,60,60,255);
 
+    public static Color instaPostDone = new Color32(152,188,106,255);
+
     public static ColorBlock GetInteractionColorBlock() 
     {
         ColorBlock uiInteractionColors = ColorBlock.defaultColorBlock;

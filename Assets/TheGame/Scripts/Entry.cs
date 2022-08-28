@@ -3,6 +3,7 @@
 //Unlocking a post is here in the update methode and based on bool vals in the static class GameData.
 
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
 
@@ -18,7 +19,7 @@ public class Entry : MonoBehaviour
     public GameObject post;
     public GameObject overlay;
     public SoPostData postData;
-   
+    public Image fbDone;
 
     //public bool testVideoPlayed = false;
 
@@ -29,10 +30,13 @@ public class Entry : MonoBehaviour
     private SoChapOneRuntimeData runtimeData;
     private SoChapTwoRuntimeData runtimeDataCh02;
     private SoChapThreeRuntimeData runtimeDataCh03;
+    private Color fbDoneColor = GameColors.instaPostDone;
+    private Color fbInProgress = GameColors.defaultTextColor;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (fbDone != null) fbDone.color = fbInProgress;
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         runtimeDataCh02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
@@ -160,10 +164,36 @@ public class Entry : MonoBehaviour
         }
     }
 
+    private void SetColorDoneFeedbackImage()
+    {
+        if (fbDone == null) return;
+
+        if (fbDone.color == fbDoneColor) return;
+
+        bool setColorDone = false;
+        Debug.Log("------------------------------------------------");
+        if (gameObject.name == GameData.NameEntry111 && runtimeData.post111Done) setColorDone = true;
+        else if (gameObject.name == GameData.NameEntry112 && runtimeData.post112Done) setColorDone = true;
+        else if (gameObject.name == GameData.NameEntry113 && runtimeData.post113Done) setColorDone = true;
+        else if (gameObject.name == GameData.NameEntry114 && runtimeData.post114Done) setColorDone = true;
+        else if (gameObject.name == GameData.NameEntry115 && runtimeData.video115Done) setColorDone = true;
+        else if (gameObject.name == GameData.NameEntry116 && runtimeData.interaction116Done) setColorDone = true;
+        else if (gameObject.name == GameData.NameEntry117 && runtimeData.interaction117Done) setColorDone = true;
+        //else if (gameObject.name == GameData.NameEntry118 && runtimeData.post117Done) setColorDone = true;
+        else if (gameObject.name == GameData.NameEntry119 && runtimeData.quiz119Done) setColorDone = true;
+        //else if (gameObject.name == GameData.NameEntry1110 && runtimeData.post117Done) setColorDone = true;
+
+        if (!setColorDone) return;
+        Debug.Log("------------------------------------------------" + gameObject.name);
+        if (fbDone != null) fbDone.color = fbDoneColor;
+    }
+
     private void Update()
     {
         if(SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain)
         {
+            SetColorDoneFeedbackImage();
+
             if (post.GetComponent<Post>().isPostLocked())
             {
                 if(gameObject.name == GameData.NameEntry113 && runtimeData.post111Done && runtimeData.post112Done)
