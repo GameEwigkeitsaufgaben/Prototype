@@ -237,6 +237,8 @@ public class PostManagerChapterOne : MonoBehaviour
                 break;
             case chapter.ch2: runtimeDataCh2.musicOn = !runtimeDataCh2.musicOn;
                 break;
+            case chapter.ch3: runtimeDataCh3.musicOn = !runtimeDataCh3.musicOn;
+                break;
 
         }
         
@@ -247,6 +249,9 @@ public class PostManagerChapterOne : MonoBehaviour
                 break;
             case chapter.ch2:
                 EnableDisableMusic(runtimeDataCh2.musicOn);
+                break;
+            case chapter.ch3:
+                EnableDisableMusic(runtimeDataCh3.musicOn);
                 break;
         }
        
@@ -298,7 +303,18 @@ public class PostManagerChapterOne : MonoBehaviour
                 else if (runtimeDataCh2.overlaySoundState == OverlaySoundState.Opened)
                 {
                     ReduceVolumeBGMusic(GameData.overlayVolumeInsta);
-                    runtimeDataCh1.overlaySoundState = OverlaySoundState.SoudAjusted;
+                    runtimeDataCh2.overlaySoundState = OverlaySoundState.SoudAjusted;
+                }
+                break;
+            case chapter.ch3:
+                if (runtimeDataCh3.overlaySoundState == OverlaySoundState.NoSound && (audioSrcBGInsta.volume != 0f))
+                {
+                    audioSrcBGInsta.volume = 0f;
+                }
+                else if (runtimeDataCh3.overlaySoundState == OverlaySoundState.Opened)
+                {
+                    ReduceVolumeBGMusic(GameData.overlayVolumeInsta);
+                    runtimeDataCh3.overlaySoundState = OverlaySoundState.SoudAjusted;
                 }
                 break;
 
