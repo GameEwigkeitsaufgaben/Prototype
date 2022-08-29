@@ -75,22 +75,17 @@ public class PostManagerChapterOne : MonoBehaviour
                 break;
             case chapter.ch2:
                 runtimeDataCh2 = runtimeDataChapters.LoadChap2RuntimeData();
+                if (runtimeDataChapters.progressWithAdminCh2) runtimeDataCh2.SetAllDone();
                 break;
             case chapter.ch3:
                 runtimeDataCh3 = runtimeDataChapters.LoadChap3RuntimeData();
+                if (runtimeDataChapters.progressWithAdminCh3) runtimeDataCh3.SetAllDone();
                 break;
         }
 
-        //if (SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain)
-        //{
-        //    currentCH = chapter.ch1;
-        //    runtimeDataCh1 = runtimeDataChapters.LoadChap1RuntimeData();
-        //}
-        //else
         if (SceneManager.GetActiveScene().name == GameScenes.ch02InstaMain)
         {
             currentCH = chapter.ch2;
-            //runtimeDataCh1 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
             runtimeDataCh2 = runtimeDataChapters.LoadChap2RuntimeData();
 
             if (runtimeDataChapters.progressWithAdminCh2)
@@ -164,9 +159,7 @@ public class PostManagerChapterOne : MonoBehaviour
                 }
 
                 break;
-            
         }
-        
     }
 
     public void SaveSliderPos()
@@ -238,8 +231,6 @@ public class PostManagerChapterOne : MonoBehaviour
 
         btnVolPlus.interactable = (audioSrcBGInsta.volume != 1f) ? true : false;
         btnVolMinus.interactable = (audioSrcBGInsta.volume != 0f) ? true : false;
-       
-        //else runtimeDataCh1.overlaySoundState = OverlaySoundState.Opened;
     }
 
     //Called from Inspector BtnMusicOnOff OnClick()
@@ -253,7 +244,6 @@ public class PostManagerChapterOne : MonoBehaviour
                 break;
             case chapter.ch3: runtimeDataCh3.musicOn = !runtimeDataCh3.musicOn;
                 break;
-
         }
         
         switch (currentCH)

@@ -3605,6 +3605,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BtnWeiterRechts
       objectReference: {fileID: 0}
+    - target: {fileID: 6730032561803502671, guid: 18c060d17a167ab4f875d9b7a429cf9b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18c060d17a167ab4f875d9b7a429cf9b, type: 3}
 --- !u!224 &582663673 stripped
@@ -5106,11 +5110,83 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3881969855218591035, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 3.07
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 3881969855218591035, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 304.81
+      value: 4.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881969855218591035, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881969855218591035, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2.389
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881969855562001010, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
+      propertyPath: m_text
+      value: Weiter
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881969855562001010, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
+      propertyPath: m_Maskable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881969855562001010, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
+      propertyPath: m_fontSize
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881969855562001010, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
+      propertyPath: m_margin.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881969855562001010, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
+      propertyPath: m_margin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881969855562001010, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881969855562001010, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881969855562001011, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -0.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881969855562001011, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881969855562001011, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881969855562001011, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.213
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881969855562001011, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881969855575915028, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881969855575915028, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1096251803}
+    - target: {fileID: 3881969855575915028, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SwitchToChapter1withOverlay
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881969855575915028, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Overlay117
       objectReference: {fileID: 0}
     - target: {fileID: 3881969855575915029, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
       propertyPath: m_SizeDelta.x
@@ -5165,6 +5241,10 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3881969857192998070, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881969857192998070, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -5174,7 +5254,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3881969857192998070, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -2.77
       objectReference: {fileID: 0}
     - target: {fileID: 3881969857192998070, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5194,7 +5274,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3881969857192998070, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 1.26
       objectReference: {fileID: 0}
     - target: {fileID: 3881969857192998070, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6340,6 +6420,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   btnExitMuseum: {fileID: 4241237783513075516}
   btnReplayTalkingList: {fileID: 1238930392}
+  btnObjProceed: {fileID: 0}
   speechManagerCh1: {fileID: 98634164}
   walkingGroup: {fileID: 518400732}
   switchScene: {fileID: 1096251803}

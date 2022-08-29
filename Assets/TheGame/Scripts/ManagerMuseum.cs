@@ -11,6 +11,7 @@ public enum SoundMuseum
 public class ManagerMuseum : MonoBehaviour
 {
     public Button btnExitMuseum, btnReplayTalkingList;
+    public GameObject btnObjProceed;
     public SpeechManagerMuseumChapOne speechManagerCh1;
     public MuseumPlayer walkingGroup;
     public SwitchSceneManager switchScene;
@@ -42,6 +43,10 @@ public class ManagerMuseum : MonoBehaviour
         walkingGroup.SetCharcters(characterDad, characterGuide, waitingGuide);
         runtimeDataCh1.soundSettingMuseum = SoundMuseum.Showroom;
         btnExitImage.gameObject.GetComponent<Button>().interactable = false;
+
+
+        btnObjProceed.SetActive(runtimeDataCh1.revisitMuseum);
+  
 
         if (runtimeDataCh1.currentMuseumWaypoint != MuseumWaypoints.WP0)
         {
@@ -105,6 +110,7 @@ public class ManagerMuseum : MonoBehaviour
         
         if (!museumDoneSet && runtimeDataCh1.interaction117Done)
         {
+            if (runtimeDataCh1.revisitMuseum) return;
             speechManagerCh1.playMuseumOutro = true;
             museumDoneSet = true;
             walkingGroup.MoveToWaypoint((int)MuseumWaypoints.WPExitMuseum0);
