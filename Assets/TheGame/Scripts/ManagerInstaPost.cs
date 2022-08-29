@@ -18,7 +18,7 @@ public enum volume
     decrease = -1
 }
 
-public class PostManagerChapterOne : MonoBehaviour
+public class ManagerInstaPost : MonoBehaviour
 {
     public GameObject overlayParent;
     public Button musicOnOff, chaptersHome, btnVolMinus, btnVolPlus;
@@ -155,7 +155,7 @@ public class PostManagerChapterOne : MonoBehaviour
                         ReduceVolumeBGMusic(GameData.overlayVolumeInsta);
                     }
 
-                    runtimeDataCh1.postOverlayToLoad = "";
+                    runtimeDataCh2.postOverlayToLoad = "";
                 }
 
                 break;

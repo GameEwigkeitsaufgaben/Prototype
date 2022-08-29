@@ -28,7 +28,7 @@ public class Overlay : MonoBehaviour
 
     private SoPostData postData;
     private SoGameIcons icons;
-    private PostManagerChapterOne menuManager;
+    private ManagerInstaPost menuManager;
     private SoChapOneRuntimeData runtimeDataChap01;
     private SoChapTwoRuntimeData runtimeDataChap02;
     private SoChapThreeRuntimeData runtimeDataChap03;
@@ -44,7 +44,7 @@ public class Overlay : MonoBehaviour
 
     private void Start()
     {
-        menuManager = FindObjectOfType<PostManagerChapterOne>();
+        menuManager = FindObjectOfType<ManagerInstaPost>();
     }
 
     public void SetReplayIcon()
