@@ -15,18 +15,24 @@ public class ManagerOverviewChapters : MonoBehaviour
     [SerializeField] private TMP_Text lawNotice;
     [SerializeField] private bool allChapDone;
     private SoChaptersRuntimeData runtimeDataChapters;
+    private SoSfx sfx;
+    private AudioSource audioSrc;
 
     private void Awake()
     {
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
         btnFotoplatz.interactable = false;
+        audioSrc = GetComponent<AudioSource>();
+        sfx = runtimeDataChapters.LoadSfx();
     }
 
     private void Start()
     {
         btnCredits.colors = GameColors.GetInteractionColorBlock();
         lawNotice.text = GameData.lawNotiz;
+        audioSrc.clip = sfx.instaMenuBGmusicLoop;
+        audioSrc.Play();
 
         allChapDone = runtimeDataChapters.ch1GeneralUnlocked && runtimeDataChapters.ch2GrubenwasserUnlocked && runtimeDataChapters.ch3GrubenwasserUnlocked;
 

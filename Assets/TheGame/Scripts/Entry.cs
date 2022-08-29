@@ -172,7 +172,6 @@ public class Entry : MonoBehaviour
         if (fbDone.color == fbDoneColor) return;
 
         bool setColorDone = false;
-        Debug.Log("-------------------------------" + fbDone.color + " " + fbDoneColor);
         if (gameObject.name == GameData.NameEntry111 && runtimeDataCh1.post111Done) setColorDone = true;
         else if (gameObject.name == GameData.NameEntry112 && runtimeDataCh1.post112Done) setColorDone = true;
         else if (gameObject.name == GameData.NameEntry113 && runtimeDataCh1.post113Done) setColorDone = true;
@@ -185,7 +184,6 @@ public class Entry : MonoBehaviour
         else if (gameObject.name == GameData.NameEntry1110 && runtimeDataCh1.post1110Done) setColorDone = true;
 
         if (!setColorDone) return;
-        Debug.Log("------------------------------------------------" + gameObject.name);
         if (fbDone != null) fbDone.color = fbDoneColor;
     }
 

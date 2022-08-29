@@ -15,6 +15,7 @@ public class SoSfx : ScriptableObject
     public AudioClip coalmineLWC, coalmineMoveShields, coalmineCoalToConveyorBeltFalling, coalmineBreakingRock;
 
     public AudioClip museumBGMurmur;
+    public AudioClip quizBGLoop;
 
     public AudioClip correctAnswer, incorrectAnswer, btnClick;
 

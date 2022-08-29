@@ -48,7 +48,6 @@ public class Post : MonoBehaviour
     //will be called form Class Entry!
     private void SetUpPost()
     {
-        Debug.Log("Setup Post: " + gameObject.name);
         gameObject.GetComponent<Image>().sprite = postData.postSprite;
 
         //generate child obj with local positioning
@@ -66,7 +65,6 @@ public class Post : MonoBehaviour
         childIcon.GetComponent<Image>().preserveAspect = true;
         childIcon.GetComponent<Image>().raycastTarget = false;
 
-        Debug.Log("Setup Post cild obj: " + childIcon.name);
         gameObject.GetComponent<Button>().interactable = false;
 
         //If you entered the adminpin go futher to unlock post
@@ -100,7 +98,6 @@ public class Post : MonoBehaviour
     public void UnlockPost()
     {
         postData.postUnLocked = true;
-        Debug.Log("Post " + gameObject.name + " unlocked: " + postData.postUnLocked);
 
         if (postData.postUnLocked)
         {

@@ -7,15 +7,15 @@ public class SwitchSceneManager : MonoBehaviour
 {
     public Animator transition;
     public float transitionTime = 1f;
-    SoChapOneRuntimeData runtimeData;
-    SoChapTwoRuntimeData runtimeDataChap02;
-    SoChapThreeRuntimeData runtimeDataChap03;
+    SoChapOneRuntimeData runtimeDataCh1;
+    SoChapTwoRuntimeData runtimeDataCh2;
+    SoChapThreeRuntimeData runtimeDataCh3;
 
     private void Awake()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
-        runtimeDataChap02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
-        runtimeDataChap03 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
+        runtimeDataCh1 = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        runtimeDataCh2 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
+        runtimeDataCh3 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
     }
 
     public void LoadMine()
@@ -171,25 +171,24 @@ public class SwitchSceneManager : MonoBehaviour
 
     public void SwitchToChapter1withOverlay(string overlayName)
     {
-        runtimeData.postOverlayToLoad = overlayName;
+        runtimeDataCh1.postOverlayToLoad = overlayName;
         SwitchScene(GameScenes.ch01InstaMain); 
     }
     public void SwitchToChapter2withOverlay(string overlayName)
     {
         
-        runtimeDataChap02.postOverlayToLoad = overlayName;
+        runtimeDataCh2.postOverlayToLoad = overlayName;
         SwitchScene(GameScenes.ch02InstaMain);
     }
 
     public void SwitchToChapter3withOverlay(string overlayName)
     {
-        runtimeDataChap03.postOverlayToLoad = overlayName;
+        runtimeDataCh3.postOverlayToLoad = overlayName;
         SwitchScene(GameScenes.ch03InstaMain);
     }
 
     public int GetActiveQuizScene()
     {
-        Debug.Log("++++++++++++++++++ " + SceneManager.GetActiveScene().name);
         if (SceneManager.GetActiveScene().name == GameScenes.ch01Quiz)
             return 1;
         else if (SceneManager.GetActiveScene().name == GameScenes.ch02Quiz)

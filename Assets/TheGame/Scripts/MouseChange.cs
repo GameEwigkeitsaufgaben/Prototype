@@ -183,7 +183,6 @@ public class MouseChange : MonoBehaviour
                 if (runtimeDataCh1.currDragItemExists) return;
             }
         }
-        Debug.Log("Mouse EXIT---------------");
         Cursor.SetCursor(runtimeDataChapters.sceneCursor, Vector2.zero, cursorMode);
         runtimeDataCh1.hintPostUnlock = "";
         runtimeDataCh2.hintPostUnlock = "";

@@ -5,8 +5,8 @@ using TMPro;
 
 public class ManagerQuizAllChap : MonoBehaviour
 {
-    private const string weiter = "Weiter";
-    private const string pruefen = "Prüfen";
+    //private const string weiter = "Weiter";
+    //private const string pruefen = "Prüfen";
 
     [Header("Assign GameObjects")]
     [SerializeField] private QuizData[] questionsData;
@@ -24,6 +24,7 @@ public class ManagerQuizAllChap : MonoBehaviour
     public TMP_Text textMinerPointsFeedback;
     public TMP_Text textMinerWordsFeedback;
     public Text progressFeedback;
+    public Button btnNext, btnCheck;
 
     [Header("Assigned at runtime")]
     [SerializeField] private List<QuizQuestionWIP> questions;
@@ -36,6 +37,7 @@ public class ManagerQuizAllChap : MonoBehaviour
     private SwitchSceneManager switchScene;
     private QuizTimer quizTimer;
     private SoSfx sfx;
+    public AudioSource audioSrcBGMusic, audioSrcbuttonClick;
 
     private int currentQuestionIndex;
     private int activeScene; //1 chap1, 2 chap2, 3 chap3;
@@ -44,6 +46,8 @@ public class ManagerQuizAllChap : MonoBehaviour
     {
         switchScene = GetComponent<SwitchSceneManager>();
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        
+        //audioSrcBGMusic = GetComponent<AudioSource>();
 
         activeScene = switchScene.GetActiveQuizScene();
         
@@ -67,6 +71,10 @@ public class ManagerQuizAllChap : MonoBehaviour
 
     void Start()
     {
+        audioSrcBGMusic.clip = sfx.quizBGLoop;
+        audioSrcBGMusic.Play();
+        audioSrcbuttonClick.clip = sfx.btnClick;
+
         //Generate all Questions based on Quizdata
         questions = GenerateQuestionList();
 
@@ -167,23 +175,8 @@ public class ManagerQuizAllChap : MonoBehaviour
         return l;
     }
 
-    public void ProcessAnswer()
+    public void ProveAnswer()
     {
-        TMP_Text btnNextIdentifier = btnProcessAnswer.GetComponentInChildren<TMP_Text>();
-
-        //Case Weiter;
-        if (btnNextIdentifier.text == weiter)
-        {
-            ShowNextQuestion();
-            Debug.Log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" + questions[currentQuestionIndex].data.name);
-            quizTimer.StartTimer(questions[currentQuestionIndex].data.timeToAnswerInSec);
-            //quizTimer.StartTimer();
-            SetMinerFeedback(MinerFeedback.Idle, 0f);
-            btnNextIdentifier.text = pruefen;
-            return;
-        }
-        
-        //Case Prüfen;
         quizTimer.StopTimer();
         float completionTime = quizTimer.GetCompletionTime();
 
@@ -252,24 +245,75 @@ public class ManagerQuizAllChap : MonoBehaviour
                 scoreOverall.text = runtimeDataCh3.quizPointsOverall.ToString();
                 break;
         }
+    }
 
-        btnNextIdentifier.text = weiter;
+    public void Proceed()
+    {
+        audioSrcbuttonClick.Play();
+
+        if (btnNext.IsActive())
+        {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.Count)
+            {
+                UpdateProgressUI();
+                Answer[] aws = verticalLayoutGroup.GetComponentsInChildren<Answer>();
+                foreach (Answer a in aws)
+                {
+                    a.gameObject.transform.SetParent(a.origParent);
+                    a.gameObject.SetActive(false);
+                }
+                questions[currentQuestionIndex].ShowData();
+                quizTimer.StartTimer(questions[currentQuestionIndex].data.timeToAnswerInSec);
+                SetMinerFeedback(MinerFeedback.Idle, 0f);
+                btnCheck.gameObject.SetActive(true);
+                btnNext.gameObject.SetActive(false);
+            }
+            else
+            {
+                switch (activeScene)
+                {
+                    case 1:
+                        runtimeDataCh1.quiz119Done = true;
+                        switchScene.SwitchToChapter1withOverlay(runtimeDataCh1.generalKeyOverlay);
+                        break;
+                    case 2:
+                        switchScene.SwitchToChapter2withOverlay(runtimeDataCh2.generalKeyOverlay);
+                        runtimeDataCh2.progressPost2111QuizDone = true;
+                        break;
+                    case 3:
+                        switchScene.SwitchToChapter3withOverlay(runtimeDataCh3.generalKeyOverlay);
+                        runtimeDataCh3.SetPostDone(ProgressChap3enum.Post316);
+                        break;
+                }
+            }
+        }
+        else if (btnCheck.IsActive())
+        {
+            ProveAnswer();
+            btnCheck.gameObject.SetActive(false);
+            btnNext.gameObject.SetActive(true);
+        }
     }
 
     private void ShowNextQuestion()
     {
-        currentQuestionIndex++;
+        //currentQuestionIndex++;
         UpdateProgressUI();
 
+        Debug.Log("quest indesx  " + currentQuestionIndex + " " + questions.Count);
         if (currentQuestionIndex == questions.Count)
         {
             Debug.Log("Zeit auzusteigen " + activeScene);
             switch (activeScene)
             {
                 case 1:
-                    switchScene.SwitchToChapter1withOverlay(runtimeDataCh1.generalKeyOverlay);
                     runtimeDataCh1.quiz119Done = true;
-                    break;
+                    Debug.Log("JETZT RAUS");
+                    //switchScene.SwitchToChapter1withOverlay(runtimeDataCh1.generalKeyOverlay);
+                    btnProcessAnswer.gameObject.SetActive(false);
+                    btnNext.gameObject.SetActive(true);
+                    return;
                 case 2:
                     switchScene.SwitchToChapter2withOverlay(runtimeDataCh2.generalKeyOverlay);
                     runtimeDataCh2.progressPost2111QuizDone = true;
@@ -295,12 +339,12 @@ public class ManagerQuizAllChap : MonoBehaviour
             questions[currentQuestionIndex].ShowData();
         }
     }
-
+ 
     private void Update()
     {
         if (quizTimer.IsTimeRunOut())
         {
-            ProcessAnswer();
+            Proceed();
             quizTimer.ResetTimeRunOut();
         }
     }

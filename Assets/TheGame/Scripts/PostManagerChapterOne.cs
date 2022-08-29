@@ -76,12 +76,13 @@ public class PostManagerChapterOne : MonoBehaviour
                 break;
         }
 
-        if (SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain)
-        {
-            currentCH = chapter.ch1;
-            runtimeDataCh1 = runtimeDataChapters.LoadChap1RuntimeData();
-        }
-        else if (SceneManager.GetActiveScene().name == GameScenes.ch02InstaMain)
+        //if (SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain)
+        //{
+        //    currentCH = chapter.ch1;
+        //    runtimeDataCh1 = runtimeDataChapters.LoadChap1RuntimeData();
+        //}
+        //else
+        if (SceneManager.GetActiveScene().name == GameScenes.ch02InstaMain)
         {
             currentCH = chapter.ch2;
             //runtimeDataCh1 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
@@ -166,13 +167,11 @@ public class PostManagerChapterOne : MonoBehaviour
     void ReduceVolumeBGMusic(float value)
     {
         audioSrcBGInsta.volume -= value;
-        Debug.Log("minus");
     }
 
     void IncreaseVolumeMusic(float value)
     {
         audioSrcBGInsta.volume += value;
-        Debug.Log("plus");
     }
 
     private void EnableDisableMusic(bool enable)
@@ -291,8 +290,8 @@ public class PostManagerChapterOne : MonoBehaviour
                 }
                 else if (runtimeDataCh1.overlaySoundState == OverlaySoundState.Opened)
                 {
-                    ReduceVolumeBGMusic(GameData.overlayVolumeInsta);
-                    runtimeDataCh1.overlaySoundState = OverlaySoundState.SoudAjusted;
+                    //ReduceVolumeBGMusic(GameData.overlayVolumeInsta);
+                    //runtimeDataCh1.overlaySoundState = OverlaySoundState.SoudAjusted;
                 }
                 break;
             case chapter.ch2:

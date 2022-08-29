@@ -159,7 +159,6 @@ public class Overlay : MonoBehaviour
             points = "error";
         }
 
-        Debug.Log(points);
         allOverlayChildren[OVERLAYDESCRIPTION].gameObject.GetComponent<TMP_Text>().text = $"Punkte: {points}\n" + postData.postDescription;
     }
 
