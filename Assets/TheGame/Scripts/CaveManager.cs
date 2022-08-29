@@ -10,6 +10,9 @@ using UnityEngine.UI;
 
 public class CaveManager : MonoBehaviour
 {
+    int frameCounter = 0;
+    float totalFrameTime, fps;
+
     public Cave cave;
     public Player player;
     public Character characterEnya, characterDad, characterGeorg;
@@ -31,6 +34,22 @@ public class CaveManager : MonoBehaviour
     private SoSfx sfx;
 
     public AudioSource baukipper, kran, water, bewetterung;
+
+    private void ShowFPS()
+    {
+        frameCounter++;
+        //float frameTime = Time.deltaTime;
+        totalFrameTime += Time.deltaTime;
+
+        if (totalFrameTime >= 1f)
+        {
+            int fps = Mathf.RoundToInt(frameCounter/totalFrameTime);
+            Debug.Log("FPS---------------------------- " + fps + " Counte:  " + frameCounter + " frame time " + totalFrameTime );
+            frameCounter = 0;
+            totalFrameTime -= 1f;
+            
+        }
+    }
 
     private void Awake()
     {
@@ -175,6 +194,8 @@ public class CaveManager : MonoBehaviour
 
     private void Update()
     {
+        ShowFPS();
+
         //set in false in update, set in true in tl finished;
         if (!introPlayedOneTime && speechManagerMine.IsMineEATalkingFinished())
         {
@@ -238,7 +259,7 @@ public class CaveManager : MonoBehaviour
             sfx.PlaySfxSole2();
         }
 
-        if (GetComponent<CoalmineWaypointManager>().IsBahnsteigCurrentWP() && runtimeData.trainArrived)
+        if (waypointManagerMine.IsBahnsteigCurrentWP() && runtimeData.trainArrived)
         {
             if(!sole3EnterTrainBtn.IsActive())
                 sole3EnterTrainBtn.gameObject.SetActive(true);

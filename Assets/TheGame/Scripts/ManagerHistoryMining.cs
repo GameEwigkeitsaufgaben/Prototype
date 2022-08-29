@@ -48,7 +48,7 @@ public class ManagerHistoryMining : MonoBehaviour
     {
         
         sliderCentury = Century.none;
-        btnBackToMuseum.interactable = false;
+        btnBackToMuseum.interactable = runtimeData.isMythDone;
 
         runtimeData.cursorDefault = null;
     }

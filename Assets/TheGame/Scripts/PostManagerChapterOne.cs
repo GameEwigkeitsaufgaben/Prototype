@@ -43,6 +43,11 @@ public class PostManagerChapterOne : MonoBehaviour
 
     public int logAufrufe = 0;
 
+    public void Start()
+    {
+        scrollbar.value = runtimeDataCh1.instaSliderPos;
+    }
+
     private void Awake()
     {
         audioSrcBGInsta = GetComponent<AudioSource>();
@@ -162,6 +167,16 @@ public class PostManagerChapterOne : MonoBehaviour
             
         }
         
+    }
+
+    public void SaveSliderPos()
+    {
+        switch (currentCH)
+        {
+            case chapter.ch1:
+                runtimeDataCh1.instaSliderPos = scrollbar.value;
+                break;
+        }
     }
 
     void ReduceVolumeBGMusic(float value)

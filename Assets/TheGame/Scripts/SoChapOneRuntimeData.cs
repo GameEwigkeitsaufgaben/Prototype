@@ -14,6 +14,7 @@ public class SoChapOneRuntimeData : Runtime
     public bool liftBtnsAllEnabled;
     public float playerRotation; //needed for lookaroundMouse
     public bool revisitEntryArea;
+    public bool revisitMuseum;
     public CoalmineStop currentCoalmineStop;
     public bool playerInsideCave;
     public bool trainArrived;
@@ -40,6 +41,8 @@ public class SoChapOneRuntimeData : Runtime
 
     [Header("GameProgress")]
     public bool post111Done, post112Done, post113Done, post114Done, video115Done, interaction116Done, interaction117Done, post118Done, quiz119Done, post1110Done;
+    internal float instaSliderPos;
+
     //progressCh1WithAdmin;
 
     public Animator GetKohlenhobelAnimator()
@@ -57,6 +60,8 @@ public class SoChapOneRuntimeData : Runtime
     }
     private void OnEnable()
     {
+        instaSliderPos = 1f;
+
         //posts
         post111Done = post112Done = post113Done = post114Done = post118Done = false;
         video115Done = false;
@@ -75,6 +80,7 @@ public class SoChapOneRuntimeData : Runtime
         liftBtnsAllEnabled = false;
         replayEntryArea = false;
         revisitEntryArea = false;
+        revisitMuseum = false;
         currentCoalmineStop = CoalmineStop.Unset;
         ch1GeneralUnlocked = false;
         ch2GrubenwasserUnlocked = false;
@@ -110,6 +116,9 @@ public class SoChapOneRuntimeData : Runtime
         sole1Done = sole2Done = sole3BewetterungDone = sole3GebaeudeDone = trainRideInDone = trainRideOutDone = isLongwallCutterDone = true;
 
         revisitEntryArea = true;
+        revisitMuseum = true;
+        replayInfoPointMuseum = replayMinerEquipment = replayWorld = replayHistoryMining = replayCoalification = true;
+        isMinerDone = isMythDone = isCarbonificationPeriodDone = isCoalifiationDone = true;
     }
 
     public void CheckInteraction117Done()

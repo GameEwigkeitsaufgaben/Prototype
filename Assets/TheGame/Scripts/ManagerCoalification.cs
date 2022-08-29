@@ -77,8 +77,7 @@ public class ManagerCoalification : MonoBehaviour
 
         if (btnGoToMuseum.interactable) return;
 
-        if (runtimeData.isCoalifiationDone) btnGoToMuseum.interactable = true;
-        
+        btnGoToMuseum.interactable = runtimeData.isCoalifiationDone;
     }
 
     public void GoBackToMuseum()

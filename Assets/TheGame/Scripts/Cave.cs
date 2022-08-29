@@ -51,11 +51,20 @@ public class Cave : MonoBehaviour
 
     private SoChapOneRuntimeData runtimeData;
 
+    private CaveDoor leftDoor, rightDoor;
+    private AudioSource sfxLeftDoor, sfxRightDoor;
+    private Vector3 tmpVector3;
+
     private void Awake()
     {
         Debug.Log("CAVE AWAKE");
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
+        leftDoor = doorLeft.GetComponent<CaveDoor>();
+        rightDoor = doorRight.GetComponent<CaveDoor>();
+        sfxLeftDoor = leftDoor.GetComponent<AudioSource>();
+        sfxRightDoor = rightDoor.GetComponent<AudioSource>();
+        tmpVector3 = Vector3.zero;
     }
 
     private void Start()
@@ -142,27 +151,27 @@ public class Cave : MonoBehaviour
 
     public void CloseDoors()
     {
-        doorLeft.GetComponent<CaveDoor>().CloseDoor();
-        doorRight.GetComponent<CaveDoor>().CloseDoor();
+        leftDoor.CloseDoorAnim();
+        rightDoor.CloseDoorAnim();
         caveDoorsClosed = true;
         PlayDoorMoveSound();
     }
 
     public void OpenDoors()
     {
-        doorLeft.GetComponent<CaveDoor>().OpenDoor();
-        doorRight.GetComponent<CaveDoor>().OpenDoor();
+        leftDoor.OpenDoorAnim();
+        rightDoor.OpenDoorAnim();
         caveDoorsClosed = false;
         PlayDoorMoveSound();
     }
 
     private void PlayDoorMoveSound()
     {
-        if (!doorRight.GetComponent<CaveDoor>().GetComponent<AudioSource>().isPlaying &&
-                   !doorLeft.GetComponent<CaveDoor>().GetComponent<AudioSource>().isPlaying)
+        if (!sfxRightDoor.isPlaying &&
+                   !sfxLeftDoor.isPlaying)
         {
-            doorLeft.GetComponent<CaveDoor>().PlayMoveSfx();
-            doorRight.GetComponent<CaveDoor>().PlayMoveSfx();
+            leftDoor.PlayMoveSfx();
+            rightDoor.PlayMoveSfx();
         }
     }
 
@@ -192,7 +201,7 @@ public class Cave : MonoBehaviour
     //{
     //    currentStop = targetStop = CoalmineStop.Sole3;
     //    var tempPosCavePos = new Vector3(GameData.cavePosX, GameData.cavePosY, GameData.cavePosZ);
-        
+
     //    gameObject.transform.position = tempPosCavePos;
     //    StopCave();
     //    if (caveDoorsClosed)
@@ -201,17 +210,34 @@ public class Cave : MonoBehaviour
     //    }
     //}
 
-    private void Update()
+    private void FixedUpdate()
     {
-        runtimeData.CheckInteraction116Done();
-
         if (GameData.moveCave)
         {
             GameData.moveDirection = (int)moveDirection;
             // No shake! transform.position += new Vector3(0, (int)moveDirection * caveSpeed*0.01f, 0);
-            transform.position += new Vector3(0, (int)moveDirection * caveSpeed * Mathf.Clamp(Time.deltaTime, -0.006f, 0.006f), 0);
+            float tmpY = (int)moveDirection * caveSpeed * Mathf.Clamp(Time.deltaTime, -0.006f, 0.006f);
+            tmpVector3.Set(0f, tmpY, 0f);
+            transform.position += tmpVector3;
+            //transform.position += new Vector3(0, (int)moveDirection * caveSpeed * Mathf.Clamp(Time.deltaTime, -0.006f, 0.006f), 0);
             return;
         }
+    }
+
+    private void Update()
+    {
+        runtimeData.CheckInteraction116Done();
+
+        //if (GameData.moveCave)
+        //{
+        //    GameData.moveDirection = (int)moveDirection;
+        //    // No shake! transform.position += new Vector3(0, (int)moveDirection * caveSpeed*0.01f, 0);
+        //    float tmpY = (int)moveDirection * caveSpeed * Mathf.Clamp(Time.deltaTime, -0.006f, 0.006f);
+        //    tmpVector3.Set(0f, tmpY, 0f);
+        //    transform.position += tmpVector3;
+        //    //transform.position += new Vector3(0, (int)moveDirection * caveSpeed * Mathf.Clamp(Time.deltaTime, -0.006f, 0.006f), 0);
+        //    return;
+        //}
 
         if (!runtimeData.replayEntryArea) return;
 

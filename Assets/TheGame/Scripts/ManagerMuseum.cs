@@ -28,27 +28,32 @@ public class ManagerMuseum : MonoBehaviour
 
     private void Awake()
     {
-        runtimeDataCh1 = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
+        runtimeDataCh1 = runtimeDataChapters.LoadChap1RuntimeData();
+        audioSrcBGMusic = gameObject.GetComponent<AudioSource>();
+        btnExitImage = btnExitMuseum.GetComponent<Image>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
         walkingGroup.SetCharcters(characterDad, characterGuide, waitingGuide);
-        audioSrcBGMusic = gameObject.GetComponent<AudioSource>();
         runtimeDataCh1.soundSettingMuseum = SoundMuseum.Showroom;
+        btnExitImage.gameObject.GetComponent<Button>().interactable = false;
 
-        if(runtimeDataCh1.currentMuseumWaypoint != MuseumWaypoints.WP0)
+        if (runtimeDataCh1.currentMuseumWaypoint != MuseumWaypoints.WP0)
         {
             SetInMuseumGroup();
+            btnReplayTalkingList.gameObject.SetActive(true);
         }
-       
-        btnExitImage = btnExitMuseum.GetComponent<Image>();
-        btnExitImage.gameObject.GetComponent<Button>().interactable = false;
-        btnReplayTalkingList.gameObject.SetActive(false);
-        museumDoneSet = false;
+        else
+        {
+            btnReplayTalkingList.gameObject.SetActive(false);
+        }
+        
+        museumDoneSet = runtimeDataCh1.revisitMuseum;
     }
 
     // Update is called once per frame
@@ -81,6 +86,8 @@ public class ManagerMuseum : MonoBehaviour
             if (speechManagerCh1.IsTalkingListFinished(GameData.NameCH1TLMuseumOutro))
             {
                 switchScene.SwitchToChapter1withOverlay(GameData.NameOverlay117);
+                runtimeDataCh1.interaction117Done = true;
+                runtimeDataCh1.revisitMuseum = true;
             }
 
         }

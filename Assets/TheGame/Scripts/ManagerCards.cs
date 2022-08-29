@@ -28,7 +28,7 @@ public class ManagerCards : MonoBehaviour
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
 
         myConfig = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
-        btnProceed.interactable = false;
+        btnProceed.interactable = runtimeDataCh1.isCarbonificationPeriodDone;
     }
 
     private void Start()

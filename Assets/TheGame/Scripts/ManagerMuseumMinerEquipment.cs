@@ -58,7 +58,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
 
     void Start()
     {
-        btnGoToMuseum.interactable = false;
+        btnGoToMuseum.interactable = runtimeData.isMinerDone;
         tries = 0;
 
         foreach (MuseumMinerEquipmentItem i in items)

@@ -41,10 +41,13 @@ public class MuseumPlayer : MonoBehaviour
     private GameObject characterDad, characterGuide, waitingGuide;
     //public bool switchToGuide;
 
+    Vector3 posInfoVector3;
+
     private void Awake()
     {
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         configMuseum = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
+        posInfoVector3 = new Vector3(-16.856f, 2.4f, 12.94951f);
     }
 
     void Start()
@@ -52,12 +55,18 @@ public class MuseumPlayer : MonoBehaviour
         mySplineMove = gameObject.GetComponent<splineMove>();
         mySplineMove.ChangeSpeed(50.0f);
 
-        if (runtimeData.currentMuseumWaypoint == MuseumWaypoints.WP0) 
+        Debug.Log("In MuSEUM Waypoints");
+
+        if (runtimeData.currentMuseumWaypoint == MuseumWaypoints.WP0)
+        {
             ShowOnlyInfo();
+            
+        }
         else if (runtimeData.currentMuseumWaypoint != MuseumWaypoints.WP0)
         {
             gameObject.transform.localPosition = runtimeData.currentGroupPos;
             currentWP = targetWP = runtimeData.currentMuseumWaypoint;
+            Debug.Log("IN != WP0" + currentWP); 
             ShowOtherStations(currentWP);
         }
     }
@@ -167,7 +176,7 @@ public class MuseumPlayer : MonoBehaviour
 
         if (currentWP == MuseumWaypoints.WPInfo)
         {
-            Debug.Log("wp reached ------------------- INFOOOOOOOOOOOOOOOO");
+            Debug.Log("wp reached ------------------- INFOOOOOOOOOOOOOOOO: ......... " + gameObject.transform.localPosition);
             btnWPInfo.gameObject.SetActive(false);
             overlay.ActivateOverlay(MuseumWaypoints.WPInfo);
             

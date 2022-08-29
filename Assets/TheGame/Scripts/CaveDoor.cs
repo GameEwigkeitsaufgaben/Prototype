@@ -21,12 +21,12 @@ public class CaveDoor : MonoBehaviour
         }
     }
 
-    public void CloseDoor()
+    public void CloseDoorAnim()
     {
         anim.SetBool("move", false);
     }
 
-    public void OpenDoor()
+    public void OpenDoorAnim()
     {
         anim.SetBool("move",true);
     }
