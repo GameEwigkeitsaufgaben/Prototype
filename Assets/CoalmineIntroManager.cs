@@ -98,9 +98,9 @@ public class CoalmineIntroManager : MonoBehaviour
                     mySpeechManger.playCaveIntroNotAllDone = true;
                 }
 
-                georg.ChangeCharacterImage(stop);
-                dad.ChangeCharacterImage(stop);
-                enya.ChangeCharacterImage(stop);
+                if(georg != null) georg.ChangeCharacterImage(stop);
+                if(dad != null) dad.ChangeCharacterImage(stop);
+                if(enya != null) enya.ChangeCharacterImage(stop);
 
                 audioStarted = true;
             }

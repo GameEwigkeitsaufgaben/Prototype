@@ -56,6 +56,9 @@ public class SpeechBubble : MonoBehaviour
         }
 
         bubbleImage.sprite = gameIcons.speechBubble;
+        if (bubbleButton.GetComponent<Image>() == null) return;
+
+        //ToDo evt. weg
         bubbleButton.GetComponent<Image>().sprite = gameIcons.talking;
     }
 

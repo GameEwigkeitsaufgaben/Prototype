@@ -52,8 +52,7 @@ public class CoalmineWaypointManager : MonoBehaviour
     private SoSfx sfx;
 
     [Header("Assigned during runtime")]
-    [SerializeField]
-    private Button wps1ViewpointBtn, wps2ViewpointBtn, wps3ViewpointBtn;
+    public Button wps1ViewpointBtn, wps2ViewpointBtn, wps3ViewpointBtn;
     
     [SerializeField] 
     private Button runtimeViewpointBtn, caveBtn, bahnsteigBtn, bewetterungBtn, ovmineBtn;

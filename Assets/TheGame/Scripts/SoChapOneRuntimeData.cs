@@ -33,12 +33,13 @@ public class SoChapOneRuntimeData : Runtime
     public bool replayCoalmineIntro;
     public bool replayInfoPointMuseum, replayMinerEquipment, replayWorld, replayHistoryMining, replayCoalification;
     public bool replayS1Cave, replayS2Cave, replayS3Cave;
+    public bool replayLwcBahnsteig;
 
     public string generalKeyOverlay = GameData.NameOverlay1110;
 
 
     [Header("GameProgress")]
-    public bool post111Done, post112Done, post113Done, post114Done, video115Done, interaction116Done, interaction117Done, quiz119Done;
+    public bool post111Done, post112Done, post113Done, post114Done, video115Done, interaction116Done, interaction117Done, post118Done, quiz119Done, post1110Done;
     //progressCh1WithAdmin;
 
     public Animator GetKohlenhobelAnimator()
@@ -56,10 +57,21 @@ public class SoChapOneRuntimeData : Runtime
     }
     private void OnEnable()
     {
+        //posts
+        post111Done = post112Done = post113Done = post114Done = post118Done = false;
+        video115Done = false;
+        interaction116Done = interaction117Done = quiz119Done = false;
+
+        //quiz
         quizPointsCh01 = "";
         quizPointsOverall = 0;
+        
+        //Insta
         hintPostUnlock = "";
-        post111Done = post112Done = post113Done = post114Done = false;
+        postOverlayToLoad = "";
+        musicOn = true;
+
+        //coalmine
         liftBtnsAllEnabled = false;
         replayEntryArea = false;
         revisitEntryArea = false;
@@ -67,28 +79,26 @@ public class SoChapOneRuntimeData : Runtime
         ch1GeneralUnlocked = false;
         ch2GrubenwasserUnlocked = false;
         trainArrived = viewPointS3passed = false;
-        postOverlayToLoad = "";
         playerInsideCave = false;
-        video115Done = false;
         currentGroupPos = Vector3.zero;
         currentMuseumWaypoint = MuseumWaypoints.WP0;
         playerRotation = 0f;
         isMinerDone = isMythDone = isCarbonificationPeriodDone = isCoalifiationDone = false;
         sole1Done = sole2Done = sole3BewetterungDone = sole3GebaeudeDone = trainRideInDone = trainRideOutDone = isLongwallCutterDone = false;
-        interaction116Done = interaction117Done = quiz119Done = false;
-        musicOn = true;
         currDragItemExists = false;
         replayInfoPointMuseum = replayMinerEquipment = replayWorld = replayHistoryMining = replayCoalification =  false;
         replayCoalmineIntro = false;
         replayS1Cave = false;
         replayS2Cave = false;
         replayS3Cave = false;
+        replayLwcBahnsteig = false;
     }
 
     public void SetAllDone()
     {
         //Posts Done incl. Video finished;
-        post111Done = post112Done = post113Done = post114Done = video115Done = interaction116Done = interaction117Done = quiz119Done = true;
+        post111Done = post112Done = post113Done = post114Done = video115Done = interaction116Done = interaction117Done = 
+            interaction117Done = post118Done = quiz119Done = post1110Done = true;
 
         //Coalmine all stations done;
         replayCoalmineIntro = true; 
@@ -96,7 +106,10 @@ public class SoChapOneRuntimeData : Runtime
         replayS1Cave = true;
         replayS2Cave = true;
         replayS3Cave = true;
+        replayLwcBahnsteig = true;
         sole1Done = sole2Done = sole3BewetterungDone = sole3GebaeudeDone = trainRideInDone = trainRideOutDone = isLongwallCutterDone = true;
+
+        revisitEntryArea = true;
     }
 
     public void CheckInteraction117Done()

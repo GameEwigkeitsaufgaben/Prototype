@@ -8,9 +8,9 @@ public class KohlehobelManager : MonoBehaviour
     public CoalmineSpeechManger speechManager;
     public LongwallCutterWaypointManager lwcManager;
     public Character enya, georg, dad;
-    public Button btnLwcViewpoint, btnLwcExit;
+    public Button btnLwcViewpoint, btnLwcExit, btnReplayTalkingList;
 
-    private SoChapOneRuntimeData runtimeData01;
+    private SoChapOneRuntimeData runtimeDataCh1;
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoSfx sfx;
     public AudioSource audioSrcBewetterung, audioSrcLwc;
@@ -18,7 +18,7 @@ public class KohlehobelManager : MonoBehaviour
     private void Awake()
     {
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
-        runtimeData01 = runtimeDataChapters.LoadChap1RuntimeData();
+        runtimeDataCh1 = runtimeDataChapters.LoadChap1RuntimeData();
         sfx = runtimeDataChapters.LoadSfx();
     }
 
@@ -32,25 +32,48 @@ public class KohlehobelManager : MonoBehaviour
 
         btnLwcViewpoint.interactable = false;
         btnLwcExit.interactable = false;
+        btnReplayTalkingList.gameObject.SetActive(false);
 
-        Invoke("StartViewpointBahnsteig", 2.0f);
+        if(!runtimeDataCh1.isLongwallCutterDone) Invoke("StartViewpointBahnsteig", 2.0f);
 
         lwcManager.RotateCharacters(-114.0f, -53.0f, -80.0f);
         myPlayer.SetPlayerRotation(0f,false);
 
+
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorTexture3DCave);
+
+        if (runtimeDataCh1.isLongwallCutterDone)
+        {
+            btnReplayTalkingList.gameObject.SetActive(true);
+            btnLwcViewpoint.interactable = true;
+            btnLwcExit.interactable = true;
+        }
         //runtimeDataChapters.sceneCursor = runtimeData01.cursorTexture3DCave;
         //Cursor.SetCursor(runtimeDataChapters.sceneCursor, Vector2.zero, CursorMode.Auto);
     }
 
+
+    public void ReplayTalkingList()
+    {
+        if (lwcManager.StandingOnBahnsteig())
+        {
+            speechManager.playLongwallCutterBahnsteig = true;
+        }
+        else if(lwcManager.GetCurrentLongWallCutterWP() == MineWayPoints.viewpointLWLWCutter)
+        {
+            speechManager.playLongwallCutterLongwallCutter = true;
+        }
+       // if(runtimeDataCh1.currentMuseumWaypoint == Mu)
+    }
+
     public void StartAnimKohlenhobel()
     {
-        if (!runtimeData01.GetKohlenhobelAnimator().GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        if (!runtimeDataCh1.GetKohlenhobelAnimator().GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
-            runtimeData01.GetKohlenhobelAnimator().SetTrigger("backToIdle");
+            runtimeDataCh1.GetKohlenhobelAnimator().SetTrigger("backToIdle");
         }
 
-        runtimeData01.GetKohlenhobelAnimator().SetTrigger("play");
+        runtimeDataCh1.GetKohlenhobelAnimator().SetTrigger("play");
         audioSrcLwc.Play();
     }
 
@@ -80,16 +103,25 @@ public class KohlehobelManager : MonoBehaviour
         speechManager.playLongwallCutterBahnsteig = true;
     }
 
+    public void GoToTrainRideOut()
+    {
+        speechManager.StopRunningTL();
+        switchScene.GoToTrainRideOut();
+    }
+
 
     private void Update()
     {
         if (!btnLwcViewpoint.interactable && speechManager.IsLWCBahnsteigFinished())
         {
             btnLwcViewpoint.interactable = true;
+            runtimeDataCh1.replayLwcBahnsteig = true;
+            btnReplayTalkingList.gameObject.SetActive(true);
         }
         else if (!btnLwcExit.interactable && speechManager.IsLWCLWCFinished())
         {
             btnLwcExit.interactable = true;
+            runtimeDataCh1.isLongwallCutterDone = true;
         }
     }
 }

@@ -9,13 +9,6 @@ using UnityEngine.SceneManagement;
 
 public class Entry : MonoBehaviour
 {
-   // private const string Entry115 = "Entry115";
-   // private const string Entry116 = "Entry116";
-   // private const string Entry1110 = "Entry1110";
-   // private const string Entry117 = "Entry117";
-   // private const string Entry118 = "Entry118";
-   // private const string Entry119 = "Entry119";
-   // private const float changeVolumeAmount = 0.15f;
     public GameObject post;
     public GameObject overlay;
     public SoPostData postData;
@@ -27,9 +20,9 @@ public class Entry : MonoBehaviour
 
     private OverlayType overlayType; // Enum
     private SoSfx sfx;
-    private SoChapOneRuntimeData runtimeData;
-    private SoChapTwoRuntimeData runtimeDataCh02;
-    private SoChapThreeRuntimeData runtimeDataCh03;
+    private SoChapOneRuntimeData runtimeDataCh1;
+    private SoChapTwoRuntimeData runtimeDataCh2;
+    private SoChapThreeRuntimeData runtimeDataCh3;
     private Color fbDoneColor = GameColors.instaPostDone;
     private Color fbInProgress = GameColors.defaultTextColor;
 
@@ -38,9 +31,9 @@ public class Entry : MonoBehaviour
     {
         if (fbDone != null) fbDone.color = fbInProgress;
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
-        runtimeDataCh02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
-        runtimeDataCh03 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
+        runtimeDataCh1 = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        runtimeDataCh2 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
+        runtimeDataCh3 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
 
         post.GetComponent<Post>().SetPostData(postData);
         overlay.GetComponent<Overlay>().SetOverlayData(postData);
@@ -77,76 +70,84 @@ public class Entry : MonoBehaviour
 
         if(overlay.name == GameData.NameOverlay111)
         {
-            runtimeData.post111Done = true;
+            runtimeDataCh1.post111Done = true;
         }
         else if (overlay.name == GameData.NameOverlay112)
         {
-            runtimeData.post112Done = true;
+            runtimeDataCh1.post112Done = true;
         }
         else if (overlay.name == GameData.NameOverlay113)
         {
-            runtimeData.post113Done = true;
+            runtimeDataCh1.post113Done = true;
         }
         else if (overlay.name == GameData.NameOverlay114)
         {
-            runtimeData.post114Done = true;
+            runtimeDataCh1.post114Done = true;
+        }
+        else if (overlay.name == GameData.NameOverlay118)
+        {
+            runtimeDataCh1.post118Done = true;
+        }
+        else if (overlay.name == GameData.NameOverlay1110)
+        {
+            runtimeDataCh1.post1110Done = true;
         }
         else if (overlay.name == GameData.NameOverlay213)
         {
-            runtimeDataCh02.progressPost213Done = true;
+            runtimeDataCh2.progressPost213Done = true;
         }
         else if (overlay.name == GameData.NameOverlay214)
         {
-            runtimeDataCh02.progressPost214Done = true;
+            runtimeDataCh2.progressPost214Done = true;
         }
         else if (overlay.name == GameData.NameOverlay216)
         {
-            runtimeDataCh02.progressPost216Done = true;
+            runtimeDataCh2.progressPost216Done = true;
         }
         else if (overlay.name == GameData.NameOverlay217)
         {
-            runtimeDataCh02.progressPost217Done = true;
+            runtimeDataCh2.progressPost217Done = true;
         }
         else if (overlay.name == GameData.NameOverlay33)
         {
-            runtimeDataCh03.SetPostDone(ProgressChap3enum.Post33);
+            runtimeDataCh3.SetPostDone(ProgressChap3enum.Post33);
         }
         else if (overlay.name == GameData.NameOverlay34)
         {
-            runtimeDataCh03.SetPostDone(ProgressChap3enum.Post34);
+            runtimeDataCh3.SetPostDone(ProgressChap3enum.Post34);
         }
         else if (overlay.name == GameData.NameOverlay35)
         {
-            runtimeDataCh03.SetPostDone(ProgressChap3enum.Post35);
+            runtimeDataCh3.SetPostDone(ProgressChap3enum.Post35);
         }
         else if (overlay.name == GameData.NameOverlay36)
         {
-            runtimeDataCh03.SetPostDone(ProgressChap3enum.Post36);
+            runtimeDataCh3.SetPostDone(ProgressChap3enum.Post36);
         }
         else if (overlay.name == GameData.NameOverlay37)
         {
-            runtimeDataCh03.SetPostDone(ProgressChap3enum.Post37);
+            runtimeDataCh3.SetPostDone(ProgressChap3enum.Post37);
         }
         else if (overlay.name == GameData.NameOverlay38)
         {
-            runtimeDataCh03.SetPostDone(ProgressChap3enum.Post38);
+            runtimeDataCh3.SetPostDone(ProgressChap3enum.Post38);
         }
         else if (overlay.name == GameData.NameOverlay39)
         {
-            runtimeDataCh03.SetPostDone(ProgressChap3enum.Post39);
+            runtimeDataCh3.SetPostDone(ProgressChap3enum.Post39);
         }
         else if (overlay.name == GameData.NameOverlay313)
         {
-            runtimeDataCh03.SetPostDone(ProgressChap3enum.Post313);
+            runtimeDataCh3.SetPostDone(ProgressChap3enum.Post313);
         }
         else if (overlay.name == GameData.NameOverlay315)
         {
-            runtimeDataCh03.SetPostDone(ProgressChap3enum.Post315);
+            runtimeDataCh3.SetPostDone(ProgressChap3enum.Post315);
         }
 
-        if (runtimeData.musicOn)
+        if (runtimeDataCh1.musicOn)
         {
-            runtimeData.overlaySoundState = OverlaySoundState.Opened;
+            runtimeDataCh1.overlaySoundState = OverlaySoundState.Opened;
             //sfx.ReduceVolume(sfx.instaMenuBGmusicLoop, changeVolumeAmount);
         }
     }
@@ -154,7 +155,7 @@ public class Entry : MonoBehaviour
     public void CloseOverlay()
     {
         overlay.GetComponent<Overlay>().CloseOverlay();
-        if (runtimeData.musicOn)
+        if (runtimeDataCh1.musicOn)
         {
             //sfx.IncreaseVolume(sfx.instaMenuBGmusicLoop, changeVolumeAmount);
             //if (!sfx.IsInstaBGMusicPlaying())
@@ -171,17 +172,17 @@ public class Entry : MonoBehaviour
         if (fbDone.color == fbDoneColor) return;
 
         bool setColorDone = false;
-        Debug.Log("------------------------------------------------");
-        if (gameObject.name == GameData.NameEntry111 && runtimeData.post111Done) setColorDone = true;
-        else if (gameObject.name == GameData.NameEntry112 && runtimeData.post112Done) setColorDone = true;
-        else if (gameObject.name == GameData.NameEntry113 && runtimeData.post113Done) setColorDone = true;
-        else if (gameObject.name == GameData.NameEntry114 && runtimeData.post114Done) setColorDone = true;
-        else if (gameObject.name == GameData.NameEntry115 && runtimeData.video115Done) setColorDone = true;
-        else if (gameObject.name == GameData.NameEntry116 && runtimeData.interaction116Done) setColorDone = true;
-        else if (gameObject.name == GameData.NameEntry117 && runtimeData.interaction117Done) setColorDone = true;
-        //else if (gameObject.name == GameData.NameEntry118 && runtimeData.post117Done) setColorDone = true;
-        else if (gameObject.name == GameData.NameEntry119 && runtimeData.quiz119Done) setColorDone = true;
-        //else if (gameObject.name == GameData.NameEntry1110 && runtimeData.post117Done) setColorDone = true;
+        Debug.Log("-------------------------------" + fbDone.color + " " + fbDoneColor);
+        if (gameObject.name == GameData.NameEntry111 && runtimeDataCh1.post111Done) setColorDone = true;
+        else if (gameObject.name == GameData.NameEntry112 && runtimeDataCh1.post112Done) setColorDone = true;
+        else if (gameObject.name == GameData.NameEntry113 && runtimeDataCh1.post113Done) setColorDone = true;
+        else if (gameObject.name == GameData.NameEntry114 && runtimeDataCh1.post114Done) setColorDone = true;
+        else if (gameObject.name == GameData.NameEntry115 && runtimeDataCh1.video115Done) setColorDone = true;
+        else if (gameObject.name == GameData.NameEntry116 && runtimeDataCh1.interaction116Done) setColorDone = true;
+        else if (gameObject.name == GameData.NameEntry117 && runtimeDataCh1.interaction117Done) setColorDone = true;
+        else if (gameObject.name == GameData.NameEntry118 && runtimeDataCh1.post118Done) setColorDone = true;
+        else if (gameObject.name == GameData.NameEntry119 && runtimeDataCh1.quiz119Done) setColorDone = true;
+        else if (gameObject.name == GameData.NameEntry1110 && runtimeDataCh1.post1110Done) setColorDone = true;
 
         if (!setColorDone) return;
         Debug.Log("------------------------------------------------" + gameObject.name);
@@ -196,35 +197,35 @@ public class Entry : MonoBehaviour
 
             if (post.GetComponent<Post>().isPostLocked())
             {
-                if(gameObject.name == GameData.NameEntry113 && runtimeData.post111Done && runtimeData.post112Done)
+                if(gameObject.name == GameData.NameEntry113 && runtimeDataCh1.post111Done && runtimeDataCh1.post112Done)
                 {
                     post.GetComponent<Post>().UnlockPost();
                 }
-                else if (gameObject.name == GameData.NameEntry114 && runtimeData.post111Done && runtimeData.post112Done)
+                else if (gameObject.name == GameData.NameEntry114 && runtimeDataCh1.post111Done && runtimeDataCh1.post112Done)
                 {
                     post.GetComponent<Post>().UnlockPost();
                 }
-                else if (gameObject.name == GameData.NameEntry115 && runtimeData.post113Done && runtimeData.post114Done)
+                else if (gameObject.name == GameData.NameEntry115 && runtimeDataCh1.post113Done && runtimeDataCh1.post114Done)
                 {
                     post.GetComponent<Post>().UnlockPost();
                 }
-                else if (gameObject.name == GameData.NameEntry116 && runtimeData.video115Done)
+                else if (gameObject.name == GameData.NameEntry116 && runtimeDataCh1.video115Done)
                 {
                     post.GetComponent<Post>().UnlockPost();
                 }
-                else if (gameObject.name == GameData.NameEntry117 && runtimeData.interaction116Done)
+                else if (gameObject.name == GameData.NameEntry117 && runtimeDataCh1.interaction116Done)
                 {
                     post.GetComponent<Post>().UnlockPost();
                 }
-                else if (gameObject.name == GameData.NameEntry118 && runtimeData.interaction117Done)
+                else if (gameObject.name == GameData.NameEntry118 && runtimeDataCh1.interaction117Done)
                 {
                     post.GetComponent<Post>().UnlockPost();
                 }
-                else if (gameObject.name == GameData.NameEntry119 && runtimeData.interaction117Done)
+                else if (gameObject.name == GameData.NameEntry119 && runtimeDataCh1.interaction117Done)
                 {
                     post.GetComponent<Post>().UnlockPost();
                 }
-                else if (gameObject.name == GameData.NameEntry1110 && runtimeData.quiz119Done)
+                else if (gameObject.name == GameData.NameEntry1110 && runtimeDataCh1.quiz119Done)
                 {
                     post.GetComponent<Post>().UnlockPost();
                     overlay.GetComponent<Overlay>().UpdateOverlayText();
@@ -234,50 +235,50 @@ public class Entry : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == GameScenes.ch02InstaMain)
         {
-            if (gameObject.name == GameData.NameEntry2112 && runtimeDataCh02.progressPost2111QuizDone)
+            if (gameObject.name == GameData.NameEntry2112 && runtimeDataCh2.progressPost2111QuizDone)
             {
                 overlay.GetComponent<Overlay>().UpdateOverlayText();
             }
 
             if (!post.GetComponent<Post>().isPostLocked()) return;
 
-            if(gameObject.name == GameData.NameEntry213 && runtimeDataCh02.progress212MuseumDone)
+            if(gameObject.name == GameData.NameEntry213 && runtimeDataCh2.progress212MuseumDone)
             {
                 post.GetComponent<Post>().UnlockPost();
             }
-            else if (gameObject.name == GameData.NameEntry214 && runtimeDataCh02.progress212MuseumDone)
+            else if (gameObject.name == GameData.NameEntry214 && runtimeDataCh2.progress212MuseumDone)
             {
                 post.GetComponent<Post>().UnlockPost();
             }
-            else if (gameObject.name == GameData.NameEntry215 && runtimeDataCh02.progressPost213Done && runtimeDataCh02.progressPost214Done)
+            else if (gameObject.name == GameData.NameEntry215 && runtimeDataCh2.progressPost213Done && runtimeDataCh2.progressPost214Done)
             {
                 post.GetComponent<Post>().UnlockPost();
             }
-            else if (gameObject.name == GameData.NameEntry216 && runtimeDataCh02.progressPost215Done)
+            else if (gameObject.name == GameData.NameEntry216 && runtimeDataCh2.progressPost215Done)
             {
                 post.GetComponent<Post>().UnlockPost();
             }
-            else if (gameObject.name == GameData.NameEntry217 && runtimeDataCh02.progressPost215Done)
+            else if (gameObject.name == GameData.NameEntry217 && runtimeDataCh2.progressPost215Done)
             {
                 post.GetComponent<Post>().UnlockPost();
             }
-            else if (gameObject.name == GameData.NameEntry218 && runtimeDataCh02.progressPost216Done && runtimeDataCh02.progressPost217Done)
+            else if (gameObject.name == GameData.NameEntry218 && runtimeDataCh2.progressPost216Done && runtimeDataCh2.progressPost217Done)
             {
                 post.GetComponent<Post>().UnlockPost();
             }
-            else if (gameObject.name == GameData.NameEntry219 && runtimeDataCh02.progressPost218PyritDone)
+            else if (gameObject.name == GameData.NameEntry219 && runtimeDataCh2.progressPost218PyritDone)
             {
                 post.GetComponent<Post>().UnlockPost();
             }
-            else if (gameObject.name == GameData.NameEntry2110 && runtimeDataCh02.progressPost219VideoDone)
+            else if (gameObject.name == GameData.NameEntry2110 && runtimeDataCh2.progressPost219VideoDone)
             {
                 post.GetComponent<Post>().UnlockPost();
             }
-            else if (gameObject.name == GameData.NameEntry2111 && runtimeDataCh02.progressPost2110GWReinigungDone)
+            else if (gameObject.name == GameData.NameEntry2111 && runtimeDataCh2.progressPost2110GWReinigungDone)
             {
                 post.GetComponent<Post>().UnlockPost();
             }
-            else if (gameObject.name == GameData.NameEntry2112 && runtimeDataCh02.progressPost2111QuizDone)
+            else if (gameObject.name == GameData.NameEntry2112 && runtimeDataCh2.progressPost2111QuizDone)
             {
                 Debug.Log("Quiz solved: ");
                 post.GetComponent<Post>().UnlockPost();
@@ -290,7 +291,7 @@ public class Entry : MonoBehaviour
         {
             if (!post.GetComponent<Post>().isPostLocked()) return;
 
-            if (runtimeDataCh03.IsPostDone(ProgressChap3enum.Post32))
+            if (runtimeDataCh3.IsPostDone(ProgressChap3enum.Post32))
             {
                 if(gameObject.name == GameData.NameEntry33) post.GetComponent<Post>().UnlockPost();
                 else if (gameObject.name == GameData.NameEntry34) post.GetComponent<Post>().UnlockPost();
@@ -301,28 +302,28 @@ public class Entry : MonoBehaviour
             }
 
             if ((gameObject.name == GameData.NameEntry39 || gameObject.name == GameData.NameEntry310) &&
-                runtimeDataCh03.IsPostDone(ProgressChap3enum.Post33) &&
-                runtimeDataCh03.IsPostDone(ProgressChap3enum.Post34) &&
-                runtimeDataCh03.IsPostDone(ProgressChap3enum.Post35) &&
-                runtimeDataCh03.IsPostDone(ProgressChap3enum.Post36) &&
-                runtimeDataCh03.IsPostDone(ProgressChap3enum.Post37) &&
-                runtimeDataCh03.IsPostDone(ProgressChap3enum.Post38))
+                runtimeDataCh3.IsPostDone(ProgressChap3enum.Post33) &&
+                runtimeDataCh3.IsPostDone(ProgressChap3enum.Post34) &&
+                runtimeDataCh3.IsPostDone(ProgressChap3enum.Post35) &&
+                runtimeDataCh3.IsPostDone(ProgressChap3enum.Post36) &&
+                runtimeDataCh3.IsPostDone(ProgressChap3enum.Post37) &&
+                runtimeDataCh3.IsPostDone(ProgressChap3enum.Post38))
             {
                 post.GetComponent<Post>().UnlockPost();
             }
 
-            else if (gameObject.name == GameData.NameEntry311 && runtimeDataCh03.IsPostDone(ProgressChap3enum.Post310)) post.GetComponent<Post>().UnlockPost();
-            else if (gameObject.name == GameData.NameEntry312 && runtimeDataCh03.IsPostDone(ProgressChap3enum.Post311)) post.GetComponent<Post>().UnlockPost();
+            else if (gameObject.name == GameData.NameEntry311 && runtimeDataCh3.IsPostDone(ProgressChap3enum.Post310)) post.GetComponent<Post>().UnlockPost();
+            else if (gameObject.name == GameData.NameEntry312 && runtimeDataCh3.IsPostDone(ProgressChap3enum.Post311)) post.GetComponent<Post>().UnlockPost();
 
             else if (gameObject.name == GameData.NameEntry313 || gameObject.name == GameData.NameEntry314)
             {
-                if (runtimeDataCh03.IsPostDone(ProgressChap3enum.Post312)) post.GetComponent<Post>().UnlockPost();
+                if (runtimeDataCh3.IsPostDone(ProgressChap3enum.Post312)) post.GetComponent<Post>().UnlockPost();
             }
 
             else if (gameObject.name == GameData.NameEntry316)
             {
                 Debug.Log("in entry: " + GameData.NamePost316 + " " + gameObject.name + " " + ProgressChap3enum.Post315.ToString());
-                if (runtimeDataCh03.IsPostDone(ProgressChap3enum.Post315))
+                if (runtimeDataCh3.IsPostDone(ProgressChap3enum.Post315))
                 {
                     post.GetComponent<Post>().UnlockPost();
                 }
@@ -330,7 +331,7 @@ public class Entry : MonoBehaviour
 
             else if (gameObject.name == GameData.NameEntry317)
             {
-                if (runtimeDataCh03.IsPostDone(ProgressChap3enum.Post316))
+                if (runtimeDataCh3.IsPostDone(ProgressChap3enum.Post316))
                 {
                     Debug.Log("Quiz solved: ");
                     post.GetComponent<Post>().UnlockPost();

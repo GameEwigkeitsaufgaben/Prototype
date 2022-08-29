@@ -195,6 +195,11 @@ public class CoalmineSpeechManger : MonoBehaviour
         }
     }
 
+    public void StopRunningTL()
+    {
+        mySrc.Stop();
+    }
+
     void EnableListAndPlayAll(SpeechList list)
     {
         DisableAllSpeechlists();

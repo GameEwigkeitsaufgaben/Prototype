@@ -39,7 +39,7 @@ public class CaveManager : MonoBehaviour
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         waypointManagerMine = GetComponent<CoalmineWaypointManager>();
 
-        btnReplayTalkingList.gameObject.SetActive(false);
+        btnReplayTalkingList.gameObject.SetActive(runtimeData.replayEntryArea);
     }
 
     private void Start()
@@ -67,6 +67,19 @@ public class CaveManager : MonoBehaviour
         sfx.SetClipByAddToDict(water, sfx.caolmineSplashingWater);
 
         sole3EnterTrainBtn.gameObject.SetActive(false);
+
+        if (runtimeData.sole1Done)
+        {
+            sole1WPViewpointBtn.interactable = true;
+        }
+        if (runtimeData.sole2Done)
+        {
+            sole2WPViewpointBtn.interactable = true;
+        }
+        if (runtimeData.sole3BewetterungDone && runtimeData.sole3GebaeudeDone)
+        {
+            waypointManagerMine.wps3ViewpointBtn.interactable = true;
+        }
     }
 
     private void OnEnable()
@@ -90,6 +103,7 @@ public class CaveManager : MonoBehaviour
     public void GoToTrainRideIn()
     {
         GameData.sohleToReload = (int)CoalmineStop.Sole3;
+        speechManagerMine.StopRunningTL();
         cave.StoreCavePosition();
         player.StorePlayerAtBahnsteigPositon();
         switchScene.GoToTrainRideIn();
@@ -98,6 +112,7 @@ public class CaveManager : MonoBehaviour
     private void OnDestroy()
     {
         runtimeData.liftBtnsAllEnabled = false;
+        StopAllCoroutines();
     }
 
     public void ReplayTalkingList()
@@ -238,7 +253,5 @@ public class CaveManager : MonoBehaviour
         {
             btnReplayTalkingList.gameObject.SetActive(false);
         }
-
-
     }
 }

@@ -26,14 +26,20 @@ public class ManagerTrainRide : MonoBehaviour
 
         isNextSceneLoaded = false;
 
+        StopAllCoroutines();
+
+    }
+
+    private void Start()
+    {
+
         if (SwitchSceneManager.GetCurrentSceneName() == GameScenes.ch01MineSoleThreeTrainRideIn)
         {
-            Invoke("StartTalkingIn", 3f);
-            
+            Invoke("StartTalkingIn", 2f);
         }
         else if (SwitchSceneManager.GetCurrentSceneName() == GameScenes.ch01MineSoleThreeTrainRideOut)
         {
-            Invoke("StartTalkingOut", 3f);
+            Invoke("StartTalkingOut", 2f);
         }
     }
 
@@ -54,7 +60,7 @@ public class ManagerTrainRide : MonoBehaviour
 
     private void GoToOverlay()
     {
-        switchScene.SwitchToChapter1withOverlay("Overlay116");
+        switchScene.SwitchToChapter1withOverlay(GameData.NameOverlay116);
     }
 
     private void Update()
@@ -67,7 +73,7 @@ public class ManagerTrainRide : MonoBehaviour
                 {
                     speechManger.ToggleTrainRideInTalkingFinished();
                     runtimeDataCh1.trainRideInDone = true;
-                    Invoke("GoToLongwallcutter", 3f);
+                    Invoke("GoToLongwallcutter", 2f);
                     isNextSceneLoaded = true;
                 }
             }
@@ -80,7 +86,7 @@ public class ManagerTrainRide : MonoBehaviour
                 {
                     speechManger.ToggleTrainRideOutTalkingFinished();
                     runtimeDataCh1.trainRideOutDone = true;
-                    Invoke("GoToOverlay", 3f);
+                    Invoke("GoToOverlay", 2f);
                     isNextSceneLoaded = true;
                 }
             }
