@@ -18,7 +18,7 @@ public class ManagerPumpen : MonoBehaviour
     public Button btnBackToOverlay;
     public Toggle toggleP1, toggleP2, toggleP3;
 
-    private SoChapTwoRuntimeData runtimeDataChap02;
+    private SoChapTwoRuntimeData runtimeDataCh2;
     private SoChaptersRuntimeData runtimeDataChapters;
     public AudioSource audioSrc;
     public AudioClip failPumpe1, failPumpe3;
@@ -28,7 +28,7 @@ public class ManagerPumpen : MonoBehaviour
     void Start()
     {
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
-        runtimeDataChap02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
+        runtimeDataCh2 = runtimeDataChapters.LoadChap2RuntimeData();
 
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
 
@@ -69,20 +69,19 @@ public class ManagerPumpen : MonoBehaviour
 
     public void TurnOnPumpe(int pumpenid)
     {
+        
         switch (pumpenid)
         {
             case 1:
-                
                     animator.SetTrigger(Pumpen.pumpe1.ToString());
                     audioSrc.clip = failPumpe1;
                     audioSrc.Play();
-                   
                 break;
             case 2:
                 animator.SetTrigger(Pumpen.pumpe2.ToString());
                 break;
             case 3:
-                animator.SetTrigger(Pumpen.pumpe2.ToString());
+                animator.SetTrigger(Pumpen.pumpe3.ToString());
                 audioSrc.clip = failPumpe3;
                 audioSrc.Play();
                 break;
@@ -91,7 +90,8 @@ public class ManagerPumpen : MonoBehaviour
                 break;
         }
 
-        runtimeDataChap02.progressPost215Done = true;
+        runtimeDataCh2.interactPumpenDone = true;
+        runtimeDataCh2.progressPost215Done = true;
         btnBackToOverlay.interactable = true;
         toggleP1.interactable = false;
         toggleP2.interactable = false;

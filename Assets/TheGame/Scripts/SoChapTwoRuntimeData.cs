@@ -21,6 +21,7 @@ public class SoChapTwoRuntimeData : Runtime
     
     public bool interactTVDone, fliesspfadeDone = false;
     public bool reinAktivDone, reinPassivDone;
+    public bool interactPumpenDone = false;
     public Vector3 groupPosition;
 
     public bool replayTL2121intro, replayTL2121outro, replay2122TVoutro, replayOverlay2122, replayOverlay2123, replayTL21101Reinigung;
@@ -37,11 +38,18 @@ public class SoChapTwoRuntimeData : Runtime
         progressPost213Done = progressPost214Done = progressPost215Done = true;
         progressPost216Done = progressPost217Done = progressPost218PyritDone = true;
         progressPost219VideoDone = progressPost2110GWReinigungDone = progressPost2111QuizDone = progressPost2112Done = true;
+
+        replayTL2121intro = replayTL2121outro = replay2122TVoutro = replayOverlay2122 = replayOverlay2123 = replayTL21101Reinigung = true;
+        interactTVDone = fliesspfadeDone = true;
+
+        reinAktivDone = reinPassivDone = true;
+        interactPumpenDone = true;
     }
 
     private void OnEnable()
     {
         instaSliderPos = 1f;
+        interactPumpenDone = false;
         progressPost211Done = false;
         progressPost2112Done = false;
         progress212MuseumDone = false;

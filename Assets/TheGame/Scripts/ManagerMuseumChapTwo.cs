@@ -35,11 +35,17 @@ public class ManagerMuseumChapTwo : MonoBehaviour
     [SerializeField] private MuseumWaypoints currentMuseumStation;
     private bool locomotionInMuseum = false;
 
+    public AudioSource audioSrcBGMusic, audioSrcAmbience;
+    private SwitchSceneManager switchSceneManager;
+
+
     private void Awake()
     {
-        runtimeDataCh02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
+
+        runtimeDataCh02 = runtimeDataChapters.LoadChap2RuntimeData();
+        switchSceneManager = gameObject.GetComponent<SwitchSceneManager>();
     }
 
     // Start is called before the first frame update
@@ -348,7 +354,7 @@ public class ManagerMuseumChapTwo : MonoBehaviour
         if (speechManagerch2.IsTalkingListFinished(GameData.NameCH2TLMuseumOutroExitZeche))
         {
             runtimeDataCh02.progress212MuseumDone = true;
-            gameObject.GetComponent<SwitchSceneManager>().SwitchToChapter2withOverlay(GameData.NameOverlay212);
+            switchSceneManager.SwitchToChapter2withOverlay(GameData.NameOverlay212);
         }
         //else if (speechManager.IsTalkingListFinished(GameData.NameTLMuseumIntroTV))
         //{
