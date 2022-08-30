@@ -2568,7 +2568,19 @@ MonoBehaviour:
   m_NumberOfSteps: 4
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 856183558}
+        m_TargetAssemblyTypeName: ManagerInstaPost, Assembly-CSharp
+        m_MethodName: SaveSliderPos
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &786268130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2981,6 +2993,7 @@ MonoBehaviour:
   scrollbar: {fileID: 786268129}
   hints: {fileID: 331634782}
   volReduceSteps: 0.1
+  currentCH: 0
   logAufrufe: 0
 --- !u!82 &856183559
 AudioSource:

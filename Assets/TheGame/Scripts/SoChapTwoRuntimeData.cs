@@ -27,6 +27,7 @@ public class SoChapTwoRuntimeData : Runtime
 
 
     public bool h2oFound, fes2Found, o2Found, so4Found, hFound, h2So4Found, feFound;
+    internal float instaSliderPos;
 
     public void SetAllDone()
     {
@@ -39,6 +40,7 @@ public class SoChapTwoRuntimeData : Runtime
 
     private void OnEnable()
     {
+        instaSliderPos = 1f;
         progressPost211Done = true;
         progress212MuseumDone = false;
         progressPost213Done = progressPost214Done = progressPost215Done = false;

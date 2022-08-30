@@ -28,7 +28,7 @@ public class Overlay : MonoBehaviour
 
     private SoPostData postData;
     private SoGameIcons icons;
-    private ManagerInstaPost menuManager;
+    private ManagerInstaPost instaPostManager;
     private SoChapOneRuntimeData runtimeDataChap01;
     private SoChapTwoRuntimeData runtimeDataChap02;
     private SoChapThreeRuntimeData runtimeDataChap03;
@@ -44,7 +44,7 @@ public class Overlay : MonoBehaviour
 
     private void Start()
     {
-        menuManager = FindObjectOfType<ManagerInstaPost>();
+        instaPostManager = FindObjectOfType<ManagerInstaPost>();
     }
 
     public void SetReplayIcon()
@@ -110,7 +110,7 @@ public class Overlay : MonoBehaviour
 
     private void SwitchTheScene(string interactionScene)
     {
-        menuManager.GetComponent<SwitchSceneManager>().SwitchScene(interactionScene);
+        instaPostManager.GetComponent<SwitchSceneManager>().SwitchScene(interactionScene);
     }
 
     public void SetOverlayData(SoPostData data)
@@ -133,31 +133,47 @@ public class Overlay : MonoBehaviour
         // verbessern!
         string points = "---";
 
-        if (SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain)
+        switch (instaPostManager.currentCH)
         {
-            //points = runtimeData.quizPointsCh01;
-            points = runtimeDataChap01.quizPointsOverall.ToString();
-        }
-        else if (SceneManager.GetActiveScene().name == GameScenes.ch02InstaMain)
-        {
-            if (runtimeDataChap02 != null)
-            {
-                //points = runtimeDataChap02.quizPointsCh02;
+            case chapter.ch1:
+                points = runtimeDataChap01.quizPointsOverall.ToString();
+                break;
+            case chapter.ch2:
                 points = runtimeDataChap02.quizPointsOverall.ToString();
-            }
-        }
-        else if (SceneManager.GetActiveScene().name == GameScenes.ch03InstaMain)
-        {
-            if (runtimeDataChap03 != null)
-            {
-                //points = runtimeDataChap03.quizPointsCh03;
+                break;
+            case chapter.ch3:
                 points = runtimeDataChap03.quizPointsOverall.ToString();
-            }
+                break;
+            default:
+                points = "error";
+                break;
         }
-        else
-        {
-            points = "error";
-        }
+
+        //if (SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain)
+        //{
+        //    //points = runtimeData.quizPointsCh01;
+        //    points = runtimeDataChap01.quizPointsOverall.ToString();
+        //}
+        //else if (SceneManager.GetActiveScene().name == GameScenes.ch02InstaMain)
+        //{
+        //    if (runtimeDataChap02 != null)
+        //    {
+        //        //points = runtimeDataChap02.quizPointsCh02;
+        //        points = runtimeDataChap02.quizPointsOverall.ToString();
+        //    }
+        //}
+        //else if (SceneManager.GetActiveScene().name == GameScenes.ch03InstaMain)
+        //{
+        //    if (runtimeDataChap03 != null)
+        //    {
+        //        //points = runtimeDataChap03.quizPointsCh03;
+        //        points = runtimeDataChap03.quizPointsOverall.ToString();
+        //    }
+        //}
+        //else
+        //{
+        //    points = "error";
+        //}
 
         allOverlayChildren[OVERLAYDESCRIPTION].gameObject.GetComponent<TMP_Text>().text = $"Punkte: {points}\n" + postData.postDescription;
     }

@@ -38,26 +38,34 @@ public class ManagerInstaPost : MonoBehaviour
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoGameIcons gameIcons;
 
-    private chapter currentCH;
+    public chapter currentCH;
     private AudioSource audioSrcBGInsta;
 
     public int logAufrufe = 0;
 
     public void Start()
     {
-        scrollbar.value = runtimeDataCh1.instaSliderPos;
+        switch (currentCH)
+        {
+            case chapter.ch1:
+                scrollbar.value = runtimeDataCh1.instaSliderPos;
+                break;
+            case chapter.ch2:
+                scrollbar.value = runtimeDataCh2.instaSliderPos;
+                break;
+            case chapter.ch3:
+                //scrollbar.value = runtimeDataCh3.instaSliderPos;
+                break;
+        }
+        
     }
 
     private void Awake()
     {
-        audioSrcBGInsta = GetComponent<AudioSource>();
-        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
-        runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
-
         if (SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain)
         {
             currentCH = chapter.ch1;
-        } 
+        }
         else if (SceneManager.GetActiveScene().name == GameScenes.ch02InstaMain)
         {
             currentCH = chapter.ch2;
@@ -67,46 +75,11 @@ public class ManagerInstaPost : MonoBehaviour
             currentCH = chapter.ch3;
         }
 
-        switch (currentCH)
-        {
-            case chapter.ch1:
-                runtimeDataCh1 = runtimeDataChapters.LoadChap1RuntimeData();
-                if (runtimeDataChapters.progressWithAdminCh1) runtimeDataCh1.SetAllDone();
-                break;
-            case chapter.ch2:
-                runtimeDataCh2 = runtimeDataChapters.LoadChap2RuntimeData();
-                if (runtimeDataChapters.progressWithAdminCh2) runtimeDataCh2.SetAllDone();
-                break;
-            case chapter.ch3:
-                runtimeDataCh3 = runtimeDataChapters.LoadChap3RuntimeData();
-                if (runtimeDataChapters.progressWithAdminCh3) runtimeDataCh3.SetAllDone();
-                break;
-        }
-
-        if (SceneManager.GetActiveScene().name == GameScenes.ch02InstaMain)
-        {
-            currentCH = chapter.ch2;
-            runtimeDataCh2 = runtimeDataChapters.LoadChap2RuntimeData();
-
-            if (runtimeDataChapters.progressWithAdminCh2)
-            {
-                runtimeDataCh2.SetAllDone();
-            }
-        }
-        else if (SceneManager.GetActiveScene().name == GameScenes.ch03InstaMain)
-        {
-            runtimeDataCh3 = runtimeDataChapters.LoadChap3RuntimeData();
-            if (runtimeDataChapters.progressWithAdminCh3)
-            {
-                runtimeDataCh3.SetAllDone();
-            }
-        }
-
+        audioSrcBGInsta = GetComponent<AudioSource>();
+        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
         gameIcons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
-
-        musicOnOff.colors = GameColors.GetInteractionColorBlock();
-        scrollbar.colors = GameColors.GetInteractionColorBlock();
 
         overlayArray = overlayParent.GetComponentsInChildren<Overlay>(true);
 
@@ -115,17 +88,30 @@ public class ManagerInstaPost : MonoBehaviour
             dictOverlay.Add(a.name, a);
         }
 
-        gameObject.GetComponent<AudioSource>().clip = sfx.instaMenuBGmusicLoop;
-        gameObject.GetComponent<AudioSource>().volume = GameData.maxBGVolumeInsta;
-        gameObject.GetComponent<AudioSource>().Play();
+        musicOnOff.colors = GameColors.GetInteractionColorBlock();
+        scrollbar.colors = GameColors.GetInteractionColorBlock();
+        audioSrcBGInsta.clip = sfx.instaMenuBGmusicLoop;
+        audioSrcBGInsta.volume = GameData.maxBGVolumeInsta;
+        audioSrcBGInsta.Play();
 
-        if(runtimeDataCh1 != null)
+
+        switch (currentCH)
         {
-            EnableDisableMusic(runtimeDataCh1.musicOn);
-        }
-        else
-        {
-            Debug.Log("no runtime data");
+            case chapter.ch1:
+                runtimeDataCh1 = runtimeDataChapters.LoadChap1RuntimeData();
+                if (runtimeDataChapters.progressWithAdminCh1) runtimeDataCh1.SetAllDone();
+                EnableDisableMusic(runtimeDataCh1.musicOn);
+                break;
+            case chapter.ch2:
+                runtimeDataCh2 = runtimeDataChapters.LoadChap2RuntimeData();
+                if (runtimeDataChapters.progressWithAdminCh2) runtimeDataCh2.SetAllDone();
+                EnableDisableMusic(runtimeDataCh2.musicOn);
+                break;
+            case chapter.ch3:
+                runtimeDataCh3 = runtimeDataChapters.LoadChap3RuntimeData();
+                if (runtimeDataChapters.progressWithAdminCh3) runtimeDataCh3.SetAllDone();
+                EnableDisableMusic(runtimeDataCh3.musicOn);
+                break;
         }
 
         switch (currentCH)
