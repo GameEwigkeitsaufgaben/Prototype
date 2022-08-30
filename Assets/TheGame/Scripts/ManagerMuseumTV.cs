@@ -39,6 +39,7 @@ public class ManagerMuseumTV : MonoBehaviour
     public void StartTheVideo()
     {
         Debug.Log("before" + tvState);
+
         switch (tvState)
         {
             case TVState.VideoStop:
@@ -70,7 +71,7 @@ public class ManagerMuseumTV : MonoBehaviour
                 break;
         }
 
-        webglVideoPlayer.StartVid("none", "Watherdrop.mp4", rawImage);
+        webglVideoPlayer.StartVid("none", "ch2-seqGrundwasser.mp4", rawImage);
     }
 
     // Update is called once per frame

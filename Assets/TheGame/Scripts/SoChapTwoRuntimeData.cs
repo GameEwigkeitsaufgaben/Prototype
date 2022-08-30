@@ -15,6 +15,7 @@ public class SoChapTwoRuntimeData : Runtime
     //progress in game
     public bool progressPost211Done, progress212MuseumDone, progressPost213Done, progressPost214Done, progressPost215Done;
     public bool progressPost216Done, progressPost217Done, progressPost218PyritDone, progressPost219VideoDone, progressPost2110GWReinigungDone, progressPost2111QuizDone;
+    public bool progressPost2112Done;
 
     public MuseumWaypoints lastWP = MuseumWaypoints.None;
     
@@ -35,13 +36,14 @@ public class SoChapTwoRuntimeData : Runtime
         progress212MuseumDone = true;
         progressPost213Done = progressPost214Done = progressPost215Done = true;
         progressPost216Done = progressPost217Done = progressPost218PyritDone = true;
-        progressPost219VideoDone = progressPost2110GWReinigungDone = progressPost2111QuizDone = true;
+        progressPost219VideoDone = progressPost2110GWReinigungDone = progressPost2111QuizDone = progressPost2112Done = true;
     }
 
     private void OnEnable()
     {
         instaSliderPos = 1f;
-        progressPost211Done = true;
+        progressPost211Done = false;
+        progressPost2112Done = false;
         progress212MuseumDone = false;
         progressPost213Done = progressPost214Done = progressPost215Done = false;
         progressPost216Done = progressPost217Done = progressPost218PyritDone = false;

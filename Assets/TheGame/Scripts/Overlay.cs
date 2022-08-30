@@ -28,7 +28,7 @@ public class Overlay : MonoBehaviour
 
     private SoPostData postData;
     private SoGameIcons icons;
-    private ManagerInstaPost instaPostManager;
+    public ManagerInstaPost instaPostManager;
     private SoChapOneRuntimeData runtimeDataChap01;
     private SoChapTwoRuntimeData runtimeDataChap02;
     private SoChapThreeRuntimeData runtimeDataChap03;
@@ -148,32 +148,6 @@ public class Overlay : MonoBehaviour
                 points = "error";
                 break;
         }
-
-        //if (SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain)
-        //{
-        //    //points = runtimeData.quizPointsCh01;
-        //    points = runtimeDataChap01.quizPointsOverall.ToString();
-        //}
-        //else if (SceneManager.GetActiveScene().name == GameScenes.ch02InstaMain)
-        //{
-        //    if (runtimeDataChap02 != null)
-        //    {
-        //        //points = runtimeDataChap02.quizPointsCh02;
-        //        points = runtimeDataChap02.quizPointsOverall.ToString();
-        //    }
-        //}
-        //else if (SceneManager.GetActiveScene().name == GameScenes.ch03InstaMain)
-        //{
-        //    if (runtimeDataChap03 != null)
-        //    {
-        //        //points = runtimeDataChap03.quizPointsCh03;
-        //        points = runtimeDataChap03.quizPointsOverall.ToString();
-        //    }
-        //}
-        //else
-        //{
-        //    points = "error";
-        //}
 
         allOverlayChildren[OVERLAYDESCRIPTION].gameObject.GetComponent<TMP_Text>().text = $"Punkte: {points}\n" + postData.postDescription;
     }

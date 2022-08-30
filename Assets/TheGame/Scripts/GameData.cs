@@ -121,16 +121,18 @@ public static class GameData
     public static string NameEntry119 = "Entry119";
     public static string NameEntry1110 = "Entry1110";
 
-    public const string NameEntry213 = "Entry213";
-    public const string NameEntry214 = "Entry214";
-    public const string NameEntry215 = "Entry215";
-    public const string NameEntry216 = "Entry216";
-    public const string NameEntry217 = "Entry217";
-    public const string NameEntry218 = "Entry218";
-    public const string NameEntry219 = "Entry219";
-    public const string NameEntry2110 = "Entry2110";
-    public const string NameEntry2111 = "Entry2111";
-    public const string NameEntry2112 = "Entry2112";
+    public const string NameEntry21 = "Entry211";
+    public const string NameEntry22 = "Entry212";
+    public const string NameEntry23 = "Entry213";
+    public const string NameEntry24 = "Entry214";
+    public const string NameEntry25 = "Entry215";
+    public const string NameEntry26 = "Entry216";
+    public const string NameEntry27 = "Entry217";
+    public const string NameEntry28 = "Entry218";
+    public const string NameEntry29 = "Entry219";
+    public const string NameEntry210 = "Entry2110";
+    public const string NameEntry211 = "Entry2111";
+    public const string NameEntry212 = "Entry2112";
 
     public const string NameEntry32 = "Entry32";
     public const string NameEntry33 = "Entry33";
