@@ -44,10 +44,11 @@ public class ManagerFliesspfade : MonoBehaviour
     private string textFp1 = "Regenwasser versickert und fließt in den winzigen Poren zwischen den einzelnen Körnern des Gesteins. " +
         "Je kleiner diese Poren sind, umso langsamer geht das. " +
         "Hier fließt das Wasser nur wenige Zentimeter bis Meter pro Tag. " +
-        "Manchmal auch gar nicht.";
+        "Manchmal auch gar nicht. ";
     private string textFp2 = "Wenn der Fels in der Tiefe Risse hat, die Geologen nennen das Klüfte, dann kann das Wasser in den Klüften schon sehr viel schneller fließen. " +
-        "Da können es schon einige Meter pro Tag sein.";
-    private string textFp3 = "Sehr schnelles Fließen in den Schächten und Stollen.";
+        "Je nachdem wie groß die Klüfte sind, können es schon einige Meter pro Tag sein.";
+    private string textFp3 = "Die Schächte und Stollen bilden große Hohlräume im Untergrund, in denen das Wasser ganz schnell fließen kann, wie in einem Bach an der Oberfläche. " +
+        "Aus den Poren und Klüften im Berg fließt das Wasser in diese Hohlräume des Bergbaus und füllt sie langsam auf, wenn man nichts dagegen unternimmt. Hier spricht man dann von Grubenwasser.";
 
     private void Awake()
     {

@@ -14,10 +14,13 @@ public enum SauresWasserTrigger
 public class ManagerSauresWasser : MonoBehaviour
 {
 
-    public const string triggerWasser = "Mit dem Versickern von Regen dringt über unterschiedliche Fließpfade Wasser in die Versickerungsräume der unterschiedlichen Gesteinsschichten!";
-    public const string triggerSchacht = "Durch die vom Menschen angelegen Schächte und Stollen kommt Sauerstoff in tiefe Bereiche des Bergwerks und somit in die Versickerungsräume der tiefen Gesteinsschichte! ";
-    public const string triggerPyrit = "Trifft Wasser auf Pyrit, welches oft vorkommt in der Kohle und im Nebengestein, wird die Blockstruktur von Pyrit aufgelöst - zerstört! Es kommt zur ersten Oxidationsstufe. Die Schwefelmoleküle verbinden sich mit dem Sauserstoff. Eisen bleibt über.";
-    public const string triggerAustritt = "Mit dem raufpumpen des Grubenwassers kommen die glösten Elemente an die Oberfläche. Da kommt es zur 2ten Oxidationsstufe. Das Eisen fällt aus. Es beginnt sofort zu rosten. Und es bildet sich Schwefelsäure. Darum wird das Wasser rot. ";
+    public const string triggerWasser = "Mit dem Versickern von Regen dringt Wasser über unterschiedliche Fließpfade in die Hohlräume der unterschiedlichen Gesteinsschichten ein!";
+    public const string triggerSchacht = "Durch die vom Menschen angelegten Schächte und Stollen kommt Sauerstoff in tiefen Bereiche des Bergwerks und somit in die " +
+        "Versickerungsräume der tiefen Gesteinsschichten!";
+    public const string triggerPyrit = "Trifft Wasser auf Pyrit, welches oft vorkommt in der Kohle und im Nebengestein, wird die Gitterstruktur von Pyrit aufgelöst - zerstört! " +
+        "Es kommt zur Oxidation. Die Schwefelmoleküle verbinden sich mit dem Sauserstoff. Eisen bleibt übrig.";
+    public const string triggerAustritt = "Mit dem Raufpumpen des Grubenwassers kommen die gelösten Elemente an die Oberfläche. " +
+        "Da kommt es zur 2ten Oxidationsstufe. Das Eisen fällt aus. Es beginnt sofort zu rosten. Und es bildet sich Schwefelsäure. Darum wird das Wasser rot. ";
 
     public TMP_Text infoZoneText,infoZoneHeading;
     public Molecule molfes2, molh2o, molo2, molso4, molh, molfe2, molfe3;
