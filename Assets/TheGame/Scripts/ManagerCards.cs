@@ -14,9 +14,9 @@ public class ManagerCards : MonoBehaviour
     public GameObject[] cards;
     
     private int rightSelect, falseSelect;
-    [SerializeField] int maxValTrueSolution = 0;
+    //[SerializeField] int maxValTrueSolution = 0;
     public Button btnCheck, btnProceed;
-    SoMuseumConfig myConfig;
+    private SoMuseumConfig myConfig;
     private SoChapOneRuntimeData runtimeDataCh1;
     private SoChaptersRuntimeData runtimeDataChapters;
 
@@ -36,19 +36,19 @@ public class ManagerCards : MonoBehaviour
         rightSelect = falseSelect = 0;
         soResourcesCards = GetShuffeldResources();
         CreateCards();
-        maxValTrueSolution = GetMaxRightSolutions();
+        //maxValTrueSolution = GetMaxRightSolutions();
         minerImg.sprite = myConfig.minerIdle;
     }
 
-    int GetMaxRightSolutions()
-    {
-        int tmpMaxVal = 0;
-        foreach (var i in cards)
-        {
-            if (i.GetComponent<MuseumCard>().IsStatementTrue()) tmpMaxVal++;
-        }
-        return tmpMaxVal;
-    }
+    //int GetMaxRightSolutions()
+    //{
+    //    int tmpMaxVal = 0;
+    //    foreach (var i in cards)
+    //    {
+    //        if (i.GetComponent<MuseumCard>().IsStatementTrue()) tmpMaxVal++;
+    //    }
+    //    return tmpMaxVal;
+    //}
 
     public SoMuseumCard[] GetShuffeldResources()
     {
@@ -140,7 +140,6 @@ public class ManagerCards : MonoBehaviour
         btnProceed.interactable = true;
         runtimeDataCh1.isCarbonificationPeriodDone = true;
         btnCheck.interactable = false;
-        //btnExit.gameObject.SetActive(true);
     }
 
 }
