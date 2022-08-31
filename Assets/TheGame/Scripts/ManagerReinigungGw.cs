@@ -54,7 +54,12 @@ public class ManagerReinigungGw : MonoBehaviour
 
     public void GoTOOverlay()
     {
-        switchScene.SwitchToChapter2withOverlay(GameScenes.ch02gwReinigung);
+        switchScene.SwitchToChapter2withOverlay(GameData.NameOverlay2110);
+    }
+
+    public void ReplayTalkingList()
+    {
+        speechManagerCh2.playZecheIntroReinigung = true;
     }
 
     void Update()
