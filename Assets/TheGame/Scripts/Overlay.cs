@@ -164,6 +164,7 @@ public class Overlay : MonoBehaviour
             case chapter.ch3:
                 if (runtimeDataChap03 == null) return;
                 points = runtimeDataChap03.quizPointsOverall.ToString();
+                runtimeDataChap03.updatePoints = false; 
                 break;
             default:
                 points = "error";

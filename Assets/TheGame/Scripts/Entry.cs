@@ -371,6 +371,14 @@ public class Entry : MonoBehaviour
             case chapter.ch3:
                 SetColorDoneFeedbackImage(chapter.ch3);
 
+                if (gameObject.name == GameData.NameEntry317 && runtimeDataCh3.IsPostDone(ProgressChap3enum.Post316))
+                {
+                    if (runtimeDataCh3.updatePoints)
+                    {
+                        overlayComp.UpdateOverlayText(chapter.ch3);
+                    }
+                }
+
                 if (!postComp.isPostLocked()) return;
 
                 if (runtimeDataCh3.IsPostDone(ProgressChap3enum.Post32))

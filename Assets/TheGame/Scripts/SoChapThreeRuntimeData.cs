@@ -42,6 +42,7 @@ public class SoChapThreeRuntimeData : Runtime
     public string generalKeyOverlay = GameData.NameOverlay317;
     public bool interactHuellrohreDone = false;
     public float instaSliderPos;
+    public bool updatePoints;
 
 
     //Called in Entry
@@ -102,6 +103,7 @@ public class SoChapThreeRuntimeData : Runtime
         replayTL3101 = replayTL3102 = replayTL3103 = replayTL3111 = replayTL3141 = false;
         quizPointsOverall = 0;
         instaSliderPos = 1f;
+        updatePoints = false; 
 
         //311 betweenprogress
         newsDone = monitorsDone = false;

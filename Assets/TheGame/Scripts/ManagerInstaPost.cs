@@ -174,6 +174,9 @@ public class ManagerInstaPost : MonoBehaviour
             case chapter.ch2:
                 runtimeDataCh2.instaSliderPos = scrollbar.value;
                 break;
+            case chapter.ch3:
+                runtimeDataCh3.instaSliderPos = scrollbar.value;
+                break;
         }
     }
 

@@ -144,12 +144,6 @@ public class ManagerQuizAllChap : MonoBehaviour
 
                 if (b.mouseDown) return;
 
-                //if (b.isSelected)
-                //{
-                //    b.SetUnselected();
-                //    return;
-                //}
-
                 b.SetSelected();
                 break;
         }
@@ -282,6 +276,7 @@ public class ManagerQuizAllChap : MonoBehaviour
                     case 3:
                         switchScene.SwitchToChapter3withOverlay(runtimeDataCh3.generalKeyOverlay);
                         runtimeDataCh3.SetPostDone(ProgressChap3enum.Post316);
+                        runtimeDataCh3.updatePoints = true;
                         break;
                 }
             }
