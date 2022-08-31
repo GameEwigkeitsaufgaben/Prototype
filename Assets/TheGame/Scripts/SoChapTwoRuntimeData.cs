@@ -8,7 +8,8 @@ public class SoChapTwoRuntimeData : Runtime
 {
     public string hintPostUnlock;
     public string quizPointsCh02 = "***";
-    public float quizPointsOverall = 0;
+    public float quizPointsOverall = 0f;
+    public bool updatePoints = false;
     public string singleSelectAwObjName = "--";
     public string generalKeyOverlay = GameData.NameOverlay2112;
 
@@ -48,6 +49,8 @@ public class SoChapTwoRuntimeData : Runtime
 
     private void OnEnable()
     {
+        updatePoints = false;
+        postOverlayToLoad = "";
         instaSliderPos = 1f;
         interactPumpenDone = false;
         progressPost211Done = false;

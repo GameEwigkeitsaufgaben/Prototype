@@ -33,6 +33,8 @@ public class Overlay : MonoBehaviour
     private SoChapTwoRuntimeData runtimeDataChap02;
     private SoChapThreeRuntimeData runtimeDataChap03;
 
+    private chapter currentCH;
+
     private void Awake()
     {
         icons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
@@ -40,6 +42,19 @@ public class Overlay : MonoBehaviour
         runtimeDataChap02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
         runtimeDataChap03 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
         webglVideoPlayer = GameObject.FindObjectOfType<WebGlVideoPlayer>();
+
+        if (SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain)
+        {
+            currentCH = chapter.ch1;
+        }
+        else if (SceneManager.GetActiveScene().name == GameScenes.ch02InstaMain)
+        {
+            currentCH = chapter.ch2;
+        }
+        else if (SceneManager.GetActiveScene().name == GameScenes.ch03InstaMain)
+        {
+            currentCH = chapter.ch3;
+        }
     }
 
     private void Start()
@@ -128,20 +143,26 @@ public class Overlay : MonoBehaviour
         }
     }
 
-    public void UpdateOverlayText()
+    public void UpdateOverlayText(chapter inChapter)
     {
         // verbessern!
         string points = "---";
 
-        switch (instaPostManager.currentCH)
+        Debug.Log("update points: in ch " + inChapter );
+
+        switch (inChapter)
         {
             case chapter.ch1:
+                if (runtimeDataChap01 == null) return;
                 points = runtimeDataChap01.quizPointsOverall.ToString();
                 break;
             case chapter.ch2:
+                if (runtimeDataChap02 == null) return;
                 points = runtimeDataChap02.quizPointsOverall.ToString();
+                runtimeDataChap02.updatePoints = false;
                 break;
             case chapter.ch3:
+                if (runtimeDataChap03 == null) return;
                 points = runtimeDataChap03.quizPointsOverall.ToString();
                 break;
             default:

@@ -60,12 +60,11 @@ public class ManagerFliesspfade : MonoBehaviour
 
     void Start()
     {
-        backToMuseum.interactable = false;
+        backToMuseum.interactable = runtimeDataCh2.fliesspfadeDone;
         headingInfoFp.text = HeadingInfoIdle;
         textinfoFP.text = textIntro;
         currentFp = previousFp = FliesspfadState.idle;
         solidBg.color = Color.white;
-
     }
 
     void Update()
@@ -73,6 +72,7 @@ public class ManagerFliesspfade : MonoBehaviour
         if (consumedFp1 && consumedFp2 && consumedFp3)
         {
             backToMuseum.interactable = true;
+            runtimeDataCh2.fliesspfadeDone = true;
         }
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName(StateNameIdle))

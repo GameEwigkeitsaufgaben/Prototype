@@ -43,6 +43,8 @@ public class ManagerPumpen : MonoBehaviour
         toggleP1.interactable = false;
         toggleP2.interactable = false;
         toggleP3.interactable = false;
+
+        btnBackToOverlay.interactable = runtimeDataCh2.interactPumpenDone;
     }
 
     public void CheckPumpOutSole2(Pumpen pumpe)

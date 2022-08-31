@@ -36,7 +36,7 @@ public class LookaroundWithMouse : MonoBehaviour
 
         if (activeScene == GameScenes.ch02gwReinigungPassiv)
         {
-            SetPlayerBodyRotation(0f, false);
+            SetPlayerBodyRotation(-12f, false);
         }
     }
 

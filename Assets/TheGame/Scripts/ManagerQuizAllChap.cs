@@ -280,6 +280,7 @@ public class ManagerQuizAllChap : MonoBehaviour
                     case 2:
                         switchScene.SwitchToChapter2withOverlay(runtimeDataCh2.generalKeyOverlay);
                         runtimeDataCh2.progressPost2111QuizDone = true;
+                        runtimeDataCh2.updatePoints = true;
                         break;
                     case 3:
                         switchScene.SwitchToChapter3withOverlay(runtimeDataCh3.generalKeyOverlay);

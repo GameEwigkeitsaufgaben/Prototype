@@ -31,13 +31,16 @@ public class ManagerReinigungAktiv : MonoBehaviour
     bool moveInScene = false;
     public ReinigungStation currentStation, targetStation;
     private float offsetGroupCam;
+    private Vector3 tmpVec3;
+    private SwitchSceneManager switchSceneManager;
 
     private void Awake()
     {
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
-        runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
+        runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorTexture3DCave);
 
         runtimeDatatCh2 = runtimeDataChapters.LoadChap2RuntimeData();
+        switchSceneManager = GetComponent<SwitchSceneManager>();
     }
 
     void Start()
@@ -48,7 +51,6 @@ public class ManagerReinigungAktiv : MonoBehaviour
         btnToBlackbox.interactable = false;
         btnToAbsetzbecken.interactable = false;
         btnToPassiv.interactable = false;
-
     }
 
     public void MoveReverseToReinigungStation(int id)
@@ -173,20 +175,23 @@ public class ManagerReinigungAktiv : MonoBehaviour
     public void SwitchToPassiv()
     {
         runtimeDatatCh2.reinAktivDone = true;
+
         if(runtimeDatatCh2.reinAktivDone && runtimeDatatCh2.reinPassivDone)
         {
-            GetComponent<SwitchSceneManager>().SwitchToChapter2withOverlay(GameData.NameOverlay2110);
+            //GetComponent<SwitchSceneManager>().SwitchToChapter2withOverlay(GameData.NameOverlay2110);
             runtimeDatatCh2.progressPost2110GWReinigungDone = true;
-            return;
         }
         
-        GetComponent<SwitchSceneManager>().SwitchScene(GameScenes.ch02gwReinigung);
+        switchSceneManager.SwitchScene(GameScenes.ch02gwReinigung);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(moveInScene)
-        cam.transform.position = new Vector3(group.transform.position.x + offsetGroupCam, cam.transform.position.y, cam.transform.position.z);
+        if (moveInScene)
+        {
+            tmpVec3.Set(group.transform.position.x + offsetGroupCam, cam.transform.position.y, cam.transform.position.z);
+            cam.transform.position = tmpVec3;
+        }
     }
 }

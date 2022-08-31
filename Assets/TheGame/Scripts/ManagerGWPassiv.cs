@@ -6,6 +6,7 @@ public class ManagerGWPassiv : MonoBehaviour
 {
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoChapTwoRuntimeData runtimeDatatCh2;
+    private SwitchSceneManager switchScene;
 
     private void Awake()
     {
@@ -13,6 +14,7 @@ public class ManagerGWPassiv : MonoBehaviour
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
 
         runtimeDatatCh2 = runtimeDataChapters.LoadChap2RuntimeData();
+        switchScene = GetComponent<SwitchSceneManager>();
     }
 
 
@@ -22,13 +24,12 @@ public class ManagerGWPassiv : MonoBehaviour
 
         if(runtimeDatatCh2.reinPassivDone && runtimeDatatCh2.reinAktivDone)
         {
-            GetComponent<SwitchSceneManager>().SwitchToChapter2withOverlay(GameData.NameOverlay2110);
+            //GetComponent<SwitchSceneManager>().SwitchToChapter2withOverlay(GameData.NameOverlay2110);
             runtimeDatatCh2.progressPost2110GWReinigungDone = true;
         }
-        else
-        {
-            GetComponent<SwitchSceneManager>().SwitchScene(GameScenes.ch02gwReinigung);
-        }
+        
+        switchScene.SwitchScene(GameScenes.ch02gwReinigung);
+        
 
     }
    

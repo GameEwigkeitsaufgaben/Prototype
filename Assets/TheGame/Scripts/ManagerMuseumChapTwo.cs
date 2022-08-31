@@ -351,6 +351,13 @@ public class ManagerMuseumChapTwo : MonoBehaviour
             }
            
         }
+
+        if (!runtimeDataCh02.progress212MuseumDone)
+        {
+            if (runtimeDataCh02.interactTVDone && runtimeDataCh02.fliesspfadeDone)
+                runtimeDataCh02.progress212MuseumDone = true;
+        }
+
         if (speechManagerch2.IsTalkingListFinished(GameData.NameCH2TLMuseumOutroExitZeche))
         {
             runtimeDataCh02.progress212MuseumDone = true;

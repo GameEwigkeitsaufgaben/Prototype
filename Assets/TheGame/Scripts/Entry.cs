@@ -47,7 +47,6 @@ public class Entry : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         if (fbDone != null) fbDone.color = fbInProgress;
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
 
@@ -90,6 +89,7 @@ public class Entry : MonoBehaviour
         switch (currentCh)
         {
             case chapter.ch1:
+                
                 if (overlay.name == GameData.NameOverlay111)
                 {
                     runtimeDataCh1.post111Done = true;
@@ -294,7 +294,7 @@ public class Entry : MonoBehaviour
                     else if (gameObject.name == GameData.NameEntry1110 && runtimeDataCh1.quiz119Done)
                     {
                         postComp.UnlockPost();
-                        overlayComp.UpdateOverlayText();
+                        overlayComp.UpdateOverlayText(chapter.ch1);
                         GameData.chapterOneUnlocked = 1;
                     }
                 }
@@ -304,7 +304,10 @@ public class Entry : MonoBehaviour
 
                 if (gameObject.name == GameData.NameEntry212 && runtimeDataCh2.progressPost2111QuizDone)
                 {
-                    overlayComp.UpdateOverlayText();
+                    if (runtimeDataCh2.updatePoints)
+                    {
+                        overlayComp.UpdateOverlayText(chapter.ch2);
+                    }
                 }
 
                 if (!postComp.isPostLocked()) return;
@@ -348,7 +351,7 @@ public class Entry : MonoBehaviour
                 else if (gameObject.name == GameData.NameEntry212 && runtimeDataCh2.progressPost2111QuizDone)
                 {
                     postComp.UnlockPost();
-                    overlayComp.UpdateOverlayText();
+                    overlayComp.UpdateOverlayText(chapter.ch2);
                     GameData.chapterTwoUnlocked = 1;
                 }
                 break;
@@ -498,7 +501,7 @@ public class Entry : MonoBehaviour
                 {
                     Debug.Log("Quiz solved: ");
                     postComp.UnlockPost();
-                    overlayComp.UpdateOverlayText();
+                    overlayComp.UpdateOverlayText(chapter.ch3);
                     GameData.chapterThreeUnlocked = 1;
 
                 }

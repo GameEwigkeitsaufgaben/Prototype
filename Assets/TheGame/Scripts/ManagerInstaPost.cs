@@ -45,6 +45,7 @@ public class ManagerInstaPost : MonoBehaviour
 
     public void Start()
     {
+        //pos saved in inspector in scrollbar call function SaveSliderPos() from this class
         switch (currentCH)
         {
             case chapter.ch1:
@@ -134,6 +135,7 @@ public class ManagerInstaPost : MonoBehaviour
             case chapter.ch2:
                 if (runtimeDataCh2.postOverlayToLoad != "" && dictOverlay != null)
                 {
+                    Debug.Log("Overlay to load" + runtimeDataCh2.postOverlayToLoad);
                     dictOverlay[runtimeDataCh2.postOverlayToLoad].gameObject.SetActive(true);
 
                     if (runtimeDataCh2.musicOn)
@@ -154,6 +156,9 @@ public class ManagerInstaPost : MonoBehaviour
         {
             case chapter.ch1:
                 runtimeDataCh1.instaSliderPos = scrollbar.value;
+                break;
+            case chapter.ch2:
+                runtimeDataCh2.instaSliderPos = scrollbar.value;
                 break;
         }
     }

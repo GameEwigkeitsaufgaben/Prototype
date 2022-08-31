@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class ManagerReinigungGw : MonoBehaviour
 {
+    public Button btnProceed;
+
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoChapTwoRuntimeData runtimeDataCh2;
     private SpeechManagerMuseumChapTwo speechManagerCh2;
@@ -21,7 +23,7 @@ public class ManagerReinigungGw : MonoBehaviour
 
     void Start()
     {
-
+        btnProceed.interactable = runtimeDataCh2.progressPost2110GWReinigungDone;
         btnReplayTalkingList.gameObject.SetActive(runtimeDataCh2.replayTL21101Reinigung);
         
         if (runtimeDataCh2.replayTL21101Reinigung)
@@ -50,6 +52,11 @@ public class ManagerReinigungGw : MonoBehaviour
         switchScene.SwitchScene(GameScenes.ch02gwReinigungPassiv);
     }
 
+    public void GoTOOverlay()
+    {
+        switchScene.SwitchToChapter2withOverlay(GameScenes.ch02gwReinigung);
+    }
+
     void Update()
     {
         if (speechManagerCh2.IsTalkingListFinished(GameData.NameCH2TLZecheIntroReiniung))
@@ -57,6 +64,11 @@ public class ManagerReinigungGw : MonoBehaviour
             runtimeDataCh2.replayTL21101Reinigung = true;
             btnReplayTalkingList.gameObject.SetActive(true);
             EnableBtns(true);
+        }
+
+        if(!btnProceed.interactable && runtimeDataCh2.progressPost2110GWReinigungDone)
+        {
+            btnProceed.interactable = true;
         }
 
     }
