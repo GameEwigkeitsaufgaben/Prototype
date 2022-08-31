@@ -18,12 +18,13 @@ public class ManagerGWChancen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        runtimeDataCh3 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        runtimeDataCh3 = runtimeDataChapters.LoadChap3RuntimeData();
+       
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
+
         animator.enabled = true;
         MirrorBergbauvertreter(false);
-        btnNext.interactable = false;
 
         float x = -300f, y = 150f;
         foreach (DragItemThoughts d in dragitems)
@@ -34,6 +35,9 @@ public class ManagerGWChancen : MonoBehaviour
         }
 
         speechManager = GetComponent<SpeechManagerChapThree>();
+
+
+        btnNext.interactable = runtimeDataCh3.IsPostDone(ProgressChap3enum.Post312);
     }
 
 

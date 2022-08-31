@@ -13,7 +13,7 @@ public enum PumpenwerkStatus
 
 public class ManagerPumpStandorte : MonoBehaviour
 {
-    public Button btnNext, btnReplayTalkingList;
+    public Button btnProceed, btnReplayTalkingList;
     public Toggle togglePumpwerke;
 
     public GameObject textWHBisher, textWHNeu;
@@ -30,22 +30,27 @@ public class ManagerPumpStandorte : MonoBehaviour
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoChapThreeRuntimeData runtimeDataCh03;
     private SpeechManagerChapThree speechManager;
+    private SwitchSceneManager switchSceneMgr;
     Color32 colorInactive = new Color32(255, 255, 255, 50);
 
     private void Awake()
     {
-        gameColors = Resources.Load<SoGameColors>(GameData.NameGameColors);
+        switchSceneMgr = GetComponent<SwitchSceneManager>();
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
-        runtimeDataCh03 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
+        
+        runtimeDataCh03 = runtimeDataChapters.LoadChap3RuntimeData();
+
+        gameColors = Resources.Load<SoGameColors>(GameData.NameGameColors);
+        
         speechManager = GetComponent<SpeechManagerChapThree>();
 
         speechManager.playPumpstandorte = !runtimeDataCh03.replayTL3102;
 
         btnReplayTalkingList.gameObject.SetActive(runtimeDataCh03.replayTL3102);
-        togglePumpwerke.interactable = runtimeDataCh03.replayTL3102;
-        btnNext.interactable = runtimeDataCh03.IsPostDone(ProgressChap3enum.Post3102);
 
+        togglePumpwerke.interactable = runtimeDataCh03.replayTL3102;
+        btnProceed.interactable = runtimeDataCh03.IsPostDone(ProgressChap3enum.Post3102);
 
         pumpwerke = new Dictionary<string, Image>();
 
@@ -88,9 +93,9 @@ public class ManagerPumpStandorte : MonoBehaviour
             pegelHigh.gameObject.SetActive(true);
             pegelLow.gameObject.SetActive(false);
             
-            if (!btnNext.interactable)
+            if (!btnProceed.interactable)
             {
-                btnNext.interactable = true;
+                btnProceed.interactable = true;
                 runtimeDataCh03.SetPostDone(ProgressChap3enum.Post3102);
                 if (runtimeDataCh03.IsPostDone(ProgressChap3enum.Post3103)) runtimeDataCh03.SetPostDone(ProgressChap3enum.Post310);
             }
@@ -110,14 +115,7 @@ public class ManagerPumpStandorte : MonoBehaviour
 
     public void SwitchTheScene()
     {
-        if (runtimeDataCh03.IsPostDone(ProgressChap3enum.Post310))
-        {
-            GetComponent<SwitchSceneManager>().SwitchToChapter3withOverlay(GameData.NameOverlay310);
-        }
-        else
-        {
-            GetComponent<SwitchSceneManager>().SwitchScene(GameScenes.ch03EmscherWeg);
-        }
+        switchSceneMgr.SwitchScene(GameScenes.ch03EmscherWeg);
     }
 
     public void MarkActive()

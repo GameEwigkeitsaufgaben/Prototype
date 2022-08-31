@@ -5,6 +5,13 @@ using UnityEngine.UI;
 
 public class ManagerDemo : MonoBehaviour
 {
+    private const string clipNameBuerger = "ch03demo0-buerger";
+    private const string clipNameUmweltschutz = "ch03demo1-umwelt";
+    private const string clipNameWissenschaft = "ch03demo2-science";
+    private const string clipNamePoldervertreter = "ch03demo3-poldervertreter";
+    private const string clipNameGrubenwasservertreter = "ch03demo4-grubenwasservertreter";
+    private const string clipNameWasserversorger = "ch03demo5-wasserversorger";
+
     // Start is called before the first frame update
 
     public GameObject myPrefab;
@@ -13,60 +20,77 @@ public class ManagerDemo : MonoBehaviour
     public Canvas mobCanvas;
     public Button btnBackToInsta;
 
-    public Image umweltschutz, wissenschaft, polder, grubenwasser, buerger, wasserversorger;
+    public GameObject umweltschutz, wissenschaft, polder, grubenwasser, buerger, wasserversorger;
 
     private SoConfigChapter3 configCh3;
+    private SoChaptersRuntimeData runtimeDataChapters;
     private SoChapThreeRuntimeData runtimeCh03;
     private SoTalkingList demoAudios;
     private List<Demonstrant> demonstranten = new List<Demonstrant>();
     private AudioSource audioSrc;
 
     public bool buergerDone, umweltDone, scienceDone, polderVertreterDone, gwVertreterDone, wasserversorgerDone;
-    
 
     private int finishedCount = 0;
-
-    private Color feedbackGehoert = Color.white;
-
     private string currentClip = "";
+
+    private Demonstrant demoBuerger, demoUmweltschutz, demoWissenschaft, demoPolder, demoGrubenwasser, demoWasserversorger;
     
     private void Awake()
     {
+        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        runtimeCh03 = runtimeDataChapters.LoadChap3RuntimeData();
+
+        runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorTexture3DCave);
+
         configCh3 = Resources.Load<SoConfigChapter3>(GameData.NameConfigCH3Demo);
-        runtimeCh03 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
         demoAudios = Resources.Load<SoTalkingList>(GameData.NameCH3TLDemo);
-        
         audioSrc = GetComponent<AudioSource>();
 
+        demoBuerger = buerger.GetComponent<Demonstrant>();
+        demoUmweltschutz = umweltschutz.GetComponent<Demonstrant>();
+        demoWissenschaft = wissenschaft.GetComponent<Demonstrant>();
+        demoPolder = polder.GetComponent<Demonstrant>();
+        demoGrubenwasser = grubenwasser.GetComponent<Demonstrant>();
+        demoWasserversorger = wasserversorger.GetComponent<Demonstrant>();
+    }
+
+    private void Start()
+    {
         //0 buerger, 1 umwelt, 2 science, 3 poldervertreter, 4 grubenwasservertreter, 5 wasserversorger
-        buerger.GetComponent<Image>().sprite = configCh3.familie;
-        buerger.GetComponent<Demonstrant>().audioClip = demoAudios.orderedListOfAudioClips[0];
-        demonstranten.Add(buerger.GetComponent<Demonstrant>());
+        demoBuerger.characterImage.sprite = configCh3.familie;
+        demoBuerger.audioClip = demoAudios.orderedListOfAudioClips[0];
+        demonstranten.Add(demoBuerger);
+       
+        demoUmweltschutz.characterImage.sprite = configCh3.umweltschuetz;
+        demoUmweltschutz.audioClip = demoAudios.orderedListOfAudioClips[1];
+        demonstranten.Add(demoUmweltschutz);
 
-        umweltschutz.GetComponent<Image>().sprite = configCh3.umweltschuetz;
-        umweltschutz.GetComponent<Demonstrant>().audioClip = demoAudios.orderedListOfAudioClips[1];
-        demonstranten.Add(umweltschutz.GetComponent<Demonstrant>());
+        demoWissenschaft.characterImage.sprite = configCh3.wissenschaft;
+        demoWissenschaft.audioClip = demoAudios.orderedListOfAudioClips[2];
+        demonstranten.Add(demoWissenschaft);
 
-        wissenschaft.GetComponent<Image>().sprite = configCh3.wissenschaft;
-        wissenschaft.GetComponent<Demonstrant>().audioClip = demoAudios.orderedListOfAudioClips[2];
-        demonstranten.Add(wissenschaft.GetComponent<Demonstrant>());
+        demoPolder.characterImage.sprite = configCh3.poldervertretung;
+        demoPolder.audioClip = demoAudios.orderedListOfAudioClips[3];
+        demonstranten.Add(demoPolder);
 
-        polder.GetComponent<Image>().sprite = configCh3.poldervertretung;
-        polder.GetComponent<Demonstrant>().audioClip = demoAudios.orderedListOfAudioClips[3];
-        demonstranten.Add(polder.GetComponent<Demonstrant>());
+        demoGrubenwasser.characterImage.sprite = configCh3.grubenwasservertretung;
+        demoGrubenwasser.audioClip = demoAudios.orderedListOfAudioClips[4];
+        demonstranten.Add(demoGrubenwasser);
 
-        grubenwasser.GetComponent<Image>().sprite = configCh3.grubenwasservertretung;
-        grubenwasser.GetComponent<Demonstrant>().audioClip = demoAudios.orderedListOfAudioClips[4];
-        demonstranten.Add(grubenwasser.GetComponent<Demonstrant>());
+        demoWasserversorger.characterImage.sprite = configCh3.wasserversorgung;
+        demoWasserversorger.audioClip = demoAudios.orderedListOfAudioClips[5];
+        demonstranten.Add(demoWasserversorger);
 
-        wasserversorger.GetComponent<Image>().sprite = configCh3.wasserversorgung;
-        wasserversorger.GetComponent<Demonstrant>().audioClip = demoAudios.orderedListOfAudioClips[5];
-        demonstranten.Add(wasserversorger.GetComponent<Demonstrant>());
-
-        foreach(Demonstrant d in demonstranten)
+        if (runtimeCh03.IsPostDone(ProgressChap3enum.Post32))
         {
-            d.gameObject.GetComponent<Image>().color = new Color32(99,99,99,255);
-            d.SpeechBubbleOn(false);
+            foreach (Demonstrant demo in demonstranten)
+            {
+                demo.SetGehoert(true);
+            }
+
+            btnBackToInsta.interactable = true;
+            return;
         }
     }
 
@@ -78,7 +102,7 @@ public class ManagerDemo : MonoBehaviour
             foreach(Demonstrant e in demonstranten)
             {
                 e.SpeechBubbleOn(false);
-                if(!e.gehoert) e.GetComponent<Image>().color = new Color32(99, 99, 99, 255);
+                if (!e.gehoert) e.SetGehoert(false);
             }
             audioSrc.Stop();
         }
@@ -90,22 +114,22 @@ public class ManagerDemo : MonoBehaviour
         switch (protagonist)
         {
             case 0: 
-                demo = buerger.GetComponent<Demonstrant>(); 
+                demo = demoBuerger; 
                 break;
             case 1:
-                demo = umweltschutz.GetComponent<Demonstrant>();
+                demo = demoUmweltschutz;
                 break;
             case 2:
-                demo = wissenschaft.GetComponent<Demonstrant>();
+                demo = demoWissenschaft;
                 break;
             case 3:
-                demo = polder.GetComponent<Demonstrant>();
+                demo = demoPolder;
                 break;
             case 4:
-                demo = grubenwasser.GetComponent<Demonstrant>();
+                demo = demoGrubenwasser;
                 break;
             case 5:
-                demo = wasserversorger.GetComponent<Demonstrant>();
+                demo = demoWasserversorger;
                 break;
             default:
                 demo = null;
@@ -113,7 +137,7 @@ public class ManagerDemo : MonoBehaviour
         }
 
         if (demo != null) demo.SpeechBubbleOn(true);
-        demo.GetComponent<Image>().color = feedbackGehoert;
+        demo.SetGehoert(true);
 
         currentClip = audioSrc.clip.name;
         audioSrc.Play();
@@ -160,52 +184,46 @@ public class ManagerDemo : MonoBehaviour
     {
         if (currentClip == "") return;
 
-        Image demonstrant = null;
+        Demonstrant demonstrant = null;
         
-        if (currentClip == "ch03demo0-buerger")
+        if (currentClip == clipNameBuerger)
         {
-            buerger.GetComponent<Demonstrant>().gehoert = buergerDone = true;
-            buerger.GetComponent<Image>().color = feedbackGehoert;
-            demonstrant = buerger;
-            //buerger.GetComponent<Demonstrant>().SpeechBubbleOn(false);
+            demoBuerger.SetGehoert(true);
+            buergerDone = true;
+            demonstrant = demoBuerger;
         }
-        else if (currentClip == "ch03demo1-umwelt") 
+        else if (currentClip == clipNameUmweltschutz) 
         {
-            umweltschutz.GetComponent<Demonstrant>().gehoert = umweltDone = true;
-            umweltschutz.GetComponent<Image>().color = feedbackGehoert;
-            demonstrant = umweltschutz;
-            //umweltschutz.GetComponent<Demonstrant>().SpeechBubbleOn(false);
+            umweltDone = true;
+            demoUmweltschutz.SetGehoert(true);
+            demonstrant = demoUmweltschutz;
         }
-        else if (currentClip == "ch03demo2-science")
+        else if (currentClip == clipNameWissenschaft)
         {
-            wissenschaft.GetComponent<Demonstrant>().gehoert = scienceDone = true;
-            wissenschaft.GetComponent<Image>().color = feedbackGehoert;
-            demonstrant = wissenschaft;
-            //wissenschaft.GetComponent<Demonstrant>().SpeechBubbleOn(false);
+            demoWissenschaft.SetGehoert(true);
+            scienceDone = true;
+            demonstrant = demoWissenschaft;
         }
-        else if (currentClip == "ch03demo3-poldervertreter")
+        else if (currentClip == clipNamePoldervertreter)
         {
-            polder.GetComponent<Demonstrant>().gehoert = polderVertreterDone =  true;
-            polder.GetComponent<Image>().color = feedbackGehoert;
-            demonstrant = polder;
-            //polder.GetComponent<Demonstrant>().SpeechBubbleOn(false);
+            demoPolder.SetGehoert(true);
+            polderVertreterDone =  true;
+            demonstrant = demoPolder;
         }
-        else if (currentClip == "ch03demo4-grubenwasservertreter")
+        else if (currentClip == clipNameGrubenwasservertreter)
         {
-            grubenwasser.GetComponent<Demonstrant>().gehoert = gwVertreterDone = true;
-            grubenwasser.GetComponent<Image>().color = feedbackGehoert;
-            demonstrant = grubenwasser;
-            //grubenwasser.GetComponent<Demonstrant>().SpeechBubbleOn(false);
+            demoGrubenwasser.SetGehoert(true);
+            gwVertreterDone = true;
+            demonstrant = demoGrubenwasser;
         }
-        else if (currentClip == "ch03demo5-wasserversorger")
+        else if (currentClip == clipNameWasserversorger)
         {
-            wasserversorger.GetComponent<Demonstrant>().gehoert = wasserversorgerDone = true;
-            wasserversorger.GetComponent<Image>().color = feedbackGehoert;
-            demonstrant = wasserversorger;
-            //wasserversorger.GetComponent<Demonstrant>().SpeechBubbleOn(false);
+            demoWasserversorger.SetGehoert(true);
+            wasserversorgerDone = true;
+            demonstrant = demoWasserversorger;
         }
 
-        demonstrant.GetComponent<Demonstrant>().SpeechBubbleOn(false);
+        demonstrant.SpeechBubbleOn(false);
         currentClip = "";
         audioSrc.clip = null;
     }

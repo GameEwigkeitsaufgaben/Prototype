@@ -55,7 +55,7 @@ public class ManagerInstaPost : MonoBehaviour
                 scrollbar.value = runtimeDataCh2.instaSliderPos;
                 break;
             case chapter.ch3:
-                //scrollbar.value = runtimeDataCh3.instaSliderPos;
+                scrollbar.value = runtimeDataCh3.instaSliderPos;
                 break;
         }
         
@@ -144,6 +144,20 @@ public class ManagerInstaPost : MonoBehaviour
                     }
 
                     runtimeDataCh2.postOverlayToLoad = "";
+                }
+                break;
+            case chapter.ch3:
+                if (runtimeDataCh3.postOverlayToLoad != "" && dictOverlay != null)
+                {
+                    Debug.Log("Overlay to load" + runtimeDataCh3.postOverlayToLoad);
+                    dictOverlay[runtimeDataCh3.postOverlayToLoad].gameObject.SetActive(true);
+
+                    if (runtimeDataCh3.musicOn)
+                    {
+                        ReduceVolumeBGMusic(GameData.overlayVolumeInsta);
+                    }
+
+                    runtimeDataCh3.postOverlayToLoad = "";
                 }
 
                 break;

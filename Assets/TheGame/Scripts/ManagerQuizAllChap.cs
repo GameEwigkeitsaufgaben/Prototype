@@ -5,9 +5,6 @@ using TMPro;
 
 public class ManagerQuizAllChap : MonoBehaviour
 {
-    //private const string weiter = "Weiter";
-    //private const string pruefen = "Prüfen";
-
     [Header("Assign GameObjects")]
     [SerializeField] private QuizData[] questionsData;
     [SerializeField] private GameObject parentQuestions;
@@ -25,6 +22,7 @@ public class ManagerQuizAllChap : MonoBehaviour
     public TMP_Text textMinerWordsFeedback;
     public Text progressFeedback;
     public Button btnNext, btnCheck;
+    public AudioSource audioSrcBGMusic, audioSrcbuttonClick;
 
     [Header("Assigned at runtime")]
     [SerializeField] private List<QuizQuestionWIP> questions;
@@ -37,7 +35,6 @@ public class ManagerQuizAllChap : MonoBehaviour
     private SwitchSceneManager switchScene;
     private QuizTimer quizTimer;
     private SoSfx sfx;
-    public AudioSource audioSrcBGMusic, audioSrcbuttonClick;
 
     private int currentQuestionIndex;
     private int activeScene; //1 chap1, 2 chap2, 3 chap3;
@@ -66,7 +63,7 @@ public class ManagerQuizAllChap : MonoBehaviour
 
         quizConfig = runtimeDataChapters.LoadConfigQuiz();
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
-        sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
+        sfx = runtimeDataChapters.LoadSfx();
     }
 
     void Start()

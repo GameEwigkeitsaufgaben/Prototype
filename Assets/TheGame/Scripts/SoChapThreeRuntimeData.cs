@@ -40,6 +40,8 @@ public class SoChapThreeRuntimeData : Runtime
     public bool replayTL3101, replayTL3102, replayTL3103, replayTL3141, replayTL3111;
     public bool newsDone, monitorsDone;
     public string generalKeyOverlay = GameData.NameOverlay317;
+    public bool interactHuellrohreDone = false;
+    public float instaSliderPos;
 
 
     //Called in Entry
@@ -76,6 +78,7 @@ public class SoChapThreeRuntimeData : Runtime
         return false;
     }
 
+
     public bool AllDone (List<Monitor> itemList)
     {
         if (itemList.Count == 0) return false;
@@ -93,10 +96,13 @@ public class SoChapThreeRuntimeData : Runtime
     private void OnEnable()
     {
         //Init Progress;
+        postOverlayToLoad = "";
+        interactHuellrohreDone = true;
         progressDone = new ProgressChap3[namesEnum.Length];
         replayTL3101 = replayTL3102 = replayTL3103 = replayTL3111 = replayTL3141 = false;
         quizPointsOverall = 0;
-        
+        instaSliderPos = 1f;
+
         //311 betweenprogress
         newsDone = monitorsDone = false;
 
@@ -109,6 +115,9 @@ public class SoChapThreeRuntimeData : Runtime
 
     public void SetAllDone()
     {
+        interactHuellrohreDone = true;
+        replayTL3101 = replayTL3102 = replayTL3103 = replayTL3111 = replayTL3141 = true;
+
         for (int i = 0; i < progressDone.Length; i++)
         {
             progressDone[i] = new ProgressChap3(namesEnum[i]);

@@ -5,12 +5,14 @@ public class ManagerWasserChapThree : MonoBehaviour
 {
     public Button btnSchautafel3102, btnSchautafel3103;
     public Button btnReplayTalkingList;
+    public Button btnProceed;
 
     private SoChapThreeRuntimeData runtimeDataCh3;
     private SoChaptersRuntimeData runtimeDataChapters;
     private SpeechManagerChapThree speechManager;
 
     public bool audioFinished = false;
+
 
     private void Awake()
     {
@@ -22,14 +24,20 @@ public class ManagerWasserChapThree : MonoBehaviour
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
 
-        audioFinished = runtimeDataCh3.replayTL3101;
-        btnReplayTalkingList.gameObject.SetActive(audioFinished);
+        if (runtimeDataCh3.IsPostDone(ProgressChap3enum.Post310))
+        {
+            btnProceed.interactable = btnSchautafel3102.interactable = btnSchautafel3103.interactable = true;
+            btnReplayTalkingList.gameObject.SetActive(true);
+            return;
+        }
 
-        btnSchautafel3102.interactable = audioFinished;
-        btnSchautafel3103.interactable = audioFinished;
-        
+        btnReplayTalkingList.gameObject.SetActive(runtimeDataCh3.replayTL3101);
 
-        speechManager.playGrubenwasser = !audioFinished;
+        btnProceed.interactable = false;
+        btnSchautafel3102.interactable = runtimeDataCh3.replayTL3101;
+        btnSchautafel3103.interactable = runtimeDataCh3.replayTL3101;
+
+        speechManager.playGrubenwasser = !runtimeDataCh3.replayTL3101;
     }
 
     public void ReplayTalkingList()

@@ -9,16 +9,26 @@ public class ManagerGrubenwasserhaltungAufbau : MonoBehaviour
     public bool audioFinised = false;
     public GameObject btnBackTo3101;
     public Button btnReplayTalkingList;
-
+    
+    private SwitchSceneManager switchSceneMgr;
     private SoChapThreeRuntimeData runtimeDataCh3;
     private SoChaptersRuntimeData runtimeDataChapters;
 
     void Start()
     {
-        runtimeDataCh3 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        runtimeDataCh3 = runtimeDataChapters.LoadChap3RuntimeData();
+        switchSceneMgr = GetComponent<SwitchSceneManager>();
        
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
+
+        if (runtimeDataCh3.IsPostDone(ProgressChap3enum.Post310) ||
+            runtimeDataCh3.IsPostDone(ProgressChap3enum.Post3103))
+        {
+            btnReplayTalkingList.gameObject.SetActive(true);
+            btnBackTo3101.GetComponent<Button>().interactable = true;
+            return;
+        }
 
         btnReplayTalkingList.gameObject.SetActive(runtimeDataCh3.replayTL3103);
 
@@ -35,14 +45,7 @@ public class ManagerGrubenwasserhaltungAufbau : MonoBehaviour
 
     public void SwitchTheScene()
     {
-        if (runtimeDataCh3.IsPostDone(ProgressChap3enum.Post310))
-        {
-            GetComponent<SwitchSceneManager>().SwitchToChapter3withOverlay(GameData.NameOverlay310);
-        }
-        else
-        {
-            GetComponent<SwitchSceneManager>().SwitchScene(GameScenes.ch03EmscherWeg);
-        }
+        switchSceneMgr.SwitchScene(GameScenes.ch03EmscherWeg);
     }
 
     void Update()

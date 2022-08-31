@@ -38,11 +38,10 @@ public class Entry : MonoBehaviour
         runtimeDataCh3 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
 
         Scene currScene = SceneManager.GetActiveScene();
+        Debug.Log("inAWASE: " +currScene.name);
         if (currScene.name == GameScenes.ch01InstaMain) currentCh = chapter.ch1;
         else if (currScene.name == GameScenes.ch02InstaMain) currentCh = chapter.ch2;
-        //else if (currScene.name == GameScenes.ch3InstaMain) currentCh = chapter.ch3;
-
-
+        else if (currScene.name == GameScenes.ch03InstaMain) currentCh = chapter.ch3;
     }
     // Start is called before the first frame update
     void Start()
@@ -207,7 +206,7 @@ public class Entry : MonoBehaviour
         }
     }
 
-    private void SetColorDoneFeedbackImage()
+    private void SetColorDoneFeedbackImage(chapter currentCh)
     {
         if (fbDone == null) return;
 
@@ -244,9 +243,23 @@ public class Entry : MonoBehaviour
                 else if (gameObject.name == GameData.NameEntry212 &&runtimeDataCh2.progressPost2112Done) setColorDone = true;
                 break;
             case chapter.ch3:
+                if (gameObject.name == GameData.NameEntry32 && runtimeDataCh3.IsPostDone(ProgressChap3enum.Post32)) setColorDone = true;
+                else if (gameObject.name == GameData.NameEntry33 && runtimeDataCh3.IsPostDone(ProgressChap3enum.Post33)) setColorDone = true;
+                else if (gameObject.name == GameData.NameEntry34 && runtimeDataCh3.IsPostDone(ProgressChap3enum.Post34)) setColorDone = true;
+                else if (gameObject.name == GameData.NameEntry35 && runtimeDataCh3.IsPostDone(ProgressChap3enum.Post35)) setColorDone = true;
+                else if (gameObject.name == GameData.NameEntry36 && runtimeDataCh3.IsPostDone(ProgressChap3enum.Post36)) setColorDone = true;
+                else if (gameObject.name == GameData.NameEntry37 && runtimeDataCh3.IsPostDone(ProgressChap3enum.Post37)) setColorDone = true;
+                else if (gameObject.name == GameData.NameEntry38 && runtimeDataCh3.IsPostDone(ProgressChap3enum.Post38)) setColorDone = true;
+                else if (gameObject.name == GameData.NameEntry39 && runtimeDataCh3.IsPostDone(ProgressChap3enum.Post39)) setColorDone = true;
+                else if (gameObject.name == GameData.NameEntry310 && runtimeDataCh3.IsPostDone(ProgressChap3enum.Post310)) setColorDone = true;
+                else if (gameObject.name == GameData.NameEntry311 && runtimeDataCh3.IsPostDone(ProgressChap3enum.Post311)) setColorDone = true;
+                else if (gameObject.name == GameData.NameEntry312 && runtimeDataCh3.IsPostDone(ProgressChap3enum.Post312)) setColorDone = true;
+                else if (gameObject.name == GameData.NameEntry313 && runtimeDataCh3.IsPostDone(ProgressChap3enum.Post313)) setColorDone = true;
+                else if (gameObject.name == GameData.NameEntry314 && runtimeDataCh3.IsPostDone(ProgressChap3enum.Post314)) setColorDone = true;
+                else if (gameObject.name == GameData.NameEntry315 && runtimeDataCh3.IsPostDone(ProgressChap3enum.Post315)) setColorDone = true;
+                else if (gameObject.name == GameData.NameEntry316 && runtimeDataCh3.IsPostDone(ProgressChap3enum.Post316)) setColorDone = true;
+                else if (gameObject.name == GameData.NameEntry317 && runtimeDataCh3.IsPostDone(ProgressChap3enum.Post317)) setColorDone = true;
                 break;
-
-
         }
         
 
@@ -259,7 +272,7 @@ public class Entry : MonoBehaviour
         switch (currentCh)
         {
             case chapter.ch1:
-                SetColorDoneFeedbackImage();
+                SetColorDoneFeedbackImage(chapter.ch1);
 
                 if (postComp.isPostLocked())
                 {
@@ -300,7 +313,7 @@ public class Entry : MonoBehaviour
                 }
                 break;
             case chapter.ch2:
-                SetColorDoneFeedbackImage();
+                SetColorDoneFeedbackImage(chapter.ch2);
 
                 if (gameObject.name == GameData.NameEntry212 && runtimeDataCh2.progressPost2111QuizDone)
                 {
@@ -355,157 +368,61 @@ public class Entry : MonoBehaviour
                     GameData.chapterTwoUnlocked = 1;
                 }
                 break;
-        }
+            case chapter.ch3:
+                SetColorDoneFeedbackImage(chapter.ch3);
 
-        //if(SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain)
-        //{
-        //    SetColorDoneFeedbackImage();
+                if (!postComp.isPostLocked()) return;
 
-        //    if (postComp.isPostLocked())
-        //    {
-        //        if(gameObject.name == GameData.NameEntry113 && runtimeDataCh1.post111Done && runtimeDataCh1.post112Done)
-        //        {
-        //            postComp.UnlockPost();
-        //        }
-        //        else if (gameObject.name == GameData.NameEntry114 && runtimeDataCh1.post111Done && runtimeDataCh1.post112Done)
-        //        {
-        //            postComp.UnlockPost();
-        //        }
-        //        else if (gameObject.name == GameData.NameEntry115 && runtimeDataCh1.post113Done && runtimeDataCh1.post114Done)
-        //        {
-        //            postComp.UnlockPost();
-        //        }
-        //        else if (gameObject.name == GameData.NameEntry116 && runtimeDataCh1.video115Done)
-        //        {
-        //            postComp.UnlockPost();
-        //        }
-        //        else if (gameObject.name == GameData.NameEntry117 && runtimeDataCh1.interaction116Done)
-        //        {
-        //            postComp.UnlockPost();
-        //        }
-        //        else if (gameObject.name == GameData.NameEntry118 && runtimeDataCh1.interaction117Done)
-        //        {
-        //            postComp.UnlockPost();
-        //        }
-        //        else if (gameObject.name == GameData.NameEntry119 && runtimeDataCh1.interaction117Done)
-        //        {
-        //            postComp.UnlockPost();
-        //        }
-        //        else if (gameObject.name == GameData.NameEntry1110 && runtimeDataCh1.quiz119Done)
-        //        {
-        //            postComp.UnlockPost();
-        //            overlayComp.UpdateOverlayText();
-        //            GameData.chapterOneUnlocked = 1;
-        //        }
-        //    }
-        //}
-        //else if (SceneManager.GetActiveScene().name == GameScenes.ch02InstaMain)
-        //{
-        //    if (gameObject.name == GameData.NameEntry212 && runtimeDataCh2.progressPost2111QuizDone)
-        //    {
-        //        overlayComp.UpdateOverlayText();
-        //    }
+                if (runtimeDataCh3.IsPostDone(ProgressChap3enum.Post32))
+                {
+                    if (gameObject.name == GameData.NameEntry33) postComp.UnlockPost();
+                    else if (gameObject.name == GameData.NameEntry34) postComp.UnlockPost();
+                    else if (gameObject.name == GameData.NameEntry35) postComp.UnlockPost();
+                    else if (gameObject.name == GameData.NameEntry36) postComp.UnlockPost();
+                    else if (gameObject.name == GameData.NameEntry37) postComp.UnlockPost();
+                    else if (gameObject.name == GameData.NameEntry38) postComp.UnlockPost();
+                }
 
-        //    if (!postComp.isPostLocked()) return;
-
-        //    if(gameObject.name == GameData.NameEntry23 && runtimeDataCh2.progress212MuseumDone)
-        //    {
-        //        postComp.UnlockPost();
-        //    }
-        //    else if (gameObject.name == GameData.NameEntry24 && runtimeDataCh2.progress212MuseumDone)
-        //    {
-        //        postComp.UnlockPost();
-        //    }
-        //    else if (gameObject.name == GameData.NameEntry25 && runtimeDataCh2.progressPost213Done && runtimeDataCh2.progressPost214Done)
-        //    {
-        //        postComp.UnlockPost();
-        //    }
-        //    else if (gameObject.name == GameData.NameEntry26 && runtimeDataCh2.progressPost215Done)
-        //    {
-        //        postComp.UnlockPost();
-        //    }
-        //    else if (gameObject.name == GameData.NameEntry27 && runtimeDataCh2.progressPost215Done)
-        //    {
-        //        postComp.UnlockPost();
-        //    }
-        //    else if (gameObject.name == GameData.NameEntry28 && runtimeDataCh2.progressPost216Done && runtimeDataCh2.progressPost217Done)
-        //    {
-        //        postComp.UnlockPost();
-        //    }
-        //    else if (gameObject.name == GameData.NameEntry29 && runtimeDataCh2.progressPost218PyritDone)
-        //    {
-        //        postComp.UnlockPost();
-        //    }
-        //    else if (gameObject.name == GameData.NameEntry210 && runtimeDataCh2.progressPost219VideoDone)
-        //    {
-        //        postComp.UnlockPost();
-        //    }
-        //    else if (gameObject.name == GameData.NameEntry211 && runtimeDataCh2.progressPost2110GWReinigungDone)
-        //    {
-        //        postComp.UnlockPost();
-        //    }
-        //    else if (gameObject.name == GameData.NameEntry212 && runtimeDataCh2.progressPost2111QuizDone)
-        //    {
-        //        Debug.Log("Quiz solved: ");
-        //        postComp.UnlockPost();
-        //        overlayComp.UpdateOverlayText();
-        //        GameData.chapterTwoUnlocked = 1;
-        //    }
-
-        //}
-        if (SceneManager.GetActiveScene().name == GameScenes.ch03InstaMain)
-        {
-            if (!postComp.isPostLocked()) return;
-
-            if (runtimeDataCh3.IsPostDone(ProgressChap3enum.Post32))
-            {
-                if(gameObject.name == GameData.NameEntry33) postComp.UnlockPost();
-                else if (gameObject.name == GameData.NameEntry34) postComp.UnlockPost();
-                else if (gameObject.name == GameData.NameEntry35) postComp.UnlockPost();
-                else if (gameObject.name == GameData.NameEntry36) postComp.UnlockPost();
-                else if (gameObject.name == GameData.NameEntry37) postComp.UnlockPost();
-                else if (gameObject.name == GameData.NameEntry38) postComp.UnlockPost();
-            }
-
-            if ((gameObject.name == GameData.NameEntry39 || gameObject.name == GameData.NameEntry310) &&
-                runtimeDataCh3.IsPostDone(ProgressChap3enum.Post33) &&
-                runtimeDataCh3.IsPostDone(ProgressChap3enum.Post34) &&
-                runtimeDataCh3.IsPostDone(ProgressChap3enum.Post35) &&
-                runtimeDataCh3.IsPostDone(ProgressChap3enum.Post36) &&
-                runtimeDataCh3.IsPostDone(ProgressChap3enum.Post37) &&
-                runtimeDataCh3.IsPostDone(ProgressChap3enum.Post38))
-            {
-                postComp.UnlockPost();
-            }
-
-            else if (gameObject.name == GameData.NameEntry311 && runtimeDataCh3.IsPostDone(ProgressChap3enum.Post310)) postComp.UnlockPost();
-            else if (gameObject.name == GameData.NameEntry312 && runtimeDataCh3.IsPostDone(ProgressChap3enum.Post311)) postComp.UnlockPost();
-
-            else if (gameObject.name == GameData.NameEntry313 || gameObject.name == GameData.NameEntry314)
-            {
-                if (runtimeDataCh3.IsPostDone(ProgressChap3enum.Post312)) postComp.UnlockPost();
-            }
-
-            else if (gameObject.name == GameData.NameEntry316)
-            {
-                Debug.Log("in entry: " + GameData.NamePost316 + " " + gameObject.name + " " + ProgressChap3enum.Post315.ToString());
-                if (runtimeDataCh3.IsPostDone(ProgressChap3enum.Post315))
+                if ((gameObject.name == GameData.NameEntry39 || gameObject.name == GameData.NameEntry310) &&
+                    runtimeDataCh3.IsPostDone(ProgressChap3enum.Post33) &&
+                    runtimeDataCh3.IsPostDone(ProgressChap3enum.Post34) &&
+                    runtimeDataCh3.IsPostDone(ProgressChap3enum.Post35) &&
+                    runtimeDataCh3.IsPostDone(ProgressChap3enum.Post36) &&
+                    runtimeDataCh3.IsPostDone(ProgressChap3enum.Post37) &&
+                    runtimeDataCh3.IsPostDone(ProgressChap3enum.Post38))
                 {
                     postComp.UnlockPost();
                 }
-            }
 
-            else if (gameObject.name == GameData.NameEntry317)
-            {
-                if (runtimeDataCh3.IsPostDone(ProgressChap3enum.Post316))
+                else if (gameObject.name == GameData.NameEntry311 && runtimeDataCh3.IsPostDone(ProgressChap3enum.Post310)) postComp.UnlockPost();
+                else if (gameObject.name == GameData.NameEntry312 && runtimeDataCh3.IsPostDone(ProgressChap3enum.Post311)) postComp.UnlockPost();
+
+                else if (gameObject.name == GameData.NameEntry313 || gameObject.name == GameData.NameEntry314)
                 {
-                    Debug.Log("Quiz solved: ");
-                    postComp.UnlockPost();
-                    overlayComp.UpdateOverlayText(chapter.ch3);
-                    GameData.chapterThreeUnlocked = 1;
-
+                    if (runtimeDataCh3.IsPostDone(ProgressChap3enum.Post312)) postComp.UnlockPost();
                 }
-            }
+
+                else if (gameObject.name == GameData.NameEntry316)
+                {
+                    Debug.Log("in entry: " + GameData.NamePost316 + " " + gameObject.name + " " + ProgressChap3enum.Post315.ToString());
+                    if (runtimeDataCh3.IsPostDone(ProgressChap3enum.Post315))
+                    {
+                        postComp.UnlockPost();
+                    }
+                }
+
+                else if (gameObject.name == GameData.NameEntry317)
+                {
+                    if (runtimeDataCh3.IsPostDone(ProgressChap3enum.Post316))
+                    {
+                        Debug.Log("Quiz solved: ");
+                        postComp.UnlockPost();
+                        overlayComp.UpdateOverlayText(chapter.ch3);
+                        GameData.chapterThreeUnlocked = 1;
+
+                    }
+                }
+                break;
         }
     }
 }

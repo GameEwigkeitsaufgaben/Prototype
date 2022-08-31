@@ -80,7 +80,7 @@ public class CodeLock : MonoBehaviour
 
                 if (code == GameData.pwdAdminChapterThree)
                 {
-                    chaptersRuntimeData.progressWithAdminCh3= true;
+                    chaptersRuntimeData.progressWithAdminCh3 = true;
                 }
 
                 chaptersRuntimeData.ch3GrubenwasserUnlocked= true;
