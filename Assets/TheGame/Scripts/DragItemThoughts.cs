@@ -10,11 +10,10 @@ public enum GWChanceType
     neitherNor
 }
 
-[RequireComponent(typeof(MouseChange))]
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BehaviourButton))]
-public class DragItemThoughts : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class DragItemThoughts : MonoBehaviour, IEndDragHandler, IDragHandler
 {
     private RectTransform myDragRectTransform;
     private Canvas myParentCanvas;
@@ -32,9 +31,15 @@ public class DragItemThoughts : MonoBehaviour, IBeginDragHandler, IEndDragHandle
 
     public GWChanceType type;
 
+    private MouseChange mouse;
+    [SerializeField] private bool isMouseUp = false;
+    [SerializeField] private bool rightCollision = false;
+    [SerializeField] private Collider2D rightCollisionObj;
+
     void Start()
     {
         myDragRectTransform = GetComponent<RectTransform>();
+        mouse = GetComponent<MouseChange>();
         manager = FindObjectOfType<ManagerGWChancen>();
         btnRahmen = rahmen.gameObject.GetComponent<Button>();
         rahmen.enabled = false;
@@ -50,14 +55,9 @@ public class DragItemThoughts : MonoBehaviour, IBeginDragHandler, IEndDragHandle
             tempCanvasItem = tempCanvasItem.transform.parent.gameObject;
         }
         myParentCanvas = tempCanvasItem.GetComponent<Canvas>();
-        origPos = gameObject.transform.position;
+        //origPos = gameObject.transform.position;
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
         gameObject.tag = "DragItem";
-    }
-
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        Debug.Log("Begin Drag");
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -65,60 +65,87 @@ public class DragItemThoughts : MonoBehaviour, IBeginDragHandler, IEndDragHandle
         if (snaped) return;
         if (!dragable) return;
 
-        Debug.Log("Drag");
         myDragRectTransform.anchoredPosition += eventData.delta / myParentCanvas.scaleFactor; //important when using screen space
         dragging = true;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("End Drag");
         dragging = false;
     }
 
     private void OnMouseDown()
     {
-        GetComponent<MouseChange>().MouseDown();
+        mouse.MouseDown();
     }
 
     private void OnMouseUp()
     {
-        GetComponent<MouseChange>().MouseUp();
+        Debug.Log("in mouse up ###########################" + gameObject.name);
+        if (rightCollisionObj != null)
+        {
+            ChangeSceneBehaviour(rightCollisionObj);
+
+            switch (type)
+            {
+                case GWChanceType.chance:
+                    PlayChance();
+                    break;
+                case GWChanceType.nochance:
+                    PlayNoChance();
+                    break;
+                case GWChanceType.neitherNor:
+                    PlayNeitherNor();
+                    break;
+            }
+
+        }
+
+        //Debug.Log(gameObject.name + "chaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaat" + "pos != orig" + (!snaped && gameObject.transform.localPosition != origPos));
+        //if (!snaped && gameObject.transform.localPosition != origPos)
+        //{
+        //    gameObject.transform.localPosition = origPos;
+        //}
+        
+
+        mouse.MouseUp();
     }
 
     public void ReplayTalkingList()
     {
+        ChangeSceneBehaviour(null);
+
         PlayChance();
         PlayNoChance();
         PlayNeitherNor();
     }
- 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.name == "DropTargetImgChance" && type == GWChanceType.chance)
+        if (collision.name == "DropTargetImgChance" && type == GWChanceType.chance) rightCollision = true;
+        else if (collision.name == "DropTargetImgNoChance" && type == GWChanceType.nochance) rightCollision = true;
+        else if (collision.name == "DropTargetImgNeitherNor" && type == GWChanceType.neitherNor) rightCollision = true;
+        else rightCollision = false;
+
+        if (rightCollision)
         {
-            ChangeSceneBehaviour(collision);
-
-            PlayChance();
+            rightCollisionObj = collision;
         }
-        else if (collision.name == "DropTargetImgNoChance" && type == GWChanceType.nochance)
+        else
         {
-            ChangeSceneBehaviour(collision);
-
-            PlayNoChance();
+            rightCollisionObj = null;
         }
-        else if (collision.name == "DropTargetImgNeitherNor" && type == GWChanceType.neitherNor)
-        {
-            ChangeSceneBehaviour(collision);
+    }
 
-            PlayNeitherNor();
-        }
-
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        rightCollision = false;
+        rightCollisionObj = null;
     }
 
     private void PlayNeitherNor()
     {
+
         if (gameObject.name == "DragSourceSauberesGrubenwasser")
         {
             manager.speechManager.playSauberesGW = true;
@@ -166,10 +193,12 @@ public class DragItemThoughts : MonoBehaviour, IBeginDragHandler, IEndDragHandle
 
     private void ChangeSceneBehaviour(Collider2D collision)
     {
-        Debug.Log(collision.name);
-        gameObject.transform.SetParent(collision.transform);
-        gameObject.GetComponent<Image>().enabled = false;
+        if(collision != null) gameObject.transform.SetParent(collision.transform);
         snaped = true;
+        gameObject.GetComponent<Image>().enabled = false;
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        gameObject.GetComponent<BehaviourButton>().enabled = false;
+
         btnRahmen.enabled = true;
         rahmen.enabled = true;
         bubble.enabled = false;
@@ -177,5 +206,14 @@ public class DragItemThoughts : MonoBehaviour, IBeginDragHandler, IEndDragHandle
         manager.animator.enabled = false;
         manager.MirrorBergbauvertreter(true);
         manager.PauseDragAllDragItems(true);
+    }
+
+    private void Update()
+    {
+        if (snaped) return;
+        if (dragging) return;
+        
+        gameObject.transform.localPosition = origPos;
+        
     }
 }

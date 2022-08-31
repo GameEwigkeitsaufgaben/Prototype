@@ -15,6 +15,8 @@ public class ManagerGWChancen : MonoBehaviour
     public Button btnNext;
     public bool allItemsSnaped = false;
 
+    public GameObject headingImgChance, headingImgNoChance, headingImgNN;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,16 +29,19 @@ public class ManagerGWChancen : MonoBehaviour
         MirrorBergbauvertreter(false);
 
         float x = -300f, y = 150f;
+
+        Vector3 tmpVec3 = Vector3.zero; 
+
         foreach (DragItemThoughts d in dragitems)
         {
-            d.gameObject.transform.localPosition = new Vector3(x, y, 0f);
+            tmpVec3.Set(x, y, 0f);
+            d.gameObject.transform.localPosition = tmpVec3;
+            d.origPos = tmpVec3;
             y -= 10f;
             x += 10f;
         }
 
         speechManager = GetComponent<SpeechManagerChapThree>();
-
-
         btnNext.interactable = runtimeDataCh3.IsPostDone(ProgressChap3enum.Post312);
     }
 
@@ -49,6 +54,11 @@ public class ManagerGWChancen : MonoBehaviour
 
     public void PauseDragAllDragItems(bool pause)
     {
+        Vector2 sizeVec2 = new Vector2(150f, 110f);
+        headingImgChance.GetComponent<RectTransform>().localScale = Vector3.one;
+        headingImgNN.GetComponent<RectTransform>().localScale = Vector3.one;
+        headingImgNoChance.GetComponent<RectTransform>().localScale = Vector3.one;
+
         foreach (DragItemThoughts d in dragitems)
         {
             d.dragable = !pause;
