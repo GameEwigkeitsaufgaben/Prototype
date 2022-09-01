@@ -22,8 +22,8 @@ public class ManagerPumpen : MonoBehaviour
 
     private SoChapTwoRuntimeData runtimeDataCh2;
     private SoChaptersRuntimeData runtimeDataChapters;
-    public AudioSource audioSrc;
-    public AudioClip failPumpe1, failPumpe3;
+    public AudioSource audioSrc, richtigeAntwort;
+    public AudioClip failPumpe1, failPumpe3, rightPumpe;
     public AnimationClip p1, p2, p3, off;
 
     SpeechManagerMuseumChapTwo speechManagerCh2;
@@ -64,17 +64,14 @@ public class ManagerPumpen : MonoBehaviour
             case Pumpen.pumpe1:
                 toggleP2.interactable = false;
                 toggleP3.interactable = false;
-                //starte Audio:
                 break;
             case Pumpen.pumpe2:
                 toggleP1.interactable = false;
                 toggleP3.interactable = false;
-                //starte Audio:
                 break;
             case Pumpen.pumpe3:
                 toggleP2.interactable = false;
                 toggleP3.interactable = false;
-                //starte Audio:
                 break;
         }
     }
@@ -98,6 +95,9 @@ public class ManagerPumpen : MonoBehaviour
                 break;
             case 2:
                 if (!toggleP2.GetComponent<Toggle>().isOn) return;
+                richtigeAntwort.Play();
+                audioSrc.clip = rightPumpe;
+                audioSrc.Play();
                 animator.SetTrigger(Pumpen.pumpe3.ToString());
                 break;
             case 3:
