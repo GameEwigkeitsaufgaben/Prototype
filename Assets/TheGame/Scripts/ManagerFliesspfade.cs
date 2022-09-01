@@ -38,12 +38,12 @@ public class ManagerFliesspfade : MonoBehaviour
 
     Color rain = new Color32(152,152,152,255);
 
-    private string textIntro = "Wasser versickert und fließt in Hohlräumen im Untergrund. Die Hohlräume können kleine Poren zwischen einzelnen Sand und Kieskörnern sein, " +
+    private string textIntro = "Wasser versickert und fließt in Hohlräumen im Untergrund. Diese Hohlräume können kleine Poren zwischen einzelnen Sand- und Kieskörnern sein, " +
         "Klüfte im Fels oder auch große Gänge, wie im Bergwerk. " +
         "Je größer die Hohlräume sind, umso schneller kann Wasser versickern und zu Grundwasser werden.";
     private string textFp1 = "Regenwasser versickert und fließt in den winzigen Poren zwischen den einzelnen Körnern des Gesteins. " +
         "Je kleiner diese Poren sind, umso langsamer geht das. " +
-        "Hier fließt das Wasser nur wenige Zentimeter bis Meter pro Tag. " +
+        "Dort fließt das Wasser nur wenige Zentimeter bis Meter pro Tag. " +
         "Manchmal auch gar nicht. ";
     private string textFp2 = "Wenn der Fels in der Tiefe Risse hat, die Geologen nennen das Klüfte, dann kann das Wasser in den Klüften schon sehr viel schneller fließen. " +
         "Je nachdem wie groß die Klüfte sind, können es schon einige Meter pro Tag sein.";
