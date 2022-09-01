@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -15,12 +13,12 @@ public class ManagerSauresWasser : MonoBehaviour
 {
 
     public const string triggerWasser = "Mit dem Versickern von Regen dringt Wasser über unterschiedliche Fließpfade in die Hohlräume der unterschiedlichen Gesteinsschichten ein!";
-    public const string triggerSchacht = "Durch die vom Menschen angelegten Schächte und Stollen kommt Sauerstoff in tiefen Bereiche des Bergwerks und somit in die " +
-        "Versickerungsräume der tiefen Gesteinsschichten!";
+    public const string triggerSchacht = "Durch die vom Menschen angelegten Schächte und Stollen kommt Sauerstoff in tiefe Bereiche des Bergwerks und somit in die " +
+        "Versickerungsräume der tiefen Gesteins- schichten!";
     public const string triggerPyrit = "Trifft Wasser auf Pyrit, welches oft vorkommt in der Kohle und im Nebengestein, wird die Gitterstruktur von Pyrit aufgelöst - zerstört! " +
         "Es kommt zur Oxidation. Die Schwefelmoleküle verbinden sich mit dem Sauserstoff. Eisen bleibt übrig.";
     public const string triggerAustritt = "Mit dem Raufpumpen des Grubenwassers kommen die gelösten Elemente an die Oberfläche. " +
-        "Da kommt es zur 2ten Oxidationsstufe. Das Eisen fällt aus. Es beginnt sofort zu rosten. Und es bildet sich Schwefelsäure. Darum wird das Wasser rot. ";
+        "Da kommt es zur zweiten Oxidationsstufe. Das Eisen fällt aus. Es beginnt sofort zu rosten. Und es bildet sich Schwefelsäure. Darum wird das Wasser rot. ";
 
     public TMP_Text infoZoneText,infoZoneHeading;
     public Molecule molfes2, molh2o, molo2, molso4, molh, molfe2, molfe3;
@@ -89,22 +87,18 @@ public class ManagerSauresWasser : MonoBehaviour
         {
             case SauresWasserTrigger.Wasser:
                 infoZoneText.text = triggerWasser;
-                //infoZoneHeading.text = "H2o";
                 headingH2o.SetActive(true);
                 break;
             case SauresWasserTrigger.Schacht:
                 infoZoneText.text = triggerSchacht;
-                //infoZoneHeading.text = "O2";
                 headingO2.SetActive(true);
                 break;
             case SauresWasserTrigger.Pyrit:
                 infoZoneText.text = triggerPyrit;
-                //infoZoneHeading.text = "FeS2";
                 headingFeS2.SetActive(true);
                 break;
             case SauresWasserTrigger.Austritt:
                 infoZoneText.text = triggerAustritt;
-                //infoZoneHeading.text = "H2oS4";
                 headingSo4.SetActive(true);
                 break;
         }
