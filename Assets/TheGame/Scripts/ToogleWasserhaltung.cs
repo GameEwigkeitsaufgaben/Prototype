@@ -12,14 +12,12 @@ public class ToogleWasserhaltung : MonoBehaviour
     public void DisableNormal(bool disable)
     {
         normal.gameObject.SetActive(disable);
-        
     }
     // Start is called before the first frame update
     void Start()
     {
         gameObject.GetComponent<Toggle>().isOn = false;
         gameObject.GetComponent<Toggle>().colors = GameColors.GetInteractionColorBlock();
-        //normal.color = pressed.color = GameColors.defaultInteractionColorNormal;
     }
 
     // Update is called once per frame
