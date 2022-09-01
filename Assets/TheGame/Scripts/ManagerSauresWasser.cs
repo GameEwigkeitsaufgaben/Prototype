@@ -26,6 +26,7 @@ public class ManagerSauresWasser : MonoBehaviour
     private Color foundColor = Color.green;
 
     public GameObject headingH2o, headingO2, headingSo4, headingFeS2;
+    public GameObject phRegen, phOxi1, phOxi2;
 
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoChapTwoRuntimeData runtimeDataCh2;
@@ -40,6 +41,9 @@ public class ManagerSauresWasser : MonoBehaviour
         headingH2o.SetActive(false);
         headingO2.SetActive(false);
         headingSo4.SetActive(false);
+        phOxi1.SetActive(false);
+        phOxi2.SetActive(false);
+        phRegen.SetActive(false);
     }
 
     public void SetMolekuelFound(SauresWasserTrigger trigger)
@@ -75,6 +79,29 @@ public class ManagerSauresWasser : MonoBehaviour
         runtimeDataCh2.progressPost218PyritDone = true;
     }
 
+    //ph=0 rain, ph=1 oxi1, ph=2 oxi2
+    public void SetPH(int ph)
+    {
+        switch (ph)
+        {
+            case 0:
+                phRegen.SetActive(true);
+                phOxi1.SetActive(false);
+                phOxi2.SetActive(false);
+                break;
+            case 1:
+                phRegen.SetActive(false);
+                phOxi1.SetActive(true);
+                phOxi2.SetActive(false);
+                break;
+            case 2:
+                phRegen.SetActive(false);
+                phOxi1.SetActive(false);
+                phOxi2.SetActive(true);
+                break;
+        }
+    }
+
     public void SetTextToTrigger(SauresWasserTrigger trigger)
     {
         headingFeS2.SetActive(false);
@@ -88,6 +115,7 @@ public class ManagerSauresWasser : MonoBehaviour
             case SauresWasserTrigger.Wasser:
                 infoZoneText.text = triggerWasser;
                 headingH2o.SetActive(true);
+                SetPH(0);
                 break;
             case SauresWasserTrigger.Schacht:
                 infoZoneText.text = triggerSchacht;
@@ -96,10 +124,12 @@ public class ManagerSauresWasser : MonoBehaviour
             case SauresWasserTrigger.Pyrit:
                 infoZoneText.text = triggerPyrit;
                 headingFeS2.SetActive(true);
+                SetPH(1);
                 break;
             case SauresWasserTrigger.Austritt:
                 infoZoneText.text = triggerAustritt;
                 headingSo4.SetActive(true);
+                SetPH(2);
                 break;
         }
     }

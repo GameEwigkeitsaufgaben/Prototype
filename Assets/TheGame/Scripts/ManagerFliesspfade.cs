@@ -27,6 +27,7 @@ public class ManagerFliesspfade : MonoBehaviour
     public GameObject eventsystem;
     public Animator animator;
     public TMP_Text textinfoFP, headingInfoFp;
+    public AudioSource audioSrc, audioSrcRain, audioSrcFp2, audioSrcFp3, wetterNice;
     public Button backToMuseum;
     public Toggle btnFp1, btnFp2, btnFp3;
     public Image solidBg; 
@@ -35,6 +36,7 @@ public class ManagerFliesspfade : MonoBehaviour
     FliesspfadState currentFp, previousFp;
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoChapTwoRuntimeData runtimeDataCh2;
+    private SoSfx sfx;
 
     Color rain = new Color32(152,152,152,255);
 
@@ -56,6 +58,8 @@ public class ManagerFliesspfade : MonoBehaviour
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
 
         runtimeDataCh2 = runtimeDataChapters.LoadChap2RuntimeData();
+        sfx = runtimeDataChapters.LoadSfx();
+        
     }
 
     void Start()
@@ -65,6 +69,12 @@ public class ManagerFliesspfade : MonoBehaviour
         textinfoFP.text = textIntro;
         currentFp = previousFp = FliesspfadState.idle;
         solidBg.color = Color.white;
+
+        audioSrcRain.clip = sfx.regen;
+        audioSrcFp2.clip = sfx.fp2;
+        audioSrcFp3.clip = sfx.fp3;
+        wetterNice.clip = sfx.athmoNiceWeather;
+        wetterNice.Play();
     }
 
     void Update()
@@ -115,21 +125,42 @@ public class ManagerFliesspfade : MonoBehaviour
                     headingInfoFp.text = HeadingInfoIdle;
                     textinfoFP.text = textIntro;
                     solidBg.color = Color.white;
+                    wetterNice.Play();
+                    audioSrc.Stop();
+                    audioSrcRain.Stop();
+                    audioSrcFp2.Stop();
+                    audioSrcFp3.Stop();
+
                     break;
                 case FliesspfadState.fp1:
                     btnFp2.interactable = false;
                     btnFp3.interactable = false;
                     solidBg.color = rain;
+                    audioSrc.clip = sfx.wolken;
+
+                    wetterNice.Stop();
+                    audioSrc.Play();
+                    audioSrcRain.PlayDelayed(2);
                     break;
                 case FliesspfadState.fp2:
                     btnFp1.interactable = false;
                     btnFp3.interactable = false;
                     solidBg.color = rain;
+
+                    wetterNice.Stop();
+                    audioSrc.Play();
+                    audioSrcRain.PlayDelayed(2);
+                    audioSrcFp2.PlayDelayed(3);
                     break;
                 case FliesspfadState.fp3:
                     btnFp1.interactable = false;
                     btnFp2.interactable = false;
                     solidBg.color = rain;
+
+                    wetterNice.Stop();
+                    audioSrc.Play();
+                    audioSrcRain.PlayDelayed(2);
+                    audioSrcFp3.PlayDelayed(3);
                     break;
             }
 

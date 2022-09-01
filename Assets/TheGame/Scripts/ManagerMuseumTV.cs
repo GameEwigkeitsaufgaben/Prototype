@@ -20,11 +20,16 @@ public class ManagerMuseumTV : MonoBehaviour
     private SoGameIcons icons;
     public TVState tvState;
     private SoChapTwoRuntimeData runtimeDataCh02;
+    private SoChaptersRuntimeData runtimeDataChapters;
+    private SoSfx sfx;
+    public AudioSource audioSrcAtmo;
 
     private void Awake()
     {
+        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         icons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
-        runtimeDataCh02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
+        runtimeDataCh02 = runtimeDataChapters.LoadChap2RuntimeData();
+        sfx = runtimeDataChapters.LoadSfx();
     }
 
     // Start is called before the first frame update
@@ -34,6 +39,8 @@ public class ManagerMuseumTV : MonoBehaviour
         btnPause.GetComponent<Image>().sprite = icons.tvPauseIcon;
         btnPause.gameObject.SetActive(false);
         tvState = TVState.VideoStop;
+        audioSrcAtmo.clip = sfx.atmoMuseum;
+        audioSrcAtmo.Play();
     }
 
     public void StartTheVideo()

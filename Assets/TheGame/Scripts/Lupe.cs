@@ -15,7 +15,6 @@ public class Lupe : MonoBehaviour, IDragHandler
     public GameObject LupeCirc, LupeHandle;
     public Image lupeBg;
     public Canvas myParentCanvas;
-    //public GameObject h2oAnimObj, fes2AnimObj;
     
     int origSize;
     float scaleFactor = 4f;
@@ -32,7 +31,6 @@ public class Lupe : MonoBehaviour, IDragHandler
         runtimeDataCh02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
         manager = FindObjectOfType<ManagerSauresWasser>();
         configCh2 = Resources.Load<SoConfigChapter2>(GameData.NameConfigCh2);
-        
     }
 
     private void Start()
