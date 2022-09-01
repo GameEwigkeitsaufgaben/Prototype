@@ -25,7 +25,7 @@ public class SoChapTwoRuntimeData : Runtime
     public bool interactPumpenDone = false;
     public Vector3 groupPosition;
 
-    public bool replayTL2121intro, replayTL2121outro, replay2122TVoutro, replayOverlay2122, replayOverlay2123, replayTL21101Reinigung;
+    public bool replayTL2121intro, replayTL2121outro, replay2122TVoutro, replayOverlay2122, replayOverlay2123, replayTL21101Reinigung, replayPumpen;
     public TVStation state;
 
 
@@ -42,6 +42,7 @@ public class SoChapTwoRuntimeData : Runtime
 
         replayTL2121intro = replayTL2121outro = replay2122TVoutro = replayOverlay2122 = replayOverlay2123 = replayTL21101Reinigung = true;
         interactTVDone = fliesspfadeDone = true;
+        replayPumpen = true;
 
         reinAktivDone = reinPassivDone = true;
         interactPumpenDone = true;
@@ -50,6 +51,7 @@ public class SoChapTwoRuntimeData : Runtime
     private void OnEnable()
     {
         updatePoints = false;
+        replayPumpen = false;
         postOverlayToLoad = "";
         instaSliderPos = 1f;
         interactPumpenDone = false;
