@@ -24,6 +24,8 @@ public class Lupe : MonoBehaviour, IDragHandler
     ManagerSauresWasser manager;
     public Animator animator;
 
+    private Vector3 pausePosLupe = new Vector3(-430f, 55f, 0f);
+
     private SoConfigChapter2 configCh2;
 
     private void Awake()
@@ -92,7 +94,6 @@ public class Lupe : MonoBehaviour, IDragHandler
             runtimeDataCh02.fes2Found = true;
             lupeBg.sprite = configCh2.lupeBGOxi1;
             lupeBg.color = configCh2.lupeBGOxi1Color;
-            //fes2AnimObj.SetActive(true);
             animator.SetTrigger("oxi1");
         }
         else if(collision.name == o2)
@@ -157,5 +158,16 @@ public class Lupe : MonoBehaviour, IDragHandler
     public void OnDrag(PointerEventData eventData)
     {
         myDragRectTransform.anchoredPosition += eventData.delta / myParentCanvas.scaleFactor; //important when using screen space
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonUp(0))
+        {
+            Debug.Log("btn up");
+            gameObject.transform.localPosition = pausePosLupe;
+            manager.SetAudio(4);
+            manager.ResetIonHeading();
+        }
     }
 }

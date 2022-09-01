@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public enum SauresWasserTrigger
@@ -27,15 +28,30 @@ public class ManagerSauresWasser : MonoBehaviour
 
     public GameObject headingH2o, headingO2, headingSo4, headingFeS2;
     public GameObject phRegen, phOxi1, phOxi2;
+    public SpeechManagerMuseumChapTwo speechManager;
+    public GameObject Lupe, btnReplayTalkingList, mirror; 
+    public Button btnProceed;
+    public AudioSource aRegen, aBewetterung, aKnistern, aAusleiten; 
 
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoChapTwoRuntimeData runtimeDataCh2;
+    private SoSfx sfx;
 
     private void Awake()
     {
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDragTouch);
         runtimeDataCh2 = runtimeDataChapters.LoadChap2RuntimeData();
+        sfx = runtimeDataChapters.LoadSfx();
+
+        aRegen.clip = sfx.regen;
+        aBewetterung.clip = sfx.coalmineWindInTunnel;
+        aAusleiten.clip = sfx.atmoWasserRinnt;
+
+        aRegen.Play();
+        aBewetterung.Play();
+        aKnistern.Play();
+        aAusleiten.Play();
 
         headingFeS2.SetActive(false);
         headingH2o.SetActive(false);
@@ -44,6 +60,84 @@ public class ManagerSauresWasser : MonoBehaviour
         phOxi1.SetActive(false);
         phOxi2.SetActive(false);
         phRegen.SetActive(false);
+
+        btnProceed.interactable = false;
+
+        if (runtimeDataCh2.replayPyrit)
+        {
+            btnReplayTalkingList.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("starte talking");
+            speechManager.playZechePyrit = true;
+            mirror.SetActive(true);
+            Lupe.SetActive(false);
+            btnReplayTalkingList.SetActive(false);
+        }
+
+        if (runtimeDataCh2.progressPost218PyritDone)
+        {
+            btnProceed.interactable = true;
+        }
+    }
+
+    public void ResetIonHeading()
+    {
+        headingFeS2.SetActive(false);
+        headingH2o.SetActive(false);
+        headingO2.SetActive(false);
+        headingSo4.SetActive(false);
+        phOxi1.SetActive(false);
+        phOxi2.SetActive(false);
+        phRegen.SetActive(false);
+        infoZoneHeading.gameObject.SetActive(true);
+        infoZoneText.text = "";
+    }
+
+    //int regen-0, bewetterung-1, knistern-2, abwasser-3
+    public void SetAudio(int station)
+    {
+        switch (station)
+        {
+            case 0:
+                aRegen.volume = 1f;
+                aBewetterung.volume = 0.3f;
+                aKnistern.volume = 0.3f;
+                aAusleiten.volume = 0.3f;
+                break;
+            case 1:
+                aRegen.volume = 0.3f;
+                aBewetterung.volume = 1f;
+                aKnistern.volume = 0.3f;
+                aAusleiten.volume = 0.3f;
+                break;
+            case 2:
+                aRegen.volume = 0.3f;
+                aBewetterung.volume = 0.3f;
+                aKnistern.volume = 1f;
+                aAusleiten.volume = 0.3f;
+                break;
+            case 3:
+                aRegen.volume = 0.3f;
+                aBewetterung.volume = 0.3f;
+                aKnistern.volume = 0.3f;
+                aAusleiten.volume = 1f;
+                break;
+            case 4:
+                aRegen.volume = 0.3f;
+                aBewetterung.volume = 0.3f;
+                aKnistern.volume = 0.3f;
+                aAusleiten.volume = 0.3f;
+                break;
+        }
+    }
+
+    public void ReplayTalkingList()
+    {
+        speechManager.playZechePyrit = true;
+        mirror.SetActive(true);
+        Lupe.SetActive(false);
     }
 
     public void SetMolekuelFound(SauresWasserTrigger trigger)
@@ -53,10 +147,14 @@ public class ManagerSauresWasser : MonoBehaviour
             case SauresWasserTrigger.Wasser:
                 infoZoneText.text = triggerWasser;
                 molh2o.SetColor(foundColor);
+                molh2o.SetDone();
+                SetAudio(0);
                 break;
             case SauresWasserTrigger.Schacht:
                 infoZoneText.text = triggerSchacht;
                 molo2.SetColor(foundColor);
+                molo2.SetDone();
+                SetAudio(1);
                 break;
             case SauresWasserTrigger.Pyrit:
                 infoZoneText.text = triggerPyrit;
@@ -64,13 +162,31 @@ public class ManagerSauresWasser : MonoBehaviour
                 molh.SetColor(foundColor);
                 molfe2.SetColor(foundColor);
                 molso4.SetColor(foundColor);
+                SetAudio(2);
+
+                molfes2.SetDone();
+                molh.SetDone();
+                molfe2.SetDone();
+                molso4.SetDone();
                 break;
             case SauresWasserTrigger.Austritt:
                 infoZoneText.text = triggerAustritt;
                 molh.SetColor(foundColor);
                 molfe3.SetColor(foundColor);
+                molfe3.SetDone();
+                SetAudio(3);
                 break;
         }
+
+        if (molh2o.IsDone() && molo2.IsDone() && molfes2.IsDone() && molh.IsDone() && molfe2.IsDone() & molso4.IsDone() && molfe3.IsDone())
+        {
+            runtimeDataCh2.progressPost218PyritDone = true;
+            btnProceed.interactable = true;
+            return;
+        }
+
+        Debug.Log("missing ion");
+        
     }
 
     public void SwitchScene()
@@ -131,6 +247,17 @@ public class ManagerSauresWasser : MonoBehaviour
                 headingSo4.SetActive(true);
                 SetPH(2);
                 break;
+        }
+    }
+
+    private void Update()
+    {
+        if (speechManager.IsTalkingListFinished(GameData.NameCH2TLZechePyrit))
+        {
+            Lupe.SetActive(true);
+            mirror.SetActive(false);
+            runtimeDataCh2.replayPyrit = true;
+            btnReplayTalkingList.SetActive(true);
         }
     }
 }

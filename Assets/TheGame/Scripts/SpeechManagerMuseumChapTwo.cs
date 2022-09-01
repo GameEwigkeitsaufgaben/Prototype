@@ -17,33 +17,37 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
     public SoTalkingList
         tlZecheIntroReinigung,
         tlZechePumpeIntro,
-        tlZechePumpeOutro;
+        tlZechePumpeOutro,
+        tlZechePyrit;
 
-    public bool 
+    public bool
         playSecSilent,
-        playMuseumGWIntro, 
+        playMuseumGWIntro,
         playMuseumGWTVIntro,
         playMuseumGWTVOutro,
-        playMuseumFliesspfadIntro, 
+        playMuseumFliesspfadIntro,
         playMuseumExitZeche,
         playZecheIntroReinigung,
         playZechePumpeIntro,
-        playZechePumpeOutro;
+        playZechePumpeOutro,
+        playZechePyrit;
     
     private AudioSource audioSrc;
 
     public bool resetFin;
 
-    private SpeechList 
+    private SpeechList
         speakSilent,
-        speakMuseumGWIntro, 
-        speakMuseumGWTVIntro, 
-        speakMuseumGWTVOutro, 
-        speakMuseumFliesspfadIntro, 
+        speakMuseumGWIntro,
+        speakMuseumGWTVIntro,
+        speakMuseumGWTVOutro,
+        speakMuseumFliesspfadIntro,
         speakMuseumExitZeche,
         speakZecheIntroReinigung,
         speakZechePumpeIntro,
-        speakZechePumpeOutro;
+        speakZechePumpeOutro,
+        speakZechePyrit;
+
 
    
     private Dictionary<string, SpeechList> speechDict = new Dictionary<string, SpeechList>();
@@ -87,6 +91,7 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
         tlZecheIntroReinigung = Resources.Load<SoTalkingList>(GameData.NameCH2TLZecheIntroReiniung);
         tlZechePumpeIntro = Resources.Load<SoTalkingList>(GameData.NameCH2TLZechePumpeIntro);
         tlZechePumpeOutro = Resources.Load<SoTalkingList>(GameData.NameCH2TLZechePumpeOutro);
+        tlZechePyrit = Resources.Load<SoTalkingList>(GameData.NameCH2TLZechePyrit);
     }
 
     void Start()
@@ -102,6 +107,7 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
         AddToDict(speakZecheIntroReinigung, tlZecheIntroReinigung);
         AddToDict(speakZechePumpeIntro, tlZechePumpeIntro);
         AddToDict(speakZechePumpeOutro, tlZechePumpeOutro);
+        AddToDict(speakZechePyrit, tlZechePyrit);
 
 
         enya = GetComponent<PeopleInScene>().enya;
@@ -226,6 +232,11 @@ public class SpeechManagerMuseumChapTwo : MonoBehaviour
         {
             currentList = speechDict[GameData.NameCH2TLZechePumpeOutro];
             playZechePumpeOutro = false;
+        }
+        else if (playZechePyrit)
+        {
+            currentList = speechDict[GameData.NameCH2TLZechePyrit];
+            playZechePyrit = false;
         }
         if (currentList != null)
         {

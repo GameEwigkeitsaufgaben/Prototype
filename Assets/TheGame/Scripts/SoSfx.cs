@@ -16,7 +16,7 @@ public class SoSfx : ScriptableObject
 
     public AudioClip mineAlarm, mineHusten;
     public AudioClip mouseOff, mouseOn;
-    public AudioClip wolken, regen, fp2, fp3, athmoNiceWeather;
+    public AudioClip wolken, regen, fp2, fp3, atmoNiceWeather, atmoWasserRinnt;
 
     public AudioClip atmoMuseum;
     public AudioClip quizBGLoop;

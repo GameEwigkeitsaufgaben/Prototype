@@ -198,7 +198,8 @@ public static class GameData
     public const string NameCH2TLZecheIntroReiniung = "AudioTalkingList-2.1.10.1-GWReinigung";
     public const string NameCH2TLZechePumpeIntro = "AudioTalkingList-2.1.5.1-IntroPumpen";
     public const string NameCH2TLZechePumpeOutro = "AudioTalkingList-2.1.5.1-OutroPumpen";
-    
+    public const string NameCH2TLZechePyrit = "AudioTalkingList-2.1.8.1-IntroPyrit";
+
 
     //Talkinglist ch3: TL-TalkingList
     public const string NameCH3TLDemo = "AudioTalkingList-3.2.1-Demo";

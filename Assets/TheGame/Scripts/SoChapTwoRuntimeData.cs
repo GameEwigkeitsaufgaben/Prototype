@@ -25,7 +25,9 @@ public class SoChapTwoRuntimeData : Runtime
     public bool interactPumpenDone = false;
     public Vector3 groupPosition;
 
+
     public bool replayTL2121intro, replayTL2121outro, replay2122TVoutro, replayOverlay2122, replayOverlay2123, replayTL21101Reinigung, replayPumpen;
+    public bool replayPyrit;
     public TVStation state;
 
 
@@ -34,6 +36,7 @@ public class SoChapTwoRuntimeData : Runtime
 
     public void SetAllDone()
     {
+        replayPyrit = true;
         progressPost211Done = true;
         progress212MuseumDone = true;
         progressPost213Done = progressPost214Done = progressPost215Done = true;
@@ -50,6 +53,7 @@ public class SoChapTwoRuntimeData : Runtime
 
     private void OnEnable()
     {
+        replayPyrit = false;
         updatePoints = false;
         replayPumpen = false;
         postOverlayToLoad = "";

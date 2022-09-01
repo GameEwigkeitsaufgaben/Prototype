@@ -73,7 +73,7 @@ public class ManagerFliesspfade : MonoBehaviour
         audioSrcRain.clip = sfx.regen;
         audioSrcFp2.clip = sfx.fp2;
         audioSrcFp3.clip = sfx.fp3;
-        wetterNice.clip = sfx.athmoNiceWeather;
+        wetterNice.clip = sfx.atmoNiceWeather;
         wetterNice.Play();
     }
 
