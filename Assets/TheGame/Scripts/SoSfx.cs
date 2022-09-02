@@ -15,7 +15,7 @@ public class SoSfx : ScriptableObject
     public AudioClip coalmineLWC, coalmineMoveShields, coalmineCoalToConveyorBeltFalling, coalmineBreakingRock;
 
     public AudioClip mineAlarm, mineHusten;
-    public AudioClip mouseOff, mouseOn;
+    public AudioClip mouseOff, mouseOn, mouseHammer;
     public AudioClip wolken, regen, fp2, fp3, atmoNiceWeather, atmoWasserRinnt;
 
     public AudioClip atmoMuseum;

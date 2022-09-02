@@ -13,6 +13,7 @@ public class Guckloch : MonoBehaviour
 
     public static byte[] ssData = null;
     public string imageFilename = "TestImage";
+    public AudioSource audioAtmo;
 
     [Header("Setup")]
     public RawImage webcamDisplay;
@@ -24,11 +25,18 @@ public class Guckloch : MonoBehaviour
     public int cameraActive = 0;
     private WebCamDevice[] devices;
 
+
     [Header("Error Handling")]
     public GameObject errorNoCamera;
     public GameObject errorMultipleCameras;
 
+    private SoSfx sfx;
 
+
+    private void Awake()
+    {
+        sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
+    }
 
     public void DownloadSpecificFrame()
     {
@@ -50,6 +58,9 @@ public class Guckloch : MonoBehaviour
         }
 
         SetWebCam(0);
+
+        audioAtmo.clip = sfx.atmoNiceWeather;
+        audioAtmo.Play();
     }
 
     IEnumerator RecordSpecificFrame()

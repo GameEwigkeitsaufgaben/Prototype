@@ -9,20 +9,28 @@ public class ManagerReinigungGw : MonoBehaviour
     private SoChapTwoRuntimeData runtimeDataCh2;
     private SpeechManagerMuseumChapTwo speechManagerCh2;
     private SwitchSceneManager switchScene;
+    private SoSfx sfx;
 
     public Button btnReplayTalkingList, btnActive, btnPassive;
+    public AudioSource atmo;
+    
 
     private void Awake()
     {
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
         runtimeDataCh2 = runtimeDataChapters.LoadChap2RuntimeData();
+        sfx = runtimeDataChapters.LoadSfx();
+
         speechManagerCh2 = GetComponent<SpeechManagerMuseumChapTwo>();
         switchScene = GetComponent<SwitchSceneManager>();
     }
 
     void Start()
     {
+        atmo.clip = sfx.atmoNiceWeather;
+        atmo.Play();
+
         btnProceed.interactable = runtimeDataCh2.progressPost2110GWReinigungDone;
         btnReplayTalkingList.gameObject.SetActive(runtimeDataCh2.replayTL21101Reinigung);
         
