@@ -47,6 +47,7 @@ public class ManagerSauresWasser : MonoBehaviour
         aRegen.clip = sfx.regen;
         aBewetterung.clip = sfx.coalmineWindInTunnel;
         aAusleiten.clip = sfx.atmoWasserRinnt;
+        aKnistern.clip = sfx.molecule;
 
         aRegen.Play();
         aBewetterung.Play();

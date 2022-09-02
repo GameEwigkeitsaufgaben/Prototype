@@ -16,6 +16,7 @@ public class ManagerGWChancen : MonoBehaviour
     public bool allItemsSnaped = false;
 
     public GameObject headingImgChance, headingImgNoChance, headingImgNN;
+    [SerializeField] private GameObject dropTargetChance, dropTargetNoChance, dropTargetNeitherNor;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +37,9 @@ public class ManagerGWChancen : MonoBehaviour
         {
             tmpVec3.Set(x, y, 0f);
             d.gameObject.transform.localPosition = tmpVec3;
+            d.dropTargetChance = dropTargetChance;
+            d.dropTargetNeitherNor = dropTargetNeitherNor;
+            d.dropTargetNoChance = dropTargetNoChance;
             d.origPos = tmpVec3;
             y -= 10f;
             x += 10f;

@@ -34,7 +34,8 @@ public class DragItemThoughts : MonoBehaviour, IEndDragHandler, IDragHandler
     private MouseChange mouse;
     [SerializeField] private bool isMouseUp = false;
     [SerializeField] private bool rightCollision = false;
-    [SerializeField] private Collider2D rightCollisionObj;
+    [SerializeField] private Collider2D enterCollision;
+    public GameObject dropTargetChance, dropTargetNoChance, dropTargetNeitherNor;
 
     void Start()
     {
@@ -72,48 +73,44 @@ public class DragItemThoughts : MonoBehaviour, IEndDragHandler, IDragHandler
     public void OnEndDrag(PointerEventData eventData)
     {
         dragging = false;
+
+        if (!rightCollision) return;
+
+        switch (type)
+        {
+            case GWChanceType.chance:
+                ChangeSceneBehaviour(dropTargetChance);
+                PlayChance();
+                break;
+            case GWChanceType.nochance:
+                PlayNoChance();
+                ChangeSceneBehaviour(dropTargetNoChance);
+                break;
+            case GWChanceType.neitherNor:
+                ChangeSceneBehaviour(dropTargetNeitherNor);
+                PlayNeitherNor();
+                break;
+        }
     }
 
     private void OnMouseDown()
     {
+        if (mouse == null) return;
         mouse.MouseDown();
     }
 
     private void OnMouseUp()
     {
-        Debug.Log("in mouse up ###########################" + gameObject.name);
-        if (rightCollisionObj != null)
-        {
-            ChangeSceneBehaviour(rightCollisionObj);
-
-            switch (type)
-            {
-                case GWChanceType.chance:
-                    PlayChance();
-                    break;
-                case GWChanceType.nochance:
-                    PlayNoChance();
-                    break;
-                case GWChanceType.neitherNor:
-                    PlayNeitherNor();
-                    break;
-            }
-
-        }
-
-        //Debug.Log(gameObject.name + "chaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaat" + "pos != orig" + (!snaped && gameObject.transform.localPosition != origPos));
-        //if (!snaped && gameObject.transform.localPosition != origPos)
-        //{
-        //    gameObject.transform.localPosition = origPos;
-        //}
-        
-
+        if (mouse == null) return;
         mouse.MouseUp();
     }
 
     public void ReplayTalkingList()
     {
-        ChangeSceneBehaviour(null);
+        //ChangeSceneBehaviour(null);
+        manager.animator.enabled = false;
+        manager.MirrorBergbauvertreter(true);
+        manager.PauseDragAllDragItems(true);
 
         PlayChance();
         PlayNoChance();
@@ -122,30 +119,26 @@ public class DragItemThoughts : MonoBehaviour, IEndDragHandler, IDragHandler
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        enterCollision = collision;
         if (collision.name == "DropTargetImgChance" && type == GWChanceType.chance) rightCollision = true;
         else if (collision.name == "DropTargetImgNoChance" && type == GWChanceType.nochance) rightCollision = true;
         else if (collision.name == "DropTargetImgNeitherNor" && type == GWChanceType.neitherNor) rightCollision = true;
         else rightCollision = false;
-
-        if (rightCollision)
-        {
-            rightCollisionObj = collision;
-        }
-        else
-        {
-            rightCollisionObj = null;
-        }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+
+    private void OnTriggerExit2D(Collider2D collision)
     {
+        if (enterCollision == null) return;
+
+        if (collision.name != enterCollision.name) return;
+        
         rightCollision = false;
-        rightCollisionObj = null;
+        enterCollision = null;
     }
 
     private void PlayNeitherNor()
     {
-
         if (gameObject.name == "DragSourceSauberesGrubenwasser")
         {
             manager.speechManager.playSauberesGW = true;
@@ -191,9 +184,9 @@ public class DragItemThoughts : MonoBehaviour, IEndDragHandler, IDragHandler
         }
     }
 
-    private void ChangeSceneBehaviour(Collider2D collision)
+    private void ChangeSceneBehaviour(GameObject dropTarget)
     {
-        if(collision != null) gameObject.transform.SetParent(collision.transform);
+        gameObject.transform.SetParent(dropTarget.transform);
         snaped = true;
         gameObject.GetComponent<Image>().enabled = false;
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
@@ -212,8 +205,13 @@ public class DragItemThoughts : MonoBehaviour, IEndDragHandler, IDragHandler
     {
         if (snaped) return;
         if (dragging) return;
+
+        if (rightCollision) return;
+
+        if (Vector3.Distance(gameObject.transform.localPosition, origPos) < 0.1f) return;
         
         gameObject.transform.localPosition = origPos;
-        
+        Debug.Log("SET BACK");
+       
     }
 }
