@@ -86,7 +86,8 @@ public class ManagerDemo : MonoBehaviour
         {
             foreach (Demonstrant demo in demonstranten)
             {
-                demo.SetGehoert(true);
+                demo.SetGehoert();
+                demo.SetGehoertFeedback(true);
             }
 
             btnBackToInsta.interactable = true;
@@ -102,7 +103,7 @@ public class ManagerDemo : MonoBehaviour
             foreach(Demonstrant e in demonstranten)
             {
                 e.SpeechBubbleOn(false);
-                if (!e.gehoert) e.SetGehoert(false);
+                if (!e.gehoert) e.SetGehoertFeedback(false);
             }
             audioSrc.Stop();
         }
@@ -137,7 +138,7 @@ public class ManagerDemo : MonoBehaviour
         }
 
         if (demo != null) demo.SpeechBubbleOn(true);
-        demo.SetGehoert(true);
+        demo.SetGehoertFeedback(true);
 
         currentClip = audioSrc.clip.name;
         audioSrc.Play();
@@ -188,37 +189,43 @@ public class ManagerDemo : MonoBehaviour
         
         if (currentClip == clipNameBuerger)
         {
-            demoBuerger.SetGehoert(true);
+            demoBuerger.SetGehoert();
+            demoBuerger.SetGehoertFeedback(true);
             buergerDone = true;
             demonstrant = demoBuerger;
         }
         else if (currentClip == clipNameUmweltschutz) 
         {
             umweltDone = true;
-            demoUmweltschutz.SetGehoert(true);
+            demoUmweltschutz.SetGehoert();
+            demoUmweltschutz.SetGehoertFeedback(true);
             demonstrant = demoUmweltschutz;
         }
         else if (currentClip == clipNameWissenschaft)
         {
-            demoWissenschaft.SetGehoert(true);
+            demoWissenschaft.SetGehoert();
+            demoWissenschaft.SetGehoertFeedback(true);
             scienceDone = true;
             demonstrant = demoWissenschaft;
         }
         else if (currentClip == clipNamePoldervertreter)
         {
-            demoPolder.SetGehoert(true);
+            demoPolder.SetGehoert();
+            demoPolder.SetGehoertFeedback(true);
             polderVertreterDone =  true;
             demonstrant = demoPolder;
         }
         else if (currentClip == clipNameGrubenwasservertreter)
         {
-            demoGrubenwasser.SetGehoert(true);
+            demoGrubenwasser.SetGehoert();
+            demoGrubenwasser.SetGehoertFeedback(true);
             gwVertreterDone = true;
             demonstrant = demoGrubenwasser;
         }
         else if (currentClip == clipNameWasserversorger)
         {
-            demoWasserversorger.SetGehoert(true);
+            demoWasserversorger.SetGehoert();
+            demoWasserversorger.SetGehoertFeedback(true);
             wasserversorgerDone = true;
             demonstrant = demoWasserversorger;
         }

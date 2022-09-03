@@ -18,23 +18,21 @@ public class Demonstrant : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetGehoert(false);
+        gehoert = false;
+        SetGehoertFeedback(false);
         SpeechBubbleOn(false);
     }
 
-    public void SetGehoert(bool gehoertJa)
+    public void SetGehoertFeedback(bool finished)
+    {
+        characterImage.color = finished ? feedbackGehoert: fbUngehoert;
+    }
+
+    public void SetGehoert()
     {
         if (gehoert) return;
-        
-        if (gehoertJa)
-        {
-            gehoert = true;
-            characterImage.color = feedbackGehoert;
-            return;
-        }
 
-        gehoert = false;
-        characterImage.color = fbUngehoert;
+        gehoert = true;
     }
 
     public void SpeechBubbleOn(bool turnOn)
