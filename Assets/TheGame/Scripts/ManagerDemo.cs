@@ -26,10 +26,13 @@ public class ManagerDemo : MonoBehaviour
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoChapThreeRuntimeData runtimeCh03;
     private SoTalkingList demoAudios;
+    private SoSfx sfx;
     private List<Demonstrant> demonstranten = new List<Demonstrant>();
     private AudioSource audioSrc;
 
+
     public bool buergerDone, umweltDone, scienceDone, polderVertreterDone, gwVertreterDone, wasserversorgerDone;
+    public AudioSource audioScrAtmo;
 
     private int finishedCount = 0;
     private string currentClip = "";
@@ -45,6 +48,7 @@ public class ManagerDemo : MonoBehaviour
 
         configCh3 = Resources.Load<SoConfigChapter3>(GameData.NameConfigCH3Demo);
         demoAudios = Resources.Load<SoTalkingList>(GameData.NameCH3TLDemo);
+        sfx = runtimeDataChapters.LoadSfx();
         audioSrc = GetComponent<AudioSource>();
 
         demoBuerger = buerger.GetComponent<Demonstrant>();
@@ -93,6 +97,11 @@ public class ManagerDemo : MonoBehaviour
             btnBackToInsta.interactable = true;
             return;
         }
+
+        audioScrAtmo.playOnAwake = false;
+        audioScrAtmo.loop = true;
+        audioScrAtmo.clip = sfx.atmoDemo;
+        audioScrAtmo.Play();
     }
 
     public void PlayAudio(int protagonist)

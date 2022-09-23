@@ -22,6 +22,8 @@ public class SoSfx : ScriptableObject
     public AudioClip atmoMuseum;
     public AudioClip quizBGLoop;
 
+    public AudioClip atmoDemo;
+
     public AudioClip correctAnswer, incorrectAnswer, btnClick;
 
     public GameObject instaAudioSrc;
