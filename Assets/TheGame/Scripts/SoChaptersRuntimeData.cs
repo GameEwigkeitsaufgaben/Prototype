@@ -21,10 +21,13 @@ public class SoChaptersRuntimeData : ScriptableObject
 
     public Texture2D sceneCursor;
 
+    public float musicVolume = 0.0f;
+
     private void OnEnable()
     {
         ch1GeneralUnlocked = ch2GrubenwasserUnlocked = ch3GrubenwasserUnlocked = false;
         progressWithAdminCh1 = progressWithAdminCh2 = progressWithAdminCh3 = false;
+        musicVolume = GameData.defaultVolumeInsta;
     }
 
     public SoSfx LoadSfx()

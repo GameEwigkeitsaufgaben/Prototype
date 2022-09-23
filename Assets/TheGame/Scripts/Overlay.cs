@@ -34,6 +34,7 @@ public class Overlay : MonoBehaviour
     private SoChapThreeRuntimeData runtimeDataChap03;
 
     private chapter currentCH;
+    private AudioSource audioSrcMusic;
 
     private void Awake()
     {
@@ -62,6 +63,11 @@ public class Overlay : MonoBehaviour
         instaPostManager = FindObjectOfType<ManagerInstaPost>();
     }
 
+    public void SetMusicAudioSrc(AudioSource asrc)
+    {
+        audioSrcMusic = asrc;
+    }
+
     public void SetReplayIcon()
     {
         allOverlayChildren[OVERLAYTYPEICON].gameObject.GetComponent<Image>().sprite = postData.GetReplayIcon();
@@ -81,6 +87,7 @@ public class Overlay : MonoBehaviour
         if (webglVideoPlayer != null)
         {
             webglVideoPlayer.StartTheVideo(gameObject.name, postData.videoName, allOverlayChildren[OVERLAYIMAGE].gameObject.GetComponent<RawImage>());
+            audioSrcMusic.Pause();
         }
         else
         {
@@ -179,6 +186,7 @@ public class Overlay : MonoBehaviour
         gameObject.SetActive(false);
         runtimeDataChap01.overlaySoundState = OverlaySoundState.Closed;
         webglVideoPlayer.StopTheVideo();
+        audioSrcMusic.UnPause();
     }
 
     public SoPostData GetPostData()

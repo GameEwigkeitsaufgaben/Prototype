@@ -14,7 +14,7 @@ public class Entry : MonoBehaviour
     public GameObject overlay;
     public SoPostData postData;
     public Image fbDone;
-    public AudioSource audioSrcOverlay;
+    public AudioSource audioSrcOverlay, audioSrcMusic;
 
     //public bool testVideoPlayed = false;
 
@@ -22,6 +22,7 @@ public class Entry : MonoBehaviour
 
     private OverlayType overlayType; // Enum
     private SoSfx sfx;
+    private SoChaptersRuntimeData runtimeDataChapters;
     private SoChapOneRuntimeData runtimeDataCh1;
     private SoChapTwoRuntimeData runtimeDataCh2;
     private SoChapThreeRuntimeData runtimeDataCh3;
@@ -35,27 +36,29 @@ public class Entry : MonoBehaviour
 
     private void Awake()
     {
-        runtimeDataCh1 = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
-        runtimeDataCh2 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
-        runtimeDataCh3 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
+        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        runtimeDataCh1 = runtimeDataChapters.LoadChap1RuntimeData();
+        runtimeDataCh2 = runtimeDataChapters.LoadChap2RuntimeData();
+        runtimeDataCh3 = runtimeDataChapters.LoadChap3RuntimeData();
 
         Scene currScene = SceneManager.GetActiveScene();
-        Debug.Log("inAWASE: " +currScene.name);
+
         if (currScene.name == GameScenes.ch01InstaMain) currentCh = chapter.ch1;
         else if (currScene.name == GameScenes.ch02InstaMain) currentCh = chapter.ch2;
         else if (currScene.name == GameScenes.ch03InstaMain) currentCh = chapter.ch3;
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         if (fbDone != null) fbDone.color = fbInProgress;
-        sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
+        sfx = runtimeDataChapters.LoadSfx();
 
         postComp = post.GetComponent<Post>();
         overlayComp = overlay.GetComponent<Overlay>();
 
         postComp.SetPostData(postData);
         overlayComp.SetOverlayData(postData);
+        overlayComp.SetMusicAudioSrc(audioSrcMusic);
 
         try
         {
@@ -68,9 +71,7 @@ public class Entry : MonoBehaviour
             Debug.Log("No Videoplayer found");
         }
 
-        Debug.Log(gameObject.name + " created.");
-
-        audioSrcOverlay.clip = sfx.mouseHammer;
+        audioSrcOverlay.clip = sfx.lupeEnlarge;
     }
 
     public void SetReplayIcon(VideoPlayer vp)
@@ -202,6 +203,7 @@ public class Entry : MonoBehaviour
     {
         yield return new WaitForSeconds(.1f);
         overlayComp.CloseOverlay();
+        //if(runtimeDataChapters.musicVolume != 0.0f) 
     }
 
     public void CloseOverlay()

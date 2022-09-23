@@ -22,7 +22,7 @@ public class ManagerQuizAllChap : MonoBehaviour
     public TMP_Text textMinerWordsFeedback;
     public Text progressFeedback;
     public Button btnNext, btnCheck;
-    public AudioSource audioSrcBGMusic, audioSrcbuttonClick;
+    public AudioSource audioSrcBGMusic, audioSrcbuttonClick, audioSrcSpecial;
 
     [Header("Assigned at runtime")]
     [SerializeField] private List<QuizQuestionWIP> questions;
@@ -47,28 +47,34 @@ public class ManagerQuizAllChap : MonoBehaviour
         //audioSrcBGMusic = GetComponent<AudioSource>();
 
         activeScene = switchScene.GetActiveQuizScene();
-        
+        sfx = runtimeDataChapters.LoadSfx();
         switch (activeScene)
         {
             case 1: 
                 runtimeDataCh1 = runtimeDataChapters.LoadChap1RuntimeData();
+                audioSrcSpecial.clip = sfx.sageFeuer;
                 break;
             case 2:
                 runtimeDataCh2 = runtimeDataChapters.LoadChap2RuntimeData();
+                audioSrcSpecial.clip = sfx.atmoWasserRinnt;
                 break;
             case 3:
                 runtimeDataCh3 = runtimeDataChapters.LoadChap3RuntimeData();
+                audioSrcSpecial.clip = sfx.pumpen;
                 break;
         }
 
+        audioSrcSpecial.Play();
+
         quizConfig = runtimeDataChapters.LoadConfigQuiz();
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
-        sfx = runtimeDataChapters.LoadSfx();
+
     }
 
     void Start()
     {
         audioSrcBGMusic.clip = sfx.quizBGLoop;
+        audioSrcBGMusic.volume = GameData.defaultVolumeInsta;
         audioSrcBGMusic.Play();
         audioSrcbuttonClick.clip = sfx.btnClick;
 
@@ -95,6 +101,7 @@ public class ManagerQuizAllChap : MonoBehaviour
     public void SetMinerFeedback(MinerFeedback fb,  float pointsPerQuestion)
     {
         AudioSource audioSrc = imgMinerFeedback.GetComponent<AudioSource>();
+        audioSrc.volume = 0.3f;
         switch (fb)
         {
             case MinerFeedback.Idle:

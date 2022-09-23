@@ -58,7 +58,8 @@ public class ManagerInstaPost : MonoBehaviour
                 scrollbar.value = runtimeDataCh3.instaSliderPos;
                 break;
         }
-        
+
+        if (runtimeDataChapters.musicVolume != GameData.defaultVolumeInsta) audioSrcBGInsta.volume = runtimeDataChapters.musicVolume;
     }
 
     private void Awake()
@@ -204,6 +205,7 @@ public class ManagerInstaPost : MonoBehaviour
     void ReduceVolumeBGMusic(float value)
     {
         audioSrcBGInsta.volume -= value;
+        runtimeDataChapters.musicVolume = audioSrcBGInsta.volume;
 
         if (audioSrcBGInsta.volume == 1.0f)
         {
@@ -228,6 +230,7 @@ public class ManagerInstaPost : MonoBehaviour
     void IncreaseVolumeMusic(float value)
     {
         audioSrcBGInsta.volume += value;
+        runtimeDataChapters.musicVolume = audioSrcBGInsta.volume;
 
         if (audioSrcBGInsta.volume == 1.0f)
         {

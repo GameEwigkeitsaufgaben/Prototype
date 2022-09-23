@@ -90,6 +90,7 @@ public class WebGlVideoPlayer : MonoBehaviour
             if(videoPostName == GameData.NameOverlay115) 
             {
                 videoPlayer.loopPointReached += SetVideopostToRead;
+                //runtimeDataCh1.overlaySoundState = OverlaySoundState.NoSound;
             }
 
             if (videoPostName == GameData.NameOverlay219)
@@ -99,7 +100,7 @@ public class WebGlVideoPlayer : MonoBehaviour
 
             videoIsPlaying = true;
             //runtimeData.videoPlaying = true;
-            runtimeDataCh1.overlaySoundState = OverlaySoundState.NoSound;
+            //runtimeDataCh1.overlaySoundState = OverlaySoundState.NoSound;
         }
         else
         {
