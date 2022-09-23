@@ -13,6 +13,7 @@ public class Entry : MonoBehaviour
     public GameObject overlay;
     public SoPostData postData;
     public Image fbDone;
+    public AudioSource audioSrcOverlay;
 
     //public bool testVideoPlayed = false;
 
@@ -67,6 +68,8 @@ public class Entry : MonoBehaviour
         }
 
         Debug.Log(gameObject.name + " created.");
+
+        audioSrcOverlay.clip = sfx.mouseHammer;
     }
 
     public void SetReplayIcon(VideoPlayer vp)
@@ -84,6 +87,7 @@ public class Entry : MonoBehaviour
     public void OpenOverlay()
     {
         overlay.SetActive(true);
+        audioSrcOverlay.Play();
 
         switch (currentCh)
         {

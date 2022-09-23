@@ -63,6 +63,7 @@ public class ManagerInstaPost : MonoBehaviour
 
     private void Awake()
     {
+        //Get active Scene
         if (SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain)
         {
             currentCH = chapter.ch1;
@@ -76,7 +77,8 @@ public class ManagerInstaPost : MonoBehaviour
             currentCH = chapter.ch3;
         }
 
-        audioSrcBGInsta = GetComponent<AudioSource>();
+        //audio setting
+
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
         gameIcons = Resources.Load<SoGameIcons>(GameData.NameGameIcons);
@@ -91,8 +93,10 @@ public class ManagerInstaPost : MonoBehaviour
 
         musicOnOff.colors = GameColors.GetInteractionColorBlock();
         scrollbar.colors = GameColors.GetInteractionColorBlock();
-        audioSrcBGInsta.clip = sfx.instaMenuBGmusicLoop;
-        audioSrcBGInsta.volume = GameData.maxBGVolumeInsta;
+
+        audioSrcBGInsta = GetComponent<AudioSource>();
+        audioSrcBGInsta.clip = sfx.instaMenuMusicLoop;
+        audioSrcBGInsta.volume = GameData.defaultVolumeInsta;
         audioSrcBGInsta.Play();
 
 
@@ -183,25 +187,78 @@ public class ManagerInstaPost : MonoBehaviour
     void ReduceVolumeBGMusic(float value)
     {
         audioSrcBGInsta.volume -= value;
+
+        if(audioSrcBGInsta.volume == 0.0f)
+        {
+            btnVolMinus.interactable = false;
+            btnVolPlus.interactable = false;
+            musicOnOff.GetComponent<Image>().sprite = gameIcons.musicOff;
+            SetMusicON(false);
+        }
+    }
+
+    private void SetMusicON(bool musicOn)
+    {
+        switch (currentCH)
+        {
+            case chapter.ch1:
+                runtimeDataCh1.musicOn = musicOn;
+                break;
+            case chapter.ch2:
+                runtimeDataCh2.musicOn = musicOn;
+                break;
+            case chapter.ch3:
+                runtimeDataCh3.musicOn = musicOn;
+                break;
+        }
     }
 
     void IncreaseVolumeMusic(float value)
     {
         audioSrcBGInsta.volume += value;
+
+        if (audioSrcBGInsta.volume == 1.0f)
+        {
+            btnVolPlus.interactable = false;
+        }
+
+        if(audioSrcBGInsta.volume != 0.0f)
+        {
+            btnVolMinus.interactable = true;
+        }
     }
 
     private void EnableDisableMusic(bool enable)
     {
+        Debug.Log("call enable + " + enable);
         if (enable)
         {
-            if (audioSrcBGInsta.volume == 0f) IncreaseVolumeMusic(volReduceSteps);
-            btnVolMinus.interactable = true;
-            if (audioSrcBGInsta.volume != 1.0f) btnVolPlus.interactable = true;
             if (!audioSrcBGInsta.isPlaying)
             {
                 audioSrcBGInsta.Play();
             }
+            
             musicOnOff.GetComponent<Image>().sprite = gameIcons.musicOn;
+            SetMusicON(true);
+
+            if (audioSrcBGInsta.volume > 0.0f && audioSrcBGInsta.volume < 1.0f)
+            {
+                btnVolMinus.interactable = true;
+                btnVolPlus.interactable = true;
+            }
+
+            else if (audioSrcBGInsta.volume == 1.0f)
+            {
+                btnVolMinus.interactable = true;
+                btnVolPlus.interactable = false;
+            }
+
+            else if (audioSrcBGInsta.volume == 0.0f)
+            {
+                btnVolMinus.interactable = false;
+                btnVolPlus.interactable = true;
+                IncreaseVolumeMusic(0.1f);
+            }
         }
         else
         {
@@ -209,36 +266,24 @@ public class ManagerInstaPost : MonoBehaviour
             {
                 audioSrcBGInsta.Stop();
             }
+
             musicOnOff.GetComponent<Image>().sprite = gameIcons.musicOff;
+            SetMusicON(false);
             btnVolPlus.interactable = btnVolMinus.interactable = false;
         }
     }
 
     public void ChangeVolume(int vol)
     {
-        float oldVol = audioSrcBGInsta.volume;
-
         switch((volume)vol)
         {
             case volume.increase:
-                if(audioSrcBGInsta.volume <= 1.0f) IncreaseVolumeMusic(volReduceSteps);
+               IncreaseVolumeMusic(volReduceSteps);
             break;
             case volume.decrease:
-                if(audioSrcBGInsta.volume >= 0.0f) ReduceVolumeBGMusic(volReduceSteps);
+                ReduceVolumeBGMusic(volReduceSteps);
             break;
         }
-
-        if(oldVol != audioSrcBGInsta.volume)
-        {
-            if (audioSrcBGInsta.volume == 0f) ToggleMusicOnOff();
-            else
-            {
-                if (oldVol == 0) ToggleMusicOnOff();
-            }
-        }
-
-        btnVolPlus.interactable = (audioSrcBGInsta.volume != 1f) ? true : false;
-        btnVolMinus.interactable = (audioSrcBGInsta.volume != 0f) ? true : false;
     }
 
     //Called from Inspector BtnMusicOnOff OnClick()
@@ -246,11 +291,17 @@ public class ManagerInstaPost : MonoBehaviour
     {
         switch (currentCH)
         {
-            case chapter.ch1: runtimeDataCh1.musicOn = !runtimeDataCh1.musicOn;
+            case chapter.ch1:
+                Debug.Log("on ? = " + runtimeDataCh1.musicOn);
+                runtimeDataCh1.musicOn = !runtimeDataCh1.musicOn;
                 break;
-            case chapter.ch2: runtimeDataCh2.musicOn = !runtimeDataCh2.musicOn;
+            case chapter.ch2:
+                Debug.Log("on old ? = " + runtimeDataCh2.musicOn);
+                runtimeDataCh2.musicOn = !runtimeDataCh2.musicOn;
+                Debug.Log("on new ? = " + runtimeDataCh2.musicOn);
                 break;
-            case chapter.ch3: runtimeDataCh3.musicOn = !runtimeDataCh3.musicOn;
+            case chapter.ch3: 
+                runtimeDataCh3.musicOn = !runtimeDataCh3.musicOn;
                 break;
         }
         

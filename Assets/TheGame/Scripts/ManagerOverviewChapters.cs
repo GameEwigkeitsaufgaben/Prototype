@@ -31,8 +31,9 @@ public class ManagerOverviewChapters : MonoBehaviour
     {
         btnCredits.colors = GameColors.GetInteractionColorBlock();
         lawNotice.text = GameData.lawNotiz;
-        audioSrc.clip = sfx.instaMenuBGmusicLoop;
+        audioSrc.clip = sfx.instaMenuMusicLoop;
         audioSrc.Play();
+        audioSrc.volume = GameData.defaultVolumeInsta;
 
         allChapDone = runtimeDataChapters.ch1GeneralUnlocked && runtimeDataChapters.ch2GrubenwasserUnlocked && runtimeDataChapters.ch3GrubenwasserUnlocked;
 

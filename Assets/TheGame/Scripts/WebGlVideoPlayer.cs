@@ -82,7 +82,7 @@ public class WebGlVideoPlayer : MonoBehaviour
         {
             if(sfx != null)
             {
-                sfx.StopClip(sfx.instaMenuBGmusicLoop);
+                sfx.StopClip(sfx.instaMenuMusicLoop);
             }
 
             videoPlayer.Play();

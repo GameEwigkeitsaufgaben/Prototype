@@ -9,6 +9,7 @@ public class Post : MonoBehaviour
     private SoGameIcons icons;
     public GameObject prefabImgLocked;
 
+
     private WebGlVideoPlayer webglVideoPlayer;
 
     private GameObject childIcon = null;

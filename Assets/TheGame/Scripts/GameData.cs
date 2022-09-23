@@ -155,7 +155,7 @@ public static class GameData
     public static int chapterTwoUnlocked = 0;
     public static int chapterThreeUnlocked = 0;
 
-    public static float maxBGVolumeInsta = 0.1f;
+    public static float defaultVolumeInsta = 0.2f;
     public static float overlayVolumeInsta = 0.5f;
 
     //Talkinglist Mine: TL-TalkingList, EA-EntryArea, LWC-Longwallcutter

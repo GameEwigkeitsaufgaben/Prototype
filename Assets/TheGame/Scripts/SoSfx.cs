@@ -6,7 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SfxConfig")]
 public class SoSfx : ScriptableObject
 {
-    public AudioClip instaMenuBGmusicLoop;//AudioSource on PostManager in Scene ch01scene01-00-instaMenu
+    //in more than one chapter
+    public AudioClip instaMenuMusicLoop; //AudioSource on PostManager in Scene ch01scene01-00-instaMenu
     public AudioClip coalmineVerschub, coalmineZecheWind, coalmineConveyorBelt;
     public AudioClip coalmineCaveMoveDoors, coalmineMoveCave, coalmineWindInTunnel;
     public AudioClip coalmineWorkingMachinesMetal, caolmineLader;
@@ -69,6 +70,11 @@ public class SoSfx : ScriptableObject
     //        a.Play();
     //    }
     //}
+
+    public void LoadSFX()
+    {
+       
+    }
 
     public void PlayClipsInSole1Sfx()
     {
@@ -137,7 +143,7 @@ public class SoSfx : ScriptableObject
     }
     public bool IsInstaBGMusicPlaying()
     {
-        return playingSourcesLoop[instaMenuBGmusicLoop.name].isPlaying;
+        return playingSourcesLoop[instaMenuMusicLoop.name].isPlaying;
     }
 
     public void StopClip(AudioClip clip)
