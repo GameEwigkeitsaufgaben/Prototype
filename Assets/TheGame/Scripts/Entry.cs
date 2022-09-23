@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class Entry : MonoBehaviour
 {
@@ -197,17 +198,25 @@ public class Entry : MonoBehaviour
         }
     }
 
+    IEnumerator DelayCloseOverlay()
+    {
+        yield return new WaitForSeconds(.1f);
+        overlayComp.CloseOverlay();
+    }
+
     public void CloseOverlay()
     {
-        overlayComp.CloseOverlay();
-        if (runtimeDataCh1.musicOn)
-        {
-            //sfx.IncreaseVolume(sfx.instaMenuBGmusicLoop, changeVolumeAmount);
-            //if (!sfx.IsInstaBGMusicPlaying())
-            //{
-            //    sfx.PlayClip(sfx.instaMenuBGmusicLoop);
-            //}
-        }
+
+        StartCoroutine(DelayCloseOverlay());
+        //overlayComp.CloseOverlay();
+        //if (runtimeDataCh1.musicOn)
+        //{
+        //    //sfx.IncreaseVolume(sfx.instaMenuBGmusicLoop, changeVolumeAmount);
+        //    //if (!sfx.IsInstaBGMusicPlaying())
+        //    //{
+        //    //    sfx.PlayClip(sfx.instaMenuBGmusicLoop);
+        //    //}
+        //}
     }
 
     private void SetColorDoneFeedbackImage(chapter currentCh)

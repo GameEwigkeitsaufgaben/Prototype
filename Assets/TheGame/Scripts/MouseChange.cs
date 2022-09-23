@@ -9,6 +9,8 @@ public class MouseChange : MonoBehaviour
     private SoChapTwoRuntimeData runtimeDataCh2;
     private SoChapThreeRuntimeData runtimeDataCh3;
     private SoChaptersRuntimeData runtimeDataChapters;
+    private SoSfx sfx;
+    private AudioSource audioSrcBtn;
 
     private void Awake()
     {
@@ -16,7 +18,11 @@ public class MouseChange : MonoBehaviour
         runtimeDataCh1 = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         runtimeDataCh2 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
         runtimeDataCh3 = runtimeDataChapters.LoadChap3RuntimeData();
+        sfx = runtimeDataChapters.LoadSfx();
 
+        audioSrcBtn = gameObject.AddComponent<AudioSource>();
+        audioSrcBtn.playOnAwake = false;
+        audioSrcBtn.clip = sfx.btnClick;
     }
 
     private void Start()
@@ -47,6 +53,11 @@ public class MouseChange : MonoBehaviour
                 return;
             }
 
+            else
+            {
+                gameObject.GetComponent<Button>().onClick.AddListener(PlaySfx);
+            }
+
             gameObject.GetComponent<Button>().colors = GameColors.GetInteractionColorBlock();
             gameObject.GetComponent<Button>().navigation = GameData.GetNoneNavigation();
         }
@@ -62,6 +73,17 @@ public class MouseChange : MonoBehaviour
         {
             gameObject.GetComponent<Toggle>().colors = GameColors.GetToogleColorBlock();
         }
+    }
+
+    public void PlaySfx()
+    {
+        if (gameObject.GetComponent<Post>() != null) return;
+        else if (gameObject.GetComponent<RawImage>() != null) return;
+        else if (gameObject.GetComponent<QuizAnswerUiBehaviour>() != null) return;
+        else if (gameObject.tag == "Buzzer") return;
+
+        audioSrcBtn.Play();
+        Debug.Log("------------------play audio btn");
     }
 
     public void MouseEnter()
