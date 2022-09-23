@@ -24,6 +24,8 @@ public class SoSfx : ScriptableObject
 
     public AudioClip atmoDemo;
 
+    public AudioClip lupeEnlarge, lupeShrink;
+
     public AudioClip correctAnswer, incorrectAnswer, btnClick;
 
     public GameObject instaAudioSrc;

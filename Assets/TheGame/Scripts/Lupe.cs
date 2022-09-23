@@ -16,23 +16,33 @@ public class Lupe : MonoBehaviour, IDragHandler
     public Image lupeBg;
     public Canvas myParentCanvas;
     
-    int origSize;
-    float scaleFactor = 4f;
-    Vector3 origPosLupeCirc, origPosLupeHandle;
-    RectTransform myDragRectTransform;
-    SoChapTwoRuntimeData runtimeDataCh02;
-    ManagerSauresWasser manager;
+    private int origSize;
+    private float scaleFactor = 4f;
+    private Vector3 origPosLupeCirc, origPosLupeHandle;
+    private RectTransform myDragRectTransform;
+    private SoChapTwoRuntimeData runtimeDataCh02;
+    private ManagerSauresWasser manager;
+    private AudioSource audioSrcLupe;
     public Animator animator;
-
+    
     private Vector3 pausePosLupe = new Vector3(-430f, 55f, 0f);
 
     private SoConfigChapter2 configCh2;
+    private SoChaptersRuntimeData runtimeDataChapters;
+    private SoSfx sfx;
 
     private void Awake()
     {
-        runtimeDataCh02 = Resources.Load<SoChapTwoRuntimeData>(GameData.NameRuntimeDataChap02);
+        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+
+        runtimeDataCh02 = runtimeDataChapters.LoadChap2RuntimeData();
+        sfx = runtimeDataChapters.LoadSfx();
+
         manager = FindObjectOfType<ManagerSauresWasser>();
         configCh2 = Resources.Load<SoConfigChapter2>(GameData.NameConfigCh2);
+        audioSrcLupe = GetComponent<AudioSource>();
+        audioSrcLupe.playOnAwake = false;
+        audioSrcLupe.loop = false;
     }
 
     private void Start()
@@ -46,6 +56,8 @@ public class Lupe : MonoBehaviour, IDragHandler
 
     public void EnlargeLupeHandle(float factor)
     {
+        audioSrcLupe.clip = sfx.lupeEnlarge;
+        audioSrcLupe.Play();
         float newSize = origSize * factor;
         //LupeCirc.GetComponent<RectTransform>().sizeDelta = new Vector2(newSize, newSize);
         
@@ -58,6 +70,8 @@ public class Lupe : MonoBehaviour, IDragHandler
 
     public void ShrinkToOrigLupe()
     {
+        audioSrcLupe.clip = sfx.lupeShrink;
+        audioSrcLupe.Play();
         float newSize = origSize;
         //LupeCirc.GetComponent<RectTransform>().sizeDelta = new Vector2(origSize, origSize);
         LupeHandle.GetComponent<RectTransform>().sizeDelta = new Vector2(origSize, origSize);
