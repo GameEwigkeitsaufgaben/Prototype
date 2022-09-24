@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 public class BehaviourButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler 
 {
-    //MouseCLick only with Button Sprite Simple not with Scliced
+    //MouseCLick works only with Button Sprite Simple not with Scliced
     MouseChange mouse;
     AudioSource audioSrc;
     SoSfx sfx;

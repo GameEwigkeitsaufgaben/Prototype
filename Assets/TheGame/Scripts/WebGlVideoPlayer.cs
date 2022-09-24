@@ -47,9 +47,10 @@ public class WebGlVideoPlayer : MonoBehaviour
 
     public void StartVid(string videoPostName, string videoName, RawImage imgRaw)
     {
-        Debug.Log("vp is playing: " + videoPlayer.isPlaying);
+       
         if (videoPlayer.isPlaying)
         {
+            Debug.Log("vp is playing will be Paused ");
             videoPlayer.Pause();
             return;
         }
@@ -61,6 +62,7 @@ public class WebGlVideoPlayer : MonoBehaviour
         }
 
         videoPlayer.Play();
+        Debug.Log("Video should be played");
         videoPlayer.loopPointReached += SetTVStationDone;
     }
 

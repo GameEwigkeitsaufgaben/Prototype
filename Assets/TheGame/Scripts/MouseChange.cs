@@ -72,11 +72,19 @@ public class MouseChange : MonoBehaviour
         else if (gameObject.GetComponent<Toggle>() !=null)
         {
             gameObject.GetComponent<Toggle>().colors = GameColors.GetToogleColorBlock();
+            gameObject.GetComponent<Toggle>().onValueChanged.AddListener(delegate { PlayMechanicBtnSfx(); });
         }
+    }
+
+    public void PlayMechanicBtnSfx()
+    {
+        audioSrcBtn.clip = sfx.mechanicBtnPress;
+        audioSrcBtn.Play();
     }
 
     public void PlaySfx()
     {
+        audioSrcBtn.clip = sfx.btnClick;
         if (gameObject.GetComponent<Post>() != null) return;
         else if (gameObject.GetComponent<RawImage>() != null) return;
         else if (gameObject.GetComponent<QuizAnswerUiBehaviour>() != null) return;

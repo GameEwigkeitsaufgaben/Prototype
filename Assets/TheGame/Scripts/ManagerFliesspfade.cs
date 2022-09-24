@@ -27,7 +27,7 @@ public class ManagerFliesspfade : MonoBehaviour
     public GameObject eventsystem;
     public Animator animator;
     public TMP_Text textinfoFP, headingInfoFp;
-    public AudioSource audioSrc, audioSrcRain, audioSrcFp2, audioSrcFp3, wetterNice;
+    public AudioSource audioSrcWolken, audioSrcRain, audioSrcFp2, audioSrcFp3, wetterNice;
     public Button backToMuseum;
     public Toggle btnFp1, btnFp2, btnFp3;
     public Image solidBg; 
@@ -126,7 +126,7 @@ public class ManagerFliesspfade : MonoBehaviour
                     textinfoFP.text = textIntro;
                     solidBg.color = Color.white;
                     wetterNice.Play();
-                    audioSrc.Stop();
+                    audioSrcWolken.Stop();
                     audioSrcRain.Stop();
                     audioSrcFp2.Stop();
                     audioSrcFp3.Stop();
@@ -136,10 +136,10 @@ public class ManagerFliesspfade : MonoBehaviour
                     btnFp2.interactable = false;
                     btnFp3.interactable = false;
                     solidBg.color = rain;
-                    audioSrc.clip = sfx.wolken;
+                    audioSrcWolken.clip = sfx.wolken;
 
                     wetterNice.Stop();
-                    audioSrc.Play();
+                    audioSrcWolken.Play();
                     audioSrcRain.PlayDelayed(2);
                     break;
                 case FliesspfadState.fp2:
@@ -148,7 +148,7 @@ public class ManagerFliesspfade : MonoBehaviour
                     solidBg.color = rain;
 
                     wetterNice.Stop();
-                    audioSrc.Play();
+                    audioSrcWolken.Play();
                     audioSrcRain.PlayDelayed(2);
                     audioSrcFp2.PlayDelayed(3);
                     break;
@@ -158,7 +158,7 @@ public class ManagerFliesspfade : MonoBehaviour
                     solidBg.color = rain;
 
                     wetterNice.Stop();
-                    audioSrc.Play();
+                    audioSrcWolken.Play();
                     audioSrcRain.PlayDelayed(2);
                     audioSrcFp3.PlayDelayed(3);
                     break;

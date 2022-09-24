@@ -31,11 +31,12 @@ public class ManagerMuseumChapTwo : MonoBehaviour
     private SoChaptersRuntimeData runtimeDataChapters;
     private float offsetGroupCam;
     private MuseumWaypoints targetMuseumStation;
+    private SoSfx sfx;
 
     [SerializeField] private MuseumWaypoints currentMuseumStation;
     private bool locomotionInMuseum = false;
 
-    public AudioSource audioSrcBGMusic, audioSrcAmbience;
+    public AudioSource audioSrcBGMusic, audioSrcAtmo;
     private SwitchSceneManager switchSceneManager;
 
 
@@ -46,11 +47,15 @@ public class ManagerMuseumChapTwo : MonoBehaviour
 
         runtimeDataCh02 = runtimeDataChapters.LoadChap2RuntimeData();
         switchSceneManager = gameObject.GetComponent<SwitchSceneManager>();
+        sfx = runtimeDataChapters.LoadSfx();
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        audioSrcAtmo.clip = sfx.atmoMuseum;
+        audioSrcAtmo.playOnAwake = true;
+        
         denkBubble.SetActive(false);
         btnNextGrubenwasser.colors = GameColors.GetInteractionColorBlock();
         btnNextGrubenwasser.interactable = false;

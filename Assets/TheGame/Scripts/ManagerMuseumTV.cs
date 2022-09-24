@@ -45,7 +45,9 @@ public class ManagerMuseumTV : MonoBehaviour
 
     public void StartTheVideo()
     {
+        Debug.Log("Start THE VIDEO----------------------------");
         Debug.Log("before" + tvState);
+        audioSrcAtmo.Pause();
 
         switch (tvState)
         {
@@ -84,6 +86,10 @@ public class ManagerMuseumTV : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!audioSrcAtmo.isPlaying && tvState == TVState.VideoStop)
+        {
+            audioSrcAtmo.UnPause();
+        }
         if (runtimeDataCh02.interactTVDone && tvState == TVState.VideoPlays)
         {
             tvState = TVState.VideoStop;

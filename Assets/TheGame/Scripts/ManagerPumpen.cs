@@ -22,7 +22,9 @@ public class ManagerPumpen : MonoBehaviour
 
     private SoChapTwoRuntimeData runtimeDataCh2;
     private SoChaptersRuntimeData runtimeDataChapters;
+    private SoSfx sfx;
     public AudioSource audioSrc, richtigeAntwort;
+    public AudioSource audioSrcAtmo, audioSrcPumpenSfx;
     public AudioClip failPumpe1, failPumpe3, rightPumpe;
     public AnimationClip p1, p2, p3, off;
 
@@ -38,6 +40,8 @@ public class ManagerPumpen : MonoBehaviour
 
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
 
+        sfx = runtimeDataChapters.LoadSfx();
+
         speechManagerCh2 = GetComponent<SpeechManagerMuseumChapTwo>();
         speechManagerCh2.playZechePumpeIntro = true;
 
@@ -50,9 +54,15 @@ public class ManagerPumpen : MonoBehaviour
         toggleP2.interactable = false;
         toggleP3.interactable = false;
 
+        audioSrcPumpenSfx.clip = sfx.pumpen;
+        audioSrcPumpenSfx.loop = true;
+
         btnBackToOverlay.interactable = runtimeDataCh2.interactPumpenDone;
         replayButton.SetActive(runtimeDataCh2.replayPumpen);
-        TurnOnPumpe(0);
+        //TurnOnPumpe(0);
+
+        audioSrcAtmo.clip = sfx.atmoNiceWeather;
+        audioSrcAtmo.Play();
 
         Debug.Log(p1.length + " " +p2.length + " " + p3.length);
     }
@@ -80,58 +90,89 @@ public class ManagerPumpen : MonoBehaviour
     {
         speechManagerCh2.playZechePumpeIntro = true;
         mirrorDad.gameObject.SetActive(true);
+        TurnOnPumpe(0);
     }
+
+    private bool IsAnimatorPlaying(int pumpenId)
+    {
+        //fix switched pumpen (2/3) in future work
+        switch (pumpenId)
+        {
+            case 1:
+                return (animator.GetCurrentAnimatorStateInfo(0).IsName(Pumpen.pumpe1.ToString()) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
+            case 2:
+                return (animator.GetCurrentAnimatorStateInfo(0).IsName(Pumpen.pumpe2.ToString()) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
+            case 3:
+                return (animator.GetCurrentAnimatorStateInfo(0).IsName(Pumpen.pumpe3.ToString()) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
+            default:
+                return false;
+        }
+     }
 
 
     public void TurnOnPumpe(int pumpenid)
     {
+        audioSrcPumpenSfx.Play();
+        Debug.Log("TurnOn with id " + pumpenid);
+
         switch (pumpenid)
         {
             case 1:
-                if (!toggleP1.GetComponent<Toggle>().isOn) return;
-                animator.SetTrigger(Pumpen.pumpe1.ToString());
-                audioSrc.clip = failPumpe1;
-                audioSrc.Play();
+                if (!toggleP1.isOn) return;
+            
+                if (!IsAnimatorPlaying(pumpenid))
+                {
+                    if (animator.IsInTransition(0)) return;
+                    animator.SetTrigger(Pumpen.pumpe1.ToString());
+                    audioSrc.clip = failPumpe1;
+                    audioSrc.Play();
+                }
+
                 break;
+
             case 2:
-                if (!toggleP2.GetComponent<Toggle>().isOn) return;
-                richtigeAntwort.Play();
-                audioSrc.clip = rightPumpe;
-                audioSrc.Play();
-                animator.SetTrigger(Pumpen.pumpe3.ToString());
+                if (!toggleP2.isOn) return;
+
+                if (!IsAnimatorPlaying(3))
+                {
+                    Debug.Log("Turn on richtige pumpe 3, mit toggle 2");
+                    if (animator.IsInTransition(0)) return;
+                    richtigeAntwort.Play();
+                    audioSrc.clip = rightPumpe;
+                    audioSrc.Play();
+                    animator.SetTrigger(Pumpen.pumpe3.ToString());
+                }
+
                 break;
+            
             case 3:
-                if (!toggleP3.GetComponent<Toggle>().isOn) return;
-                animator.SetTrigger(Pumpen.pumpe2.ToString());
-                audioSrc.clip = failPumpe3;
-                audioSrc.Play();
+                if (!toggleP3.isOn) return;
+
+                if (!IsAnimatorPlaying(2))
+                {
+                    if (animator.IsInTransition(0)) return;
+                    animator.SetTrigger(Pumpen.pumpe2.ToString());
+                    audioSrc.clip = failPumpe3;
+                    audioSrc.Play();
+                }
+                
                 break;
+
             case 0:
+                //If animation is finished
+                Debug.Log("In Case 0");
                 animator.SetTrigger(Pumpen.pumpeOff.ToString());
+                audioSrcPumpenSfx.Stop();
                 break;
         }
 
         runtimeDataCh2.interactPumpenDone = true;
         runtimeDataCh2.progressPost215Done = true;
+
         toggleP1.interactable = false;
         toggleP2.interactable = false;
         toggleP3.interactable = false;
 
-    }
-
-    public void PumpeIsFinished(int pumpenid)
-    {
-        switch (pumpenid)
-        {
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-        }
-
-        Debug.Log("");
     }
 
     private void Update()
@@ -146,34 +187,46 @@ public class ManagerPumpen : MonoBehaviour
             mirrorDad.gameObject.SetActive(false);
             runtimeDataCh2.replayPumpen = true;
             replayButton.SetActive(true);
+           
         }
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName(Pumpen.pumpe1.ToString()) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
         {
-            Debug.Log("+++++++++++++++++++++++++++ off triggern! p1");
-            toggleP1.GetComponent<Toggle>().isOn = false;
-            interact = false;
+            if (toggleP1.isOn)
+            {
+                Debug.Log("+++++++++++++++++++++++++++ off triggern! p1");
+                toggleP1.isOn = false;
+                interact = false;
 
-            TurnOnPumpe(0);
+                TurnOnPumpe(0);
+            }
+            
         }
         if (animator.GetCurrentAnimatorStateInfo(0).IsName(Pumpen.pumpe2.ToString()) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
         {
-            Debug.Log("+++++++++++++++++++++++++++ off triggern! p2");
-            toggleP3.GetComponent<Toggle>().isOn = false;
-            interact = false;
+            if (toggleP3.isOn)
+            {
+                Debug.Log("+++++++++++++++++++++++++++ off triggern! p2");
+                toggleP3.isOn = false;
+                interact = false;
 
-            TurnOnPumpe(0);
+                TurnOnPumpe(0);
+            }
         }
         if (animator.GetCurrentAnimatorStateInfo(0).IsName(Pumpen.pumpe3.ToString()) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
         {
-            Debug.Log("+++++++++++++++++++++++++++ off triggern p3!");
-            toggleP2.GetComponent<Toggle>().isOn = false;
-            interact = false;
+            if (toggleP2.isOn)
+            {
+                Debug.Log("+++++++++++++++++++++++++++ off triggern p3!");
+                toggleP2.isOn = false;
+                interact = false;
 
-            runtimeDataCh2.interactPumpenDone = true;
-            btnBackToOverlay.interactable = true;
+                runtimeDataCh2.interactPumpenDone = true;
+                btnBackToOverlay.interactable = true;
 
-            TurnOnPumpe(0);
+                //TurnOnPumpe(0);
+            }
+
         }
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName(Pumpen.pumpeOff.ToString()) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
