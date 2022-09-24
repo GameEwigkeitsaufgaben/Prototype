@@ -19,6 +19,9 @@ public class DragItemThoughts : MonoBehaviour, IEndDragHandler, IDragHandler
     private Canvas myParentCanvas;
     private ManagerGWChancen manager;
     private string myTag;
+    private SoChaptersRuntimeData runtimeDataChapters;
+    private SoSfx sfx;
+
     public Vector3 origPos;
     public TMP_Text buzzword;
     public Image bubble, rahmen;
@@ -35,7 +38,15 @@ public class DragItemThoughts : MonoBehaviour, IEndDragHandler, IDragHandler
     [SerializeField] private bool isMouseUp = false;
     [SerializeField] private bool rightCollision = false;
     [SerializeField] private Collider2D enterCollision;
+    [SerializeField] private AudioSource audioSrcDragDrop;
+
     public GameObject dropTargetChance, dropTargetNoChance, dropTargetNeitherNor;
+
+    private void Awake()
+    {
+        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        sfx = runtimeDataChapters.LoadSfx();
+    }
 
     void Start()
     {
@@ -91,6 +102,10 @@ public class DragItemThoughts : MonoBehaviour, IEndDragHandler, IDragHandler
                 PlayNeitherNor();
                 break;
         }
+
+        audioSrcDragDrop.clip = sfx.dropSfx;
+        audioSrcDragDrop.Play();
+
     }
 
     private void OnMouseDown()

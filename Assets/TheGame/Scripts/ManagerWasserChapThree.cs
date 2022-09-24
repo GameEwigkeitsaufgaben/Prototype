@@ -6,23 +6,32 @@ public class ManagerWasserChapThree : MonoBehaviour
     public Button btnSchautafel3102, btnSchautafel3103;
     public Button btnReplayTalkingList;
     public Button btnProceed;
+    public AudioSource audioSrcAtmo;
 
     private SoChapThreeRuntimeData runtimeDataCh3;
     private SoChaptersRuntimeData runtimeDataChapters;
     private SpeechManagerChapThree speechManager;
+
+    private SoSfx sfx;
 
     public bool audioFinished = false;
 
 
     private void Awake()
     {
-        runtimeDataCh3 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
+        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
+
+        runtimeDataCh3 = runtimeDataChapters.LoadChap3RuntimeData();
+        sfx = runtimeDataChapters.LoadSfx();
         speechManager = GetComponent<SpeechManagerChapThree>();
+
     }
     void Start()
     {
-        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
-        runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
+        audioSrcAtmo.clip = sfx.wasserhaltungAussen;
+        audioSrcAtmo.loop = true;
+        audioSrcAtmo.Play();
 
         if (runtimeDataCh3.IsPostDone(ProgressChap3enum.Post310))
         {

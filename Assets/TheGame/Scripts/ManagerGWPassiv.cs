@@ -7,6 +7,10 @@ public class ManagerGWPassiv : MonoBehaviour
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoChapTwoRuntimeData runtimeDatatCh2;
     private SwitchSceneManager switchScene;
+    private SoSfx sfx;
+
+    public AudioSource audioSrcAtmo;
+
 
     private void Awake()
     {
@@ -15,6 +19,10 @@ public class ManagerGWPassiv : MonoBehaviour
 
         runtimeDatatCh2 = runtimeDataChapters.LoadChap2RuntimeData();
         switchScene = GetComponent<SwitchSceneManager>();
+        sfx = runtimeDataChapters.LoadSfx();
+        audioSrcAtmo.clip = sfx.atmoNiceWeather;
+        audioSrcAtmo.loop = true;
+        audioSrcAtmo.Play();
     }
 
 

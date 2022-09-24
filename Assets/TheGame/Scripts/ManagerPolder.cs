@@ -8,18 +8,28 @@ public class ManagerPolder : MonoBehaviour
     public Button btnBackToOverlay;
     public Button btnReplayTalkingList;
     public List <DragItemRiver> dragItems;
+    public AudioSource audioSrcAtmo;
 
     private SoChapThreeRuntimeData runtimeDataCh3;
     private SoChaptersRuntimeData runtimeDataChapters;
+    private SoSfx sfx;
 
     bool audioFinished;
     bool allRiversSnaped;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
         runtimeDataCh3 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+
+        sfx = runtimeDataChapters.LoadSfx();
+
+        audioSrcAtmo.clip = sfx.atmoNiceWeather;
+        audioSrcAtmo.loop = true;
+        audioSrcAtmo.Play();
 
         if (runtimeDataCh3.IsPostDone(ProgressChap3enum.Post314))
         {

@@ -1,20 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class DragTurmItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     private RectTransform myDragRectTransform;
     private Canvas myParentCanvas;
+    private SoChaptersRuntimeData runtimeDataChapters;
+    private SoSfx sfx;
+
     public Vector3 origPos;
+    [SerializeField] private  AudioSource audioSrcDragDrop;
 
     public GameObject mySnapObj;
     public bool snaped = false;
     public bool dragging = false;
 
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        sfx = runtimeDataChapters.LoadSfx();
+    }
+
     void Start()
     {
         myDragRectTransform = GetComponent<RectTransform>();
@@ -31,43 +37,42 @@ public class DragTurmItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("Begin Drag");
+        if (snaped) return;
+
+        audioSrcDragDrop.clip = sfx.mechanicBtnPress;
+        audioSrcDragDrop.Play();
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         if (snaped) return;
 
-        Debug.Log("Drag");
         myDragRectTransform.anchoredPosition += eventData.delta / myParentCanvas.scaleFactor; //important when using screen space
         dragging = true;
     }
 
-    private void OnMouseUp()
-    {
-        if (snaped) return;
-        
-        gameObject.transform.position = gameObject.GetComponent<DragTurmItem>().origPos;
-    }
-
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("End Drag");
         dragging = false;
+
+        if (snaped) return;
+
+        gameObject.transform.position = origPos;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.name == mySnapObj.name)
         {
-            Debug.Log("SNAP");
             if (snaped) return;
 
             gameObject.transform.SetParent(mySnapObj.transform);
             gameObject.transform.localPosition = Vector3.zero;
             gameObject.transform.parent.GetComponent<RectTransform>().sizeDelta = gameObject.GetComponent<RectTransform>().sizeDelta;
             snaped = true;
+
+            audioSrcDragDrop.clip = sfx.dropSfx;
+            audioSrcDragDrop.Play();
         }
-        Debug.Log("Trigger "+collision.name );
     }
 }

@@ -6,9 +6,11 @@ public class ManagerGWChancen : MonoBehaviour
 {
     public List<DragItemThoughts> dragitems = new List<DragItemThoughts>();
     public SpeechManagerChapThree speechManager;
+    [SerializeField] private AudioSource audioSrcAtmo;
 
     private SoChapThreeRuntimeData runtimeDataCh3;
     private SoChaptersRuntimeData runtimeDataChapters;
+    private SoSfx sfx;
     public string currentTL = "";
     public Animator animator;
     public GameObject bergvertreter1, bergvertreter2;
@@ -18,11 +20,11 @@ public class ManagerGWChancen : MonoBehaviour
     public GameObject headingImgChance, headingImgNoChance, headingImgNN;
     [SerializeField] private GameObject dropTargetChance, dropTargetNoChance, dropTargetNeitherNor;
 
-    // Start is called before the first frame update
     void Start()
     {
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataCh3 = runtimeDataChapters.LoadChap3RuntimeData();
+        sfx = runtimeDataChapters.LoadSfx();
        
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
 
@@ -47,6 +49,10 @@ public class ManagerGWChancen : MonoBehaviour
 
         speechManager = GetComponent<SpeechManagerChapThree>();
         btnNext.interactable = runtimeDataCh3.IsPostDone(ProgressChap3enum.Post312);
+
+        audioSrcAtmo.clip = sfx.atmoNiceWeather;
+        audioSrcAtmo.loop = true;
+        audioSrcAtmo.Play();
     }
 
 

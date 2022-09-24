@@ -21,8 +21,8 @@ public class ManagerPumpStandorte : MonoBehaviour
     public Dictionary<string, Image> pumpwerke;
     public Image pegelHigh, pegelLow;
     public Image lightReducedBetrieb, lightAllBetrieb;
+    public AudioSource audioSrcAtmo;
 
-    
     public bool isDone = false;
     public bool audioFinished = false;
 
@@ -31,6 +31,7 @@ public class ManagerPumpStandorte : MonoBehaviour
     private SoChapThreeRuntimeData runtimeDataCh03;
     private SpeechManagerChapThree speechManager;
     private SwitchSceneManager switchSceneMgr;
+    private SoSfx sfx;
     Color32 colorInactive = new Color32(255, 255, 255, 50);
 
     private void Awake()
@@ -38,12 +39,17 @@ public class ManagerPumpStandorte : MonoBehaviour
         switchSceneMgr = GetComponent<SwitchSceneManager>();
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
-        
+        sfx = runtimeDataChapters.LoadSfx();
         runtimeDataCh03 = runtimeDataChapters.LoadChap3RuntimeData();
 
         gameColors = Resources.Load<SoGameColors>(GameData.NameGameColors);
         
         speechManager = GetComponent<SpeechManagerChapThree>();
+
+        audioSrcAtmo.clip = sfx.wasserhaltungAussen;
+        audioSrcAtmo.loop = true;
+        audioSrcAtmo.Play();
+
 
         speechManager.playPumpstandorte = !runtimeDataCh03.replayTL3102;
 

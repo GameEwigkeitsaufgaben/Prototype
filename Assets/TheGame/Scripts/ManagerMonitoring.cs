@@ -19,10 +19,12 @@ public class ManagerMonitoring : MonoBehaviour
     public List<Monitor> monitors;
    // public bool stationsDone;
     public TMP_Text introText;
+    public AudioSource audioSrcAtmo;
 
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoChapThreeRuntimeData runtimeDataChap3;
     private SpeechManagerChapThree speechManager;
+    private SoSfx sfx;
     private TMP_Text activeDesc;
 
     Dictionary<string, Canvas> canvasGraphs = new Dictionary<string, Canvas>();
@@ -44,6 +46,7 @@ public class ManagerMonitoring : MonoBehaviour
 
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
         runtimeDataChap3 = runtimeDataChapters.LoadChap3RuntimeData();
+        sfx = runtimeDataChapters.LoadSfx();
     }
 
     private void Start()
@@ -67,6 +70,10 @@ public class ManagerMonitoring : MonoBehaviour
         }
 
         btnBackToOverlay.interactable = false;
+
+        audioSrcAtmo.clip = sfx.pumpen;
+        audioSrcAtmo.loop = true;
+        audioSrcAtmo.Play();
     }
 
     public void SetDescription(TMP_Text desc)

@@ -9,16 +9,25 @@ public class ManagerGrubenwasserhaltungAufbau : MonoBehaviour
     public bool audioFinised = false;
     public GameObject btnBackTo3101;
     public Button btnReplayTalkingList;
-    
+    public AudioSource audioSrcAtmo;
+
     private SwitchSceneManager switchSceneMgr;
     private SoChapThreeRuntimeData runtimeDataCh3;
     private SoChaptersRuntimeData runtimeDataChapters;
+    private SoSfx sfx;
+    private Button btnBackToEntryPoint;
 
     void Start()
     {
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataCh3 = runtimeDataChapters.LoadChap3RuntimeData();
         switchSceneMgr = GetComponent<SwitchSceneManager>();
+        sfx = runtimeDataChapters.LoadSfx();
+        btnBackToEntryPoint = btnBackTo3101.GetComponent<Button>();
+
+        audioSrcAtmo.clip = sfx.wasserhaltungAussen;
+        audioSrcAtmo.loop = true;
+        audioSrcAtmo.Play();
        
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
 
@@ -26,7 +35,7 @@ public class ManagerGrubenwasserhaltungAufbau : MonoBehaviour
             runtimeDataCh3.IsPostDone(ProgressChap3enum.Post3103))
         {
             btnReplayTalkingList.gameObject.SetActive(true);
-            btnBackTo3101.GetComponent<Button>().interactable = true;
+            btnBackToEntryPoint.interactable = true;
             return;
         }
 
@@ -76,10 +85,16 @@ public class ManagerGrubenwasserhaltungAufbau : MonoBehaviour
 
             if (allItemsSnaped)
             {
-                btnBackTo3101.GetComponent<Button>().interactable = true;
-                runtimeDataCh3.SetPostDone(ProgressChap3enum.Post3103);
+                if (!btnBackToEntryPoint.interactable)
+                {
+                    if (runtimeDataCh3.replayTL3103)
+                    {
+                        btnBackToEntryPoint.interactable = true;
+                        runtimeDataCh3.SetPostDone(ProgressChap3enum.Post3103);
 
-                if (runtimeDataCh3.IsPostDone(ProgressChap3enum.Post3102)) runtimeDataCh3.SetPostDone(ProgressChap3enum.Post310);
+                        if (runtimeDataCh3.IsPostDone(ProgressChap3enum.Post3102)) runtimeDataCh3.SetPostDone(ProgressChap3enum.Post310);
+                    }
+                }
             }
         }
     }

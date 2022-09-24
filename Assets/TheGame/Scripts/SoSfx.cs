@@ -29,6 +29,7 @@ public class SoSfx : ScriptableObject
 
     public AudioClip correctAnswer, incorrectAnswer, btnClick;
     public AudioClip mechanicBtnPress;
+    public AudioClip dropSfx, wasserhaltungAussen;
 
     public GameObject instaAudioSrc;
 
