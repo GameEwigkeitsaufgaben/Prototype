@@ -351,6 +351,7 @@ public class CoalmineWaypointManager : MonoBehaviour
 
     //Ändern der Rotation der Viewpoits passiert über das Canvas(WP), WPs werden
     //so in die Richtung gedreht, dass die Buttons clickable sind. 
+    //Wichtig auch die Position nur über das Canvas ändern, sonst funkt die Rotation nicht mehr. 
     private void ChangeS3WPRotations(float viewpointRotationY, float bahnsteigRotationY, float ovMineRotationY, float bewetterungRotationY)
     {
         viewpoint.transform.localRotation = Quaternion.Euler(0, viewpointRotationY, 0);
@@ -401,7 +402,7 @@ public class CoalmineWaypointManager : MonoBehaviour
 
     public void MoveToBewetterung()
     {
-        SetCharacterPosition(new Vector3(35.41f, 1.6f, -12.6f));
+        SetCharacterPosition(new Vector3(35.3f, 1.6f, -11.6f));
         DetectAndSetPath(MineWayPoints.viewpointBewetterung);
         playerSplineMove.StartMove();
     }
@@ -415,7 +416,7 @@ public class CoalmineWaypointManager : MonoBehaviour
 
     public void MoveToOVMine()
     {
-        SetCharacterPosition(new Vector3(21.77f, 1.6f, -8.65f));
+        SetCharacterPosition(new Vector3(23.0f, 1.6f, -8f));
         DetectAndSetPath(MineWayPoints.viewpointOVMine);
         playerSplineMove.StartMove();
     }

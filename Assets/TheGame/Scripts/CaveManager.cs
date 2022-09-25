@@ -44,7 +44,7 @@ public class CaveManager : MonoBehaviour
         if (totalFrameTime >= 1f)
         {
             int fps = Mathf.RoundToInt(frameCounter/totalFrameTime);
-            Debug.Log("FPS---------------------------- " + fps + " Counte:  " + frameCounter + " frame time " + totalFrameTime );
+            //Debug.Log("FPS---------------------------- " + fps + " Counte:  " + frameCounter + " frame time " + totalFrameTime );
             frameCounter = 0;
             totalFrameTime -= 1f;
             
@@ -194,7 +194,7 @@ public class CaveManager : MonoBehaviour
 
     private void Update()
     {
-        ShowFPS();
+        //ShowFPS();
 
         //set in false in update, set in true in tl finished;
         if (!introPlayedOneTime && speechManagerMine.IsMineEATalkingFinished())
