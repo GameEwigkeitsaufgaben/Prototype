@@ -21,11 +21,14 @@ public class ManagerHistoryMining : MonoBehaviour
     public Button btnBackToMuseum, btnUrlToSage;
     public TextMeshProUGUI centuryText;
     public GameObject imgSanduhr;
+    [SerializeField] private AudioSource audioSrcTime;
     
     [Header("Assigned at Runtime")]
     public SoMuseumConfig museumConfig;
     private SoChapOneRuntimeData runtimeData;
     private SoChaptersRuntimeData runtimeDataChapters;
+    private SoSfx sfx;
+    private AudioClip timeSound;
 
     public Century sliderCentury;
 
@@ -42,15 +45,18 @@ public class ManagerHistoryMining : MonoBehaviour
         museumConfig = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
+        sfx = runtimeDataChapters.LoadSfx();
     }
 
     private void Start()
     {
-        
         sliderCentury = Century.none;
         btnBackToMuseum.interactable = runtimeData.isMythDone;
 
         runtimeData.cursorDefault = null;
+
+        audioSrcTime.loop = true;
+        audioSrcTime.playOnAwake = false;
     }
 
     public void OpenUrlSage()
@@ -82,18 +88,46 @@ public class ManagerHistoryMining : MonoBehaviour
                 imgSanduhr.gameObject.SetActive(false);
                 centuryText.text = museumConfig.textmyth;
                 btnUrlToSage.gameObject.SetActive(true);
+                audioSrcTime.mute = false;
+                audioSrcTime.clip = sfx.sageFeuer;
+                if (!audioSrcTime.isPlaying)
+                {
+                    Debug.Log("PlayMyth");
+                    audioSrcTime.Play();
+                }
                 break;
             case Century.century13:
                 imgSanduhr.gameObject.SetActive(false);
                 centuryText.text = museumConfig.textCentury13;
+                audioSrcTime.mute = false;
+                audioSrcTime.clip = sfx.jh13;
+                if (!audioSrcTime.isPlaying)
+                {
+                    Debug.Log("Play13");
+                    audioSrcTime.Play();
+                }
                 break;
             case Century.century16:
                 imgSanduhr.gameObject.SetActive(false);
                 centuryText.text = museumConfig.textCentury16;
+                audioSrcTime.mute = false;
+                audioSrcTime.clip = sfx.jh16;
+                if (!audioSrcTime.isPlaying)
+                {
+                    Debug.Log("Play16");
+                    audioSrcTime.Play();
+                }
                 break;
             case Century.century19:
                 imgSanduhr.gameObject.SetActive(false);
                 centuryText.text = museumConfig.textCentury19;
+                audioSrcTime.mute = false;
+                audioSrcTime.clip = sfx.jh19;
+                if (!audioSrcTime.isPlaying)
+                {
+                    Debug.Log("Play19");
+                    audioSrcTime.Play();
+                }
                 break;
             case Century.century21:
                 imgSanduhr.gameObject.SetActive(false);
@@ -101,11 +135,21 @@ public class ManagerHistoryMining : MonoBehaviour
                 runtimeData.isMythDone = true;
                 //btnBackToMuseum.GetComponent<Image>().color = GameColors.defaultInteractionColorNormal;
                 btnBackToMuseum.interactable = true;
+                audioSrcTime.mute = false;
+                audioSrcTime.clip = sfx.jh21;
+                if (!audioSrcTime.isPlaying)
+                {
+                    Debug.Log("Play21");
+                    audioSrcTime.Play();
+                }
                 break;
             default:
                 centuryText.text = GameData.EmptyString;
                 imgSanduhr.gameObject.SetActive(true);
+                audioSrcTime.mute = true;
                 break;
         }
+
+
     }
 }

@@ -19,7 +19,7 @@ public class SoSfx : ScriptableObject
     public AudioClip autschSfx, goodJobSfx, badJobSfx, minerOutro, dragSfx;
     public AudioClip mouseOff, mouseOn, mouseHammer;
     public AudioClip wolken, regen, fp2, fp3, atmoNiceWeather, atmoWasserRinnt, molecule;
-    public AudioClip sageFeuer, pumpen;
+    public AudioClip sageFeuer, pumpen, jh13, jh16, jh19, jh21;
 
     public AudioClip atmoMuseum;
     public AudioClip quizBGLoop;
