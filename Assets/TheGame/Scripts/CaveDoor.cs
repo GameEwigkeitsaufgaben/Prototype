@@ -5,20 +5,30 @@ public class CaveDoor : MonoBehaviour
     public Animator anim;
     private SoSfx sfx;
     public bool playDoorSound;
+    private AudioSource doorMovingSfx;
     
 
     private void Start()
     {
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
-        gameObject.GetComponent<AudioSource>().clip = sfx.coalmineCaveMoveDoors;
+        doorMovingSfx = gameObject.GetComponent<AudioSource>();
+        doorMovingSfx.loop = false;
+        doorMovingSfx.playOnAwake = false;
+        doorMovingSfx.clip = sfx.coalmineCaveMoveDoors;
+
     }
 
     public void PlayMoveSfx()
     {
-        if (!gameObject.GetComponent<AudioSource>().isPlaying)
+        if (!doorMovingSfx.isPlaying)
         {
-            gameObject.GetComponent<AudioSource>().Play();
+            doorMovingSfx.Play();
         }
+    }
+
+    public void StopSfx()
+    {
+        doorMovingSfx.Stop();
     }
 
     public void CloseDoorAnim()

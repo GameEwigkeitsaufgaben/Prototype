@@ -10,6 +10,7 @@ public class ManagerCards : MonoBehaviour
     public SoMuseumCard[] soResourcesCards;
     public Image minerImg;
     public TMP_Text minerMsg;
+    [SerializeField] private AudioSource audioSrcFeedback;
 
     public GameObject[] cards;
     
@@ -19,6 +20,7 @@ public class ManagerCards : MonoBehaviour
     private SoMuseumConfig myConfig;
     private SoChapOneRuntimeData runtimeDataCh1;
     private SoChaptersRuntimeData runtimeDataChapters;
+    private SoSfx sfx;
 
     private void Awake()
     {
@@ -29,6 +31,10 @@ public class ManagerCards : MonoBehaviour
 
         myConfig = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
         btnProceed.interactable = runtimeDataCh1.isCarbonificationPeriodDone;
+
+        sfx = runtimeDataChapters.LoadSfx();
+        audioSrcFeedback.loop = false;
+        audioSrcFeedback.playOnAwake = false;
     }
 
     private void Start()
@@ -39,16 +45,6 @@ public class ManagerCards : MonoBehaviour
         //maxValTrueSolution = GetMaxRightSolutions();
         minerImg.sprite = myConfig.minerIdle;
     }
-
-    //int GetMaxRightSolutions()
-    //{
-    //    int tmpMaxVal = 0;
-    //    foreach (var i in cards)
-    //    {
-    //        if (i.GetComponent<MuseumCard>().IsStatementTrue()) tmpMaxVal++;
-    //    }
-    //    return tmpMaxVal;
-    //}
 
     public SoMuseumCard[] GetShuffeldResources()
     {
@@ -110,11 +106,15 @@ public class ManagerCards : MonoBehaviour
         {
             minerImg.sprite = myConfig.minerThumpDown;
             minerMsg.text = "Oh nein!\nRichtig wäre ...";
+            audioSrcFeedback.clip = sfx.badJobNoReptSfx;
+            audioSrcFeedback.Play();
         }
         else
         {
             minerImg.sprite = myConfig.minerThumpUp;
             minerMsg.text = "\nSuper gemacht!";
+            audioSrcFeedback.clip = sfx.goodJobSfx;
+            audioSrcFeedback.Play();
         }
 
         foreach (var i in cards)

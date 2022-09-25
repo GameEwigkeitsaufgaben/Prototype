@@ -167,12 +167,12 @@ public class Cave : MonoBehaviour
 
     private void PlayDoorMoveSound()
     {
-        if (!sfxRightDoor.isPlaying &&
-                   !sfxLeftDoor.isPlaying)
-        {
-            leftDoor.PlayMoveSfx();
-            rightDoor.PlayMoveSfx();
-        }
+
+        if (sfxRightDoor.isPlaying) rightDoor.StopSfx();
+        if (sfxLeftDoor.isPlaying) leftDoor.StopSfx();
+
+        leftDoor.PlayMoveSfx();
+        rightDoor.PlayMoveSfx();
     }
 
     public bool GoToNextStopValid()

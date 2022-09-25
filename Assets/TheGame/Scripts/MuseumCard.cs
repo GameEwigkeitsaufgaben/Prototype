@@ -13,6 +13,9 @@ public class MuseumCard : MonoBehaviour
 
     [SerializeField] private Canvas myParentCanvas;
     private SoMuseumConfig myConfig;
+    private SoChaptersRuntimeData runtimeDataChapters;
+    private SoSfx sfx;
+
     public SoMuseumCard myResource;
     bool setup;
 
@@ -22,6 +25,8 @@ public class MuseumCard : MonoBehaviour
     {
         setup = true;
         myConfig = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
+        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        sfx = runtimeDataChapters.LoadSfx();
     }
 
     public void PopulateElements()
@@ -113,7 +118,7 @@ public class MuseumCard : MonoBehaviour
 
         cardAudio = myParentCanvas.GetComponent<AudioSource>();
         cardAudio.playOnAwake = false;
-        cardAudio.clip = myConfig.sfxFlipCard;
+        cardAudio.clip = sfx.btnFlipCard;
     }
 
     public void MarkRightSolution()

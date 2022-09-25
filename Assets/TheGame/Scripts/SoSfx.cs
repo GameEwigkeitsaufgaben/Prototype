@@ -8,7 +8,7 @@ public class SoSfx : ScriptableObject
 {
     //in more than one chapter
     public AudioClip instaMenuMusicLoop; //AudioSource on PostManager in Scene ch01scene01-00-instaMenu
-    public AudioClip coalmineVerschub, coalmineZecheWind, coalmineConveyorBelt;
+    public AudioClip coalmineVerschub, coalmineVerschubFerne, coalmineZecheWind, coalmineConveyorBelt;
     public AudioClip coalmineCaveMoveDoors, coalmineMoveCave, coalmineWindInTunnel;
     public AudioClip coalmineWorkingMachinesMetal, caolmineLader;
     public AudioClip caolmineSplashingWater;
@@ -16,7 +16,7 @@ public class SoSfx : ScriptableObject
     public AudioClip coalmineLWC, coalmineMoveShields, coalmineCoalToConveyorBeltFalling, coalmineBreakingRock;
 
     public AudioClip mineAlarm, mineHusten;
-    public AudioClip autschSfx, goodJobSfx, badJobSfx, minerOutro, dragSfx;
+    public AudioClip autschSfx, goodJobSfx, badJobSfx, badJobNoReptSfx, minerOutro, dragSfx;
     public AudioClip mouseOff, mouseOn, mouseHammer;
     public AudioClip wolken, regen, fp2, fp3, atmoNiceWeather, atmoWasserRinnt, molecule;
     public AudioClip sageFeuer, pumpen, jh13, jh16, jh19, jh21;
@@ -28,7 +28,7 @@ public class SoSfx : ScriptableObject
 
     public AudioClip lupeEnlarge, lupeShrink;
 
-    public AudioClip correctAnswer, incorrectAnswer, btnClick;
+    public AudioClip correctAnswer, incorrectAnswer, btnClick, btnFlipCard;
     public AudioClip mechanicBtnPress;
     public AudioClip dropSfx, wasserhaltungAussen;
     public AudioClip treesCoalificationSfx, atmoCoalificationSfx;

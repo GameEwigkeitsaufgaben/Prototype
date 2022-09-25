@@ -11,17 +11,21 @@ public class CoalmineIntroManager : MonoBehaviour
 
     public Disc eaDone, s1Done, s2Done, s3wetterDone, s3GebaudeDone, trainInDone, lwcDone, trainOutDone;
 
+    [SerializeField] private AudioSource audioSrcAtmo;
+
     public Character georg, dad, enya;
 
     private bool audioStarted = false;
 
     private SoChapOneRuntimeData runtimeDataCh1;
     private SoChaptersRuntimeData runtimeDataChapers;
+    private SoSfx sfx;
 
     private void Awake()
     {
         runtimeDataCh1 = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         runtimeDataChapers = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        sfx = runtimeDataChapers.LoadSfx();
     }
 
     private bool IsSole3Done()
@@ -45,6 +49,12 @@ public class CoalmineIntroManager : MonoBehaviour
         if (runtimeDataCh1.trainRideInDone) imgTrainInStation.color =  fbColor;
         if (runtimeDataCh1.trainRideOutDone) imgTrainOutStation.color = fbColor;
         if (runtimeDataCh1.isLongwallCutterDone) imgLwcStation.color = fbColor;
+
+        audioSrcAtmo.clip = sfx.coalmineVerschubFerne;
+        audioSrcAtmo.loop = true;
+        audioSrcAtmo.playOnAwake = false;
+        audioSrcAtmo.Play();
+        
     }
 
     public void ReplayTalkingList()
