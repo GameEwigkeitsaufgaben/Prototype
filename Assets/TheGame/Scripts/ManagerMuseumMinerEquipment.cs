@@ -46,6 +46,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     private AudioSource audioSrc;
     private SoChapOneRuntimeData runtimeData;
     private SoChaptersRuntimeData runtimeDataChapters;
+    private SoSfx sfx;
     private int tries = 0;
 
     private void Awake()
@@ -54,6 +55,8 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
+        sfx = runtimeDataChapters.LoadSfx();
+
     }
 
     void Start()
@@ -218,7 +221,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
             case EquipmentRound.SpecialTask:
                 runtimeData.isMinerDone = true;
                 tmpCheckBtn.text = checkBtnNochmal;
-                audioSrc.clip = audioFBoutro;
+                audioSrc.clip = sfx.minerOutro;
                 audioSrc.Play();
                 break;
         }
@@ -257,7 +260,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     IEnumerator PlayBadJob()
     {
         runningCorouine = true;
-        audioSrc.clip = badJobClip;
+        audioSrc.clip = sfx.badJobSfx;
         audioSrc.Play();
         float length = badJobAnim.length;
         anim.Play("BadJob");
@@ -272,7 +275,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
         float length = goodJobAnim.length;
         anim.Play("GoodJob");
 
-        audioSrc.clip = goodJobClip;
+        audioSrc.clip = sfx.goodJobSfx;
         audioSrc.Play();
         yield return new WaitForSeconds(length);
 
@@ -288,35 +291,35 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
         if (!helm)
         {
             anim.Play("Alert");
-            audioSrc.clip = alarm;
+            audioSrc.clip = sfx.mineAlarm;
             audioSrc.Play();
             yield return new WaitForSeconds(2f);
             audioSrc.Stop();
             anim.Play("NoHelmet");
             float length = noHelmAnim.length;
             Debug.Log("No Helm + length: " + length );
-            audioSrc.clip = autsch;
+            audioSrc.clip = sfx.autschSfx;
             audioSrc.Play();
             yield return new WaitForSeconds(length);
         }
         if (!mask)
         {
             anim.Play("Alert");
-            audioSrc.clip = alarm;
+            audioSrc.clip = sfx.mineAlarm;
             audioSrc.Play();
             yield return new WaitForSeconds(2f);
             audioSrc.Stop();
             anim.Play("NoMask");
             float length = noMaskAnim.length;
             Debug.Log("No Atemmaske + length: " + length );
-            audioSrc.clip = husten;
+            audioSrc.clip = sfx.mineHusten;
             audioSrc.Play();
             yield return new WaitForSeconds(length);
         }
         if (!lamp)
         {
             anim.Play("Alert");
-            audioSrc.clip = alarm;
+            audioSrc.clip = sfx.mineAlarm;
             audioSrc.Play();
             yield return new WaitForSeconds(2f);
             audioSrc.Stop();
@@ -324,7 +327,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
             float length = noLightAnim.length;
             audioSrc.clip = lichtaus;
             audioSrc.Play();
-            audioSrc.clip = autsch;
+            audioSrc.clip = sfx.autschSfx;
             audioSrc.Play();
             Debug.Log("No lampe + length:" + length);
 
@@ -333,7 +336,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
 
         if (missingItem)
         {
-            audioSrc.clip = badJobClip;
+            audioSrc.clip = sfx.badJobSfx;
             audioSrc.Play();
             float length = badJobAnim.length;
             anim.Play("BadJob");
@@ -433,6 +436,4 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
 
         SetTableItemsInactive(maxItemsReached);
     }
-
-
 }

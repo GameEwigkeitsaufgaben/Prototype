@@ -16,6 +16,8 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
 
     private bool positionChanged = false;
     private SoMinerEquipment myConifg;
+    private SoChaptersRuntimeData runtimeDataChapters;
+    private SoSfx sfx;
 
 
     private AudioSource myAudioSrc;
@@ -51,9 +53,16 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
     string descScarf = "Das Halstuch kann zur Not als Mundschutz dienen und ist angenehm zu tragen.";
     string descGloves = "Die Handschuhe schützen die Hände bei schweren Arbeiten vor Blasen und Schwielen.";
 
-    private void Start()
+    private void Awake()
     {
         myManager = FindObjectOfType<ManagerMuseumMinerEquipment>();
+        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        sfx = runtimeDataChapters.LoadSfx();
+    }
+
+    private void Start()
+    {
+        
         origPosOnTable = gameObject.transform.position; //every instance of class is reference type and any instance of structure is value type.
         isDragableInRound = true;
         
@@ -191,7 +200,7 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
         isCurrentlyDragging = true;
         
         gameObject.transform.parent = dragObjParent.transform;
-        myAudioSrc.clip = myConifg.beginDrag;
+        myAudioSrc.clip = sfx.dragSfx;
         myAudioSrc.Play();
     }
 
@@ -204,7 +213,7 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
         gameObject.transform.parent = dragObjDefaultParent.transform;
 
         positionChanged = GetHasLocationChanged();
-        myAudioSrc.clip = myConifg.endDrag;
+        myAudioSrc.clip = sfx.dropSfx;
         myAudioSrc.Play();
 
         //Special: 2 different sprites for table and miner

@@ -16,6 +16,7 @@ public class SoSfx : ScriptableObject
     public AudioClip coalmineLWC, coalmineMoveShields, coalmineCoalToConveyorBeltFalling, coalmineBreakingRock;
 
     public AudioClip mineAlarm, mineHusten;
+    public AudioClip autschSfx, goodJobSfx, badJobSfx, minerOutro, dragSfx;
     public AudioClip mouseOff, mouseOn, mouseHammer;
     public AudioClip wolken, regen, fp2, fp3, atmoNiceWeather, atmoWasserRinnt, molecule;
     public AudioClip sageFeuer, pumpen;
@@ -30,6 +31,8 @@ public class SoSfx : ScriptableObject
     public AudioClip correctAnswer, incorrectAnswer, btnClick;
     public AudioClip mechanicBtnPress;
     public AudioClip dropSfx, wasserhaltungAussen;
+    public AudioClip treesCoalificationSfx, atmoCoalificationSfx;
+
 
     public GameObject instaAudioSrc;
 
