@@ -120,53 +120,53 @@ public class ManagerInstaPost : MonoBehaviour
                 break;
         }
 
-        //switch (currentCH)
-        //{
-        //    case chapter.ch1:
+        switch (currentCH)
+        {
+            case chapter.ch1:
 
-        //        if (runtimeDataCh1.postOverlayToLoad != "" && dictOverlay != null)
-        //        {
-        //            dictOverlay[runtimeDataCh1.postOverlayToLoad].gameObject.SetActive(true);
+                if (runtimeDataCh1.postOverlayToLoad != "" && dictOverlay != null)
+                {
+                    dictOverlay[runtimeDataCh1.postOverlayToLoad].gameObject.SetActive(true);
 
-        //            if (runtimeDataCh1.musicOn)
-        //            {
-        //                ReduceVolumeBGMusic(GameData.overlayVolumeInsta);
-        //            }
+                    //if (runtimeDataCh1.musicOn)
+                    //{
+                    //    ReduceVolumeBGMusic(GameData.overlayVolumeInsta);
+                    //}
 
-        //            runtimeDataCh1.postOverlayToLoad = "";
-        //        }
+                    runtimeDataCh1.postOverlayToLoad = "";
+                }
 
-        //        break;
-        //    case chapter.ch2:
-        //        if (runtimeDataCh2.postOverlayToLoad != "" && dictOverlay != null)
-        //        {
-        //            Debug.Log("Overlay to load" + runtimeDataCh2.postOverlayToLoad);
-        //            dictOverlay[runtimeDataCh2.postOverlayToLoad].gameObject.SetActive(true);
+                break;
+            case chapter.ch2:
+                if (runtimeDataCh2.postOverlayToLoad != "" && dictOverlay != null)
+                {
+                    Debug.Log("Overlay to load" + runtimeDataCh2.postOverlayToLoad);
+                    dictOverlay[runtimeDataCh2.postOverlayToLoad].gameObject.SetActive(true);
 
-        //            if (runtimeDataCh2.musicOn)
-        //            {
-        //                ReduceVolumeBGMusic(GameData.overlayVolumeInsta);
-        //            }
+                    //if (runtimeDataCh2.musicOn)
+                    //{
+                    //    ReduceVolumeBGMusic(GameData.overlayVolumeInsta);
+                    //}
 
-        //            runtimeDataCh2.postOverlayToLoad = "";
-        //        }
-        //        break;
-        //    case chapter.ch3:
-        //        if (runtimeDataCh3.postOverlayToLoad != "" && dictOverlay != null)
-        //        {
-        //            Debug.Log("Overlay to load" + runtimeDataCh3.postOverlayToLoad);
-        //            dictOverlay[runtimeDataCh3.postOverlayToLoad].gameObject.SetActive(true);
+                    runtimeDataCh2.postOverlayToLoad = "";
+                }
+                break;
+            case chapter.ch3:
+                if (runtimeDataCh3.postOverlayToLoad != "" && dictOverlay != null)
+                {
+                    Debug.Log("Overlay to load" + runtimeDataCh3.postOverlayToLoad);
+                    dictOverlay[runtimeDataCh3.postOverlayToLoad].gameObject.SetActive(true);
 
-        //            if (runtimeDataCh3.musicOn)
-        //            {
-        //                ReduceVolumeBGMusic(GameData.overlayVolumeInsta);
-        //            }
+                    //if (runtimeDataCh3.musicOn)
+                    //{
+                    //    ReduceVolumeBGMusic(GameData.overlayVolumeInsta);
+                    //}
 
-        //            runtimeDataCh3.postOverlayToLoad = "";
-        //        }
+                    runtimeDataCh3.postOverlayToLoad = "";
+                }
 
-        //        break;
-        //}
+                break;
+        }
     }
 
     public void SaveSliderPos()

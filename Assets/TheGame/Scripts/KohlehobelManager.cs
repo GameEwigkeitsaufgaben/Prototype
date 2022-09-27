@@ -27,6 +27,8 @@ public class KohlehobelManager : MonoBehaviour
     {
         audioSrcBewetterung.clip = sfx.coalmineZecheWind;
         audioSrcBewetterung.playOnAwake = true;
+
+        //audioSrcLwc.clip = sfx.coalmine
         switchScene.LoadLongwallCutterStatic();
         switchScene.LoadLongwallCutterAnim();
 
