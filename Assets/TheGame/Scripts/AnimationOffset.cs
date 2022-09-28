@@ -21,7 +21,7 @@ public class AnimationOffset : MonoBehaviour
         anim = GetComponent<Animator>();
         var name =  anim.GetCurrentAnimatorStateInfo(0).shortNameHash;
         runtimeDataCh01.kohlenhobelAnimator = anim;
-        StartKohlenhobelAnim();
+        //StartKohlenhobelAnim();
     }
 
     public void StartKohlenhobelAnim()
