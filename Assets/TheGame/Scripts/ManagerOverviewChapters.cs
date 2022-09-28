@@ -11,7 +11,7 @@ public enum Chapters
 
 public class ManagerOverviewChapters : MonoBehaviour
 {
-    [SerializeField] private Button btnCredits, btnFotoplatz;
+    [SerializeField] private Button btnCredits, btnFotoplatz, btnFwb;
     [SerializeField] private TMP_Text lawNotice;
     [SerializeField] private bool allChapDone;
     private SoChaptersRuntimeData runtimeDataChapters;
@@ -41,5 +41,10 @@ public class ManagerOverviewChapters : MonoBehaviour
         {
             btnFotoplatz.interactable = true;
         }
+    }
+
+    public void GoToFWB()
+    {
+        Application.OpenURL("https://forum-bergbau-wasser.de/");
     }
 }
