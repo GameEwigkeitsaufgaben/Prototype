@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LiftSohleOne : MonoBehaviour
 {
     public AudioClip clip1, clip2, clipEnvironment;
-    bool playNextAudio = false;
+    //bool playNextAudio = false;
 
     private AudioSource srcEnvironment;
     private AudioSource srcTalk;

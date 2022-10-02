@@ -19,7 +19,7 @@ public class SpeechBubble : MonoBehaviour
 
     [SerializeField] private SoGameIcons gameIcons;
 
-    bool isOn = false;
+    //bool isOn = false;
 
     private void Awake()
     {

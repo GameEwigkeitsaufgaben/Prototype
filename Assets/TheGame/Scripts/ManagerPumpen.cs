@@ -30,7 +30,7 @@ public class ManagerPumpen : MonoBehaviour
 
     SpeechManagerMuseumChapTwo speechManagerCh2;
 
-    float time = 0f;
+    //float time = 0f;
     bool interact = true;
 
     void Start()

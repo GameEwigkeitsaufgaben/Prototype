@@ -33,7 +33,7 @@ public class Overlay : MonoBehaviour
     private SoChapTwoRuntimeData runtimeDataChap02;
     private SoChapThreeRuntimeData runtimeDataChap03;
 
-    private chapter currentCH;
+    //private chapter currentCH;
     private AudioSource audioSrcMusic;
 
     private void Awake()
@@ -44,18 +44,18 @@ public class Overlay : MonoBehaviour
         runtimeDataChap03 = Resources.Load<SoChapThreeRuntimeData>(GameData.NameRuntimeDataChap03);
         webglVideoPlayer = GameObject.FindObjectOfType<WebGlVideoPlayer>();
 
-        if (SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain)
-        {
-            currentCH = chapter.ch1;
-        }
-        else if (SceneManager.GetActiveScene().name == GameScenes.ch02InstaMain)
-        {
-            currentCH = chapter.ch2;
-        }
-        else if (SceneManager.GetActiveScene().name == GameScenes.ch03InstaMain)
-        {
-            currentCH = chapter.ch3;
-        }
+        //if (SceneManager.GetActiveScene().name == GameScenes.ch01InstaMain)
+        //{
+        //    currentCH = chapter.ch1;
+        //}
+        //else if (SceneManager.GetActiveScene().name == GameScenes.ch02InstaMain)
+        //{
+        //    currentCH = chapter.ch2;
+        //}
+        //else if (SceneManager.GetActiveScene().name == GameScenes.ch03InstaMain)
+        //{
+        //    currentCH = chapter.ch3;
+        //}
     }
 
     private void Start()

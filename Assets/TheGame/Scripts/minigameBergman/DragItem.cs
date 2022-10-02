@@ -15,7 +15,7 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
     private bool snap;
     private GameObject snapObject;
-    int maxNumberSnapedObjects = 3;
+    //int maxNumberSnapedObjects = 3;
 
     private void Awake()
     {

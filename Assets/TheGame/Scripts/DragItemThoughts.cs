@@ -35,7 +35,7 @@ public class DragItemThoughts : MonoBehaviour, IEndDragHandler, IDragHandler
     public GWChanceType type;
 
     private MouseChange mouse;
-    [SerializeField] private bool isMouseUp = false;
+    //[SerializeField] private bool isMouseUp = false;
     [SerializeField] private bool rightCollision = false;
     [SerializeField] private Collider2D enterCollision;
     [SerializeField] private AudioSource audioSrcDragDrop;
