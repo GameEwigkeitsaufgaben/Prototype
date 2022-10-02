@@ -327,11 +327,12 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
             float length = noLightAnim.length;
             audioSrc.clip = lichtaus;
             audioSrc.Play();
+            yield return new WaitForSeconds(2f);
             audioSrc.clip = sfx.autschSfx;
             audioSrc.Play();
             Debug.Log("No lampe + length:" + length);
 
-            yield return new WaitForSeconds(length);
+            yield return new WaitForSeconds(3.5f);
         }
 
         if (missingItem)
