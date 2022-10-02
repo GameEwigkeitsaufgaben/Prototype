@@ -45,6 +45,7 @@ public class CoalmineWaypointManager : MonoBehaviour
     public Canvas bahnsteig, bewetterung, ovmine, viewpoint;
     public CoalmineSpeechManger speechManager;
 
+
     private bool helperSetPath = false;
     private Player myPlayer;
 

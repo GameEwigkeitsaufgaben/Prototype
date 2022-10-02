@@ -35,6 +35,7 @@ public class Cave : MonoBehaviour
     public GameObject doorLeft;
     public GameObject doorRight;
     public bool caveDoorsClosed = false;
+    public AudioSource caveBell;
 
     public Button[] liftBtns;
 
@@ -65,6 +66,11 @@ public class Cave : MonoBehaviour
         sfxLeftDoor = leftDoor.GetComponent<AudioSource>();
         sfxRightDoor = rightDoor.GetComponent<AudioSource>();
         tmpVector3 = Vector3.zero;
+
+
+        caveBell.loop = false;
+        caveBell.playOnAwake = false;
+        caveBell.clip = sfx.caveBell;
     }
 
     private void Start()
@@ -121,6 +127,7 @@ public class Cave : MonoBehaviour
         targetStop = tStop;
         moveDirection = GetMoveDirection();
         gameObject.GetComponent<CaveShake>().StartShake();
+        caveBell.Play();
         liftMovingSrc.Play();
     }
 

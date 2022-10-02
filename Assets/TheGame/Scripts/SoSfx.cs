@@ -32,6 +32,7 @@ public class SoSfx : ScriptableObject
     public AudioClip mechanicBtnPress;
     public AudioClip dropSfx, wasserhaltungAussen;
     public AudioClip treesCoalificationSfx, atmoCoalificationSfx;
+    public AudioClip caveBell;
 
 
     public GameObject instaAudioSrc;

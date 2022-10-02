@@ -35,6 +35,7 @@ public class CaveManager : MonoBehaviour
 
     public AudioSource baukipper, kran, water, bewetterung;
 
+
     private void ShowFPS()
     {
         frameCounter++;
@@ -59,6 +60,7 @@ public class CaveManager : MonoBehaviour
         waypointManagerMine = GetComponent<CoalmineWaypointManager>();
 
         btnReplayTalkingList.gameObject.SetActive(runtimeData.replayEntryArea);
+
     }
 
     private void Start()
