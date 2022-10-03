@@ -24,6 +24,16 @@ public class CodeLock : MonoBehaviour
             LoadCodeInDisplay(Chapters.Ch01General);
             return;
         }
+        else if(chaptersRuntimeData.ch2GrubenwasserUnlocked && lockForChapter == Chapters.Ch02Grubenwasser)
+        {
+            LoadCodeInDisplay(Chapters.Ch02Grubenwasser);
+            return;
+        }
+        else if (chaptersRuntimeData.ch3GrubenwasserUnlocked&& lockForChapter == Chapters.Ch03Ewigkeitsaufgabe)
+        {
+            LoadCodeInDisplay(Chapters.Ch03Ewigkeitsaufgabe);
+            return;
+        }
 
         ResetCode();
     }
