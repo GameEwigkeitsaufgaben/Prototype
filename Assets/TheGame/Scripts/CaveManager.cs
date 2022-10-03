@@ -27,7 +27,7 @@ public class CaveManager : MonoBehaviour
     
     public Button exitSceneBtn, sole1WPViewpointBtn, sole2WPViewpointBtn, sole1caveWPBtn, sole3EnterTrainBtn, btnReplayTalkingList;
 
-    private bool introPlayedOneTime = false;
+    //private bool introPlayedOneTime = false;
 
     public AudioSource[] sfxS1;
 
@@ -45,10 +45,8 @@ public class CaveManager : MonoBehaviour
         if (totalFrameTime >= 1f)
         {
             int fps = Mathf.RoundToInt(frameCounter/totalFrameTime);
-            //Debug.Log("FPS---------------------------- " + fps + " Counte:  " + frameCounter + " frame time " + totalFrameTime );
             frameCounter = 0;
             totalFrameTime -= 1f;
-            
         }
     }
 
@@ -89,15 +87,15 @@ public class CaveManager : MonoBehaviour
 
         sole3EnterTrainBtn.gameObject.SetActive(false);
 
-        if (runtimeData.sole1Done)
+        if (runtimeData.sole1Done || runtimeData.replayS1Cave)
         {
             sole1WPViewpointBtn.interactable = true;
         }
-        if (runtimeData.sole2Done)
+        if (runtimeData.sole2Done || runtimeData.replayS2Cave)
         {
             sole2WPViewpointBtn.interactable = true;
         }
-        if (runtimeData.sole3BewetterungDone && runtimeData.sole3GebaeudeDone)
+        if ((runtimeData.sole3BewetterungDone && runtimeData.sole3GebaeudeDone) || runtimeData.replayS3Cave)
         {
             waypointManagerMine.wps3ViewpointBtn.interactable = true;
         }
@@ -199,11 +197,11 @@ public class CaveManager : MonoBehaviour
         //ShowFPS();
 
         //set in false in update, set in true in tl finished;
-        if (!introPlayedOneTime && speechManagerMine.IsMineEATalkingFinished())
+        if (!runtimeData.replayEntryArea && speechManagerMine.IsMineEATalkingFinished())
         {
             Debug.Log("set done ea");
             cave.SetAllButtonsInteractable(true);
-            introPlayedOneTime = true;
+            //introPlayedOneTime = true;
             runtimeData.replayEntryArea = true;
             btnReplayTalkingList.gameObject.SetActive(true);
         }

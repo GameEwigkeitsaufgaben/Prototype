@@ -110,33 +110,32 @@ public class CodeLock : MonoBehaviour
 
     public void LoadCodeInDisplay(Chapters chapter)
     {
-        if (chaptersRuntimeData.progressWithAdminCh1)
-        {
-            switch (chapter)
-            {
-                case Chapters.Ch01General:
-                    SetCodeDisplay("1", "2", "1", "2");
-                    break;
-                case Chapters.Ch02Grubenwasser:
-                    SetCodeDisplay("2", "3", "2", "3");
-                    break;
-                case Chapters.Ch03Ewigkeitsaufgabe:
-                    SetCodeDisplay("3", "4", "3", "4");
-                    break;
-            }
-
-            return;
-        }
-
         switch (chapter)
         {
             case Chapters.Ch01General:
+                if (chaptersRuntimeData.progressWithAdminCh1)
+                {
+                    SetCodeDisplay("1", "2", "1", "2");
+                    break;
+                }
+                
                 SetCodeDisplay("1", "1", "1", "1");
                 break;
             case Chapters.Ch02Grubenwasser:
+                if (chaptersRuntimeData.progressWithAdminCh2)
+                {
+                    SetCodeDisplay("2", "3", "2", "3");
+                    break;
+                }
+
                 SetCodeDisplay("2", "2", "2", "2");
                 break;
             case Chapters.Ch03Ewigkeitsaufgabe:
+                if (chaptersRuntimeData.progressWithAdminCh3)
+                {
+                    SetCodeDisplay("3", "4", "3", "4");
+                    break;
+                }
                 SetCodeDisplay("3", "3", "3", "3");
                 break;
         }

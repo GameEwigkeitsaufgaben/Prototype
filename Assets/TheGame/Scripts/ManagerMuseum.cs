@@ -87,6 +87,15 @@ public class ManagerMuseum : MonoBehaviour
                         break;
                 }
             }
+            else
+            {
+                switch (walkingGroup.currentWP)
+                {
+                    case MuseumWaypoints.WPExitMuseum0:
+                        btnReplayTalkingList.gameObject.SetActive(false);
+                        break;
+                }
+            }
 
             if (speechManagerCh1.IsTalkingListFinished(GameData.NameCH1TLMuseumOutro))
             {
