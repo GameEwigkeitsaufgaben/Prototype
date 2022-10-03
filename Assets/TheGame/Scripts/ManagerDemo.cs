@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,6 +18,7 @@ public class ManagerDemo : MonoBehaviour
     public List<GameObject> mob;
     public Canvas mobCanvas;
     public Button btnBackToInsta;
+    public AudioSource audioSrcAtmo;
 
     public GameObject umweltschutz, wissenschaft, polder, grubenwasser, buerger, wasserversorger;
 
@@ -50,6 +50,11 @@ public class ManagerDemo : MonoBehaviour
         demoAudios = Resources.Load<SoTalkingList>(GameData.NameCH3TLDemo);
         sfx = runtimeDataChapters.LoadSfx();
         audioSrc = GetComponent<AudioSource>();
+        
+        audioScrAtmo.clip = sfx.atmoDemo;
+        //audioScrAtmo.playOnAwake = true;
+        audioScrAtmo.loop = true;
+        audioScrAtmo.Play();
 
         demoBuerger = buerger.GetComponent<Demonstrant>();
         demoUmweltschutz = umweltschutz.GetComponent<Demonstrant>();
