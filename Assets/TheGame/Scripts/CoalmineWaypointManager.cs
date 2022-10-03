@@ -51,6 +51,7 @@ public class CoalmineWaypointManager : MonoBehaviour
 
     private SoChapOneRuntimeData runtimeData;
     private SoSfx sfx;
+    private AudioSource audioSrcWalkingGroup;
 
     [Header("Assigned during runtime")]
     public Button wps1ViewpointBtn, wps2ViewpointBtn, wps3ViewpointBtn;
@@ -67,6 +68,8 @@ public class CoalmineWaypointManager : MonoBehaviour
     {
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        audioSrcWalkingGroup = gameObject.AddComponent<AudioSource>();
+        audioSrcWalkingGroup.clip = sfx.walkingGroup;
 
         //The order has to be Canvas (parent), first child ist btn, second child is text; 
         wps1ViewpointBtn = wpS1ViewpointSign.GetComponentsInChildren<Transform>()[1].GetComponent<Button>();
@@ -383,6 +386,7 @@ public class CoalmineWaypointManager : MonoBehaviour
 
         playerSplineMove.reverse = false;
         playerSplineMove.StartMove();
+        audioSrcWalkingGroup.Play();
     }
 
     public void MoveIn()
@@ -396,6 +400,7 @@ public class CoalmineWaypointManager : MonoBehaviour
         playerSplineMove.reverse = true;
         playerSplineMove.StartMove();
         SetCharacterPosition(new Vector3(0.0f, 1.6f, 0.0f));
+        audioSrcWalkingGroup.Play();
     }
 
     public void MoveToBewetterung()
@@ -403,6 +408,7 @@ public class CoalmineWaypointManager : MonoBehaviour
         SetCharacterPosition(new Vector3(35.3f, 1.6f, -11.6f));
         DetectAndSetPath(MineWayPoints.viewpointBewetterung);
         playerSplineMove.StartMove();
+        audioSrcWalkingGroup.Play();
     }
 
     public void MoveToBahnsteig()
@@ -410,6 +416,7 @@ public class CoalmineWaypointManager : MonoBehaviour
         SetCharacterPosition(new Vector3(21.77f, 1.6f, -4f));
         DetectAndSetPath(MineWayPoints.viewpointBahnsteig);
         playerSplineMove.StartMove();
+        audioSrcWalkingGroup.Play();
     }
 
     public void MoveToOVMine()
@@ -417,6 +424,7 @@ public class CoalmineWaypointManager : MonoBehaviour
         SetCharacterPosition(new Vector3(23.0f, 1.6f, -8f));
         DetectAndSetPath(MineWayPoints.viewpointOVMine);
         playerSplineMove.StartMove();
+        audioSrcWalkingGroup.Play();
     }
 
     public void MoveToViewpoint()
@@ -426,6 +434,7 @@ public class CoalmineWaypointManager : MonoBehaviour
         SetCharacterPosition(new Vector3(7.11f, 1.6f, -2.16f));
         DetectAndSetPath(MineWayPoints.viewpoint);
         playerSplineMove.StartMove();
+        audioSrcWalkingGroup.Play();
     }
 
     private void SetCharacterPosition(Vector3 charpos)
