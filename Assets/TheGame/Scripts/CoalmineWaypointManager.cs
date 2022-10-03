@@ -245,7 +245,6 @@ public class CoalmineWaypointManager : MonoBehaviour
                 playerSplineMove.reverse = false;
             }
         }
-        Debug.Log("current WP " + currentWP + " target WP " + targetWP + " -pathname " + playerSplineMove.pathContainer.name + " -reverse " + playerSplineMove.reverse);
     }
 
     public void SetS3WaypointsInteractable(bool interactable)
@@ -313,8 +312,6 @@ public class CoalmineWaypointManager : MonoBehaviour
             ChangeS3WPRotations(-90.0f, -90.0f, -90.0f, 0.0f);
 
             runtimeData.sole3BewetterungDone = true;
-
-            //Debug.Log(currentWP + "sould be set " + transform.localPosition);
         }
         else if (currentWP == MineWayPoints.viewpoint)
         {
@@ -334,7 +331,7 @@ public class CoalmineWaypointManager : MonoBehaviour
             ovmineBtn.gameObject.SetActive(false);
             caveBtn.gameObject.SetActive(false);
 
-            ChangeS3WPRotations(180.0f, -33.0f, 0.0f, -250.0f);
+            ChangeS3WPRotations(-56f, -33.0f, 0.0f, -250.0f);
 
             runtimeData.sole3GebaeudeDone = true;
         }
@@ -350,7 +347,7 @@ public class CoalmineWaypointManager : MonoBehaviour
         }
     }
 
-    //Ändern der Rotation der Viewpoits passiert über das Canvas(WP), WPs werden
+    //Ändern der Rotation der Viewpoints passiert über das Canvas(WP), WPs werden
     //so in die Richtung gedreht, dass die Buttons clickable sind. 
     //Wichtig auch die Position nur über das Canvas ändern, sonst funkt die Rotation nicht mehr. 
     private void ChangeS3WPRotations(float viewpointRotationY, float bahnsteigRotationY, float ovMineRotationY, float bewetterungRotationY)

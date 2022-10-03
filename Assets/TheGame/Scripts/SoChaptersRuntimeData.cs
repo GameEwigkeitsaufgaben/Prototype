@@ -22,6 +22,7 @@ public class SoChaptersRuntimeData : ScriptableObject
     public Texture2D sceneCursor;
 
     public float musicVolume = 0.0f;
+    public bool musicOn = true;
 
     private void OnEnable()
     {

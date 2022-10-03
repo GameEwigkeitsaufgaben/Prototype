@@ -12,10 +12,10 @@ public class BehaviourButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
     private void Awake()
     {
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
-        audioSrc = gameObject.AddComponent<AudioSource>();
-        audioSrc.clip = sfx.mouseHammer;
-        audioSrc.playOnAwake = false;
-        audioSrc.loop = false;
+        //audioSrc = gameObject.AddComponent<AudioSource>();
+        //audioSrc.clip = sfx.mouseHammer;
+        //audioSrc.playOnAwake = false;
+        //audioSrc.loop = false;
     }
 
 
@@ -23,7 +23,7 @@ public class BehaviourButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
     {
         gameObject.AddComponent<MouseChange>();
         mouse = gameObject.GetComponent<MouseChange>();
-       // gameObject.GetComponent<Button>().onClick.AddListener(PlaySound);
+        gameObject.GetComponent<Button>().onClick.AddListener(PlaySound);
 
 
         if (gameObject.GetComponent<Image>() == null) return;
@@ -36,8 +36,11 @@ public class BehaviourButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
     private void PlaySound()
     {
         Debug.Log("Play Sound");
-        if (audioSrc.isPlaying) return;
-        audioSrc.Play();
+        //if (audioSrc == null) return;
+        //if (!audioSrc.isActiveAndEnabled) return;
+        //if (audioSrc.isPlaying) return;
+
+        mouse.PlaySfx();
     }
 
     public void OnPointerEnter(PointerEventData eventData)

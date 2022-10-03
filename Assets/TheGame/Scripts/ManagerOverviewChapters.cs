@@ -17,6 +17,7 @@ public class ManagerOverviewChapters : MonoBehaviour
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoSfx sfx;
     private AudioSource audioSrc;
+    public AudioSource audioSrcAtmo;
 
     private void Awake()
     {
@@ -32,8 +33,15 @@ public class ManagerOverviewChapters : MonoBehaviour
         btnCredits.colors = GameColors.GetInteractionColorBlock();
         lawNotice.text = GameData.lawNotiz;
         audioSrc.clip = sfx.instaMenuMusicLoop;
+
+        audioSrc.mute = !runtimeDataChapters.musicOn;
         audioSrc.Play();
-        audioSrc.volume = GameData.defaultVolumeInsta;
+        audioSrc.volume = runtimeDataChapters.musicVolume;
+
+        
+        audioSrcAtmo.clip = sfx.coalmineVerschubFerne;
+        audioSrcAtmo.loop = true;
+        audioSrcAtmo.Play();
 
         allChapDone = runtimeDataChapters.ch1GeneralUnlocked && runtimeDataChapters.ch2GrubenwasserUnlocked && runtimeDataChapters.ch3GrubenwasserUnlocked;
 

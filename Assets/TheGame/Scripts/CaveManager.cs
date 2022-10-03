@@ -199,9 +199,7 @@ public class CaveManager : MonoBehaviour
         //set in false in update, set in true in tl finished;
         if (!runtimeData.replayEntryArea && speechManagerMine.IsMineEATalkingFinished())
         {
-            Debug.Log("set done ea");
             cave.SetAllButtonsInteractable(true);
-            //introPlayedOneTime = true;
             runtimeData.replayEntryArea = true;
             btnReplayTalkingList.gameObject.SetActive(true);
         }

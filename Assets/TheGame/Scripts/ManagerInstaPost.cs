@@ -58,6 +58,7 @@ public class ManagerInstaPost : MonoBehaviour
                 scrollbar.value = runtimeDataCh3.instaSliderPos;
                 break;
         }
+        
 
         if (runtimeDataChapters.musicVolume != GameData.defaultVolumeInsta) audioSrcBGInsta.volume = runtimeDataChapters.musicVolume;
     }
@@ -97,8 +98,10 @@ public class ManagerInstaPost : MonoBehaviour
 
         audioSrcBGInsta = GetComponent<AudioSource>();
         audioSrcBGInsta.clip = sfx.instaMenuMusicLoop;
-        audioSrcBGInsta.volume = GameData.defaultVolumeInsta;
+        audioSrcBGInsta.volume = runtimeDataChapters.musicVolume;
         audioSrcBGInsta.Play();
+        EnableDisableMusic(runtimeDataChapters.musicOn);
+        audioSrcBGInsta.mute = !runtimeDataChapters.musicOn;
 
 
         switch (currentCH)
@@ -106,19 +109,21 @@ public class ManagerInstaPost : MonoBehaviour
             case chapter.ch1:
                 runtimeDataCh1 = runtimeDataChapters.LoadChap1RuntimeData();
                 if (runtimeDataChapters.progressWithAdminCh1) runtimeDataCh1.SetAllDone();
-                EnableDisableMusic(runtimeDataCh1.musicOn);
+                //EnableDisableMusic(runtimeDataCh1.musicOn);
                 break;
             case chapter.ch2:
                 runtimeDataCh2 = runtimeDataChapters.LoadChap2RuntimeData();
                 if (runtimeDataChapters.progressWithAdminCh2) runtimeDataCh2.SetAllDone();
-                EnableDisableMusic(runtimeDataCh2.musicOn);
+                //EnableDisableMusic(runtimeDataCh2.musicOn);
                 break;
             case chapter.ch3:
                 runtimeDataCh3 = runtimeDataChapters.LoadChap3RuntimeData();
                 if (runtimeDataChapters.progressWithAdminCh3) runtimeDataCh3.SetAllDone();
-                EnableDisableMusic(runtimeDataCh3.musicOn);
+                //EnableDisableMusic(runtimeDataCh3.musicOn);
                 break;
         }
+
+
 
         switch (currentCH)
         {
@@ -171,18 +176,19 @@ public class ManagerInstaPost : MonoBehaviour
 
     private void SetMusicON(bool musicOn)
     {
-        switch (currentCH)
-        {
-            case chapter.ch1:
-                runtimeDataCh1.musicOn = musicOn;
-                break;
-            case chapter.ch2:
-                runtimeDataCh2.musicOn = musicOn;
-                break;
-            case chapter.ch3:
-                runtimeDataCh3.musicOn = musicOn;
-                break;
-        }
+        runtimeDataChapters.musicOn = musicOn;
+        //switch (currentCH)
+        //{
+        //    case chapter.ch1:
+        //        runtimeDataCh1.musicOn = musicOn;
+        //        break;
+        //    case chapter.ch2:
+        //        runtimeDataCh2.musicOn = musicOn;
+        //        break;
+        //    case chapter.ch3:
+        //        runtimeDataCh3.musicOn = musicOn;
+        //        break;
+        //}
     }
 
     void ReduceVolumeBGMusic(float value)
@@ -288,32 +294,31 @@ public class ManagerInstaPost : MonoBehaviour
     //Called from Inspector BtnMusicOnOff OnClick()
     public void ToggleMusicOnOff()
     {
-        switch (currentCH)
-        {
-            case chapter.ch1:
-                Debug.Log("on ? = " + runtimeDataCh1.musicOn);
-                runtimeDataCh1.musicOn = !runtimeDataCh1.musicOn;
-                break;
-            case chapter.ch2:
-                Debug.Log("on old ? = " + runtimeDataCh2.musicOn);
-                runtimeDataCh2.musicOn = !runtimeDataCh2.musicOn;
-                Debug.Log("on new ? = " + runtimeDataCh2.musicOn);
-                break;
-            case chapter.ch3: 
-                runtimeDataCh3.musicOn = !runtimeDataCh3.musicOn;
-                break;
-        }
+        runtimeDataChapters.musicOn = !runtimeDataChapters.musicOn;
+
+        //switch (currentCH)
+        //{
+        //    case chapter.ch1:
+        //        runtimeDataCh1.musicOn = !runtimeDataCh1.musicOn;
+        //        break;
+        //    case chapter.ch2:
+        //        runtimeDataCh2.musicOn = !runtimeDataCh2.musicOn;
+        //        break;
+        //    case chapter.ch3: 
+        //        runtimeDataCh3.musicOn = !runtimeDataCh3.musicOn;
+        //        break;
+        //}
         
         switch (currentCH)
         {
             case chapter.ch1:
-                EnableDisableMusic(runtimeDataCh1.musicOn);
+                EnableDisableMusic(runtimeDataChapters.musicOn);
                 break;
             case chapter.ch2:
-                EnableDisableMusic(runtimeDataCh2.musicOn);
+                EnableDisableMusic(runtimeDataChapters.musicOn);
                 break;
             case chapter.ch3:
-                EnableDisableMusic(runtimeDataCh3.musicOn);
+                EnableDisableMusic(runtimeDataChapters.musicOn);
                 break;
         }
        

@@ -91,13 +91,11 @@ public class MouseChange : MonoBehaviour
         else if (gameObject.tag == "Buzzer") return;
 
         if(audioSrcBtn.isActiveAndEnabled) audioSrcBtn.Play();
-
-        Debug.Log("------------------play audio btn");
+        Debug.Log("Play CLICK");
     }
 
     public void MouseEnter()
     {
-        Debug.Log("Mouse Enter");
         if (gameObject.GetComponent<Post>())
         {
             runtimeDataCh1.hintPostUnlock = (gameObject.GetComponent<Button>().interactable) ? "": gameObject.GetComponent<Post>().GetUnlockHint();
@@ -111,18 +109,14 @@ public class MouseChange : MonoBehaviour
         }
         else if (gameObject.GetComponent<Toggle>() != null)
         {
-            Debug.Log("in Toggle");
             if (gameObject.GetComponent<Toggle>().isOn)
             {
-                Debug.Log("in Toggle is on, set cursur" + runtimeDataChapters.cursorNoInteract.name);
                 Cursor.SetCursor(runtimeDataChapters.cursorNoInteract, hotSpot, cursorMode);
             }
             else
             {
-                Debug.Log("in Toggle is off ");
                 if(gameObject.GetComponent<Toggle>().interactable) Cursor.SetCursor(runtimeDataChapters.cursorInteract, hotSpot, cursorMode);
                 else { Cursor.SetCursor(runtimeDataChapters.cursorNoInteract, hotSpot, cursorMode); }
-
             }
         }
         else if (gameObject.GetComponent<Scrollbar>() != null)
@@ -169,16 +163,12 @@ public class MouseChange : MonoBehaviour
 
             else if(gameObject.GetComponent<MuseumMinerEquipmentItem>() != null)
             {
-                Debug.Log("DRAG DRAG" + gameObject.name);
-
                 if (runtimeDataCh1.currDragItemExists) return;
 
                 MuseumMinerEquipmentItem item = gameObject.GetComponent<MuseumMinerEquipmentItem>();
 
                 if (item == null) return;
                 if (item.isCurrentlyDragging) return;
-
-                Debug.Log("OverrideDrag " + gameObject.name);
  
                 if (MaxReachedSnaptToTable(item))
                 {
@@ -186,7 +176,6 @@ public class MouseChange : MonoBehaviour
                     return;
                 }
 
-                //if (!gameObject.GetComponent<MuseumMinerEquipmentItem>().isCurrentlyDragging)
                 Cursor.SetCursor(runtimeDataChapters.cursorDragTouch, hotSpot, cursorMode);
             }
 
@@ -222,18 +211,6 @@ public class MouseChange : MonoBehaviour
 
     private bool MaxReachedSnaptToTable(MuseumMinerEquipmentItem item)
     {
-        //Debug.Log("Max reached");
-
-        //if (item.myManager.IsMaxItemsOnMinerReached())
-        //{
-        //    if (item.snapedTo == SnapetTo.Table)
-        //    {
-        //        Cursor.SetCursor(runtimeDataChapters.cursorNoDrag, hotSpot, cursorMode);
-        //        Debug.Log("Max reached, set no drag");
-        //        return;
-        //    }
-        //}
-
         return item.myManager.IsMaxItemsOnMinerReached() && (item.snapedTo == SnapetTo.Table);
     }
 
@@ -252,7 +229,6 @@ public class MouseChange : MonoBehaviour
                     Cursor.SetCursor(runtimeDataChapters.cursorNoDrag, hotSpot, cursorMode);
                     return;
                 }
-                Debug.Log("geht weiter ------------------------- ");
 
                 Cursor.SetCursor(runtimeDataChapters.cursorDragDrag, hotSpot, cursorMode);
                 runtimeDataCh1.currDragItemExists = true;
@@ -278,13 +254,10 @@ public class MouseChange : MonoBehaviour
         {
             if (gameObject.GetComponent<DragTurmItem>() != null)
             {
-                Debug.Log("Back to orig");
                 if (!gameObject.GetComponent<DragTurmItem>().snaped)
                 {
                     gameObject.transform.position = gameObject.GetComponent<DragTurmItem>().origPos;
-                    Debug.Log("Back to orig");
                 }
-                //Cursor.SetCursor(runtimeDataChapters.cursorDragTouch, hotSpot, cursorMode);
             }
 
             else if (gameObject.GetComponent<DragItemThoughts>() != null)
