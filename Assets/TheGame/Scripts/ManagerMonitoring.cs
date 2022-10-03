@@ -71,7 +71,7 @@ public class ManagerMonitoring : MonoBehaviour
 
         btnBackToOverlay.interactable = false;
 
-        audioSrcAtmo.clip = sfx.pumpen;
+        audioSrcAtmo.clip = sfx.monitoringAtmo;
         audioSrcAtmo.loop = true;
         audioSrcAtmo.Play();
     }

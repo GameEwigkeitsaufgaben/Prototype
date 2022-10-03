@@ -71,7 +71,7 @@ public class Entry : MonoBehaviour
             Debug.Log("No Videoplayer found");
         }
 
-        audioSrcOverlay.clip = sfx.lupeEnlarge;
+        audioSrcOverlay.clip = sfx.openOverlay;
     }
 
     public void SetReplayIcon(VideoPlayer vp)
