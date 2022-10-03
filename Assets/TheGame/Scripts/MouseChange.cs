@@ -90,7 +90,8 @@ public class MouseChange : MonoBehaviour
         else if (gameObject.GetComponent<QuizAnswerUiBehaviour>() != null) return;
         else if (gameObject.tag == "Buzzer") return;
 
-        audioSrcBtn.Play();
+        if(audioSrcBtn.isActiveAndEnabled) audioSrcBtn.Play();
+
         Debug.Log("------------------play audio btn");
     }
 
