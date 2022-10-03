@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 56253825}
   - component: {fileID: 56253824}
+  - component: {fileID: 56253826}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -168,6 +169,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &56253826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56253823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1540cfb5823a01e4286b0d3c41ffb23a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &232912398
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,15 +299,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3881969855575915028, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3881969855575915028, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 56253824}
+      objectReference: {fileID: 56253826}
     - target: {fileID: 3881969855575915028, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SwitchScene
+      value: SwitchOnboarding3ToOv
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881969855575915028, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ManagerOnboarding, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3881969855575915028, guid: cfe61656510823c44adefc8ba36e6f2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -456,8 +473,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Gibt f\xFCr das erste Kapitel diesen Freischaltschl\xFCssel ein: 1111\n
-    \nDr\xFCcke anschlie\xDFend das Schl\xFCsselsymbol!"
+  m_text: "Gibt f\xFCr das erste Kapitel diesen Freischaltschl\xFCssel ein: 1111\n\nDr\xFCcke
+    anschlie\xDFend das Schl\xFCsselsymbol!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7e929406877575e4bbafc812ce11fed8, type: 2}
   m_sharedMaterial: {fileID: -3880025241007979547, guid: 7e929406877575e4bbafc812ce11fed8, type: 2}

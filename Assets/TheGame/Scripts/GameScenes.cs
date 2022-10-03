@@ -9,7 +9,9 @@ public static class GameScenes
 
     //Chapter one Bergbau allgemein
     public const string ch01InstaMain = "ch01scene01-00-instaMenu";
-    public const string ch01GameOnboarding = "ch01scene00-00-onboarding";
+    public const string ch01GameOnboarding1 = "ch00scene03-onboarding1";
+    public const string ch01GameOnboarding2 = "ch00scene03-onboarding2";
+    public const string ch01GameOnboarding3 = "ch00scene03-onboarding3";
 
     public const string ch01MineIntro = "ch01scene01-61-coalmine-intro";
     public const string ch01Mine = "ch01scene01-62-coalmine-cave";
