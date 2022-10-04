@@ -64,11 +64,11 @@ public class ManagerReinigungAktiv : MonoBehaviour
         audioSrcAtmo.loop = true;
         audioSrcAtmo.Play();
 
-        audioSrcVorfluter.clip = sfx.atmoWasserRinnt;
+        audioSrcVorfluter.clip = sfx.gwaktivVorfluter;
         audioSrcVorfluter.loop = true;
         audioSrcVorfluter.Play();
 
-        audioSrcTreppeWasser.clip = sfx.caolmineSplashingWater;
+        audioSrcTreppeWasser.clip = sfx.gwaktivTreppe;
         audioSrcTreppeWasser.loop = true;
         audioSrcTreppeWasser.Play();
 

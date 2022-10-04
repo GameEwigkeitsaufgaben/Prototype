@@ -35,6 +35,7 @@ public class SoSfx : ScriptableObject
     public AudioClip caveBell;
     public AudioClip walkingGroup;
     public AudioClip monitoringAtmo;
+    public AudioClip gwaktivTreppe, gwaktivVorfluter;
 
 
     public GameObject instaAudioSrc;
