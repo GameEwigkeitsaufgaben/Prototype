@@ -13,7 +13,7 @@ public class KohlehobelManager : MonoBehaviour
     private SoChapOneRuntimeData runtimeDataCh1;
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoSfx sfx;
-    public AudioSource audioSrcBewetterung, audioSrcLwc;
+    public AudioSource audioSrcBewetterung, audioSrcLwc, audioSrcBand;
 
     private void Awake()
     {
@@ -27,8 +27,14 @@ public class KohlehobelManager : MonoBehaviour
     {
         audioSrcBewetterung.clip = sfx.coalmineZecheWind;
         audioSrcBewetterung.playOnAwake = true;
+        audioSrcBewetterung.Play();
 
-        //audioSrcLwc.clip = sfx.coalmine
+        audioSrcBand.clip = sfx.coalmineConveyerBelt;
+        audioSrcBand.loop = true;
+        audioSrcBand.Play();
+
+        audioSrcLwc.clip = sfx.coalmineLWC;
+
         switchScene.LoadLongwallCutterStatic();
         switchScene.LoadLongwallCutterAnim();
 

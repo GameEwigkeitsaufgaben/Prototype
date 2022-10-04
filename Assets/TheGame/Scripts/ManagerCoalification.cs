@@ -23,6 +23,7 @@ public class ManagerCoalification : MonoBehaviour
     [SerializeField] private StatesInkohlung statesInkohlung;
     [SerializeField] private AudioSource audioSrcAtmo, audioSrcTrees, audioSrcRegen;
     public Button btnGoToMuseum;
+    public AudioSource audioSrcMusic;
 
     public bool sliderMoving = false;
     public bool enableAnim = false;
@@ -48,6 +49,8 @@ public class ManagerCoalification : MonoBehaviour
 
         audioSrcTrees.clip = sfx.treesCoalificationSfx;
         audioSrcTrees.playOnAwake = false;
+
+        runtimeDataChapters.SetAndStartMusic(audioSrcMusic, sfx.instaMenuMusicLoop);
 
         configMuseum = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
     }

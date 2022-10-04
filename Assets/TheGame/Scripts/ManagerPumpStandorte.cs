@@ -21,7 +21,7 @@ public class ManagerPumpStandorte : MonoBehaviour
     public Dictionary<string, Image> pumpwerke;
     public Image pegelHigh, pegelLow;
     public Image lightReducedBetrieb, lightAllBetrieb;
-    public AudioSource audioSrcAtmo;
+    public AudioSource audioSrcAtmo, audioSrcWetterAtmo;
 
     public bool isDone = false;
     public bool audioFinished = false;
@@ -50,6 +50,9 @@ public class ManagerPumpStandorte : MonoBehaviour
         audioSrcAtmo.loop = true;
         audioSrcAtmo.Play();
 
+        audioSrcWetterAtmo.clip = sfx.atmoNiceWeather;
+        audioSrcWetterAtmo.loop = true;
+        audioSrcWetterAtmo.Play();
 
         speechManager.playPumpstandorte = !runtimeDataCh03.replayTL3102;
 

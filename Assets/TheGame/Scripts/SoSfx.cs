@@ -13,7 +13,7 @@ public class SoSfx : ScriptableObject
     public AudioClip coalmineWorkingMachinesMetal, caolmineLader;
     public AudioClip caolmineSplashingWater;
     public AudioClip coalmineIncomingTrain, coalmineDepartingTrain, coalmineMovingTrain;
-    public AudioClip coalmineLWC, coalmineMoveShields, coalmineCoalToConveyorBeltFalling, coalmineBreakingRock;
+    public AudioClip coalmineLWC, coalmineMoveShields, coalmineCoalToConveyorBeltFalling, coalmineConveyerBelt, coalmineBreakingRock;
 
     public AudioClip mineAlarm, mineHusten;
     public AudioClip autschSfx, goodJobSfx, badJobSfx, badJobNoReptSfx, minerOutro, dragSfx;

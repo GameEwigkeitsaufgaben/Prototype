@@ -21,7 +21,7 @@ public class ManagerHistoryMining : MonoBehaviour
     public Button btnBackToMuseum, btnUrlToSage;
     public TextMeshProUGUI centuryText;
     public GameObject imgSanduhr;
-    [SerializeField] private AudioSource audioSrcTime;
+    [SerializeField] private AudioSource audioSrcTime, audioSrcMusic;
     
     [Header("Assigned at Runtime")]
     public SoMuseumConfig museumConfig;
@@ -57,6 +57,8 @@ public class ManagerHistoryMining : MonoBehaviour
 
         audioSrcTime.loop = true;
         audioSrcTime.playOnAwake = false;
+
+        runtimeDataChapters.SetAndStartMusic(audioSrcMusic, sfx.instaMenuMusicLoop);
     }
 
     public void OpenUrlSage()

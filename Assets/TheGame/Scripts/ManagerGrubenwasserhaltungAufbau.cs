@@ -9,7 +9,7 @@ public class ManagerGrubenwasserhaltungAufbau : MonoBehaviour
     public bool audioFinised = false;
     public GameObject btnBackTo3101;
     public Button btnReplayTalkingList;
-    public AudioSource audioSrcAtmo;
+    public AudioSource audioSrcAtmo, audioSrcWetter;
 
     private SwitchSceneManager switchSceneMgr;
     private SoChapThreeRuntimeData runtimeDataCh3;
@@ -28,6 +28,10 @@ public class ManagerGrubenwasserhaltungAufbau : MonoBehaviour
         audioSrcAtmo.clip = sfx.wasserhaltungAussen;
         audioSrcAtmo.loop = true;
         audioSrcAtmo.Play();
+
+        audioSrcWetter.clip = sfx.atmoNiceWeather;
+        audioSrcWetter.loop = true;
+        audioSrcWetter.Play();
        
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
 

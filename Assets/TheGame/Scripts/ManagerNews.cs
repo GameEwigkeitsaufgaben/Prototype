@@ -16,7 +16,7 @@ public class ManagerNews : MonoBehaviour
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
         runtimeDataCh3 = runtimeDataChapters.LoadChap3RuntimeData();
         sfx = runtimeDataChapters.LoadSfx();
-        audioSrcAtmo.clip = sfx.wasserhaltungAussen;
+        audioSrcAtmo.clip = sfx.monitoringAtmo;
         audioSrcAtmo.Play();
         
     }

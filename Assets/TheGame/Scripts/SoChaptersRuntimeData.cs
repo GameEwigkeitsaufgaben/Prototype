@@ -24,6 +24,13 @@ public class SoChaptersRuntimeData : ScriptableObject
     public float musicVolume = 0.0f;
     public bool musicOn = true;
 
+    public void SetAndStartMusic(AudioSource src, AudioClip clip)
+    {
+        src.clip = clip;
+        src.volume = musicVolume;
+        src.loop = true;
+        src.Play();
+    }
     private void OnEnable()
     {
         ch1GeneralUnlocked = ch2GrubenwasserUnlocked = ch3GrubenwasserUnlocked = false;

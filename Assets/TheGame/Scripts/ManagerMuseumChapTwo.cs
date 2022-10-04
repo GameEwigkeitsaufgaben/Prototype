@@ -55,6 +55,9 @@ public class ManagerMuseumChapTwo : MonoBehaviour
     {
         audioSrcAtmo.clip = sfx.atmoMuseum;
         audioSrcAtmo.playOnAwake = true;
+        audioSrcAtmo.Play();
+
+        runtimeDataChapters.SetAndStartMusic(audioSrcBGMusic, sfx.instaMenuMusicLoop);
         
         denkBubble.SetActive(false);
         btnNextGrubenwasser.colors = GameColors.GetInteractionColorBlock();

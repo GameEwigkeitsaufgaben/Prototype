@@ -6,7 +6,7 @@ public class ManagerWasserChapThree : MonoBehaviour
     public Button btnSchautafel3102, btnSchautafel3103;
     public Button btnReplayTalkingList;
     public Button btnProceed;
-    public AudioSource audioSrcAtmo;
+    public AudioSource audioSrcAtmo, audioSrcAtmoWetter;
 
     private SoChapThreeRuntimeData runtimeDataCh3;
     private SoChaptersRuntimeData runtimeDataChapters;
@@ -32,6 +32,10 @@ public class ManagerWasserChapThree : MonoBehaviour
         audioSrcAtmo.clip = sfx.wasserhaltungAussen;
         audioSrcAtmo.loop = true;
         audioSrcAtmo.Play();
+
+        audioSrcAtmoWetter.clip = sfx.atmoNiceWeather;
+        audioSrcAtmoWetter.loop = true;
+        audioSrcAtmoWetter.Play();
 
         if (runtimeDataCh3.IsPostDone(ProgressChap3enum.Post310))
         {

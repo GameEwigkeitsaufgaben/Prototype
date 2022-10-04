@@ -23,6 +23,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     public AnimationClip noHelmAnim, noMaskAnim, noLightAnim, badJobAnim, goodJobAnim;
     public Image denkbubbleWorstcase;
     public Sprite sNoHelm, sNoLamp, sNoMask, s4, minerGoodJob, minerBadJob;
+    public AudioSource audioSrcMusic;
 
     private IEnumerator worstcasesCoroutine, goodJobCoroutine, badJobCoroutine;
 
@@ -84,6 +85,8 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
         audioSrc = gameObject.AddComponent<AudioSource>();
         audioSrc.playOnAwake = false;
         SetUiTooltip();
+
+        runtimeDataChapters.SetAndStartMusic(audioSrcMusic, sfx.instaMenuMusicLoop);
         
     }
 

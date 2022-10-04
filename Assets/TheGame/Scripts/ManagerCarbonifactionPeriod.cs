@@ -5,6 +5,8 @@ public class ManagerCarbonifactionPeriod : MonoBehaviour
 {
     private SoChapOneRuntimeData runtimeData;
     private SoChaptersRuntimeData runtimeDataChapters;
+    private SoSfx sfx;
+    public AudioSource atmoSfx;
 
     public Button externalLink;
 
@@ -14,9 +16,12 @@ public class ManagerCarbonifactionPeriod : MonoBehaviour
         externalLink.colors = GameColors.GetInteractionColorBlock();
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
+        sfx = runtimeDataChapters.LoadSfx();
     }
     private void Start()
     {
+        runtimeDataChapters.SetAndStartMusic(atmoSfx, sfx.instaMenuMusicLoop);
+        
     }
     
     //Called from Btn in Scene/Inspector

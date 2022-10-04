@@ -27,6 +27,8 @@ public class ManagerMuseum : MonoBehaviour
    
     public MuseumOverlay overlay;
 
+    private SoSfx sfx;
+
     private void Awake()
     {
         
@@ -35,6 +37,7 @@ public class ManagerMuseum : MonoBehaviour
         runtimeDataCh1 = runtimeDataChapters.LoadChap1RuntimeData();
         audioSrcBGMusic = gameObject.GetComponent<AudioSource>();
         btnExitImage = btnExitMuseum.GetComponent<Image>();
+        sfx = runtimeDataChapters.LoadSfx();
     }
 
     // Start is called before the first frame update
@@ -46,7 +49,8 @@ public class ManagerMuseum : MonoBehaviour
 
 
         btnObjProceed.SetActive(runtimeDataCh1.revisitMuseum);
-  
+
+        runtimeDataChapters.SetAndStartMusic(audioSrcBGMusic, sfx.instaMenuMusicLoop);
 
         if (runtimeDataCh1.currentMuseumWaypoint != MuseumWaypoints.WP0)
         {

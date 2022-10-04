@@ -17,6 +17,7 @@ public class ManagerReinigungAktiv : MonoBehaviour
 {
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoChapTwoRuntimeData runtimeDatatCh2;
+    private SoSfx sfx;
 
     public Button btnToNeutralisation, btnToAbsetzbecken, btnToBlackbox, btnToVorfluter;
     public Button btnRToBeluft, btnRToNeutral, btnRAbsetz, btnRBlackbox;
@@ -33,6 +34,7 @@ public class ManagerReinigungAktiv : MonoBehaviour
     private float offsetGroupCam;
     private Vector3 tmpVec3;
     private SwitchSceneManager switchSceneManager;
+    [SerializeField] private AudioSource audioSrcTreppeWasser, audioSrcVorfluter, audioSrcPumpe, audioSrcAtmo;
 
     private void Awake()
     {
@@ -41,6 +43,8 @@ public class ManagerReinigungAktiv : MonoBehaviour
 
         runtimeDatatCh2 = runtimeDataChapters.LoadChap2RuntimeData();
         switchSceneManager = GetComponent<SwitchSceneManager>();
+
+        sfx = runtimeDataChapters.LoadSfx();
     }
 
     void Start()
@@ -51,6 +55,25 @@ public class ManagerReinigungAktiv : MonoBehaviour
         btnToBlackbox.interactable = false;
         btnToAbsetzbecken.interactable = false;
         btnToPassiv.interactable = false;
+
+        audioSrcPumpe.clip = sfx.pumpen;
+        audioSrcPumpe.loop = true;
+        audioSrcPumpe.Play();
+
+        audioSrcAtmo.clip = sfx.atmoNiceWeather;
+        audioSrcAtmo.loop = true;
+        audioSrcAtmo.Play();
+
+        audioSrcVorfluter.clip = sfx.atmoWasserRinnt;
+        audioSrcVorfluter.loop = true;
+        audioSrcVorfluter.Play();
+
+        audioSrcTreppeWasser.clip = sfx.caolmineSplashingWater;
+        audioSrcTreppeWasser.loop = true;
+        audioSrcTreppeWasser.Play();
+
+
+        //audioSrcVorfluter.clip = sfx.
     }
 
     public void MoveReverseToReinigungStation(int id)
