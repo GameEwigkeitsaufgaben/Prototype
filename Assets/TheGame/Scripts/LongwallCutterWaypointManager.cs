@@ -35,7 +35,6 @@ public class LongwallCutterWaypointManager : MonoBehaviour
 
         if (StandingOnBahnsteig())
         {
-            Debug.Log("----------------------------me on bahnsteig");
             btnKohlehobel.gameObject.SetActive(true);
             RotateCharacters(-114.0f, -53.0f, -80.0f);
         }
@@ -46,8 +45,6 @@ public class LongwallCutterWaypointManager : MonoBehaviour
 
             runtimeData.isLongwallCutterDone = true;
         }
-
-        Debug.Log("Handle Current wp: " + GetCurrentLongWallCutterWP());
     }
 
     public bool StandingOnBahnsteig()

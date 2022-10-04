@@ -108,7 +108,6 @@ public class SpeechManagerMuseumChapOne : MonoBehaviour
 
     public bool IsTalkingListFinished(string talkingListName)
     {
-        Debug.Log("..................................." + mySpeechDict[talkingListName].listName);
         return mySpeechDict[talkingListName].finishedToogle;
     }
 

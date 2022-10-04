@@ -93,7 +93,6 @@ public class MouseChange : MonoBehaviour
         if (audioSrcBtn.isActiveAndEnabled)
         {
             audioSrcBtn.Play();
-            Debug.Log("Play CLICK");
         }
     }
 

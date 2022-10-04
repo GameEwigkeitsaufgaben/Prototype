@@ -50,7 +50,6 @@ public class WebGlVideoPlayer : MonoBehaviour
        
         if (videoPlayer.isPlaying)
         {
-            Debug.Log("vp is playing will be Paused ");
             videoPlayer.Pause();
             return;
         }
@@ -62,18 +61,15 @@ public class WebGlVideoPlayer : MonoBehaviour
         }
 
         videoPlayer.Play();
-        Debug.Log("Video should be played");
         videoPlayer.loopPointReached += SetTVStationDone;
     }
 
     public void StartTheVideo(string videoPostName, string videoName, RawImage imgRaw)
     {
-        Debug.Log("in Start the video in wegl");
         if (!videoSetUpDone)
         {
             SetVideo(videoName, imgRaw);
             videoSetUpDone = true;
-            Debug.Log("Setup Videooutput" + videoPostName);
         }
 
         this.videoPostName = videoPostName;
@@ -108,7 +104,6 @@ public class WebGlVideoPlayer : MonoBehaviour
         {
             if (videoPlayer.isPlaying)
             {
-                //Debug.Log("will stop the video: " + videoPlayer.)
                 videoPlayer.Stop();
             }
 
@@ -130,7 +125,6 @@ public class WebGlVideoPlayer : MonoBehaviour
 
     public void SetVideo(string videoName, RawImage imgRaw)
     {
-        Debug.Log("SetVideoData in Player");
         rawImage = imgRaw.gameObject;
         rawImage.GetComponent<RawImage>().texture = videoPlayer.targetTexture;
         
@@ -161,14 +155,11 @@ public class WebGlVideoPlayer : MonoBehaviour
         runtimeDataCh2.progressPost219VideoDone = true;
     }
   
-    //Method called (from local method StartTheVideo) if event player finished is fired
     public void SetVideopostToRead(VideoPlayer vp)
     {
         videoIsPlaying = false;
-        //runtimeData.videoPlaying = false;
         runtimeDataCh1.overlaySoundState = OverlaySoundState.SoudAjusted;
 
-        //GameData.introVideoPlayedOnce = true;
         runtimeDataCh1.video115Done = true;
     }
 

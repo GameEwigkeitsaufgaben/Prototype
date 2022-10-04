@@ -226,7 +226,5 @@ public class DragItemThoughts : MonoBehaviour, IEndDragHandler, IDragHandler
         if (Vector3.Distance(gameObject.transform.localPosition, origPos) < 0.1f) return;
         
         gameObject.transform.localPosition = origPos;
-        Debug.Log("SET BACK");
-       
     }
 }

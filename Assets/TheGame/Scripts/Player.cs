@@ -123,20 +123,7 @@ public class Player : MonoBehaviour
             GameData.playerPositonXatS3Bahnsteig, 
             GameData.playerPositonYatS3Bahnsteig, 
             GameData.playerPositonZatS3Bahnsteig);
-
-        Debug.Log("Read Player Pos from Gamedata and set transform.postion (Bahnsteig): " + transform.position);
     }
-
-    ////wird nicht mehr gebruacht Prüfen!!! Jetzt in Cave controller drinnen
-    //public void MovePlayerToTargetObj()
-    //{
-    //    transform.position = Vector3.MoveTowards(transform.position, targetObj.transform.position, speed * Time.deltaTime);
-    //    Debug.Log("new position player: " + transform.position);
-    //    if (Vector3.Distance(transform.position, targetObj.transform.position) < 0.01)
-    //    {
-    //        targetObj = null;
-    //    }
-    //}
 
     private void Update()
     {

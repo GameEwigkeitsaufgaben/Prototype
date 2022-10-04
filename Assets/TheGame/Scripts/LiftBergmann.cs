@@ -24,7 +24,6 @@ public class LiftBergmann : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("collision name " + collision.name);
         Invoke("SetSprechblaseActive",0.3f);
         move = false;
     }

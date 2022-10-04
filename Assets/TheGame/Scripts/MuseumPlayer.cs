@@ -35,19 +35,29 @@ public class MuseumPlayer : MonoBehaviour
     public Button btnWPInfo, btnWPInkohlung, btnWPBergmann, btnWPSchwein, btnWPWelt;
     public MuseumOverlay overlay;
     private SoChapOneRuntimeData runtimeData;
+    private SoChaptersRuntimeData runtimeDataChapters;
     private SoMuseumConfig configMuseum;
     public SwitchSceneManager switchScene;
 
     private GameObject characterDad, characterGuide, waitingGuide;
-    //public bool switchToGuide;
+    private SoSfx sfx;
+
+    private AudioSource audioSrcSalkingGroup;
 
     Vector3 posInfoVector3;
 
     private void Awake()
     {
-        runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
+        runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
+        runtimeData = runtimeDataChapters.LoadChap1RuntimeData();
         configMuseum = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
         posInfoVector3 = new Vector3(-16.856f, 2.4f, 12.94951f);
+        sfx = runtimeDataChapters.LoadSfx();
+
+        audioSrcSalkingGroup = gameObject.AddComponent<AudioSource>();
+        audioSrcSalkingGroup.clip = sfx.walkingGroupMuseum;
+        audioSrcSalkingGroup.playOnAwake = false;
+        audioSrcSalkingGroup.loop = false;
     }
 
     void Start()
@@ -55,7 +65,6 @@ public class MuseumPlayer : MonoBehaviour
         mySplineMove = gameObject.GetComponent<splineMove>();
         mySplineMove.ChangeSpeed(50.0f);
 
-        Debug.Log("In MuSEUM Waypoints");
 
         if (runtimeData.currentMuseumWaypoint == MuseumWaypoints.WP0)
         {
@@ -66,7 +75,6 @@ public class MuseumPlayer : MonoBehaviour
         {
             gameObject.transform.localPosition = runtimeData.currentGroupPos;
             currentWP = targetWP = runtimeData.currentMuseumWaypoint;
-            Debug.Log("IN != WP0" + currentWP); 
             ShowOtherStations(currentWP);
         }
     }
@@ -80,10 +88,8 @@ public class MuseumPlayer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("GO "+ gameObject.name + mySplineMove.IsMoving());
         //if (mySplineMove.IsMoving()) return;
 
-        Debug.Log("collider trigger " +other.name);
         if (other.name.Contains("WP1"))
         {
             currentWP = MuseumWaypoints.WPInfo;
@@ -172,11 +178,8 @@ public class MuseumPlayer : MonoBehaviour
         characterGuide.GetComponent<Image>().sprite = configMuseum.guideStanding;
         characterGuide.transform.rotation = Quaternion.Euler(Vector3.zero);
 
-        Debug.Log("wp reached -------------------  " + currentWP);
-
         if (currentWP == MuseumWaypoints.WPInfo)
         {
-            Debug.Log("wp reached ------------------- INFOOOOOOOOOOOOOOOO: ......... " + gameObject.transform.localPosition);
             btnWPInfo.gameObject.SetActive(false);
             overlay.ActivateOverlay(MuseumWaypoints.WPInfo);
             
@@ -213,24 +216,18 @@ public class MuseumPlayer : MonoBehaviour
         runtimeData.currentGroupPos = gameObject.transform.localPosition;
         runtimeData.currentMuseumWaypoint = currentWP;
         
-        Debug.Log("current WP " + currentWP);
-        
         if (currentWP == MuseumWaypoints.None) return;
         if (currentWP == MuseumWaypoints.WPExitMuseum0) return;
         if (currentWP == MuseumWaypoints.WPExitMuseum1) return;
 
         ShowOtherStations(currentWP);
-        
     }
 
     public void MoveToWaypoint (int id)
     {
-        Debug.Log("-----------Move to waypoint: " +id);
         if (mySplineMove.IsMoving()) return;
 
         targetWP = (MuseumWaypoints)id;
-        Debug.Log("SET target Waypoint to :  " + targetWP + "id is: " + id);
-        
 
         if (currentWP == 0)
         {
@@ -239,6 +236,7 @@ public class MuseumPlayer : MonoBehaviour
         
         mySplineMove.pathContainer = GetPath(currentWP, targetWP);
         mySplineMove.StartMove();
+        audioSrcSalkingGroup.Play();
         characterGuide.GetComponent<Image>().sprite = configMuseum.guideWalking;
         characterGuide.transform.rotation = Quaternion.Euler(0f,-180f,0f);
     }

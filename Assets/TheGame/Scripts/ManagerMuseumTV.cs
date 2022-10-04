@@ -45,8 +45,6 @@ public class ManagerMuseumTV : MonoBehaviour
 
     public void StartTheVideo()
     {
-        Debug.Log("Start THE VIDEO----------------------------");
-        Debug.Log("before" + tvState);
         audioSrcAtmo.Pause();
 
         switch (tvState)
@@ -61,8 +59,6 @@ public class ManagerMuseumTV : MonoBehaviour
                 tvState = TVState.VideoPlays;
                 break;
         }
-
-        Debug.Log("after" + tvState);
 
         switch (tvState)
         {

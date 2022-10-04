@@ -122,7 +122,6 @@ public class Entry : MonoBehaviour
                 break;
             case chapter.ch2:
                 //212, 215, 218, 2110 is interaction, 219 video, 2111 quiz
-                Debug.Log("In Open Overlay ------------------------------");
 
                 if (overlay.name == GameData.NameOverlay211)
                 {
@@ -195,7 +194,6 @@ public class Entry : MonoBehaviour
         if (runtimeDataCh1.musicOn)
         {
             runtimeDataCh1.overlaySoundState = OverlaySoundState.Opened;
-            //sfx.ReduceVolume(sfx.instaMenuBGmusicLoop, changeVolumeAmount);
         }
     }
 
@@ -203,22 +201,11 @@ public class Entry : MonoBehaviour
     {
         yield return new WaitForSeconds(.1f);
         overlayComp.CloseOverlay();
-        //if(runtimeDataChapters.musicVolume != 0.0f) 
     }
 
     public void CloseOverlay()
     {
-
         StartCoroutine(DelayCloseOverlay());
-        //overlayComp.CloseOverlay();
-        //if (runtimeDataCh1.musicOn)
-        //{
-        //    //sfx.IncreaseVolume(sfx.instaMenuBGmusicLoop, changeVolumeAmount);
-        //    //if (!sfx.IsInstaBGMusicPlaying())
-        //    //{
-        //    //    sfx.PlayClip(sfx.instaMenuBGmusicLoop);
-        //    //}
-        //}
     }
 
     private void SetColorDoneFeedbackImage(chapter currentCh)
@@ -276,7 +263,6 @@ public class Entry : MonoBehaviour
                 else if (gameObject.name == GameData.NameEntry317 && runtimeDataCh3.IsPostDone(ProgressChap3enum.Post317)) setColorDone = true;
                 break;
         }
-        
 
         if (!setColorDone) return;
         if (fbDone != null) fbDone.color = fbDoneColor;
@@ -288,6 +274,14 @@ public class Entry : MonoBehaviour
         {
             case chapter.ch1:
                 SetColorDoneFeedbackImage(chapter.ch1);
+
+                if (gameObject.name == GameData.NameEntry1110 && runtimeDataCh1.quiz119Done)
+                {
+                    if (runtimeDataCh1.updatePoints)
+                    {
+                        overlayComp.UpdateOverlayText(chapter.ch1);
+                    }
+                }
 
                 if (postComp.isPostLocked())
                 {
@@ -427,7 +421,6 @@ public class Entry : MonoBehaviour
 
                 else if (gameObject.name == GameData.NameEntry316)
                 {
-                    Debug.Log("in entry: " + GameData.NamePost316 + " " + gameObject.name + " " + ProgressChap3enum.Post315.ToString());
                     if (runtimeDataCh3.IsPostDone(ProgressChap3enum.Post315))
                     {
                         postComp.UnlockPost();
@@ -438,11 +431,9 @@ public class Entry : MonoBehaviour
                 {
                     if (runtimeDataCh3.IsPostDone(ProgressChap3enum.Post316))
                     {
-                        Debug.Log("Quiz solved: ");
                         postComp.UnlockPost();
                         overlayComp.UpdateOverlayText(chapter.ch3);
                         GameData.chapterThreeUnlocked = 1;
-
                     }
                 }
                 break;

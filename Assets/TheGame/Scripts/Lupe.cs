@@ -178,7 +178,6 @@ public class Lupe : MonoBehaviour, IDragHandler
     {
         if (Input.GetMouseButtonUp(0))
         {
-            Debug.Log("btn up");
             gameObject.transform.localPosition = pausePosLupe;
             manager.SetAudio(4);
             manager.ResetIonHeading();

@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(RectTransform))]
 public class Drag : MonoBehaviour, IDragHandler

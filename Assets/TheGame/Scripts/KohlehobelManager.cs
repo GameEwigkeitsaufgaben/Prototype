@@ -55,8 +55,6 @@ public class KohlehobelManager : MonoBehaviour
             btnLwcViewpoint.interactable = true;
             btnLwcExit.interactable = true;
         }
-        //runtimeDataChapters.sceneCursor = runtimeData01.cursorTexture3DCave;
-        //Cursor.SetCursor(runtimeDataChapters.sceneCursor, Vector2.zero, CursorMode.Auto);
     }
 
 
@@ -70,7 +68,6 @@ public class KohlehobelManager : MonoBehaviour
         {
             speechManager.playLongwallCutterLongwallCutter = true;
         }
-       // if(runtimeDataCh1.currentMuseumWaypoint == Mu)
     }
 
     public void StartAnimKohlenhobel()
@@ -84,17 +81,9 @@ public class KohlehobelManager : MonoBehaviour
         audioSrcLwc.Play();
     }
 
-    //Positionieren und Ausrichten in LongwallCutterWaypointManager
-
-    //Audios auf Buttons abspielen (3sohle)
-    //SFX 
 
     public void StartTalking()
     {
-        Debug.Log("in start Talking");
-
-        Debug.Log(lwcManager.StandingOnBahnsteig());
-
         if (lwcManager.StandingOnBahnsteig()) return;
 
         speechManager.playLongwallCutterLongwallCutter = true;

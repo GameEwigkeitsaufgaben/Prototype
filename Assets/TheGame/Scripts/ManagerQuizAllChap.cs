@@ -274,6 +274,7 @@ public class ManagerQuizAllChap : MonoBehaviour
                     case 1:
                         runtimeDataCh1.quiz119Done = true;
                         switchScene.SwitchToChapter1withOverlay(runtimeDataCh1.generalKeyOverlay);
+                        runtimeDataCh1.updatePoints = true;
                         break;
                     case 2:
                         switchScene.SwitchToChapter2withOverlay(runtimeDataCh2.generalKeyOverlay);
@@ -301,16 +302,12 @@ public class ManagerQuizAllChap : MonoBehaviour
         //currentQuestionIndex++;
         UpdateProgressUI();
 
-        Debug.Log("quest indesx  " + currentQuestionIndex + " " + questions.Count);
         if (currentQuestionIndex == questions.Count)
         {
-            Debug.Log("Zeit auzusteigen " + activeScene);
             switch (activeScene)
             {
                 case 1:
                     runtimeDataCh1.quiz119Done = true;
-                    Debug.Log("JETZT RAUS");
-                    //switchScene.SwitchToChapter1withOverlay(runtimeDataCh1.generalKeyOverlay);
                     btnProcessAnswer.gameObject.SetActive(false);
                     btnNext.gameObject.SetActive(true);
                     return;

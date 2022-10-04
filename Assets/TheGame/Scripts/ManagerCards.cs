@@ -75,7 +75,6 @@ public class ManagerCards : MonoBehaviour
             cards[i].GetComponent<MuseumCard>().myResource = soResourcesCards[i];
             cards[i].name = "Card" + i;
             cards[i].AddComponent<MouseChange>();
-            Debug.Log("create  " + cards[i].name);
         }
 
         foreach (var i in cards)

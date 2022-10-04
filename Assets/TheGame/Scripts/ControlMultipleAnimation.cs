@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 public class ControlMultipleAnimation : MonoBehaviour
@@ -9,8 +8,6 @@ public class ControlMultipleAnimation : MonoBehaviour
     private Animator anim;
     [SerializeField]
     public Slider slider;   //Assign the UI slider of your scene in this slot 
-    //[SerializeField]
-    //public string[] stateNames;
 
     [SerializeField]
     public List<Clips> states;

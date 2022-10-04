@@ -85,6 +85,5 @@ public class LookaroundWithMouse : MonoBehaviour
         transform.localEulerAngles = new Vector3(0.0f, yaw, 0.0f);
 
         this.yaw = yaw;
-        Debug.Log("set player body rotation local euler angles");
     }
 }

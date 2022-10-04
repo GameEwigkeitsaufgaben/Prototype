@@ -95,35 +95,20 @@ public class CoalmineWaypointManager : MonoBehaviour
 
     public bool IsBahnsteigCurrentWP()
     {
-        //Debug.Log("for train: is bahnsteig current wP: " + (currentWP == MineWayPoints.viewpointBahnsteig || currentWP == MineWayPoints.reloadBahnsteig));
-        //Debug.Log("for train: " + currentWP);
         return (currentWP == MineWayPoints.viewpointBahnsteig || currentWP == MineWayPoints.reloadBahnsteig);
     }
 
     //von splinemove im inspector aufgerufen
     public void DeactivateButton()
     {
-        //if (playerSplineMove.currentPoint == (int)MineWayPoints.viewpoint)
-        //{
-        //    runtimeViewpointBtn.gameObject.SetActive(false);
-        //    caveBtn.gameObject.SetActive(true);
-        //}
-        //else if(playerSplineMove.currentPoint == (int)MineWayPoints.insideCave)
-        //{
-        //    runtimeViewpointBtn.gameObject.SetActive(true);
-        //    //caveBtn.gameObject.SetActive(false);
-        //    GameData.liftBtnsEnabled = true;
-        //}
     }
 
     public MineWayPoints GetCurrentWP()
     {
         if (currentWP == MineWayPoints.reloadBahnsteig) return MineWayPoints.viewpointBahnsteig;
-        Debug.Log("player current point start (0): " + playerSplineMove.currentPoint);
 
         if(playerSplineMove.currentPoint == (int)PathWaypoints.startPath)
         {
-            Debug.Log("player current point start (0) name : " + playerSplineMove.pathContainer.name);
             if (playerSplineMove.pathContainer.name == pathS3CaveToViewpoint.name) return MineWayPoints.insideCave;
             else if (playerSplineMove.pathContainer.name == pathS2CaveToViewpoint.name) return MineWayPoints.insideCave;
             else if (playerSplineMove.pathContainer.name == pathS1CaveToViewpoint.name) return MineWayPoints.insideCave;
@@ -135,7 +120,6 @@ public class CoalmineWaypointManager : MonoBehaviour
             else if (playerSplineMove.pathContainer.name == pathS3BahnsteigToOVMine.name) return MineWayPoints.viewpointBahnsteig;
         }
 
-        Debug.Log("player current point end (1) name : " + playerSplineMove.pathContainer.name);
         if (playerSplineMove.pathContainer.name == pathS3CaveToViewpoint.name) return MineWayPoints.viewpoint;
         else if (playerSplineMove.pathContainer.name == pathS2CaveToViewpoint.name) return MineWayPoints.viewpoint;
         else if (playerSplineMove.pathContainer.name == pathS1CaveToViewpoint.name) return MineWayPoints.viewpoint;
@@ -163,7 +147,6 @@ public class CoalmineWaypointManager : MonoBehaviour
 
         if(currentWP == MineWayPoints.error)
         {
-            Debug.Log("++++++++++++++++++++Etwas schiefgelaufen!! " + GetCurrentWP());
             return;
         }
 
@@ -285,7 +268,6 @@ public class CoalmineWaypointManager : MonoBehaviour
 
     public void SetWaypointMarkers()
     {
-        Debug.Log("MineWaypoint is :"  + currentWP);
 
         if (currentWP == MineWayPoints.insideCave)
         {
@@ -344,9 +326,6 @@ public class CoalmineWaypointManager : MonoBehaviour
             wps3ViewpointBtn.gameObject.SetActive(true);
 
             ChangeS3WPRotations(102.0f, 0.0f, 0.0f, 0.0f);
-            //myPlayer.SetPlayerToAnkerPosition();
-            //myPlayer.ReloadPlayerAtS3Cave();
-            //Debug.Log("------------------SetInsideCave");
         }
     }
 
@@ -373,8 +352,6 @@ public class CoalmineWaypointManager : MonoBehaviour
         ovmineBtn.gameObject.SetActive(active);
         bahnsteigBtn.gameObject.SetActive(active);
         bewetterungBtn.gameObject.SetActive(active);
-
-        Debug.Log("setAllbtn to "+ active + " ---------------------------------");
     }
 
     //Methods Called from Inspector

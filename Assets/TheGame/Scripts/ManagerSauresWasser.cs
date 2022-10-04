@@ -70,7 +70,6 @@ public class ManagerSauresWasser : MonoBehaviour
         }
         else
         {
-            Debug.Log("starte talking");
             speechManager.playZechePyrit = true;
             mirror.SetActive(true);
             Lupe.SetActive(false);
@@ -185,9 +184,6 @@ public class ManagerSauresWasser : MonoBehaviour
             btnProceed.interactable = true;
             return;
         }
-
-        Debug.Log("missing ion");
-        
     }
 
     public void SwitchScene()

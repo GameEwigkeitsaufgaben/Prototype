@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LiftSohleTwo : MonoBehaviour
@@ -12,7 +10,6 @@ public class LiftSohleTwo : MonoBehaviour
     {
         if (dad1 == null || youngster2 == null || dad3 == null)
         {
-            Debug.Log("Audiosource is null: add all audiosources!!");
             enabled = false;
             return;
         }

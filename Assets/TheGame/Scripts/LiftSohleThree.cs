@@ -39,7 +39,6 @@ public class LiftSohleThree : MonoBehaviour
 
     private void SetTrainMove()
     {
-        Debug.Log("sollte funken train start!!");
         train.StartTrainMoving();
     }
 

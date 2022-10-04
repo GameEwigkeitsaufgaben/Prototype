@@ -300,7 +300,6 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
             audioSrc.Stop();
             anim.Play("NoHelmet");
             float length = noHelmAnim.length;
-            Debug.Log("No Helm + length: " + length );
             audioSrc.clip = sfx.autschSfx;
             audioSrc.Play();
             yield return new WaitForSeconds(length);
@@ -314,7 +313,6 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
             audioSrc.Stop();
             anim.Play("NoMask");
             float length = noMaskAnim.length;
-            Debug.Log("No Atemmaske + length: " + length );
             audioSrc.clip = sfx.mineHusten;
             audioSrc.Play();
             yield return new WaitForSeconds(length);
@@ -333,7 +331,6 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
             yield return new WaitForSeconds(2f);
             audioSrc.clip = sfx.autschSfx;
             audioSrc.Play();
-            Debug.Log("No lampe + length:" + length);
 
             yield return new WaitForSeconds(3.5f);
         }

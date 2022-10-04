@@ -58,7 +58,6 @@ public class Cave : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("CAVE AWAKE");
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
         leftDoor = doorLeft.GetComponent<CaveDoor>();
@@ -82,13 +81,6 @@ public class Cave : MonoBehaviour
             runtimeData.currentCoalmineStop = CoalmineStop.EntryArea;
             currentStop = targetStop = runtimeData.currentCoalmineStop;
             liftBtns[0].GetComponent<CaveButton>().isSelected = true;
-
-            //move to manager?!
-            //sfx.PlayClip(wind, sfx.coalmineWindInTunnel);
-            //sfx.ReduceVolume(sfx.coalmineWindInTunnel, 0.7f);
-
-            //sfx.PlayClip(cbelt, sfx.coalmineConveyorBelt);
-            //Ssfx.ReduceVolume(sfx.coalmineConveyorBelt, 0.8f);
 
             liftMovingSrc.clip = sfx.coalmineMoveCave;
         }
@@ -204,18 +196,6 @@ public class Cave : MonoBehaviour
         liftMovingSrc.Stop();
     }
 
-    //public void ReloadCaveAtSohle3()
-    //{
-    //    currentStop = targetStop = CoalmineStop.Sole3;
-    //    var tempPosCavePos = new Vector3(GameData.cavePosX, GameData.cavePosY, GameData.cavePosZ);
-
-    //    gameObject.transform.position = tempPosCavePos;
-    //    StopCave();
-    //    if (caveDoorsClosed)
-    //    {
-    //        OpenDoors();
-    //    }
-    //}
 
     private void FixedUpdate()
     {
@@ -235,17 +215,6 @@ public class Cave : MonoBehaviour
     {
         runtimeData.CheckInteraction116Done();
 
-        //if (GameData.moveCave)
-        //{
-        //    GameData.moveDirection = (int)moveDirection;
-        //    // No shake! transform.position += new Vector3(0, (int)moveDirection * caveSpeed*0.01f, 0);
-        //    float tmpY = (int)moveDirection * caveSpeed * Mathf.Clamp(Time.deltaTime, -0.006f, 0.006f);
-        //    tmpVector3.Set(0f, tmpY, 0f);
-        //    transform.position += tmpVector3;
-        //    //transform.position += new Vector3(0, (int)moveDirection * caveSpeed * Mathf.Clamp(Time.deltaTime, -0.006f, 0.006f), 0);
-        //    return;
-        //}
-
         if (!runtimeData.replayEntryArea) return;
 
         if (!runtimeData.playerInsideCave)
@@ -254,7 +223,6 @@ public class Cave : MonoBehaviour
         }
         else
         {
-            
             SetAllButtonsInteractable(true);
         }
     }

@@ -97,8 +97,6 @@ public class Guckloch : MonoBehaviour
 
     public void SetWebCam(int index)
     {
-        print("SetWEbCam" + index);
-
         tex = new WebCamTexture(devices[index].name);
         webcamDisplay.texture = tex;
         tex.Play();

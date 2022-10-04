@@ -27,9 +27,11 @@ public class SoChaptersRuntimeData : ScriptableObject
     public void SetAndStartMusic(AudioSource src, AudioClip clip)
     {
         src.clip = clip;
+        src.playOnAwake = true;
         src.volume = musicVolume;
         src.loop = true;
-        src.Play();
+        if(!src.isPlaying) src.Play();
+        src.mute = !musicOn;
     }
     private void OnEnable()
     {

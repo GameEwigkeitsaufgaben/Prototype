@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using SWS;
@@ -34,7 +32,7 @@ public class ManagerReinigungAktiv : MonoBehaviour
     private float offsetGroupCam;
     private Vector3 tmpVec3;
     private SwitchSceneManager switchSceneManager;
-    [SerializeField] private AudioSource audioSrcTreppeWasser, audioSrcVorfluter, audioSrcPumpe, audioSrcAtmo;
+    [SerializeField] private AudioSource audioSrcTreppeWasser, audioSrcVorfluter, audioSrcPumpe, audioSrcAtmo, audioSrcFluss;
 
     private void Awake()
     {
@@ -49,7 +47,6 @@ public class ManagerReinigungAktiv : MonoBehaviour
 
     void Start()
     {
-        //offsetGroupCam = cam.transform.position.x - group.transform.position.x;
         offsetGroupCam = 0f;
         btnToNeutralisation.interactable = true;
         btnToBlackbox.interactable = false;
@@ -72,8 +69,9 @@ public class ManagerReinigungAktiv : MonoBehaviour
         audioSrcTreppeWasser.loop = true;
         audioSrcTreppeWasser.Play();
 
-
-        //audioSrcVorfluter.clip = sfx.
+        audioSrcFluss.clip = sfx.gwaktivFluss;
+        audioSrcFluss.loop = true;
+        audioSrcFluss.Play();
     }
 
     public void MoveReverseToReinigungStation(int id)
@@ -117,7 +115,6 @@ public class ManagerReinigungAktiv : MonoBehaviour
 
         mySplineMove.reverse = true;
         mySplineMove.StartMove();
-        //characterGuide.transform.rotation = Quaternion.Euler(0f, -180f, 0f);
     }
 
     public void MoveToReinigungStation(int id)
@@ -159,7 +156,6 @@ public class ManagerReinigungAktiv : MonoBehaviour
 
         mySplineMove.reverse = false;
         mySplineMove.StartMove();
-        //characterGuide.transform.rotation = Quaternion.Euler(0f, -180f, 0f);
     }
 
     public void ReachedWP()//Called from UnityEvent Gruppe in Inspector
@@ -191,8 +187,6 @@ public class ManagerReinigungAktiv : MonoBehaviour
                 btnToPassiv.interactable = true;
                 break;
         }
-
-        //characterGuide.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
     }
 
     public void SwitchToPassiv()
@@ -201,7 +195,6 @@ public class ManagerReinigungAktiv : MonoBehaviour
 
         if(runtimeDatatCh2.reinAktivDone && runtimeDatatCh2.reinPassivDone)
         {
-            //GetComponent<SwitchSceneManager>().SwitchToChapter2withOverlay(GameData.NameOverlay2110);
             runtimeDatatCh2.progressPost2110GWReinigungDone = true;
         }
         

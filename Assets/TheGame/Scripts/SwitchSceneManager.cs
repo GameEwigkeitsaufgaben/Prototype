@@ -21,7 +21,6 @@ public class SwitchSceneManager : MonoBehaviour
     public void LoadMine()
     {
         SceneManager.LoadScene(GameScenes.ch01Mine, LoadSceneMode.Single);
-        Debug.Log("LoadScene Mine");
     }
 
     public void LoadFotoplatz()
@@ -110,30 +109,25 @@ public class SwitchSceneManager : MonoBehaviour
 
     public void GoToMuseum()
     {
-        Debug.Log("Scene schould be loaded");
         SceneManager.LoadScene(GameScenes.ch01Museum, LoadSceneMode.Single);
     }
     public void GoToMinerEquipment()
     {
-        Debug.Log("Scene schould be loaded");
         SceneManager.LoadScene(GameScenes.ch01MuseumMinerEquipment, LoadSceneMode.Single);
     }
 
     public void GoToWorld()
     {
-        Debug.Log("Scene schould be loaded");
         SceneManager.LoadScene(GameScenes.ch01MuseumCarbonPeriod, LoadSceneMode.Single);
     }
 
     public void GoToCoalification()
     {
-        Debug.Log("Scene schould be loaded --------------------------------------------------------------------");
         SceneManager.LoadScene(GameScenes.ch01MuseumCoalification, LoadSceneMode.Single);
     }
 
     public void GoToMythos()
     {
-        Debug.Log("Scene schould be loaded");
         SceneManager.LoadScene(GameScenes.ch01MuseumHistoryMining, LoadSceneMode.Single);
     }
 

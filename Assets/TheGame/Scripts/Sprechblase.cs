@@ -41,7 +41,6 @@ public class Sprechblase : MonoBehaviour
 
     void ChangeButtonEventMethod()
     {
-        Debug.Log("Test button");
         if (audioSrc.isPlaying) return;
 
         //audioSrc.SetAudioClip(introDad);
@@ -67,15 +66,8 @@ public class Sprechblase : MonoBehaviour
 
     private void Update()
     {
-       // Debug.Log(audioSrc.isPlaying + " started " + audioStarted);
         if(audioSrc != null) 
         {
-            if(audioSrc.clip != null)
-            {
-                Debug.Log(audioSrc.clip.name);
-            }
-            
-            Debug.Log(audioSrc.isPlaying + " started " + audioStarted);
 
             if (!audioSrc.isPlaying && audioStarted)
             {

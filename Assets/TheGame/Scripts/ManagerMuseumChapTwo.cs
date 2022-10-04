@@ -84,7 +84,6 @@ public class ManagerMuseumChapTwo : MonoBehaviour
                 
                 break;
             case MuseumWaypoints.WPTV:
-                Debug.Log("Entry at TV");
                 group.transform.position = runtimeDataCh02.groupPosition;
 
                 currentMuseumStation = runtimeDataCh02.lastWP;
@@ -138,7 +137,6 @@ public class ManagerMuseumChapTwo : MonoBehaviour
 
                 break;
             case MuseumWaypoints.WPFliesspfad:
-                Debug.Log("Entry at FF");
                 currentMuseumStation = MuseumWaypoints.WPFliesspfad;
                 group.transform.position = runtimeDataCh02.groupPosition;
 
@@ -371,11 +369,7 @@ public class ManagerMuseumChapTwo : MonoBehaviour
             runtimeDataCh02.progress212MuseumDone = true;
             switchSceneManager.SwitchToChapter2withOverlay(GameData.NameOverlay212);
         }
-        //else if (speechManager.IsTalkingListFinished(GameData.NameTLMuseumIntroTV))
-        //{
-        //    Debug.Log("Finished TV audio intro");
-        //    gameObject.GetComponent<SwitchSceneManager>().SwitchScene(GameScenes.ch02MuseumTV);
-        //}
+
     }
 
 }

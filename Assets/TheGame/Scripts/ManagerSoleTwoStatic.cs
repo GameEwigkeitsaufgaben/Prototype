@@ -11,10 +11,4 @@ public class ManagerSoleTwoStatic : MonoBehaviour
     {
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);    
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //if(runtimeData.)
-    }
 }

@@ -122,9 +122,6 @@ public class QuizAnswerItem
         }
         else if (SceneManager.GetActiveScene().name == GameScenes.ch02Quiz)
         {
-            Debug.Log("event system name obj " + EventSystem.current.GetComponent<EventSystem>().currentSelectedGameObject.name);
-            Debug.Log("btn name obj " + runtimeDataChap02.singleSelectAwObjName);
-
             if(EventSystem.current.GetComponent<EventSystem>().currentSelectedGameObject == null)
             {
                 btn.GetComponent<QuizAnswerUiBehaviour>().isSelected = true;
@@ -138,9 +135,6 @@ public class QuizAnswerItem
         }
         else if (SceneManager.GetActiveScene().name == GameScenes.ch03Quiz)
         {
-            Debug.Log("event system name obj " + EventSystem.current.GetComponent<EventSystem>().currentSelectedGameObject.name);
-            Debug.Log("btn name obj " + runtimeDataChap02.singleSelectAwObjName);
-
             if (EventSystem.current.GetComponent<EventSystem>().currentSelectedGameObject == null)
             {
                 btn.GetComponent<QuizAnswerUiBehaviour>().isSelected = true;

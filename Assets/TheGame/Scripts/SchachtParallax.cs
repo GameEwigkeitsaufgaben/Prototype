@@ -32,10 +32,8 @@ public class SchachtParallax : MonoBehaviour
     {
         if(other.name == "TriggerSpawnSchacht" && GameData.nbrSchacht < 2)
         {
-            Debug.Log("TriggerSpawnSchacht");
             CreateSchacht();
             GameData.nbrSchacht++;
-            Debug.Log(GameData.nbrSchacht);
         }
         if(other.name == "TriggerSelfDestroy")
         {

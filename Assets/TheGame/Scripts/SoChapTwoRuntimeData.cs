@@ -68,6 +68,7 @@ public class SoChapTwoRuntimeData : Runtime
         replayTL2121intro = replayTL2121outro = replay2122TVoutro =  replayOverlay2122 = replayOverlay2123 = replayTL21101Reinigung = false;
         h2oFound = fes2Found = o2Found = so4Found = hFound = h2oFound = feFound = false;
         reinAktivDone = reinPassivDone = false;
+        quizPointsCh02 = "***";
 
         groupPosition = new Vector3(12.03f, 2.61f, -4.28f);
         lastWP = MuseumWaypoints.None;

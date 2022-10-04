@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class QuizQuestionManager : MonoBehaviour
 {
@@ -27,11 +23,6 @@ public class QuizQuestionManager : MonoBehaviour
     void Start()
     {
         questionText.text = quizData.question;
-        //answerA.text = quizData.answerA;
-        //answerB.text = quizData.answerB;
-        //answerC.text = quizData.answerC;
-        //answerD.text = quizData.answerD;
-        //rightAnswer = quizData.rightAnswer;
         elapsed = maxTimeInSec;
     }
 
@@ -52,14 +43,6 @@ public class QuizQuestionManager : MonoBehaviour
         cb.disabledColor = Color.red;
         btn.interactable = false;
         btn.colors = cb;
-
-        //Button btnOK = ReturnAnswerButton(quizData.rightAnswer);
-        //btnOK.gameObject.SetActive(true);
-        //btnOK.interactable = false;
-        //cb = btnOK.colors;
-        //cb.disabledColor = Color.green;
-        //btnOK.colors = cb;
-        //btnNext.gameObject.SetActive(true);
     }
 
     void SetUITimeOut()
@@ -68,8 +51,6 @@ public class QuizQuestionManager : MonoBehaviour
         answerB.transform.parent.gameObject.SetActive(false);
         answerC.transform.parent.gameObject.SetActive(false);
         answerD.transform.parent.gameObject.SetActive(false);
-        //SetUIChoiceOK(ReturnAnswerButton(quizData.rightAnswer));
-        //btnNext.gameObject.SetActive(true);
     }
        
 

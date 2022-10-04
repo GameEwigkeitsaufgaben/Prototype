@@ -57,7 +57,6 @@ public class SpeechList : MonoBehaviour
         playAll = false;
         currentIndex = 0;
         finishedToogle = false;
-        Debug.Log("Reset all flags in speechlist;");
     }
 
     void ResetSpeechBubbles()

@@ -19,13 +19,11 @@ public class LiftSohleOne : MonoBehaviour
 
     public void PlayEnvironmentalSound()
     {
-        Debug.Log("Play env soudn");
         srcEnvironment.Play();
     }
 
     public void PlayAudio()
     {
-        //srcEnvironment.Play();
         srcTalk.Play();
         Invoke("PlayClip2", 15f);
     }

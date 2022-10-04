@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Shapes;
 
@@ -13,7 +11,7 @@ public class PolylineAnimate : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("PolylineAnimatePoint ist auf : " + gameObject.name);
+       // Debug.Log("PolylineAnimatePoint ist auf : " + gameObject.name);
     }
 
     private void OnValidate()

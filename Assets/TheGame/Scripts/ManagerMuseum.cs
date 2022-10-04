@@ -23,7 +23,7 @@ public class ManagerMuseum : MonoBehaviour
     private bool museumDoneSet;
     public GameObject characterDad, characterGuide, waitingGuide;
 
-    private AudioSource audioSrcBGMusic;
+    [SerializeField] private AudioSource audioSrcBGMusic, audioSrcMuseumAtmo;
    
     public MuseumOverlay overlay;
 
@@ -31,7 +31,6 @@ public class ManagerMuseum : MonoBehaviour
 
     private void Awake()
     {
-        
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
         runtimeDataCh1 = runtimeDataChapters.LoadChap1RuntimeData();
@@ -47,10 +46,13 @@ public class ManagerMuseum : MonoBehaviour
         runtimeDataCh1.soundSettingMuseum = SoundMuseum.Showroom;
         btnExitImage.gameObject.GetComponent<Button>().interactable = false;
 
-
         btnObjProceed.SetActive(runtimeDataCh1.revisitMuseum);
 
         runtimeDataChapters.SetAndStartMusic(audioSrcBGMusic, sfx.instaMenuMusicLoop);
+
+        audioSrcMuseumAtmo.clip = sfx.atmoMuseum;
+        audioSrcMuseumAtmo.loop = true;
+        audioSrcMuseumAtmo.Play();
 
         if (runtimeDataCh1.currentMuseumWaypoint != MuseumWaypoints.WP0)
         {
@@ -137,10 +139,10 @@ public class ManagerMuseum : MonoBehaviour
         switch (runtimeDataCh1.soundSettingMuseum)
         {
             case SoundMuseum.Showroom:
-                PlayAdjustedBGMusic(0.5f);
+                //PlayAdjustedBGMusic(0.5f);
                 break;
             case SoundMuseum.Overlay:
-                PlayAdjustedBGMusic(0.2f);
+                //PlayAdjustedBGMusic(0.2f);
                 break;
             case SoundMuseum.None:
                 audioSrcBGMusic.Stop();

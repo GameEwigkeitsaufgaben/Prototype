@@ -101,7 +101,6 @@ public class MuseumOverlay : MonoBehaviour
 
                 if (wp == MuseumWaypoints.WPInfo)
                 {
-                    Debug.Log("Info should be played!");
                     audioProgressBG.gameObject.SetActive(true);
                     showSkip = runtimeDataCh1.replayInfoPointMuseum;
                     
@@ -109,8 +108,6 @@ public class MuseumOverlay : MonoBehaviour
                     speechManagerChapOne.playMuseumInfoArrival = true;
                     btnSkipIntro.onClick.AddListener(stopIntroInfoPoint);
                     audioP.StartTimer(speechManagerChapOne.GetTalkingListOverallTimeInSec(GameData.NameCH1TLMuseumInfoArrival));
-                    Debug.Log("---------------------END Info should be played!");
-
                 }
                 else if (wp == MuseumWaypoints.WPBergmann)
                 {
@@ -151,7 +148,6 @@ public class MuseumOverlay : MonoBehaviour
                     speechManagerChapOne.playMuseumCoalification = true;
                     btnSkipIntro.onClick.AddListener(openCoalification);
                     audioP.StartTimer(speechManagerChapOne.GetTalkingListOverallTimeInSec(GameData.NameCH1TLMuseumCoalification));
-                    Debug.Log("INKOHUNG");
                 }
                 break;
             case 2:
@@ -199,7 +195,6 @@ public class MuseumOverlay : MonoBehaviour
 
         if (playOverlay)
         {
-            Debug.Log("Plllllllllllllllllllllllllllllllllllllay overlaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
             switch (chapter)
             {
                 case 1:
@@ -220,7 +215,6 @@ public class MuseumOverlay : MonoBehaviour
                     }
                     else if (currentOverlayWP == MuseumWaypoints.WPInkohlung && speechManagerChapOne.IsTalkingListFinished(GameData.NameCH1TLMuseumCoalification))
                     {
-                        Debug.Log("COALLLLLLLLLLLLLLLLLLLLLLLLLLLL");
                         gameObject.GetComponent<SwitchSceneManager>().GoToCoalification();
                         runtimeDataCh1.replayCoalification = true;
                     }

@@ -29,9 +29,7 @@ public class CaveButton : MonoBehaviour
 
     public void GoToMyStop()
     {
-        Debug.Log("pressed got to stop");
         if (caveMoveController.CheckNextStopInvalid()) return;
-        Debug.Log("pressed got to stop after return");
         caveMoveController.GoToStop(relatedStop);
         isSelected = true;
     }

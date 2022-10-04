@@ -88,12 +88,10 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
     public void EnableParticles(bool enable)
     {
         particles.gameObject.SetActive(enable);
-        Debug.Log("particles enable " + enable);
     }
 
     private void SetupDescription()
     {
-        Debug.Log("eitem....................." + equipmentItem);
 
         switch (equipmentItem)
         {

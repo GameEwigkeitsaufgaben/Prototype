@@ -65,6 +65,5 @@ public class SpeechBubble : MonoBehaviour
     public void RotateSpeechBubble(float yRotation)
     {
         gameObject.transform.localRotation = Quaternion.Euler(gameObject.transform.localRotation.x, yRotation, gameObject.transform.localRotation.z);
-        Debug.Log("in rotate Speechbubble");
     }
 }

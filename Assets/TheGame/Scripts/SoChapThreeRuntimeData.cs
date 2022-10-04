@@ -103,7 +103,8 @@ public class SoChapThreeRuntimeData : Runtime
         replayTL3101 = replayTL3102 = replayTL3103 = replayTL3111 = replayTL3141 = false;
         quizPointsOverall = 0;
         instaSliderPos = 1f;
-        updatePoints = false; 
+        updatePoints = false;
+        quizPointsCh03 = "***";
 
         //311 betweenprogress
         newsDone = monitorsDone = false;

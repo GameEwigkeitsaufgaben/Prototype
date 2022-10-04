@@ -51,13 +51,8 @@ public class PostItDrag : MonoBehaviour
                 }
             }
         }
-
-        //FlipCard();
-        //myImage.sprite = myConfig.memoryBackside;
-        //myStatement.gameObject.SetActive(false);
-
-        Debug.Log("setup img: " + myImage.sprite.ToString());
     }
+
     public void MarkRightSolution()
     {
         mySolutionImg.gameObject.SetActive(true);
@@ -69,7 +64,6 @@ public class PostItDrag : MonoBehaviour
 
         if (backsideUp)
         {
-            Debug.Log("img null -------- " + myImage);
             myImage.sprite = myConfig.memoryBackside;
             myStatement.gameObject.SetActive(false);
         }
@@ -78,50 +72,11 @@ public class PostItDrag : MonoBehaviour
             myImage.sprite = mySprite;
             myStatement.gameObject.SetActive(true);
         }
-
-
     }
 
     private void OnMouseDown()
     {
-        Debug.Log("on down!!!");
         FlipCard();
     }
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    Debug.Log(collision.name);
-       
-    //    if (collision.name == "Wahr")
-    //    {
-    //        Debug.Log("wahr");
-    //        correctSelection = (statementTrue) ? true : false;
-    //    }
-        
-    //    if (collision.name == "Falsch")
-    //    {
-    //        Debug.Log("falsch");
-    //        correctSelection = (statementTrue) ? false : true;
-    //    }
-    //}
-
-    //public void OnBeginDrag(PointerEventData eventData)
-    //{
-    //    Debug.Log("OnDragBegin");
-    //    origPos = gameObject.transform.position;
-    //}
-
-    //public void OnEndDrag(PointerEventData eventData)
-    //{
-    //    Debug.Log("OnDragEnd");
-    //    if (!correctSelection)
-    //    {
-    //        transform.position = origPos;
-    //    }
-    //}
-
-    //public void OnDrag(PointerEventData eventData)
-    //{
-    //    dragRectTransform.anchoredPosition += eventData.delta / myParentCanvas.scaleFactor; //important when using screen space
-    //}
 }

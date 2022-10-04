@@ -20,7 +20,6 @@ public class Diashow : MonoBehaviour
         currentIndex++;
         if (currentIndex > diasArray.Length - 1) currentIndex = 0;
 
-        Debug.Log("cur index " + currentIndex);
 
         for(int i=0; i < diasArray.Length; i++)
         {
@@ -40,7 +39,6 @@ public class Diashow : MonoBehaviour
         {
             NextDia();
             timePassed = 0f;
-            Debug.Log("in next dia");
         }
     }
 }

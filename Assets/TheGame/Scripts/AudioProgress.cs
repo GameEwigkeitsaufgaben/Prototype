@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +10,6 @@ public class AudioProgress : MonoBehaviour
 
     public void StartTimer(float overallTlTimeInSec)
     {
-        Debug.Log("STAAAAAAAAAAAAAAAAAAAAAAAART TIMER ++++++++++++++++++++++++++++++");
         timeImage.gameObject.SetActive(true);
         overallTime = overallTlTimeInSec;
         timerTime = overallTlTimeInSec;

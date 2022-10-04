@@ -27,8 +27,6 @@ public class CaveManager : MonoBehaviour
     
     public Button exitSceneBtn, sole1WPViewpointBtn, sole2WPViewpointBtn, sole1caveWPBtn, sole3EnterTrainBtn, btnReplayTalkingList;
 
-    //private bool introPlayedOneTime = false;
-
     public AudioSource[] sfxS1;
 
     private SoSfx sfx;

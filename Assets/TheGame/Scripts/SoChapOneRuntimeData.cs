@@ -4,7 +4,6 @@ using UnityEngine;
 public class SoChapOneRuntimeData : Runtime
 {
     public bool videoPlaying = false;
-    //public OverlaySoundState overlaySoundState;
 
     public bool ch1GeneralUnlocked, ch2GrubenwasserUnlocked;
 
@@ -31,6 +30,7 @@ public class SoChapOneRuntimeData : Runtime
     public SoundMuseum soundSettingMuseum;
     public string quizPointsCh01 = "";
     public float quizPointsOverall = 0;
+    public bool updatePoints = false;
     public bool replayCoalmineIntro;
     public bool replayInfoPointMuseum, replayMinerEquipment, replayWorld, replayHistoryMining, replayCoalification;
     public bool replayS1Cave, replayS2Cave, replayS3Cave;
@@ -38,23 +38,18 @@ public class SoChapOneRuntimeData : Runtime
 
     public string generalKeyOverlay = GameData.NameOverlay1110;
 
-
     [Header("GameProgress")]
     public bool post111Done, post112Done, post113Done, post114Done, video115Done, interaction116Done, interaction117Done, post118Done, quiz119Done, post1110Done;
     internal float instaSliderPos;
-
-    //progressCh1WithAdmin;
 
     public Animator GetKohlenhobelAnimator()
     {
         if(kohlenhobelAnimator == null)
         {
-            Debug.Log("Kohlenhobel Animator is null");
             return null;
         }
         else
         {
-            Debug.Log("Kohlenhobel Animator: " + kohlenhobelAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle"));
             return kohlenhobelAnimator;
         }
     }
@@ -68,11 +63,12 @@ public class SoChapOneRuntimeData : Runtime
         interaction116Done = interaction117Done = quiz119Done = false;
 
         //quiz
-        quizPointsCh01 = "";
+        quizPointsCh01 = "***";
         quizPointsOverall = 0;
-        
-        //Insta
-        hintPostUnlock = "";
+        updatePoints = false;
+
+    //Insta
+    hintPostUnlock = "";
         postOverlayToLoad = "";
         musicOn = true;
 

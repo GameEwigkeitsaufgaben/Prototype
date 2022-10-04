@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveSchild : MonoBehaviour
@@ -19,11 +17,4 @@ public class MoveSchild : MonoBehaviour
         animator.Play("Schild");
     }
 
-    
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

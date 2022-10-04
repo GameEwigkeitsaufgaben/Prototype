@@ -94,7 +94,6 @@ public class ManagerHistoryMining : MonoBehaviour
                 audioSrcTime.clip = sfx.sageFeuer;
                 if (!audioSrcTime.isPlaying)
                 {
-                    Debug.Log("PlayMyth");
                     audioSrcTime.Play();
                 }
                 break;
@@ -105,7 +104,6 @@ public class ManagerHistoryMining : MonoBehaviour
                 audioSrcTime.clip = sfx.jh13;
                 if (!audioSrcTime.isPlaying)
                 {
-                    Debug.Log("Play13");
                     audioSrcTime.Play();
                 }
                 break;
@@ -116,7 +114,6 @@ public class ManagerHistoryMining : MonoBehaviour
                 audioSrcTime.clip = sfx.jh16;
                 if (!audioSrcTime.isPlaying)
                 {
-                    Debug.Log("Play16");
                     audioSrcTime.Play();
                 }
                 break;
@@ -127,7 +124,6 @@ public class ManagerHistoryMining : MonoBehaviour
                 audioSrcTime.clip = sfx.jh19;
                 if (!audioSrcTime.isPlaying)
                 {
-                    Debug.Log("Play19");
                     audioSrcTime.Play();
                 }
                 break;
@@ -141,7 +137,6 @@ public class ManagerHistoryMining : MonoBehaviour
                 audioSrcTime.clip = sfx.jh21;
                 if (!audioSrcTime.isPlaying)
                 {
-                    Debug.Log("Play21");
                     audioSrcTime.Play();
                 }
                 break;
