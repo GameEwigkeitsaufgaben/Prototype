@@ -18,7 +18,8 @@ public class ManagerHistoryMining : MonoBehaviour
     //https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@10.9/manual/requirements.html urp for 2020.3.18f1
     
     public Slider slider;
-    public Button btnBackToMuseum, btnUrlToSage;
+    public Button btnBackToMuseum; 
+    public GameObject btnUrlToSage;
     public TextMeshProUGUI centuryText;
     public GameObject imgSanduhr;
     [SerializeField] private AudioSource audioSrcTime, audioSrcMusic;
@@ -81,7 +82,7 @@ public class ManagerHistoryMining : MonoBehaviour
         else if (slider.normalizedValue > twentyfirstRange.x) sliderCentury = Century.century21; 
         else sliderCentury = Century.none;
 
-        if(btnUrlToSage.isActiveAndEnabled) btnUrlToSage.gameObject.SetActive(false);
+        if(btnUrlToSage.activeSelf) btnUrlToSage.gameObject.SetActive(false);
 
         //Do someting based on century 
         switch (sliderCentury)
