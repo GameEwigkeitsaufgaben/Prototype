@@ -57,7 +57,6 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
         
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
         sfx = runtimeDataChapters.LoadSfx();
-
     }
 
     void Start()
