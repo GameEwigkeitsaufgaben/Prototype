@@ -8,12 +8,12 @@ public class ManagerCarbonifactionPeriod : MonoBehaviour
     private SoSfx sfx;
     public AudioSource atmoSfx;
 
-    public Button externalLink;
+    //public Button externalLink;
 
     private void Awake()
     {
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
-        externalLink.colors = GameColors.GetInteractionColorBlock();
+      //  externalLink.colors = GameColors.GetInteractionColorBlock();
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);
         sfx = runtimeDataChapters.LoadSfx();

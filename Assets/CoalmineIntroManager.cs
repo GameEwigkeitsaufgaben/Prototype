@@ -20,6 +20,7 @@ public class CoalmineIntroManager : MonoBehaviour
     private SoChapOneRuntimeData runtimeDataCh1;
     private SoChaptersRuntimeData runtimeDataChapers;
     private SoSfx sfx;
+    public AudioSource audioSrcVogerl;
 
     private void Awake()
     {
@@ -54,7 +55,10 @@ public class CoalmineIntroManager : MonoBehaviour
         audioSrcAtmo.loop = true;
         audioSrcAtmo.playOnAwake = false;
         audioSrcAtmo.Play();
-        
+
+        audioSrcVogerl.clip = sfx.atmoVogerlKohleberbau;
+        audioSrcVogerl.loop = true;
+        audioSrcVogerl.Play();
     }
 
     public void ReplayTalkingList()

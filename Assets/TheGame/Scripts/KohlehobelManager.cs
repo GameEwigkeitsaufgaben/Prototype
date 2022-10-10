@@ -13,7 +13,7 @@ public class KohlehobelManager : MonoBehaviour
     private SoChapOneRuntimeData runtimeDataCh1;
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoSfx sfx;
-    public AudioSource audioSrcBewetterung, audioSrcLwc, audioSrcBand;
+    public AudioSource audioSrcBewetterung, audioSrcLwc, audioSrcBand, audioSrcZecheAtmo;
 
     private void Awake()
     {
@@ -25,7 +25,7 @@ public class KohlehobelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        audioSrcBewetterung.clip = sfx.coalmineZecheWind;
+        audioSrcBewetterung.clip = sfx.coalmineWindInTunnel;
         audioSrcBewetterung.playOnAwake = true;
         audioSrcBewetterung.Play();
 
@@ -34,6 +34,9 @@ public class KohlehobelManager : MonoBehaviour
         audioSrcBand.Play();
 
         audioSrcLwc.clip = sfx.coalmineLWC;
+
+        audioSrcZecheAtmo.clip = sfx.coalmineZecheWind;
+        audioSrcZecheAtmo.Play();
 
         switchScene.LoadLongwallCutterStatic();
         switchScene.LoadLongwallCutterAnim();

@@ -36,6 +36,7 @@ public class SoSfx : ScriptableObject
     public AudioClip walkingGroup, walkingGroupMuseum;
     public AudioClip monitoringAtmo;
     public AudioClip gwaktivTreppe, gwaktivVorfluter, gwaktivFluss;
+    public AudioClip atmoVogerlKohleberbau;
 
 
     public GameObject instaAudioSrc;

@@ -23,6 +23,7 @@ public class MouseChange : MonoBehaviour
         audioSrcBtn = gameObject.AddComponent<AudioSource>();
         audioSrcBtn.playOnAwake = false;
         audioSrcBtn.clip = sfx.btnClick;
+        audioSrcBtn.volume = 0.3f;
     }
 
     private void Start()

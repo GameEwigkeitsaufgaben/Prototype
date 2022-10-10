@@ -17,7 +17,7 @@ public class ManagerOverviewChapters : MonoBehaviour
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoSfx sfx;
     private AudioSource audioSrc;
-    public AudioSource audioSrcAtmo;
+    public AudioSource audioSrcAtmo, audioSrcVogerl;
 
     private void Awake()
     {
@@ -38,7 +38,10 @@ public class ManagerOverviewChapters : MonoBehaviour
         audioSrc.Play();
         audioSrc.volume = runtimeDataChapters.musicVolume;
 
-        
+        audioSrcVogerl.clip = sfx.atmoNiceWeather;
+        audioSrcVogerl.loop = true; 
+        audioSrc.Play();
+
         audioSrcAtmo.clip = sfx.coalmineVerschubFerne;
         audioSrcAtmo.loop = true;
         audioSrcAtmo.Play();
