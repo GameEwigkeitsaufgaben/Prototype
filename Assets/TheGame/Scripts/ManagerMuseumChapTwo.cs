@@ -182,6 +182,10 @@ public class ManagerMuseumChapTwo : MonoBehaviour
     //called from BtnExitToInsta
     public void ExitToOverlay211()
     {
+        if (mySplineMove.IsMoving())
+        {
+            mySplineMove.Stop();
+        }
         runtimeDataCh02.state = TVStation.IntroOverlay;
         runtimeDataCh02.lastWP = MuseumWaypoints.None;
         gameObject.GetComponent<SwitchSceneManager>().SwitchToChapter2withOverlay(GameData.NameOverlay212);
