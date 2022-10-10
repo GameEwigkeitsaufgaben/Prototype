@@ -178,6 +178,8 @@ public class MuseumPlayer : MonoBehaviour
         characterGuide.GetComponent<Image>().sprite = configMuseum.guideStanding;
         characterGuide.transform.rotation = Quaternion.Euler(Vector3.zero);
 
+        audioSrcSalkingGroup.Stop();
+
         if (currentWP == MuseumWaypoints.WPInfo)
         {
             btnWPInfo.gameObject.SetActive(false);

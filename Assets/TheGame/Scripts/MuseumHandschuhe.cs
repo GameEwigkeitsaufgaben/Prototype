@@ -8,7 +8,6 @@ public class MuseumHandschuhe : MonoBehaviour
     {
         leftHand.snapedTo = SnapetTo.Miner;
         rightHand.snapedTo = SnapetTo.Miner;
-        Debug.Log("Both set to miner");
     }
 
     public void SetToogleSameForBoth()

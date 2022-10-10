@@ -43,28 +43,32 @@ public class ManagerQuizAllChap : MonoBehaviour
     {
         switchScene = GetComponent<SwitchSceneManager>();
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
-        
-        //audioSrcBGMusic = GetComponent<AudioSource>();
 
         activeScene = switchScene.GetActiveQuizScene();
         sfx = runtimeDataChapters.LoadSfx();
+
+        //runtimeDataChapters.SetAndStartMusic(audioSrcSpecial);
         switch (activeScene)
         {
             case 1: 
                 runtimeDataCh1 = runtimeDataChapters.LoadChap1RuntimeData();
-                audioSrcSpecial.clip = sfx.sageFeuer;
+                //audioSrcSpecial.clip = sfx.quizFeuer;
+                runtimeDataChapters.SetAndStartMusic(audioSrcSpecial, sfx.quizFeuer);
                 break;
             case 2:
                 runtimeDataCh2 = runtimeDataChapters.LoadChap2RuntimeData();
-                audioSrcSpecial.clip = sfx.atmoWasserRinnt;
+                //audioSrcSpecial.clip = sfx.atmoWasserRinnt;
+                runtimeDataChapters.SetAndStartMusic(audioSrcSpecial, sfx.atmoWasserRinnt);
                 break;
             case 3:
                 runtimeDataCh3 = runtimeDataChapters.LoadChap3RuntimeData();
-                audioSrcSpecial.clip = sfx.pumpen;
+                //audioSrcSpecial.clip = sfx.pumpen;
+                runtimeDataChapters.SetAndStartMusic(audioSrcSpecial, sfx.pumpen);
                 break;
         }
 
-        audioSrcSpecial.Play();
+        //runtimeDataChapters.SetAndStartMusic(audioSrcSpecial);
+        
 
         quizConfig = runtimeDataChapters.LoadConfigQuiz();
         runtimeDataChapters.SetSceneCursor(runtimeDataChapters.cursorDefault);

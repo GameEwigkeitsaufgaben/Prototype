@@ -21,7 +21,7 @@ public class ManagerCoalification : MonoBehaviour
     public Slider slider;
     public TMP_Text infoText;
     [SerializeField] private StatesInkohlung statesInkohlung;
-    [SerializeField] private AudioSource audioSrcAtmo, audioSrcTrees, audioSrcRegen;
+    [SerializeField] private AudioSource audioSrcAtmo, audioSrcTrees, audioSrcRegen, audioSourceDruck;
     public Button btnGoToMuseum;
     public AudioSource audioSrcMusic;
 
@@ -65,6 +65,13 @@ public class ManagerCoalification : MonoBehaviour
     {
         sliderMoving = true;
 
+        if(slider.value >= 0.06 && slider.value <= 0.08 ||
+            slider.value >= 0.13 && slider.value <= 0.12 ||
+            slider.value >= 0.28 && slider.value <= 0.43)
+        {
+            if (!audioSourceDruck.isPlaying) audioSourceDruck.Play();
+        }
+
         if (slider.value <= 0.048)
         {
             statesInkohlung = StatesInkohlung.PlantDeath;
@@ -78,6 +85,7 @@ public class ManagerCoalification : MonoBehaviour
 
             if (slider.value >= 0.19 && slider.value <= 0.192) startTreeFalling = true;
             if (slider.value >= 0.56 && slider.value <= 0.562) startTreeFalling = true;
+            if (audioSrcRegen.isPlaying) audioSrcRegen.Stop();
         }
         else if (slider.value > 0.658 && slider.value < 1.0)
         {

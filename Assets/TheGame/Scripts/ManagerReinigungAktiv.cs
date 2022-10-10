@@ -32,7 +32,7 @@ public class ManagerReinigungAktiv : MonoBehaviour
     private float offsetGroupCam;
     private Vector3 tmpVec3;
     private SwitchSceneManager switchSceneManager;
-    [SerializeField] private AudioSource audioSrcTreppeWasser, audioSrcVorfluter, audioSrcPumpe, audioSrcAtmo, audioSrcFluss;
+    [SerializeField] private AudioSource audioSrcTreppeWasser, audioSrcVorfluter, audioSrcPumpe, audioSrcAtmo, audioSrcFluss, audioSrcNeutal;
 
     private void Awake()
     {
@@ -72,6 +72,11 @@ public class ManagerReinigungAktiv : MonoBehaviour
         audioSrcFluss.clip = sfx.gwaktivFluss;
         audioSrcFluss.loop = true;
         audioSrcFluss.Play();
+
+        audioSrcNeutal.clip = sfx.neutralisation;
+        audioSrcNeutal.loop = true;
+        audioSrcNeutal.Play();
+
     }
 
     public void MoveReverseToReinigungStation(int id)

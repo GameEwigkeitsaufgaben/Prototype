@@ -36,7 +36,7 @@ public class ManagerMuseumChapTwo : MonoBehaviour
     [SerializeField] private MuseumWaypoints currentMuseumStation;
     private bool locomotionInMuseum = false;
 
-    public AudioSource audioSrcBGMusic, audioSrcAtmo;
+    public AudioSource audioSrcBGMusic, audioSrcAtmo, audioSrcSchritte;
     private SwitchSceneManager switchSceneManager;
 
 
@@ -56,6 +56,8 @@ public class ManagerMuseumChapTwo : MonoBehaviour
         audioSrcAtmo.clip = sfx.atmoMuseum;
         audioSrcAtmo.playOnAwake = true;
         audioSrcAtmo.Play();
+
+        audioSrcSchritte.clip = sfx.walkingGroupMuseum;
 
         runtimeDataChapters.SetAndStartMusic(audioSrcBGMusic, sfx.instaMenuMusicLoop);
         
@@ -194,15 +196,17 @@ public class ManagerMuseumChapTwo : MonoBehaviour
     public void MoveToMuseumStation(int id)
     {
         locomotionInMuseum = true;
+
         if (mySplineMove.IsMoving()) return;
-        
+       
         switch (id)
         {
             case (int)MuseumWaypoints.None:
                 mySplineMove.pathContainer = pGroupToTV;
                 mySplineMove.reverse = true;
                 targetMuseumStation = MuseumWaypoints.None;
-                
+                audioSrcSchritte.clip = sfx.walkingGroupMuseum;
+                if (!audioSrcSchritte.isPlaying) audioSrcSchritte.Play();
                 break;
             case (int)MuseumWaypoints.WPTV:
 
@@ -211,10 +215,14 @@ public class ManagerMuseumChapTwo : MonoBehaviour
                     case MuseumWaypoints.None:
                         mySplineMove.pathContainer = pGroupToTV;
                         mySplineMove.reverse = false;
+                        audioSrcSchritte.clip = sfx.walkingGroupMuseum;
+                        if (!audioSrcSchritte.isPlaying) audioSrcSchritte.Play();
                         break;
                     case MuseumWaypoints.WPFliesspfad:
                         mySplineMove.pathContainer = pathGroupToFliesspfad;
                         mySplineMove.reverse = true;
+                        audioSrcSchritte.clip = sfx.walkingGroupMuseum;
+                        if (!audioSrcSchritte.isPlaying) audioSrcSchritte.Play();
                         break;
                 }
                 targetMuseumStation = MuseumWaypoints.WPTV;
@@ -225,12 +233,16 @@ public class ManagerMuseumChapTwo : MonoBehaviour
                 mySplineMove.reverse = false;
                 targetMuseumStation = MuseumWaypoints.WPFliesspfad;
                 btnReplayTalkingList.gameObject.SetActive(false);
+                audioSrcSchritte.clip = sfx.walkingGroupTVToFliess;
+                if (!audioSrcSchritte.isPlaying) audioSrcSchritte.Play();
                 break;
             case (int)MuseumWaypoints.WPExitZeche:
                 mySplineMove.pathContainer = pathGroupToExitZeche;
                 targetMuseumStation = MuseumWaypoints.WPExitZeche;
                 speechManagerch2.playMuseumExitZeche = true;
                 btnReplayTalkingList.gameObject.SetActive(false);
+                audioSrcSchritte.clip = sfx.walkingGroupFliessToZeche;
+                if (!audioSrcSchritte.isPlaying) audioSrcSchritte.Play();
                 break;
             case (int)MuseumWaypoints.WPBeluft:
                 mySplineMove.pathContainer = pBeluftToB1;

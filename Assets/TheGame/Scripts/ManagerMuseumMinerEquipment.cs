@@ -23,7 +23,6 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     public AnimationClip noHelmAnim, noMaskAnim, noLightAnim, badJobAnim, goodJobAnim;
     public Image denkbubbleWorstcase;
     public Sprite sNoHelm, sNoLamp, sNoMask, s4, minerGoodJob, minerBadJob;
-    public AudioSource audioSrcMusic;
 
     private IEnumerator worstcasesCoroutine, goodJobCoroutine, badJobCoroutine;
 
@@ -44,7 +43,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     public TMP_Text uiTooltipText;
     bool runningCorouine = false;
 
-    private AudioSource audioSrc;
+    public AudioSource audioSrcFeedBack, audioSrcMusic;
     private SoChapOneRuntimeData runtimeData;
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoSfx sfx;
@@ -81,8 +80,8 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
         itemsOnMiner = 0;
        
         denkbubbleWorstcase.GetComponent<Image>().preserveAspect = true;
-        audioSrc = gameObject.AddComponent<AudioSource>();
-        audioSrc.playOnAwake = false;
+        //audioSrcMusic = gameObject.AddComponent<AudioSource>();
+        //audioSrcMusic.playOnAwake = false;
         SetUiTooltip();
 
         runtimeDataChapters.SetAndStartMusic(audioSrcMusic, sfx.instaMenuMusicLoop);
@@ -223,8 +222,8 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
             case EquipmentRound.SpecialTask:
                 runtimeData.isMinerDone = true;
                 tmpCheckBtn.text = checkBtnNochmal;
-                audioSrc.clip = sfx.minerOutro;
-                audioSrc.Play();
+                audioSrcFeedBack.clip = sfx.minerOutro;
+                audioSrcFeedBack.Play();
                 break;
         }
 
@@ -262,8 +261,8 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
     IEnumerator PlayBadJob()
     {
         runningCorouine = true;
-        audioSrc.clip = sfx.badJobSfx;
-        audioSrc.Play();
+        audioSrcFeedBack.clip = sfx.badJobSfx;
+        audioSrcFeedBack.Play();
         float length = badJobAnim.length;
         anim.Play("BadJob");
         yield return new WaitForSeconds(length);
@@ -277,8 +276,8 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
         float length = goodJobAnim.length;
         anim.Play("GoodJob");
 
-        audioSrc.clip = sfx.goodJobSfx;
-        audioSrc.Play();
+        audioSrcFeedBack.clip = sfx.goodJobSfx;
+        audioSrcFeedBack.Play();
         yield return new WaitForSeconds(length);
 
         runningCorouine = false;
@@ -293,51 +292,51 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
         if (!helm)
         {
             anim.Play("Alert");
-            audioSrc.clip = sfx.mineAlarm;
-            audioSrc.Play();
+            audioSrcFeedBack.clip = sfx.mineAlarm;
+            audioSrcFeedBack.Play();
             yield return new WaitForSeconds(2f);
-            audioSrc.Stop();
+            audioSrcFeedBack.Stop();
             anim.Play("NoHelmet");
             float length = noHelmAnim.length;
-            audioSrc.clip = sfx.autschSfx;
-            audioSrc.Play();
+            audioSrcFeedBack.clip = sfx.autschSfx;
+            audioSrcFeedBack.Play();
             yield return new WaitForSeconds(length);
         }
         if (!mask)
         {
             anim.Play("Alert");
-            audioSrc.clip = sfx.mineAlarm;
-            audioSrc.Play();
+            audioSrcFeedBack.clip = sfx.mineAlarm;
+            audioSrcFeedBack.Play();
             yield return new WaitForSeconds(2f);
-            audioSrc.Stop();
+            audioSrcFeedBack.Stop();
             anim.Play("NoMask");
             float length = noMaskAnim.length;
-            audioSrc.clip = sfx.mineHusten;
-            audioSrc.Play();
+            audioSrcFeedBack.clip = sfx.mineHusten;
+            audioSrcFeedBack.Play();
             yield return new WaitForSeconds(length);
         }
         if (!lamp)
         {
             anim.Play("Alert");
-            audioSrc.clip = sfx.mineAlarm;
-            audioSrc.Play();
+            audioSrcFeedBack.clip = sfx.mineAlarm;
+            audioSrcFeedBack.Play();
             yield return new WaitForSeconds(2f);
-            audioSrc.Stop();
+            audioSrcFeedBack.Stop();
             anim.Play("NoLight");
             float length = noLightAnim.length;
-            audioSrc.clip = lichtaus;
-            audioSrc.Play();
+            audioSrcFeedBack.clip = lichtaus;
+            audioSrcFeedBack.Play();
             yield return new WaitForSeconds(2f);
-            audioSrc.clip = sfx.autschSfx;
-            audioSrc.Play();
+            audioSrcFeedBack.clip = sfx.autschSfx;
+            audioSrcFeedBack.Play();
 
             yield return new WaitForSeconds(3.5f);
         }
 
         if (missingItem)
         {
-            audioSrc.clip = sfx.badJobSfx;
-            audioSrc.Play();
+            audioSrcFeedBack.clip = sfx.badJobSfx;
+            audioSrcFeedBack.Play();
             float length = badJobAnim.length;
             anim.Play("BadJob");
             yield return new WaitForSeconds(length);

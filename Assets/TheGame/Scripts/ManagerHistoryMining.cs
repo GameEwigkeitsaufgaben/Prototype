@@ -22,7 +22,7 @@ public class ManagerHistoryMining : MonoBehaviour
     public GameObject btnUrlToSage;
     public TextMeshProUGUI centuryText;
     public GameObject imgSanduhr;
-    [SerializeField] private AudioSource audioSrcTime, audioSrcMusic;
+    [SerializeField] private AudioSource audioSrcTime, audioSrcMusic, audioSrcAtmoMuseum;
     
     [Header("Assigned at Runtime")]
     public SoMuseumConfig museumConfig;
@@ -51,6 +51,8 @@ public class ManagerHistoryMining : MonoBehaviour
 
     private void Start()
     {
+       
+
         sliderCentury = Century.none;
         btnBackToMuseum.interactable = runtimeData.isMythDone;
 
@@ -58,6 +60,10 @@ public class ManagerHistoryMining : MonoBehaviour
 
         audioSrcTime.loop = true;
         audioSrcTime.playOnAwake = false;
+
+        audioSrcAtmoMuseum.clip = sfx.atmoMuseum;
+        audioSrcAtmoMuseum.loop = true;
+        audioSrcAtmoMuseum.Play();
 
         runtimeDataChapters.SetAndStartMusic(audioSrcMusic, sfx.instaMenuMusicLoop);
     }

@@ -83,6 +83,7 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
         SetupDescription();
         ChooseSprite();
         myAudioSrc = gameObject.AddComponent<AudioSource>();
+        myAudioSrc.volume = 0.4f;
     }
 
     public void EnableParticles(bool enable)
@@ -197,7 +198,8 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
 
         isCurrentlyDragging = true;
         
-        gameObject.transform.parent = dragObjParent.transform;
+        //gameObject.transform.parent = dragObjParent.transform;
+        gameObject.transform.SetParent(dragObjParent.transform);
         myAudioSrc.clip = sfx.dragSfx;
         myAudioSrc.Play();
     }
@@ -208,7 +210,8 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
         if (myManager.IsMaxItemsOnMinerReached() && snapedTo == SnapetTo.Table) return;
 
         isCurrentlyDragging = false;
-        gameObject.transform.parent = dragObjDefaultParent.transform;
+        //gameObject.transform.parent = dragObjDefaultParent.transform;
+        gameObject.transform.SetParent(dragObjParent.transform);
 
         positionChanged = GetHasLocationChanged();
         myAudioSrc.clip = sfx.dropSfx;

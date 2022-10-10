@@ -148,8 +148,13 @@ public class ManagerFliesspfade : MonoBehaviour
                     solidBg.color = rain;
 
                     wetterNice.Stop();
+
+                    audioSrcWolken.volume = 0.1f;
+                    audioSrcRain.volume = 0.1f;
+                    audioSrcFp2.volume = 0.4f;
+
                     audioSrcWolken.Play();
-                    audioSrcRain.PlayDelayed(2);
+                    audioSrcRain.PlayDelayed(1);
                     audioSrcFp2.PlayDelayed(3);
                     break;
                 case FliesspfadState.fp3:
@@ -158,9 +163,16 @@ public class ManagerFliesspfade : MonoBehaviour
                     solidBg.color = rain;
 
                     wetterNice.Stop();
+
+                    audioSrcWolken.volume = 0.1f;
+                    audioSrcRain.volume = 0.1f;
+                    audioSrcFp2.volume = 0.1f;
+                    audioSrcFp3.volume = 0.4f;
+
                     audioSrcWolken.Play();
-                    audioSrcRain.PlayDelayed(2);
-                    audioSrcFp3.PlayDelayed(3);
+                    audioSrcRain.PlayDelayed(1);
+                    audioSrcFp2.PlayDelayed(3);
+                    audioSrcFp3.PlayDelayed(9);
                     break;
             }
 

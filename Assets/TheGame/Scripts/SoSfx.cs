@@ -33,10 +33,12 @@ public class SoSfx : ScriptableObject
     public AudioClip dropSfx, wasserhaltungAussen;
     public AudioClip treesCoalificationSfx, atmoCoalificationSfx;
     public AudioClip caveBell;
-    public AudioClip walkingGroup, walkingGroupMuseum;
+    public AudioClip walkingGroup, walkingGroupMuseum, walkingGroupFliessToZeche, walkingGroupTVToFliess;
     public AudioClip monitoringAtmo;
     public AudioClip gwaktivTreppe, gwaktivVorfluter, gwaktivFluss;
     public AudioClip atmoVogerlKohleberbau;
+    public AudioClip quizFeuer;
+    public AudioClip neutralisation;
 
 
     public GameObject instaAudioSrc;
