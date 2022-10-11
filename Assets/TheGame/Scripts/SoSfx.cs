@@ -41,6 +41,7 @@ public class SoSfx : ScriptableObject
     public AudioClip neutralisation;
     public AudioClip raschelZeitung;
     public AudioClip pinDrop, pinDrag;
+    public AudioClip waterDrops;
 
 
     public GameObject instaAudioSrc;

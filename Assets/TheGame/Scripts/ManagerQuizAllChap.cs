@@ -58,7 +58,7 @@ public class ManagerQuizAllChap : MonoBehaviour
             case 2:
                 runtimeDataCh2 = runtimeDataChapters.LoadChap2RuntimeData();
                 //audioSrcSpecial.clip = sfx.atmoWasserRinnt;
-                runtimeDataChapters.SetAndStartMusic(audioSrcSpecial, sfx.atmoWasserRinnt);
+                runtimeDataChapters.SetAndStartMusic(audioSrcSpecial, sfx.waterDrops);
                 break;
             case 3:
                 runtimeDataCh3 = runtimeDataChapters.LoadChap3RuntimeData();

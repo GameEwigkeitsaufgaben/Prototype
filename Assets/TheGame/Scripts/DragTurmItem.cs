@@ -39,7 +39,7 @@ public class DragTurmItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
     {
         if (snaped) return;
 
-        audioSrcDragDrop.clip = sfx.mechanicBtnPress;
+        audioSrcDragDrop.clip = sfx.pinDrag;
         audioSrcDragDrop.Play();
     }
 
@@ -71,7 +71,7 @@ public class DragTurmItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
             gameObject.transform.parent.GetComponent<RectTransform>().sizeDelta = gameObject.GetComponent<RectTransform>().sizeDelta;
             snaped = true;
 
-            audioSrcDragDrop.clip = sfx.dropSfx;
+            audioSrcDragDrop.clip = sfx.pinDrop;
             audioSrcDragDrop.Play();
         }
     }

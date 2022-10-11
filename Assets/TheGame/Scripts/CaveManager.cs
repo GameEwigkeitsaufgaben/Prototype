@@ -5,6 +5,7 @@
 //The SwitchSceneManager which is responsible for loading scenens in the game. 
 //It has a link to Cave Collider Button to reset the character sprites accordingly to the coalmine stop.
 
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -135,6 +136,7 @@ public class CaveManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        DOTween.KillAll();
         runtimeData.liftBtnsAllEnabled = false;
         StopAllCoroutines();
     }
