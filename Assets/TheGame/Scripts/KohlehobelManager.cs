@@ -45,7 +45,7 @@ public class KohlehobelManager : MonoBehaviour
         btnLwcExit.interactable = false;
         btnReplayTalkingList.gameObject.SetActive(false);
 
-        if(!runtimeDataCh1.isLongwallCutterDone) Invoke("StartViewpointBahnsteig", 2.0f);
+        if(!runtimeDataCh1.isLongwallCutterDone) Invoke("StartViewpointBahnsteig", 1.0f);
 
         lwcManager.RotateCharacters(-114.0f, -53.0f, -80.0f);
         myPlayer.SetPlayerRotation(0f,false);
@@ -58,6 +58,11 @@ public class KohlehobelManager : MonoBehaviour
             btnLwcViewpoint.interactable = true;
             btnLwcExit.interactable = true;
         }
+    }
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
     }
 
 
@@ -111,6 +116,11 @@ public class KohlehobelManager : MonoBehaviour
 
     private void Update()
     {
+        if(!btnLwcExit.interactable && runtimeDataCh1.isLongwallCutterDone)
+        {
+            btnLwcExit.interactable = true;
+        }
+
         if (!btnLwcViewpoint.interactable && speechManager.IsLWCBahnsteigFinished())
         {
             btnLwcViewpoint.interactable = true;

@@ -488,10 +488,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0f8e4be0820b4f49bf64c789ff602f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speechManger: {fileID: 788826952}
+  speechManager: {fileID: 788826952}
   switchScene: {fileID: 788826953}
   isNextSceneLoaded: 0
-  trainride: {fileID: 8300000, guid: f282c79dc3279d643bb6d1affa90b831, type: 3}
 --- !u!4 &788826951
 Transform:
   m_ObjectHideFlags: 0
@@ -2837,7 +2836,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4950265731138996425}
-  - component: {fileID: 4950265731138996431}
   - component: {fileID: 4950265731138996426}
   m_Layer: 0
   m_Name: Group
@@ -2888,54 +2886,6 @@ MonoBehaviour:
   MaximumAngularShake: {x: 1, y: 1, z: 1}
   MaximumTranslationShake: {x: -0.01, y: 0.1, z: 0.03}
   shakeCabine: 1
---- !u!114 &4950265731138996431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4950265731138996424}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a2d9078dbe17bc4f966c9d2310be047, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pathContainer: {fileID: 0}
-  onStart: 1
-  moveToPath: 1
-  reverse: 0
-  startPoint: 0
-  currentPoint: 0
-  closeLoop: 0
-  localType: 0
-  lookAhead: 0
-  sizeToAdd: 0
-  timeValue: 1
-  speed: 1
-  animEaseType:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  loopType: 0
-  waypoints: []
-  pathType: 1
-  pathMode: 1
-  easeType: 1
-  lockPosition: 0
-  lockRotation: -1
-  waypointRotation: 0
-  rotationTarget: {fileID: 0}
-  movementStart:
-    m_PersistentCalls:
-      m_Calls: []
-  movementChange:
-    m_PersistentCalls:
-      m_Calls: []
-  movementEnd:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &4950265731339144801
 GameObject:
   m_ObjectHideFlags: 0

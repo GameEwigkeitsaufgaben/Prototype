@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ManagerTrainRide : MonoBehaviour
 {
-    public CoalmineSpeechManger speechManger;
+    public CoalmineSpeechManger speechManager;
     public SwitchSceneManager switchScene;
     public bool isNextSceneLoaded = false;
     //public AudioClip trainride;
@@ -25,32 +25,34 @@ public class ManagerTrainRide : MonoBehaviour
         gameObject.GetComponent<AudioSource>().Play();
 
         isNextSceneLoaded = false;
+        speechManager.StopRunningTL();
 
         StopAllCoroutines();
-
     }
 
     private void Start()
     {
 
+        speechManager.StopRunningTL();
+
         if (SwitchSceneManager.GetCurrentSceneName() == GameScenes.ch01MineSoleThreeTrainRideIn)
         {
-            Invoke("StartTalkingIn", 2f);
+            Invoke("StartTalkingIn", 1f);
         }
         else if (SwitchSceneManager.GetCurrentSceneName() == GameScenes.ch01MineSoleThreeTrainRideOut)
         {
-            Invoke("StartTalkingOut", 2f);
+            Invoke("StartTalkingOut", 1f);
         }
     }
 
     private void StartTalkingIn()
     {
-        speechManger.playTrainRideIn = true;
+        speechManager.playTrainRideIn = true;
     }
 
     private void StartTalkingOut()
     {
-        speechManger.playTrainRideOut = true;
+        speechManager.playTrainRideOut = true;
     }
 
     private void GoToLongwallcutter()
@@ -65,26 +67,26 @@ public class ManagerTrainRide : MonoBehaviour
 
     private void Update()
     {
-        if (speechManger.IsTrainRideInTalkingFinished())
+        if (speechManager.IsTrainRideInTalkingFinished())
         {
             if (SwitchSceneManager.GetCurrentSceneName() == GameScenes.ch01MineSoleThreeTrainRideIn)
             {
                 if (!isNextSceneLoaded)
                 {
-                    speechManger.ToggleTrainRideInTalkingFinished();
+                    speechManager.ToggleTrainRideInTalkingFinished();
                     runtimeDataCh1.trainRideInDone = true;
                     Invoke("GoToLongwallcutter", 2f);
                     isNextSceneLoaded = true;
                 }
             }
         }
-       else if (speechManger.IsTrainRideOutTalkingFinished())
+       else if (speechManager.IsTrainRideOutTalkingFinished())
         {
             if (SwitchSceneManager.GetCurrentSceneName() == GameScenes.ch01MineSoleThreeTrainRideOut)
             {
                 if (!isNextSceneLoaded)
                 {
-                    speechManger.ToggleTrainRideOutTalkingFinished();
+                    speechManager.ToggleTrainRideOutTalkingFinished();
                     runtimeDataCh1.trainRideOutDone = true;
                     Invoke("GoToOverlay", 2f);
                     isNextSceneLoaded = true;

@@ -10,12 +10,18 @@ public class LongwallCutterWaypointManager : MonoBehaviour
     public Button btnBahnsteig, btnKohlehobel;
 
     private SoChapOneRuntimeData runtimeData;
+    bool moving;
 
     private void Start()
     {
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         HandleCurrentWP();
         playerSplineMove.gameObject.transform.position = pathViewpointToKohlehobel.waypoints[0].transform.position;
+    }
+
+    public void SetMoving(bool moving)
+    {
+        this.moving = moving;
     }
 
     public MineWayPoints GetCurrentLongWallCutterWP()
@@ -26,6 +32,16 @@ public class LongwallCutterWaypointManager : MonoBehaviour
         }
 
         return MineWayPoints.viewpointLWLWCutter;
+    }
+
+    public void GoToInstaExit()
+    {
+        if ((enyaSplineMove != null) && enyaSplineMove.IsMoving()) enyaSplineMove.Stop();
+        if ((georgSplineMove != null) && georgSplineMove.IsMoving()) georgSplineMove.Stop();
+        if ((vaterSplineMove != null) && vaterSplineMove.IsMoving()) vaterSplineMove.Stop();
+        if ((playerSplineMove != null) && playerSplineMove.IsMoving()) playerSplineMove.Stop(); 
+             
+        gameObject.GetComponent<SwitchSceneManager>().SwitchToChapter1withOverlay(GameData.NameOverlay116);
     }
 
     public void HandleCurrentWP()

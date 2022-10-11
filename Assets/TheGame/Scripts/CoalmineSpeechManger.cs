@@ -86,13 +86,12 @@ public class CoalmineSpeechManger : MonoBehaviour
     private void Awake()
     {
         LoadTalkingListsMine();
+        mySrc = gameObject.AddComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        mySrc = gameObject.AddComponent<AudioSource>();
-
         speakCaveIntro = gameObject.AddComponent<SpeechList>();
         speakCaveIntro.SetUpList(audiosCaveIntro, mySrc);
         mySpeechLists.Add(speakCaveIntro);
@@ -197,7 +196,7 @@ public class CoalmineSpeechManger : MonoBehaviour
 
     public void StopRunningTL()
     {
-        mySrc.Stop();
+        if(mySrc != null && mySrc.isPlaying) mySrc.Stop();
     }
 
     void EnableListAndPlayAll(SpeechList list)
@@ -389,9 +388,5 @@ public class CoalmineSpeechManger : MonoBehaviour
         if (spEnya != null) spEnya.gameObject.SetActive(GameData.bubbleOnEnya);
         if (spDad != null) spDad.gameObject.SetActive(GameData.bubbleOnDad);
         if (spGeorg != null) spGeorg.gameObject.SetActive(GameData.bubbleOnGeorg);
-
-        //spDad.gameObject.SetActive(GameData.bubbleOnDad);
-        //spEnya.gameObject.SetActive(GameData.bubbleOnEnya);
-        //spGeorg.gameObject.SetActive(GameData.bubbleOnGeorg);
     }
 }
