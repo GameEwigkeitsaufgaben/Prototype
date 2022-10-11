@@ -72,7 +72,9 @@ public class Lupe : MonoBehaviour, IDragHandler
     {
         audioSrcLupe.clip = sfx.lupeShrink;
         audioSrcLupe.Play();
+        
         float newSize = origSize;
+        manager.SetAudio(4);
         //LupeCirc.GetComponent<RectTransform>().sizeDelta = new Vector2(origSize, origSize);
         LupeHandle.GetComponent<RectTransform>().sizeDelta = new Vector2(origSize, origSize);
         LupeHandle.GetComponent<RectTransform>().localPosition = origPosLupeHandle;
@@ -167,6 +169,8 @@ public class Lupe : MonoBehaviour, IDragHandler
         {
             ShrinkToOrigLupe();
         }
+
+
     }
 
     public void OnDrag(PointerEventData eventData)

@@ -125,10 +125,10 @@ public class ManagerSauresWasser : MonoBehaviour
                 aAusleiten.volume = 1f;
                 break;
             case 4:
-                aRegen.volume = 0.3f;
-                aBewetterung.volume = 0.3f;
-                aKnistern.volume = 0.3f;
-                aAusleiten.volume = 0.3f;
+                aRegen.volume = 0.1f;
+                aBewetterung.volume = 0.1f;
+                aKnistern.volume = 0.1f;
+                aAusleiten.volume = 0.1f;
                 break;
         }
     }
