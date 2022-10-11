@@ -53,6 +53,10 @@ public class ManagerMonitoring : MonoBehaviour
     {
         speechManager = GetComponent<SpeechManagerChapThree>();
 
+        audioSrcAtmo.clip = sfx.monitoringAtmo;
+        audioSrcAtmo.loop = true;
+        audioSrcAtmo.Play();
+
         //Audio Talkinglist
         btnReplayAudio.gameObject.SetActive(runtimeDataChap3.replayTL3111);
 
@@ -71,9 +75,7 @@ public class ManagerMonitoring : MonoBehaviour
 
         btnBackToOverlay.interactable = false;
 
-        audioSrcAtmo.clip = sfx.monitoringAtmo;
-        audioSrcAtmo.loop = true;
-        audioSrcAtmo.Play();
+
     }
 
     public void SetDescription(TMP_Text desc)

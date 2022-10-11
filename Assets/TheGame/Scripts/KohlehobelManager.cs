@@ -13,7 +13,7 @@ public class KohlehobelManager : MonoBehaviour
     private SoChapOneRuntimeData runtimeDataCh1;
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoSfx sfx;
-    public AudioSource audioSrcBewetterung, audioSrcLwc, audioSrcBand, audioSrcZecheAtmo;
+    public AudioSource audioSrcBewetterung, audioSrcLwc, audioSrcBand, audioSrcZecheAtmo, audioSrcSchritte;
 
     private void Awake()
     {
@@ -22,9 +22,19 @@ public class KohlehobelManager : MonoBehaviour
         sfx = runtimeDataChapters.LoadSfx();
     }
 
+    public void PlayerSchritte()
+    {
+        if (!audioSrcSchritte.isPlaying)
+        {
+            audioSrcSchritte.Play();
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        audioSrcSchritte.clip = sfx.walkingGroup;
+
         audioSrcBewetterung.clip = sfx.coalmineWindInTunnel;
         audioSrcBewetterung.playOnAwake = true;
         audioSrcBewetterung.Play();

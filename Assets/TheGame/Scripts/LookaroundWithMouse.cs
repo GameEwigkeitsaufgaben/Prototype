@@ -17,6 +17,10 @@ public class LookaroundWithMouse : MonoBehaviour
     private float pitch = 0.0f;
 
     bool mouseDown = false;
+    bool s1outside = false, s2outside = false;
+
+    public float helperYawLeft = 0.0f, helperYawRight= 0.0f;
+
 
     string activeScene = "";
     
@@ -40,6 +44,16 @@ public class LookaroundWithMouse : MonoBehaviour
         }
     }
 
+    public void SetS1OutsideLimits(bool inS1)
+    {
+        s1outside = inS1;
+    }
+
+    public void SetS2OutsideLimits(bool inS2)
+    {
+        s2outside = inS2;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -57,6 +71,8 @@ public class LookaroundWithMouse : MonoBehaviour
             yaw += speedH * Input.GetAxis("Mouse X");
             pitch -= speedV * Input.GetAxis("Mouse Y");
 
+            Debug.Log(s1outside + "s1outside");
+
             if(activeScene == GameScenes.ch03Demo)
             {
                 pitch = Mathf.Clamp(pitch, -12f, +55f);
@@ -70,6 +86,18 @@ public class LookaroundWithMouse : MonoBehaviour
             {
                 pitch = Mathf.Clamp(pitch, -12f, +55f);
                 yaw = Mathf.Clamp(yaw, -40f, 7f);
+            }
+            else if (s1outside)
+            {
+                Debug.Log("in S1");
+                pitch = Mathf.Clamp(pitch, -20f, +55f); ;
+                yaw = Mathf.Clamp(yaw, -150f, 20f);
+            }
+            else if (s2outside)
+            {
+                Debug.Log("in S1");
+                pitch = Mathf.Clamp(pitch, -8f, +55f); ;
+                yaw = Mathf.Clamp(yaw, -150f, 66f);
             }
             else
             {

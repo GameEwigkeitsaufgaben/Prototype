@@ -359,6 +359,16 @@ public class CoalmineWaypointManager : MonoBehaviour
     {
         runtimeData.liftBtnsAllEnabled = false;
 
+        if (runtimeData.currentCoalmineStop == CoalmineStop.Sole1)
+        {
+            myPlayer.mainCam.GetComponent<LookaroundWithMouse>().SetS1OutsideLimits(true);
+        }
+
+        if (runtimeData.currentCoalmineStop == CoalmineStop.Sole2)
+        {
+            myPlayer.mainCam.GetComponent<LookaroundWithMouse>().SetS2OutsideLimits(true);
+        }
+
         if (runtimeData.currentCoalmineStop == CoalmineStop.Sole3) return;
 
         playerSplineMove.reverse = false;
@@ -368,6 +378,16 @@ public class CoalmineWaypointManager : MonoBehaviour
 
     public void MoveIn()
     {
+        if (runtimeData.currentCoalmineStop == CoalmineStop.Sole1)
+        {
+            myPlayer.mainCam.GetComponent<LookaroundWithMouse>().SetS1OutsideLimits(false);
+        }
+
+        if(runtimeData.currentCoalmineStop == CoalmineStop.Sole2)
+        {
+            myPlayer.mainCam.GetComponent<LookaroundWithMouse>().SetS2OutsideLimits(false);
+        }
+
         //needed because more than one path uses the viewpoint waypoint
         if (runtimeData.currentCoalmineStop == CoalmineStop.Sole3)
         {

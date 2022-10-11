@@ -31,7 +31,7 @@ public class CaveManager : MonoBehaviour
 
     private SoSfx sfx;
 
-    public AudioSource baukipper, kran, water, bewetterung, bewetterungS2;
+    public AudioSource kran, water, bewetterung, bewetterungS2; //baukipper
 
 
     private void ShowFPS()
@@ -79,14 +79,14 @@ public class CaveManager : MonoBehaviour
 
         //SetupAudio;
         sfx.SetClipByAddToDict(bewetterung, sfx.coalmineWindInTunnel);
-        sfx.SetClipByAddToDict(baukipper, sfx.caolmineLader);
+        //sfx.SetClipByAddToDict(baukipper, sfx.caolmineLader);
         sfx.SetClipByAddToDict(kran, sfx.coalmineWorkingMachinesMetal);
         sfx.SetClipByAddToDict(water, sfx.caolmineSplashingWater);
 
         bewetterung.Play();
         bewetterungS2.clip = sfx.coalmineWindInTunnel;
         bewetterungS2.Play();
-        baukipper.Play();
+        //baukipper.Play();
         kran.Play();
         water.Play();
 

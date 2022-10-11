@@ -13,11 +13,15 @@ public class ManagerPolder : MonoBehaviour
     private SoChapThreeRuntimeData runtimeDataCh3;
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoSfx sfx;
+    private SpeechManagerChapThree speechMgrCh03;
 
     bool audioFinished;
     bool allRiversSnaped;
 
-
+    private void Awake()
+    {
+        speechMgrCh03 = gameObject.GetComponent<SpeechManagerChapThree>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -53,20 +57,20 @@ public class ManagerPolder : MonoBehaviour
     }
     public void ReplayTalkingList()
     {
-        gameObject.GetComponent<SpeechManagerChapThree>().playPolder = true;
+        speechMgrCh03.playPolder = true;
     }
     // Update is called once per frame
     void Update()
     {
         if (btnBackToOverlay.interactable) return;
 
-        if (!audioFinished)
+        if (!runtimeDataCh3.replayTL3141 && speechMgrCh03.IsTalkingListFinished(GameData.NameCH3TLPolder))
         {
-            audioFinished = gameObject.GetComponent<SpeechManagerChapThree>().IsTalkingListFinished(GameData.NameCH3TLPolder);
+            btnReplayTalkingList.gameObject.SetActive(true);
             runtimeDataCh3.replayTL3141 = true;
         }
 
-        if (audioFinished && runtimeDataCh3.DropTargetsAllItemsSnaped(dragItems))
+        if (runtimeDataCh3.replayTL3141 && runtimeDataCh3.DropTargetsAllItemsSnaped(dragItems))
         {
             btnBackToOverlay.interactable = true;
             runtimeDataCh3.SetPostDone(ProgressChap3enum.Post314);

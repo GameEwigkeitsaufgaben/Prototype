@@ -10,18 +10,13 @@ public class LongwallCutterWaypointManager : MonoBehaviour
     public Button btnBahnsteig, btnKohlehobel;
 
     private SoChapOneRuntimeData runtimeData;
-    bool moving;
+
 
     private void Start()
     {
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         HandleCurrentWP();
         playerSplineMove.gameObject.transform.position = pathViewpointToKohlehobel.waypoints[0].transform.position;
-    }
-
-    public void SetMoving(bool moving)
-    {
-        this.moving = moving;
     }
 
     public MineWayPoints GetCurrentLongWallCutterWP()
