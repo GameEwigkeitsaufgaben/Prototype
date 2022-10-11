@@ -33,6 +33,7 @@ public class ManagerReinigungAktiv : MonoBehaviour
     private Vector3 tmpVec3;
     private SwitchSceneManager switchSceneManager;
     [SerializeField] private AudioSource audioSrcTreppeWasser, audioSrcVorfluter, audioSrcPumpe, audioSrcAtmo, audioSrcFluss, audioSrcNeutal;
+    [SerializeField] private AudioSource audioSrcSchritte;
 
     private void Awake()
     {
@@ -49,9 +50,12 @@ public class ManagerReinigungAktiv : MonoBehaviour
     {
         offsetGroupCam = 0f;
         btnToNeutralisation.interactable = true;
+        btnRToBeluft.interactable = false;
         btnToBlackbox.interactable = false;
         btnToAbsetzbecken.interactable = false;
         btnToPassiv.interactable = false;
+
+        audioSrcSchritte.clip = sfx.walkingGroupStones;
 
         audioSrcPumpe.clip = sfx.pumpen;
         audioSrcPumpe.loop = true;
@@ -120,6 +124,7 @@ public class ManagerReinigungAktiv : MonoBehaviour
 
         mySplineMove.reverse = true;
         mySplineMove.StartMove();
+        if (!audioSrcSchritte.isPlaying) audioSrcSchritte.Play();
     }
 
     public void MoveToReinigungStation(int id)
@@ -161,15 +166,20 @@ public class ManagerReinigungAktiv : MonoBehaviour
 
         mySplineMove.reverse = false;
         mySplineMove.StartMove();
+        shoes.SetActive(false);
+        if (!audioSrcSchritte.isPlaying) audioSrcSchritte.Play();
     }
 
     public void ReachedWP()//Called from UnityEvent Gruppe in Inspector
     {
         currentStation = targetStation;
         moveInScene = false;
+        shoes.SetActive(true);
         shoes.transform.position = cam.transform.position;
 
-        switch (currentStation)
+        if (audioSrcSchritte.isPlaying) audioSrcSchritte.Stop();
+
+            switch (currentStation)
         {
             case ReinigungStation.Belueftung:
                 btnToNeutralisation.interactable = true;

@@ -232,7 +232,7 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
         {
             transform.position = correspondingItemOnMiner.transform.position;
 
-            //if item is one handschuh, also make changes for the other handschuh
+            //if a single handschuh is dragged, also make changes for the other handschuh
             if (equipmentItem == MinerEquipmentItem.Handschuhe) handschuhe.ResetBothToMiner();
             
         }

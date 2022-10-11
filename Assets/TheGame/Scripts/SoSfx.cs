@@ -33,7 +33,7 @@ public class SoSfx : ScriptableObject
     public AudioClip dropSfx, wasserhaltungAussen;
     public AudioClip treesCoalificationSfx, atmoCoalificationSfx;
     public AudioClip caveBell;
-    public AudioClip walkingGroup, walkingGroupMuseum, walkingGroupFliessToZeche, walkingGroupTVToFliess;
+    public AudioClip walkingGroup, walkingGroupMuseum, walkingGroupFliessToZeche, walkingGroupTVToFliess, walkingGroupStones;
     public AudioClip monitoringAtmo;
     public AudioClip gwaktivTreppe, gwaktivVorfluter, gwaktivFluss;
     public AudioClip atmoVogerlKohleberbau;
@@ -95,7 +95,6 @@ public class SoSfx : ScriptableObject
 
     public void PlayClipsInSole1Sfx()
     {
-        Debug.Log("++++++++++++++++++++++ " + sole1SfxStarted);
         if (sole1SfxStarted) return;
         
         sole1SfxStarted = true;
