@@ -53,6 +53,8 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
     string descScarf = "Das Halstuch kann zur Not als Mundschutz dienen und ist angenehm zu tragen.";
     string descGloves = "Die Handschuhe schützen die Hände bei schweren Arbeiten vor Blasen und Schwielen.";
 
+    private MuseumHandschuhe handschuhe;
+
     private void Awake()
     {
         myManager = FindObjectOfType<ManagerMuseumMinerEquipment>();
@@ -84,6 +86,11 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
         ChooseSprite();
         myAudioSrc = gameObject.AddComponent<AudioSource>();
         myAudioSrc.volume = 0.4f;
+
+        if(MinerEquipmentItem.Handschuhe == equipmentItem)
+        {
+            handschuhe = gameObject.transform.parent.GetComponent<MuseumHandschuhe>();
+        }
     }
 
     public void EnableParticles(bool enable)
@@ -226,13 +233,14 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
             transform.position = correspondingItemOnMiner.transform.position;
 
             //if item is one handschuh, also make changes for the other handschuh
-            if (equipmentItem == MinerEquipmentItem.Handschuhe) gameObject.transform.parent.GetComponent<MuseumHandschuhe>().ResetBothToMiner();
+            if (equipmentItem == MinerEquipmentItem.Handschuhe) handschuhe.ResetBothToMiner();
+            
         }
         else if (snapedTo == SnapetTo.Table)
         {
             transform.position = origPosOnTable;
 
-            if (equipmentItem == MinerEquipmentItem.Handschuhe) gameObject.transform.parent.GetComponent<MuseumHandschuhe>().ResetBothToTable();
+            if (equipmentItem == MinerEquipmentItem.Handschuhe) handschuhe.ResetBothToTable();
         }
         
         if (positionChanged)
