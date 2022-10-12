@@ -51,8 +51,6 @@ public class ManagerHistoryMining : MonoBehaviour
 
     private void Start()
     {
-       
-
         sliderCentury = Century.none;
         btnBackToMuseum.interactable = runtimeData.isMythDone;
 
@@ -68,10 +66,10 @@ public class ManagerHistoryMining : MonoBehaviour
         runtimeDataChapters.SetAndStartMusic(audioSrcMusic, sfx.instaMenuMusicLoop);
     }
 
-    public void OpenUrlSage()
-    {
-        Application.OpenURL("https://www.hamsterkiste-lesen-und-schreiben.de/schweinehirt");
-    }
+    //public void OpenUrlSage()
+    //{
+    //    Application.OpenURL("https://www.hamsterkiste-lesen-und-schreiben.de/schweinehirt");
+    //}
 
     public void GoBackToMuseum()
     {
@@ -138,7 +136,6 @@ public class ManagerHistoryMining : MonoBehaviour
                 imgSanduhr.gameObject.SetActive(false);
                 centuryText.text = museumConfig.textCentury21;
                 runtimeData.isMythDone = true;
-                //btnBackToMuseum.GetComponent<Image>().color = GameColors.defaultInteractionColorNormal;
                 btnBackToMuseum.interactable = true;
                 audioSrcTime.mute = false;
                 audioSrcTime.clip = sfx.jh21;
@@ -153,7 +150,5 @@ public class ManagerHistoryMining : MonoBehaviour
                 audioSrcTime.mute = true;
                 break;
         }
-
-
     }
 }

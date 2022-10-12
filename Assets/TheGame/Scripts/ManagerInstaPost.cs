@@ -157,6 +157,11 @@ public class ManagerInstaPost : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        SaveSliderPos();        
+    }
+
     public void SaveSliderPos()
     {
         switch (currentCH)

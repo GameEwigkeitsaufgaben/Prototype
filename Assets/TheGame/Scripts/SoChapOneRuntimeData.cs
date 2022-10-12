@@ -58,7 +58,7 @@ public class SoChapOneRuntimeData : Runtime
         instaSliderPos = 1f;
 
         //posts
-        post111Done = post112Done = post113Done = post114Done = post118Done = false;
+        post111Done = post112Done = post113Done = post114Done = post118Done = post1110Done = false;
         video115Done = false;
         interaction116Done = interaction117Done = quiz119Done = false;
 

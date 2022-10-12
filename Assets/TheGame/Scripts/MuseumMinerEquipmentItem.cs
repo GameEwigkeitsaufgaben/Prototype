@@ -324,7 +324,8 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
             if (solutionItemRound1)
             {
                 isDragableInRound = false;
-                gameObject.transform.parent = orderTopParent.transform;
+                //gameObject.transform.parent = orderTopParent.transform;
+                gameObject.transform.SetParent(orderTopParent.transform);
             }
         }
         else if (myManager.currentRound == EquipmentRound.SpecialTask)
@@ -332,7 +333,8 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
             if (solutionItemRound2)
             {
                 isDragableInRound = false;
-                gameObject.transform.parent = orderTopParent.transform;
+                //gameObject.transform.parent = orderTopParent.transform;
+                gameObject.transform.SetParent(orderTopParent.transform);
             }
         }
     }

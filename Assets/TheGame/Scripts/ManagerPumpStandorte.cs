@@ -83,9 +83,10 @@ public class ManagerPumpStandorte : MonoBehaviour
         togglePumpwerke.gameObject.GetComponent<ToogleWasserhaltung>().btnTextInBetrieb.color = gameColors.gameGray;
         togglePumpwerke.gameObject.GetComponent<ToogleWasserhaltung>().btnTextAlleBetrieb.color = gameColors.gameRed;
         lightReducedBetrieb.color = gameColors.gameGray;
+        lightAllBetrieb.color = gameColors.gameRed;
         pegelHigh.gameObject.SetActive(false);
         pegelLow.gameObject.SetActive(true);
-        lightAllBetrieb.color = gameColors.gameRed;
+        
         textWHBisher.SetActive(true);
         textWHNeu.SetActive(false);
     }

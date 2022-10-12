@@ -51,6 +51,7 @@ public class Entry : MonoBehaviour
     void Start()
     {
         if (fbDone != null) fbDone.color = fbInProgress;
+        Debug.Log(gameObject.name + "feebackColor: " + fbDone.color);
         sfx = runtimeDataChapters.LoadSfx();
 
         postComp = post.GetComponent<Post>();
