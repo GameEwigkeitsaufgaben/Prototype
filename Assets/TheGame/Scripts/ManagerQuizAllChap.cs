@@ -52,16 +52,19 @@ public class ManagerQuizAllChap : MonoBehaviour
         {
             case 1: 
                 runtimeDataCh1 = runtimeDataChapters.LoadChap1RuntimeData();
+                runtimeDataCh1.quizPointsOverall = 0;
                 //audioSrcSpecial.clip = sfx.quizFeuer;
                 runtimeDataChapters.SetAndStartMusic(audioSrcSpecial, sfx.quizFeuer);
                 break;
             case 2:
                 runtimeDataCh2 = runtimeDataChapters.LoadChap2RuntimeData();
+                runtimeDataCh2.quizPointsOverall = 0;
                 //audioSrcSpecial.clip = sfx.atmoWasserRinnt;
                 runtimeDataChapters.SetAndStartMusic(audioSrcSpecial, sfx.waterDrops);
                 break;
             case 3:
                 runtimeDataCh3 = runtimeDataChapters.LoadChap3RuntimeData();
+                runtimeDataCh3.quizPointsOverall = 0;
                 //audioSrcSpecial.clip = sfx.pumpen;
                 runtimeDataChapters.SetAndStartMusic(audioSrcSpecial, sfx.pumpen);
                 break;
