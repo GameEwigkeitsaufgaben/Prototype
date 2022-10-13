@@ -150,7 +150,7 @@ public class ManagerFliesspfade : MonoBehaviour
                     wetterNice.Stop();
 
                     audioSrcWolken.volume = 0.1f;
-                    audioSrcRain.volume = 0.1f;
+                    audioSrcRain.volume = 0.4f;
                     audioSrcFp2.volume = 0.4f;
 
                     audioSrcWolken.Play();
@@ -165,7 +165,7 @@ public class ManagerFliesspfade : MonoBehaviour
                     wetterNice.Stop();
 
                     audioSrcWolken.volume = 0.1f;
-                    audioSrcRain.volume = 0.1f;
+                    audioSrcRain.volume = 0.4f;
                     audioSrcFp2.volume = 0.1f;
                     audioSrcFp3.volume = 0.4f;
 

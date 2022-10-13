@@ -87,7 +87,7 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
         myAudioSrc = gameObject.AddComponent<AudioSource>();
         myAudioSrc.volume = 0.4f;
 
-        if(MinerEquipmentItem.Handschuhe == equipmentItem)
+        if (MinerEquipmentItem.Handschuhe == equipmentItem)
         {
             handschuhe = gameObject.transform.parent.GetComponent<MuseumHandschuhe>();
         }
@@ -205,8 +205,17 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
     {
         if (!isDragableInRound) return;
 
-        if (myManager.IsMaxItemsOnMinerReached() && snapedTo == SnapetTo.Table) return;
-
+        if (myManager.IsMaxItemsOnMinerReached()) 
+        {
+            if (snapedTo == SnapetTo.Table) 
+            {
+                if (equipmentItem != MinerEquipmentItem.Handschuhe) return;
+                else
+                {
+                    
+                }
+            }
+        }
         isCurrentlyDragging = true;
         
         //gameObject.transform.parent = dragObjParent.transform;
