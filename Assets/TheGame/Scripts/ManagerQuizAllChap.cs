@@ -99,8 +99,6 @@ public class ManagerQuizAllChap : MonoBehaviour
         SetMinerFeedback(MinerFeedback.Idle, 0f);
         quizTimer.StartTimer(questions[currentQuestionIndex].data.timeToAnswerInSec);
 
-        audioUhr.clip = sfx.uhrTickt;
-        if(audioUhr != null && !audioUhr.isPlaying) audioUhr.Play();
     }
 
     public void UpdateProgressUI()
