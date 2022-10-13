@@ -13,7 +13,7 @@ public class KohlehobelManager : MonoBehaviour
     private SoChapOneRuntimeData runtimeDataCh1;
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoSfx sfx;
-    public AudioSource audioSrcBewetterung, audioSrcLwc, audioSrcBand, audioSrcZecheAtmo, audioSrcSchritte, audioSrcSchritte2;
+    public AudioSource audioSrcBewetterung, audioSrcLwc, audioSrcBand, audioSrcZecheAtmo, audioSrcSchritte, audioSrcSchritte2, audioSrcWater;
 
     private void Awake()
     {
@@ -22,6 +22,10 @@ public class KohlehobelManager : MonoBehaviour
         sfx = runtimeDataChapters.LoadSfx();
         audioSrcSchritte2.clip = sfx.walkingGroupStones;
         audioSrcSchritte2.volume=0.4f;
+
+        audioSrcWater.clip = sfx.rohreWasser;
+        audioSrcWater.loop = true;
+        audioSrcWater.Play();
     }
 
     public void PlayerSchritte()

@@ -44,6 +44,7 @@ public class SoSfx : ScriptableObject
     public AudioClip waterDrops;
     public AudioClip uhrTickt;
     public AudioClip atmoJahrhunderte;
+    public AudioClip rohreWasser;
 
 
     public GameObject instaAudioSrc;
