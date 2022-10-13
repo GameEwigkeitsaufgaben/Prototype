@@ -22,7 +22,7 @@ public class ManagerHistoryMining : MonoBehaviour
     public GameObject btnUrlToSage;
     public TextMeshProUGUI centuryText;
     public GameObject imgSanduhr;
-    [SerializeField] private AudioSource audioSrcTime, audioSrcMusic, audioSrcAtmoMuseum;
+    [SerializeField] private AudioSource audioSrcTime, audioSrcMusic, audioSrcAtmoMuseum, audioSrcJHAtmo;
     
     [Header("Assigned at Runtime")]
     public SoMuseumConfig museumConfig;
@@ -64,6 +64,10 @@ public class ManagerHistoryMining : MonoBehaviour
         audioSrcAtmoMuseum.Play();
 
         runtimeDataChapters.SetAndStartMusic(audioSrcMusic, sfx.instaMenuMusicLoop);
+
+        audioSrcJHAtmo.clip = sfx.atmoJahrhunderte;
+        audioSrcJHAtmo.loop = true;
+        audioSrcJHAtmo.Play();
     }
 
     //public void OpenUrlSage()

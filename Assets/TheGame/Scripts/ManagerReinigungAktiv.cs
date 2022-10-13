@@ -55,7 +55,7 @@ public class ManagerReinigungAktiv : MonoBehaviour
         btnToAbsetzbecken.interactable = false;
         btnToPassiv.interactable = false;
 
-        audioSrcSchritte.clip = sfx.walkingGroupStones;
+        audioSrcSchritte.clip = sfx.walkingGitter;
 
         audioSrcPumpe.clip = sfx.pumpen;
         audioSrcPumpe.loop = true;

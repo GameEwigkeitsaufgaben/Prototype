@@ -44,6 +44,8 @@ public class ManagerSauresWasser : MonoBehaviour
         runtimeDataCh2 = runtimeDataChapters.LoadChap2RuntimeData();
         sfx = runtimeDataChapters.LoadSfx();
 
+        aBewetterung.loop = true;
+
         aRegen.clip = sfx.regen;
         aBewetterung.clip = sfx.coalmineWindInTunnel;
         aAusleiten.clip = sfx.atmoWasserRinnt;
@@ -80,6 +82,8 @@ public class ManagerSauresWasser : MonoBehaviour
         {
             btnProceed.interactable = true;
         }
+
+        SetAudio(4);
     }
 
     public void ResetIonHeading()
@@ -98,37 +102,44 @@ public class ManagerSauresWasser : MonoBehaviour
     //int regen-0, bewetterung-1, knistern-2, abwasser-3
     public void SetAudio(int station)
     {
+
+        float loudValue = 0.4f;
+        float knistern = 0.4f;
+        float ausleiten = 0.2f;
+        float bewetterung = 0.1f;
+        float regen = 0.3f;
+
         switch (station)
         {
             case 0:
-                aRegen.volume = 1f;
-                aBewetterung.volume = 0.3f;
-                aKnistern.volume = 0.3f;
-                aAusleiten.volume = 0.3f;
+                aRegen.volume = regen + 0.5f;
+                aBewetterung.volume = bewetterung;
+                aKnistern.volume = knistern;
+                aAusleiten.volume = ausleiten;
                 break;
             case 1:
-                aRegen.volume = 0.3f;
-                aBewetterung.volume = 1f;
-                aKnistern.volume = 0.3f;
-                aAusleiten.volume = 0.3f;
+                aRegen.volume = regen;
+                aBewetterung.volume = bewetterung + 0.2f;
+                aKnistern.volume = knistern;
+                aAusleiten.volume = ausleiten;
                 break;
             case 2:
-                aRegen.volume = 0.3f;
-                aBewetterung.volume = 0.3f;
-                aKnistern.volume = 1f;
-                aAusleiten.volume = 0.3f;
+                aRegen.volume = regen;
+                aBewetterung.volume = bewetterung;
+                aKnistern.volume = knistern + 0.4f;
+                aAusleiten.volume = ausleiten;
                 break;
             case 3:
-                aRegen.volume = 0.3f;
-                aBewetterung.volume = 0.3f;
-                aKnistern.volume = 0.3f;
-                aAusleiten.volume = 1f;
+                aRegen.volume = regen;
+                aBewetterung.volume = bewetterung;
+                aKnistern.volume = knistern;
+                aAusleiten.volume = ausleiten + 0.2f;
                 break;
             case 4:
-                aRegen.volume = 0.1f;
-                aBewetterung.volume = 0.1f;
-                aKnistern.volume = 0.1f;
-                aAusleiten.volume = 0.1f;
+                aRegen.volume = regen;
+                aBewetterung.volume = bewetterung;
+                aKnistern.volume = knistern;
+                aAusleiten.volume = ausleiten;
                 break;
         }
     }

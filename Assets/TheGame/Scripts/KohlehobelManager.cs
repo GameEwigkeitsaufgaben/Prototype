@@ -13,13 +13,15 @@ public class KohlehobelManager : MonoBehaviour
     private SoChapOneRuntimeData runtimeDataCh1;
     private SoChaptersRuntimeData runtimeDataChapters;
     private SoSfx sfx;
-    public AudioSource audioSrcBewetterung, audioSrcLwc, audioSrcBand, audioSrcZecheAtmo, audioSrcSchritte;
+    public AudioSource audioSrcBewetterung, audioSrcLwc, audioSrcBand, audioSrcZecheAtmo, audioSrcSchritte, audioSrcSchritte2;
 
     private void Awake()
     {
         runtimeDataChapters = Resources.Load<SoChaptersRuntimeData>(GameData.NameRuntimeDataChapters);
         runtimeDataCh1 = runtimeDataChapters.LoadChap1RuntimeData();
         sfx = runtimeDataChapters.LoadSfx();
+        audioSrcSchritte2.clip = sfx.walkingGroupStones;
+        audioSrcSchritte2.volume=0.4f;
     }
 
     public void PlayerSchritte()
@@ -27,6 +29,7 @@ public class KohlehobelManager : MonoBehaviour
         if (!audioSrcSchritte.isPlaying)
         {
             audioSrcSchritte.Play();
+            audioSrcSchritte2.Play();
         }
     }
 
@@ -34,6 +37,7 @@ public class KohlehobelManager : MonoBehaviour
     void Start()
     {
         audioSrcSchritte.clip = sfx.walkingGroup;
+        audioSrcSchritte.volume = 0.34f;
 
         audioSrcBewetterung.clip = sfx.coalmineWindInTunnel;
         audioSrcBewetterung.playOnAwake = true;

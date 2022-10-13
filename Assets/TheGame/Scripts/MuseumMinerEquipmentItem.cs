@@ -177,6 +177,10 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
         ChooseSprite();
         transform.position = origPosOnTable;
         gameObject.transform.SetParent(parentTable.transform);
+        if(equipmentItem == MinerEquipmentItem.Handschuhe)
+        {
+            gameObject.transform.SetParent(handschuhe.transform);
+        }
 
     }
 
@@ -292,7 +296,7 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
             snapedTo = SnapetTo.Table;
             if(equipmentItem != MinerEquipmentItem.Handschuhe) myManager.itemsOnMiner--;
             else
-            {
+            {                
                 if (gameObject.name.Contains("Links"))
                 {
                     myManager.itemsOnMiner--;
@@ -300,7 +304,6 @@ public class MuseumMinerEquipmentItem : MonoBehaviour, IBeginDragHandler, IEndDr
             }
             if (equipmentItem == MinerEquipmentItem.Handschuhe)
             {
-
                 if (gameObject.transform.parent.GetComponent<MuseumHandschuhe>() != null) 
                     gameObject.transform.parent.GetComponent<MuseumHandschuhe>().SetBothSnapedToTable();
             }

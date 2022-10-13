@@ -149,7 +149,7 @@ public class ManagerMuseumMinerEquipment : MonoBehaviour
                 items[(int)MinerEquipmentItem.Schienbeinschuetzer].EnableParticles(enable);
                 break;
             case EquipmentRound.SpecialTask:
-                //Cace could not be reached!
+                //Case could not be reached!
                 break;
         }
     }

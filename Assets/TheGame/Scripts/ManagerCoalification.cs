@@ -21,7 +21,7 @@ public class ManagerCoalification : MonoBehaviour
     public Slider slider;
     public TMP_Text infoText;
     [SerializeField] private StatesInkohlung statesInkohlung;
-    [SerializeField] private AudioSource audioSrcAtmo, audioSrcTrees, audioSrcRegen, audioSourceDruck;
+    [SerializeField] private AudioSource audioSrcAtmo, audioSrcTrees, audioSrcRegen, audioSourceDruck, audioVogerl;
     public Button btnGoToMuseum;
     public AudioSource audioSrcMusic;
 
@@ -53,6 +53,10 @@ public class ManagerCoalification : MonoBehaviour
         runtimeDataChapters.SetAndStartMusic(audioSrcMusic, sfx.instaMenuMusicLoop);
 
         configMuseum = Resources.Load<SoMuseumConfig>(GameData.NameConfigMuseum);
+
+        audioVogerl.clip = sfx.atmoJahrhunderte;
+        audioVogerl.loop = true;
+        audioVogerl.Play();
     }
 
     private void Start()
@@ -91,7 +95,13 @@ public class ManagerCoalification : MonoBehaviour
         {
             statesInkohlung = StatesInkohlung.TectonicForces;
 
-            if (slider.value >= 0.7 && slider.value <= 0.87)
+
+            if (slider.value > 0.658 && slider.value < 0.7)
+            {
+                audioSrcRegen.Stop();
+            }
+
+            if (slider.value >= 0.7 && slider.value <= 0.88)
             {
                     startRegen = true;
             }
@@ -108,6 +118,11 @@ public class ManagerCoalification : MonoBehaviour
             {
                 startFlutung = true;
                 audioSrcRegen.Stop();
+            }
+
+            if (slider.value > 0.98)
+            {
+                audioSrcAtmo.Stop();
             }
         }
         else if (slider.value == 1) runtimeData.isCoalifiationDone = true;
@@ -126,7 +141,7 @@ public class ManagerCoalification : MonoBehaviour
                 if (!audioSrcAtmo.isPlaying) audioSrcAtmo.Play();
                 break;
             case StatesInkohlung.TectonicForces:
-                audioSrcAtmo.Stop();
+                //audioSrcAtmo.Stop();
                 infoText.text = configMuseum.tektonischeKraefte;
                 break;
             case StatesInkohlung.None:

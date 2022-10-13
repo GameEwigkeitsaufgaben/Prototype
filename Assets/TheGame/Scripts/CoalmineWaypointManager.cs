@@ -51,7 +51,8 @@ public class CoalmineWaypointManager : MonoBehaviour
 
     private SoChapOneRuntimeData runtimeData;
     private SoSfx sfx;
-    private AudioSource audioSrcWalkingGroup;
+    private AudioSource audioSrcWalkingGroup; 
+    public AudioSource audioSrcSchritte;
 
     [Header("Assigned during runtime")]
     public Button wps1ViewpointBtn, wps2ViewpointBtn, wps3ViewpointBtn;
@@ -70,6 +71,7 @@ public class CoalmineWaypointManager : MonoBehaviour
         runtimeData = Resources.Load<SoChapOneRuntimeData>(GameData.NameRuntimeDataChap01);
         audioSrcWalkingGroup = gameObject.AddComponent<AudioSource>();
         audioSrcWalkingGroup.clip = sfx.walkingGroup;
+        audioSrcWalkingGroup.volume = 0.34f;
 
         //The order has to be Canvas (parent), first child ist btn, second child is text; 
         wps1ViewpointBtn = wpS1ViewpointSign.GetComponentsInChildren<Transform>()[1].GetComponent<Button>();
@@ -79,6 +81,8 @@ public class CoalmineWaypointManager : MonoBehaviour
         bewetterungBtn = bewetterung.GetComponentsInChildren<Transform>()[1].GetComponentInChildren<Button>();
         ovmineBtn = ovmine.GetComponentsInChildren<Transform>()[1].GetComponentInChildren<Button>();
         caveBtn = wpInsideCaveSign.GetComponentsInChildren<Transform>()[1].GetComponentInChildren<Button>();
+
+        audioSrcSchritte.clip = sfx.walkingGroupStones;
     }
 
     private void Start()
@@ -374,6 +378,7 @@ public class CoalmineWaypointManager : MonoBehaviour
         playerSplineMove.reverse = false;
         playerSplineMove.StartMove();
         audioSrcWalkingGroup.Play();
+        audioSrcSchritte.Play();
     }
 
     public void MoveIn()
@@ -398,6 +403,7 @@ public class CoalmineWaypointManager : MonoBehaviour
         playerSplineMove.StartMove();
         SetCharacterPosition(new Vector3(0.0f, 1.6f, 0.0f));
         audioSrcWalkingGroup.Play();
+        audioSrcSchritte.Play();
     }
 
     public void MoveToBewetterung()
@@ -406,6 +412,7 @@ public class CoalmineWaypointManager : MonoBehaviour
         DetectAndSetPath(MineWayPoints.viewpointBewetterung);
         playerSplineMove.StartMove();
         audioSrcWalkingGroup.Play();
+        audioSrcSchritte.Play();
     }
 
     public void MoveToBahnsteig()
@@ -414,6 +421,7 @@ public class CoalmineWaypointManager : MonoBehaviour
         DetectAndSetPath(MineWayPoints.viewpointBahnsteig);
         playerSplineMove.StartMove();
         audioSrcWalkingGroup.Play();
+        audioSrcSchritte.Play();
     }
 
     public void MoveToOVMine()
@@ -422,6 +430,7 @@ public class CoalmineWaypointManager : MonoBehaviour
         DetectAndSetPath(MineWayPoints.viewpointOVMine);
         playerSplineMove.StartMove();
         audioSrcWalkingGroup.Play();
+        audioSrcSchritte.Play();
     }
 
     public void MoveToViewpoint()
@@ -432,6 +441,7 @@ public class CoalmineWaypointManager : MonoBehaviour
         DetectAndSetPath(MineWayPoints.viewpoint);
         playerSplineMove.StartMove();
         audioSrcWalkingGroup.Play();
+        audioSrcSchritte.Play();
     }
 
     private void SetCharacterPosition(Vector3 charpos)

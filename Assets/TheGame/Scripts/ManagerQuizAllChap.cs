@@ -22,7 +22,7 @@ public class ManagerQuizAllChap : MonoBehaviour
     public TMP_Text textMinerWordsFeedback;
     public Text progressFeedback;
     public Button btnNext, btnCheck;
-    public AudioSource audioSrcBGMusic, audioSrcbuttonClick, audioSrcSpecial;
+    public AudioSource audioSrcBGMusic, audioSrcbuttonClick, audioSrcSpecial, audioUhr;
 
     [Header("Assigned at runtime")]
     [SerializeField] private List<QuizQuestionWIP> questions;
@@ -98,6 +98,9 @@ public class ManagerQuizAllChap : MonoBehaviour
         UpdateProgressUI();
         SetMinerFeedback(MinerFeedback.Idle, 0f);
         quizTimer.StartTimer(questions[currentQuestionIndex].data.timeToAnswerInSec);
+
+        audioUhr.clip = sfx.uhrTickt;
+        if(audioUhr != null && !audioUhr.isPlaying) audioUhr.Play();
     }
 
     public void UpdateProgressUI()
