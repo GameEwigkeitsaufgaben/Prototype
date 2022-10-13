@@ -165,18 +165,33 @@ public class SwitchSceneManager : MonoBehaviour
 
     public void SwitchToChapter1withOverlay(string overlayName)
     {
+        if (overlayName == GameData.NameOverlay1110)
+        {
+            runtimeDataCh1.post1110Done = true;
+        }
+
         runtimeDataCh1.postOverlayToLoad = overlayName;
         SwitchScene(GameScenes.ch01InstaMain); 
     }
     public void SwitchToChapter2withOverlay(string overlayName)
     {
-        
+
+        if (overlayName == GameData.NameOverlay2112)
+        {
+            runtimeDataCh2.progressPost2112Done = true;
+        }
+
         runtimeDataCh2.postOverlayToLoad = overlayName;
         SwitchScene(GameScenes.ch02InstaMain);
     }
 
     public void SwitchToChapter3withOverlay(string overlayName)
     {
+        if (overlayName == GameData.NameOverlay317)
+        {
+            runtimeDataCh3.SetPostDone(ProgressChap3enum.Post317);
+        }
+
         runtimeDataCh3.postOverlayToLoad = overlayName;
         SwitchScene(GameScenes.ch03InstaMain);
     }
