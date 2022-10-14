@@ -43,7 +43,16 @@ public class ManagerPumpen : MonoBehaviour
         sfx = runtimeDataChapters.LoadSfx();
 
         speechManagerCh2 = GetComponent<SpeechManagerMuseumChapTwo>();
-        speechManagerCh2.playZechePumpeIntro = true;
+        
+        if (runtimeDataCh2.progressPost215Done)
+        {
+            mirrorDad.gameObject.SetActive(false);
+        }
+        else
+        {
+            speechManagerCh2.playZechePumpeIntro = true;
+        }
+        
 
         for(int i = 0; i < textInScene.Length; i++)
         {
@@ -187,14 +196,12 @@ public class ManagerPumpen : MonoBehaviour
             mirrorDad.gameObject.SetActive(false);
             runtimeDataCh2.replayPumpen = true;
             replayButton.SetActive(true);
-           
         }
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName(Pumpen.pumpe1.ToString()) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
         {
             if (toggleP1.isOn)
             {
-                Debug.Log("+++++++++++++++++++++++++++ off triggern! p1");
                 toggleP1.isOn = false;
                 interact = false;
 
@@ -206,7 +213,6 @@ public class ManagerPumpen : MonoBehaviour
         {
             if (toggleP3.isOn)
             {
-                Debug.Log("+++++++++++++++++++++++++++ off triggern! p2");
                 toggleP3.isOn = false;
                 interact = false;
 
@@ -217,7 +223,6 @@ public class ManagerPumpen : MonoBehaviour
         {
             if (toggleP2.isOn)
             {
-                Debug.Log("+++++++++++++++++++++++++++ off triggern p3!");
                 toggleP2.isOn = false;
                 interact = false;
 
