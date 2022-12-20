@@ -54,6 +54,11 @@ public class ManagerOverviewChapters : MonoBehaviour
         }
     }
 
+    public void CloseGame()
+    {
+        Application.Quit();
+    }
+
     public void GoToFWB()
     {
         Application.OpenURL("https://forum-bergbau-wasser.de/");

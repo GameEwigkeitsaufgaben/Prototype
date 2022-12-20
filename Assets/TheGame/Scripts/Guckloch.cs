@@ -38,9 +38,19 @@ public class Guckloch : MonoBehaviour
         sfx = Resources.Load<SoSfx>(GameData.NameConfigSfx);
     }
 
+    //called from Button in Fotoplatz BtnCreateImage for Web
     public void DownloadSpecificFrame()
     {
         StartCoroutine(RecordSpecificFrame());
+    }
+
+    //called from Button in Fotoplatz BtnCreateImage for Standalone
+    public void TakeGucklochScreenshot()
+    {
+        scaleFactor = canvas.scaleFactor;
+        int width = Screen.width;
+        int height = Screen.height;
+        ScreenshotHandler.TakeScreenshotStatic(width, height, frame, scaleFactor);
     }
 
     void Start()
@@ -61,6 +71,14 @@ public class Guckloch : MonoBehaviour
 
         audioAtmo.clip = sfx.atmoNiceWeather;
         audioAtmo.Play();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            TakeGucklochScreenshot();
+        }
     }
 
     IEnumerator RecordSpecificFrame()
