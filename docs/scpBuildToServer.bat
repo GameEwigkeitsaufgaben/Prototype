@@ -1,1 +1,0 @@
-scp -r ./Build ./StreamingAssets ./TemplateData index.html sstadler@susi-stadler.at:/var/www-xrux.at/gameUniKohle/PrototypeWebGl-TestServer
