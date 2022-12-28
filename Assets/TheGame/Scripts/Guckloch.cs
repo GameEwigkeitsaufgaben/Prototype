@@ -41,16 +41,14 @@ public class Guckloch : MonoBehaviour
     //called from Button in Fotoplatz BtnCreateImage for Web
     public void DownloadSpecificFrame()
     {
-        StartCoroutine(RecordSpecificFrame());
+        StartCoroutine(RecordSpecificFrame());             
     }
 
     //called from Button in Fotoplatz BtnCreateImage for Standalone
     public void TakeGucklochScreenshot()
     {
-        scaleFactor = canvas.scaleFactor;
-        int width = Screen.width;
-        int height = Screen.height;
-        ScreenshotHandler.TakeScreenshotStatic(width, height, frame, scaleFactor);
+        StartCoroutine(TakeScreenshotStandalone());
+        //https://gamedevbeginner.com/how-to-capture-the-screen-in-unity-3-methods/#screen_capture_class
     }
 
     void Start()
@@ -79,6 +77,13 @@ public class Guckloch : MonoBehaviour
         {
             TakeGucklochScreenshot();
         }
+    }
+
+    IEnumerator TakeScreenshotStandalone()
+    {
+        yield return new WaitForEndOfFrame();
+        ScreenCapture.CaptureScreenshot("screenshot " + System.DateTime.Now.ToString("MM-dd-yy (HH-mm-ss)") + ".png");
+        Debug.Log("captured");
     }
 
     IEnumerator RecordSpecificFrame()
