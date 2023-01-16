@@ -82,7 +82,7 @@ public class Guckloch : MonoBehaviour
     IEnumerator TakeScreenshotStandalone()
     {
         yield return new WaitForEndOfFrame();
-        ScreenCapture.CaptureScreenshot("screenshot " + System.DateTime.Now.ToString("MM-dd-yy (HH-mm-ss)") + ".png");
+        ScreenCapture.CaptureScreenshot("fotoplatz" + System.DateTime.Now.ToString("MM-dd-yy(HH-mm-ss)") + ".png");
         Debug.Log("captured");
     }
 
